@@ -35,10 +35,13 @@ flowchart TB
 
 ## Prerequisites
 
-| Tool    | Version | Install           |
-| ------- | ------- | ----------------- |
-| Node.js | `>=24`  | `nvm install 24`  |
-| Yarn    | `4.x`   | `corepack enable` |
+| Tool       | Version | Install           |
+| ---------- | ------- | ----------------- |
+| Node.js    | `>=24`  | `nvm install 24`  |
+| Yarn       | `4.x`   | `corepack enable` |
+| GitHub CLI | any     | `brew install gh` |
+
+Authenticate `gh` once installed: `gh auth login`.
 
 ---
 

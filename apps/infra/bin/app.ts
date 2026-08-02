@@ -19,7 +19,9 @@ if (!lambdaRegion) throw new Error('LAMBDA_REGION must be set (us-east-1 for Lam
 if (!locationShort) throw new Error('LOCATION_SHORT must be set');
 if (!orgPrefix) throw new Error('ORG_PREFIX must be set (short org code used in resource names)');
 
-const edgeStack = new EdgeStack(app, 'EdgeStack', {
+const stackSuffix = `${orgPrefix}-${workload}`;
+
+const edgeStack = new EdgeStack(app, `EdgeStack-${stackSuffix}`, {
   ...shared,
   env: { region: lambdaRegion },
   crossRegionReferences: true,
@@ -29,7 +31,7 @@ Object.entries(defaultTags({ orgPrefix, environment, workload })).forEach(([k, v
   cdk.Tags.of(app).add(k, v)
 );
 
-new DocsStack(app, 'DocsStack', {
+new DocsStack(app, `DocsStack-${stackSuffix}`, {
   ...shared,
   cfPriceClass,
   edgeStack,
@@ -48,11 +50,18 @@ if (!githubOrg || !githubOrgId || !githubRepo || !githubRepoId) {
   );
 }
 
-new CiStack(app, 'CiStack', {
+new CiStack(app, `CiStack-${stackSuffix}`, {
   ...shared,
   githubOrg,
   githubOrgId,
   githubRepo,
   githubRepoId,
+  // The GitHub OIDC provider is an AWS-account-wide singleton. Only the first
+  // client/org deployed into a shared account should create it — every subsequent
+  // one must import the existing provider instead. Defaults to creating it, since
+  // the common case is one dedicated AWS account per client (a fresh account has
+  // no provider yet). Set to 'false' when sharing an account with an org that's
+  // already provisioned it.
+  createOidcProvider: (process.env.CREATE_OIDC_PROVIDER ?? 'true') !== 'false',
   env: { region: process.env.AWS_REGION },
 });

@@ -47,7 +47,18 @@
     "output": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "aws cloudformation describe-stacks --stack-name DocsStack --query 'Stacks[0].Outputs' --output table",
+        "command": "aws cloudformation describe-stacks --stack-name DocsStack-$ORG_PREFIX-$WORKLOAD --query 'Stacks[0].Outputs' --output table",
+        "cwd": "{projectRoot}"
+      },
+      "configurations": {
+        "dev": { "envFile": "apps/infra/.env.dev" },
+        "prod": { "envFile": "apps/infra/.env.prod" }
+      }
+    },
+    "output-ci": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "aws cloudformation describe-stacks --stack-name CiStack-$ORG_PREFIX-$WORKLOAD --query 'Stacks[0].Outputs' --output table",
         "cwd": "{projectRoot}"
       },
       "configurations": {

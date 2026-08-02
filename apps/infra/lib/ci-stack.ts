@@ -12,6 +12,7 @@ interface CiStackProps extends cdk.StackProps {
   githubOrgId: string;
   githubRepo: string;
   githubRepoId: string;
+  createOidcProvider: boolean;
 }
 
 export class CiStack extends cdk.Stack {
@@ -26,10 +27,11 @@ export class CiStack extends cdk.Stack {
       githubOrgId,
       githubRepo,
       githubRepoId,
+      createOidcProvider,
     } = props;
     const names = naming({ orgPrefix, environment, workload, locationShort });
 
-    const oidcProvider = this.createOidcProvider();
+    const oidcProvider = this.createOidcProvider(createOidcProvider);
     const deployRole = this.createDeployRole(
       oidcProvider,
       names,
@@ -48,20 +50,31 @@ export class CiStack extends cdk.Stack {
     });
   }
 
-  private createOidcProvider(): iam.OpenIdConnectProvider {
-    return new iam.OpenIdConnectProvider(this, 'GitHubOidcProvider', {
-      url: 'https://token.actions.githubusercontent.com',
-      clientIds: ['sts.amazonaws.com'],
-      // Both thumbprints cover GitHub's current and previous TLS cert chains.
-      thumbprints: [
-        '6938fd4d98bab03faadb97b34396831e3780aea1',
-        '1c58a3a8518e8759bf075b76b750d4f2df264fcd',
-      ],
-    });
+  // The GitHub Actions OIDC provider is an AWS-account-wide singleton, keyed by its
+  // URL — not scoped to a stack. Every client after the first one deployed into a
+  // shared account must import the existing provider instead of creating a second one
+  // (IAM rejects a duplicate url with EntityAlreadyExistsException).
+  private createOidcProvider(create: boolean): iam.IOpenIdConnectProvider {
+    if (create) {
+      return new iam.OpenIdConnectProvider(this, 'GitHubOidcProvider', {
+        url: 'https://token.actions.githubusercontent.com',
+        clientIds: ['sts.amazonaws.com'],
+        // Both thumbprints cover GitHub's current and previous TLS cert chains.
+        thumbprints: [
+          '6938fd4d98bab03faadb97b34396831e3780aea1',
+          '1c58a3a8518e8759bf075b76b750d4f2df264fcd',
+        ],
+      });
+    }
+    return iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+      this,
+      'GitHubOidcProvider',
+      `arn:aws:iam::${this.account}:oidc-provider/token.actions.githubusercontent.com`
+    );
   }
 
   private createDeployRole(
-    oidcProvider: iam.OpenIdConnectProvider,
+    oidcProvider: iam.IOpenIdConnectProvider,
     names: ReturnType<typeof naming>,
     environment: string,
     workload: string,

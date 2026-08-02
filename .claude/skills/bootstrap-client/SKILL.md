@@ -1,6 +1,6 @@
 ---
 name: bootstrap-client
-description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Collects CLIENT_NAME, ORG_PREFIX, GitHub org/repo/IDs, and Giscus config via Q&A, then runs the deterministic scripts/bootstrap/bootstrap-client.mts to apply everything. Run once per new client instance, right after cloning.
+description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts) and narrative (optional — drafts the personalized "story" sections on Connect Framework/Workshops/Problem Space/Solution Space index pages, write-confirmed per page). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
 ---
 
 The developer wants to bootstrap this starter kit for a new client. Here is their input:
@@ -14,6 +14,38 @@ The developer wants to bootstrap this starter kit for a new client. Here is thei
 > ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
 
 This is a one-time setup flow with two phases: **Q&A** (this skill — judgment, wording, and external-setup steps live here) and **deterministic apply** (a script — zero free-text generation, same input always produces the same output). See `STARTER-KIT-PLAN.md`'s Personalization Inventory for the full rationale behind every value collected below.
+
+Each phase is independently re-runnable — Step 0 detects what's already done so a second run doesn't repeat work or re-ask questions that already have answers.
+
+---
+
+## Step 0 — Detect current state
+
+Before asking anything, check what this instance already has.
+
+**Mechanical phase:**
+
+```bash
+grep -rl "\[\[CLIENT_NAME\]\]" --include="*.md" --include="*.ts" --include="*.vue" --include="*.json" . 2>/dev/null | grep -v "scripts/bootstrap/\|\.claude/skills/bootstrap-client/"
+```
+
+- Non-empty → mechanical phase not (fully) done. Continue to Step 1 as normal.
+- Empty → `[[CLIENT_NAME]]` is fully resolved already. Say: "This instance already looks bootstrapped — no `[[CLIENT_NAME]]` tokens remain. Skip the mechanical setup and jump straight to the narrative sections?" **Stop and wait.** If confirmed, skip to Step 8. If the developer wants to re-run the mechanical phase anyway (e.g. to correct a value), continue to Step 1.
+
+**Narrative phase** — for each page below, grep for its anchor text. Anchor still present means that page's section is still a placeholder; anchor absent means it was already filled in a prior run.
+
+| Page                                      | Anchor text (present = not yet filled)                               |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| `docs/AI SDLC/Connect Framework/index.md` | `[Why a structured problem→solution framework matters for`           |
+| `docs/AI SDLC/Workshops/index.md`         | `[Known constraints that will shape how discovery actually runs for` |
+| `docs/AI SDLC/Problem Space/index.md`     | `[What pain points`                                                  |
+| `docs/AI SDLC/Solution Space/index.md`    | `[Early signal on where the solution might land`                     |
+
+Build the list of still-unfilled pages — this is what Step 8 asks about, not necessarily all four. Report the split up front, e.g.: "Narrative sections: Connect Framework and Workshops are already filled in; Problem Space and Solution Space are still placeholders."
+
+- All four already filled → tell the developer and skip straight to Step 10. If the mechanical phase was also skipped, there's nothing left to bootstrap — say so and stop; don't proceed to Step 10's commit prompt with nothing to report.
+- Some filled, some not → proceed through Steps 1–7 or straight to Step 8 (per the mechanical check above), but Step 8 only asks about the unfilled subset.
+- None filled → proceed normally, all four in scope for Step 8.
 
 ---
 
@@ -137,16 +169,74 @@ If the script errors (invalid input, missing required value), relay its error me
 
 ---
 
-## Step 7 — Report
+## Step 7 — Report (mechanical phase)
 
 Summarize what changed, from the script's own final output. Then remind the developer:
 
-- Review `git diff` before committing — Step 1's find-replace touches every file that contained `[[CLIENT_NAME]]`
 - Fill in `AWS_REGION`, `LOCATION_SHORT`, `ENVIRONMENT` in the newly-scaffolded `.env.dev` files — these are deployment-environment values, not client-identity, so this skill doesn't collect them
 - AWS account setup, `cdk bootstrap`, and the first `cdk deploy` are a separate step — point to the deployment runbook once it exists (Iteration 6 in `STARTER-KIT-PLAN.md`)
 
-Suggest a commit message:
+Do not suggest a commit yet — the narrative phase below still has to run or be explicitly skipped first, so the developer commits once with everything, not twice.
+
+---
+
+## Step 8 — Personalized narrative sections (optional, judgment-heavy)
+
+Four pages each carry a placeholder "story" section — client-specific narrative, not identity tokens — added by design so a fresh clone shows the intended shape even before bootstrap:
+
+| Page                                      | Section                                      | Hedge required?                                                  |
+| ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| `docs/AI SDLC/Connect Framework/index.md` | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
+| `docs/AI SDLC/Workshops/index.md`         | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
+| `docs/AI SDLC/Problem Space/index.md`     | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
+| `docs/AI SDLC/Solution Space/index.md`    | Early Direction                              | **Yes** — same reason                                            |
+
+Only ask about the subset Step 0 flagged as still-unfilled — if Step 0 found some pages already done, don't re-ask about those; note them as already complete instead. This step is entirely optional beyond that — the developer may not have had any client conversations yet. Ask, scoped to the unfilled subset:
+
+> "{N} docs page(s) still have placeholder 'story' sections — {list of unfilled page names}. Want to fill these in now, or skip and leave them as placeholders for later?"
+
+**Stop and wait.** If skipped, go straight to Step 10 — leave the bracketed placeholder text and the `[!WARNING]`/`[!IMPORTANT]` callouts exactly as they are on the still-unfilled pages. Do not fabricate an answer to fill the gap.
+
+If proceeding, ask only the questions matching the unfilled subset, batched together (since each is short):
+
+> "1. **Connect Framework** — Why does a structured problem→solution framework matter for `{CLIENT_NAME}` specifically? What are they trying to achieve, and why not jump straight to a fix?
+>
+> 2. **Workshops** — Any known constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability?
+>
+> 3. **Problem Space** — What pain points has `{CLIENT_NAME}` already mentioned — from sales conversations, an RFP, or public information? (This will be clearly marked as an entering hypothesis, not a confirmed finding.)
+>
+> 4. **Solution Space** — Any early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations? (Also marked provisional.)
+>
+> Answer as many as you can — skip any you don't have an answer for yet, individually."
+
+(Only include the numbered questions for pages actually in scope this run.)
+
+**Stop and wait.** A partial answer set is fine — draft only the pages with an answer in Step 9, leave the rest as placeholders.
+
+---
+
+## Step 9 — Draft and confirm each section
+
+For each page with an answer from Step 8, apply the write-confirm pattern individually — one page at a time, not all four before any confirmation:
+
+1. Draft 2–4 sentences from the developer's answer, replacing the bracketed placeholder text. Match this repo's existing tone throughout `docs/AI SDLC/` — short sentences, no marketing language, no unearned certainty. For Problem Space and Solution Space, the drafted prose itself should also read as tentative ("early signal suggests…", "mentioned that…") — the `[!IMPORTANT]` callout above it is not enough on its own if the prose reads as settled fact.
+2. Write the file.
+3. Say: "Updated `{page}`'s `{section}` section. Review — any corrections?"
+4. **Stop and wait.** Apply corrections and re-save; repeat from step 3 until confirmed.
+5. Move to the next page with an answer.
+
+---
+
+## Step 10 — Final report and commit
+
+Summarize what actually ran this session — it may be just one phase, per Step 0's routing:
+
+- Mechanical: either the Step 7 apply summary, or "already bootstrapped, skipped."
+- Narrative: which of the four sections were filled this run, which were already done from a prior run, and which are still left as placeholders.
+
+Suggest a commit message reflecting what actually changed — the full one if both phases ran this session, narrower if only one did:
 
 > `chore: bootstrap client — {CLIENT_NAME}`
+> `docs: personalize narrative sections — {CLIENT_NAME}` (narrative-only run)
 
 **Stop and wait** for the developer to confirm the commit. This skill never commits or pushes on its own — `git push` is a guarded command.

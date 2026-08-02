@@ -2,6 +2,13 @@
 
 Goals · Problem Space · Solution Space · Milestones — the four-list facilitation arc that structures every ADLC engagement, from first discovery through to pilot delivery.
 
+## Why This Matters for [[CLIENT_NAME]]
+
+> [!WARNING] Populated During Bootstrap
+> Filled in by `/bootstrap-client` — not yet answered for this instance.
+
+[Why a structured problem→solution framework matters for [[CLIENT_NAME]] specifically — what they're trying to achieve, and why not jump straight to a fix.]
+
 ## How This Directory Works
 
 [01 Overview](./01%20Overview.md) describes the framework itself — definitions, how the lists connect, key principles — and does not change during the engagement. The four list pages below hold [[CLIENT_NAME]]'s current understanding and are updated as workshops progress, the same living-pages pattern used by [Problem Space (workdir)](/AI%20SDLC/Problem%20Space/).

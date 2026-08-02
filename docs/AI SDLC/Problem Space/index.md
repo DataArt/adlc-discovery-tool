@@ -2,6 +2,13 @@
 
 A working directory for forming and stress-testing hypotheses about where [[CLIENT_NAME]]'s delivery time is lost. Content here is provisional — findings are validated through workshops and promoted into the [Connect Framework](/AI%20SDLC/Connect%20Framework/)'s Problem Space list.
 
+## Entering Hypothesis
+
+> [!IMPORTANT] Entering Hypothesis — Not Yet Validated
+> Filled in by `/bootstrap-client` from initial conversations with [[CLIENT_NAME]] — not a confirmed finding. Workshops confirm or refute this.
+
+[What pain points [[CLIENT_NAME]] has already mentioned — from sales conversations, an RFP, or public information.]
+
 ## How This Space Works
 
 [01 Overview](./01%20Overview.md) synthesizes the central symptom, root-cause landscape, and open questions into the top-level diagnosis — it changes as the picture sharpens. [Current State](./Current%20State/) holds raw findings already discovered and gathered (any existing initiative, bottom-up team evidence) that feed that diagnosis. The domain pages below break the diagnosis out by SDLC area — current state, time-loss estimate, AI opportunity, evidence needed — filled in as the relevant workshop session completes.

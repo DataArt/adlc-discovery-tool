@@ -156,9 +156,12 @@ function parseAndValidateArgs(): Answers {
 }
 
 function listTrackedTextFiles(): string[] {
-  const out = execFileSync('git', ['ls-files'], { cwd: REPO_ROOT }).toString();
+  // -z: NUL-separated, unquoted paths. Without it, git quotes/escapes any path containing
+  // non-ASCII characters (e.g. "✅"/"—" in docs/Stories/archive/* filenames), which silently
+  // breaks readFileSync on those exact paths — found live, testing against this repo.
+  const out = execFileSync('git', ['ls-files', '-z'], { cwd: REPO_ROOT }).toString();
   return out
-    .split('\n')
+    .split('\0')
     .filter(Boolean)
     .filter((f) => !BINARY_EXTENSIONS.has(extname(f).toLowerCase()));
 }

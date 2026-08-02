@@ -42,6 +42,11 @@ const PROJECT_JSON_FILES = [
   'apps/lambda-auth/project.json',
 ];
 
+// The bootstrap tooling's own files reference `[[CLIENT_NAME]]` literally, in prose that
+// documents what it does (e.g. "replaces [[CLIENT_NAME]] everywhere"). Find-replacing those
+// would corrupt the tooling's own comments/docs — exclude it from Step 1 specifically.
+const SELF_EXCLUDE_PREFIXES = ['scripts/bootstrap/', '.claude/skills/bootstrap-client/'];
+
 interface EnvScaffold {
   example: string;
   target: string;
@@ -164,6 +169,8 @@ function replaceClientNameToken(v: Answers): { filesChanged: number; replacement
   const token = '[[CLIENT_NAME]]';
 
   for (const relPath of listTrackedTextFiles()) {
+    if (SELF_EXCLUDE_PREFIXES.some((prefix) => relPath.startsWith(prefix))) continue;
+
     const abs = resolve(REPO_ROOT, relPath);
     let content: string;
     try {

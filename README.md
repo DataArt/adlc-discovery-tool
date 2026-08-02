@@ -4,6 +4,10 @@ A structured, evidence-led engagement tool: a DataArt-led AI SDLC discovery enga
 
 This repository is the working surface for the engagement: it hosts the documentation site delivered to [[CLIENT_NAME]], the design sessions that produce engagement content, and the engineering harness that structures how the team works.
 
+## Using this starter kit for a new client
+
+If you're seeing literal `[[CLIENT_NAME]]` placeholders anywhere in this repo, it hasn't been bootstrapped yet. Run `/bootstrap-client` inside Claude Code — it walks through a short Q&A (client name, GitHub org/repo, Giscus setup) and then applies everything deterministically via a script, not free-text generation. See `STARTER-KIT-PLAN.md` for the full personalization rationale.
+
 ## What's here
 
 | Path                              | Purpose                                                                       |

@@ -52,6 +52,7 @@ __metadata:
     lint-staged: "npm:^15.0.0"
     nx: "npm:^23.0.0"
     prettier: "npm:^3.0.0"
+    tsx: "npm:^4.0.0"
     typescript: "npm:^5.7.0"
     typescript-eslint: "npm:^8.0.0"
   languageName: unknown

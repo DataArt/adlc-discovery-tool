@@ -39,6 +39,7 @@ Key constraint: basic auth password protection on all routes.
 
 | Skill                 | Purpose                                                                |
 | --------------------- | ---------------------------------------------------------------------- |
+| `/bootstrap-client`   | Instantiate this starter kit for a new client engagement (one-time)    |
 | `/dev`                | Dev lifecycle orchestrator — Plan → Implement → Test → Document        |
 | `/design`             | Design lifecycle orchestrator — Frame → Research → Elaborate → Publish |
 | `/skill-reflect`      | Brain-dump observations after completing a ticket                      |

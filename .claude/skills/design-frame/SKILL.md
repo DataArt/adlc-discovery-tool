@@ -53,7 +53,7 @@ Before writing any files, confirm the developer is on the correct feature branch
 
 Determine which design track this session follows:
 
-> "Is this design for **AI SDLC engagement content** (workshops, problem-space analysis, solution recommendations for Collinson — output lands in `docs/AI SDLC/`) or for **project/app architecture** (VitePress site, Lambda@Edge auth, CDK infrastructure — output lands in HLD/LLD)?
+> "Is this design for **AI SDLC engagement content** (workshops, problem-space analysis, solution recommendations for [[CLIENT_NAME]] — output lands in `docs/AI SDLC/`) or for **project/app architecture** (VitePress site, Lambda@Edge auth, CDK infrastructure — output lands in HLD/LLD)?
 >
 > **A — AI SDLC content** · **B — Project architecture**"
 

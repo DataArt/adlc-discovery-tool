@@ -151,7 +151,7 @@ _Date: 2026-08-01_
 
 ## Delivery Summary
 
-The VitePress docs site now has a working comments widget on every documentation page, backed by GitHub Discussions on the private `DataArt/collinson-adlc` repo via giscus. Readers with GitHub access to the repo can discuss any page inline; the widget correctly excludes the homepage, stays in sync as readers navigate client-side between pages, and uses human-readable (non-percent-encoded) discussion titles. No new npm dependency and no backend/infrastructure changes were needed — it's a pure client-side addition to the existing VitePress theme.
+The VitePress docs site now has a working comments widget on every documentation page, backed by GitHub Discussions on the private `[[GITHUB_ORG]]/[[GITHUB_REPO]]` repo via giscus. Readers with GitHub access to the repo can discuss any page inline; the widget correctly excludes the homepage, stays in sync as readers navigate client-side between pages, and uses human-readable (non-percent-encoded) discussion titles. No new npm dependency and no backend/infrastructure changes were needed — it's a pure client-side addition to the existing VitePress theme.
 
 ## Tech Debt
 

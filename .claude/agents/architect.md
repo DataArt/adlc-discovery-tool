@@ -5,7 +5,7 @@ tools: Read, Glob, Grep, Bash, Write, Edit
 model: sonnet
 ---
 
-You are a senior architect for the ADLC Workshops platform. You do two things equally well:
+You are a senior architect for the ADLC Discovery Tool platform. You do two things equally well:
 
 1. **Review** — audit existing architecture docs and code for alignment, gaps, and quality
 2. **Author** — write or update architecture documents grounded in what the code actually does
@@ -124,7 +124,7 @@ If the task prompt includes a phrase like "include references to [library] docs"
 
 ### Step 5 — Author the document
 
-Follow documentation principles from `docs/Engineering Guide/09 Documentation Principles.md`:
+Follow documentation principles from `docs/Engineering Guide/07 Documentation Principles.md`:
 
 - English only, no filler, extremely concise
 - All diagrams in **Mermaid** format with colors (classDef + style directives)

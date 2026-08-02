@@ -8,7 +8,7 @@
 
 ## Problem
 
-The VitePress docs site has no way for readers to leave feedback or discuss a specific page. Giscus is a comments widget backed by GitHub Discussions — it needs no backend of its own, matches this site's "no server-side runtime" Web container design, and reuses the existing private GitHub repo (`DataArt/collinson-adlc`) as the storage/identity layer.
+The VitePress docs site has no way for readers to leave feedback or discuss a specific page. Giscus is a comments widget backed by GitHub Discussions — it needs no backend of its own, matches this site's "no server-side runtime" Web container design, and reuses the existing private GitHub repo (`[[GITHUB_ORG]]/[[GITHUB_REPO]]`) as the storage/identity layer.
 
 Access model (confirmed with developer): giscus's access control rides on GitHub repo permissions, not the site's Lambda@Edge basic auth. Only GitHub users with read access to the private repo can view/post comments — a subset of everyone who can reach the site via the shared password. This is expected and accepted.
 
@@ -16,7 +16,7 @@ Access model (confirmed with developer): giscus's access control rides on GitHub
 
 **In scope:**
 
-- Enable GitHub Discussions on `DataArt/collinson-adlc` and install the giscus GitHub App (developer-performed, external to this repo's code)
+- Enable GitHub Discussions on `[[GITHUB_ORG]]/[[GITHUB_REPO]]` and install the giscus GitHub App (developer-performed, external to this repo's code)
 - Embed the giscus comments widget at the bottom of documentation pages via VitePress's `doc-after` slot
 - SPA-safe reload of the widget on client-side navigation between docs pages
 
@@ -28,7 +28,7 @@ Access model (confirmed with developer): giscus's access control rides on GitHub
 
 ## Acceptance Criteria
 
-- [ ] `AC-1` — giscus GitHub App is installed on `DataArt/collinson-adlc` and Discussions is enabled with a category dedicated to giscus mapping (verified in GitHub repo settings)
+- [ ] `AC-1` — giscus GitHub App is installed on `[[GITHUB_ORG]]/[[GITHUB_REPO]]` and Discussions is enabled with a category dedicated to giscus mapping (verified in GitHub repo settings)
 - [ ] `AC-2` — running `yarn nx run site:serve` and opening any documentation page (e.g. `/Engineering Guide/01 Conventions`) shows the giscus widget rendered at the bottom of the content, below the page footer/prev-next links
 - [ ] `AC-3` — the widget is mapped to the page (`data-mapping="pathname"` or equivalent) — opening two different doc pages shows two distinct discussion contexts, not the same one
 - [ ] `AC-4` — navigating between two doc pages via a sidebar/nav link (no full browser reload) updates the widget to reflect the new page, confirmed via Network tab showing a fresh giscus request after client-side navigation
@@ -49,7 +49,7 @@ flowchart LR
         WIDGET["💬 Giscus widget\n(injected iframe)"]:::widget
     end
 
-    subgraph GITHUB ["🐙 GitHub (DataArt/collinson-adlc — private)"]
+    subgraph GITHUB ["🐙 GitHub ([[GITHUB_ORG]]/[[GITHUB_REPO]] — private)"]
         DISCUSSIONS["🗨️ Discussions\n(1 per page, mapped by pathname)"]:::discussions
         APP["🔌 giscus GitHub App\n(repo-scoped install)"]:::app
     end
@@ -74,18 +74,18 @@ No code changes — this step is developer-performed setup on GitHub, gating the
 
 **Changes:**
 
-- None (repo settings on `DataArt/collinson-adlc`, outside this codebase)
+- None (repo settings on `[[GITHUB_ORG]]/[[GITHUB_REPO]]`, outside this codebase)
 
 **Actions:**
 
-1. In `DataArt/collinson-adlc` GitHub repo settings → enable **Discussions**
+1. In `[[GITHUB_ORG]]/[[GITHUB_REPO]]` GitHub repo settings → enable **Discussions**
 2. Create a Discussions category for giscus (e.g. "Page Comments", format: _Announcements_ so only giscus/maintainers start new discussions — recommended by giscus)
-3. Install the **giscus** GitHub App (https://github.com/apps/giscus) scoped to `DataArt/collinson-adlc`
+3. Install the **giscus** GitHub App (https://github.com/apps/giscus) scoped to `[[GITHUB_ORG]]/[[GITHUB_REPO]]`
 4. Because the repo is **private**, giscus.app's configurator cannot verify it (its "✔️ compatible" check is an anonymous, unauthenticated API call and can't see private repos — this is expected, not a sign of misconfiguration). Instead, get the two IDs directly via GitHub's authenticated GraphQL API Explorer (https://docs.github.com/en/graphql/overview/explorer), signed in as an account with read access to the repo:
 
    ```graphql
    query {
-     repository(owner: "DataArt", name: "collinson-adlc") {
+     repository(owner: "[[GITHUB_ORG]]", name: "[[GITHUB_REPO]]") {
        id
        discussionCategories(first: 10) {
          nodes {
@@ -113,7 +113,7 @@ Depends on Step 1's `data-repo-id` / `data-category-id`. Ships the widget render
 
 **Changes:**
 
-- `apps/docs-web/.vitepress/theme/GiscusComments.vue` — new component. Renders a mount `<div>` and imperatively injects the `https://giscus.app/client.js` script on mount (per giscus's official framework-agnostic embed method — no new npm dependency). Config (`data-repo="DataArt/collinson-adlc"`, `data-repo-id`, `data-category`, `data-category-id`, `data-mapping="pathname"`, `data-theme="preferred_color_scheme"`) as constants at the top of the file, with `data-repo-id`/`data-category-id` filled in from Step 1.
+- `apps/docs-web/.vitepress/theme/GiscusComments.vue` — new component. Renders a mount `<div>` and imperatively injects the `https://giscus.app/client.js` script on mount (per giscus's official framework-agnostic embed method — no new npm dependency). Config (`data-repo="[[GITHUB_ORG]]/[[GITHUB_REPO]]"`, `data-repo-id`, `data-category`, `data-category-id`, `data-mapping="pathname"`, `data-theme="preferred_color_scheme"`) as constants at the top of the file, with `data-repo-id`/`data-category-id` filled in from Step 1.
 - `apps/docs-web/.vitepress/theme/Layout.vue` — new component wrapping `DefaultTheme.Layout`, adding `<GiscusComments />` in the `#doc-after` slot (VitePress's built-in slot that only renders on pages using the `doc` layout — automatically excludes `docs/index.md`'s `layout: home`).
 - `apps/docs-web/.vitepress/theme/index.ts` — add `Layout` (from the new `Layout.vue`) to the exported theme object alongside the existing `extends: DefaultTheme` and `setup()`; no changes to the existing zoom logic.
 

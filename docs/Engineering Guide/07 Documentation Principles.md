@@ -10,7 +10,7 @@ Documentation degrades in two ways: it grows too long to read, or it grows too t
 
 These principles exist so that every document in this repo is worth reading: short enough to consume, precise enough to act on, and located where a future reader would look for it.
 
-A secondary reason: frontier AI models follow ~150–200 instructions reliably before quality degrades uniformly. Root context files (CLAUDE.md, AGENTS.md) that exceed this budget dilute every instruction in them. The principles below apply to human-facing docs and AI-facing context files equally.
+A secondary reason: frontier AI models follow ~150–200 instructions reliably before quality degrades uniformly. Root context files (CLAUDE.md) that exceed this budget dilute every instruction in them. The principles below apply to human-facing docs and AI-facing context files equally.
 
 ---
 
@@ -24,7 +24,7 @@ A secondary reason: frontier AI models follow ~150–200 instructions reliably b
 
 **Progressive disclosure** — root context files point; they do not inline. A line that says "read X for Y" costs ~10–15 tokens and stays accurate indefinitely. Inlined content costs hundreds of tokens and drifts the moment the source is updated.
 
-**Length budget** — root context files (CLAUDE.md, AGENTS.md, steering files): 60–130 lines. Engineering Guide articles: under 150 lines. LLD container docs: under 120 lines. HLD container docs: under 80 lines. If a doc exceeds its budget, something is in the wrong place.
+**Length budget** — root context files (CLAUDE.md): 60–130 lines. Engineering Guide articles: under 150 lines. LLD container docs: under 120 lines. HLD container docs: under 80 lines. If a doc exceeds its budget, something is in the wrong place.
 
 **Certainty principle** — architecture docs (HLD and LLD) state only settled outcomes. No comparisons, open questions, or rationale. Those belong in `Stories/<TICKET>/design/`. → See `docs/README.md`.
 
@@ -85,15 +85,15 @@ Never write as prose what can be a diagram. Never write as bullets what can be a
 
 ## How — doc-type cheat sheet
 
-| Doc type                                  | Structure                                                                     | Length target |
-| ----------------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| Root context file (CLAUDE.md / AGENTS.md) | WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (slash commands / agents) | 60–130 lines  |
-| Engineering Guide article                 | Problem → Steps → Notes                                                       | < 150 lines   |
-| HLD container doc                         | Responsibilities → Technology → Data flow → NFRs → Open questions             | < 80 lines    |
-| LLD container doc                         | Overview → Component detail → Integration patterns → Key decisions            | < 120 lines   |
-| Convention skill                          | Rule → Why → How to apply                                                     | < 40 lines    |
-| Orchestrator skill                        | Orchestration pattern + per-phase invariants                                  | < 60 lines    |
-| App README                                | What → How to run locally → Links to HLD + LLD                                | < 60 lines    |
-| ADR (Architecture Decision Record)        | Context → Decision → Consequences                                             | < 60 lines    |
+| Doc type                           | Structure                                                                     | Length target |
+| ---------------------------------- | ----------------------------------------------------------------------------- | ------------- |
+| Root context file (CLAUDE.md)      | WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (slash commands / agents) | 60–130 lines  |
+| Engineering Guide article          | Problem → Steps → Notes                                                       | < 150 lines   |
+| HLD container doc                  | Responsibilities → Technology → Data flow → NFRs → Open questions             | < 80 lines    |
+| LLD container doc                  | Overview → Component detail → Integration patterns → Key decisions            | < 120 lines   |
+| Convention skill                   | Rule → Why → How to apply                                                     | < 40 lines    |
+| Orchestrator skill                 | Orchestration pattern + per-phase invariants                                  | < 60 lines    |
+| App README                         | What → How to run locally → Links to HLD + LLD                                | < 60 lines    |
+| ADR (Architecture Decision Record) | Context → Decision → Consequences                                             | < 60 lines    |
 
 This document follows its own rules: it states why these principles exist, what they are, and how to apply them — nothing else.

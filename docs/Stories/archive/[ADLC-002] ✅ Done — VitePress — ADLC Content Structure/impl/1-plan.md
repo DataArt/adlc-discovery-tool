@@ -32,7 +32,7 @@ The VitePress site (`apps/docs-web`) is wired for a different project and does n
 - [ ] `AC-4` — VitePress dev server renders exactly five nav items: **Problem Space (AI SDLC)**, **Solution...**, **Workshops**, **Project (HLD)**, **Engineering Guide (Harness)**
 - [ ] `AC-5` — Clicking each nav item lands on its section index page without a 404
 - [ ] `AC-6` — Sidebar for each nav section lists the correct documents (auto-scanned from `docs/`)
-- [ ] `AC-7` — Site title shown in the browser tab reads "Collinson ADLC Workshops"
+- [ ] `AC-7` — Site title shown in the browser tab reads "[[CLIENT_NAME]] ADLC Discovery"
 - [ ] `AC-8` — `yarn nx run site:build` completes without errors
 
 ## Steps
@@ -85,7 +85,7 @@ Note: `index.md` files are intentionally excluded from the sidebar auto-scan (th
 **Changes:**
 
 - `apps/docs-web/.vitepress/config.ts` — replace title, nav, and sidebar:
-  - Title: `Collinson ADLC Workshops`
+  - Title: `[[CLIENT_NAME]] ADLC Discovery`
   - Nav (5 items) — each links to its section `index` page:
     1. `Problem Space (AI SDLC)` → `/AI SDLC/Problem Space/`
     2. `Solution Space (AI SDLC)` → `/AI SDLC/Solution Space/`
@@ -102,7 +102,7 @@ Note: `index.md` files are intentionally excluded from the sidebar auto-scan (th
 >
 > Confirm:
 >
-> 1. Browser tab title reads "Collinson ADLC Workshops"
+> 1. Browser tab title reads "[[CLIENT_NAME]] ADLC Discovery"
 > 2. Nav bar shows exactly 5 items with the correct labels
 > 3. Click each nav item — section index page loads without 404
 > 4. Sidebar lists documents for each section

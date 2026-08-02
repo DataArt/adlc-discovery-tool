@@ -32,7 +32,7 @@ Do not reflect on outcomes that are obvious from reading the code. A skill encod
 | **Reflect** | `/skill-reflect <brain-dump>` | Structured reflection in `.claude/reflections/` (or equivalent)     |
 | **Triage**  | `/skill-triage`               | Draft skills in `skills/drafts/` clustered from pending reflections |
 | **New**     | `/skill-new <description>`    | Single draft skill directly (bypasses reflect → triage)             |
-| **Promote** | `/skill-promote [draft-name]` | Draft graduated to active skill location; registered in AGENTS.md   |
+| **Promote** | `/skill-promote [draft-name]` | Draft graduated to active skill location; registered in CLAUDE.md   |
 
 ---
 
@@ -44,7 +44,7 @@ Do not reflect on outcomes that are obvious from reading the code. A skill encod
 
 **New:** Same structure as a reflected + triaged skill: Rule → Why → How to apply. Under 40 lines.
 
-**Promote:** Register the promoted skill in AGENTS.md and any skill index. Remove the draft once promoted — do not leave stale copies.
+**Promote:** Register the promoted skill in CLAUDE.md and any skill index. Remove the draft once promoted — do not leave stale copies.
 
 ---
 

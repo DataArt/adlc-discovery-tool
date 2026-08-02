@@ -13,4 +13,4 @@
 
 - No cost ceiling defined for this engagement
 - Small team, internal access only (~10 users)
-- 6-week engagement scope
+- Fixed-duration engagement scope

@@ -42,9 +42,9 @@ mv .claude/skills/drafts/{name}.md {destination}/{name}.md
 
 Present this as a command for the developer to run — do not run it yourself.
 
-## Step 5 — Register in AGENTS.md
+## Step 5 — Register in CLAUDE.md
 
-Open `AGENTS.md` and add an entry:
+Open `CLAUDE.md` and add an entry:
 
 - **Agent** → add to the `## Agents` table: one row with agent name, layer scope, and tools
 - **Rule skill** → add to the `## Skills` table: one row with skill name and one-line description
@@ -68,10 +68,10 @@ If the promoted skill matches, tell the developer:
 Tell the developer:
 
 - Where the file now lives
-- What was added to AGENTS.md
+- What was added to CLAUDE.md
 - Remind them to commit the change so the whole team inherits the skill:
   ```
-  git add .claude/ AGENTS.md && git commit -m "skill: promote {name}"
+  git add .claude/ CLAUDE.md && git commit -m "skill: promote {name}"
   ```
 
 **Harness bootstrap sync** — glob for `.harness-bootstrap/` at the repo root. If it exists, tell the developer:

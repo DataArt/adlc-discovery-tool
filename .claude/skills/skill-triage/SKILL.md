@@ -50,7 +50,7 @@ Before deciding an action, determine the **scope** of the pattern:
 Ask: does this cluster describe a **multi-step protocol** that already appears (or should appear) in 3 or more workflow skills? If yes — recommend a `pattern-{name}.md` file instead of point-fixing each skill individually. See `.claude/skills/skill-authoring.md` §Patterns for the authoring rules. Key points:
 
 - Pattern files live alongside the skills that use them (e.g. `.claude/skills/dev/` for dev-flow patterns)
-- Not registered in `AGENTS.md` — loaded on-demand via explicit path references in workflow skills
+- Not registered in `CLAUDE.md` — loaded on-demand via explicit path references in workflow skills
 - Workflow skills own the trigger condition and any local overrides; the pattern file owns the rule text
 
 ## Step 4 — Decide action per cluster
@@ -99,7 +99,7 @@ Apply these to every draft — the same engineering discipline used for producti
 | Principle | What it means for skills                                                                                                                                                                  |
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **SoC**   | One skill = one concern. If a draft covers two unrelated conventions, split it into two files.                                                                                            |
-| **DRY**   | Before writing, check that the rule isn't already stated in another skill, agent body, or AGENTS.md. If it is, update the existing file rather than duplicating. Reference, don't repeat. |
+| **DRY**   | Before writing, check that the rule isn't already stated in another skill, agent body, or CLAUDE.md. If it is, update the existing file rather than duplicating. Reference, don't repeat. |
 | **KISS**  | State the rule in the minimum words needed. No examples unless the rule is ambiguous. No scaffolding for hypothetical future cases.                                                       |
 
 For each **New skill** decision, write a draft to `.claude/skills/drafts/{kebab-name}.md`.

@@ -110,7 +110,7 @@ flowchart TD
 
 ## Patterns
 
-Patterns are shared multi-step protocols co-located in `.claude/skills/dev/`. They are not registered in `AGENTS.md` — each workflow skill loads them on-demand via explicit path reference. The pattern file is the single source of truth for the protocol; the workflow skill owns only the trigger condition and any local overrides.
+Patterns are shared multi-step protocols co-located in `.claude/skills/dev/`. They are not registered in `CLAUDE.md` — each workflow skill loads them on-demand via explicit path reference. The pattern file is the single source of truth for the protocol; the workflow skill owns only the trigger condition and any local overrides.
 
 | Pattern                  | File                            | What it enforces                                                                                                                                                                  | Applied in                                                                           |
 | ------------------------ | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
@@ -124,7 +124,7 @@ Patterns are shared multi-step protocols co-located in `.claude/skills/dev/`. Th
 **Principles:**
 
 - Extract a pattern when 3+ workflow skills share the same multi-step protocol.
-- Co-locate under `.claude/skills/dev/` — not in `AGENTS.md` registry, not in `skills/drafts/`.
+- Co-locate under `.claude/skills/dev/` — not in `CLAUDE.md` registry, not in `skills/drafts/`.
 - Reference by explicit file path at the point of use in the workflow skill.
 - The pattern owns the rule text; the workflow skill owns the trigger condition and any local overrides.
 - Update the pattern file only when the protocol itself evolves — not for local variations.

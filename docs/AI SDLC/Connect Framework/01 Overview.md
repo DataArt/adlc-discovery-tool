@@ -28,7 +28,7 @@ flowchart LR
 
 Goals anchor Problems. Problems produce Solutions. Solutions feed Milestones. Milestones prove Goals.
 
-The framework applies at every scale: to the [[ENGAGEMENT_LENGTH]] engagement as a whole, to each workshop day, and to each individual session. The arc is the same; only the grain changes.
+The framework applies at every scale: to the engagement as a whole, to each workshop day, and to each individual session. The arc is the same; only the grain changes.
 
 ## Key Principles
 

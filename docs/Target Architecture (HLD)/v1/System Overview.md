@@ -2,7 +2,7 @@
 
 ## Purpose
 
-ADLC Discovery Tool is a password-protected static documentation site delivering a [[ENGAGEMENT_LENGTH]] AI-first SDLC adoption programme. The site hosts discovery materials, workshop outputs, and design decisions produced during the [[CLIENT_NAME]] × DataArt engagement.
+ADLC Discovery Tool is a password-protected static documentation site delivering an AI-first SDLC adoption programme. The site hosts discovery materials, workshop outputs, and design decisions produced during the [[CLIENT_NAME]] × DataArt engagement.
 
 ## Containers
 
@@ -72,7 +72,7 @@ Binding workspace decisions that apply across all containers.
 | ----------- | -------------- | ----------------------------------------- |
 | Node.js     | 24             | `.nvmrc`                                  |
 | Yarn        | 4.x            | `packageManager` in root `package.json`   |
-| NX          | 20.x           | root `package.json` devDependencies       |
+| NX          | 23.x           | root `package.json` devDependencies       |
 | Module mode | ESM            | `"type": "module"` in root `package.json` |
 | ESLint      | v9 flat config | `eslint.config.js` at workspace root      |
 

@@ -17,7 +17,7 @@ The developer wants to run the documentation stage for an implemented plan. Here
 
 ## Step 0 — Read documentation writing rules
 
-Read `docs/Engineering Guide/09 Documentation Principles.md` before doing anything else — it contains destination rules, diagram standards (min 1 colored Mermaid diagram per doc), format priority (diagrams → tables → text), certainty principle, and length budgets. Also read `docs/Engineering Guide/02 Doc Structure.md` for tier placement and naming conventions.
+Read `docs/Engineering Guide/07 Documentation Principles.md` before doing anything else — it contains destination rules, diagram standards (min 1 colored Mermaid diagram per doc), format priority (diagrams → tables → text), certainty principle, and length budgets. Also read `docs/Engineering Guide/02 Doc Structure.md` for tier placement and naming conventions.
 
 For multi-file permanent doc updates, delegate to `@docs-writer` instead of writing inline.
 
@@ -79,12 +79,12 @@ Use these rules to classify each item:
 
 **`docs/AI SDLC/`** — for engagement content (the fifth destination, specific to this project):
 
-- **`docs/AI SDLC/Problem Space/`** — discovery outputs, current-state analysis, workshop session findings, validated hypotheses about where time is lost in Collinson's SDLC
+- **`docs/AI SDLC/Problem Space/`** — discovery outputs, current-state analysis, workshop session findings, validated hypotheses about where time is lost in [[CLIENT_NAME]]'s SDLC
 - **`docs/AI SDLC/Solution Space/`** — settled recommendations, pilot roadmap, governance frameworks, agentic workflow designs, engagement deliverables ready to share with stakeholders
 
-Use `docs/AI SDLC/` when the output is engagement content — not implementation detail about the docs site itself. If uncertain: ask yourself "does this inform Collinson's AI adoption?" If yes → AI SDLC. "Does this describe the hosting infrastructure?" → LLD or README.
+Use `docs/AI SDLC/` when the output is engagement content — not implementation detail about the docs site itself. If uncertain: ask yourself "does this inform [[CLIENT_NAME]]'s AI adoption?" If yes → AI SDLC. "Does this describe the hosting infrastructure?" → LLD or README.
 
-**File naming inside `docs/`:** All Markdown files under `docs/` use the format `NN Title Case.md` — two-digit number prefix, space separator, Title Case. Pick the next available number within the folder. Update all references in `README.md` and `AGENTS.md` when adding or renaming a file.
+**File naming inside `docs/`:** All Markdown files under `docs/` use the format `NN Title Case.md` — two-digit number prefix, space separator, Title Case. Pick the next available number within the folder. Update all references in `README.md` and `CLAUDE.md` when adding or renaming a file.
 
 **DRY rule:** if the substance of a change mostly belongs in the Engineering Guide or System Architecture (LLD), put the full content there and add only a short one-sentence reference in the app `README.md`. Never duplicate the same detail in two places.
 
@@ -112,7 +112,7 @@ Suggested checks based on the documentation skill:
 - New env var → update app `README.md` env table + `.env.example`
 - New build target → update app `README.md` targets table
 - Non-obvious architectural decision → capture as a skill in `.claude/skills/` or note in the relevant Target Architecture doc
-- New repeatable pattern → write skill in `.claude/skills/` + register in `AGENTS.md`
+- New repeatable pattern → write skill in `.claude/skills/` + register in `CLAUDE.md`
 - Engagement finding or recommendation → write to appropriate `docs/AI SDLC/` subfolder
 
 ---

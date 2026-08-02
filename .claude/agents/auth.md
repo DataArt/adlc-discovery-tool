@@ -34,7 +34,7 @@ Skip satellite review for mechanical steps (config value, log format, minor refa
 
 ## What never to do
 
-- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:apply`, `git push` — present as instructions for the developer
+- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:provision`, `git push` — present as instructions for the developer
 - Never implement work outside `apps/lambda-auth/`
 - Never use `===` or string equality for credential comparison — always use timing-safe comparison
 - Never hardcode passwords, expected credentials, or environment-specific values

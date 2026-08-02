@@ -29,6 +29,9 @@ cdk.out/
 .idea/
 *.iml
 
+# Claude Code — personal/local overrides, never shared
+.claude/settings.local.json
+
 # NX
 .nx/
 

@@ -1,6 +1,6 @@
 # Target Architecture (HLD)
 
-The system's design intent — what this repo's own platform (the ADLC Workshops site) is built toward. Three containers: Web (VitePress static site), Auth (Lambda@Edge basic auth), and Infrastructure (CloudFront + S3 via CDK).
+The system's design intent — what this repo's own platform (the ADLC Discovery Tool site) is built toward. Three containers: Web (VitePress static site), Auth (Lambda@Edge basic auth), and Infrastructure (CloudFront + S3 via CDK).
 
 ## How This Directory Works
 

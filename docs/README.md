@@ -20,7 +20,7 @@ Navigation index for this repository's documentation.
 
 ## AI SDLC
 
-A [[ENGAGEMENT_LENGTH]] DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-first workflow adoption across [[CLIENT_NAME]]. Covers problem space analysis, solution framing, and structured discovery workshops.
+A DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-first workflow adoption across [[CLIENT_NAME]]. Covers problem space analysis, solution framing, and structured discovery workshops.
 
 → [AI SDLC — Workshops](AI%20SDLC/Workshops/00%20Overview.md)
 → [AI SDLC — Connect Framework](AI%20SDLC/Connect%20Framework/01%20Overview.md) — the Goals·Problem·Solution·Milestones facilitation arc used to run every workshop session

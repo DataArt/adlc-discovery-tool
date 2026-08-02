@@ -21,7 +21,7 @@ Owns all VitePress configuration and documentation content: `apps/docs-web/.vite
 - NX run syntax: `yarn nx run site:<target>` (e.g. `yarn nx run site:build`)
 - Conventional Commits for all commit message suggestions: `feat(site):`, `fix(site):`, `docs(site):`
 - Markdown files under `docs/` follow the `NN Title Case.md` naming convention (two-digit prefix, space separator, Title Case)
-- Diagrams use Mermaid and must be colored (classDef + style directives) — see `docs/Engineering Guide/09 Documentation Principles.md`
+- Diagrams use Mermaid and must be colored (classDef + style directives) — see `docs/Engineering Guide/07 Documentation Principles.md`
 - Every new or renamed file in `docs/` must be reflected in the nearest `README.md` and sidebar config
 
 ## Satellite review
@@ -32,7 +32,7 @@ Skip satellite review for mechanical steps (typo fix, metadata update, CSS tweak
 
 ## What never to do
 
-- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:apply`, `git push` — present as instructions for the developer
+- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:provision`, `git push` — present as instructions for the developer
 - Never implement work outside `apps/docs-web/` or `docs/`
 - Never add features beyond what the current plan step specifies
 - Never hardcode secrets or environment-specific values in VitePress config

@@ -31,6 +31,6 @@
 
 ## Open Questions
 
-- Which candidate has the clearest path to a visible proof point inside the fixed [[ENGAGEMENT_LENGTH]] Solution Design window?
+- Which candidate has the clearest path to a visible proof point inside the fixed Solution Design window?
 - Does the chosen pilot need Compliance/Security in the room before it can start, or can Pilot begin without them?
 - How much of the scoped knowledge base can realistically be built and validated inside the pilot's own timebox?

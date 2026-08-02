@@ -168,13 +168,13 @@ Present `@architect`'s findings to the developer:
 
 ## Step 6 — Apply doc updates (track-dependent)
 
-Read `docs/Engineering Guide/09 Documentation Principles.md` before writing anything.
+Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything.
 
 **Track A — AI SDLC content:**
 
 Delegate to `@docs-writer` with the destination list from Step 5:
 
-> "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/09 Documentation Principles.md` before writing anything.
+> "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything.
 >
 > **Docs to create/update:**
 > {list from Step 5 — path · section · text_to_add}
@@ -187,7 +187,7 @@ Delegate to `@docs-writer` with the destination list from Step 5:
 
 Delegate to `@docs-writer` with the full classified list from Step 5:
 
-> "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/09 Documentation Principles.md` before writing anything — it contains destination rules, diagram standards, coloring requirements, and format priority.
+> "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything — it contains destination rules, diagram standards, coloring requirements, and format priority.
 >
 > **Docs to create/update:**
 > {list from @architect — path · section · diagrams_to_port · text_to_add}

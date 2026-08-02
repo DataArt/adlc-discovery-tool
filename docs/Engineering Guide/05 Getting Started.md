@@ -1,6 +1,6 @@
 # Getting Started
 
-_First-time setup and daily commands for the ADLC Workshops monorepo._
+_First-time setup and daily commands for the ADLC Discovery Tool monorepo._
 
 ---
 
@@ -71,7 +71,7 @@ yarn nx run infra:synth --configuration=dev
 yarn nx run infra:diff --configuration=dev
 ```
 
-> ⚠️ `infra:deploy` is a **guarded command** — do not run directly. Follow the deployment runbook.
+> ⚠️ `infra:provision` is a **guarded command** — do not run directly. Follow the deployment runbook.
 
 ---
 

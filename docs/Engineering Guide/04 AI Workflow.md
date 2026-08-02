@@ -33,17 +33,19 @@ _How the harness concepts map to each AI tool's primitives._
 
 ---
 
-## AGENTS.md — the canonical root
+## CLAUDE.md — the canonical root (this project)
 
-**AGENTS.md is the cross-tool root context file.** Use it as the single source of truth; tool-specific files point to it rather than duplicating it.
+**This project is Claude-Code-only.** CLAUDE.md holds the real root-context content directly — there's no separate AGENTS.md wrapper or symlink to maintain.
 
-| Tool        | How to wire AGENTS.md                                                     |
-| ----------- | ------------------------------------------------------------------------- |
-| Claude Code | `CLAUDE.md` → one-liner: `→ See AGENTS.md for project instructions.`      |
-| Codex CLI   | Read natively from repo root; no wrapper needed                           |
-| Cursor      | `.cursor/rules/project.mdc` with `alwaysApply: true` → `→ See AGENTS.md`  |
-| Kiro        | `.kiro/steering/project.md` → mirror AGENTS.md WHAT section               |
-| Windsurf    | First line of `.windsurfrules` → `See AGENTS.md for project conventions.` |
+The table below shows how each tool names and wires its own root context file, for reference if this harness is ever extended beyond Claude Code — not as active configuration in this repo:
+
+| Tool        | Root context file     | How it would wire back to CLAUDE.md                                      |
+| ----------- | --------------------- | ------------------------------------------------------------------------ |
+| Claude Code | `CLAUDE.md`           | — (this is the canonical file)                                           |
+| Codex CLI   | `AGENTS.md`           | `AGENTS.md` → one-liner: `→ See CLAUDE.md for project instructions.`     |
+| Cursor      | `.cursor/rules/*.mdc` | `.cursor/rules/project.mdc` with `alwaysApply: true` → `→ See CLAUDE.md` |
+| Kiro        | `.kiro/steering/*.md` | `.kiro/steering/project.md` → mirror CLAUDE.md's WHAT section            |
+| Windsurf    | `.windsurfrules`      | First line → `See CLAUDE.md for project conventions.`                    |
 
 ---
 
@@ -68,5 +70,5 @@ The following work regardless of tool — they are file-system conventions, not 
 - The `docs/` four-tier structure (HLD / LLD / Engineering Guide / Stories)
 - The certainty principle
 - The `07 Documentation Principles.md` doc-type cheat sheet
-- `AGENTS.md` as root context
+- A single canonical root context file (`CLAUDE.md` in this project — would be `AGENTS.md` if this repo used Codex CLI instead)
 - Skill files in `.harness-bootstrap/skills/` (SKILL.md format is now cross-tool standard)

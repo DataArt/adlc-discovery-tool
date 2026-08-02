@@ -18,7 +18,7 @@
       "Bash(mkdir:*)",
       "Bash(cat:*)"
     ],
-    "deny": ["Bash(cdk deploy:*)", "Bash(git push:*)", "Bash(yarn nx run infra:apply:*)"]
+    "deny": ["Bash(cdk deploy:*)", "Bash(git push:*)", "Bash(yarn nx run infra:provision:*)"]
   },
   "hooks": {
     "PostToolUse": [

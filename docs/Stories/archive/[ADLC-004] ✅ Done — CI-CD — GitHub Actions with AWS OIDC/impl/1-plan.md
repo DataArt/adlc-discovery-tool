@@ -33,7 +33,7 @@ All deployment configuration lives in SSM Parameter Store. GitHub stores only th
 
 - [ ] `AC-1` — `yarn nx run infra:synth:dev` succeeds and `cdk.out/CiStack.template.json` exists
 - [ ] `AC-2` — `CiStack` template contains `AWS::IAM::OIDCProvider` for `token.actions.githubusercontent.com`
-- [ ] `AC-3` — IAM role trust condition is `StringLike` scoped to `repo:DataArt/collinson-adlc:*` — no broader wildcard
+- [ ] `AC-3` — IAM role trust condition is `StringLike` scoped to `repo:[[GITHUB_ORG]]/[[GITHUB_REPO]]:*` — no broader wildcard
 - [ ] `AC-4` — IAM role has no `*` actions — all permissions are explicitly listed
 - [ ] `AC-5` — CI workflow runs on every PR and executes audit, lint, typecheck, build in sequence
 - [ ] `AC-6` — `yarn npm audit --all --severity moderate` exits non-zero on moderate-or-higher vulnerability, failing the job
@@ -79,7 +79,7 @@ flowchart TD
 - `apps/infra/lib/conventions.ts` — add `ciDeployRole` key to `naming()` return: `clnsn-ci-${wl}-${loc}-role`
 - `apps/infra/lib/ci-stack.ts` — new stack:
   - `iam.OpenIdConnectProvider` for `token.actions.githubusercontent.com` with thumbprint `6938fd4d98bab03faadb97b34396831e3780aea1`
-  - IAM role using the OIDC provider as principal with `StringLike` condition `repo:DataArt/collinson-adlc:*`
+  - IAM role using the OIDC provider as principal with `StringLike` condition `repo:[[GITHUB_ORG]]/[[GITHUB_REPO]]:*`
   - Inline policies (all resources scoped by naming convention — no `*` actions):
     - **S3**: `s3:PutObject`, `s3:DeleteObject`, `s3:GetObject`, `s3:ListBucket` on `arn:aws:s3:::${names.siteBucket}` and `…/*`
     - **CloudFront**: `cloudfront:CreateInvalidation`, `cloudfront:GetDistributionConfig`, `cloudfront:UpdateDistribution`, `cloudfront:GetDistribution` on `arn:aws:cloudfront::${account}:distribution/*`

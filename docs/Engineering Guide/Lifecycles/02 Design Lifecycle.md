@@ -95,7 +95,7 @@ flowchart TD
 
 ## Patterns
 
-Patterns are shared multi-step protocols co-located in `.claude/skills/design/`. They are not registered in `AGENTS.md` — each workflow skill loads them on-demand via explicit path reference.
+Patterns are shared multi-step protocols co-located in `.claude/skills/design/`. They are not registered in `CLAUDE.md` — each workflow skill loads them on-demand via explicit path reference.
 
 | Pattern                             | File                                 | What it enforces                                                                                      | Applied in                                                                  |
 | ----------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |

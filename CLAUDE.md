@@ -12,7 +12,7 @@ See `docs/Engineering Guide/01 Conventions.md`.
 
 **Critical — violating either of these is a hard stop:**
 
-- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:apply`, `git push`
+- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:provision`, `git push`
 - **Region** — must never appear hardcoded in source or documentation anywhere; it is deployment configuration only
 
 Commit format: `<type>(<scope>): <what>` (Conventional Commits). Branch format: `<type>/short-description`. Package manager: `yarn` — never `npm` or `npx`.

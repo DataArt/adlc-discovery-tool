@@ -16,7 +16,7 @@ The skill lifecycle turns observed friction into encoded conventions. Read befor
 1. **Reflect** — capture a brain-dump after any ticket. Even one sentence works. Output: `.claude/reflections/{date}-{slug}.md` with `status: pending-triage`.
 2. **Triage** — when 2+ reflections are pending, cluster them, scope each pattern, present options, write drafts. Output: `.claude/skills/drafts/{name}.md` + triage report.
 3. **New** — create a draft directly when you know a pattern without needing a reflection cycle. Output: `.claude/skills/drafts/{name}.md`.
-4. **Promote** — after ~1 week of validation, graduate a draft to active. Output: `.claude/skills/{name}.md` or `.claude/agents/{name}.md`, registered in `AGENTS.md`.
+4. **Promote** — after ~1 week of validation, graduate a draft to active. Output: `.claude/skills/{name}.md` or `.claude/agents/{name}.md`, registered in `CLAUDE.md`.
 
 ## Folder structure
 
@@ -45,7 +45,7 @@ The skill lifecycle turns observed friction into encoded conventions. Read befor
 2. **Draft before promoting.** Every new skill goes through `.claude/skills/drafts/` first. Use it for at least a week before promoting.
 3. **One concern per skill.** If a draft covers two unrelated rules, split it. If a rule is already in another skill, update that skill instead of duplicating.
 4. **Archive, don't delete.** Move reflections to `triaged/` or `archive/` using `git mv` — never delete. History is valuable for understanding why a skill was or wasn't created.
-5. **Register on promote.** Every promoted skill or agent must appear in `AGENTS.md` before others can discover and use it.
+5. **Register on promote.** Every promoted skill or agent must appear in `CLAUDE.md` before others can discover and use it.
 
 ## Why
 

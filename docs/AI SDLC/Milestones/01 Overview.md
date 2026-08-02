@@ -19,7 +19,7 @@
 
 | Constraint               | Detail                                                            |
 | ------------------------ | ----------------------------------------------------------------- |
-| Timeline                 | Fixed [[ENGAGEMENT_LENGTH]] Solution Design phase                 |
+| Timeline                 | Fixed-duration Solution Design phase                              |
 | [[CLIENT_NAME]] capacity | TBD — agreed with [[CLIENT_NAME]] at kickoff                      |
 | DataArt role             | Expert guidance and spike leadership — not embedded delivery      |
 | Data risk                | Availability and quality are known risks                          |
@@ -31,7 +31,7 @@
 
 ```mermaid
 flowchart LR
-    subgraph Phase1["Solution Design — [[ENGAGEMENT_LENGTH]] (fixed time & budget)"]
+    subgraph Phase1["Solution Design — fixed time & budget"]
         direction TB
         SD1[Business requirements\n& technical workshops]
         SD2[Current state\nassessment]
@@ -69,11 +69,11 @@ flowchart LR
     style Phase3 fill:#ECFDF5,stroke:#047857,color:#047857
 ```
 
-| Phase               | Shape                                      | Status          |
-| ------------------- | ------------------------------------------ | --------------- |
-| Solution Design     | [[ENGAGEMENT_LENGTH]], fixed time & budget | Not yet started |
-| Elaboration         | TBD, time & materials                      | Not yet started |
-| Product Development | Ongoing, time & materials                  | Not yet started |
+| Phase               | Shape                     | Status          |
+| ------------------- | ------------------------- | --------------- |
+| Solution Design     | Fixed time & budget       | Not yet started |
+| Elaboration         | TBD, time & materials     | Not yet started |
+| Product Development | Ongoing, time & materials | Not yet started |
 
 ---
 

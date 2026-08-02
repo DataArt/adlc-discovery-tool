@@ -53,7 +53,7 @@ Multiple rounds of debugging before green:
 1. **Yarn caching**: `actions/setup-node@v4` with `cache: yarn` tried `yarn config get cacheFolder` before corepack was enabled, hitting Yarn 1.x on the runner. Fixed by removing `cache: yarn`, adding explicit `corepack enable` step, and manual `actions/cache@v4` targeting `.yarn/cache`. Upgraded to `actions/setup-node@v6.5.0`.
 2. **esbuild moderate vulnerability**: `yarn npm audit --all --severity moderate` caught GHSA-67mh-4wv8-2f99. Fixed by bumping esbuild to `^0.25.0` in `apps/lambda-auth/package.json`.
 3. **lambda-auth:build env file lookup**: `defaultConfiguration: "dev"` caused `.env.dev` lookup in CI. Fixed by adding `"ci": {}` to build configurations and hardcoding `--configuration=ci` in the workflow.
-4. **OIDC trust policy — immutable subject claims**: Repos created after June 1, 2026 use numeric IDs in the sub claim (`repo:DataArt@2479892/collinson-adlc@1301909128:*`). Trust policy had `repo:DataArt/collinson-adlc:*`. Fixed in `ci-stack.ts`; trust policy patched directly in IAM console (no local AWS creds for redeploy).
+4. **OIDC trust policy — immutable subject claims**: Repos created after June 1, 2026 use numeric IDs in the sub claim (`repo:[[GITHUB_ORG]]@[[GITHUB_ORG_ID]]/[[GITHUB_REPO]]@[[GITHUB_REPO_ID]]:*`). Trust policy had `repo:[[GITHUB_ORG]]/[[GITHUB_REPO]]:*`. Fixed in `ci-stack.ts`; trust policy patched directly in IAM console (no local AWS creds for redeploy).
 5. **GitHub environment `dev` required**: `vars.*` only resolves when the job has `environment: dev` set. Added to job config.
 6. **`env-export.sh` before build**: `build.ts` inlines `SM_SECRET_NAME` + `AWS_REGION` via esbuild `define` — OIDC auth and SSM env export must run before the build target.
 7. **VitePress SSR crash on plan file**: `docs/Stories/.../1-plan.md` contains `${{ github.base_ref }}` which Vue SSR interprets as template interpolation. Fixed by adding `srcExclude: ['Stories/**']` to `apps/docs-web/.vitepress/config.ts`.
@@ -109,7 +109,7 @@ _Date: 2026-07-16_
 ### Notes
 
 - No unit tests exist for this ticket's deliverables (CDK stacks, bash scripts, GitHub Actions workflows) — integration tests were the verification: live CI and CD runs on GitHub Actions
-- All 10 acceptance criteria passed; AC-3 trust-policy sub claim updated to numeric org/repo IDs (`repo:DataArt@2479892/collinson-adlc@1301909128:*`) as required for repos created post June 2026
+- All 10 acceptance criteria passed; AC-3 trust-policy sub claim updated to numeric org/repo IDs (`repo:[[GITHUB_ORG]]@[[GITHUB_ORG_ID]]/[[GITHUB_REPO]]@[[GITHUB_REPO_ID]]:*`) as required for repos created post June 2026
 - PR review fixes committed: SEC-001 (SSM scope tightened to `/{env}/{workload}/*`), BUG-001 (CF single-fetch), IMPROVE-002 (AWS_REGION guard), IMPROVE-003 (CF invalidation wait), DESIGN-001 (handler.ts comment)
 
 ## Documentation

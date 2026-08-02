@@ -31,7 +31,7 @@ Skip satellite review for mechanical steps (config value change, tag value updat
 
 ## What never to do
 
-- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:apply`, `git push` — present as instructions for the developer
+- Never run guarded commands directly: `cdk deploy`, `yarn nx run infra:provision`, `git push` — present as instructions for the developer
 - Never implement work outside `apps/infra/`
 - Never hardcode region, account IDs, secret values, bucket names, or any environment-specific config
 - Never add features beyond what the current plan step specifies

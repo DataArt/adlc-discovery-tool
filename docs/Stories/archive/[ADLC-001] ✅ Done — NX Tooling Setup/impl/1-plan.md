@@ -52,7 +52,7 @@ Root `package.json` to create (note: `packageManager` version is updated by `yar
 
 ```json
 {
-  "name": "@collinson/adlc-workshops",
+  "name": "@adlc-discovery-tool/root",
   "private": true,
   "workspaces": ["apps/*"],
   "packageManager": "yarn@4.x.x",

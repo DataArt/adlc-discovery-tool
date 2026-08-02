@@ -1,6 +1,6 @@
 ---
 name: bootstrap-client
-description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts) and narrative (optional — drafts the personalized "story" sections on Connect Framework/Workshops/Problem Space/Solution Space index pages, write-confirmed per page). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
+description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts) and narrative (optional — asks one engagement-story question, then derives and write-confirms the personalized "story" section on each of the Connect Framework/Workshops/Problem Space/Solution Space index pages from it). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
 ---
 
 The developer wants to bootstrap this starter kit for a new client. Here is their input:
@@ -197,33 +197,34 @@ Only ask about the subset Step 0 flagged as still-unfilled — if Step 0 found s
 
 **Stop and wait.** If skipped, go straight to Step 10 — leave the bracketed placeholder text and the `[!WARNING]`/`[!IMPORTANT]` callouts exactly as they are on the still-unfilled pages. Do not fabricate an answer to fill the gap.
 
-If proceeding, ask only the questions matching the unfilled subset, batched together (since each is short):
+If proceeding, ask **one** open-ended question — not four separate ones. The four pages are different facets of a single engagement story, and asking them separately forces the developer to artificially chop up one narrative into four answers instead of just telling it once:
 
-> "1. **Connect Framework** — Why does a structured problem→solution framework matter for `{CLIENT_NAME}` specifically? What are they trying to achieve, and why not jump straight to a fix?
->
-> 2. **Workshops** — Any known constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability?
->
-> 3. **Problem Space** — What pain points has `{CLIENT_NAME}` already mentioned — from sales conversations, an RFP, or public information? (This will be clearly marked as an entering hypothesis, not a confirmed finding.)
->
-> 4. **Solution Space** — Any early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations? (Also marked provisional.)
->
-> Answer as many as you can — skip any you don't have an answer for yet, individually."
+> "Tell me the engagement story — why are we here? What's driving this for `{CLIENT_NAME}`: how it came about, what they're hoping to get out of it, and anything they've already told you about where it hurts or where they'd like to end up."
 
-(Only include the numbered questions for pages actually in scope this run.)
-
-**Stop and wait.** A partial answer set is fine — draft only the pages with an answer in Step 9, leave the rest as placeholders.
+**Stop and wait.** This single answer is the raw material for every in-scope page in Step 9 — do not ask the four page-specific questions from earlier drafts of this skill.
 
 ---
 
-## Step 9 — Draft and confirm each section
+## Step 9 — Derive and confirm each section
 
-For each page with an answer from Step 8, apply the write-confirm pattern individually — one page at a time, not all four before any confirmation:
+Take the one story answer from Step 8 and derive each in-scope page's section from it — each page pulls a different facet out of the same story, it isn't a fresh question:
 
-1. Draft 2–4 sentences from the developer's answer, replacing the bracketed placeholder text. Match this repo's existing tone throughout `docs/AI SDLC/` — short sentences, no marketing language, no unearned certainty. For Problem Space and Solution Space, the drafted prose itself should also read as tentative ("early signal suggests…", "mentioned that…") — the `[!IMPORTANT]` callout above it is not enough on its own if the prose reads as settled fact.
+| Page              | Facet to extract                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Connect Framework | Why a structured problem→solution framework matters here specifically — what they're trying to achieve, why not jump straight to a fix     |
+| Workshops         | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
+| Problem Space     | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
+| Solution Space    | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
+
+If the story doesn't contain material for one of the in-scope pages (e.g. no pilot-domain signal was mentioned at all), don't invent one — leave that page's placeholder as-is and note it as unanswered in Step 10. Don't force a facet out of material that isn't there.
+
+Apply the write-confirm pattern individually per page — one at a time, not all four before any confirmation:
+
+1. Draft 2–4 sentences pulling that page's facet from the story, replacing the bracketed placeholder text. Match this repo's existing tone throughout `docs/AI SDLC/` — short sentences, no marketing language, no unearned certainty. For Problem Space and Solution Space, the drafted prose itself should also read as tentative ("early signal suggests…", "mentioned that…") — the `[!IMPORTANT]` callout above it is not enough on its own if the prose reads as settled fact.
 2. Write the file.
 3. Say: "Updated `{page}`'s `{section}` section. Review — any corrections?"
 4. **Stop and wait.** Apply corrections and re-save; repeat from step 3 until confirmed.
-5. Move to the next page with an answer.
+5. Move to the next in-scope page.
 
 ---
 

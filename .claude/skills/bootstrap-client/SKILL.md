@@ -137,7 +137,7 @@ If the repo doesn't exist yet:
 > "Before I can wire up comments:
 >
 > 1. Enable **Discussions** on `{org}/{repo}` (repo Settings → General → Features)
-> 2. Install the [giscus GitHub App](https://github.com/apps/giscus), scoped to `{org}/{repo}`
+> 2. Install the giscus GitHub App (https://github.com/apps/giscus), scoped to `{org}/{repo}`
 > 3. Create a Discussions category for comments — Announcements format (reuse "ADLC Comments", or pick your own)
 >
 > Tell me once all three are done — or say skip if you want to wire up comments later."

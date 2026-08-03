@@ -70,7 +70,7 @@ git remote add origin git@github.com:{org}/{repo}.git       # point at the new c
 git push -u origin main                                     # push the fresh single-commit history
 ```
 
-**Alternative — via GitHub UI (covers repo creation + initial commit in one action):** if `adlc-discovery-tool` is marked as a [template repository](https://github.com/DataArt/adlc-discovery-tool), GitHub can do the empty-repo creation and the fresh-history reset for you:
+**Alternative — via GitHub UI (covers repo creation + initial commit in one action):** if `adlc-discovery-tool` is marked as a template repository (https://github.com/DataArt/adlc-discovery-tool), GitHub can do the empty-repo creation and the fresh-history reset for you:
 
 1. Go to `https://github.com/DataArt/adlc-discovery-tool`
 2. Click **Use this template → Create a new repository**
@@ -109,7 +109,7 @@ gh api repos/{org}/{repo} -X PATCH -f has_discussions=true   # turns on the Disc
 
 Then, via the browser regardless of which path above you took (no CLI equivalent for either):
 
-1. Install the [giscus GitHub App](https://github.com/apps/giscus), scoped to `{org}/{repo}`.
+1. Install the giscus GitHub App (https://github.com/apps/giscus), scoped to `{org}/{repo}`.
 2. Create a Discussions category for comments — Announcements format, so only maintainers/giscus start new top-level discussions (repo → Discussions tab → "New category"). Note the category name — you'll need it below.
 
 **Private repos — no UI path for the giscus IDs.** giscus.app's own configuration wizard needs public visibility to auto-detect a repo, and GitHub's embedded GraphQL Explorer no longer exists. Capture both IDs via the authenticated GraphQL API instead:

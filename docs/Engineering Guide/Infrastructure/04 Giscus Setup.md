@@ -6,7 +6,7 @@ _Manual runbook for wiring up the comments widget — only needed if this was sk
 
 ## When you need this
 
-`/bootstrap-client` walks through this as part of its mechanical phase (Step 4) and can be skipped there if Discussions/giscus aren't ready yet. If comments show "giscus is not installed on this repository" (or the widget doesn't render at all), either this setup was skipped, or `VITE_GITHUB_ORG` / `VITE_GITHUB_REPO` / `VITE_GISCUS_REPO_ID` / `VITE_GISCUS_CATEGORY_ID` in `apps/docs-web/.env.<env>` are missing or wrong — check those first.
+`/bootstrap-client` walks through this as part of Stage 2 (step 2.4) and can be skipped there if Discussions/giscus aren't ready yet. If comments show "giscus is not installed on this repository" (or the widget doesn't render at all), either this setup was skipped, or `VITE_GITHUB_ORG` / `VITE_GITHUB_REPO` / `VITE_GISCUS_REPO_ID` / `VITE_GISCUS_CATEGORY_ID` in `apps/docs-web/.env.<env>` are missing or wrong — check those first.
 
 ---
 

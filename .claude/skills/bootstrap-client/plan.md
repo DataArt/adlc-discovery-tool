@@ -1,44 +1,43 @@
-# Quick Setup Guide
+---
+name: Bootstrap Plan
+description: The fixed reference checklist /bootstrap-client walks through, grouped into 4 stages. Every command here is run by the developer in their own terminal, never by Claude directly — see pattern-run-and-validate.md.
+type: reference
+---
 
-_The path from an empty clone of this starter kit to a live, deployed client instance. One entry per step — short instruction, plus a reference where a fuller guide exists. Populated progressively — steps without a guide yet are marked `—`._
+# Bootstrap Plan
+
+The path from an empty clone of this starter kit to a live, deployed client instance, grouped into 4 stages.
 
 ```mermaid
 flowchart LR
-    classDef done  fill:#064e3b,stroke:#059669,color:#d1fae5,font-weight:bold
-    classDef here  fill:#7c2d12,stroke:#f97316,color:#ffedd5,font-weight:bold
-    classDef todo  fill:#1e3a8a,stroke:#3b82f6,color:#dbeafe
+    classDef stage fill:#1e3a8a,stroke:#3b82f6,color:#dbeafe,font-weight:bold
 
-    A["1. Prerequisites"]:::done --> B["2. Environment"]:::done
-    B --> C["3. Empty git repo"]:::done
-    C --> D["4. Initial commit"]:::done
-    D --> E["5. Bootstrap"]:::done
-    E --> F["6. Repo Discussions"]:::done
-    F --> G["7. Infra provisioning"]:::done
-    G --> H["8. Deployment"]:::done
-    H --> I["9. CI/CD"]:::here
+    A["1. Environment & Repo"]:::stage --> B["2. Bootstrap"]:::stage
+    B --> C["3. Infrastructure & Deploy"]:::stage
+    C --> D["4. CI/CD"]:::stage
 ```
 
 ---
 
-## 1. Prerequisites
+## Stage 1 — Environment & Repo
 
-Install Node `>=24`, Yarn 4, and the GitHub CLI — later steps (repo creation, Discussions, giscus IDs, CI/CD variables) all run through `gh`.
+Entirely manual, done by the developer **before** invoking `/bootstrap-client` — this skill starts from Stage 2. Covers prerequisites, environment, creating the new repo, and detaching it from this starter kit's own history.
+
+### Prerequisites
+
+Install Node `>=24`, Yarn 4, and the GitHub CLI — later stages (repo creation, Discussions, giscus IDs, CI/CD variables) all run through `gh`.
 
 ```bash
-nvm install 24      # installs and switches to Node 24
-corepack enable      # activates Yarn 4 via the packageManager field
-yarn install         # installs all workspace deps
-brew install gh      # GitHub CLI
-gh auth login        # authenticate gh — required before any gh command below
+nvm install 24       # installs and switches to Node 24
+corepack enable       # activates Yarn 4 via the packageManager field
+yarn install          # installs all workspace deps
+brew install gh       # GitHub CLI
+gh auth login         # authenticate gh — required before any gh command below
 ```
 
 → See `docs/Engineering Guide/05 Getting Started.md`
 
----
-
-## 2. Environment
-
-Copy the env file, fill in your credentials, then launch Claude Code with them loaded.
+### Environment
 
 ```bash
 cp .env.example .env   # scaffold your local env file
@@ -48,19 +47,13 @@ source .env && claude  # load credentials into the shell, then launch Claude Cod
 
 → See `docs/Engineering Guide/06 MCP Setup.md`
 
----
-
-## 3. Empty git repo
-
-Create a new, empty GitHub repo for this client instance.
+### Empty git repo
 
 ```bash
 gh repo create {org}/{repo} --private   # creates the empty client repo on GitHub
 ```
 
----
-
-## 4. Initial commit
+### Initial commit — detach from this starter kit
 
 Reset to a single fresh commit — don't carry this starter kit's own development history (bootstrap tooling commits, etc.) into the client's repo — then repoint `origin` and push.
 
@@ -77,7 +70,7 @@ git remote add origin git@github.com:{org}/{repo}.git       # point at the new c
 git push -u origin main                                     # push the fresh single-commit history
 ```
 
-**Alternative — via GitHub UI (covers steps 3–4 in one action):** if `adlc-discovery-tool` is marked as a [template repository](https://github.com/DataArt/adlc-discovery-tool), GitHub can do the empty-repo creation and the fresh-history reset for you:
+**Alternative — via GitHub UI (covers repo creation + initial commit in one action):** if `adlc-discovery-tool` is marked as a [template repository](https://github.com/DataArt/adlc-discovery-tool), GitHub can do the empty-repo creation and the fresh-history reset for you:
 
 1. Go to `https://github.com/DataArt/adlc-discovery-tool`
 2. Click **Use this template → Create a new repository**
@@ -90,21 +83,23 @@ git clone git@github.com:{org}/{repo}.git
 cd {repo}
 ```
 
+**How the skill verifies this stage is done:** `git remote -v` no longer points to `DataArt/adlc-discovery-tool` — see `pattern-run-and-validate.md` for why this specific check is safe for Claude to run directly rather than asking the developer to paste it (local, read-only).
+
 ---
 
-## 5. Bootstrap
+## Stage 2 — Bootstrap
 
-Run the bootstrap skill in Claude Code — collects client identity (name, org prefix, GitHub org/repo), applies everything deterministically via a script, and optionally drafts the narrative "story" sections.
+Run inside Claude Code:
 
 ```
 /bootstrap-client
 ```
 
-→ See `.claude/skills/bootstrap-client/SKILL.md`
+Collects client identity (name, org prefix, AWS region/location code, GitHub org/repo), applies everything deterministically via `scripts/bootstrap/bootstrap-client.mts`, optionally drafts the narrative "story" sections, and wires up GitHub Discussions/giscus comments.
 
----
+→ See `SKILL.md` for the full Q&A flow (this _is_ that flow — Stage 2 of the orchestrator delegates straight into it)
 
-## 6. Repo Discussions
+### Repo Discussions (part of Stage 2)
 
 ```bash
 gh api repos/{org}/{repo} -X PATCH -f has_discussions=true   # turns on the Discussions tab
@@ -117,7 +112,7 @@ Then, via the browser regardless of which path above you took (no CLI equivalent
 1. Install the [giscus GitHub App](https://github.com/apps/giscus), scoped to `{org}/{repo}`.
 2. Create a Discussions category for comments — Announcements format, so only maintainers/giscus start new top-level discussions (repo → Discussions tab → "New category"). Note the category name — you'll need it below.
 
-**Private repos — no UI path for the giscus IDs.** giscus.app's own configuration wizard needs public visibility to auto-detect a repo and won't work here, and GitHub's embedded GraphQL Explorer no longer exists — an unauthenticated `api.github.com/graphql` request in the browser just hits anonymous rate limits. Capture both IDs via the authenticated GraphQL API instead:
+**Private repos — no UI path for the giscus IDs.** giscus.app's own configuration wizard needs public visibility to auto-detect a repo, and GitHub's embedded GraphQL Explorer no longer exists. Capture both IDs via the authenticated GraphQL API instead:
 
 ```bash
 gh api graphql -f query='
@@ -132,21 +127,19 @@ gh api graphql -f query='
 '
 ```
 
-`repository.id` → `GISCUS_REPO_ID`. Match the category name you created above against `discussionCategories.nodes` → that node's `id` → `GISCUS_CATEGORY_ID`. This is exactly what Step 5's bootstrap flow runs on your behalf, so no separate action is needed here if you're filling these in through `/bootstrap-client` — this is for capturing them by hand if you need the values outside that flow.
+`repository.id` → `GISCUS_REPO_ID`. Match the category name you created above against `discussionCategories.nodes` → that node's `id` → `GISCUS_CATEGORY_ID`.
 
-Handled inline as part of bootstrap — called out here since it's a manual, external action, not something the script applies.
-
-→ See `.claude/skills/bootstrap-client/SKILL.md` (Step 4)
+→ See `docs/Engineering Guide/Infrastructure/04 Giscus Setup.md` if this was skipped and needs doing later, outside the bootstrap flow.
 
 ---
 
-## 7. Infra provisioning
+## Stage 3 — Infrastructure & Deploy
 
 Prerequisite — authenticate via AWS SSO before running anything below:
 
 ```bash
-aws sso login --profile "$AWS_PROFILE"       # opens a browser, refreshes SSO credentials
-aws sts get-caller-identity --profile "$AWS_PROFILE"   # confirms the session is valid
+aws sso login --profile "$AWS_PROFILE"                 # opens a browser, refreshes SSO credentials
+aws sts get-caller-identity --profile "$AWS_PROFILE"    # confirms the session is valid
 ```
 
 → See `docs/Engineering Guide/06 MCP Setup.md` (AWS section)
@@ -168,30 +161,26 @@ node -e "const{createHash}=require('crypto');console.log(createHash('sha256').up
 yarn nx run lambda-auth:sm-push:dev    # writes the basic-auth password hash to Secrets Manager
 ```
 
-`infra:bootstrap` and `infra:provision` are guarded commands — run manually, do not let Claude Code run them for you.
+`infra:bootstrap` and `infra:provision` are guarded commands — always run manually by the developer, never by Claude.
 
 → See `docs/Engineering Guide/Infrastructure/01 Local Provisioning Runbook.md`
 
----
-
-## 8. Deployment
+### Deployment
 
 ```bash
 yarn nx run lambda-auth:deploy:dev   # builds, zips, uploads the auth handler; restores the CloudFront association
 yarn nx run site:deploy:dev          # builds the VitePress site and syncs it to S3
 ```
 
-Subsequent deploys only need to re-run the target(s) for what actually changed.
-
-→ See `docs/Engineering Guide/Infrastructure/02 Deploy Lifecycle.md`
+Auth handler deploys _before_ the site — restores the basic-auth gate before content becomes reachable. See `docs/Engineering Guide/Infrastructure/02 Deploy Lifecycle.md` for why the order matters. Subsequent deploys only need to re-run the target(s) for what actually changed.
 
 ---
 
-## 9. CI/CD
+## Stage 4 — CI/CD
 
-The pipeline itself (`.github/workflows/ci.yml`, `cd.yml`, `.github/actions/aws-auth`) already ships with the starter kit — nothing to build here. This step just wires this instance's values into the repo's GitHub Actions `dev` environment so those workflows can authenticate via OIDC and find their config.
+The pipeline itself (`.github/workflows/ci.yml`, `cd.yml`, `.github/actions/aws-auth`) already ships with the starter kit — nothing to build here. This stage wires this instance's values into the repo's GitHub Actions `dev` environment so those workflows can authenticate via OIDC and find their config.
 
-`IAM_ROLE_ARN` comes from `CiStack`'s own output — there was no target for this until now (`infra:output:dev` only ever covered `DocsStack`); use the new `output-ci` target:
+`IAM_ROLE_ARN` comes from `CiStack`'s own output:
 
 ```bash
 yarn nx run infra:output-ci:dev   # prints CiStack's DeployRoleArn

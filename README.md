@@ -12,29 +12,30 @@ A DataArt starter kit for AI SDLC discovery engagements — clone it, run one bo
 
 ## Launching a new client engagement
 
-```bash
-git clone https://github.com/DataArt/adlc-discovery-tool.git {client-repo-name}   # clone the starter kit
-cd {client-repo-name}
-git remote remove origin   # detach from this tool's own repo
-# create an initial commit and push it to the new engagement's own repo — GitHub, GitLab,
-# Azure DevOps, Bitbucket, etc. — host is up to the team, not this starter kit's concern
-```
+1. Clone this repo:
 
-```bash
-nvm install 24     # installs and switches to Node 24
-corepack enable     # activates Yarn 4 via the packageManager field
-yarn install        # installs all workspace deps
-```
+   ```bash
+   git clone https://github.com/DataArt/adlc-discovery-tool.git {client-repo-name}
+   ```
 
-Then, inside Claude Code:
+2. Detach it from this starter kit and point it at the new engagement's own repo (any host — GitHub, GitLab, Azure DevOps, Bitbucket):
 
-```
-/bootstrap-client
-```
+   ```bash
+   cd {client-repo-name}
+   git remote remove origin
+   ```
 
-It walks through a short Q&A — client name, org prefix, AWS region, GitHub org/repo, Giscus setup — and applies everything deterministically via a script, not free-text generation.
+3. Inside Claude Code:
 
-→ See `QUICK-SETUP-GUIDE.md` for the full path from empty clone to a live, deployed instance (prerequisites through CI/CD).
+   ```
+   /bootstrap-client
+   ```
+
+   It walks through a short Q&A — client name, org prefix, AWS region, GitHub org/repo, Giscus setup — and applies everything deterministically via a script, not free-text generation.
+
+→ See `.claude/skills/bootstrap-client/plan.md` for the full path from empty clone to a live, deployed instance (prerequisites, repo setup, CI/CD).
+
+→ See `.claude/skills/bootstrap-client/plan.md` for the full path from empty clone to a live, deployed instance (prerequisites, repo setup, CI/CD).
 
 ## Contributing / local development
 

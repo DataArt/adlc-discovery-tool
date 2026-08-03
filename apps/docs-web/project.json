@@ -42,8 +42,7 @@
       "inputs": ["default", "^default"],
       "outputs": ["{projectRoot}/.vitepress/dist"],
       "options": {
-        "command": "vitepress build",
-        "cwd": "{projectRoot}"
+        "command": "bash scripts/ci/site-build.sh"
       },
       "configurations": {
         "dev": { "envFile": "apps/docs-web/.env.dev" },

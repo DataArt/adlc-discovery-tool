@@ -5,7 +5,7 @@ A working directory for forming and stress-testing hypotheses about where [[CLIE
 ## Entering Hypothesis
 
 > [!IMPORTANT] Entering Hypothesis — Not Yet Validated
-> Filled in by `/bootstrap-client` from initial conversations with [[CLIENT_NAME]] — not a confirmed finding. Workshops confirm or refute this.
+> Filled in by `/bootstrap-client` from initial conversations with [[CLIENT_NAME]] — not a confirmed finding. Vision-building workshops confirm or refute this.
 
 [What pain points [[CLIENT_NAME]] has already mentioned — from sales conversations, an RFP, or public information.]
 

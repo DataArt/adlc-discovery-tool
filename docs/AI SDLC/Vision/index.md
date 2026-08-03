@@ -1,6 +1,6 @@
-# Workshops
+# Vision
 
-The discovery workshop programme — short, focused sessions that locate where [[CLIENT_NAME]]'s delivery time is lost and where agentic AI could change the outcome, not just accelerate the existing process. Findings feed the [Problem Space](/AI%20SDLC/Problem%20Space/) diagnosis and, once validated, the [Connect Framework](/AI%20SDLC/Connect%20Framework/).
+Building a shared picture of [[CLIENT_NAME]]'s current state, where it needs to get to, and the solution hypotheses in between — current state, future state, and the drafts and hypotheses that connect them. The workshop programme below is the _mechanism_ that builds this vision, not the goal itself: short, focused sessions that locate where delivery time is lost and where agentic AI could change the outcome, not just accelerate the existing process. Findings feed the [Problem Space](/AI%20SDLC/Problem%20Space/) diagnosis and, once validated, the [Connect Framework](/AI%20SDLC/Connect%20Framework/).
 
 ## Finding [[CLIENT_NAME]]'s Improvement Points
 

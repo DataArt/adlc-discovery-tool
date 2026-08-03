@@ -1,6 +1,6 @@
 ---
 name: bootstrap-client
-description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, AWS region/location code, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts, fully resolving every deterministic .env.dev value) and narrative (optional — asks one engagement-story question, then derives and write-confirms the personalized "story" section on each of the Connect Framework/Workshops/Problem Space/Solution Space index pages from it). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
+description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, AWS region/location code, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts, fully resolving every deterministic .env.dev value) and narrative (optional — asks one engagement-story question, then derives and write-confirms the personalized "story" section on each of the Connect Framework/Vision/Problem Space/Solution Space index pages from it). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
 ---
 
 The developer wants to bootstrap this starter kit for a new client. Here is their input:
@@ -37,11 +37,11 @@ grep -rl "\[\[CLIENT_NAME\]\]" --include="*.md" --include="*.ts" --include="*.vu
 | Page                                      | Anchor text (present = not yet filled)                               |
 | ----------------------------------------- | -------------------------------------------------------------------- |
 | `docs/AI SDLC/Connect Framework/index.md` | `[Why a structured problem→solution framework matters for`           |
-| `docs/AI SDLC/Workshops/index.md`         | `[Known constraints that will shape how discovery actually runs for` |
+| `docs/AI SDLC/Vision/index.md`            | `[Known constraints that will shape how discovery actually runs for` |
 | `docs/AI SDLC/Problem Space/index.md`     | `[What pain points`                                                  |
 | `docs/AI SDLC/Solution Space/index.md`    | `[Early signal on where the solution might land`                     |
 
-Build the list of still-unfilled pages — this is what Step 8 asks about, not necessarily all four. Report the split up front, e.g.: "Narrative sections: Connect Framework and Workshops are already filled in; Problem Space and Solution Space are still placeholders."
+Build the list of still-unfilled pages — this is what Step 8 asks about, not necessarily all four. Report the split up front, e.g.: "Narrative sections: Connect Framework and Vision are already filled in; Problem Space and Solution Space are still placeholders."
 
 - All four already filled → tell the developer and skip straight to Step 10. If the mechanical phase was also skipped, there's nothing left to bootstrap — say so and stop; don't proceed to Step 10's commit prompt with nothing to report.
 - Some filled, some not → proceed through Steps 1–7 or straight to Step 8 (per the mechanical check above), but Step 8 only asks about the unfilled subset.
@@ -195,7 +195,7 @@ Four pages each carry a placeholder "story" section — client-specific narrativ
 | Page                                      | Section                                      | Hedge required?                                                  |
 | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
 | `docs/AI SDLC/Connect Framework/index.md` | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
-| `docs/AI SDLC/Workshops/index.md`         | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
+| `docs/AI SDLC/Vision/index.md`            | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
 | `docs/AI SDLC/Problem Space/index.md`     | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
 | `docs/AI SDLC/Solution Space/index.md`    | Early Direction                              | **Yes** — same reason                                            |
 
@@ -220,7 +220,7 @@ Take the one story answer from Step 8 and derive each in-scope page's section fr
 | Page              | Facet to extract                                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Connect Framework | Why a structured problem→solution framework matters here specifically — what they're trying to achieve, why not jump straight to a fix     |
-| Workshops         | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
+| Vision            | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
 | Problem Space     | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
 | Solution Space    | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
 

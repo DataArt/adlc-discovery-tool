@@ -25,11 +25,12 @@ hero:
       link: /AI SDLC/Milestones/01 Overview
 
 features:
-  - title: Workshops
+  - title: Vision
     details: >
-      Discovery workshop sessions — requirements, design, DevOps, knowledge base,
-      team integration, impact analysis, refinement, and AI governance.
-    link: /AI SDLC/Workshops/
+      Current state, future state, and the solution hypotheses in between —
+      built through discovery workshops covering requirements, design, DevOps,
+      knowledge base, team integration, impact analysis, and AI governance.
+    link: /AI SDLC/Vision/
   - title: Connect Framework
     details: >
       Goals · Problem · Solution · Milestones — the facilitation arc that

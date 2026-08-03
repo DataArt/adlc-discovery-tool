@@ -10,9 +10,9 @@ Every command that mutates state or touches an external/credentialed system (Git
 2. **Stop and wait** for the developer to run it in their own terminal.
 3. Ask them to paste back the output (or confirm completion, for steps with no meaningful output — e.g. a UI checkbox).
 4. Validate against the expected result:
-   - Matches → mark the step `✅` in `report.md`, move on.
-   - Doesn't match / error → diagnose from the pasted output, propose a fix, do not guess silently or retry blindly.
-5. Update `report.md`'s Progress table for this step before moving to the next.
+   - Matches → proceed to step 5.
+   - Doesn't match / error → diagnose from the pasted output, propose a fix, do not guess silently or retry blindly. Do not touch `report.md` for this step until it actually passes.
+5. **Use the Edit tool to update `report.md` now, before saying anything else or moving to the next step.** Mark the step `✅` in its Progress table and fill in any values it just produced. "Mark X in `report.md`" anywhere in `SKILL.md` means this — an actual file edit, not a description of one in your response text. Narrating the update without performing it leaves `report.md` stale and defeats its entire purpose as a persistent record.
 
 ## Why
 

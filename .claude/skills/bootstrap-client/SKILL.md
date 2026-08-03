@@ -17,7 +17,7 @@ This orchestrates the full bootstrap flow across 4 stages: **Environment & Repo 
 
 **Every command that mutates state or touches an external/credentialed system (GitHub, AWS, git remotes) is an instruction for the developer to run in their own terminal — never executed by Claude directly.** The one exception is local, read-only checks against files already on disk (e.g. `git remote -v`, a `grep`) — Claude runs those directly to validate. See `pattern-run-and-validate.md` for the loop and why this line is drawn where it is.
 
-`report.md` (in this skill folder) is this instance's live progress record. Read it first to resume; update it as each step is confirmed.
+`report.md` (in this skill folder) is this instance's live progress record. Read it first to resume. Every "mark X in `report.md`" or "update `report.md`" instruction below means **use the Edit tool on it right then, before your next message** — not a description of the update in your response text. A step is not done until `report.md` reflects it.
 
 ---
 

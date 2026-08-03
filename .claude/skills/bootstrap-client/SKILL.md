@@ -13,7 +13,7 @@ The developer wants to bootstrap this starter kit for a new client. Here is thei
 
 > ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
 
-This is a one-time setup flow with two phases: **Q&A** (this skill — judgment, wording, and external-setup steps live here) and **deterministic apply** (a script — zero free-text generation, same input always produces the same output). See `STARTER-KIT-PLAN.md`'s Personalization Inventory for the full rationale behind every value collected below.
+This is a one-time setup flow with two phases: **Q&A** (this skill — judgment, wording, and external-setup steps live here) and **deterministic apply** (a script — zero free-text generation, same input always produces the same output).
 
 Each phase is independently re-runnable — Step 0 detects what's already done so a second run doesn't repeat work or re-ask questions that already have answers.
 

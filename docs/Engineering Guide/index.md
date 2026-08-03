@@ -35,3 +35,4 @@ The top-level articles cover conventions and setup — read [02 Doc Structure](.
 | [01 Local Provisioning Runbook](./Infrastructure/01%20Local%20Provisioning%20Runbook.md) | Step-by-step sequence for provisioning a fresh environment and deploying all apps    |
 | [02 Deploy Lifecycle](./Infrastructure/02%20Deploy%20Lifecycle.md)                       | Full sequence from code change to live site                                          |
 | [03 CI-CD Pipeline](./Infrastructure/03%20CI-CD%20Pipeline.md)                           | Automated quality gate (CI) and deployment (CD) via GitHub Actions and AWS OIDC      |
+| [04 Giscus Setup](./Infrastructure/04%20Giscus%20Setup.md)                               | Manual comments-widget setup, if skipped during `/bootstrap-client`                  |

@@ -7,9 +7,10 @@
 //
 //   1. Literal find-replace of [[CLIENT_NAME]] across every git-tracked text file
 //   2. Rewrite the {org} placeholder in the 3 project.json files (infra, docs-web, lambda-auth)
-//   3. Scaffold apps/{infra,docs-web,lambda-auth}/.env.dev from .env.example + collected values
-//      (only the {org}-templated / client-identity keys are filled in — deployment-environment
-//      keys like AWS_REGION, LOCATION_SHORT stay blank for the developer)
+//   3. Scaffold apps/{infra,docs-web,lambda-auth}/.env.dev from .env.example + collected values —
+//      every deterministic value (org/env/locationShort/region-templated shapes, same formula as
+//      apps/infra/lib/conventions.ts's naming()) is fully resolved; only genuinely AWS-assigned
+//      values (e.g. CF_DISTRIBUTION_ID, known only after infra:provision) stay blank
 //
 // Invoked by the /bootstrap-client skill after it has collected and confirmed every value
 // with the developer — this script performs no Q&A of its own.
@@ -18,6 +19,7 @@
 //   yarn bootstrap:client \
 //     --client-name "Acme Corp" \
 //     --org-prefix acme \
+//     --aws-region us-east-1 --location-short ue1 \
 //     --github-org AcmeOrg --github-org-id 12345 \
 //     --github-repo adlc-discovery-acme --github-repo-id 67890 \
 //     [--giscus-repo-id R_xxx] [--giscus-category-id DIC_xxx] \
@@ -52,9 +54,18 @@ interface EnvScaffold {
   target: string;
   // Keys whose value is replaced outright with the collected value.
   directFills: Record<string, string>;
-  // Keys whose value is a `{org}`-templated shape (e.g. "{org}-{env}-docs-{locationShort}-s3-01") —
-  // only the {org} segment is resolved; the rest stays as a placeholder for the developer.
-  orgTemplatedKeys: string[];
+}
+
+// Shape-templated values in .env.example (e.g. "{org}-{env}-docs-{locationShort}-s3-01") are
+// fully deterministic from what bootstrap already collects — same formula as
+// apps/infra/lib/conventions.ts's naming(). Resolved wherever these tokens appear, in any key.
+function templateTokens(v: Answers): Record<string, string> {
+  return {
+    '{org}': v.orgPrefix,
+    '{env}': 'dev',
+    '{locationShort}': v.locationShort,
+    '{region}': v.awsRegion,
+  };
 }
 
 function buildEnvScaffolds(v: Answers): EnvScaffold[] {
@@ -63,30 +74,31 @@ function buildEnvScaffolds(v: Answers): EnvScaffold[] {
       example: 'apps/infra/.env.example',
       target: 'apps/infra/.env.dev',
       directFills: {
+        AWS_REGION: v.awsRegion,
+        ENVIRONMENT: 'dev',
+        LOCATION_SHORT: v.locationShort,
         ORG_PREFIX: v.orgPrefix,
         GITHUB_ORG: v.githubOrg,
         GITHUB_ORG_ID: v.githubOrgId,
         GITHUB_REPO: v.githubRepo,
         GITHUB_REPO_ID: v.githubRepoId,
       },
-      orgTemplatedKeys: [],
     },
     {
       example: 'apps/docs-web/.env.example',
       target: 'apps/docs-web/.env.dev',
       directFills: {
+        AWS_REGION: v.awsRegion,
         VITE_GITHUB_ORG: v.githubOrg,
         VITE_GITHUB_REPO: v.githubRepo,
         ...(v.giscusRepoId ? { VITE_GISCUS_REPO_ID: v.giscusRepoId } : {}),
         ...(v.giscusCategoryId ? { VITE_GISCUS_CATEGORY_ID: v.giscusCategoryId } : {}),
       },
-      orgTemplatedKeys: ['S3_BUCKET_NAME'],
     },
     {
       example: 'apps/lambda-auth/.env.example',
       target: 'apps/lambda-auth/.env.dev',
-      directFills: {},
-      orgTemplatedKeys: ['SM_SECRET_NAME', 'LAMBDA_FUNCTION_NAME'],
+      directFills: { AWS_REGION: v.awsRegion },
     },
   ];
 }
@@ -94,6 +106,8 @@ function buildEnvScaffolds(v: Answers): EnvScaffold[] {
 interface Answers {
   clientName: string;
   orgPrefix: string;
+  awsRegion: string;
+  locationShort: string;
   githubOrg: string;
   githubOrgId: string;
   githubRepo: string;
@@ -108,6 +122,8 @@ function parseAndValidateArgs(): Answers {
     options: {
       'client-name': { type: 'string' },
       'org-prefix': { type: 'string' },
+      'aws-region': { type: 'string' },
+      'location-short': { type: 'string' },
       'github-org': { type: 'string' },
       'github-org-id': { type: 'string' },
       'github-repo': { type: 'string' },
@@ -119,7 +135,8 @@ function parseAndValidateArgs(): Answers {
   });
 
   const required = [
-    'client-name', 'org-prefix', 'github-org', 'github-org-id', 'github-repo', 'github-repo-id',
+    'client-name', 'org-prefix', 'aws-region', 'location-short',
+    'github-org', 'github-org-id', 'github-repo', 'github-repo-id',
   ] as const;
   const missing = required.filter((k) => !values[k]);
   if (missing.length > 0) {
@@ -131,6 +148,13 @@ function parseAndValidateArgs(): Answers {
     throw new Error(
       `--org-prefix "${orgPrefix}" is invalid — must be lowercase alphanumeric with optional ` +
         'internal hyphens, 1-20 chars, no leading/trailing hyphen (it feeds AWS resource names).'
+    );
+  }
+  const locationShort = values['location-short']!;
+  if (!/^[a-z0-9]{2,10}$/.test(locationShort)) {
+    throw new Error(
+      `--location-short "${locationShort}" is invalid — must be lowercase alphanumeric, ` +
+        '2-10 chars (e.g. "ue1", "euw1") — it feeds AWS resource names.'
     );
   }
   for (const [flag, val] of [
@@ -145,6 +169,8 @@ function parseAndValidateArgs(): Answers {
   return {
     clientName: values['client-name']!,
     orgPrefix,
+    awsRegion: values['aws-region']!,
+    locationShort,
     githubOrg: values['github-org']!,
     githubOrgId: values['github-org-id']!,
     githubRepo: values['github-repo']!,
@@ -238,20 +264,28 @@ function scaffoldEnvDevFiles(v: Answers): { created: string[]; skipped: string[]
       continue;
     }
 
+    const tokens = templateTokens(v);
     const lines = readFileSync(exampleAbs, 'utf-8').split('\n');
-    const filled = lines.map((line) => {
-      const match = line.match(/^([A-Z_]+)=(.*)$/);
+    let resolvedFnName: string | undefined;
+
+    let filled = lines.map((line) => {
+      const match = line.match(/^([A-Z0-9_]+)=(.*)$/);
       if (!match) return line;
       const [, key, value] = match;
 
-      if (key in scaffold.directFills) {
-        return `${key}=${scaffold.directFills[key]}`;
+      let resolved = key in scaffold.directFills ? scaffold.directFills[key] : value;
+      for (const [token, replacement] of Object.entries(tokens)) {
+        if (resolved.includes(token)) resolved = resolved.split(token).join(replacement);
       }
-      if (scaffold.orgTemplatedKeys.includes(key) && value.includes('{org}')) {
-        return `${key}=${value.split('{org}').join(v.orgPrefix)}`;
-      }
-      return line;
+      if (key === 'LAMBDA_FUNCTION_NAME') resolvedFnName = resolved;
+      return `${key}=${resolved}`;
     });
+
+    // CW_LOG_GROUP references the function name computed on its own line above —
+    // resolved as a second pass once that value is known.
+    if (resolvedFnName) {
+      filled = filled.map((line) => line.replace('{function-name}', resolvedFnName!));
+    }
 
     created.push(scaffold.target);
     console.log(`  ${v.dryRun ? '[dry-run] would create' : 'creating'} ${scaffold.target}`);
@@ -287,8 +321,8 @@ function main() {
 
   if (!answers.dryRun) {
     console.log('\nStill manual (not this script\'s job):');
-    console.log('  - AWS account setup, `cdk bootstrap`, first `cdk deploy` — see Iteration 6 / the deployment runbook');
-    console.log('  - Fill in AWS_REGION, LOCATION_SHORT, ENVIRONMENT in the scaffolded .env.dev files');
+    console.log('  - AWS account setup, `cdk bootstrap`, first `cdk deploy` — see the Quick Setup Guide');
+    console.log('  - CF_DISTRIBUTION_ID stays blank until after `infra:provision` + `infra:output` — see the Quick Setup Guide');
     console.log('  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]]');
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: bootstrap-client
-description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts) and narrative (optional — asks one engagement-story question, then derives and write-confirms the personalized "story" section on each of the Connect Framework/Workshops/Problem Space/Solution Space index pages from it). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
+description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Two independently re-runnable phases — mechanical (collects CLIENT_NAME, ORG_PREFIX, AWS region/location code, GitHub org/repo/IDs, Giscus config; applies via the deterministic scripts/bootstrap/bootstrap-client.mts, fully resolving every deterministic .env.dev value) and narrative (optional — asks one engagement-story question, then derives and write-confirms the personalized "story" section on each of the Connect Framework/Workshops/Problem Space/Solution Space index pages from it). Detects what's already done on each run, so a first pass can skip narrative and a later pass can skip straight to it.
 ---
 
 The developer wants to bootstrap this starter kit for a new client. Here is their input:
@@ -59,13 +59,19 @@ Ask:
 
 ---
 
-## Step 2 — Org prefix
+## Step 2 — Org prefix and deployment region
 
 Derive a suggested `ORG_PREFIX` from the client name: lowercase, alphanumeric + hyphens only, ≤20 characters. Keep it short — it feeds every AWS resource name, IAM role name, and SSM path (`{org}-{env}-{workload}-{location}-{type}-{index}`), and those have their own length ceilings.
 
 > "Suggested org prefix: `{slug}` — used in every AWS resource name, IAM role, and SSM path. Accept, or give me a different one?"
 
 **Stop and wait.** Validate whatever the developer confirms against `^[a-z0-9]([a-z0-9-]{0,18}[a-z0-9])?$`. If it doesn't match, explain why and ask again — don't silently coerce it.
+
+Then ask for the AWS deployment region — unlike `ENVIRONMENT` (always `dev` for this flow) and `WORKLOAD`/`CF_PRICE_CLASS` (sensible defaults already in `.env.example`), the region genuinely varies per account and feeds resource names, so it's worth asking rather than defaulting silently:
+
+> "Which AWS region will this deploy to, and what's the short location code for resource names (e.g. `us-east-1` / `ue1`, `eu-west-1` / `euw1`)?"
+
+**Stop and wait.** Validate the location code against `^[a-z0-9]{2,10}$`.
 
 ---
 
@@ -136,6 +142,7 @@ Show the full resolved set for explicit sign-off — nothing touches disk before
 > | -------------------------------- | ------------------------ |
 > | `CLIENT_NAME`                    | `{value}`                |
 > | `ORG_PREFIX`                     | `{value}`                |
+> | `AWS_REGION` / `LOCATION_SHORT`  | `{value}` / `{value}`    |
 > | `GITHUB_ORG` / `GITHUB_ORG_ID`   | `{value}` / `{value}`    |
 > | `GITHUB_REPO` / `GITHUB_REPO_ID` | `{value}` / `{value}`    |
 > | `GISCUS_REPO_ID`                 | `{value or "— skipped"}` |
@@ -153,6 +160,7 @@ Run the deterministic script in `--dry-run` mode first:
 
 ```bash
 yarn bootstrap:client --client-name "{value}" --org-prefix {value} \
+  --aws-region {value} --location-short {value} \
   --github-org {value} --github-org-id {value} \
   --github-repo {value} --github-repo-id {value} \
   [--giscus-repo-id {value}] [--giscus-category-id {value}] \
@@ -173,8 +181,8 @@ If the script errors (invalid input, missing required value), relay its error me
 
 Summarize what changed, from the script's own final output. Then remind the developer:
 
-- Fill in `AWS_REGION`, `LOCATION_SHORT`, `ENVIRONMENT` in the newly-scaffolded `.env.dev` files — these are deployment-environment values, not client-identity, so this skill doesn't collect them
-- AWS account setup, `cdk bootstrap`, and the first `cdk deploy` are a separate step — point to the deployment runbook once it exists (Iteration 6 in `STARTER-KIT-PLAN.md`)
+- `CF_DISTRIBUTION_ID` stays blank in the scaffolded `.env.dev` files — it's the one value that's genuinely AWS-assigned, only known after `infra:provision` + `infra:output`. Everything else is already filled in.
+- AWS account setup, `cdk bootstrap`, and the first `cdk deploy` are a separate step — see `QUICK-SETUP-GUIDE.md`
 
 Do not suggest a commit yet — the narrative phase below still has to run or be explicitly skipped first, so the developer commits once with everything, not twice.
 

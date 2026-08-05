@@ -18,11 +18,18 @@ A DataArt starter kit for AI SDLC discovery engagements — clone it, run one bo
    git clone https://github.com/DataArt/adlc-discovery-tool.git {client-repo-name}
    ```
 
-2. Detach it from this starter kit and point it at the new engagement's own repo (any host — GitHub, GitLab, Azure DevOps, Bitbucket):
+2. Reset to a single fresh commit — don't carry this starter kit's own development history into the new engagement's repo — then push to your own repo (any host: GitHub, GitLab, Azure DevOps, Bitbucket):
 
    ```bash
    cd {client-repo-name}
+   git checkout --orphan client-init
+   git add -A
+   git commit -m "chore: initial commit — starter kit"
+   git branch -D main
+   git branch -m main
    git remote remove origin
+   git remote add origin <your-new-repo-url>
+   git push -u origin main
    ```
 
 3. Inside Claude Code:
@@ -32,8 +39,6 @@ A DataArt starter kit for AI SDLC discovery engagements — clone it, run one bo
    ```
 
    It walks through a short Q&A — client name, org prefix, AWS region, GitHub org/repo, Giscus setup — and applies everything deterministically via a script, not free-text generation.
-
-→ See `.claude/skills/bootstrap-client/plan.md` for the full path from empty clone to a live, deployed instance (prerequisites, repo setup, CI/CD).
 
 → See `.claude/skills/bootstrap-client/plan.md` for the full path from empty clone to a live, deployed instance (prerequisites, repo setup, CI/CD).
 

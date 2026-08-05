@@ -2,7 +2,7 @@
 // Run via tsx (already this repo's convention for TS scripts — see apps/infra/cdk.json,
 // apps/lambda-auth's build), not node's native type-stripping.
 //
-// Does exactly three things, and nothing else — no free-text generation, no judgment calls.
+// Does exactly four things, and nothing else — no free-text generation, no judgment calls.
 // Same input always produces the same output; safe to re-run (skips work already done).
 //
 //   1. Literal find-replace of [[CLIENT_NAME]] across every git-tracked text file
@@ -11,6 +11,9 @@
 //      every deterministic value (org/env/locationShort/region-templated shapes, same formula as
 //      apps/infra/lib/conventions.ts's naming()) is fully resolved; only genuinely AWS-assigned
 //      values (e.g. CF_DISTRIBUTION_ID, known only after infra:provision) stay blank
+//   4. Replace the starter-kit pitch README.md with CONTRIBUTING.md's content, then remove
+//      CONTRIBUTING.md — once bootstrapped, a team working in this repo needs local-dev/structure
+//      docs as their README, not "how to launch a new client engagement" (already done)
 //
 // Invoked by the /bootstrap-client skill after it has collected and confirmed every value
 // with the developer — this script performs no Q&A of its own.
@@ -26,7 +29,7 @@
 //     [--dry-run]
 
 import { execFileSync } from 'node:child_process';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 import { parseArgs } from 'node:util';
 
@@ -298,6 +301,27 @@ function scaffoldEnvDevFiles(v: Answers): { created: string[]; skipped: string[]
   return { created, skipped };
 }
 
+function swapReadmeForContributing(v: Answers): boolean {
+  const contributingAbs = resolve(REPO_ROOT, 'CONTRIBUTING.md');
+  const readmeAbs = resolve(REPO_ROOT, 'README.md');
+
+  if (!existsSync(contributingAbs)) {
+    console.log('  CONTRIBUTING.md not found — already swapped in a prior run, skipping');
+    return false;
+  }
+
+  console.log(
+    `  ${v.dryRun ? '[dry-run] would replace' : 'replacing'} README.md with CONTRIBUTING.md, then remove CONTRIBUTING.md`
+  );
+
+  if (!v.dryRun) {
+    writeFileSync(readmeAbs, readFileSync(contributingAbs, 'utf-8'), 'utf-8');
+    unlinkSync(contributingAbs);
+  }
+
+  return true;
+}
+
 function main() {
   const answers = parseAndValidateArgs();
 
@@ -314,6 +338,10 @@ function main() {
   console.log('Step 3 — .env.dev scaffolding');
   const { created, skipped } = scaffoldEnvDevFiles(answers);
   console.log(`  → ${created.length} created, ${skipped.length} skipped (already existed)\n`);
+
+  console.log('Step 4 — README swap');
+  const swapped = swapReadmeForContributing(answers);
+  console.log(`  → ${swapped ? 'done' : 'skipped'}\n`);
 
   console.log('─'.repeat(60));
   console.log(answers.dryRun ? 'Dry run complete — re-run without --dry-run to apply.' : 'Bootstrap complete.');

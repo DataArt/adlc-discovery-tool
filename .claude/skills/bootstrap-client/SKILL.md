@@ -196,7 +196,7 @@ yarn bootstrap:client --client-name "{value}" --org-prefix {value} \
 
 **Stop and wait** for the developer to run it and paste back the output. Read the pasted file/replacement counts as-is — don't re-derive or summarize them yourself. Ask:
 
-> "This will change `{N}` files (`{M}` replacements) plus the 3 `project.json` files, and scaffold `.env.dev` files where they don't already exist. Apply for real?"
+> "This will change `{N}` files (`{M}` replacements) plus the 3 `project.json` files, scaffold `.env.dev` files where they don't already exist, and replace `README.md` with `CONTRIBUTING.md`'s content (removing `CONTRIBUTING.md`). Apply for real?"
 
 **Stop and wait.** If confirmed, print the exact same command with `--dry-run` removed, **stop and wait** for the developer to run it and paste back the output.
 
@@ -261,12 +261,16 @@ Every command below is `pattern-run-and-validate.md` — print, stop and wait, d
 
 ### 3.1 — AWS SSO
 
+This stage's commands run in the developer's own terminal, which may not be the one that had Stage 1's `source .env` run in it — `.env` may not even exist yet if Stage 1 skipped that step:
+
 ```bash
+ls .env || cp .env.example .env   # create it if missing — then fill in AWS_PROFILE before continuing
+source .env
 aws sso login --profile "$AWS_PROFILE"
 aws sts get-caller-identity --profile "$AWS_PROFILE"
 ```
 
-Expect a JSON identity block back. If it errors, relay the error — don't guess at a profile name.
+Expect a JSON identity block back. If it errors with "Unable to resolve AWS account to use" at any later step in this stage, this is almost always why — `.env` never created, or `$AWS_PROFILE` unset in that terminal. Send them back here rather than guessing at a different fix.
 
 ### 3.2 — Provisioning, outputs, and secrets
 

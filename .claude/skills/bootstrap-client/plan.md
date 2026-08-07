@@ -135,12 +135,16 @@ gh api graphql -f query='
 
 ## Stage 3 — Infrastructure & Deploy
 
-Prerequisite — authenticate via AWS SSO before running anything below:
+Prerequisite — this stage's commands run in your own terminal (not the one that launched Claude Code), so `AWS_PROFILE` isn't set here yet even if you already ran Stage 1's `source .env` elsewhere.
 
 ```bash
+ls .env || cp .env.example .env   # create it if Stage 1 never did — then fill in AWS_PROFILE (and friends) before continuing
+source .env                        # loads AWS_PROFILE into this terminal
 aws sso login --profile "$AWS_PROFILE"                 # opens a browser, refreshes SSO credentials
-aws sts get-caller-identity --profile "$AWS_PROFILE"    # confirms the session is valid
+aws sts get-caller-identity --profile "$AWS_PROFILE"   # confirms the session is valid — should print an Account/Arn, not an error
 ```
+
+If `cdk bootstrap`/`cdk provision` fail with "Unable to resolve AWS account to use," this is almost always why — either `.env` was never created, or `$AWS_PROFILE` is unset in whatever terminal ran the command.
 
 → See `docs/Engineering Guide/06 MCP Setup.md` (AWS section)
 

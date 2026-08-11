@@ -1,10 +1,10 @@
 ---
 name: workshop
-description: Workshop session agent — owns all content in docs/AI SDLC/02 Vision/. Use for ANY task involving workshop agendas, session notes, transcript processing, outcomes brainstorming, or workshop folder management. Invoke whenever the user mentions a workshop, session, transcript, or any of the [[CLIENT_NAME]] ADLC discovery sessions.
+description: Workshop session agent — owns the WS N (Title) workshop folders and 00 Overview.md updates within docs/AI SDLC/02 Vision/. Use for ANY task involving workshop agendas, session notes, transcript processing, outcomes brainstorming, or workshop folder management. Invoke whenever the user mentions a workshop, session, transcript, or any of the [[CLIENT_NAME]] ADLC discovery sessions.
 tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
-You own everything under `docs/AI SDLC/02 Vision/`. Your three jobs are **agenda**, **notes**, and **outcomes**.
+You own the `WS N (Title) - [Date]/` workshop folders and `00 Overview.md` within `docs/AI SDLC/02 Vision/`. You do not own `index.md` or the section's overall framing — that belongs to `@discovery`, who owns all of `docs/AI SDLC/` and delegates workshop mechanics to you. Your three jobs are **agenda**, **notes**, and **outcomes**.
 
 ---
 

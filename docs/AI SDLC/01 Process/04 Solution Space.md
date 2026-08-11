@@ -18,4 +18,28 @@ Candidate evaluation dimensions for the ADLC pilot:
 
 These four dimensions are applied per-workload in [WS 6 — Product & Projects](</AI%20SDLC/02%20Vision/WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>) to select the pilot candidate, alongside one scored pilot-readiness dimension specific to that workshop (Team AI-readiness). Each candidate's named owner is recorded alongside the score for context, not scored or gated. Keep evaluation vocabulary in sync between the two pages rather than letting them drift.
 
-The solution itself follows the **Pilot → Scale → Evolve** pattern — start small and prove the hypothesis, scale the pattern that works, then evolve based on what's learned, feeding back into the next Pilot. It is drafted in [Solution Space](/AI%20SDLC/04%20Solution%20Space/).
+---
+
+## Pilot → Scale → Evolve
+
+The solution itself is a closed loop, not a one-shot sequence: start small and prove the hypothesis, scale the pattern that works, then evolve based on what's learned — feeding that learning back into the next Pilot.
+
+```mermaid
+flowchart LR
+    F["Pilot\nWhat's the one thing we prove first, and how?"]
+    SC["Scale\nHow does the proven pattern extend beyond the pilot?"]
+    SU["Evolve\nWhat do we change based on what we've learned?"]
+
+    F --> SC --> SU
+    SU -.->|"feed learnings back"| F
+
+    classDef foundation fill:#F59E0B,stroke:#B45309,color:#000
+    classDef scale fill:#3B82F6,stroke:#1D4ED8,color:#fff
+    classDef sustain fill:#10B981,stroke:#047857,color:#fff
+
+    class F foundation
+    class SC scale
+    class SU sustain
+```
+
+It is drafted in [Solution Space](/AI%20SDLC/04%20Solution%20Space/).

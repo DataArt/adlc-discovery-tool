@@ -29,6 +29,11 @@ Evolve` section with the closed-loop diagram, matching colors with the top-level
 - `index.md` and `CLAUDE.md` updated to reflect the new page and the `@discovery`/`@workshop`
   agent table entries.
 
+Also removes the header social-link icon that pointed at the Connect Framework catalog page
+(`transform.artisyn.dataart.com/catalog/frameworks#connect`) — now redundant since
+`06 Connect Framework.md` links to the same URL from inside the docs. The `artisyn-favicon.png`
+asset itself is left in `docs/public/` untouched even though nothing references it anymore.
+
 ## Added
 
 - `.claude/agents/discovery.md`
@@ -42,6 +47,7 @@ Evolve` section with the closed-loop diagram, matching colors with the top-level
 - `docs/AI SDLC/01 Process/01 Overview.md`
 - `docs/AI SDLC/01 Process/04 Solution Space.md`
 - `docs/AI SDLC/01 Process/index.md`
+- `apps/docs-web/.vitepress/config.ts`
 
 ## Ordering note
 

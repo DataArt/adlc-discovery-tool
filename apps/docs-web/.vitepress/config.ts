@@ -30,12 +30,6 @@ export default withMermaid(
           },
           link: 'https://www.dataart.com/artisyn',
         },
-        {
-          icon: {
-            svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><image href="/artisyn-favicon.png" width="32" height="32"/></svg>',
-          },
-          link: 'https://transform.artisyn.dataart.com/catalog/frameworks#connect',
-        },
       ],
 
       nav: [

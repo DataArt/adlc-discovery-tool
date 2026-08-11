@@ -13,9 +13,12 @@ Solution Space → Milestones) is DataArt's branded methodology, but this engage
 process is Vision → Goals → Problems → Solution (Pilot → Scale → Evolve) → Roadmap — similar but
 not identical. Concretely:
 
-- New `06 Connect Framework.md` — dedicated page for the original methodology, linking to
-  https://transform.artisyn.dataart.com/catalog/frameworks#connect, explaining exactly how this
-  engagement's process adapts it.
+- New `06 Connect Framework.md` — dedicated page for the original methodology: the full "How the
+  Lists Connect" diagram, Key Principles, and all four list cards (Goals/Problem Space/Solution
+  Space/Milestones, each with its key question and Examples) carried over from the old branded
+  Overview page, plus a link to
+  https://transform.artisyn.dataart.com/catalog/frameworks#connect and an explanation of exactly
+  how this engagement's process adapts it.
 - `01 Overview.md` rewritten to describe the actual 5-stage process, with a new diagram: a Vision
   subgraph (Goals → Problems inside), a Solution subgraph (Pilot → Scale → Evolve inside, with the
   feed-learnings-back loop), and a standalone Roadmap node — each subgraph and node carries its

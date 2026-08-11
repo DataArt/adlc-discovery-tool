@@ -1,8 +1,27 @@
-# AI Workflow
+# AI Coding Tool Compatibility
 
-_How the harness concepts map to each AI tool's primitives._
+_How the harness concepts map to each AI **coding agent's** primitives — not a comparison of LLM providers (Anthropic / OpenAI / Google)._
 
-> ⚠️ Tool capabilities change rapidly. Verify against current tool docs before relying on this table. Last reviewed: 2026-05.
+> ⚠️ Tool capabilities change rapidly. Verify against current tool docs before relying on this table. Last reviewed: 2026-08.
+
+---
+
+## Where this harness lives today
+
+```mermaid
+flowchart LR
+    classDef active fill:#2f6f4f,stroke:#1c4a32,color:#fff
+    classDef portable fill:#3b5b8c,stroke:#25406b,color:#fff
+
+    H[Harness concepts<br/>root context · skills · agents · memory · lifecycles]:::portable
+    H --> CC[Claude Code<br/>reference implementation]:::active
+    H -.future engagement.-> Codex[Codex CLI]:::portable
+    H -.future engagement.-> Cursor[Cursor]:::portable
+    H -.future engagement.-> Kiro[Kiro]:::portable
+    H -.future engagement.-> Wind[Windsurf]:::portable
+```
+
+This project runs on Claude Code only (solid line). The other tools (dashed) are documented so the harness can be re-instantiated with a different coding agent on a future client engagement via `/bootstrap-client` — see [Portability floor](#portability-floor).
 
 ---
 

@@ -13,6 +13,8 @@ Building a shared picture of [[CLIENT_NAME]]'s current state, where it needs to 
 
 [00 Overview](./00%20Overview.md) defines the terminology (Workshop / Session / Topic / Area), lists the 10 Areas under diagnosis, and holds the draft workshop schedule — updated as each workshop is scheduled and completes. Each workshop below has its own folder holding an Agenda (pre-session plan), Notes (live capture), Outcomes (post-session synthesis), and a raw Transcript — shown here as full placeholder shapes for reference. In a live engagement, only Agenda exists ahead of a workshop; the other three are populated once the session actually runs.
 
+[Process](./01%20Current%20State/Process.md) and [Architecture](./01%20Current%20State/Architecture.md) (Current State) hold the baseline [[CLIENT_NAME]] is starting from — as things actually stand today, gathered from intake and early workshops rather than diagnosed. This is the raw material; diagnosis happens in [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
+
 | Workshop                                                                                              | Areas                                  | Date     |
 | ----------------------------------------------------------------------------------------------------- | -------------------------------------- | -------- |
 | [00 Overview](./00%20Overview.md)                                                                     | Terminology, Area list, draft schedule | —        |

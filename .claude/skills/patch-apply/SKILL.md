@@ -20,6 +20,10 @@ The developer wants to apply a patch bundle to this repo. Here is their input:
 
 A patch bundle (see `/patch-prepare`) is a self-contained folder under `.patch/`: a `manifest.md` listing added/updated/deleted paths, and a `files/` tree with the new content for every added/updated path. This repo has no shared git history with wherever the bundle came from — treat every overwrite as a potential conflict with local changes, not a mechanical copy.
 
+This repo tracks applied bundles in its own `.patch/APPLIED.md` — never in `.patch/REGISTRY.md`. `REGISTRY.md` belongs to `/patch-prepare` and records bundles _this repo prepared_ for others; its IDs are only unique within this repo's own sequence. A bundle copied in from a sibling repo carries an ID that was sequential _there_, so two incoming bundles (or an incoming bundle and a locally-prepared one) can legitimately share the same numeric ID. `APPLIED.md` keys off the full bundle folder name (`NNNN-YYYY-MM-DD-slug`) for exactly this reason, and the two files are never merged.
+
+If more than one bundle needs applying, apply them **one at a time, start to finish** (Steps 2–7 for bundle A — including its commit-message suggestion and stop — fully done before starting bundle B). Don't read multiple manifests up front or interleave file writes across bundles — each bundle's placeholder-resolution and conflict decisions are independent, and mixing them risks attributing one bundle's edits to another. The per-bundle stop in Step 7 also keeps each bundle as its own committable unit, rather than one large commit mixing unrelated changes from several bundles.
+
 ---
 
 ## Step 1 — Locate the bundle(s)
@@ -28,15 +32,17 @@ Parse `$ARGUMENTS` for a bundle ID or folder name.
 
 If given: locate `.patch/<match>/`.
 
-If not given: scan `.patch/` for bundle folders (`NNNN-YYYY-MM-DD-<slug>/`), cross-check each ID against `.patch/REGISTRY.md`. List any bundle not already marked `applied` in this repo's registry, and ask the developer which to apply (default: all unapplied, in ID order).
+If not given: scan `.patch/` for bundle folders (`NNNN-YYYY-MM-DD-<slug>/`), cross-check each folder name against `.patch/APPLIED.md`. List any bundle not already marked `applied` in this repo's applied registry, and ask the developer which to apply and in what order (default: all unapplied, oldest date first).
 
-If `.patch/REGISTRY.md` doesn't exist yet, create it with the same header as in `/patch-prepare` before continuing.
+If `.patch/APPLIED.md` doesn't exist yet, create it (header shown in Step 6) before continuing.
+
+Once the list and order are confirmed, work through it one bundle at a time — repeat Steps 2–7 per bundle, stopping after each — rather than batching.
 
 ---
 
 ## Step 2 — Check for prior application
 
-If the bundle's ID already has an `applied` row in `.patch/REGISTRY.md`, tell the developer and ask whether to re-apply (skip by default — idempotency matters more than convenience here).
+If this bundle's folder name already has an `applied` row in `.patch/APPLIED.md`, tell the developer and ask whether to re-apply (skip by default — idempotency matters more than convenience here).
 
 ---
 
@@ -80,10 +86,33 @@ Batch the confirmations sensibly (e.g. "these 6 are clean adds, apply all?") rat
 
 ## Step 6 — Register
 
-Append (or update) a row in this repo's `.patch/REGISTRY.md` for the bundle's ID, with Status `applied` and today's date. Carry over the Slug and Summary from the bundle's own manifest/registry row if available.
+Append (or update) a row in this repo's `.patch/APPLIED.md` for this bundle, with Status `applied` and today's date. Carry over the ID, Slug, and Summary from the bundle's own `manifest.md`. Create the file with this header if it doesn't exist yet:
+
+```markdown
+# Applied Patches
+
+Tracks patch bundles applied _to this repo_ from sibling projects. Local to this repo — does not sync itself, and is separate from `.patch/REGISTRY.md` (this repo's own _prepared_ bundles). Keyed by bundle folder name, not bare ID, since IDs are only sequential within their repo of origin.
+
+| Bundle Folder | Date Applied | Slug | Summary | Status |
+| ------------- | ------------ | ---- | ------- | ------ |
+```
+
+Then append one row per bundle:
+
+| Bundle Folder        | Date Applied | Slug     | Summary                               | Status    |
+| -------------------- | ------------ | -------- | ------------------------------------- | --------- |
+| `<full folder name>` | `<today>`    | `<slug>` | `<one-line summary from manifest.md>` | `applied` |
 
 ---
 
-## Step 7 — Report
+## Step 7 — Suggest a commit, then stop
 
-Summarize what changed: files added, updated, deleted, and anything skipped (already applied, already up to date, or held back pending developer review). Remind the developer that nothing was staged or committed — that's their call, same as any other edit.
+Summarize this bundle's outcome: files added, updated, deleted, and anything skipped (already up to date, or held back pending developer review). Propose a commit message for _this bundle's changes only_, following this repo's Conventional Commits format (`<type>(<scope>): <what>`, per root `CLAUDE.md`) — infer type/scope from the manifest summary and the paths touched.
+
+**Stop here and wait.** Committing is the developer's call, same as any other edit — don't stage or commit it yourself. Only after they respond should you proceed: if more unapplied bundles remain in the list confirmed back in Step 1, return to Step 2 for the next one; otherwise the batch is done.
+
+---
+
+## Step 8 — Final report
+
+Once every bundle in the batch has been through Steps 2–7, give one short closing summary listing each bundle applied (or skipped) in order. No further action needed beyond what was already confirmed per bundle.

@@ -35,4 +35,4 @@ Wait for confirmation. Then follow the selected skill exactly.
 
 ## What this is for
 
-`/patch` moves already-made changes — docs conventions, VitePress config, Engineering Guide articles, narrative content, anything worth having in more than one project — between projects that already exist. A patch bundle is a self-contained folder under `.patch/`: it does not assume the target repo shares git history with the source repo, so it works even between projects that diverged long ago.
+`/patch` moves already-made changes — docs conventions, VitePress config, Engineering Guide articles, narrative content, anything worth having in more than one project — between projects that already exist. A patch bundle is a self-contained folder under `.patch/`: it does not assume the target repo shares git history with the source repo, so it works even between projects that diverged long ago. Each repo keeps its own bookkeeping — `.patch/REGISTRY.md` for bundles it prepared, `.patch/APPLIED.md` for bundles it applied — so a bundle folder can simply be copy-pasted into a sibling's `.patch/` directory and applied there without touching the source repo's state.

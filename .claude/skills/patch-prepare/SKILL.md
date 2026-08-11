@@ -20,6 +20,8 @@ The developer wants to package changes made in this repo into a patch bundle. He
 
 A patch bundle is a folder under `.patch/` that carries: a manifest of added / updated / deleted files, a copy of the current content of every added/updated file, and a one-line summary of why. It does not carry a git diff — the target repo may have no shared history with this one — so the bundle must be self-contained.
 
+`.patch/REGISTRY.md` in this repo tracks only bundles _prepared here_ — it is never touched by `/patch-apply`, which keeps its own `.patch/APPLIED.md` for bundles received from siblings. The two files stay separate because bundle IDs are only sequential within their repo of origin: an incoming bundle can share an ID with one this repo already prepared.
+
 ---
 
 ## Step 1 — Determine the base ref

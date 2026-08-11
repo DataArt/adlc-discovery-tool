@@ -79,7 +79,7 @@ Patch: `/patch prepare` · `/patch apply`
 | `@infra`       | Infrastructure (`apps/infra/`)             | Read, Edit, Write, Glob, Grep       |
 | `@architect`   | All (reviewer + doc author)                | Read, Glob, Grep, Bash, Write, Edit |
 | `@docs-writer` | `docs/` (content authoring)                | Read, Edit, Write, Glob, Grep       |
-| `@workshop`    | `docs/AI SDLC/Vision/` (agenda + notes)    | Read, Edit, Write, Glob, Grep, Bash |
+| `@workshop`    | `docs/AI SDLC/02 Vision/` (agenda + notes)  | Read, Edit, Write, Glob, Grep, Bash |
 
 ### Issue tracker
 

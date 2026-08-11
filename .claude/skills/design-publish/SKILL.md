@@ -130,8 +130,8 @@ Read `design/Report.md` for the Track setting (A or B).
 
 Determine which `docs/AI SDLC/` subfolder(s) the solution output belongs in:
 
-- `docs/AI SDLC/Problem Space/` — discovery outputs, current-state analysis, workshop findings, validated hypotheses
-- `docs/AI SDLC/Solution Space/` — settled recommendations, pilot roadmap, governance frameworks, engagement deliverables
+- `docs/AI SDLC/03 Problem Space/` — discovery outputs, current-state analysis, workshop findings, validated hypotheses
+- `docs/AI SDLC/04 Solution Space/` — settled recommendations, pilot roadmap, governance frameworks, engagement deliverables
 
 Review `solution/Architecture.md` and `solution/Design.md` to identify the exact docs to create or update. Present to the developer:
 

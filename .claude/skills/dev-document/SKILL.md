@@ -79,8 +79,8 @@ Use these rules to classify each item:
 
 **`docs/AI SDLC/`** — for engagement content (the fifth destination, specific to this project):
 
-- **`docs/AI SDLC/Problem Space/`** — discovery outputs, current-state analysis, workshop session findings, validated hypotheses about where time is lost in [[CLIENT_NAME]]'s SDLC
-- **`docs/AI SDLC/Solution Space/`** — settled recommendations, pilot roadmap, governance frameworks, agentic workflow designs, engagement deliverables ready to share with stakeholders
+- **`docs/AI SDLC/03 Problem Space/`** — discovery outputs, current-state analysis, workshop session findings, validated hypotheses about where time is lost in [[CLIENT_NAME]]'s SDLC
+- **`docs/AI SDLC/04 Solution Space/`** — settled recommendations, pilot roadmap, governance frameworks, agentic workflow designs, engagement deliverables ready to share with stakeholders
 
 Use `docs/AI SDLC/` when the output is engagement content — not implementation detail about the docs site itself. If uncertain: ask yourself "does this inform [[CLIENT_NAME]]'s AI adoption?" If yes → AI SDLC. "Does this describe the hosting infrastructure?" → LLD or README.
 

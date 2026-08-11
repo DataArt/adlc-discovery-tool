@@ -2,7 +2,7 @@
 
 _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, target ≤2 hours._
 
-**Purpose:** [One or two sentences — what this workshop needs to establish, and which Area(s) below it covers. Every finding should be traceable back to a [Problem Space](/AI%20SDLC/Problem%20Space/) domain.]
+**Purpose:** [One or two sentences — what this workshop needs to establish, and which Area(s) below it covers. Every finding should be traceable back to a [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain.]
 
 ---
 
@@ -22,7 +22,7 @@ _Adjust block lengths to the number of topics this workshop actually covers — 
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Connect Framework → Goals](/AI%20SDLC/Connect%20Framework/02%20Goals.md)). Set this session's goal and remind the room how findings feed the Problem Space.
+Anchor on the engagement's central question (see [Connect Framework → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the Problem Space.
 
 - If this isn't the first workshop: recap and validate findings from the previous workshop before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 
@@ -62,6 +62,6 @@ _Use these to open and steer the topic. Capture answers on the shared board._
 
 Capture and record:
 
-- Pain points surfaced — candidates for the relevant [Problem Space](/AI%20SDLC/Problem%20Space/) domain page(s)
+- Pain points surfaced — candidates for the relevant [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain page(s)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

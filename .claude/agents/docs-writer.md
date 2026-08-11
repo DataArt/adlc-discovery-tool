@@ -26,8 +26,8 @@ Every doc goes to exactly one location — confirm before writing:
 
 - **LLD** → `docs/System Architecture (LLD)/` — implementation detail grounded in what is actually built
 - **Engineering Guide** → `docs/Engineering Guide/` — cross-cutting conventions, operational procedures, onboarding
-- **AI SDLC Problem Space** → `docs/AI SDLC/Problem Space/` — discovery outputs, current-state analysis, workshop findings, validated hypotheses about [[CLIENT_NAME]]'s SDLC bottlenecks
-- **AI SDLC Solution Space** → `docs/AI SDLC/Solution Space/` — settled recommendations, pilot roadmap, governance frameworks, engagement deliverables for [[CLIENT_NAME]] stakeholders
+- **AI SDLC Problem Space** → `docs/AI SDLC/03 Problem Space/` — discovery outputs, current-state analysis, workshop findings, validated hypotheses about [[CLIENT_NAME]]'s SDLC bottlenecks
+- **AI SDLC Solution Space** → `docs/AI SDLC/04 Solution Space/` — settled recommendations, pilot roadmap, governance frameworks, engagement deliverables for [[CLIENT_NAME]] stakeholders
 
 If the caller specifies the destination, trust it. If something seems misplaced, flag it before writing.
 

@@ -87,10 +87,10 @@ Then, for each page below, grep for its anchor text (present = not yet filled):
 
 | Page                                      | Anchor text (present = not yet filled)                               |
 | ----------------------------------------- | -------------------------------------------------------------------- |
-| `docs/AI SDLC/Connect Framework/index.md` | `[Why a structured problem→solution framework matters for`           |
-| `docs/AI SDLC/Vision/index.md`            | `[Known constraints that will shape how discovery actually runs for` |
-| `docs/AI SDLC/Problem Space/index.md`     | `[What pain points`                                                  |
-| `docs/AI SDLC/Solution Space/index.md`    | `[Early signal on where the solution might land`                     |
+| `docs/AI SDLC/01 Process/index.md`        | `[Why a structured problem→solution framework matters for`           |
+| `docs/AI SDLC/02 Vision/index.md`         | `[Known constraints that will shape how discovery actually runs for` |
+| `docs/AI SDLC/03 Problem Space/index.md`  | `[What pain points`                                                  |
+| `docs/AI SDLC/04 Solution Space/index.md` | `[Early signal on where the solution might land`                     |
 
 Build the list of still-unfilled pages for 2.8. Report the split up front if mixed.
 
@@ -215,10 +215,10 @@ Four pages each carry a placeholder "story" section:
 
 | Page                                      | Section                                      | Hedge required?                                                  |
 | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
-| `docs/AI SDLC/Connect Framework/index.md` | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
-| `docs/AI SDLC/Vision/index.md`            | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
-| `docs/AI SDLC/Problem Space/index.md`     | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
-| `docs/AI SDLC/Solution Space/index.md`    | Early Direction                              | **Yes** — same reason                                            |
+| `docs/AI SDLC/01 Process/index.md`        | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
+| `docs/AI SDLC/02 Vision/index.md`         | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
+| `docs/AI SDLC/03 Problem Space/index.md`  | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
+| `docs/AI SDLC/04 Solution Space/index.md` | Early Direction                              | **Yes** — same reason                                            |
 
 Only ask about the subset 2.0 flagged as still-unfilled. Optional beyond that:
 

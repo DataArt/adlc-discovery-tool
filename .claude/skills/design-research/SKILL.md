@@ -38,8 +38,8 @@ Read `design/Report.md` to determine the Track (A or B).
 
 **Track A — AI SDLC content:**
 
-1. Read docs under `docs/AI SDLC/Problem Space/` relevant to the problem stated in `00 Frame.md`.
-2. Read docs under `docs/AI SDLC/Solution Space/` for any prior recommendations touching this area.
+1. Read docs under `docs/AI SDLC/03 Problem Space/` relevant to the problem stated in `00 Frame.md`.
+2. Read docs under `docs/AI SDLC/04 Solution Space/` for any prior recommendations touching this area.
 3. Identify what has already been established about this topic in the engagement context.
 
 **Track B — Project architecture:**

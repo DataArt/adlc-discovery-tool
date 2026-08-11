@@ -66,8 +66,8 @@ Record the track in `design/Report.md` (create the file using `.claude/skills/de
 
 **Track A — context sources for Step 4 and all subsequent phases:**
 
-- Read relevant docs under `docs/AI SDLC/Problem Space/` (discovery, current-state analysis, workshop findings)
-- Read relevant docs under `docs/AI SDLC/Solution Space/` (existing recommendations or prior designs in this area)
+- Read relevant docs under `docs/AI SDLC/03 Problem Space/` (discovery, current-state analysis, workshop findings)
+- Read relevant docs under `docs/AI SDLC/04 Solution Space/` (existing recommendations or prior designs in this area)
 - Do NOT read HLD docs — they describe the infrastructure, not the engagement content
 
 **Track B — context sources for Step 4 and all subsequent phases:**

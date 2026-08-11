@@ -1,7 +1,7 @@
 import { withMermaid } from 'vitepress-plugin-mermaid';
 import { defineConfig } from 'vitepress';
 import { scanSection } from './utils/sidebar';
-// import { HLD_VERSION } from './utils/constants';
+import { HLD_VERSION } from './utils/constants';
 
 export default withMermaid(
   defineConfig({
@@ -39,32 +39,33 @@ export default withMermaid(
       ],
 
       nav: [
-        { text: 'Vision', link: '/AI SDLC/Vision/' },
-        { text: 'Problem', link: '/AI SDLC/Problem Space/' },
-        { text: 'Solution', link: '/AI SDLC/Solution Space/' },
-        { text: 'Milestones', link: '/AI SDLC/Milestones/' },
-        { text: 'Connect', link: '/AI SDLC/Connect Framework/' },
-        { text: 'Context', link: '/Context/' },
-        // { text: 'Project (HLD)', link: '/Target Architecture (HLD)/' },
-        { text: 'Harness', link: '/Engineering Guide/' },
+        { text: 'Process', link: '/AI SDLC/01 Process/' },
+        { text: 'Vision', link: '/AI SDLC/02 Vision/' },
+        { text: 'Problem', link: '/AI SDLC/03 Problem Space/' },
+        { text: 'Solution', link: '/AI SDLC/04 Solution Space/' },
+        { text: 'Roadmap', link: '/AI SDLC/05 Roadmap/' },
       ],
 
       sidebar: {
-        '/AI SDLC/Connect Framework/': [
-          { text: 'Connect Framework', items: scanSection('AI SDLC/Connect Framework') },
-        ],
+        '/AI SDLC/01 Process/': [{ text: 'Process', items: scanSection('AI SDLC/01 Process') }],
         '/Context/': [{ text: 'Context', items: scanSection('Context') }],
-        '/AI SDLC/Problem Space/': [
-          { text: 'Problem Space', items: scanSection('AI SDLC/Problem Space') },
+        '/AI SDLC/03 Problem Space/': [
+          { text: 'Problem Space', items: scanSection('AI SDLC/03 Problem Space') },
         ],
-        '/AI SDLC/Solution Space/': [
-          { text: 'Solution Space', items: scanSection('AI SDLC/Solution Space') },
+        '/AI SDLC/04 Solution Space/': [
+          { text: 'Solution Space', items: scanSection('AI SDLC/04 Solution Space') },
         ],
-        '/AI SDLC/Milestones/': [{ text: 'Milestones', items: scanSection('AI SDLC/Milestones') }],
-        '/AI SDLC/Vision/': [{ text: 'Vision', items: scanSection('AI SDLC/Vision') }],
-        // '/Target Architecture (HLD)/': [
-        //   { text: 'Project (HLD)', items: scanSection(`Target Architecture (HLD)/${HLD_VERSION}`) },
-        // ],
+        '/AI SDLC/05 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/05 Roadmap') }],
+        '/AI SDLC/02 Vision/': [{ text: 'Vision', items: scanSection('AI SDLC/02 Vision') }],
+        '/Target Architecture (HLD)/': [
+          {
+            text: 'Target Architecture (HLD)',
+            items: scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
+          },
+        ],
+        '/System Architecture (LLD)/': [
+          { text: 'System Architecture (LLD)', items: scanSection('System Architecture (LLD)') },
+        ],
         '/Engineering Guide/': [
           { text: 'Engineering Guide', items: scanSection('Engineering Guide') },
         ],

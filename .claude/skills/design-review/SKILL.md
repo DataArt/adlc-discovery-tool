@@ -54,7 +54,7 @@ Also read `design/Report.md` for existing WAF findings (to avoid duplicating alr
 
 **Track B only:** Read `docs/Target Architecture (HLD)/README.md` to find the active version. Read the relevant container and NFR docs for the areas the design touches. Read `docs/Target Architecture (HLD)/{ACTIVE_VERSION}/Non-Functional Concerns/Requirements.md`.
 
-**Track A:** Read relevant docs from `docs/AI SDLC/Problem Space/` and `docs/AI SDLC/Solution Space/` for the areas the design touches.
+**Track A:** Read relevant docs from `docs/AI SDLC/03 Problem Space/` and `docs/AI SDLC/04 Solution Space/` for the areas the design touches.
 
 ---
 

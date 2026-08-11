@@ -1,10 +1,10 @@
 ---
 name: workshop
-description: Workshop session agent — owns all content in docs/AI SDLC/Vision/. Use for ANY task involving workshop agendas, session notes, transcript processing, outcomes brainstorming, or workshop folder management. Invoke whenever the user mentions a workshop, session, transcript, or any of the [[CLIENT_NAME]] ADLC discovery sessions.
+description: Workshop session agent — owns all content in docs/AI SDLC/02 Vision/. Use for ANY task involving workshop agendas, session notes, transcript processing, outcomes brainstorming, or workshop folder management. Invoke whenever the user mentions a workshop, session, transcript, or any of the [[CLIENT_NAME]] ADLC discovery sessions.
 tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
-You own everything under `docs/AI SDLC/Vision/`. Your three jobs are **agenda**, **notes**, and **outcomes**.
+You own everything under `docs/AI SDLC/02 Vision/`. Your three jobs are **agenda**, **notes**, and **outcomes**.
 
 ---
 
@@ -24,7 +24,7 @@ Match `00 Overview.md`'s Terminology table exactly:
 ## Folder structure
 
 ```
-docs/AI SDLC/Vision/
+docs/AI SDLC/02 Vision/
   00 Overview.md                          ← terminology, Area list, draft workshop grouping, coverage tracker — keep in sync with new workshops
   index.md                                ← VitePress home page for the section, do not modify
   WS N (Title) - [Date]/

@@ -53,12 +53,12 @@ A secondary reason: frontier AI models follow ~150–200 instructions reliably b
 
 Every permanent doc lands in exactly one location. Confirm before writing.
 
-| Destination           | Path                                                            | What belongs here                                                                                                                        |
-| --------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **AI SDLC**           | `docs/AI SDLC/Problem Space/` or `docs/AI SDLC/Solution Space/` | Engagement content: problem-space analysis, workshop findings, solution recommendations, pilot designs for [[CLIENT_NAME]]'s AI adoption |
-| **HLD**               | `docs/Target Architecture (HLD)/`                               | Design intent for the platform itself — containers, data flows, NFRs                                                                     |
-| **LLD**               | `docs/System Architecture (LLD)/`                               | Implementation detail grounded in what is actually built                                                                                 |
-| **Engineering Guide** | `docs/Engineering Guide/`                                       | Cross-cutting conventions, operational procedures, onboarding                                                                            |
+| Destination           | Path                                                                  | What belongs here                                                                                                                        |
+| --------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI SDLC**           | `docs/AI SDLC/03 Problem Space/` or `docs/AI SDLC/04 Solution Space/` | Engagement content: problem-space analysis, workshop findings, solution recommendations, pilot designs for [[CLIENT_NAME]]'s AI adoption |
+| **HLD**               | `docs/Target Architecture (HLD)/`                                     | Design intent for the platform itself — containers, data flows, NFRs                                                                     |
+| **LLD**               | `docs/System Architecture (LLD)/`                                     | Implementation detail grounded in what is actually built                                                                                 |
+| **Engineering Guide** | `docs/Engineering Guide/`                                             | Cross-cutting conventions, operational procedures, onboarding                                                                            |
 
 SoC test: _"Does this inform [[CLIENT_NAME]]'s AI adoption?"_ → AI SDLC. _"Does this describe the platform's design intent?"_ → HLD. _"Is this an implementation detail for a container?"_ → LLD. _"Is this a convention the whole team follows?"_ → Engineering Guide.
 

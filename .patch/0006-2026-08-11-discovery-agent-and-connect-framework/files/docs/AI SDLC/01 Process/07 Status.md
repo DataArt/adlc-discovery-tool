@@ -20,6 +20,16 @@ flowchart LR
 
 _TBD — recolor the current stage green, completed stages stay green, upcoming stages stay grey. See [01 Overview](./01%20Overview.md) for what each stage means._
 
+| Stage    | Status         | Last Updated |
+| -------- | -------------- | ------------ |
+| Vision   | ⏳ Not started | —            |
+| Goals    | ⏳ Not started | —            |
+| Problems | ⏳ Not started | —            |
+| Solution | ⏳ Not started | —            |
+| Roadmap  | ⏳ Not started | —            |
+
+_TBD — flip each row to 🔄 in progress or ✅ done as the stage moves, and stamp the date. Keep this table and the diagram above in sync — one glance at either should tell the same story._
+
 _TBD — one-paragraph narrative: current gate, what's happened since the last update._
 
 ## What's Next

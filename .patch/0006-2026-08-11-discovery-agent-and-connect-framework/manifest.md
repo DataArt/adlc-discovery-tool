@@ -21,8 +21,8 @@ not identical. Concretely:
   feed-learnings-back loop), and a standalone Roadmap node — each subgraph and node carries its
   key-question description, matching the style already used in `04 Solution Space/01 Overview.md`.
 - New `07 Status.md` (numbered last, not first) — the engagement's landing view: current stage
-  (5-stage Mermaid diagram, pending/complete styling), what's next, blockers. Kept current by
-  `@discovery`.
+  (5-stage Mermaid diagram, pending/complete styling), a per-stage Status/Last-Updated table for
+  quick scanning, what's next, blockers. Kept current by `@discovery`.
 - `04 Solution Space.md` (the Process-internal summary page) gained its own `## Pilot → Scale →
 Evolve` section with the closed-loop diagram, matching colors with the top-level Solution Space
   overview.

@@ -126,5 +126,5 @@ See `06 MCP Setup.md` for the full credentials guide.
 
 → See `01 Conventions.md` for commit format and branch naming.
 → See `03 Engineer Role.md` for the AI-assisted dev workflow.
-→ See `04 AI Workflow.md` for slash commands and agent roles.
+→ See `04 AI Coding Tool Compatibility.md` for slash commands and agent roles.
 → See `06 MCP Setup.md` to connect Claude Code to AWS, GitHub, and Atlassian.

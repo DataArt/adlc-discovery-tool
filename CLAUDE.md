@@ -51,6 +51,7 @@ Key constraint: basic auth password protection on all routes.
 | `/where-we-are`       | Delivery gap report: Designed vs Implemented vs Documented             |
 | `/war-design`         | Assess target architecture against AWS Well-Architected Framework      |
 | `/war-implementation` | Audit running code against AWS WAF pillars                             |
+| `/patch`              | Cross-project patch router (`prepare` / `apply`)                       |
 
 ## How
 
@@ -65,6 +66,8 @@ Design phases: `/design-frame` → `/design-research` → `/design-elaborate` �
 Skill phases: `/skill-reflect` → `/skill-triage` → `/skill-new` → `/skill-promote`
 
 Architecture: `/where-we-are` · `/war design` · `/war impl`
+
+Patch: `/patch prepare` · `/patch apply`
 
 ### Agents
 

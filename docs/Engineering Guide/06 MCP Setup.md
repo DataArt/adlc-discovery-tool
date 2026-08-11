@@ -89,4 +89,4 @@ All three servers should show as connected: `aws-mcp`, `github`, and `mcp-atlass
 ---
 
 → See `01 Conventions.md` for commit format and branch naming.
-→ See `04 AI Workflow.md` for slash commands and MCP-powered agent roles.
+→ See `04 AI Coding Tool Compatibility.md` for slash commands and MCP-powered agent roles.

@@ -1,5 +1,7 @@
 # Engineer Role
 
+![Engineer Role](/images/engineering-guide/engineer-role.png)
+
 > **Engineer = creative direction. AI = follows the workflow and assists with implementation.**
 
 ## The Mental Model
@@ -41,4 +43,4 @@ This keeps velocity high without trading away quality or ownership.
 ---
 
 → See `Engineering Guide/Lifecycles/01 Dev Lifecycle.md` for the ticket-to-PR process.
-→ See `Engineering Guide/04 AI Workflow.md` for how the harness maps to specific AI tools.
+→ See `Engineering Guide/04 AI Coding Tool Compatibility.md` for how the harness maps to specific AI tools.

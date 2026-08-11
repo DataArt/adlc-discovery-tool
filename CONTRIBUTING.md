@@ -12,7 +12,7 @@ _Local development, repository structure, and onboarding for anyone working in t
 | `apps/docs-web/`                  | VitePress documentation site                                                  |
 | `apps/lambda-auth/`               | Lambda@Edge basic auth handler                                                |
 | `apps/infra/`                     | AWS CDK infrastructure                                                        |
-| `raw-artifacts/`                  | Source documents and reference materials                                      |
+| `raw-artifacts/`                  | Sourcewe documents and reference materials                                    |
 | `.claude/`                        | Engineering harness — skills, agents, templates                               |
 | `scripts/`                        | Deterministic automation — bootstrap, CI, local env/secrets push-pull         |
 
@@ -48,7 +48,7 @@ Once oriented:
 
 → `docs/Engineering Guide/01 Conventions.md` — commit format, branch naming, and portable conventions
 → `docs/Engineering Guide/03 Engineer Role.md` — the engineer/AI division of labour
-→ `docs/Engineering Guide/04 AI Workflow.md` — how harness concepts map to Claude Code's slash commands and agents
+→ `docs/Engineering Guide/04 AI Coding Tool Compatibility.md` — how harness concepts map to Claude Code's slash commands and agents
 
 ## Primary commands
 

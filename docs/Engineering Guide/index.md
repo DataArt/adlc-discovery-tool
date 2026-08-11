@@ -6,15 +6,15 @@ Cross-cutting conventions, operational procedures, and lifecycle playbooks that 
 
 The top-level articles cover conventions and setup — read [02 Doc Structure](./02%20Doc%20Structure.md) first for the full four-tier documentation model this repo follows. [Lifecycles](./Lifecycles/00%20Overview.md) documents the four lifecycles (Dev, Design, Skill, Architecture) that structure all work end to end. [Infrastructure](./Infrastructure/00%20Configuration%20%26%20Secrets.md) covers deploy-related operational runbooks. Unlike the AI SDLC docs, this guide is stable reference material — it changes when a convention changes, not as the engagement progresses.
 
-| Page                                                                | Holds                                                                              |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| [01 Conventions](./01%20Conventions.md)                             | Portable conventions that apply regardless of which AI tool is used                |
-| [02 Doc Structure](./02%20Doc%20Structure.md)                       | The four-tier model — what each tier is for and what lives where                   |
-| [03 Engineer Role](./03%20Engineer%20Role.md)                       | The engineer/AI division of labour — creative direction vs. workflow execution     |
-| [04 AI Workflow](./04%20AI%20Workflow.md)                           | How harness concepts map to each AI tool's primitives                              |
-| [05 Getting Started](./05%20Getting%20Started.md)                   | First-time setup and daily commands for the monorepo                               |
-| [06 MCP Setup](./06%20MCP%20Setup.md)                               | Connecting Claude Code to AWS, GitHub, and Atlassian via MCP                       |
-| [07 Documentation Principles](./07%20Documentation%20Principles.md) | Why these principles exist, what they are, and which structure fits which doc type |
+| Page                                                                            | Holds                                                                              |
+| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [01 Conventions](./01%20Conventions.md)                                         | Portable conventions that apply regardless of which AI tool is used                |
+| [02 Doc Structure](./02%20Doc%20Structure.md)                                   | The four-tier model — what each tier is for and what lives where                   |
+| [03 Engineer Role](./03%20Engineer%20Role.md)                                   | The engineer/AI division of labour — creative direction vs. workflow execution     |
+| [04 AI Coding Tool Compatibility](./04%20AI%20Coding%20Tool%20Compatibility.md) | How harness concepts map to each AI coding agent's primitives                      |
+| [05 Getting Started](./05%20Getting%20Started.md)                               | First-time setup and daily commands for the monorepo                               |
+| [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude Code to AWS, GitHub, and Atlassian via MCP                       |
+| [07 Documentation Principles](./07%20Documentation%20Principles.md)             | Why these principles exist, what they are, and which structure fits which doc type |
 
 ### Lifecycles
 

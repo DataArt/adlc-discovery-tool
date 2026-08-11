@@ -39,11 +39,12 @@ export default withMermaid(
       ],
 
       nav: [
-        { text: 'Connect Framework', link: '/AI SDLC/Connect Framework/' },
         { text: 'Vision', link: '/AI SDLC/Vision/' },
-        { text: 'Problem Space', link: '/AI SDLC/Problem Space/' },
-        { text: 'Solution Space', link: '/AI SDLC/Solution Space/' },
+        { text: 'Problem', link: '/AI SDLC/Problem Space/' },
+        { text: 'Solution', link: '/AI SDLC/Solution Space/' },
         { text: 'Milestones', link: '/AI SDLC/Milestones/' },
+        { text: 'Connect', link: '/AI SDLC/Connect Framework/' },
+        { text: 'Context', link: '/Context/' },
         // { text: 'Project (HLD)', link: '/Target Architecture (HLD)/' },
         { text: 'Harness', link: '/Engineering Guide/' },
       ],
@@ -52,6 +53,7 @@ export default withMermaid(
         '/AI SDLC/Connect Framework/': [
           { text: 'Connect Framework', items: scanSection('AI SDLC/Connect Framework') },
         ],
+        '/Context/': [{ text: 'Context', items: scanSection('Context') }],
         '/AI SDLC/Problem Space/': [
           { text: 'Problem Space', items: scanSection('AI SDLC/Problem Space') },
         ],

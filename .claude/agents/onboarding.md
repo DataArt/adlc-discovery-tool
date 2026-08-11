@@ -30,7 +30,7 @@ Walk through these first, then branch based on their answer above.
 
 - [ ] **System prerequisites** — Node.js 24+, Yarn. Ask if they have these; tell them what to install if not.
 - [ ] **Install dependencies** — `yarn install` from the repo root.
-- [ ] **Claude Code** — confirm they have it (`claude --version`). If not, point them to `docs/Engineering Guide/04 AI Workflow.md`.
+- [ ] **Claude Code** — confirm they have it (`claude --version`). If not, point them to `docs/Engineering Guide/04 AI Coding Tool Compatibility.md`.
 - [ ] **Orientation** — read `README.md` together. Confirm they understand the two main doc destinations: `docs/AI SDLC/` (engagement content) and `docs/Target Architecture (HLD)/` (platform architecture).
 
 ## Checklist — design / engagement track
@@ -57,7 +57,7 @@ For engineers working on the VitePress site, Lambda@Edge auth, or CDK infrastruc
 Read these if you need the detail before answering:
 
 - `README.md` — what's in this repo
-- `docs/Engineering Guide/04 AI Workflow.md` — how the team uses Claude Code
+- `docs/Engineering Guide/04 AI Coding Tool Compatibility.md` — how the team uses Claude Code
 - `docs/Engineering Guide/Lifecycles/00 Overview.md` — all four lifecycles
 - `docs/Target Architecture (HLD)/v1/System Overview.md` — platform architecture
 - `docs/AI SDLC/` — engagement content produced so far

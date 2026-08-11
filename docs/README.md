@@ -18,6 +18,12 @@ Navigation index for this repository's documentation.
 
 ---
 
+## Context
+
+→ [Context — Overview](Context/index.md) — why [[CLIENT_NAME]]'s platform exists: the story, the competitive landscape, the problem statement, and the settled solution framing
+
+---
+
 ## AI SDLC
 
 A DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-first workflow adoption across [[CLIENT_NAME]]. Covers problem space analysis, solution framing, and structured discovery workshops.

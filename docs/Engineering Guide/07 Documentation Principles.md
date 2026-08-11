@@ -32,17 +32,24 @@ A secondary reason: frontier AI models follow ~150–200 instructions reliably b
 
 ---
 
-## Docs index
+## How — doc-type cheat sheet
 
-`docs/README.md` is the navigation index for this repository's documentation.
-
-**When adding a new file** under any docs directory, add a corresponding entry to the matching section in `docs/README.md`. **When renaming or removing a file**, update or remove the matching entry.
-
-This is a project-specific invariant — AI tools and developers rely on it to discover docs without scanning the full tree.
+| Doc type                           | Structure                                                                     | Length target |
+| ---------------------------------- | ----------------------------------------------------------------------------- | ------------- |
+| Root context file (CLAUDE.md)      | WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (slash commands / agents) | 60–130 lines  |
+| Engineering Guide article          | Problem → Steps → Notes                                                       | < 150 lines   |
+| HLD container doc                  | Responsibilities → Technology → Data flow → NFRs → Open questions             | < 80 lines    |
+| LLD container doc                  | Overview → Component detail → Integration patterns → Key decisions            | < 120 lines   |
+| Convention skill                   | Rule → Why → How to apply                                                     | < 40 lines    |
+| Orchestrator skill                 | Orchestration pattern + per-phase invariants                                  | < 60 lines    |
+| App README                         | What → How to run locally → Links to HLD + LLD                                | < 60 lines    |
+| ADR (Architecture Decision Record) | Context → Decision → Consequences                                             | < 60 lines    |
 
 ---
 
 ## Documentation destination
+
+![Documentation placement](/images/engineering-guide/docs-principles-placement.png)
 
 Every permanent doc lands in exactly one location. Confirm before writing.
 
@@ -54,6 +61,24 @@ Every permanent doc lands in exactly one location. Confirm before writing.
 | **Engineering Guide** | `docs/Engineering Guide/`                                       | Cross-cutting conventions, operational procedures, onboarding                                                                            |
 
 SoC test: _"Does this inform [[CLIENT_NAME]]'s AI adoption?"_ → AI SDLC. _"Does this describe the platform's design intent?"_ → HLD. _"Is this an implementation detail for a container?"_ → LLD. _"Is this a convention the whole team follows?"_ → Engineering Guide.
+
+---
+
+## Wiring Principle
+
+![Docs wiring and discovery](/images/engineering-guide/docs-wiring-discovery.png)
+
+Documentation is connected through progressive disclosure, not through one central index containing everything.
+
+`docs/README.md` provides only the root navigation and points readers to the appropriate documentation area. Each area then owns its local navigation, and individual documents use cross-links to connect related knowledge.
+
+The model is:
+
+Root index → Section navigation → Relevant document → Related documents
+
+The rules are simple: one source of truth per concept, link instead of duplicate, keep local navigation current, and add cross-links wherever they help a human or AI agent discover the next relevant piece of context.
+
+This creates multiple discovery paths without duplicating content, so both engineers and agents can progressively load only the context they need.
 
 ---
 
@@ -82,18 +107,5 @@ Never write as prose what can be a diagram. Never write as bullets what can be a
 | Directory / folder structure             | `flowchart TD` with labeled nodes       |
 
 ---
-
-## How — doc-type cheat sheet
-
-| Doc type                           | Structure                                                                     | Length target |
-| ---------------------------------- | ----------------------------------------------------------------------------- | ------------- |
-| Root context file (CLAUDE.md)      | WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (slash commands / agents) | 60–130 lines  |
-| Engineering Guide article          | Problem → Steps → Notes                                                       | < 150 lines   |
-| HLD container doc                  | Responsibilities → Technology → Data flow → NFRs → Open questions             | < 80 lines    |
-| LLD container doc                  | Overview → Component detail → Integration patterns → Key decisions            | < 120 lines   |
-| Convention skill                   | Rule → Why → How to apply                                                     | < 40 lines    |
-| Orchestrator skill                 | Orchestration pattern + per-phase invariants                                  | < 60 lines    |
-| App README                         | What → How to run locally → Links to HLD + LLD                                | < 60 lines    |
-| ADR (Architecture Decision Record) | Context → Decision → Consequences                                             | < 60 lines    |
 
 This document follows its own rules: it states why these principles exist, what they are, and how to apply them — nothing else.

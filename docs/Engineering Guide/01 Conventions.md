@@ -24,7 +24,7 @@ Do not auto-generate the root context file from scratch — generate a scaffold 
 - **No duplicates** — check existing skills before creating; update the existing file if the concept is already covered
 - **Length**: convention skills under 40 lines; orchestrator skills under 60 lines
 
-For skill file locations per tool → see `04 AI Workflow.md`.
+For skill file locations per tool → see `04 AI Coding Tool Compatibility.md`.
 
 ---
 

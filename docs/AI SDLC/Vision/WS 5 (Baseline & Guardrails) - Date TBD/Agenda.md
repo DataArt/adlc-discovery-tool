@@ -85,4 +85,4 @@ Capture and record:
 - Pain points surfaced — candidates for [Measurement](/AI%20SDLC/Problem%20Space/09%20Measurement) and [Governance](/AI%20SDLC/Problem%20Space/10%20Governance)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each
-- If this is the final workshop: pull evidence across all five sessions into a prioritised problem ranking and pilot candidate
+- Pilot candidate synthesis now happens in [WS 6 — Product & Projects](../WS%206%20%28Product%20%26%20Projects%29%20-%20Date%20TBD/Agenda.md); this session's job is to leave clean, validated findings for it to draw on

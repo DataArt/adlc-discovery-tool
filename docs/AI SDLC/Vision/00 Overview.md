@@ -86,11 +86,14 @@ flowchart LR
     WS3["WS 3 — Delivery Mechanics\nDevOps & Pipeline\nCeremony Overhead"]
     WS4["WS 4 — People & Context\nTeams & Integration\nKnowledge Base"]
     WS5["WS 5 — Baseline & Guardrails\nMeasurement\nGovernance"]
+    WS6["WS 6 — Product & Projects\nPilot Selection (synthesis)"]
 
-    WS1 --> WS2 --> WS3 --> WS4 --> WS5
+    WS1 --> WS2 --> WS3 --> WS4 --> WS5 --> WS6
 
     classDef ws fill:#3B82F6,stroke:#1D4ED8,color:#fff
+    classDef synthesis fill:#8B5CF6,stroke:#5B21B6,color:#fff
     class WS1,WS2,WS3,WS4,WS5 ws
+    class WS6 synthesis
 ```
 
 | Workshop                     | Areas covered                         | Why paired                                                                |
@@ -100,6 +103,9 @@ flowchart LR
 | WS 3 — Delivery Mechanics    | DevOps & Pipeline · Ceremony Overhead | Delivery mechanics and the process overhead around them                   |
 | WS 4 — People & Context      | Teams & Integration · Knowledge Base  | The organisational and context layer                                      |
 | WS 5 — Baseline & Guardrails | Measurement · Governance              | Cross-cutting; usually needs Compliance/Security and Finance stakeholders |
+| WS 6 — Product & Projects    | — (synthesis across all Areas)        | Capstone; synthesises WS 1–5 evidence into a pilot candidate decision     |
+
+WS 6 sits outside the Area taxonomy above — it is evidence synthesis, not diagnosis, so it does not get a Problem Space page.
 
 ### Coverage tracker
 
@@ -134,5 +140,6 @@ flowchart LR
 | WS 3 — Delivery Mechanics    | DevOps & Pipeline · Ceremony Overhead | Date TBD | [Agenda](<./WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Agenda.md>)        | [Notes](<./WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Notes.md>)        | [Outcomes](<./WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Outcomes.md>)        | [Transcript](<./WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/transcript/Transcript.md>)        |
 | WS 4 — People & Context      | Teams & Integration · Knowledge Base  | Date TBD | [Agenda](<./WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Agenda.md>)      | [Notes](<./WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Notes.md>)      | [Outcomes](<./WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Outcomes.md>)      | [Transcript](<./WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/transcript/Transcript.md>)      |
 | WS 5 — Baseline & Guardrails | Measurement · Governance              | Date TBD | [Agenda](<./WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Agenda.md>) | [Notes](<./WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Notes.md>) | [Outcomes](<./WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Outcomes.md>) | [Transcript](<./WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/transcript/Transcript.md>) |
+| WS 6 — Product & Projects    | — (synthesis across all Areas)        | Date TBD | [Agenda](<./WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>)    | [Notes](<./WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Notes.md>)    | [Outcomes](<./WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Outcomes.md>)    | [Transcript](<./WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/transcript/Transcript.md>)    |
 
 _All four documents ship as placeholder shapes for this reference structure. In a live engagement, only Agenda exists ahead of a workshop — Notes, Outcomes, and Transcript are populated once the session actually runs._

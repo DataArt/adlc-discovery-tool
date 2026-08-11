@@ -16,4 +16,6 @@ Candidate evaluation dimensions for the ADLC pilot:
 - **Ease** — how quickly can a squad prove the hypothesis?
 - **Governance fit** — does it stay within what data classification and tooling currently allow?
 
+These four dimensions are applied per-workload in [WS 6 — Product & Projects](</AI%20SDLC/Vision/WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>) to select the pilot candidate, alongside one scored pilot-readiness dimension specific to that workshop (Team AI-readiness). Each candidate's named owner is recorded alongside the score for context, not scored or gated. Keep evaluation vocabulary in sync between the two pages rather than letting them drift.
+
 The solution itself — Pilot, Scale, Evolve — is drafted in [Solution Space](/AI%20SDLC/Solution%20Space/).

@@ -21,3 +21,4 @@ Building a shared picture of [[CLIENT_NAME]]'s current state, where it needs to 
 | [WS 3 — Delivery Mechanics](<./WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Agenda.md>)           | DevOps & Pipeline · Ceremony Overhead  | Date TBD |
 | [WS 4 — People & Context](<./WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Agenda.md>)           | Teams & Integration · Knowledge Base   | Date TBD |
 | [WS 5 — Baseline & Guardrails](<./WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Agenda.md>) | Measurement · Governance               | Date TBD |
+| [WS 6 — Product & Projects](<./WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>)       | — (pilot selection synthesis)          | Date TBD |

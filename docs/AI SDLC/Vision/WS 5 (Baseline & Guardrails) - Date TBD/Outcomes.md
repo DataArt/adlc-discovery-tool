@@ -92,4 +92,4 @@ flowchart LR
 | 🔵 Decision      | [description] |       |     |
 | 📋 Carry-forward | [description] |       |     |
 
-_If this is the final workshop: pull evidence across all five sessions into a prioritised problem ranking and pilot candidate._
+_Pilot candidate synthesis now happens in [WS 6 — Product & Projects](<../WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Outcomes.md>); this session's job is to leave clean, validated findings for it to draw on._

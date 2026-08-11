@@ -50,19 +50,10 @@ export default withMermaid(
           { text: 'Solution Space', items: scanSection('AI SDLC/04 Solution Space') },
         ],
         '/AI SDLC/05 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/05 Roadmap') }],
-        '/AI SDLC/02 Vision/': [{ text: 'Vision', items: scanSection('AI SDLC/02 Vision') }],
-        '/Target Architecture (HLD)/': [
-          {
-            text: 'Target Architecture (HLD)',
-            items: scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
-          },
-        ],
-        '/System Architecture (LLD)/': [
-          { text: 'System Architecture (LLD)', items: scanSection('System Architecture (LLD)') },
-        ],
-        '/Engineering Guide/': [
-          { text: 'Engineering Guide', items: scanSection('Engineering Guide') },
-        ],
+        '/AI SDLC/02 Vision/': scanSection('AI SDLC/02 Vision'),
+        '/Target Architecture (HLD)/': scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
+        '/System Architecture (LLD)/': scanSection('System Architecture (LLD)'),
+        '/Engineering Guide/': scanSection('Engineering Guide'),
       },
     },
   })

@@ -45,16 +45,16 @@ Confirm the resolved base ref with the developer before proceeding:
 
 Against the confirmed base ref, collect:
 
-- Tracked changes: `git diff <base-ref> --name-status` (this reflects the working tree, so it includes staged and unstaged edits, not only committed ones)
+- Tracked changes: `git diff <base-ref> --name-status -M -C` (this reflects the working tree, so it includes staged and unstaged edits, not only committed ones). `-M -C` turns on rename/copy detection — without it, a moved-and-reworded file (e.g. a folder renumbering) shows up as an unrelated Delete + Add pair, which silently loses the "these are the same document" relationship the apply side needs. If a known restructure isn't showing up as `R`/`C` status (git's default similarity threshold is 50%), retry with a lower threshold, e.g. `-M30%`.
 - Untracked new files: `git status --porcelain` entries starting `??`, filtered to paths relevant to the change (ask the developer if unsure whether a stray untracked file belongs)
 
-Classify every path as **Added**, **Updated**, or **Deleted**.
+Classify every path as **Added**, **Updated**, **Renamed** (git reported `R<NN>`/`C<NN>` status — record both the old and new path, not just the new one), or **Deleted**.
 
 ---
 
 ## Step 3 — Curate with the developer
 
-Present the full Added / Updated / Deleted list. Not everything touched in a session belongs in a portable patch — ask the developer to confirm the list as-is or strike out anything that's one-off / repo-specific to this project.
+Present the full Added / Updated / Renamed / Deleted list. Not everything touched in a session belongs in a portable patch — ask the developer to confirm the list as-is or strike out anything that's one-off / repo-specific to this project.
 
 **Stop and wait** for confirmation before writing anything.
 
@@ -74,10 +74,10 @@ Bundle folder: `.patch/<ID>-<YYYY-MM-DD>-<slug>/`
 
 Create the bundle folder with:
 
-- `manifest.md` — Added / Updated / Deleted file lists (repo-relative paths), and a short prose summary of what changed and why (this travels with the bundle into a repo with zero context of this conversation — write it for that reader)
-- `files/` — for every Added and Updated path, copy its current content into `files/<same-relative-path>` (mirror the repo tree exactly, so apply can copy it straight back)
+- `manifest.md` — Added / Updated / Renamed / Deleted file lists (repo-relative paths), and a short prose summary of what changed and why (this travels with the bundle into a repo with zero context of this conversation — write it for that reader). List Renamed entries as `old/path.md` → `new/path.md`.
+- `files/` — for every Added, Updated, and Renamed path, copy its **current** content into `files/<new-relative-path>` (mirror the repo tree exactly, so apply can copy it straight back). For a Renamed entry, only the new path gets a file — there is nothing to carry for the old path.
 
-Deleted paths are recorded in `manifest.md` only — there is no content to carry for a deletion.
+Deleted paths (and the old-path half of Renamed entries) are recorded in `manifest.md` only — there is no content to carry for a deletion.
 
 ---
 
@@ -96,5 +96,5 @@ Append a row to `.patch/REGISTRY.md`:
 Tell the developer:
 
 - The bundle path
-- The file counts (added / updated / deleted)
+- The file counts (added / updated / renamed / deleted)
 - The next step is manual: copy `.patch/<ID>-<date>-<slug>/` into the target repo's `.patch/` folder, then run `/patch-apply <ID>` there. Copying files into another local repo is the developer's call — don't do it yourself even if both repos happen to be on disk.

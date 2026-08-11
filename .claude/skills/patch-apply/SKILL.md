@@ -18,7 +18,7 @@ The developer wants to apply a patch bundle to this repo. Here is their input:
 
 ## Overview
 
-A patch bundle (see `/patch-prepare`) is a self-contained folder under `.patch/`: a `manifest.md` listing added/updated/deleted paths, and a `files/` tree with the new content for every added/updated path. This repo has no shared git history with wherever the bundle came from — treat every overwrite as a potential conflict with local changes, not a mechanical copy.
+A patch bundle (see `/patch-prepare`) is a self-contained folder under `.patch/`: a `manifest.md` listing added/updated/renamed/deleted paths, and a `files/` tree with the new content for every added/updated/renamed path. This repo has no shared git history with wherever the bundle came from — treat every overwrite as a potential conflict with local changes, not a mechanical copy. That includes renames: a "new" path can carry forward — or clobber — content this repo already personalized at the old path (see Step 5).
 
 This repo tracks applied bundles in its own `.patch/APPLIED.md` — never in `.patch/REGISTRY.md`. `REGISTRY.md` belongs to `/patch-prepare` and records bundles _this repo prepared_ for others; its IDs are only unique within this repo's own sequence. A bundle copied in from a sibling repo carries an ID that was sequential _there_, so two incoming bundles (or an incoming bundle and a locally-prepared one) can legitimately share the same numeric ID. `APPLIED.md` keys off the full bundle folder name (`NNNN-YYYY-MM-DD-slug`) for exactly this reason, and the two files are never merged.
 
@@ -48,7 +48,9 @@ If this bundle's folder name already has an `applied` row in `.patch/APPLIED.md`
 
 ## Step 3 — Read the manifest
 
-Read `manifest.md` in full: the Added / Updated / Deleted lists and the summary. Read the summary before touching any file — it's the only context this repo has for _why_ the change was made.
+Read `manifest.md` in full: the Added / Updated / Renamed / Deleted lists and the summary. Read the summary before touching any file — it's the only context this repo has for _why_ the change was made.
+
+If the manifest has no explicit **Renamed** section but its Summary describes a rename or restructure (e.g. "renames X/ to Y/", "renumbers sections", "moves ... to ...") and both the Added and Deleted lists are non-empty, treat it as a **legacy bundle**: the rename relationships exist but weren't captured structurally. Carry that forward into Step 5 — every Added path needs a rename-pairing check against the Deleted list before it's safe to treat as a plain new file (see Step 5).
 
 ---
 
@@ -68,19 +70,36 @@ Apply the confirmed substitution to file content in memory before Step 5 — nev
 
 ## Step 5 — Apply file by file
 
-For each **Added** or **Updated** path:
+**A path listed as "Added" is not necessarily new content — it can be existing, locally-personalized content that simply moved.** This repo may have filled in, edited, or personalized a file at its _old_ path (bootstrap narrative sections, local corrections) after the bundle's source repo diverged from it. If the manifest's Deleted list is treated as unrelated to the Added list, that personalization is silently destroyed: the old path gets deleted, the new path gets the bundle's — possibly blank/template — version, and nothing in the diff process ever compares the two. This has actually happened (a bootstrapped narrative section was overwritten with the unfilled `/bootstrap-client` placeholder because the target path "didn't exist yet" was taken as proof it was safe to write blindly). Do not repeat it: every Added path needs a rename check before it's treated as a clean add.
 
-1. Take `files/<path>` from the bundle (after the Step 4 substitution) as the incoming content, and read the current repo file at `<path>` if it exists.
-2. If the file doesn't exist yet in this repo: it's a clean add — create it.
-3. If it exists and is identical to the incoming content: skip, nothing to do.
-4. If it exists and differs: show the diff. If the existing content looks like it carries local, repo-specific edits (not just the expected pre-patch baseline), flag that explicitly and ask before overwriting — don't assume the incoming version should always win.
+### 5a — Pair renames before writing anything
+
+- If the manifest has an explicit **Renamed** section (`old/path.md` → `new/path.md`), that pairing is authoritative — use it directly.
+- Otherwise (legacy bundle, per Step 3), build the pairing yourself: for each Added path, check the Deleted list for a path with the same basename (final path segment — e.g. both end in `index.md`, or both end in `01 Overview.md`) whose containing folder corresponds under the rename the Summary describes (e.g. `Connect Framework/` → `01 Process/`). Where a basename is ambiguous (appears more than once in either list, e.g. many `index.md`), disambiguate using the folder correspondence from the Summary — if it's still ambiguous, ask rather than guess.
+
+### 5b — Apply Added paths
+
+For each **Added** path:
+
+1. If it pairs with a Deleted path (a rename) **and** that old path currently exists in this repo: treat it like an **Updated** path, not a clean add. Diff the old path's _current repo content_ (not the bundle's copy of it — the bundle doesn't carry old-path content) against the bundle's incoming content for the new path (after Step 4 substitution). Expected differences are exactly what the manifest's Summary describes (renamed links, reworded headings/labels, restructured sections). Anything else — most importantly, real prose on the old-path side where the new-path side has a placeholder, bracketed template text, or a "Populated During Bootstrap / not yet answered" callout — is a local-edit conflict: flag it explicitly, show both sides, and ask before writing. Do not write until confirmed.
+2. Otherwise (no rename pairing, or the paired old path doesn't currently exist): take `files/<path>` from the bundle as the incoming content, and check the current repo file at `<path>`.
+   - Doesn't exist: clean add — create it.
+   - Exists and is identical to the incoming content: skip, nothing to do.
+   - Exists and differs: show the diff. If the existing content looks like it carries local, repo-specific edits (not just the expected pre-patch baseline), flag that explicitly and ask before overwriting — don't assume the incoming version should always win.
+
+### 5c — Apply Updated paths
+
+For each **Updated** path: same treatment as 5b's second bullet (diff against current repo content, flag and confirm on anything beyond the expected pre-patch baseline).
+
+### 5d — Apply Deleted paths (and the old half of renames)
 
 For each **Deleted** path:
 
 1. If it doesn't exist in this repo: nothing to do, note it as already absent.
-2. If it exists: confirm before deleting — a file with the same path may have been repurposed locally.
+2. If it was reconciled as the old half of a rename pairing in 5b.1: safe to delete once the paired Added path has been written and confirmed.
+3. Otherwise: confirm before deleting — a file with the same path may have been repurposed locally.
 
-Batch the confirmations sensibly (e.g. "these 6 are clean adds, apply all?") rather than prompting once per file when there's nothing ambiguous to decide.
+Batch the confirmations sensibly (e.g. "these 6 are clean adds, apply all?") rather than prompting once per file when there's nothing ambiguous to decide — but never fold a rename-pairing conflict (5b.1) into a batch; those need their own explicit call-out since they're exactly the case that's bitten this repo before.
 
 ---
 

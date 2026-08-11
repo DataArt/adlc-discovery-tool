@@ -236,12 +236,12 @@ If proceeding, ask **one** open-ended question, not four:
 
 Not a shell command — Claude drafts these directly (write-confirm pattern), same as any other doc content in this repo:
 
-| Page              | Facet to extract                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Connect Framework | Why a structured problem→solution framework matters here — what they're trying to achieve, why not jump straight to a fix                  |
-| Vision            | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
-| Problem Space     | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
-| Solution Space    | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
+| Page           | Facet to extract                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Process        | Why a structured problem→solution framework matters here — what they're trying to achieve, why not jump straight to a fix                  |
+| Vision         | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
+| Problem Space  | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
+| Solution Space | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
 
 If the story doesn't cover a page, leave its placeholder as-is — don't force a facet out of material that isn't there.
 

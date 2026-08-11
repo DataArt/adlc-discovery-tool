@@ -38,3 +38,5 @@ flowchart LR
 | Evolve | Gather metrics, analyse them, build dashboards and reporting, identify problems, and reiterate the solution                                                                         | Metrics gathered; dashboards & reporting live; problems identified; solution reiterated             | [Evolve](./04%20Evolve.md) |
 
 Each phase page is grounded in current [Problem Space](/AI%20SDLC/03%20Problem%20Space/) findings and linked back to the specific evidence behind each idea.
+
+Once a phase's scope and timing are agreed, they feed the [Roadmap](/AI%20SDLC/05%20Roadmap/) — the settled shape this solution converges on.

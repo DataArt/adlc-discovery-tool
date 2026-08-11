@@ -1,6 +1,6 @@
 # Roadmap
 
-The engagement's phased delivery plan — scope, phases, timelines, and team composition. Not the day-to-day tracked milestone list (that's [Connect Framework — Milestones](/AI%20SDLC/01%20Process/05%20Milestones)); this is the settled shape the plan is converging on.
+The engagement's phased delivery plan — scope, phases, timelines, and team composition. Draws on agreed scope and timing from [Solution Space](/AI%20SDLC/04%20Solution%20Space/) as phases are settled. Not the day-to-day tracked milestone list (that's [Process — Milestones](/AI%20SDLC/01%20Process/05%20Milestones)); this is the settled shape the plan is converging on.
 
 ## How This Directory Works
 

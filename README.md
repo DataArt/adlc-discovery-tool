@@ -4,7 +4,7 @@ A DataArt starter kit for AI SDLC discovery engagements — clone it, run one bo
 
 ## What this brings
 
-- **Connect Framework methodology** — the Goals · Problem Space · Solution Space · Milestones facilitation arc that structures every engagement, from first discovery through pilot delivery
+- **A structured process methodology** — the Goals · Problem Space · Solution Space · Milestones facilitation arc that structures every engagement, from first discovery through pilot delivery
 - **A Vision-building workshop programme** — short, focused sessions that build a shared picture of the client's current state, future state, and the solution hypotheses in between
 - **A deployable docs site** — VitePress, served via CloudFront + S3, gated behind Lambda@Edge basic auth, with AWS CDK infrastructure and CI/CD (GitHub Actions + OIDC) included
 - **An engineering harness** — Claude Code skills, agents, and lifecycles (`/dev`, `/design`, `/war`) that structure how design and implementation work actually gets done
@@ -48,8 +48,8 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 
 ## Documentation
 
-| Path                              | Purpose                                                                                |
-| --------------------------------- | -------------------------------------------------------------------------------------- |
-| `docs/AI SDLC/`                   | Engagement methodology and content — Connect Framework, Vision, Problem/Solution Space |
-| `docs/Engineering Guide/`         | Conventions, AI workflow, and operational runbooks                                     |
-| `docs/Target Architecture (HLD)/` | This platform's own architecture                                                       |
+| Path                              | Purpose                                                                      |
+| --------------------------------- | ---------------------------------------------------------------------------- |
+| `docs/AI SDLC/`                   | Engagement methodology and content — Process, Vision, Problem/Solution Space |
+| `docs/Engineering Guide/`         | Conventions, AI workflow, and operational runbooks                           |
+| `docs/Target Architecture (HLD)/` | This platform's own architecture                                             |

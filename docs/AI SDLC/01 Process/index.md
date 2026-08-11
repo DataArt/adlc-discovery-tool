@@ -1,6 +1,6 @@
 # Process
 
-Goals · Problem Space · Solution Space · Milestones — the four-list facilitation arc (DataArt's **Connect Framework**) that structures every ADLC engagement, from first discovery through to pilot delivery.
+Goals · Problem Space · Solution Space · Milestones — the four-list facilitation arc that structures every ADLC engagement, from first discovery through to pilot delivery. See [01 Overview](./01%20Overview.md) for the framework's name and definition.
 
 ## Why This Matters for [[CLIENT_NAME]]
 
@@ -11,7 +11,7 @@ Goals · Problem Space · Solution Space · Milestones — the four-list facilit
 
 ## How This Directory Works
 
-[01 Overview](./01%20Overview.md) describes the framework itself — definitions, how the lists connect, key principles — and does not change during the engagement. The four list pages below hold [[CLIENT_NAME]]'s current understanding and are updated as workshops progress, the same living-pages pattern used by [Problem Space (workdir)](/AI%20SDLC/03%20Problem%20Space/).
+[01 Overview](./01%20Overview.md) describes the framework itself — definitions, how the lists connect, key principles — and does not change during the engagement. The four list pages below hold [[CLIENT_NAME]]'s current understanding and are updated as workshops progress, the same living-pages pattern used by [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
 
 | Page                                            | Holds                                                                                                         |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |

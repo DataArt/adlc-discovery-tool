@@ -1,6 +1,6 @@
 # Problem Space
 
-A working directory for forming and stress-testing hypotheses about where [[CLIENT_NAME]]'s delivery time is lost. Content here is provisional — findings are validated through workshops and promoted into the [Connect Framework](/AI%20SDLC/01%20Process/)'s Problem Space list.
+A working directory for forming and stress-testing hypotheses about where [[CLIENT_NAME]]'s delivery time is lost. Content here is provisional — findings are validated through workshops and promoted into [Process](/AI%20SDLC/01%20Process/)'s Problem Space list.
 
 ## Entering Hypothesis
 

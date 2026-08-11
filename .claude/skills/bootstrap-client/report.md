@@ -42,12 +42,12 @@ Status values : ⏳ Pending · 🔄 Active · ✅ Done · ⚠️ Blocked · ⏭�
 
 ## Narrative Sections
 
-| Page              | Status |
-| ----------------- | ------ |
-| Connect Framework | ⏳     |
-| Vision            | ⏳     |
-| Problem Space     | ⏳     |
-| Solution Space    | ⏳     |
+| Page           | Status |
+| -------------- | ------ |
+| Process        | ⏳     |
+| Vision         | ⏳     |
+| Problem Space  | ⏳     |
+| Solution Space | ⏳     |
 
 ## Issues Encountered
 

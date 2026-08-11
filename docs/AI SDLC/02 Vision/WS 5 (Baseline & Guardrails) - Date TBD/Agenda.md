@@ -24,7 +24,7 @@ _Governance covers two related sub-topics in one block — trim survey questions
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Connect Framework → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
+Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
 
 - Recap and validate findings from [WS 4](../WS%204%20%28People%20%26%20Context%29%20-%20Date%20TBD/Outcomes.md) (Teams & Integration · Knowledge Base) before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 

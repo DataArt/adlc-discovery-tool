@@ -17,3 +17,5 @@ Milestones are not a project plan — they are the minimum set of commitments th
 | Review    | Pilot retrospective; scale/stop decision    | TBD   | TBD    |
 
 _Milestone owners and dates are agreed during discovery workshops and updated throughout the engagement._
+
+This is the live, day-to-day tracked list. The settled phased shape it rolls up into is the [Roadmap](/AI%20SDLC/05%20Roadmap/).

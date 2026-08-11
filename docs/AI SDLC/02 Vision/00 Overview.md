@@ -8,12 +8,12 @@ Each topic follows a consistent format: **current-state walkthrough → time-los
 
 ## Terminology
 
-| Term         | Meaning                                                                                                                                                                                                                                                                       |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.** Has its own folder with an Agenda, Notes, Outcomes, and a Transcript — only Agenda exists ahead of a live session; the rest populate once it runs.                                                       |
-| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop; a workshop occasionally runs two sessions if scheduling forces a split.                                                                                                                     |
-| **Topic**    | A specific thread on a session's agenda — as many as fit in the time available, realistically 1–3 with real depth. Each topic is tagged to the Area it's diagnosing.                                                                                                          |
-| **Area**     | A fixed diagnostic domain. The same 10 domains defined in [Connect Framework → Problem Space](/AI%20SDLC/01%20Process/03%20Problem%20Space.md); every topic belongs to exactly one Area, and every Area has a waiting [Problem Space](/AI%20SDLC/03%20Problem%20Space/) page. |
+| Term         | Meaning                                                                                                                                                                                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.** Has its own folder with an Agenda, Notes, Outcomes, and a Transcript — only Agenda exists ahead of a live session; the rest populate once it runs.                                             |
+| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop; a workshop occasionally runs two sessions if scheduling forces a split.                                                                                                           |
+| **Topic**    | A specific thread on a session's agenda — as many as fit in the time available, realistically 1–3 with real depth. Each topic is tagged to the Area it's diagnosing.                                                                                                |
+| **Area**     | A fixed diagnostic domain. The same 10 domains defined in [Process → Problem Space](/AI%20SDLC/01%20Process/03%20Problem%20Space.md); every topic belongs to exactly one Area, and every Area has a waiting [Problem Space](/AI%20SDLC/03%20Problem%20Space/) page. |
 
 ## Purpose
 

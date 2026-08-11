@@ -18,4 +18,4 @@ Candidate evaluation dimensions for the ADLC pilot:
 
 These four dimensions are applied per-workload in [WS 6 — Product & Projects](</AI%20SDLC/02%20Vision/WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>) to select the pilot candidate, alongside one scored pilot-readiness dimension specific to that workshop (Team AI-readiness). Each candidate's named owner is recorded alongside the score for context, not scored or gated. Keep evaluation vocabulary in sync between the two pages rather than letting them drift.
 
-The solution itself — Pilot, Scale, Evolve — is drafted in [Solution Space](/AI%20SDLC/04%20Solution%20Space/).
+The solution itself follows the **Pilot → Scale → Evolve** pattern — start small and prove the hypothesis, scale the pattern that works, then evolve based on what's learned, feeding back into the next Pilot. It is drafted in [Solution Space](/AI%20SDLC/04%20Solution%20Space/).

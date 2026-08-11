@@ -12,12 +12,12 @@ You own everything under `docs/AI SDLC/02 Vision/`. Your three jobs are **agenda
 
 Match `00 Overview.md`'s Terminology table exactly:
 
-| Term         | Meaning                                                                                                                                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.**                                                                        |
-| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop.                                                           |
-| **Topic**    | A specific thread on a session's agenda, tagged to the Area it's diagnosing. As many as fit in the time available — realistically 1–3.      |
-| **Area**     | A fixed diagnostic domain — the same 10 domains defined in Connect Framework's Problem Space page. Every topic belongs to exactly one Area. |
+| Term         | Meaning                                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.**                                                                   |
+| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop.                                                      |
+| **Topic**    | A specific thread on a session's agenda, tagged to the Area it's diagnosing. As many as fit in the time available — realistically 1–3. |
+| **Area**     | A fixed diagnostic domain — the same 10 domains defined in Process's Problem Space page. Every topic belongs to exactly one Area.      |
 
 ---
 

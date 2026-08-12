@@ -18,11 +18,13 @@
 - Build on [[CLIENT_NAME]]'s existing AI infrastructure where one exists, rather than standing up parallel infrastructure — check [Problem Space → Current State](/AI%20SDLC/03%20Problem%20Space/Current%20State/) for what's already there.
 - Guardrails sized to whichever candidate is chosen — e.g. read-only agent access first if the pilot touches source code or sensitive content.
 - A minimal data classification baseline (e.g. public / internal / restricted / regulated) for whatever the pilot touches — not a full framework. See [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance).
+- The actual tooling, wiring, and repo composition decisions this needs are a `/design` ticket, not drafted here — see [Process → Overview, Solution stage](/AI%20SDLC/01%20Process/01%20Overview.md#-solution).
 
 ## Set Up a Knowledge Base Scoped to the Workload (Phased)
 
 - Start with just the context the pilot workload needs, not an estate-wide rollout — draw on whatever ingestion or integration work is already underway or already planned, rather than waiting for all of it.
 - Phase it: raw ingestion → curated/structured context → validated against the pilot's actual output quality.
+- Context topology for the pilot's scope — same as above, specified via `/design`, not this page.
 
 ## Educate the Team
 

@@ -110,7 +110,7 @@ Discovery workshops that build a shared picture of where delivery time is lost a
 3. **Run the workshop with the client** — validate the previous session's findings first (goal signals and problem signals alike), then cover what isn't yet evidenced on either front; close by arranging the next follow-up.
 4. **Process the output** — fold workshop findings into the working draft, the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) coverage tracker, and the candidate goal list.
 5. **Repeat 3–4** until coverage is clear — every domain in Problem Space has moved past _TBD_, and the goal list holds steady across a session.
-6. Once there's enough context, start drafting [Current State](/AI%20SDLC/02%20Vision/01%20Current%20State/) (Process, Architecture, Context Topology) **and** the candidate [Goals](./02%20Goals.md) list — both graduate from Vision into their own stage from here.
+6. Once there's enough context, start drafting Current State ([Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md), [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md), [Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)) **and** the candidate [Goals](./02%20Goals.md) list — both graduate from Vision into their own stage from here.
 
 → [02 Vision](/AI%20SDLC/02%20Vision/) for the workshop programme and coverage tracker.
 
@@ -156,6 +156,9 @@ Options evaluated against diagnosed problems, structured as a Pilot → Scale �
 3. **Define the context and bootstrap** — at project, product, and organisation scale, per the [Target Agentic SDLC Setup](/Context/03%20Target%20Agentic%20SDLC%20Setup.md).
 4. **Define the wiring** — process ↔ context ↔ code: the actual mechanism (skills, agents, lifecycles) that keeps all three in sync once the pilot runs.
 5. **Build the coverage matrix** — every agreed Goal and every diagnosed Problem mapped to the solution element(s) that address it. Nothing proposed here should be unaccounted for on either axis.
+
+> [!IMPORTANT] Steps 2–4 are specified by running `/design`, not decided on a Solution Space page
+> Topology, context/bootstrap, and process↔context↔code wiring are architecture decisions — spanning metrics/observability/KPIs, tooling choice, repo composition, and context topology. [Target State](/AI%20SDLC/04%20Solution%20Space/02%20Target%20State.md) states _what_ the gap is; closing it is a `/design` ticket that produces the actual HLD-level spec (`Architecture.md`, `Design.md`, `Stack.md`) in [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/) — same as any other architecture decision in this repo, not a special case for the pilot.
 
 → [04 Solution Space](./04%20Solution%20Space.md) for the current evaluation dimensions, pilot options, and the full Pilot → Scale → Evolve pattern.
 

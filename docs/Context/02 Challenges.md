@@ -11,13 +11,13 @@ Without that onboarding, a senior engineer will still produce output — fast, c
 
 **An AI assistant has exactly the same problem.** Every session starts from zero. It has no memory of your architecture decisions, no awareness of your conventions, and no connection to your documentation. Execution is fast. Direction is absent.
 
-The fix is the same as with a new colleague: structured onboarding, maintained context, and a shared source of truth that stays current as the project evolves. Ten specific challenges follow. Most live at the project level, where the harness closes the gap directly — making the right context a first-class output of the work itself, not more process. A few live one layer up, at the Business or Technical/Integration Context that sits above any single project — those need wiring the [Context Topology](/Context/01%20Landscape.md) itself, not just running the harness once.
+The fix is the same as with a new colleague: structured onboarding, maintained context, and a shared source of truth that stays current as the project evolves. Eleven specific challenges follow. Most live at the project level, where the harness closes the gap directly — making the right context a first-class output of the work itself, not more process. A few live one layer up, at the Business or Technical/Integration Context that sits above any single project — those need wiring the [Context Topology](/Context/01%20Landscape.md) itself, not just running the harness once.
 
 ---
 
 ## The Drift
 
-> **By the time a system is mature:** decisions live in Slack, implementation is the only thing that's current, and documentation describes a system that no longer exists.
+> **Decisions live in Slack. Documentation describes a system that no longer exists.**
 
 This is not a new problem. It exists on every project, with or without AI.
 
@@ -109,7 +109,7 @@ The `/design` lifecycle forces the rationale to be written and approved **before
 
 ## Inconsistent Topology
 
-> **No two projects speak the same language.** Without a shared skeleton, every new contributor — human or AI — navigates by guesswork.
+> **No two projects speak the same language. Every contributor navigates by guesswork.**
 
 Every team, every project, every engagement starts from scratch — different folder structures, different naming conventions, different doc formats, different definition of "done." In regulated industries, architecture must pass an **Architecture Review Board** via a Technical Design Compliance document — real work: security posture, cost estimates, alignment with company standards. But the ARB operates at the **company level**. It does not produce a project-level skeleton. Once approved, every project is still on its own.
 
@@ -236,7 +236,7 @@ The bootstrap is a living platform. Every project improves it. Every lesson comp
 
 Even when an AI is given good context at the start of a session, it does not persist. The next session starts from zero. Mid-session, context degrades as the conversation grows. There is no memory of decisions made last Tuesday, no awareness of the convention established three sprints ago.
 
-![Session Amnesia](/images/context/Session%20Amnesia.png)
+![Context Lost on the Assembly Line](/images/context/Context%20Lost%20on%20the%20Assembly%20Line.png)
 
 A team that runs AI without structured context management is re-onboarding a new colleague every morning.
 
@@ -268,7 +268,7 @@ The difference: sessions are no longer isolated events. They are a continuous th
 
 ---
 
-## Legacy Systems Meet AI Barriers
+## The Legacy Wall
 
 > **Most of the codebase predates AI tooling entirely — and it shows.**
 
@@ -276,25 +276,67 @@ A mature engineering estate rarely looks like one coherent system. It's usually 
 
 ![Legacy Systems Meet AI Barriers](/images/context/Legacy%20Systems%20Meet%20AI%20Barriers.png)
 
-**How to address this — the harness (Project Context):** bootstrap the harness onto the project as it actually stands today, not onto a greenfield assumption. That first pass is where LLD gets written to match what's really built — including the parts that only exist in the codebase and in engineers' heads — so docs and code state start from the same truth instead of the docs describing an earlier, simpler system. From there, the same fix as Drift and Uneven Depth keeps them aligned going forward: the HLD and LLD turn integration patterns, architectural rationale, and conventions into an explicit, machine-readable output instead of tribal knowledge. What's actually true for this estate — which systems, which integrations, which conventions matter most — is captured live in [Problem Space](/AI%20SDLC/03%20Problem%20Space/) as workshops run, not assumed generically here.
+**How to address this — the harness (Project Context):** bootstrap the harness onto the project as it stands today, not a greenfield assumption — the first pass writes LLD to match what's actually built, including what only ever lived in engineers' heads. From there, the same fix as Drift and Uneven Depth keeps HLD and LLD aligned going forward. What's true for this estate is captured live in [Problem Space](/AI%20SDLC/03%20Problem%20Space/) as workshops run, not assumed generically here.
 
 ---
 
-## Architecture Is Fragmenting
+## The Mental Model Shift
 
-> **Divergence that looks manageable inside one team compounds into an estate-wide problem — usually faster than leadership expects, and harder to unwind the longer it runs.**
+> **Code used to be the artifact. Now the context is.**
+
+Every challenge above assumes the harness gets used as designed. It only does if the people running it actually adopt the mental model behind it. For most developers, code has always been the deliverable — the thing reviewed, merged, and shipped. The harness inverts that: the HLD, the conventions, and the accumulated context are the deliverable, and code is what falls out of them once the AI executes against a scoped ticket. That is not a new IDE shortcut to pick up. It is a redefinition of what "doing the job well" means, and it does not land by reading a README.
+
+![AI Workflow Shift](/images/context/AI%20Workflow%20Shift.png)
+
+| Area             | Developer mindset (before)             | Engineer mindset (after)                                                                  |
+| ---------------- | -------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Primary artifact | Code is the artifact — review the diff | Context is the artifact — review the HLD, the diff follows                                |
+| Source of truth  | "I know the codebase" lives in my head | "I know the codebase" lives in docs the AI can also read                                  |
+| Docs discipline  | Skipping docs to move faster           | Skipping docs breaks the AI on the next session, not just the next hire                   |
+| Success metric   | Judged on lines shipped                | Judged on direction set — architectural calls, scoped tickets, catching what the AI can't |
+
+Without deliberate onboarding, engineers keep working the old way around the new tooling — treating `/design` and `/dev` as optional ceremony instead of how the work actually gets done — and the harness never earns the trust it needs to replace old habits.
+
+**How to address this — the harness (Project Context):** [Engineer Role](/Engineering%20Guide/03%20Engineer%20Role.md) names the target mental model — engineer owns the problem, AI owns the execution — but naming it isn't internalizing it. A short workshop series and learning path does that: walk the team through a real `/design` → `/dev` cycle on a low-stakes ticket, so the phase boundaries and review points become muscle memory, not theory.
+
+> From Typing Code to Directing It
+
+```mermaid
+flowchart LR
+    DEV["Developer mindset<br/>code is the artifact<br/>knowledge lives in my head"]
+    WS["Workshops + Learning Path<br/>walk a real /design → /dev cycle<br/>on a low-stakes ticket"]
+    ENG["Engineer mindset<br/>context is the artifact<br/>code is derived from it"]
+
+    DEV -->|"guided, hands-on"| WS --> ENG
+
+    classDef before fill:#7F8C8D,stroke:#616A6B,color:#fff
+    classDef bridge fill:#2471A3,stroke:#1A5276,color:#fff
+    classDef after fill:#27AE60,stroke:#1E8449,color:#fff
+
+    class DEV before
+    class WS bridge
+    class ENG after
+```
+
+---
+
+## The Fragmentation
+
+> **Divergence that looks manageable inside one team compounds into an estate-wide problem.**
 
 Teams pick up AI tools independently, and each choice makes sense on its own: a different assistant here, a different convention there. Multiply that across enough teams and the estate stops having one shape at all.
 
-![Architecture Is Fragmenting](/images/context/Architecture%20Is%20Fragmenting.png)
+![Teams Feed a Broken Estate Machine](/images/context/Teams%20Feed%20a%20Broken%20Estate%20Machine.png)
 
-**How to address this — wiring Context Topology (Technical · Integration Context), not the harness alone:** this is Inconsistent Topology at estate scale rather than project scale — it lives one layer up, at the [Technical and Integration Context](/Context/01%20Landscape.md) most teams assume is already shared. A single project's harness gives that one project a consistent skeleton; it doesn't by itself keep every team's skeleton the same. What closes the gap is deliberately wiring that skeleton across the estate — the same structure, applied and kept aligned team by team — not something any one project's tooling can enforce on its own. One team adopting it is a preference; every team adopting the same skeleton, wired together, is a standard.
+**How to address this — wiring Context Topology (Technical · Integration Context), not the harness alone:** this is Inconsistent Topology at estate scale, one layer up at the [Technical and Integration Context](/Context/01%20Landscape.md) most teams assume is already shared. One project's harness gives that project a consistent skeleton — it doesn't keep every team's skeleton the same. Closing the gap means wiring that same skeleton across the estate, team by team: one team adopting it is a preference, every team adopting it is a standard.
 
 ---
 
-## Governance Written for the Wrong Threat
+## The Governance Gap
 
-> **Most security policy predates agentic AI, so it stays silent on exactly the questions that now matter: what can the AI read, what can it generate, and where do the outputs actually go.**
+> **Security policy predates agentic AI — silent on what it can read, generate, or send.**
+
+![Confused AI in the Policy Factory](/images/context/Confused%20AI%20in%20the%20Policy%20Factory.png)
 
 Depending on the organisation, those questions carry their own regulatory, customer-data, or intellectual-property dimensions — specifics that a generic enterprise AI policy, written for no industry in particular, simply doesn't cover.
 
@@ -304,13 +346,15 @@ Depending on the organisation, those questions carry their own regulatory, custo
 | What can AI generate?                | Not addressed                | Output that could be mistaken for an approved, reviewed deliverable             |
 | Where do prompts and outputs end up? | Not addressed                | Third-party model providers, logged where legal/compliance needs visibility     |
 
-**How to address this — wiring Context Topology (Business Context), not the harness alone:** governance is owned and set at the [Business Context](/Context/01%20Landscape.md) layer, above any single project — the harness cannot generate a governance policy any more than it can set company goals. What it does contribute at the project level: scoped agents (e.g. `@web`, `@auth`, `@infra` in this repo's own case) restrict what an AI session can read and write to a defined boundary, and NFR docs and guarded commands make sensitive operations explicit rather than implicit — a project that's legible enough to _plug into_ a governance policy, once one exists. Closing the gap means wiring that Business Context layer explicitly: codifying the actual policy and connecting it down into how every project operates, not assuming each project will work it out alone. The organisation's actual regulatory and IP obligations are diagnosed in [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md).
+**How to address this — wiring Context Topology (Business Context), not the harness alone:** governance is owned at the [Business Context](/Context/01%20Landscape.md) layer, above any single project — the harness can't generate a policy any more than it can set company goals. What it contributes: scoped agents (`@web`, `@auth`, `@infra`) restrict what an AI session reads and writes, and NFR docs plus guarded commands make sensitive operations explicit — legible enough to plug into a policy once one exists. The organisation's actual regulatory and IP obligations are diagnosed in [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md).
 
 ---
 
-## Spend Without Attribution
+## The Attribution Gap
 
-> **Nobody can currently tell finance which teams get real value from AI spend, which workloads are burning budget without shipping anything, or where the money is actually going. That conversation is coming, ready or not.**
+> **Nobody can tell finance which teams get real value from AI spend, or which workloads just burn budget.**
+
+![The Attribution Gap](/images/context/The%20Attribution%20Gap.png)
 
 Engineers are using AI tools across a growing number of workloads, and spend is climbing with them. The attribution to go with it doesn't exist yet.
 
@@ -320,19 +364,19 @@ Engineers are using AI tools across a growing number of workloads, and spend is 
 | Which workloads justify their usage?              | Unknown        |
 | Which usage patterns burn budget without output?  | Unknown        |
 
-**How to address this — session observability and dashboards:** the fix is instrumentation. Session-level usage observability and reporting dashboards — DataArt's own Artisyn Log Hub, or an engineering-analytics platform like [LinearB](https://linearb.io/) — capture usage as it happens and roll it up by team, workload, and outcome. The harness gives that instrumentation something coherent to group by: work is structured into scoped phases with defined outputs (`/design`, `/dev`, `/where-we-are`), so usage data attributes to a phase, a container, or a ticket instead of one undifferentiated total. The actual baseline and reporting approach is diagnosed in [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md).
+**How to address this — session observability and dashboards:** the fix is instrumentation — session-level usage dashboards like DataArt's own Artisyn Log Hub, or [LinearB](https://linearb.io/), rolled up by team, workload, and outcome. The harness gives that instrumentation something coherent to group by: scoped phases with defined outputs (`/design`, `/dev`, `/where-we-are`), so usage attributes to a phase or ticket, not one undifferentiated total. The actual baseline is diagnosed in [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md).
 
 ---
 
-## Betting on One Vendor
+## Vendor Lock-In
 
 > **Whatever a team is running today will not be what they're running in eighteen months.**
 
 Organisations that invest in a tool-agnostic context foundation now don't have to start over every time a new tool takes the lead. Organisations that build their whole workflow around today's specific tool do.
 
-![Foundation Survives, Wiring Fails](/images/context/Foundation%20Survives%2C%20Wiring%20Fails.png)
+![Context Foundation: Stable Tools vs. Broken Migration](/images/context/Context%20Foundation%3A%20Stable%20Tools%20vs.%20Broken%20Migration.png)
 
-**How to address this — the harness (Project Context):** this is the harness's own founding constraint, not an afterthought: root context, conventions, and lifecycles live as portable Markdown, mapped explicitly to each AI tool's primitives (see [AI Coding Tool Compatibility](/Engineering%20Guide/04%20AI%20Coding%20Tool%20Compatibility.md)) rather than hard-coded into one vendor's format. Swapping the underlying AI tool later means re-wiring an adapter layer, not rebuilding the context foundation itself.
+**How to address this — the harness (Project Context):** this is the harness's founding constraint: root context, conventions, and lifecycles live as portable Markdown, mapped to each AI tool's primitives (see [AI Coding Tool Compatibility](/Engineering%20Guide/04%20AI%20Coding%20Tool%20Compatibility.md)) rather than hard-coded into one vendor's format. Swapping tools later means re-wiring an adapter layer, not rebuilding the foundation.
 
 ---
 

@@ -30,6 +30,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** How do team structure and cross-team integration patterns shape — or constrain — the organisation's ability to adopt AI tooling?
 
+**Diagnoses:** [Challenge — The Fragmentation](/Context/02%20Challenges.md#the-fragmentation) · [Challenge — The Mental Model Shift](/Context/02%20Challenges.md#the-mental-model-shift) · [Problem Space — Teams & Integration](/AI%20SDLC/03%20Problem%20Space/06%20Teams%20%26%20Integration.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+
 - How squads are structured: dedicated product squads, shared platform teams, embedded roles
 - Where cross-team friction creates the most delay
 
@@ -41,12 +45,17 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. How do teams currently communicate about breaking changes or cross-cutting decisions? Formal mechanism, or informal?
 5. On a typical feature, how many teams need to be involved or informed before work can start? Which dependencies take longest to resolve?
 6. If AI agents were operating across team boundaries — reading tickets, proposing designs, generating code — which integration points would need the clearest protocols?
+7. Is code currently treated as the primary reviewed deliverable, with docs/context an afterthought — or is there already an expectation that context carries equal weight? How would that land if introduced?
 
 ---
 
 ## Topic 2 — Knowledge Base
 
 > **Key question:** Who owns the organisation's internal knowledge, how is it kept current, and is it consistent enough to be trusted as AI context?
+
+**Diagnoses:** [Challenge — The Drift](/Context/02%20Challenges.md#the-drift) · [Challenge — Inconsistent Topology](/Context/02%20Challenges.md#inconsistent-topology) · [Challenge — Session Amnesia](/Context/02%20Challenges.md#session-amnesia) · [Problem Space — Knowledge Base](/AI%20SDLC/03%20Problem%20Space/05%20Knowledge%20Base.md)
+
+**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
 - Inventory of internal knowledge stores: where knowledge lives today
 - Ownership, governance, and maintenance model
@@ -59,6 +68,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. How consistent is documentation across teams? Would a developer from one team navigate another team's docs without guidance?
 5. If an AI agent needed to answer "what does this service do and what does it depend on," which parts of current documentation could it trust, and which would mislead it?
 6. Who has the authority to set and enforce documentation standards across teams?
+7. When a new session or sprint starts, does it pick up exactly where the last one left off, or does the team re-explain decisions and context that were already established?
 
 ---
 

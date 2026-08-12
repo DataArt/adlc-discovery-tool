@@ -30,6 +30,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** What minimum documentation standard makes agentic impact analysis viable, and who maintains it?
 
+**Diagnoses:** [Challenge — The Drift](/Context/02%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/Context/02%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design.md)
+
+**Baseline:** [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+
 - A single service can span multiple systems and tech stacks
 - What AI-assisted impact analysis requires: dependency knowledge, service maps, accurate documentation
 
@@ -48,6 +52,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** Where has AI already been applied to the coding step itself, and why hasn't that translated into faster overall delivery?
 
+**Diagnoses:** [Challenge — Vendor Lock-In](/Context/02%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
+
 - Candidate hypothesis: commit or PR volume may be up since AI coding tools were introduced, while lead time hasn't moved proportionally
 - Coding-step gains only show up in delivery if the rest of the pipeline absorbs the extra throughput
 
@@ -59,6 +67,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. What would need to be true elsewhere in the pipeline for faster coding to actually show up as faster delivery?
 5. Is there a risk that AI-generated code increases downstream rework (review time, defect rate) in a way that offsets the coding-speed gain?
 6. What coding standards or conventions are enforced today, and are they legible enough for an AI tool to follow without supervision?
+7. If the team switched AI coding tools or vendors next year, how much of today's setup — prompts, conventions, tool integrations — would have to be rebuilt versus carried over unchanged?
 
 ---
 

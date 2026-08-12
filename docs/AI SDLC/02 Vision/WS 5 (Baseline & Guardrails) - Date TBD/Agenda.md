@@ -34,6 +34,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** What is the smallest credible measurement baseline that can stand up before the pilot starts?
 
+**Diagnoses:** [Challenge — The Attribution Gap](/Context/02%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
+
 - Candidate metric set: delivery-lifecycle metrics plus stage-level cycle times (idea → story → design → build → test → release)
 - What data already exists in the team's own tools today
 
@@ -53,6 +57,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 _Requires Compliance/Security and Finance attendance._
 
 > **Key question:** What is the minimum viable governance — covering data exposure, IP, and token spend — that protects the organisation without stalling the pilot?
+
+**Diagnoses:** [Challenge — The Governance Gap](/Context/02%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/Context/02%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md)
+
+**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
 - No formal data governance outside regulated-data services is a common starting point; extending it to cover AI tooling is the gap
 - Pragmatic data classification: public / internal / restricted / regulated

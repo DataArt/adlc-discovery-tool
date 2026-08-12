@@ -30,6 +30,8 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** What does the delivery toolchain actually look like, and where does it add friction rather than confidence?
 
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
+
 - CI/CD stack, pipeline ownership, and current run times
 - Flaky tests and pipeline failures as named delivery constraints
 
@@ -48,6 +50,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** If requirements and impact analysis arrived pre-drafted and trustworthy, what would refinement and planning look like?
 
+**Diagnoses:** [Challenge — No Feedback Loop](/Context/02%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
+
 - Which ceremonies exist because information is missing upstream — and would shrink if earlier Areas improved
 - The mindset shift required: workflow redesign, not a tool overlay
 
@@ -59,6 +65,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. What is the biggest recurring topic that slows down a refinement session?
 5. If an AI assistant could draft a refinement agenda, pre-answer common questions, and flag missing information before the session started — what would change about how the meeting runs?
 6. What would a team need to believe about AI outputs before trusting them as input into a planning session?
+7. When a retrospective surfaces a real lesson, where does it actually go — does it reach other squads or the next project, or stay within this team?
 
 ---
 

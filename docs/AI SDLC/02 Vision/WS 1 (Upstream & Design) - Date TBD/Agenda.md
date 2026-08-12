@@ -30,6 +30,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** Which requirement artefacts, if AI-drafted well, would remove the most downstream rework?
 
+**Diagnoses:** [Challenge — The Uneven Depth](/Context/02%20Challenges.md#the-uneven-depth) · [Problem Space — Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
+
 - What "good" looks like for stories, refinement packs, and acceptance criteria
 - Front-load while product representatives are present
 
@@ -47,6 +51,10 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 ## Topic 2 — Design & UX
 
 > **Key question:** How much elapsed time sits in design and handoff per feature, and what proportion is genuinely creative vs waiting or translation?
+
+**Diagnoses:** [Challenge — The Uneven Depth](/Context/02%20Challenges.md#the-uneven-depth) · [Problem Space — Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX.md)
+
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
 - Often one of the longest phases and least addressed by current AI tooling
 - Map the design-to-build handoff and quantify wait states

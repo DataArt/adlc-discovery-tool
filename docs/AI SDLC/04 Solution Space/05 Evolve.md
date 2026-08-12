@@ -29,7 +29,7 @@
 
 ## Reiterate the Solution
 
-- Findings from this phase feed back into [Pilot](./02%20Pilot.md) and [Scale](./03%20Scale.md) — a knowledge-base gap that only shows up at wider scope, a governance control that doesn't hold, a metric that reveals the wrong workload was scaled first.
+- Findings from this phase feed back into [Pilot](./03%20Pilot.md) and [Scale](./04%20Scale.md) — a knowledge-base gap that only shows up at wider scope, a governance control that doesn't hold, a metric that reveals the wrong workload was scaled first.
 
 ## Open Questions
 

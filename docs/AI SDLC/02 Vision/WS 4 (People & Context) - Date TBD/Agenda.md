@@ -46,6 +46,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 5. On a typical feature, how many teams need to be involved or informed before work can start? Which dependencies take longest to resolve?
 6. If AI agents were operating across team boundaries — reading tickets, proposing designs, generating code — which integration points would need the clearest protocols?
 7. Is code currently treated as the primary reviewed deliverable, with docs/context an afterthought — or is there already an expectation that context carries equal weight? How would that land if introduced?
+8. What tool(s) mediate cross-team communication and dependency requests today (Slack, Teams, Jira, ServiceNow, email)?
 
 ---
 
@@ -69,6 +70,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 5. If an AI agent needed to answer "what does this service do and what does it depend on," which parts of current documentation could it trust, and which would mislead it?
 6. Who has the authority to set and enforce documentation standards across teams?
 7. When a new session or sprint starts, does it pick up exactly where the last one left off, or does the team re-explain decisions and context that were already established?
+8. Which specific tool is the primary knowledge base today (Confluence, Notion, GitHub wiki, README files) — is it the same one across every team, or does each team keep its own?
 
 ---
 
@@ -77,5 +79,6 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 Capture and record:
 
 - Pain points surfaced — candidates for [Teams & Integration](/AI%20SDLC/03%20Problem%20Space/06%20Teams%20%26%20Integration) and [Knowledge Base](/AI%20SDLC/03%20Problem%20Space/05%20Knowledge%20Base)
+- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

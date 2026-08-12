@@ -86,7 +86,7 @@ flowchart LR
 | Gate 2 | ~Two-thirds through Solution Design window | Second iteration of SDFD deliverables    |
 | Gate 3 | End of Solution Design                     | Final Solution Design Framework Document |
 
-The live, tracked milestone list (what/who/by-when) is [Process — Milestones](/AI%20SDLC/01%20Process/05%20Milestones).
+The live, tracked milestone list (what/who/by-when) is [Process — Milestones](/AI%20SDLC/01%20Process/05%20Milestones). The gates above are the contractual shape; the work-item-level breakdown and day-by-day schedule are [02 WBS](./02%20WBS.md) and [03 Timeline](./03%20Timeline.md).
 
 ---
 

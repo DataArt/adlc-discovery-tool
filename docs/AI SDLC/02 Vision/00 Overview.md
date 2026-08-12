@@ -19,6 +19,7 @@ Each topic follows a consistent format: **current-state walkthrough → time-los
 
 - Test the hypothesis that most delivery time is lost _before_ code is written — code was never the problem
 - Walk the full SDLC and land findings, area by area, into the [Problem Space](/AI%20SDLC/03%20Problem%20Space/)
+- Surface and validate [[CLIENT_NAME]]'s [Goals](/AI%20SDLC/01%20Process/02%20Goals.md) alongside Problems — the same sessions, not a separate leadership intake
 - Surface the governance and measurement prerequisites for a credible pilot
 - Produce a prioritised problem ranking and an agreed pilot candidate grounded in evidence from the workshops
 

@@ -66,6 +66,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 5. If an AI assistant could draft a refinement agenda, pre-answer common questions, and flag missing information before the session started — what would change about how the meeting runs?
 6. What would a team need to believe about AI outputs before trusting them as input into a planning session?
 7. When a retrospective surfaces a real lesson, where does it actually go — does it reach other squads or the next project, or stay within this team?
+8. What tool tracks ceremony outputs — action items, decisions, refinement notes (Jira, Confluence, Miro, meeting notes doc)?
 
 ---
 
@@ -74,5 +75,6 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 Capture and record:
 
 - Pain points surfaced — candidates for [DevOps & Pipeline](/AI%20SDLC/03%20Problem%20Space/04%20DevOps%20%26%20Pipeline) and [Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead)
+- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

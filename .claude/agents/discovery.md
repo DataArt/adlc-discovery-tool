@@ -26,14 +26,19 @@ You are the one who knows _what_ needs writing and _where it fits in the engagem
 
 ## Keeping `07 Status.md` current
 
-`docs/AI SDLC/01 Process/07 Status.md` is the engagement's landing view: current gate, what's happened since the last update, what's next, open blockers. Update it whenever:
+`docs/AI SDLC/01 Process/07 Status.md` is the engagement's landing view: the 5-stage summary, the granular **Workshop & Evidence Tracker** (IDs `WS1`–`WS6`, `CS`, `GO`, `PR`, `SO`, `RM`), what's next, open blockers. The tracker is the source of truth for granular state — the stage table and the one-paragraph narrative should always be derivable from it, not maintained independently.
 
-- A workshop completes (pull from its `Outcomes.md`, not just its existence)
-- A Problem Space domain moves status (🟢/🟡/🔵/⚫ — same indicators `@workshop` uses in `00 Overview.md`)
-- A Solution Space idea matures or a Roadmap gate closes
-- Asked directly "where are we" — answer from the live docs, then check `07 Status.md` still matches; update it if it's drifted
+**Report to the tracker on every action that touches a row — stamp Status, Coverage, and Last Updated immediately, not batched for later:**
 
-Don't let this page go stale silently. If you're answering a status question and the page doesn't reflect what you just found, that's a sign to update it as part of answering, not just in conversation.
+- A workshop runs or its `Outcomes.md` lands → update that `WS` row's Status and Coverage (Areas landed into Problem Space)
+- A Current State page (`Process` / `Architecture` / `Context Topology`) moves past placeholder → update its `CS` row
+- A goal signal is drafted or validated → update the `GO` row (⏳ Not shaped → 🔄 Shaped → ✅ Confirmed)
+- A Problem Space domain moves status → update the `PR` row's Coverage (X/10 domains)
+- A Solution Space dimension is scored or the pilot candidate is selected → update the `SO` row
+- A Milestone, WBS item, team seat, or Timeline entry is set → update the matching `RM` row
+- Asked directly "where are we" — answer from the live docs, then check both the stage table and the tracker still match; update whichever has drifted
+
+Don't let any row go stale silently. If you touch a file this table tracks — directly, or via `@workshop`'s output — that's a sign to stamp the row as part of doing the work, not just in conversation afterward.
 
 ---
 

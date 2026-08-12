@@ -5,7 +5,7 @@
 Goals are agreed before diagnosing anything. They define the desired end state the organisation is trying to reach — not outputs or deliverables, but the conditions that would tell us the engagement succeeded.
 
 > [!WARNING] Populated During Engagement
-> [[CLIENT_NAME]]'s actual, prioritised goals are agreed during discovery workshops and recorded below. The **Common Goals** below are a starting menu for that session, not [[CLIENT_NAME]]'s goals — don't treat them as pre-agreed.
+> [[CLIENT_NAME]]'s actual, prioritised goals surface the same way Problems do — through the [Establish the Vision](./01%20Overview.md#-vision-establish-the-vision) workshop loop ([02 Vision](/AI%20SDLC/02%20Vision/)), not a separate leadership-only intake. Each workshop's closing captures goal signals alongside pain points; they're drafted and validated with stakeholders here as the picture holds steady. The **Common Goals** below are a starting menu for that conversation, not [[CLIENT_NAME]]'s goals — don't treat them as pre-agreed.
 
 ---
 

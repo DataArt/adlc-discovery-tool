@@ -10,13 +10,13 @@
 ## Scale the Workload to Product Context
 
 - Extend the pilot's workload from its original squad to the wider product it belongs to — the same pattern, not a new one, applied to more of the estate.
-- Note any hard deadlines (e.g. planned team expansions) that bound how far Scale can responsibly extend before [Evolve](./04%20Evolve.md) needs to be in place.
+- Note any hard deadlines (e.g. planned team expansions) that bound how far Scale can responsibly extend before [Evolve](./05%20Evolve.md) needs to be in place.
 - Keep both engineering and business/process stakeholders in the loop as scope grows — the pilot's success criteria need re-validating in business terms as the audience widens, not assumed to still hold.
 
 ## Wire Governance Control (Product → Project)
 
 - The pilot's lightweight, workload-scoped guardrails need a decision-rights layer above them once more than one project is involved — who owns scope-change sign-off and exceptions at the product level, not just the project level.
-- Data classification agreed for the pilot's scope in [Pilot](./02%20Pilot.md) gets applied consistently as more projects and teams fall under it, rather than re-derived per project. See [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance).
+- Data classification agreed for the pilot's scope in [Pilot](./03%20Pilot.md) gets applied consistently as more projects and teams fall under it, rather than re-derived per project. See [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance).
 
 ## Set Up a Wider Knowledge Base
 

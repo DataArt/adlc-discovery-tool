@@ -49,6 +49,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. What data is available right now that could form a baseline with minimal instrumentation?
 5. What would a credible "before" picture look like — what would need to move for the pilot to be declared a success?
 6. Who would own the measurement baseline and reporting cadence during the pilot?
+7. Which specific tool(s) currently hold this data at the finest granularity available (Jira, GitHub/GitLab, CI/CD dashboards, spreadsheets)?
 
 ---
 
@@ -74,6 +75,7 @@ _Requires Compliance/Security and Finance attendance._
 4. If an AI agent needed read access to source code, tickets, and internal documentation today — who would approve that, and how long would it take?
 5. What is the minimum governance framework that would let a pilot start within a defined runway?
 6. Who should own ongoing AI governance after the pilot starts?
+7. Which AI tools or vendors are currently approved, piloted, or in unofficial use across the organisation?
 
 ### Survey — Token Controls & Consumption
 
@@ -91,6 +93,7 @@ _Requires Compliance/Security and Finance attendance._
 Capture and record:
 
 - Pain points surfaced — candidates for [Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement) and [Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance)
+- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each
 - Pilot candidate synthesis now happens in [WS 6 — Product & Projects](../WS%206%20%28Product%20%26%20Projects%29%20-%20Date%20TBD/Agenda.md); this session's job is to leave clean, validated findings for it to draw on

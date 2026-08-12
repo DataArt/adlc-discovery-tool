@@ -45,6 +45,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. How long does a typical story take to go from "idea" to "ready for dev" (calendar days, not effort hours)?
 5. Which part of that journey could AI shorten the most, and what would it need to know to do that?
 6. What would "good enough" look like — the minimum story quality that lets a developer start with confidence?
+7. What specific tool holds requirements and stories today (Jira, Azure DevOps, Trello, spreadsheets)? Is it the same tool across every team, or does it vary?
 
 ---
 
@@ -67,6 +68,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. How do developers currently consume design outputs? What is most often lost in translation?
 5. Has the team experimented with AI-assisted design (plugins, generative UI, prompt-to-wireframe)? What was the outcome?
 6. If AI could draft a first-pass design from a brief, what would need to be true about that output for it to be useful rather than noise?
+7. What specific tool(s) does design work happen and get handed off in today (Figma, Sketch, Zeplin, static specs)?
 
 ---
 
@@ -75,5 +77,6 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 Capture and record:
 
 - Pain points surfaced — candidates for [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories) and [Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX)
+- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

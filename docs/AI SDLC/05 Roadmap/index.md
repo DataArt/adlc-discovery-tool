@@ -6,6 +6,8 @@ The engagement's phased delivery plan — scope, phases, timelines, and team com
 
 [01 Overview](./01%20Overview.md) is the current picture, built from what's already agreed with [[CLIENT_NAME]] at Gate 0.1. It's a draft: Elaboration and Product Development scope, timelines, and team composition firm up as Solution Design gates close, and this page updates alongside them.
 
-| Page                              | Holds                                          |
-| --------------------------------- | ---------------------------------------------- |
-| [01 Overview](./01%20Overview.md) | Scope, phases, timelines, and team composition |
+| Page                              | Holds                                                            |
+| --------------------------------- | ---------------------------------------------------------------- |
+| [01 Overview](./01%20Overview.md) | Scope, phases, timelines, and team composition                   |
+| [02 WBS](./02%20WBS.md)           | Milestones decomposed into scoped, sized work items              |
+| [03 Timeline](./03%20Timeline.md) | Gantt-level schedule — WBS sequenced against milestones and team |

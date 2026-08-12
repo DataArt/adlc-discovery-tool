@@ -27,7 +27,7 @@
 ## Educate the Team
 
 - The team running the pilot needs to understand the new process, not just be handed new tools — pairing or embedded support during the pilot, not a one-off training session.
-- Capture what's learned as the pilot runs, not only at the end — this is what [Evolve](./04%20Evolve.md) feeds on.
+- Capture what's learned as the pilot runs, not only at the end — this is what [Evolve](./05%20Evolve.md) feeds on.
 
 ## Open Questions
 

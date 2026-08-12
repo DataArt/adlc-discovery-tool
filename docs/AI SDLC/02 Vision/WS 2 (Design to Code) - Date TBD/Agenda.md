@@ -45,6 +45,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 4. How often does an impact analysis miss a dependency that surfaces later as a bug or incident?
 5. Who is responsible for keeping service maps and architectural diagrams current?
 6. What is the rough split of a developer's time on a typical ticket: impact analysis vs design vs coding vs testing?
+7. Which specific tool holds architecture diagrams and service maps today (Confluence, Backstage, draw.io, Lucidchart, a repo README)?
 
 ---
 
@@ -76,5 +77,6 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 Capture and record:
 
 - Pain points surfaced — candidates for [Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design) and [Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation)
+- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

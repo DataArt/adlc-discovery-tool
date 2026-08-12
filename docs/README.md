@@ -20,7 +20,7 @@ Navigation index for this repository's documentation.
 
 ## Context
 
-→ [Context — Overview](Context/index.md) — why [[CLIENT_NAME]]'s platform exists: the story, the competitive landscape, the problem statement, and the settled solution framing
+→ [Context — Overview](Context/index.md) — why [[CLIENT_NAME]]'s platform exists: the story, the competitive landscape, the common challenges, and the end-to-end loop they add up to
 
 ---
 

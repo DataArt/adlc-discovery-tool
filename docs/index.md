@@ -28,13 +28,12 @@ hero:
       link: /AI SDLC/05 Roadmap/01 Overview
 
 features:
-  - title: Context
+  - title: The Story
     details: >
-      The most common failure mode in AI-assisted delivery: project context
-      that isn't kept anywhere durable — it lives in Slack threads and
-      people's heads, and resets every session. Why it happens, and what it
-      costs.
-    link: /Context/
+      Why AI-assisted delivery breaks down industry-wide — context that
+      never gets kept, diagnosed against ten concrete failure patterns —
+      and the human/AI balance and mindset shift ADLC wires in to fix it.
+    link: /The%20Story/
   - title: Engineering Guide (Harness)
     details: >
       The scalable fix for the Context problem — conventions, lifecycles, and

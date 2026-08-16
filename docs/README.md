@@ -18,9 +18,9 @@ Navigation index for this repository's documentation.
 
 ---
 
-## Context
+## The Story
 
-→ [Context — Overview](Context/index.md) — why [[CLIENT_NAME]]'s platform exists: the story, the competitive landscape, the common challenges, and the end-to-end loop they add up to
+→ [The Story — Overview](The%20Story/index.md) — why [[CLIENT_NAME]]'s platform exists: the story, the common challenges, and the target agentic SDLC setup they add up to
 
 ---
 

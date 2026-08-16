@@ -1,5 +1,7 @@
 # The Context Landscape
 
+> The story of how to build mature product context: which layers already exist somewhere in every organisation, and the one layer that has to be built deliberately because nobody owns it by default.
+
 Every layer of context already exists somewhere. Business goals are set. Technical standards are
 governed. Integration contracts are negotiated. Workload is built.
 
@@ -15,9 +17,10 @@ The integration context between projects is negotiated and documented. What is r
 the **Project Context**: the live, current, non-contradictory record of what was decided, what was
 built, and how this project works. That is exactly what the harness generates and maintains.
 
-The five problems that follow all live at the project level. The harness addresses each one directly
-— not by adding more process, but by making the right context a first-class output of the work
-itself.
+Maturity means closing that one gap deliberately, not assuming it closes itself — by making the
+right context a first-class output of the work, not by adding more process. [The Challenges](./03%20Challenges.md)
+diagnoses exactly where each layer stands against this map today — which of the ten patterns are
+live, and at which layer.
 
 ---
 
@@ -54,5 +57,5 @@ questions — and confusing one for another leads to confident wrong turns.
 | City    | How do we approach it? What are the main constraints? | Technical · Integration Context |
 | Street  | What is the exact move to make right now?             | **Project Context**             |
 
-> An AI without Project Context is a navigator handed only the country map. It knows the
-> destination. It will drive confidently — and miss the turn.
+> Country and city maps are worth having — but neither one is the street-level map. Hand an AI
+> only the layers above the project, and it still has to guess the turn.

@@ -1,4 +1,6 @@
-# The Story
+# Software Development Lifecycle
+
+The why behind [[CLIENT_NAME]]'s platform: the industry-wide story, and what ADLC — the engagement telling this story — does about it.
 
 ---
 
@@ -162,34 +164,3 @@ against the HLD and writes the LLD — the record of what was actually built. `/
 the two at any point. The gap is delivery debt, made visible on demand rather than discovered in a
 crisis. Because HLD and LLD always reflect current state, the AI can reconstruct the full picture of
 the project in any session, on any stack, for any team member.
-
----
-
-## 7. How It Works
-
-> Bootstrap once, the project owns it. Every session starts from the same baseline. Every lesson
-> feeds back into the next project.
-
-```mermaid
-
-flowchart TB
-    B[Bootstrap\nQ1-Q11] --> F[Flows\n/design /dev /war\n/where-we-are]
-    B --> A["Agents\n@web @bff @infra @db"]
-    B --> D[Docs\nCLAUDE.md HLD\nEngineering Guide]
-    style B fill: #E67E22, color: #fff, stroke: none
-    style F fill: #4A90E2, color: #fff, stroke: none
-    style A fill: #2C3E50, color: #fff, stroke: none
-    style D fill: #27AE60, color: #fff, stroke: none
-
-```
-
-The harness is bootstrapped once from a generic template — a ~2 hour session that generates
-project-specific skills, specialist agents, a root context file, an Engineering Guide, and a seeded
-architecture backbone. From that point, every session reloads the same structured baseline. Every
-lifecycle phase has a slash command. Every phase has a human approval gate before consequential
-actions are taken. Nothing is ad-hoc.
-
-Specialist agents (`@web`, `@bff`, `@infra`, `@db`) see only their container — no noise from the
-rest of the stack. The skill lifecycle captures friction from real delivery, validates it on real
-tickets, and ships it back into the bootstrap so the next project starts with accumulated learnings
-already built in. The platform compounds with every project that runs it.

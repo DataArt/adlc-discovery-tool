@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** What minimum documentation standard makes agentic impact analysis viable, and who maintains it?
 
-**Diagnoses:** [Challenge — The Drift](/Context/02%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/Context/02%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design.md)
+**Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/The%20Story/03%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design.md)
 
 **Baseline:** [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
@@ -53,7 +53,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** Where has AI already been applied to the coding step itself, and why hasn't that translated into faster overall delivery?
 
-**Diagnoses:** [Challenge — Vendor Lock-In](/Context/02%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation.md)
+**Diagnoses:** [Challenge — Vendor Lock-In](/The%20Story/03%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
 

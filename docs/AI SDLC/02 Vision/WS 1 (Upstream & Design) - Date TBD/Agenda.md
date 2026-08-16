@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** Which requirement artefacts, if AI-drafted well, would remove the most downstream rework?
 
-**Diagnoses:** [Challenge — The Uneven Depth](/Context/02%20Challenges.md#the-uneven-depth) · [Problem Space — Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories.md)
+**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
@@ -53,7 +53,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** How much elapsed time sits in design and handoff per feature, and what proportion is genuinely creative vs waiting or translation?
 
-**Diagnoses:** [Challenge — The Uneven Depth](/Context/02%20Challenges.md#the-uneven-depth) · [Problem Space — Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX.md)
+**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 

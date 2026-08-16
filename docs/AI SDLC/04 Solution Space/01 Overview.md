@@ -14,7 +14,7 @@ This is about the solution itself — what gets built and rolled out for [[CLIEN
 This engagement pivots the mantra into a closed loop, not a one-shot sequence: Think Big sets the ambition behind the whole solution, Start Small becomes Pilot, Scale Fast becomes Scale — and [Evolve](./05%20Evolve.md) closes the loop, feeding what's learned back into the next Think Big.
 
 ```mermaid
-flowchart LR
+flowchart TB
     T["Target State\nWhat does the end state actually look like for [[CLIENT_NAME]]?"]
     F["Pilot\nWhat's the one thing we prove first, and how?"]
     SC["Scale\nHow does the proven pattern extend beyond the pilot?"]

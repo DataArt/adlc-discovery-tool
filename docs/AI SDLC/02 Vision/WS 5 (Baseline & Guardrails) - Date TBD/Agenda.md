@@ -34,7 +34,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** What is the smallest credible measurement baseline that can stand up before the pilot starts?
 
-**Diagnoses:** [Challenge — The Attribution Gap](/Context/02%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md)
+**Diagnoses:** [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
@@ -59,7 +59,7 @@ _Requires Compliance/Security and Finance attendance._
 
 > **Key question:** What is the minimum viable governance — covering data exposure, IP, and token spend — that protects the organisation without stalling the pilot?
 
-**Diagnoses:** [Challenge — The Governance Gap](/Context/02%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/Context/02%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md)
+**Diagnoses:** [Challenge — The Governance Gap](/The%20Story/03%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md)
 
 **Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 

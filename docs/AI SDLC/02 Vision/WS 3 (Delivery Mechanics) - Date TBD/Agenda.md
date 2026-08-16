@@ -50,7 +50,7 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 
 > **Key question:** If requirements and impact analysis arrived pre-drafted and trustworthy, what would refinement and planning look like?
 
-**Diagnoses:** [Challenge — No Feedback Loop](/Context/02%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead.md)
+**Diagnoses:** [Challenge — No Feedback Loop](/The%20Story/03%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 

@@ -88,7 +88,7 @@ flowchart LR
     style VisionStage fill:#FFFBEB,stroke:#B45309,color:#B45309
 ```
 
-Each [workshop topic](/AI%20SDLC/02%20Vision/) carries two tags — **Baseline** (which Current State page it fills) and **Diagnoses** (which [Context Challenge](/Context/02%20Challenges.md) and Problem Space domain it validates) — plus goal signals surfaced the same way, captured in every workshop's closing rather than a separate leadership-only track. Workshops shape Current State directly and surface Goals directly; Current State in turn is the evidence Problems are diagnosed from. Solution is not derived from Problems alone — it's **Problems + Goals**: a diagnosed root cause without an agreed Goal has no priority, and a Goal without a diagnosed Problem behind it has no evidence it's the right thing to solve. Both have to hold before a Solution element earns a place in the coverage matrix.
+Each [workshop topic](/AI%20SDLC/02%20Vision/) carries two tags — **Baseline** (which Current State page it fills) and **Diagnoses** (which [Context Challenge](/The%20Story/03%20Challenges.md) and Problem Space domain it validates) — plus goal signals surfaced the same way, captured in every workshop's closing rather than a separate leadership-only track. Workshops shape Current State directly and surface Goals directly; Current State in turn is the evidence Problems are diagnosed from. Solution is not derived from Problems alone — it's **Problems + Goals**: a diagnosed root cause without an agreed Goal has no priority, and a Goal without a diagnosed Problem behind it has no evidence it's the right thing to solve. Both have to hold before a Solution element earns a place in the coverage matrix.
 
 ---
 
@@ -153,7 +153,7 @@ Options evaluated against diagnosed problems, structured as a Pilot → Scale �
 
 1. **Define the pilot workload** — which project, which process slice, which context scope proves the hypothesis first.
 2. **Define the topology** — the context layers, repo structure, and process wiring the pilot needs.
-3. **Define the context and bootstrap** — at project, product, and organisation scale, per the [Target Agentic SDLC Setup](/Context/03%20Target%20Agentic%20SDLC%20Setup.md).
+3. **Define the context and bootstrap** — at project, product, and organisation scale, per the [Target Agentic SDLC Setup](/The%20Story/05%20Target%20Agentic%20SDLC%20Setup.md).
 4. **Define the wiring** — process ↔ context ↔ code: the actual mechanism (skills, agents, lifecycles) that keeps all three in sync once the pilot runs.
 5. **Build the coverage matrix** — every agreed Goal and every diagnosed Problem mapped to the solution element(s) that address it. Nothing proposed here should be unaccounted for on either axis.
 

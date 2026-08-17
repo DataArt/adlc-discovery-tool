@@ -22,7 +22,7 @@ docs/
 | **Stories**                   | Transient — delivery process | What did we decide, why, and what was built?                       | No limit — archived after completion |
 
 → For how docs are produced and graduate to their permanent tier, see `Lifecycles/05 Documents Flow.md`.  
-→ For the certainty principle (HLD/LLD contain only settled outcomes), see `09 Documentation Principles.md`.
+→ For the certainty principle (HLD/LLD contain only settled outcomes), see `{{DOC_PRINCIPLES_ARTICLE}}`.
 
 ---
 

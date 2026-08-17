@@ -67,6 +67,6 @@ The following work regardless of tool — they are file-system conventions, not 
 
 - The `docs/` four-tier structure (HLD / LLD / Engineering Guide / Stories)
 - The certainty principle
-- The `09 Documentation Principles.md` doc-type cheat sheet
+- The `Documentation Principles` article
 - `AGENTS.md` as root context
 - Skill files in `.harness-bootstrap/skills/` (SKILL.md format is now cross-tool standard)

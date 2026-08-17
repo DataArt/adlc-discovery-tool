@@ -1,5 +1,7 @@
 ---
 name: skill-reflect
+metadata:
+  version: 0.3.1
 description: >
   Post-task debrief (/skill-reflect or "reflect on this", "capture what I learned").
   Also trigger when /dev-document ends with the reflection prompt.

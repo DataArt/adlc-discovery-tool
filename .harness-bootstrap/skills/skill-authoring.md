@@ -24,10 +24,25 @@ Rules for writing and structuring Claude Code skills in this project. Read befor
 
 ### Patterns — shared multi-step protocols
 
-10. When the same multi-step protocol appears in 3 or more workflow skills, extract it into a `pattern-<name>.md` file. Co-locate it with the skills that use it (e.g. `.claude/skills/dev/pattern-review-gate.md` for dev-flow patterns). Do **not** register pattern files in `CLAUDE.md` — they are loaded on-demand via explicit references, not at session start.
+10. When the same multi-step protocol appears in 3 or more workflow skills, extract it into a `pattern-<name>.md` file. Co-locate it with the skills that use them (e.g. `.claude/skills/dev/pattern-review-gate.md` for dev-flow patterns). Do **not** register pattern files in `CLAUDE.md` — they are loaded on-demand via explicit references, not at session start.
 11. Each workflow skill that uses a pattern must include an explicit path reference at the point of use: `"Apply the X pattern — read `.claude/skills/dev/pattern-X.md`."` This is what triggers Claude to read it mid-execution. A name-only reference is not enough.
 12. Pattern files define the rule text once. Workflow skills own only the trigger condition (when to apply) and any local overrides (e.g. section name, tri-choice options). Never repeat the rule body in the workflow skill.
 13. When a pattern evolves, update the pattern file only. Workflow skills need to change only if their trigger condition or override changes — not because the rule text changed.
+
+### Bootstrap template versioning
+
+14. Every `.harness-bootstrap/skills/{name}/TEMPLATE.md` carries a semver in its frontmatter:
+    ```yaml
+    name: { name }
+    metadata:
+      version: 0.3.1
+    description: ...
+    ```
+15. Bump this version on every `/skill-harvest` write to that `TEMPLATE.md` — never leave it unchanged:
+    - **patch** (`X.Y.Z+1`) — wording, clarification, typo fixes; no behavior change
+    - **minor** (`X.Y+1.0`) — new steps, new sections, new optional behavior; backward compatible with existing deployments
+    - **major** (`X+1.0.0`) — renamed/removed frontmatter keys or `{{}}` placeholders, restructured steps that change what a deployed skill does
+16. This field is bootstrap-only. Do not add `metadata`/`version` to the live `.claude/skills/{name}/SKILL.md` files — those are the deployed source of truth for a specific project, not the generic, re-deployable template.
 
 ## Why
 

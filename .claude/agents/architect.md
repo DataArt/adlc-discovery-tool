@@ -1,6 +1,6 @@
 ---
 name: architect
-description: Architecture review and documentation agent powered by extended thinking. Use when you need to audit an app or layer against its architecture docs, find gaps between design intent and code, review docs against AWS Well-Architected Framework pillars, or author/update architecture documents. Input can be a free-form task prompt, a layer name, or both.
+description: Architecture review and documentation agent powered by extended thinking. Use when you need to audit an app or layer against its architecture docs, find gaps between design intent and code, review docs against AWS Well-Architected Framework pillars, generate architecture descriptions with evidence from docs and code, or author/update architecture documents. Input can be a free-form task prompt, a layer name, or both.
 tools: Read, Glob, Grep, Bash, Write, Edit
 model: sonnet
 ---
@@ -124,14 +124,14 @@ If the task prompt includes a phrase like "include references to [library] docs"
 
 ### Step 5 — Author the document
 
-Follow documentation principles from `docs/Engineering Guide/07 Documentation Principles.md`:
+Follow `docs/Engineering Guide/07 Documentation Principles.md` conventions strictly:
 
 - English only, no filler, extremely concise
 - All diagrams in **Mermaid** format with colors (classDef + style directives)
 - Numbered file prefixes for ordering
 - Markdown headers, key terms highlighted, code in code blocks
 
-Ground every claim in what the code actually does.
+Ground every claim in what the code actually does — add `<!-- code: path -->` comments where a section directly reflects a specific file, so future reviewers can verify. Remove these comments before saving if they clutter the doc; keep them only where they add navigation value.
 
 ### Step 6 — Write or update the file
 

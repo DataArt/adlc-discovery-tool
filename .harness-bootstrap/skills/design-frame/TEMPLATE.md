@@ -1,6 +1,8 @@
 ---
 name: design-frame
-description: Frame phase of the design lifecycle (/design-frame or /design orchestrator). Fetches Jira context, proposes ACs, produces design/00 Frame.md.
+metadata:
+  version: 2.0.0
+description: Frame phase of the design lifecycle (/design-frame or /design orchestrator). Frames the problem and boundaries, proposes ACs, produces design/00 Frame.md.
 ---
 
 The developer wants to run the Frame phase of a design session. Here is their input:
@@ -15,7 +17,7 @@ The developer wants to run the Frame phase of a design session. Here is their in
 
 > 🔁 **Session continuity** (`.claude/skills/design/pattern-session-continuity.md`): If resuming after context compaction, re-read this full SKILL.md before doing anything. When this phase is complete, re-read `.claude/skills/design/SKILL.md` and resume the orchestrator from the next phase.
 
-Frame is Phase 1 of the design lifecycle. It frames the problem, frames the requirements (evaluation criteria for Elaborate), and frames the boundaries — before any research begins. Output: `design/00 Frame.md`.
+Frame is Phase 1 of the design lifecycle. It frames the problem, frames the requirements (evaluation criteria for Elaborate), and frames the boundaries before any research begins. Output: `design/00 Frame.md`.
 
 ---
 
@@ -24,58 +26,53 @@ Frame is Phase 1 of the design lifecycle. It frames the problem, frames the requ
 The argument is a ticket number (e.g. `{{PROJECT_KEY}}-042`) or a direct folder path.
 
 - If a ticket number: glob for `docs/Stories/*{TICKET}*/**` — use `*{TICKET}*` wildcard (never `[{TICKET}]*`). On a fresh start no files exist yet, so the glob will return nothing — proceed directly to creating the folder.
-- If not found: create the folder:
+- If not found: ask the developer for a short title, then create the folder:
+
   ```
   docs/Stories/[{TICKET}] {name}/
       design/
   ```
-  Where `{name}` is derived from the Jira ticket summary (fetched in Step 2).
+
+  > "What is the short title for this design ticket? (e.g. 'Context Topology Mapping', 'Data Platform Integration Contract')"
+
+  **Stop and wait.** Use the provided title as `{name}`.
+
 - If `design/Report.md` exists, read it to restore session context.
 
 ---
 
-## Step 1b — Feature branch check
+## Step 2 — Feature branch check
 
 Before writing any files, confirm the developer is on the correct feature branch:
 
-> "You're currently on branch `{current-branch}`. Should I help you create a feature branch first (e.g. `feat/{ticket-lowercase}-{slug}`)? (**yes** / **skip**)"
+> "You're currently on branch `{current-branch}`. Should I suggest a feature branch name first (e.g. `docs/{ticket-lowercase}-{slug}`)? (**yes** / **skip**)"
 
 **Stop and wait for confirmation.** Do not write any files until the developer confirms or skips.
 
----
+`git checkout -b` is a guarded command — same class as `git commit` / `git push`. Even after the developer says "yes," never run it yourself (including any prep like resolving uncommitted changes). Present the exact command as an instruction for the developer to run:
 
-## Step 2 — Jira setup
+> "Run this yourself: `git checkout -b docs/{ticket-lowercase}-{slug}`"
 
-Present to the developer:
-
-> "I'll assign {TICKET} to you and move it to **In Progress**. Confirm? (**yes** / **skip**)"
-
-**Stop and wait.**
-
-If confirmed:
-
-Invoke `@scrum-master`:
-
-> "Start {TICKET}: assign to the authenticated user and transition to In Progress."
-
-Once `@scrum-master` confirms, invoke `@scrum-master` again:
-
-> "Fetch {TICKET}: return summary, description, acceptance criteria, linked {{PROJECT_KEY}} tickets, and any Confluence page URLs."
-
-Then fetch each linked Confluence page directly and extract relevant content.
+Wait for the developer to confirm they've created the branch before proceeding.
 
 ---
 
-## Step 3 — Write 00 Frame.md
+## Step 3 — Resolve design context
 
-Using `.claude/skills/design/frame-template.md`, write `design/00 Frame.md`:
+{{DESIGN_CONTEXT_STEP}}
 
-**Problem** — one paragraph from the ticket description: what is broken or missing, and why it matters now.
+---
+
+## Step 4 — Write 00 Frame.md
+
+Using `.claude/skills/design/frame-template.md`, write `design/00 Frame.md`. Pull context from the sources identified in Step 3.
+
+**Problem** — one paragraph from the ticket description (or `$ARGUMENTS`): what is broken or missing, and why it matters now.
 
 **Requirements** — two sub-sections:
 
 - _Known_ — acceptance criteria and requirements stated in the ticket (verbatim, cleaned up)
-- _Proposed_ — requirements the developer didn't think of. Look for gaps: missing edge cases, non-functional requirements (performance, security, GDPR), operational concerns (observability, rollback), and future-proofing constraints implied by the architecture. Propose 2–4 additions. Label each `[proposed]` so the developer can accept or reject.
+- _Proposed_ — requirements the developer didn't think of. Look for gaps: missing edge cases, non-functional requirements (performance, security, GDPR), operational concerns (observability, rollback), and future-proofing constraints implied by the architecture or engagement context. Propose 2–4 additions. Label each `[proposed]` so the developer can accept or reject.
 
 These requirements become the evaluation criteria rows in the Requirements × Options matrix during Elaborate.
 
@@ -84,20 +81,20 @@ These requirements become the evaluation criteria rows in the Requirements × Op
 - _In scope_ — what this design covers
 - _Out of scope_ — what is explicitly excluded (derive from ticket; add obvious exclusions if missing)
 
-**Constraints** — known deadlines, linked issues, Confluence pages, regulatory requirements, architectural constraints from the HLD that directly bound this decision.
+**Constraints** — known deadlines, linked tickets, regulatory requirements, product or architectural constraints that directly bound this decision.
 
 **Sizing** _(optional — include only when the ticket warrants capacity planning)_
 
 - Expected users / MAU
 - Request volume
 - Data volume
-- Relevant NFR targets (from the active version of `docs/Target Architecture (HLD)/{ACTIVE_VERSION}/Non-Functional Concerns/Requirements.md` — read `docs/Target Architecture (HLD)/README.md` first to find the active version)
+- Relevant NFR targets (from the resolved design context or stakeholder requirements)
 
 **Links**
 
-- Jira: `<TICKET URL>`
-- Related issues: `<linked Jira tickets>`
-- Confluence: `<linked pages>`
+- Ticket: `{{PROJECT_KEY}}-{number}` (Jira)
+- Related tickets: `<any linked {{PROJECT_KEY}} tickets if any>`
+- Reference docs: `<any {{DESIGN_DOCS_ROOT}} docs referenced>`
 
 Write `design/00 Frame.md` to disk.
 
@@ -107,20 +104,15 @@ Apply the write-confirm pattern (`.claude/skills/design/pattern-write-confirm.md
 
 ---
 
-## Step 4 — Reiterate paths
+## Step 5 — Reiterate paths
 
 If the developer raises a concern:
 
-- Source data wrong (ticket summary, linked issues, Confluence) → "Reiterate from Step 2 — re-fetch Jira with corrected scope."
-- Problem framing wrong → "Reiterate from Step 3 — re-draft the Problem and Boundaries sections."
+- Source data wrong (problem description, linked docs) → "Reiterate from Step 4 — re-draft the Problem and Boundaries sections."
+- Problem framing wrong → "Reiterate from Step 4 — re-draft the Problem and Boundaries sections."
+- Target subfolder or design context wrong → "Reiterate from Step 3 — re-resolve context and re-prime."
 
 `00 Frame.md` is the single source of ticket context for all subsequent phases. It is not modified again unless the developer explicitly requests a correction.
-
----
-
-## Step 5 — (no-op)
-
-`00 Frame.md` was written and confirmed in Steps 3–4. Proceed to Step 6.
 
 ---
 
@@ -130,13 +122,12 @@ Apply the do→report→commit pattern (`.claude/skills/design/pattern-do-report
 
 **Report** — update `design/Report.md`:
 
-- If it does not exist, create it using `.claude/skills/design/report-template.md`. Fill in: Ticket, Status (`🔄 In Progress`).
-- Phase tracker: `📋 Frame ✅ · 🔍 Research 🔄 · 🏗 Elaborate ⏳ · 📦 Solution ⏳ · 📤 Publish ⏳`
-- Append to Efforts table: `| {YYYY-MM-DD} | Frame | Fetched {TICKET}, {N} known requirements, {M} proposed requirements accepted |`
+- Phase tracker: `📋 Frame ✅ · 🔍 Research 🔄 · 🏗 Elaborate ⏳ · 📦 Solution ⏳ · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳`
+- Append to Efforts table: `| {YYYY-MM-DD} | Frame | Context: {subfolder}; {N} known requirements, {M} proposed requirements accepted |`
 
 **Commit** — suggest:
 
-> `docs({TICKET}): frame — <short title from Jira summary>`
+> `docs({TICKET}): frame — <short title>`
 
 **Stop and wait** for the developer to confirm the commit.
 

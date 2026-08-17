@@ -1,5 +1,7 @@
 ---
 name: skill-lifecycle
+metadata:
+  version: 0.3.1
 description: Skill lifecycle reference (reflect → triage → new → promote → harvest). Not invoked directly — loaded on demand.
 ---
 

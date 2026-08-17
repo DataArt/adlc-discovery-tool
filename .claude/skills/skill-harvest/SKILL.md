@@ -1,5 +1,7 @@
 ---
 name: skill-harvest
+metadata:
+  version: 0.3.1
 description: >
   Sync a modified skill or agent back to .harness-bootstrap/ templates (/skill-harvest).
   Replaces project-specific values with {{}} placeholders, presents a diff for confirmation,
@@ -18,7 +20,29 @@ The developer wants to sync a modified project skill or agent back to the harnes
 
 ## Overview
 
-This skill keeps `.harness-bootstrap/skills/` in sync with the project's `.claude/skills/` and `.claude/agents/`. When a skill or agent changes in the project, the corresponding bootstrap TEMPLATE.md (generic, with `{{}}` placeholders) and INTENT.md (how to parametrize) must reflect the change.
+This skill ports improvements made in `.claude/` back into `.harness-bootstrap/` so they can be deployed to future projects. The project's `.claude/` files are always the source of truth; the bootstrap holds the generic, parametrized form.
+
+```mermaid
+flowchart LR
+    A["Project source of truth<br/>.claude/skills/{name}/SKILL.md<br/>.claude/agents/{name}.md"]
+    B["skill-harvest<br/>generalize + parametrize"]
+    C["Bootstrap templates<br/>.harness-bootstrap/skills/{name}/TEMPLATE.md + INTENT.md<br/>.harness-bootstrap/agents/{name}/TEMPLATE.md + INTENT.md"]
+    D["New project .claude/<br/>deployed during bootstrap"]
+
+    A -->|"1. Read"| B
+    B -->|"2. Replace project-specific values with {{}} placeholders"| C
+    C -->|"3. Bootstrap deploys to new project"| D
+
+    classDef source fill:#2563eb,stroke:#1e40af,color:#fff
+    classDef skill fill:#7c3aed,stroke:#5b21b6,color:#fff
+    classDef output fill:#059669,stroke:#047857,color:#fff
+    classDef deploy fill:#d97706,stroke:#b45309,color:#fff
+
+    class A source
+    class B skill
+    class C output
+    class D deploy
+```
 
 The rule: **project `.claude/` files are the source of truth for what the skill does; bootstrap files are the generic form that can be re-deployed to any project.**
 
@@ -96,6 +120,20 @@ Identify what changed between the current project file and the existing TEMPLATE
 
 ---
 
+## Step 3c — Determine the version bump
+
+Apply the bootstrap template versioning rule — read `.claude/skills/skill-authoring.md` (rules 14–16, "Bootstrap template versioning").
+
+Classify the aggregate of this harvest's changes and compute the new `metadata.version` for `TEMPLATE.md`'s frontmatter:
+
+- **patch** — wording, clarification, typo fixes; no behavior change
+- **minor** — new steps, new sections, new optional behavior; backward compatible
+- **major** — renamed/removed frontmatter keys or `{{}}` placeholders, restructured steps that change what a deployed skill does
+
+If `TEMPLATE.md` has no `metadata.version` yet (new skill, or predates this rule), start at `0.1.0`.
+
+---
+
 ## Step 4 — Present proposed changes for confirmation
 
 **Do not write any file yet.**
@@ -103,6 +141,8 @@ Identify what changed between the current project file and the existing TEMPLATE
 Present the proposed changes as a clear diff:
 
 > "Here are the proposed updates to `.harness-bootstrap/skills/{name}/`:
+>
+> **Version bump:** `<old version> → <new version>` (<patch|minor|major> — see `.claude/skills/skill-authoring.md`)
 >
 > **TEMPLATE.md changes:**
 >
@@ -126,7 +166,7 @@ Present the proposed changes as a clear diff:
 
 After the developer confirms:
 
-1. Write the updated `.harness-bootstrap/skills/{name}/TEMPLATE.md`
+1. Write the updated `.harness-bootstrap/skills/{name}/TEMPLATE.md`, including the bumped `metadata.version` from Step 3c
 2. Write the updated `.harness-bootstrap/skills/{name}/INTENT.md`
 
 For the **deletion case** (project file was deleted and developer confirmed):

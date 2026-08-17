@@ -1,6 +1,6 @@
 # Update recipe
 
-> 🔁 **Session continuity:** If resuming after context compaction, re-read this full `02 Update.md` before doing anything. Determine which stage was last completed from the audit table or work done so far, and resume from the next stage. Do not restart from Stage 1 unless explicitly asked.
+> 🔁 **Session continuity:** If resuming after context compaction, re-read this full `02 Update.md` before doing anything. Determine which stage was last completed from the audit table or work done so far, and resume from the next stage. Do not restart from Stage 0 unless explicitly asked.
 
 Use this recipe when a project already has the harness installed and the bootstrap has since evolved — new skills, updated flows, new agents, new pattern files.
 
@@ -11,7 +11,30 @@ Two modes — pick one at the start and stay in it:
 | **Add**  | Install only components that don't exist in the project yet                                     | Safe, non-destructive. Use when you know only new things were added. |
 | **Sync** | Bring existing installed components up to the new template — preserving project-specific values | Use when flows/skills have been meaningfully updated. Requires care. |
 
-Both modes run the same Stage 1 audit. Diverge at Stage 2.
+Both modes run the same Stage 0 and Stage 1 audits. Diverge at Stage 2.
+
+---
+
+## Stage 0 — Q&A gap check
+
+`01 Bootstrap.md`'s question set can grow between when this project was bootstrapped and now (e.g. Q10b/Q10c, "design lifecycle scope," was added after some projects were already bootstrapped). Stage 1 (below) already scans _every_ file under `.harness-bootstrap/skills/` and `.harness-bootstrap/agents/` unconditionally, so it will flag a newly-unlocked component like `pattern-context-resolution.md` as **NEW** on its own — Stage 0 isn't needed to surface that. What Stage 0 actually provides: Stage 1 can tell you a component is missing, but it can't _install_ one that depends on an answer this project was never asked (e.g. you cannot deploy `product-architect` without knowing `{{PRODUCT_CONTEXT_DIR}}`). Skipping Stage 0 means Stage 2A/2B hits an unresolvable substitution mid-sync instead of asking for it up front.
+
+**0a — Read the ledger.** Look for `.harness-bootstrap-answers.md` at the repo root.
+
+- **Exists** — read it. It lists every question this project was explicitly asked and its answer.
+- **Missing** — this project was bootstrapped before the ledger convention existed. Do not block on this: infer past answers from installed state where possible (e.g. `{{PROJECT_KEY}}` from any deployed skill; design lifecycle scope from whether `pattern-context-resolution.md` or `product-architect` are already installed), note each inferred value, then create the ledger now with what's known plus `(inferred)` next to inferred rows.
+
+**0b — Diff the question set.** Compare every `Qn` / `Qn` sub-question in the current `01 Bootstrap.md` Stage 2 against the ledger's rows. Any question present in `01 Bootstrap.md` but absent from the ledger (and not inferable with confidence) is a **gap**.
+
+**0c — Ask the gaps, one at a time.** Same rhythm as bootstrap Stage 2 — propose an answer if inferable from project state, confirm or ask cold otherwise, stop and wait after each. Do not batch.
+
+> "The harness gained a new question since this project was bootstrapped: **{{Qn text}}**. {{proposed answer if inferable, else blank}} — confirm or answer?"
+
+**0d — Record.** Append the new answer(s) to the ledger. Stage 1 (next) will independently find any now-unlocked component (e.g. `pattern-context-resolution.md`, `product-architect`) as **NEW** on its own — the reason this had to happen _before_ Stage 1 is that Stage 2A/2B needs the substitution value (e.g. `{{PRODUCT_CONTEXT_DIR}}`) to actually generate that component, not merely to detect it's missing.
+
+If Stage 0 finds no gaps (ledger covers every current question): report "No new bootstrap questions since last update." and proceed directly to Stage 1.
+
+🔁 Re-read `.harness-bootstrap/02 Update.md` and proceed to Stage 1.
 
 ---
 

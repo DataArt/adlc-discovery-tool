@@ -1,5 +1,7 @@
 ---
 name: design-review
+metadata:
+  version: 0.4.0
 description: WAF satellite review of design artifacts (/design-review). Assesses against Azure WAF 5 pillars, produces design/03 Review.md. Run before /design-publish.
 ---
 
@@ -52,7 +54,7 @@ Also read `design/Report.md` for existing WAF findings (to avoid duplicating alr
 
 ## Step 2 — Read architecture context
 
-Read `docs/Target Architecture (HLD)/README.md` to find the active version. Read the relevant container and NFR docs for the areas the design touches. Read `docs/Target Architecture (HLD)/{ACTIVE_VERSION}/Non-Functional Concerns/Requirements.md`.
+Read relevant docs under `{{DESIGN_DOCS_ROOT}}` (across its subfolders) for the areas the design touches.
 
 ---
 

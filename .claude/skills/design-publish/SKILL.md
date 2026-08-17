@@ -1,6 +1,8 @@
 ---
 name: design-publish
-description: Publish phase of the design lifecycle (/design-publish or /design orchestrator). Pre-gate opens draft MR; post-approval updates docs, archives folder. Track A lands output in docs/AI SDLC/; Track B updates HLD.
+metadata:
+  version: 1.0.0
+description: Publish phase of the design lifecycle (/design-publish or /design orchestrator). Runs once the gate is approved — updates the destination docs, archives folder. Product track lands output in docs/AI SDLC/; Project track updates the HLD.
 ---
 
 The developer wants to run the Publish phase of a design session. Here is their input:
@@ -15,182 +17,50 @@ The developer wants to run the Publish phase of a design session. Here is their 
 
 > 🔁 **Session continuity** (`.claude/skills/design/pattern-session-continuity.md`): If resuming after context compaction, re-read this full SKILL.md before doing anything. When this phase is complete, the design lifecycle is closed — no orchestrator handoff needed.
 
-Publish is Phase 5. It has two entry points: **pre-gate** (Steps 1–3, open draft MR) and **post-approval** (Steps 4–12, run after the MR is approved out-of-band). The session always ends at Step 3. Step 4 begins on the next `/design-publish {TICKET}` invocation.
+Publish is Phase 7 — the final phase. It runs once `/design-review-gate` (or `/design-address-feedback`) has recorded an approved gate.
 
 ---
 
-## Step 1 — Verify prerequisites
+## Step 1 — Verify the gate is approved
 
-Find the design folder by globbing `docs/Stories/*{TICKET}*/**`.
+Find the design folder by globbing `docs/Stories/*{TICKET}*/**`. Read `design/Report.md`'s `## Gate` section.
 
-Verify all of the following exist:
-
-- `design/00 Frame.md`
-- `design/01 Research.md`
-- `design/02 Elaborate.md`
-- `solution/Architecture.md`
-- `solution/Design.md`
-- `solution/Stack.md`
-- `solution/Efforts.md`
-
-If any is missing, tell the developer which phase to complete first and stop.
-
-Read `design/Report.md`. If the Gate section already has a Draft MR URL recorded, **the gate has been opened** — skip directly to Step 4 (post-approval flow).
+If `Approved:` is still `pending` or unset, tell the developer: "The design gate isn't approved yet — run `/design-review-gate {TICKET}` (or `/design-address-feedback {TICKET}` if there are open concerns) first." Stop.
 
 ---
 
-## Step 2 — Suggest draft MR
+## Step 2 — Doc impact identification
 
-Compose and display:
-
-**Suggested MR title:**
-
-```
-Design: {TICKET} — <short title>
-```
-
-**Suggested MR body:**
-
-```
-## Design: {TICKET} — <short title>
-
-Design artifacts for {TICKET}. See `design/` and `solution/` folders.
-
-### Summary
-- Recommended option: <option name from 02 Elaborate.md>
-- Key WAF findings: <1–2 lines from Report.md WAF section>
-
-### Approver
-@<approver handle>
-```
-
-Ask:
-
-> "Who should be the approver? (name or @handle)"
-
-**Stop and wait for the approver name.**
-
-Then say:
-
-> "Open a draft MR using the title and body above and paste the resulting PR URL here."
-
-**Stop and wait for the PR URL.**
-
----
-
-## Step 3 — Record gate and end session
-
-Write to `design/Report.md` Gate section:
-
-```markdown
-## Gate
-
-- Approver: {name}
-- Draft MR: {URL}
-- Approved: pending
-```
-
-Update phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution ✅ · 📤 Publish 🔄`
-
-Tell the developer:
-
-> "Design is pending approval from `{approver}`. Come back and run `/design-publish {TICKET}` once the MR is approved."
-
-**Stop. Session ends here. Do not proceed to Step 4 automatically.**
-
----
-
-## Step 4 — Post-approval: confirm outcome
-
-Ask:
-
-> "Has the MR been approved? (**yes** / **concerns**)"
-
-**Stop and wait.**
-
-- If **yes** → proceed to Step 5.
-- If **concerns** → ask the developer to describe the concern. Identify which phase/step it traces to and suggest a named reiterate path:
-
-  | Concern type                 | Reiterate suggestion                                          |
-  | ---------------------------- | ------------------------------------------------------------- |
-  | Architectural approach wrong | Reiterate from Solution, Step 2 — rewrite Architecture        |
-  | Recommendation wrong         | Reiterate from Elaborate, Step 4 — revisit recommendation     |
-  | Missing option               | Reiterate from Research, Step 3 — re-delegate to `@architect` |
-  | Scope wrong                  | Reiterate from Frame, Step 4 — re-draft Boundaries            |
-
-  Confirm the reiterate with the developer, then stop — do not continue Publish until the reiteration is complete and the MR is re-approved.
-
----
-
-## Step 5 — Doc impact identification (track-dependent)
-
-Read `design/Report.md` for the Track setting (A or B).
-
-**Track A — AI SDLC content:**
-
-Determine which `docs/AI SDLC/` subfolder(s) the solution output belongs in:
-
-- `docs/AI SDLC/03 Problem Space/` — discovery outputs, current-state analysis, workshop findings, validated hypotheses
-- `docs/AI SDLC/04 Solution Space/` — settled recommendations, pilot roadmap, governance frameworks, engagement deliverables
-
-Review `solution/Architecture.md` and `solution/Design.md` to identify the exact docs to create or update. Present to the developer:
-
-> "For this Track A design, the output goes to:
->
-> - `docs/AI SDLC/{subfolder}/{filename}.md` → `{section}`: <what to add>
->
-> Confirm to proceed? (**yes** / **adjust**)"
-
-**Stop and wait.**
-
-**Track B — Project architecture:**
-
-Delegate to `@architect` (read-only — no file writes):
+Delegate to `{resolved architect agent}` (read-only — no file writes):
 
 - Read `solution/Architecture.md`, `solution/Design.md`, `solution/Stack.md`
 - Read `design/Report.md` WAF section (P1 items)
-- Read `docs/Target Architecture (HLD)/README.md` to find the active version
-- Read the relevant HLD container and NFR docs for the areas this design touches
-- Return: a list of specific HLD docs that need updating, with the exact section and what settled decision to add or change — no rationale, no rejected options, no open questions (Certainty principle)
+- Read the relevant docs under `{dest docs}` for the subfolder(s) this design touches
+- Return: a list of specific `{dest docs}` docs that need creating or updating, with the exact section and what settled decision to add or change — no rationale, no rejected options, no open questions (Certainty principle)
 - **Do not write or edit any files — return output only**
 
-Present `@architect`'s findings to the developer:
+Present `{resolved architect agent}`'s findings to the developer:
 
-> "Here's what needs updating in the HLD:
+> "Here's what needs updating in `{dest docs}`:
 >
 > - `{path}` → `{section}`: <what to add or change>
 >
-> Confirm to proceed with updates? (**yes** / **no changes needed**)"
+> Confirm to proceed with updates? (**yes** / **adjust**)"
 
 **Stop and wait.**
 
 ---
 
-## Step 6 — Apply doc updates (track-dependent)
+## Step 3 — Apply doc updates
 
 Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything.
 
-**Track A — AI SDLC content:**
-
-Delegate to `@docs-writer` with the destination list from Step 5:
-
-> "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything.
->
-> **Docs to create/update:**
-> {list from Step 5 — path · section · text_to_add}
->
-> Destination: `docs/AI SDLC/{subfolder}/`. Apply only settled decisions — no rationale, rejected options, or open questions. Diagrams before prose. Every doc must have at least one colored Mermaid diagram. If a new file is created or renamed, update `docs/README.md`.
->
-> Return a one-line summary per doc written."
-
-**Track B — Project architecture:**
-
-Delegate to `@docs-writer` with the full classified list from Step 5:
+Delegate to `@docs-writer` with the classified list from Step 2:
 
 > "You are writing permanent documentation for design ticket {TICKET}. Read `docs/Engineering Guide/07 Documentation Principles.md` before writing anything — it contains destination rules, diagram standards, coloring requirements, and format priority.
 >
 > **Docs to create/update:**
-> {list from @architect — path · section · diagrams_to_port · text_to_add}
+> {list from {resolved architect agent} — path · section · diagrams_to_port · text_to_add}
 >
 > For each doc:
 >
@@ -209,40 +79,37 @@ Once `@docs-writer` completes, present the summary to the developer:
 >
 > - `{path}` → `{section}`: <what was added>
 >
-> Ready for `@architect` to review? (**yes** / **undo and revise**)"
+> Ready for `{resolved architect agent}` to review? (**yes** / **undo and revise**)"
 
 **Stop and wait.**
 
 ---
 
-## Step 7 — `@architect` reviews doc changes
+## Step 4 — `{resolved architect agent}` reviews doc changes
 
-Apply the satellite review pattern (`.claude/skills/design/pattern-satellite-review.md`). Delegate to `@architect` to review the doc changes just made:
+Apply the satellite review pattern (`.claude/skills/design/pattern-satellite-review.md`). Delegate to `{resolved architect agent}` to review the doc changes just made:
 
 - Read the updated doc(s)
 - Verify the changes are accurate, consistent with the rest of the docs, and don't introduce contradictions or gaps
+- Verify the change stays at governance altitude and hasn't drifted into a downstream project's implementation detail
 - **Do not write or edit any files — return output only**
 - Return: **OK** or a specific list of corrections needed
 
-If **OK** → proceed to Step 8.
+If **OK** → proceed to Step 5.
 
 If **corrections needed** → apply the corrections, then show the developer what was changed (one line per edit) before re-delegating for one more review pass.
 
 If still not OK after 2 iterations → report to the developer and stop:
 
-> "`@architect` found unresolved issues with the doc update after 2 passes:
+> "`{resolved architect agent}` found unresolved issues with the doc update after 2 passes:
 > <list of outstanding issues>
 > Please review and resolve manually before continuing Publish."
 
 ---
 
-## Step 8 — Update Report.md
+## Step 5 — Update Report.md
 
-Record the approver and date in `design/Report.md` Gate section:
-
-- `Approved: <today's date>`
-
-Update phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution ✅ · 📤 Publish ✅`
+Update phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution ✅ · 🔎 Review ✅ · 💬 Address Feedback ✅ · 📤 Publish ✅`
 
 Set Status to `✅ Complete`.
 
@@ -254,20 +121,22 @@ Append to the Efforts table:
 
 ---
 
-## Step 9 — Hand-off question
+## Step 6 — Hand-off question
+
+Read the Implementation note from `design/Report.md`'s `## Context` section. Offer option B only per that note's guidance.
 
 Ask:
 
 > "How do you want to proceed?
 >
 > **A** — Wrap up: archive the design folder
-> **B** — Start `/dev` now (archive on return)"
+> **B** — Start `/dev` now (only if the implementation tickets target this repo's own code; archive on return)"
 
 **Stop and wait.**
 
 ---
 
-## Step 10 — Archive (option A only)
+## Step 7 — Archive (option A only)
 
 If option **A**: run the archive directly (do not present as a user instruction):
 
@@ -275,13 +144,15 @@ If option **A**: run the archive directly (do not present as a user instruction)
 git mv "docs/Stories/[{TICKET}] {name}" "docs/Stories/archive/[{TICKET}] {name}"
 ```
 
-Report to the developer: "Design folder archived to `docs/Stories/archive/[{TICKET}] {name}`."
+Moving into `archive/` adds one directory level — any relative Markdown link inside the moved `design/*.md` or `solution/*.md` files that points back up to `{dest docs}` (or any other ancestor path) now needs one more `../` than before. Grep the archived folder for relative links one level short of the new depth (e.g. `grep -rn '\.\./\.\./\.\./[A-Z]' "docs/Stories/archive/[{TICKET}] {name}"`) and add the missing `../` to each match. Do this before reporting the step complete — don't rely on a later docs build to catch it.
+
+Report to the developer: "Design folder archived to `docs/Stories/archive/[{TICKET}] {name}`. Checked and fixed relative links broken by the move."
 
 If option **B**: skip this step.
 
 ---
 
-## Step 11 — Suggest commit
+## Step 8 — Suggest commit
 
 Suggest the developer commit with:
 
@@ -290,11 +161,11 @@ Suggest the developer commit with:
 
 ---
 
-## Step 12 — Hand-off
+## Step 9 — Hand-off
 
 **If option A:**
 
-Say: "Design complete and archived. Implementation tickets can be tracked as `ADLC-{N}` stories — see `solution/Efforts.md` for the WBS. Run `/dev {first-ticket}` when ready to begin implementation."
+Say: "Design complete and archived. Implementation tickets can be tracked as `ADLC-{N}` stories — see `solution/Efforts.md` for the WBS. Read the Implementation note from `design/Report.md`'s `## Context` section for where implementation actually happens."
 
 **If option B:**
 

@@ -1,6 +1,6 @@
 ---
 name: architect
-description: Architecture review and documentation agent powered by Opus extended thinking. Use when you need to audit an app or layer against its architecture docs, find gaps between design intent and code, review docs against Well-Architected pillars, generate architecture descriptions with evidence from docs and code, or author/update architecture documents. Input can be a free-form task prompt, a layer name, or both.
+description: Architecture review and documentation agent powered by extended thinking. Use when you need to audit an app or layer against its architecture docs, find gaps between design intent and code, review docs against Well-Architected pillars, generate architecture descriptions with evidence from docs and code, or author/update architecture documents. Input can be a free-form task prompt, a layer name, or both.
 tools: Read, Glob, Grep, Bash, Write, Edit
 model: sonnet
 ---
@@ -18,13 +18,13 @@ You use extended thinking to reason carefully before drawing conclusions. Never 
 
 The caller passes a **free-form prompt** describing the task. Examples:
 
-- `"Review the serving layer against its architecture doc"`
-- `"Find gaps between the compute layer code and design principles"`
-- `"Create an architecture overview for the BFF module"`
+- `"Review the web layer against its architecture doc"`
+- `"Find gaps between the API layer code and design principles"`
+- `"Create an architecture overview for the auth layer"`
 - `"Review all architecture docs against Well-Architected pillars"`
-- `"The canonical layer doc is stale — update it to reflect the current DB schema"`
+- `"The canonical layer doc is stale — update it to reflect the current implementation"`
 - `"Audit cross-layer boundaries — check no layer imports from a layer it shouldn't"`
-- `"serving"` — shorthand, infer the task as a full review + well-architected assessment
+- `"web"` — shorthand, infer the task as a full review + well-architected assessment
 
 Parse the prompt to determine:
 
@@ -106,7 +106,7 @@ If the task prompt includes a phrase like "include references to [library] docs"
 
 ### Step 5 — Author the document
 
-Follow `.claude/skills/architecture-docs.md` conventions strictly:
+Follow `{{DOC_PRINCIPLES_ARTICLE}}` conventions strictly:
 
 - English only, no filler, extremely concise
 - All diagrams in **Mermaid** format

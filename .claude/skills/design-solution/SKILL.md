@@ -1,5 +1,7 @@
 ---
 name: design-solution
+metadata:
+  version: 1.0.0
 description: Solution phase of the design lifecycle (/design-solution or /design orchestrator). Produces solution/ with Architecture.md, Design.md, Stack.md, Efforts.md.
 ---
 
@@ -29,11 +31,9 @@ Read in full:
 
 - `design/00 Frame.md` — ACs and constraints
 - `design/02 Elaborate.md` — the recommended option and its open questions
-- `design/Report.md` — WAF P1 items that must be reflected in the solution; also the Track setting (A or B)
+- `design/Report.md` — WAF P1 items that must be reflected in the solution
 
 If `02 Elaborate.md` does not exist, tell the developer that Elaborate must be completed first and stop.
-
-**Track B only:** also read the active Target Architecture version for the affected containers (read `docs/Target Architecture (HLD)/README.md` first to find the active version). **Track A:** skip — HLD does not apply to AI SDLC content.
 
 ---
 
@@ -76,11 +76,11 @@ Apply the write-confirm pattern (`.claude/skills/design/pattern-write-confirm.md
 
 ---
 
-## Step 2b — @architect architecture review (optional gate)
+## Step 2b — `{resolved architect agent}` architecture review (optional gate)
 
 Ask:
 
-> "Would you like me to delegate to `@architect` for an independent read-only review of `Architecture.md` before I begin `Design.md`?"
+> "Would you like me to delegate to `{resolved architect agent}` for an independent read-only review of `Architecture.md` before I begin `Design.md`?"
 
 **Stop and wait.**
 
@@ -90,6 +90,8 @@ If no: proceed to Step 3.
 ---
 
 ## Step 3 — Draft solution/Design.md
+
+**Multi-decision check:** if Research/Elaborate were split per `.claude/skills/design/pattern-multi-decision-split.md`, loop this step once per decision, producing `solution/Design - {Decision}.md` for each. (`Architecture.md` in Step 2 stays a single integrated file regardless — one section per decision, not one file per decision.)
 
 Using `.claude/skills/design/solution-design-template.md`:
 
@@ -127,7 +129,7 @@ Using `.claude/skills/design/solution-efforts-template.md`:
 
 **WBS (write this):**
 
-- List of implementation tickets: `#`, `Summary`, and one-line `Scope` for each
+- List of implementation tickets using the template columns: `#`, `Summary`, `Type` (feat/fix/chore/spike), `Layer`, `Depends on`
 - Sequencing constraints (what must come before what) — include Mermaid diagram
 - Any spikes or open questions from `02 Elaborate.md` that need a dedicated ticket
 
@@ -166,7 +168,7 @@ Say: "All four solution files are saved. Review `solution/Architecture.md`, `Des
 **Reiterate paths** — if the developer raises a concern before the WAF gate:
 
 - Architecture gap that traces to the recommendation → "Reiterate from Elaborate, Step 4 — revisit the recommendation."
-- Missing option → "Reiterate from Research, Step 3 — re-delegate to `@architect` with the specific gap."
+- Missing option → "Reiterate from Research, Step 3 — re-delegate to `{resolved architect agent}` with the specific gap."
 
 Apply corrections. Iterate until the content is confirmed.
 
@@ -174,18 +176,18 @@ Apply corrections. Iterate until the content is confirmed.
 
 ## Step 7b — Design review gate
 
-Once the solution content is confirmed, run `/design-review {TICKET} elaborate` against the solution artifacts (full WAF, all pillars).
+Once the solution content is confirmed, run `/design-review {TICKET} solution` — a full WAF assessment against `solution/Architecture.md` and `solution/Design.md`.
 
 **If no P1 gaps:** proceed to Step 8.
 
 **If P1 gaps found:** present them and suggest a named reiterate path for each:
 
-| Gap type                                       | Reiterate suggestion                                                    |
-| ---------------------------------------------- | ----------------------------------------------------------------------- |
-| Security or reliability gap in Architecture.md | Reiterate from Solution, Step 2 — rewrite Architecture to address [gap] |
-| Implementation gap in Design.md                | Reiterate from Solution, Step 3 — rewrite Design                        |
-| Recommendation-level gap (wrong choice)        | Reiterate from Elaborate, Step 4 — revisit the recommendation           |
-| Missing option that would resolve the gap      | Reiterate from Research, Step 3 — re-delegate to `@architect`           |
+| Gap type                                       | Reiterate suggestion                                                          |
+| ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| Security or reliability gap in Architecture.md | Reiterate from Solution, Step 2 — rewrite Architecture to address [gap]       |
+| Implementation gap in Design.md                | Reiterate from Solution, Step 3 — rewrite Design                              |
+| Recommendation-level gap (wrong choice)        | Reiterate from Elaborate, Step 4 — revisit the recommendation                 |
+| Missing option that would resolve the gap      | Reiterate from Research, Step 3 — re-delegate to `{resolved architect agent}` |
 
 **Stop and ask:**
 
@@ -201,7 +203,7 @@ Apply the do→report→commit pattern (`.claude/skills/design/pattern-do-report
 
 **Report** — update `design/Report.md`:
 
-- Phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution ✅ · 📤 Publish 🔄`
+- Phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution ✅ · 🔎 Review 🔄 · 💬 Address Feedback ⏳ · 📤 Publish ⏳`
 - Append to Efforts table: `| {YYYY-MM-DD} | Solution | 4 solution files written; design review: <pass / N P1 gaps resolved> |`
 
 **Commit** — suggest:

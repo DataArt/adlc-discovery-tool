@@ -1,6 +1,6 @@
 # Pattern: Session Continuity (Design)
 
-Applies to every design-lifecycle phase skill (`design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-publish`).
+Applies to every design-lifecycle phase skill (`design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-review-gate`, `design-address-feedback`, `design-publish`).
 
 ## On entry (top of each skill)
 

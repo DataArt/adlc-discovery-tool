@@ -10,7 +10,7 @@ AGENTS.md is the file all major AI tools read. It is the single authoritative ro
 
 **Never duplicate content between AGENTS.md and a tool-specific wrapper.** The wrapper points; AGENTS.md holds.
 
-Structure of AGENTS.md: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `09 Documentation Principles.md` for length budgets per doc type.
+Structure of AGENTS.md: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `{{DOC_PRINCIPLES_ARTICLE}}` for length budgets per doc type.
 
 Do not auto-generate the root context file from scratch — generate a scaffold and edit by hand. Auto-generated root context is generic; hand-edited root context is precise.
 

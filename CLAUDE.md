@@ -41,7 +41,9 @@ Key constraint: basic auth password protection on all routes.
 | --------------------- | ---------------------------------------------------------------------- |
 | `/bootstrap-client`   | Instantiate this starter kit for a new client engagement (one-time)    |
 | `/dev`                | Dev lifecycle orchestrator — Plan → Implement → Test → Document        |
-| `/design`             | Design lifecycle orchestrator — Frame → Research → Elaborate → Publish |
+| `/design`             | Design lifecycle orchestrator — Frame → Research → Elaborate → Solution → Review → Address Feedback → Publish |
+| `/design-review-gate` | Opens the draft MR and records the approval gate; session pauses for out-of-band human approval |
+| `/design-address-feedback` | Only if the approver raises concerns — reiterates into the traced-to phase, then waits for re-approval |
 | `/skill-reflect`      | Brain-dump observations after completing a ticket                      |
 | `/skill-triage`       | Cluster reflections into patterns worth capturing                      |
 | `/skill-new`          | Draft a new skill or rule from a triage cluster                        |
@@ -61,7 +63,7 @@ Orchestrators: `/dev` · `/design` · `/war` · `/where-we-are`
 
 Dev phases: `/dev-plan` → `/dev-implement` → `/dev-test` → `/dev-document`
 
-Design phases: `/design-frame` → `/design-research` → `/design-elaborate` → `/design-solution` → (`/design-review`) → `/design-publish`
+Design phases: `/design-frame` → `/design-research` → `/design-elaborate` → `/design-solution` (WAF gate: `/design-review`) → `/design-review-gate` → (`/design-address-feedback`) → `/design-publish`
 
 Skill phases: `/skill-reflect` → `/skill-triage` → `/skill-new` → `/skill-promote`
 

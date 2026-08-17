@@ -53,7 +53,7 @@ flowchart TB
 
     subgraph DESIGN ["  🎨 Design lifecycle (optional)  "]
         direction LR
-        D1["Frame\nproblem + ACs"]:::design --> D2["Research\noptions via @architect"]:::design --> D3["Elaborate\nmatrix + recommend"]:::design --> D4["Solution\ncertainty artifacts"]:::design --> D5["Publish\nMR → HLD → tickets"]:::design
+        D1["Frame\nproblem + ACs"]:::design --> D2["Research\noptions via {resolved architect agent}"]:::design --> D3["Elaborate\nmatrix + recommend"]:::design --> D4["Solution\ncertainty artifacts"]:::design --> D5["Publish\nMR → docs → tickets"]:::design
     end
 
     subgraph DEV ["  🔨 Dev lifecycle  "]

@@ -1,5 +1,7 @@
 ---
 name: dev-implement
+metadata:
+  version: 0.3.1
 description: Implement phase of the dev lifecycle (/dev-implement or /dev orchestrator). Executes approved 1-plan.md one step at a time with developer verification.
 ---
 
@@ -59,7 +61,7 @@ Before starting each step, determine its layer from the step title and scope:
 
 For each step:
 
-1. Announce which step you are starting and whether you are delegating or implementing inline
+1. Announce which step you are starting (e.g. "Starting Step 2 — Auth: basic auth header validation") and whether you are delegating or implementing inline
 2. Implement (or delegate). Worker agents run a satellite review after non-trivial steps before returning (see `.claude/skills/dev/pattern-satellite-review.md`)
 3. When the step is done — including any satellite review — present the verification instructions from the plan exactly as written
 4. **Stop and wait for the developer to confirm the step passes before continuing**
@@ -115,7 +117,7 @@ If a step cannot be completed because of an external dependency (insufficient pe
 1. **Do not stop** — continue with steps that are independent of the blocker
 2. Add a row to the `## Tech Debt` table with type `blocker`:
    - What is blocked and why
-   - The exact action required and who to contact
+   - The exact action required (command to run, request text to send, who to contact)
    - What to do once the blocker is resolved
 3. Log it in `## Implementation Notes` under the relevant step entry
 4. Tell the developer: "Step N is blocked on `{reason}`. I've logged it in 2-report.md and will continue with unblocked steps."
@@ -147,7 +149,7 @@ When all steps are verified and committed, update `2-report.md`:
 
 2. **Progress table** — all rows should already reflect their final status. Do a final pass to confirm nothing is stale.
 
-3. **Delivery Summary** — add only if the ticket warrants a human-readable summary (significant feature, complex refactor). Skip for small or mechanical changes:
+3. **Delivery Summary** — add only if the ticket warrants a human-readable summary (significant feature, complex refactor, or something a reviewer would benefit from reading). Skip for small or mechanical changes:
 
    ```markdown
    ## Delivery Summary
@@ -155,13 +157,15 @@ When all steps are verified and committed, update `2-report.md`:
    <One short paragraph — what was built, what it enables, what changed for the user or system.>
    ```
 
+   Insert between the Progress table and Implementation Notes.
+
 4. **Tech Debt** — already populated during Steps 4–5. Add any final items discovered at wrap-up.
 
 5. **TD triage** — present each open TD item: "Implement now (this session) or track for later?" Flag any TD that blocks the current ticket's acceptance criteria — those need a decision before the Test phase starts.
 
-   **If the developer chooses to implement a TD now:** invoke `/dev-plan` with the TD description and tell the developer to **skip to Step 6** (step-writing) — bypass Steps 0–5. The context is already established. Append new TD steps to the **existing `1-plan.md`** and add corresponding rows to the `## Progress` table.
+   **If the developer chooses to implement a TD now:** invoke `/dev-plan` with the TD description and tell the developer to **skip to Step 6** (step-writing) — bypass Steps 0–5. The context is already established. Append new TD steps to the **existing `1-plan.md`** and add corresponding rows to the `## Progress` table so total delivery status stays visible in one place.
 
-6. **Efforts Spent** — per-step rows were already added during implementation. Add one final summary row if useful.
+6. **Efforts Spent** — per-step rows were already added during implementation. Add one final summary row if useful (total session note, unexpected complexity).
 
 Then tell the developer: "All steps complete. `2-report.md` updated."
 

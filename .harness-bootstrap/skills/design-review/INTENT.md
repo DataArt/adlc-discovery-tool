@@ -9,11 +9,12 @@ Parameterized WAF satellite — invokable at any design phase against any artifa
 
 ## Substitutions
 
-| Placeholder                 | Source              | Notes                                                                                                                                                                                                                       |
-| --------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{{PROJECT_KEY}}`           | Q5 — ticket prefix  | Used in examples only                                                                                                                                                                                                       |
-| `{{WAF_PILLARS_TABLE}}`     | Q11 — WAF framework | Replace with the correct pillar definitions table (pillar name + key questions) for the chosen framework                                                                                                                    |
-| `{{WAF_PILLAR_SHORTNAMES}}` | Q11 — WAF framework | Comma-separated abbreviated pillar names for `--pillars=` valid values, e.g. `reliability, security, cost, operations, performance` (Azure) or `security, reliability, cost, operations, performance, sustainability` (AWS) |
+| Placeholder                 | Source                                                      | Notes                                                                                                                                                                                                                       |
+| --------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{{PROJECT_KEY}}`           | Q5 — ticket prefix                                          | Used in examples only                                                                                                                                                                                                       |
+| `{{WAF_PILLARS_TABLE}}`     | Q11 — WAF framework                                         | Replace with the correct pillar definitions table (pillar name + key questions) for the chosen framework                                                                                                                    |
+| `{{WAF_PILLAR_SHORTNAMES}}` | Q11 — WAF framework                                         | Comma-separated abbreviated pillar names for `--pillars=` valid values, e.g. `reliability, security, cost, operations, performance` (Azure) or `security, reliability, cost, operations, performance, sustainability` (AWS) |
+| `{{DESIGN_DOCS_ROOT}}`      | Q10 — design lifecycle scope (see `design-frame/INTENT.md`) | Step 2 reads architecture context from here — same value/resolution as every other `/design` skill                                                                                                                          |
 
 ## Conditionals
 
@@ -21,6 +22,7 @@ Parameterized WAF satellite — invokable at any design phase against any artifa
 - If Q11 is AWS WAF: 6 pillars (Security, Reliability, Cost Optimisation, Operational Excellence, Performance Efficiency, Sustainability)
 - If Q11 is Azure WAF: 5 pillars (Reliability, Security, Cost Optimization, Operational Excellence, Performance Efficiency)
 - Adjust `--pillars=` valid values comment to match the chosen framework's pillar shortnames
+- Project-scoped or Two-track (Project track): Step 2's "relevant docs" always includes the active version's `Non-Functional Concerns/Requirements.md` — call this out explicitly rather than leaving it implicit in "across its subfolders"
 
 ## Verify checklist
 

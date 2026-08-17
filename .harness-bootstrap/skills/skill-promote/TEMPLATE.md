@@ -1,5 +1,7 @@
 ---
 name: skill-promote
+metadata:
+  version: 0.4.0
 description: Graduate a draft skill to active status (/skill-promote). Moves from .claude/skills/drafts/ to .claude/skills/, registers in CLAUDE.md.
 ---
 
@@ -53,11 +55,11 @@ Open `AGENTS.md` and add an entry:
 
 Check whether the promoted skill is a lifecycle phase skill and flag the corresponding doc if so:
 
-| Skill prefix                                                                                                          | Lifecycle doc                                              |
-| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `dev-plan`, `dev-implement`, `dev-test`, `dev-document`, `dev`                                                        | `docs/Engineering Guide/Lifecycles/01 Dev Lifecycle.md`    |
-| `design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-publish`, `design-review`, `design` | `docs/Engineering Guide/Lifecycles/02 Design Lifecycle.md` |
-| `skill-reflect`, `skill-triage`, `skill-promote`, `skill-new`                                                         | `docs/Engineering Guide/Lifecycles/03 Skill Lifecycle.md`  |
+| Skill prefix                                                                                                                                                           | Lifecycle doc                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `dev-plan`, `dev-implement`, `dev-test`, `dev-document`, `dev`                                                                                                         | `docs/Engineering Guide/Lifecycles/01 Dev Lifecycle.md`    |
+| `design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-review-gate`, `design-address-feedback`, `design-publish`, `design-review`, `design` | `docs/Engineering Guide/Lifecycles/02 Design Lifecycle.md` |
+| `skill-reflect`, `skill-triage`, `skill-promote`, `skill-new`                                                                                                          | `docs/Engineering Guide/Lifecycles/03 Skill Lifecycle.md`  |
 
 If the promoted skill matches, tell the developer:
 

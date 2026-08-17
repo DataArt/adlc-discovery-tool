@@ -1,5 +1,7 @@
 ---
 name: dev-document
+metadata:
+  version: 0.3.1
 description: Document phase of the dev lifecycle (/dev-document or /dev orchestrator). Updates READMEs, LLD, Engineering Guide; resolves deviations; archives story. Final phase.
 ---
 
@@ -109,7 +111,6 @@ Suggested checks based on the documentation skill:
 - New build target → update app `README.md` targets table
 - Non-obvious architectural decision → capture as a skill in `.claude/skills/` or note in the relevant Target Architecture doc
 - New repeatable pattern → write skill in `.claude/skills/` + register in `AGENTS.md`
-- Structural change → run `@docs-sync` to update architecture docs
 
 ---
 

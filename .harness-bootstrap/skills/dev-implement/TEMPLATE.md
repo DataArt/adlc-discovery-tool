@@ -1,5 +1,7 @@
 ---
 name: dev-implement
+metadata:
+  version: 0.3.1
 description: Implement phase of the dev lifecycle (/dev-implement or /dev orchestrator). Executes approved 1-plan.md one step at a time with developer verification.
 ---
 
@@ -53,7 +55,7 @@ Before starting each step, determine its layer from the step title and scope:
 
 - **`bff` / "BFF" / "NestJS" / backend** → delegate to `{{BACKEND_AGENT}}`. Give it the full step description from `1-plan.md` plus the current `2-report.md` for context. `{{BACKEND_AGENT}}` handles the implementation; you coordinate verification and report updates.
 - **`web` / "Web" / "FE" / "Frontend"** → delegate to `{{FRONTEND_AGENT}}`. Same handoff pattern.
-- **`db` / "DB" / "schema" / "migration" / "repository"** → delegate to `@data`. Same handoff pattern.
+- **`db` / "DB" / "schema" / "migration" / "repository"** → delegate to `{{DATA_AGENT}}`. Same handoff pattern.
 - **infra / config / docs** → implement inline.
 
 > **Scope discipline:** implement exactly what the step describes — no more, no less. Do not add features, refactors, or improvements beyond what the step specifies.
@@ -101,9 +103,9 @@ Once verification passes, follow the do → report → commit pattern (`.claude/
 
    - `{type}({scope}): {description}` — all lowercase, imperative mood, no period
    - Types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`, `ci`, `build`
-   - Scope: the NX project name or layer (`infra`, `bff`, `web`, `db`)
+   - Scope: the NX project name or layer (`infra`, `auth`, `web`)
    - No body unless breaking change — then add `BREAKING CHANGE: <what and why>` as a footer
-   - Examples: `feat(infra): provision managed identity and key vault` · `ci: add gitlab pipeline for affected-apps deployment`
+   - Examples: `feat(infra): provision managed identity and key vault` · `feat(auth): add basic auth header validation`
 
 5. **Stop and wait for the developer to confirm the commit is done before starting the next step.**
 
@@ -125,9 +127,9 @@ If a step cannot be completed because of an external dependency (IT request, ins
 
 If during any step you discover something that should be done but is out of scope: do not implement it. Add a row to the `## Tech Debt` table in `2-report.md` and mention it briefly to the developer: "Added TD-N to tech debt: `{title}`".
 
-| #    | Description                                      | Type     | Jira |
-| ---- | ------------------------------------------------ | -------- | ---- |
-| TD-N | Short title — one sentence on what and why defer | `{type}` | —    |
+| #    | Description                                      | Type     | Ticket |
+| ---- | ------------------------------------------------ | -------- | ------ |
+| TD-N | Short title — one sentence on what and why defer | `{type}` | —      |
 
 Valid types: `blocker` · `dependency` · `cleanup` · `security` · `performance` · `ux`
 

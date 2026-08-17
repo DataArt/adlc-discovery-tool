@@ -9,14 +9,15 @@ Runs the test stage for an implemented plan: build check, DB migration check, fu
 
 ## Substitutions
 
-| Placeholder             | Source                          | Notes                                                                                                                                                                         |
-| ----------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{{PROJECT_KEY}}`       | Q5 — ticket prefix              | Replaces `ND` in ticket references                                                                                                                                            |
-| `{{BACKEND_AGENT}}`     | AGENTS.md — BFF/backend agent   | e.g. `@bff`. Used for PR review delegation                                                                                                                                    |
-| `{{FRONTEND_AGENT}}`    | AGENTS.md — Web/frontend agent  | e.g. `@web`. Used for PR review delegation                                                                                                                                    |
-| `{{NX_BUILD_CMD}}`      | Stage 1b — detected NX projects | Full `yarn nx run-many -t build -p {projects}` command. Detect project names from `project.json` files under `apps/`. Example: `yarn nx run-many -t build -p bff web`         |
-| `{{NX_DB_MIGRATE_CMD}}` | Stage 1b — detected DB project  | Full `yarn nx run {db-project}:migrate` command. Detect DB project name from `apps/` structure. Example: `yarn nx run db:migrate`                                             |
-| `{{HLD_NFRS_PATH}}`     | Stage 1b — detected HLD NFR doc | Path to NFR document. Glob `docs/Target Architecture (HLD)/*/Non-Functional*` to detect. Example: `docs/Target Architecture (HLD)/v1/Non-Functional Concerns/Requirements.md` |
+| Placeholder             | Source                          | Notes                                                                                                                                                                 |
+| ----------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{{PROJECT_KEY}}`       | Q5 — ticket prefix              | Replaces `ND` in ticket references                                                                                                                                    |
+| `{{BACKEND_AGENT}}`     | AGENTS.md — BFF/backend agent   | e.g. `@bff`. Used for PR review delegation                                                                                                                            |
+| `{{FRONTEND_AGENT}}`    | AGENTS.md — Web/frontend agent  | e.g. `@web`. Used for PR review delegation                                                                                                                            |
+| `{{NX_BUILD_CMD}}`      | Stage 1b — detected NX projects | Full `yarn nx run-many -t build -p {projects}` command. Detect project names from `project.json` files under `apps/`. Example: `yarn nx run-many -t build -p bff web` |
+| `{{NX_DB_MIGRATE_CMD}}` | Stage 1b — detected DB project  | Full `yarn nx run {db-project}:migrate` command. Detect DB project name from `apps/` structure. Example: `yarn nx run db:migrate`                                     |
+| `{{INFRA_SYNTH_CMD}}`   | Q — infra tooling               | Command to synthesize/validate infra. Terraform: `terraform validate`. CDK: `yarn nx run infra:synth`. Pulumi: `pulumi preview`.                                      |
+| `{{INFRA_DIFF_CMD}}`    | Q — infra tooling               | Command to diff/plan infra changes. Terraform: `terraform plan`. CDK: `yarn nx run infra:diff`. Pulumi: `pulumi preview --diff`.                                      |
 
 ## Conditionals
 
@@ -35,5 +36,5 @@ Runs the test stage for an implemented plan: build check, DB migration check, fu
 - [ ] Step 5 (PR review) delegates by layer to `{{BACKEND_AGENT}}` and `{{FRONTEND_AGENT}}`
 - [ ] No literal `@nestjs-dev` or `@react-dev` remain
 - [ ] Step 5 includes @architect audit block with trigger conditions (infra, cross-layer, non-trivial flows) and prompt template
-- [ ] `{{HLD_NFRS_PATH}}` in the @architect prompt is resolved to an actual path
+- [ ] `@architect` prompt instructs dynamic NFR doc discovery (read HLD README → find active version → read Non-Functional Concerns/Requirements.md) — no hardcoded path
 - [ ] Step 6 is an unconditional commit gate — fires whenever code was changed during PR review, not just for must-fix items

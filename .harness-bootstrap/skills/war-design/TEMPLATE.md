@@ -1,6 +1,8 @@
 ---
 name: war-design
-description: WAR of Target Architecture design docs (/war-design). @architect assesses against Azure WAF 5 pillars. Does NOT audit code — use /war-implementation.
+metadata:
+  version: 0.3.1
+description: WAR of Target Architecture design docs (/war-design). @architect assesses against the configured {{WAF_FRAMEWORK}} pillars. Does NOT audit code — use /war-implementation.
 ---
 
 The developer wants to run a Well-Architected Review of the Target Architecture design documents for a version. Here is their input:

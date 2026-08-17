@@ -1,5 +1,7 @@
 ---
 name: dev-plan
+metadata:
+  version: 0.3.1
 description: Plan phase of the dev lifecycle (/dev-plan or /dev orchestrator). Proposes implementation plan, saves 1-plan.md + 2-report.md.
 ---
 
@@ -97,7 +99,7 @@ If a `solution/` folder is found, tell the developer:
 
 Use the solution files as the primary spec input for Steps 5–6. Developer free-form input supplements; it does not override the solution.
 
-If no `solution/` folder exists — continue normally.
+If no `solution/` folder exists — continue normally, the plan will be derived from developer input and codebase context alone.
 
 ## Step 5 — Read codebase and architecture context
 
@@ -145,16 +147,16 @@ After writing the steps, add an **`## Acceptance Criteria`** section — a flat 
 - Developer-stated goals and "out of scope" boundaries
 - Any observable end states implied by the steps (e.g. site serves correctly, auth blocks unauthenticated requests, CDK deploy succeeds)
 
-Each item must be independently verifiable by the evaluator during `dev-test`. No vague items like "works correctly". Write: `[ ] {AC-N} — <what to check and where>`.
+Each item must be independently verifiable by the evaluator during `dev-test` (curl, UI action, log output, or build result). No vague items like "works correctly". Write: `[ ] {AC-N} — <what to check and where>`.
 
 Other rules:
 
 - Never bundle verification into the next step — it belongs at the end of the current one
 - If a step depends on a previous step, say so explicitly
-- **One step = one NX project or one cross-cutting concern.** Never mix layers in a single step. A commit message that would require two types to be honest is a reliable signal the step is too broad.
-- **Infra/CDK steps require at least one live operational verification item.** Static checks are necessary but not sufficient — at least one verification item must prove the thing actually works.
-- **Do not repeat typecheck/lint in per-step verification** — the pre-commit hook runs them. Per-step verification should be the functional check specific to the step.
-- **For plans that change how resources are connected** — add a Mermaid diagram of the target state at the top of the plan, above the numbered steps.
+- **One step = one NX project or one cross-cutting concern.** Never mix layers in a single step (e.g. CDK infra changes alongside Lambda@Edge auth changes). If the step title can't map cleanly to one NX project name or one concern, split it. A commit message that would require two types to be honest is a reliable signal the step is too broad.
+- **Infra/CDK steps require at least one live operational verification item.** Static checks (grep, file inspection) are necessary but not sufficient. For any step that touches infrastructure or configuration, at least one verification item must prove the thing actually works — e.g. `cdk synth` produces the expected stack, `cdk diff` output matches expectations, a CLI check confirms an IAM policy or CloudFront behavior exists, a health check or curl returns the expected response. Do not write a verification block that is grep-only for an infra step.
+- **Do not repeat typecheck/lint in per-step verification — the pre-commit hook runs them.** The project's Husky pre-commit hook runs `typecheck` and `lint` on every commit, so a per-step `yarn nx typecheck`/`lint` instruction is redundant noise that implies manual work the hook already does. Per-step verification should be the functional check specific to the step (curl the endpoint, open the page, inspect build output). Add a single line at the top of the plan — "Pre-commit hook runs typecheck + lint on every commit" — and let the commit boundary catch type/lint regressions.
+- **For plans that change how resources are connected — network topology, VPC subnets, service-to-service routing, container boundaries — add a Mermaid diagram of the target state at the top of the plan, above the numbered steps.** A single picture lets the reviewer validate the target state before reading the step details, and becomes the reference during implementation. Also applies to any plan where "what gets wired to what" is non-obvious from the step list alone.
 
 ## Step 7 — Write draft plan, then get approval
 
@@ -165,7 +167,7 @@ Apply the write-confirm pattern (`.claude/skills/dev/pattern-write-confirm.md`):
 **Skip this step** for mechanical plans (single-layer rename, dependency bump, config value with no structural impact). Run it when the plan:
 
 - Introduces a new cross-layer integration, API contract, or module boundary
-- Adds or changes infrastructure or CDK stacks
+- Adds or changes infrastructure, IAM policy, or cloud resources
 - Changes data flow between containers
 - Has steps that touch more than one NX project in a non-obvious way
 
@@ -180,7 +182,7 @@ When triggered, delegate to `@architect` following the satellite review protocol
 
 Maximum 3 iterations. If still unresolved, present the stalemate to the developer and stop.
 
-If the developer justifies — record each justified deviation as an `## Architecture Deviations` section in `1-plan.md` (appended after the steps):
+If the developer justifies — record each justified deviation as an `## Architecture Deviations` section in `1-plan.md` (appended after the steps). Format:
 
 ```markdown
 ## Architecture Deviations
@@ -197,10 +199,10 @@ If the developer justifies — record each justified deviation as an `## Archite
 **Story folder and `1-plan.md`** were already created in Step 7. Confirm the folder structure is correct:
 
 - Glob for `docs/Stories/*{TICKET}*/` — use `*{TICKET}*` wildcard (never `[{TICKET}]*`)
-- If a design folder already exists: `impl/` sits inside it.
+- If a design folder already exists (e.g. `[{TICKET}] {name}/`): `impl/` sits inside it.
 - If none existed: `docs/Stories/[{TICKET}] {name}/impl/` was created in Step 7.
 
-The folder name is **stable for the life of the ticket** — do not rename it.
+The folder name is **stable for the life of the ticket** — do not rename it. Phase state is tracked in the `Phase` row of `2-report.md`, not in the folder name.
 
 **`1-plan.md`** was written using `.claude/skills/dev/plan-template.md` in Step 7. It is now immutable — never edit it after approval.
 
@@ -218,15 +220,22 @@ Replace the placeholder values:
 
 ## Step 10 — Report back
 
-Tell the developer the folder path and suggest a commit message:
+Tell the developer the folder path, suggest a commit message, and remind them to create the feature branch before implementing:
 
-> "Plan saved to `docs/Stories/[{TICKET}] {name}/impl/`.
+> "Plan saved to `docs/Stories/[{TICKET}] {name}/impl/` (inside the existing story folder, or a new one if none existed).
 >
 > Commit with:
 >
-> ````
+> ```
 > docs({ticket-lowercase}): add implementation plan for {short-name}
-> ```"
-> ````
+> ```
+>
+> Before starting implementation, make sure you are on the feature branch:
+>
+> ```bash
+> git checkout -b feat/{ticket-lowercase}-{slug}
+> ```
+>
+> (skip if already on it)"
 
 🔁 Re-read `.claude/skills/dev/SKILL.md` and resume the orchestrator from the next phase (Implement).

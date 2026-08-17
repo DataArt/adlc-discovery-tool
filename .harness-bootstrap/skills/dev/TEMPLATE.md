@@ -1,5 +1,7 @@
 ---
 name: dev
+metadata:
+  version: 0.4.0
 description: >
   Full dev lifecycle orchestrator (/dev {ticket}): Plan → Implement → Test → Document.
   Trigger: "build {{PROJECT_KEY}}-XX", "implement {{PROJECT_KEY}}-XX", or starting a ticket from scratch.
@@ -19,18 +21,16 @@ You guide the developer through all four phases in a single session without them
 
 > ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
 
-## Jira transition IDs (project {{PROJECT_KEY}})
+## Jira state transitions
 
-| Transition       | ID                                     |
-| ---------------- | -------------------------------------- |
-| Start Progress   | `{{JIRA_TRANSITION_START_PROGRESS}}`   |
-| Specification    | `{{JIRA_TRANSITION_SPECIFICATION}}`    |
-| Implementation   | `{{JIRA_TRANSITION_IMPLEMENTATION}}`   |
-| Testing          | `{{JIRA_TRANSITION_TESTING}}`          |
-| Documentation    | `{{JIRA_TRANSITION_DOCUMENTATION}}`    |
-| Ready for Review | `{{JIRA_TRANSITION_READY_FOR_REVIEW}}` |
-| Resolve Issue    | `{{JIRA_TRANSITION_RESOLVE}}`          |
-| Close Issue      | `{{JIRA_TRANSITION_CLOSE}}`            |
+Quick reference — all transitions are executed by `@scrum-master` at phase **start**, not at phase end.
+
+| When                                    | State       | Transition ID                     |
+| --------------------------------------- | ----------- | --------------------------------- |
+| Dev plan started                        | In Progress | `{{JIRA_TRANSITION_IN_PROGRESS}}` |
+| Test phase complete, PR submitted       | Testing     | `{{JIRA_TRANSITION_TESTING}}`     |
+| Document phase complete, story archived | Done        | `{{JIRA_TRANSITION_DONE}}`        |
+| Blocked / parked                        | On Hold     | `{{JIRA_TRANSITION_ON_HOLD}}`     |
 
 ---
 
@@ -140,8 +140,10 @@ When all four phases are done, first ask about the merge request:
 > **Title:**
 >
 > ```
-> feat({ticket-lowercase}): <one-line summary>
+> {type}({ticket-lowercase}): <one-line summary>
 > ```
+>
+> _(pick the right type: `feat` for new capability, `fix` for a bug, `chore` for tooling/config, `docs` for documentation-only, `refactor` for code change with no behaviour change)_
 >
 > **Description:**
 >
@@ -158,11 +160,19 @@ When all four phases are done, first ask about the merge request:
 
 **Stop and wait.**
 
-Then, if a ticket number was present, ask:
+---
 
-> "All done. Shall I move {{PROJECT_KEY}}-XX to **Testing**? (**yes** / **skip**)"
+## Completion — Jira sync
 
-**Stop and wait for confirmation.** If confirmed, transition the issue using the Testing transition ID (`{{JIRA_TRANSITION_TESTING}}`).
+Ask:
+
+> "How much effort did this ticket take? (for the Jira worklog)"
+
+**Stop and wait.**
+
+Delegate to `@scrum-master`: log the worklog with the effort given, then transition `{TICKET}` to Done (`{{JIRA_TRANSITION_DONE}}`) — or ask which status if the ticket's workflow offers alternatives. Report the outcome in one line.
+
+---
 
 Then tell the developer:
 
@@ -172,7 +182,6 @@ Then tell the developer:
 >
 > - Plan: `docs/Stories/archive/[{TICKET}] ✅ Done — {name}/impl/1-plan.md`
 > - Report: `docs/Stories/archive/[{TICKET}] ✅ Done — {name}/impl/2-report.md`
-> - Jira: {{PROJECT_KEY}}-XX → Testing
 >
 > 💡 If anything surprised you during this ticket, capture it now:
 >

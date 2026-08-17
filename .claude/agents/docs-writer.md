@@ -68,7 +68,7 @@ When adding a new file or renaming an existing one, update the matching entry in
 
 ### Length budget
 
-LLD container docs: under 120 lines. Engineering Guide articles: under 150 lines. HLD container docs: under 80 lines. AI SDLC docs: no hard limit — but prefer concise, structured over long prose.
+LLD container docs: under 120 lines. Engineering Guide articles: under 150 lines. HLD container docs: under 80 lines. AI SDLC docs: no hard limit — but prefer concise, structured over long prose. If a doc exceeds its budget, split it rather than extend it.
 
 ---
 

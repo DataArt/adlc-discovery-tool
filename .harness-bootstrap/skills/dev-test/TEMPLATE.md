@@ -1,5 +1,7 @@
 ---
 name: dev-test
+metadata:
+  version: 0.3.1
 description: Test phase of the dev lifecycle (/dev-test or /dev orchestrator). Runs tests, performs layer-delegated PR review, appends findings to 2-report.md.
 ---
 
@@ -78,7 +80,7 @@ Run the PR review **before** the test suite so that must-fix changes are include
 
 Prompt template:
 
-> "Read `docs/Target Architecture (HLD)/README.md` to find the active version. Audit the following implementation against HLD container boundaries, data-flow direction, and NFRs from `{{HLD_NFRS_PATH}}`. Also check layer-specific best practices (infrastructure: naming, removal policies, security rules, IAM least-privilege; backend: N+1 queries, p95 < 200ms patterns; frontend: accessibility). Files to review: `<list from plan>`. One finding per line with BUG/DESIGN/IMPROVE code." **Do not write or edit any files — return output only.**
+> "Read `docs/Target Architecture (HLD)/README.md` to find the active version. Audit the following implementation against HLD container boundaries, data-flow direction, and NFRs (read `docs/Target Architecture (HLD)/README.md` to find the active version, then read `docs/Target Architecture (HLD)/{active-version}/Non-Functional Concerns/Requirements.md`). Also check layer-specific best practices (infrastructure: naming, removal policies, security rules, IAM least-privilege; backend: N+1 queries, p95 < 200ms patterns; frontend: accessibility). Files to review: `<list from plan>`. One finding per line with BUG/DESIGN/IMPROVE code." **Do not write or edit any files — return output only.**
 
 Classify each finding using triage discipline before adding it to the PR Review table. Skip for purely mechanical or single-layer changes with no cross-cutting impact.
 
@@ -125,11 +127,11 @@ Pick the verification gate from what the plan actually touched — blindly runni
 > "Please run:
 >
 > ```bash
-> terraform validate
-> terraform plan   # in the affected module — confirm clean state and expected tags/naming
+> {{INFRA_SYNTH_CMD}}
+> {{INFRA_DIFF_CMD}}
 > ```
 >
-> Share the output. Optionally run `terraform apply` of the affected module in a safe context."
+> Share the output. Optionally apply in a safe context once the diff looks correct."
 
 Run `typecheck`/`lint`/`test` only for the subset of NX projects that actually changed.
 

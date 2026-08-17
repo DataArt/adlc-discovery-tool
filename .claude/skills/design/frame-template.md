@@ -10,6 +10,20 @@ type: reference
 
 <What is broken or missing — one paragraph. Why does this matter now.>
 
+**Current state:**
+
+```mermaid
+graph TD
+    classDef primary fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    classDef secondary fill:#7B68EE,stroke:#4B3AA8,color:#fff
+    classDef external fill:#E8F4FD,stroke:#4A90D9,color:#2C5F8A
+    classDef store fill:#F0F7EE,stroke:#5A8A5A,color:#2D4A2D
+    classDef problem fill:#FFF0F0,stroke:#D9534F,color:#8B0000
+
+    A[<actor or system>] --> B[<step with the problem>]
+    %% highlight the pain point
+```
+
 ## Success
 
 ### Known ACs
@@ -34,7 +48,7 @@ type: reference
 
 ## Constraints
 
-<Known deadlines, linked issues, regulatory requirements, architectural constraints from the HLD that directly bound this decision.>
+<Known deadlines, linked issues, regulatory requirements, architectural constraints from `{source docs}` that directly bound this decision.>
 
 ## Sizing _(omit if not applicable)_
 
@@ -49,4 +63,4 @@ type: reference
 
 - Ticket: <TICKET>
 - Related tickets: <linked ADLC tickets if any>
-- Reference docs: <linked docs if any>
+- Reference docs: <any `{source docs}` docs referenced>

@@ -1,5 +1,7 @@
 ---
 name: war-design
+metadata:
+  version: 0.3.1
 description: WAR of Target Architecture design docs (/war-design). @architect assesses against AWS Well-Architected Framework 6 pillars. Does NOT audit code — use /war-implementation.
 ---
 

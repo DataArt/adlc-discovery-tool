@@ -1,5 +1,7 @@
 ---
 name: skill-new
+metadata:
+  version: 0.3.1
 description: >
   Create a draft skill directly from a description (/skill-new or "create a skill for X",
   "encode this convention as a skill"). Bypasses /skill-reflect → /skill-triage.

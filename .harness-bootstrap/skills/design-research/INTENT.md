@@ -5,26 +5,29 @@ output: .claude/skills/design-research/SKILL.md
 
 ## Purpose
 
-Phase 2 of the design lifecycle. Reads `00 Frame.md`, validates context with the developer, delegates to `@architect` for a neutral 3–5 option analysis (no recommendation), classifies open questions by viability tier, persists triage results as an Assumptions block in `Report.md`, and saves `design/01 Research.md`. No judgment is made here — that is Phase 3's job.
+Phase 2 of the design lifecycle. Delegates to a read-only architecture agent to produce 3–5 neutral options (no recommendation), runs two-tier OQ triage, and saves `design/01 Research.md`. If Frame identified multiple independent decisions, loops once per decision.
 
 ## Substitutions
 
-None. This skill has no project-specific values.
+| Placeholder                  | Source                                                       | Notes                                                                                                                                                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `{{DESIGN_ARCHITECT_AGENT}}` | Q — design lifecycle scope (see design-frame's Conditionals) | The read-only architecture agent this phase delegates to — `@product-architect` in a product-context-scoped deployment, or this project's own `@architect` in a project-scoped deployment. Same value used across all `/design` skills. |
+| `{{DESIGN_DOCS_ROOT}}`       | Q — design lifecycle scope                                   | Same value as `design-frame/INTENT.md`                                                                                                                                                                                                  |
+| `{{DESIGN_CONTEXT_SOURCES}}` | Q — design lifecycle scope                                   | Same value as `design-frame/INTENT.md` Step 3                                                                                                                                                                                           |
 
 ## Conditionals
 
-None.
+None beyond the shared design-lifecycle-scope conditional documented in `design-frame/INTENT.md`.
 
 ## Verify checklist
 
 - [ ] TEMPLATE.md starts with `---` frontmatter containing `name:` (skill name) and `description:` (trigger conditions for this skill)
 
-- [ ] `@architect` explicitly told "Do not make a recommendation"
-- [ ] `@architect` explicitly told "Do not write or edit any files — return output only"
-- [ ] Context validation (Step 2b) has an explicit STOP before delegating to `@architect`
-- [ ] Step 3b OQ triage STOP is a **distinct, separate prompt** — not bundled with option confirmation
-- [ ] Step 3b references `.claude/skills/design/pattern-design-oq-triage.md`
-- [ ] Step 3b persists triage result as `## Assumptions` block appended to `Report.md`
-- [ ] Step 4 applies write-confirm pattern before developer confirms save
-- [ ] Step 5 (Do → Report → Commit) uses wait-for-confirmation pattern
-- [ ] Reiterate paths named with Phase N, Step M
+- [ ] Story folder glob uses `*{TICKET}*/**` wildcard, never `[{TICKET}]*`
+- [ ] Multi-decision check present at Step 1, referencing `pattern-multi-decision-split.md`
+- [ ] `{{DESIGN_ARCHITECT_AGENT}}` explicitly told "no recommendation" and "at least one minimal-change option, at least one industry-standard option"
+- [ ] OQ triage (Step 3b) is a separate prompt from the "options complete?" confirmation (Step 3) — never bundled
+- [ ] OQ triage classifies each question as (V) Viability or (E) Elaboration-input, one at a time
+- [ ] Assumptions persisted into the **existing** `## Assumptions` section of `design/Report.md` — no new `##` heading added
+- [ ] Step 5 phase tracker uses the full 7-segment banner (Frame/Research/Elaborate/Solution/Review/Address Feedback/Publish)
+- [ ] `{{DESIGN_ARCHITECT_AGENT}}` constraint: "Do not write or edit any files — return output only"

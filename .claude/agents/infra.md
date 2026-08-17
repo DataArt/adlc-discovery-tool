@@ -17,15 +17,15 @@ Owns all AWS CDK infrastructure covering CloudFront distribution, S3 static host
 - TypeScript strict mode — no `any`, no implicit `any`
 - Every resource must be defined as a CDK construct — never describe manual console steps
 - Resource tagging must be applied consistently to all stacks and constructs
-- Secrets must reference AWS Secrets Manager or SSM Parameter Store — never hardcode credentials, bucket names, or distribution IDs
-- Region must never be hardcoded or appear in any CDK source — it is configuration provided at deploy time via environment variables or CDK context
+- Secrets must reference AWS Secrets Manager or SSM Parameter Store — never hardcode credentials, bucket names, distribution IDs, or other environment-specific values
+- All resources must deploy within the single configured region — no cross-region resources. Region must never be hardcoded or appear in any CDK source — it is configuration provided at deploy time via environment variables or CDK context
 - Removal policies must be explicit on all stateful resources (S3 buckets, log groups) — never leave them as CDK defaults in production stacks
 - IAM policies must follow least-privilege — no `*` actions or resources unless explicitly justified
 - Conventional Commits for all commit message suggestions: `feat(infra):`, `fix(infra):`, `chore(infra):`
 
 ## Satellite review
 
-After completing any non-trivial step (new CDK stack or construct, IAM policy change, CloudFront behaviour change, Lambda@Edge association, security rule change), invoke `@architect` as a satellite reviewer before presenting verification to the developer. See `.claude/skills/dev/pattern-satellite-review.md` for the protocol. Maximum 3 iterations — escalate to the developer if unresolved.
+After completing any non-trivial step (new CDK stack or construct, IAM policy change, CloudFront behaviour change, Lambda@Edge association, security rule change), invoke `@architect` as a satellite reviewer before presenting verification to the developer. See `.claude/skills/worker-satellite-review.md` for the protocol and prompt template. The worker (you) invokes @architect directly — not the orchestrator. Maximum 3 iterations — escalate to the developer if unresolved.
 
 Skip satellite review for mechanical steps (config value change, tag value update, dependency bump, rename with no structural impact).
 
@@ -36,6 +36,7 @@ Skip satellite review for mechanical steps (config value change, tag value updat
 - Never hardcode region, account IDs, secret values, bucket names, or any environment-specific config
 - Never add features beyond what the current plan step specifies
 - Never use `RemovalPolicy.RETAIN` without a comment explaining why — revert after debugging
+- Never provision resources that create cross-region data flows
 
 ## Known Pitfalls
 

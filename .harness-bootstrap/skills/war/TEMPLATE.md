@@ -1,5 +1,7 @@
 ---
 name: war
+metadata:
+  version: 0.3.1
 description: Well-Architected Review router (/war). Prompts design vs implementation, delegates to /war-design or /war-implementation.
 ---
 

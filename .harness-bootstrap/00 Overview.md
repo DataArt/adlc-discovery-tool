@@ -2,6 +2,10 @@
 
 _What this harness is, why it exists, and how the pieces fit together._
 
+**Package version:** 0.3.0 — the overall `.harness-bootstrap/` package version. Bumped whenever any skill's `metadata.version` is bumped (see `skills/skill-authoring.md`, "Bootstrap template versioning") or a package file (`00 Overview.md`, `01 Bootstrap.md`, `02 Update.md`) changes. Same patch/minor/major rules apply.
+
+_0.3.0 — added the Two-track design lifecycle scope (Q10b), `pattern-context-resolution.md`, and `02 Update.md` Stage 0 (Q&A gap check for bootstrap questions added after a project was already bootstrapped). `design-frame`'s own template bump is major (2.0.0 — retired `{{DESIGN_TARGET_SUBFOLDERS}}`/`{{DESIGN_CONTEXT_SOURCES}}`); scored minor at the package level because Q1–Q11 are unchanged and existing single-track deployments are unaffected until they opt into a sync._
+
 ---
 
 ## What it is

@@ -40,4 +40,4 @@ Orchestrator for the full Dev lifecycle: Plan → Implement → Test → Documen
 - [ ] Jira transition ID table is present (or removed if no Jira)
 - [ ] Each phase section has exactly one stop, with the exact quoted question format
 - [ ] Orchestrator only delegates — no implementation logic, no step details
-- [ ] Completion section has two stops: MR offer first, then Jira transition offer — PR URL update step is intentionally absent (would produce a commit after the PR is open)
+- [ ] Completion section has two stops: MR offer first, then a "Completion — Jira sync" stop asking effort spent and delegating the worklog + `{{JIRA_TRANSITION_DONE}}` transition to `@scrum-master` — PR URL update step is intentionally absent (would produce a commit after the PR is open)

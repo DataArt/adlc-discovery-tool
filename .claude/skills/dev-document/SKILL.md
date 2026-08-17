@@ -1,5 +1,7 @@
 ---
 name: dev-document
+metadata:
+  version: 0.3.1
 description: Document phase of the dev lifecycle (/dev-document or /dev orchestrator). Updates READMEs, LLD, Engineering Guide, docs/AI SDLC/; resolves deviations; archives story. Final phase.
 ---
 
@@ -61,16 +63,18 @@ Use these rules to classify each item:
 - Infrastructure or build changes for that app
 - Deployment or teardown procedure changes
 
-**`docs/System Architecture (LLD)/{container}/`** — for implementation detail non-obvious from the code:
+**`docs/System Architecture (LLD)/{container}/`** — for implementation detail that is non-obvious from the code and worth preserving as a reference:
 
 - Data flows, sequence diagrams, component relationships
 - API contracts or integration patterns between containers
-- Key implementation decisions — **outcomes only, no rationale**
+- Key implementation decisions — **outcomes only, no rationale** (rationale stays in `solution/design/`)
 - Schema design, caching strategy, or config that isn't self-documenting
+- Only create/update if the implementation is stable enough to be a reference — not for in-progress or experimental work
+- The affected container folder will be clear from the plan context — check `docs/System Architecture (LLD)/README.md` for the current folder structure if in doubt
 
-> ⚠️ **Certainty principle** — LLD documents describe what is built, stated with certainty. No comparisons, open questions, or rationale.
+> ⚠️ **Certainty principle** — LLD documents describe what is built, stated with certainty. No comparisons, open questions, or rationale. Write single-direction, settled statements only.
 
-**`docs/Engineering Guide/`** — for changes that concern the entire project or a shared process:
+**`docs/Engineering Guide/`** — for changes that concern the entire product, an environment, or a shared process:
 
 - Environment provisioning or setup changes
 - New or changed operational steps (CDK deploy, secrets management)
@@ -84,7 +88,7 @@ Use these rules to classify each item:
 
 Use `docs/AI SDLC/` when the output is engagement content — not implementation detail about the docs site itself. If uncertain: ask yourself "does this inform [[CLIENT_NAME]]'s AI adoption?" If yes → AI SDLC. "Does this describe the hosting infrastructure?" → LLD or README.
 
-**File naming inside `docs/`:** All Markdown files under `docs/` use the format `NN Title Case.md` — two-digit number prefix, space separator, Title Case. Pick the next available number within the folder. Update all references in `README.md` and `CLAUDE.md` when adding or renaming a file.
+**File naming inside `docs/`:** All Markdown files under `docs/` use the format `NN Title Case.md` — two-digit number prefix, space separator, Title Case (e.g. `01 MCP Setup.md`, `09 Launching Env.md`). Pick the next available number within the folder. Update all references in `README.md` and `CLAUDE.md` when adding or renaming a file.
 
 **DRY rule:** if the substance of a change mostly belongs in the Engineering Guide or System Architecture (LLD), put the full content there and add only a short one-sentence reference in the app `README.md`. Never duplicate the same detail in two places.
 
@@ -187,7 +191,7 @@ Check whether an approved design exists for this ticket:
 - Also check `docs/Stories/archive/*{TICKET}*/solution/Architecture.md` (folder may already be archived)
 - If found, read `solution/Architecture.md` for the settled architecture decisions from the design
 
-If an Architecture Impact table is found, cross-reference it against what was actually implemented. Only surface impacts whose corresponding implementation step is marked complete.
+If an Architecture Impact table is found, cross-reference it against what was actually implemented (from `1-plan.md` and `2-report.md`). Only surface impacts whose corresponding implementation step is marked complete.
 
 Present to the developer:
 
@@ -197,9 +201,13 @@ Present to the developer:
 >
 > These should reflect only what was built — no rationale, no alternatives, settled outcomes only.
 >
+> Run `@architect` with the doc path and a summary of the decision to update each one.
+>
 > Proceed with archiving? (**yes** / **update docs first**)"
 
-**Stop and wait.** If no design folder is found — skip this step silently and proceed to Step 5c.
+**Stop and wait.** If the developer wants to update docs now, assist and confirm each change before continuing. If they say yes — proceed to Step 5c.
+
+If no design folder or Architecture Impact table is found — skip this step silently and proceed to Step 5c.
 
 ---
 
@@ -222,7 +230,7 @@ For each deviation, present to the developer:
 >
 > Tell me which action to take for each deviation."
 
-**Stop and wait.** Work through each deviation one at a time. Do not proceed to Step 5d until all deviations are resolved.
+**Stop and wait.** Work through each deviation one at a time using the same confirm-per-item flow from Step 2. Do not proceed to Step 5d until all deviations are resolved.
 
 If `1-plan.md` has no `## Architecture Deviations` section or the table is empty — skip this step silently and proceed to Step 5d.
 
@@ -236,7 +244,7 @@ Prompt template:
 
 > "Read the following docs that were created or updated during this documentation session: `<list every file written or edited in Steps 2–5c>`. For each file, identify: (1) any statement that contradicts a statement in another listed doc or in `docs/Target Architecture (HLD)/`, (2) any reference to a technology, tool, or resource that is no longer present in the codebase (stale reference). One finding per line. If none, say 'No issues found.' **Do not write or edit any files — return output only.**"
 
-If `@architect` returns findings, **apply the review gate pattern** (`.claude/skills/dev/pattern-review-gate.md`) with section name `## Satellite Review`. The tri-choice for each finding is **fix** / **td** (track as tech debt) / **skip**.
+If `@architect` returns findings, **apply the review gate pattern** (`.claude/skills/dev/pattern-review-gate.md`) with section name `## Satellite Review`. The tri-choice for each finding is **fix** / **td** (track as tech debt) / **skip** — present this alongside the standard triage.
 
 If no issues are found, continue directly to Step 6.
 
@@ -259,7 +267,7 @@ Mark the story as done and move it to the archive:
 
    Report to the developer: "Story archived to `docs/Stories/archive/[{TICKET}] ✅ Done — {name}`."
 
-4. Apply the do → report → commit pattern (`.claude/skills/dev/pattern-do-report-commit.md`) — present a commit message after archiving:
+4. Apply the do → report → commit pattern (`.claude/skills/dev/pattern-do-report-commit.md`) — present a commit message only after Steps 4–5 above have updated `2-report.md`:
 
 > "Documentation complete and story archived. Please commit with:
 >

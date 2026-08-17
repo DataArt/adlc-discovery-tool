@@ -1,6 +1,8 @@
 ---
 name: design-frame
-description: Frame phase of the design lifecycle (/design-frame or /design orchestrator). Detects design track (AI SDLC vs project architecture), proposes ACs, produces design/00 Frame.md.
+metadata:
+  version: 2.0.0
+description: Frame phase of the design lifecycle (/design-frame or /design orchestrator). Frames the problem and boundaries, proposes ACs, produces design/00 Frame.md.
 ---
 
 The developer wants to run the Frame phase of a design session. Here is their input:
@@ -15,7 +17,7 @@ The developer wants to run the Frame phase of a design session. Here is their in
 
 > 🔁 **Session continuity** (`.claude/skills/design/pattern-session-continuity.md`): If resuming after context compaction, re-read this full SKILL.md before doing anything. When this phase is complete, re-read `.claude/skills/design/SKILL.md` and resume the orchestrator from the next phase.
 
-Frame is Phase 1 of the design lifecycle. It frames the problem, frames the requirements (evaluation criteria for Elaborate), frames the boundaries — and sets the design track (A or B) before any research begins. Output: `design/00 Frame.md`.
+Frame is Phase 1 of the design lifecycle. It frames the problem, frames the requirements (evaluation criteria for Elaborate), and frames the boundaries before any research begins. Output: `design/00 Frame.md`.
 
 ---
 
@@ -31,11 +33,11 @@ The argument is a ticket number (e.g. `ADLC-042`) or a direct folder path.
       design/
   ```
 
-  > "What is the short title for this design ticket? (e.g. 'Workshop Framing', 'Auth Lambda Setup')"
+  > "What is the short title for this design ticket? (e.g. 'Context Topology Mapping', 'Data Platform Integration Contract')"
 
   **Stop and wait.** Use the provided title as `{name}`.
 
-- If `design/Report.md` exists, read it to restore session context (including the Track setting if already set).
+- If `design/Report.md` exists, read it to restore session context.
 
 ---
 
@@ -43,43 +45,27 @@ The argument is a ticket number (e.g. `ADLC-042`) or a direct folder path.
 
 Before writing any files, confirm the developer is on the correct feature branch:
 
-> "You're currently on branch `{current-branch}`. Should I help you create a feature branch first (e.g. `docs/{ticket-lowercase}-{slug}`)? (**yes** / **skip**)"
+> "You're currently on branch `{current-branch}`. Should I suggest a feature branch name first (e.g. `docs/{ticket-lowercase}-{slug}`)? (**yes** / **skip**)"
 
 **Stop and wait for confirmation.** Do not write any files until the developer confirms or skips.
 
+`git checkout -b` is a guarded command — same class as `git commit` / `git push`. Even after the developer says "yes," never run it yourself (including any prep like resolving uncommitted changes). Present the exact command as an instruction for the developer to run:
+
+> "Run this yourself: `git checkout -b docs/{ticket-lowercase}-{slug}`"
+
+Wait for the developer to confirm they've created the branch before proceeding.
+
 ---
 
-## Step 3 — Track Detection
+## Step 3 — Resolve design context
 
-Determine which design track this session follows:
-
-> "Is this design for **AI SDLC engagement content** (workshops, problem-space analysis, solution recommendations for [[CLIENT_NAME]] — output lands in `docs/AI SDLC/`) or for **project/app architecture** (VitePress site, Lambda@Edge auth, CDK infrastructure — output lands in HLD/LLD)?
->
-> **A — AI SDLC content** · **B — Project architecture**"
-
-**Stop and wait.**
-
-Record the track in `design/Report.md` (create the file using `.claude/skills/design/report-template.md` if it does not exist):
-
-- Track A: add a `Track: A — AI SDLC` row to the metadata table; note target subfolder (`Problem Space` for discovery/analysis, `Solution Space` for recommendations/designs)
-- Track B: add a `Track: B — Project Architecture` row to the metadata table
-
-**Track A — context sources for Step 4 and all subsequent phases:**
-
-- Read relevant docs under `docs/AI SDLC/03 Problem Space/` (discovery, current-state analysis, workshop findings)
-- Read relevant docs under `docs/AI SDLC/04 Solution Space/` (existing recommendations or prior designs in this area)
-- Do NOT read HLD docs — they describe the infrastructure, not the engagement content
-
-**Track B — context sources for Step 4 and all subsequent phases:**
-
-- Read `docs/Target Architecture (HLD)/README.md` to identify the active version
-- Read the relevant container and NFR docs for the areas this ticket touches
+Create `design/Report.md` now if it does not exist, using `.claude/skills/design/report-template.md`. Apply `.claude/skills/design/pattern-context-resolution.md` — ask the developer which track this is (Product or Project), then which subfolder within it, and write the resolved Track, Source docs, Dest docs, Subfolder, Architect agent, and Implementation note into the `## Context` section of `design/Report.md`. Context sources for Step 4 and all subsequent phases: read relevant docs under the resolved Source docs path (across its existing subfolders) for anything already established on this topic.
 
 ---
 
 ## Step 4 — Write 00 Frame.md
 
-Using `.claude/skills/design/frame-template.md`, write `design/00 Frame.md`. Pull context from the sources identified in Step 3 (Track A or Track B).
+Using `.claude/skills/design/frame-template.md`, write `design/00 Frame.md`. Pull context from the sources identified in Step 3.
 
 **Problem** — one paragraph from the ticket description (or `$ARGUMENTS`): what is broken or missing, and why it matters now.
 
@@ -95,20 +81,20 @@ These requirements become the evaluation criteria rows in the Requirements × Op
 - _In scope_ — what this design covers
 - _Out of scope_ — what is explicitly excluded (derive from ticket; add obvious exclusions if missing)
 
-**Constraints** — known deadlines, linked tickets, regulatory requirements, architectural or engagement constraints that directly bound this decision.
+**Constraints** — known deadlines, linked tickets, regulatory requirements, product or architectural constraints that directly bound this decision.
 
 **Sizing** _(optional — include only when the ticket warrants capacity planning)_
 
 - Expected users / MAU
 - Request volume
 - Data volume
-- Relevant NFR targets (Track B: from the active version of `docs/Target Architecture (HLD)/{ACTIVE_VERSION}/Non-Functional Concerns/Requirements.md` — read `docs/Target Architecture (HLD)/README.md` first to find the active version; Track A: from the engagement scope)
+- Relevant NFR targets (from the resolved design context or stakeholder requirements)
 
 **Links**
 
 - Ticket: `ADLC-{number}` (internal — no issue tracker URL)
 - Related tickets: `<any linked ADLC tickets if any>`
-- Reference docs: `<any docs/AI SDLC or HLD docs referenced>`
+- Reference docs: `<any {source docs} docs referenced>`
 
 Write `design/00 Frame.md` to disk.
 
@@ -124,7 +110,7 @@ If the developer raises a concern:
 
 - Source data wrong (problem description, linked docs) → "Reiterate from Step 4 — re-draft the Problem and Boundaries sections."
 - Problem framing wrong → "Reiterate from Step 4 — re-draft the Problem and Boundaries sections."
-- Track wrong → "Reiterate from Step 3 — re-set the Track and re-prime context."
+- Target subfolder or design context wrong → "Reiterate from Step 3 — re-resolve context and re-prime."
 
 `00 Frame.md` is the single source of ticket context for all subsequent phases. It is not modified again unless the developer explicitly requests a correction.
 
@@ -136,8 +122,8 @@ Apply the do→report→commit pattern (`.claude/skills/design/pattern-do-report
 
 **Report** — update `design/Report.md`:
 
-- Phase tracker: `📋 Frame ✅ · 🔍 Research 🔄 · 🏗 Elaborate ⏳ · 📦 Solution ⏳ · 📤 Publish ⏳`
-- Append to Efforts table: `| {YYYY-MM-DD} | Frame | Track {A/B} set; {N} known requirements, {M} proposed requirements accepted |`
+- Phase tracker: `📋 Frame ✅ · 🔍 Research 🔄 · 🏗 Elaborate ⏳ · 📦 Solution ⏳ · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳`
+- Append to Efforts table: `| {YYYY-MM-DD} | Frame | Context: {subfolder}; {N} known requirements, {M} proposed requirements accepted |`
 
 **Commit** — suggest:
 

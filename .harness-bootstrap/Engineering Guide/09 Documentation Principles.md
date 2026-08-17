@@ -46,13 +46,13 @@ This is a project-specific invariant — AI tools and developers rely on it to d
 
 Every permanent doc lands in exactly one location. Confirm before writing.
 
-| Destination           | Path                              | What belongs here                                              |
-| --------------------- | --------------------------------- | -------------------------------------------------------------- |
-| **LLD**               | `docs/System Architecture (LLD)/` | Implementation detail grounded in what is actually built       |
-| **Engineering Guide** | `docs/Engineering Guide/`         | Cross-cutting conventions, operational procedures, onboarding  |
-| **HLD**               | `rnmkr-product-context` repo      | Product-level architecture — do not write HLD in a pillar repo |
+| Destination           | Path                              | What belongs here                                             |
+| --------------------- | --------------------------------- | ------------------------------------------------------------- |
+| **HLD**               | `docs/Target Architecture (HLD)/` | Design intent for containers, data flows, NFRs                |
+| **LLD**               | `docs/System Architecture (LLD)/` | Implementation detail grounded in what is actually built      |
+| **Engineering Guide** | `docs/Engineering Guide/`         | Cross-cutting conventions, operational procedures, onboarding |
 
-SoC test: _"Is this an implementation detail for this container?"_ → LLD. _"Is this a convention or process the whole team follows?"_ → Engineering Guide.
+SoC test: _"Does this describe design intent for a container?"_ → HLD. _"Is this an implementation detail?"_ → LLD. _"Is this a convention the whole team follows?"_ → Engineering Guide.
 
 ---
 

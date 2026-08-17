@@ -1,5 +1,7 @@
 ---
 name: war-implementation
+metadata:
+  version: 0.3.1
 description: WAR code audit (/war-implementation). @architect finds gaps between NX implementation and Target Architecture. Does NOT audit design docs — use /war-design.
 ---
 

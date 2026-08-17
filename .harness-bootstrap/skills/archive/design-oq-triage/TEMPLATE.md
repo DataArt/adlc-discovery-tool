@@ -1,5 +1,7 @@
 ---
 name: Design OQ Triage Protocol
+metadata:
+  version: 0.3.1
 description: Two-tier classification of open questions from Research — viability OQs answered before Elaborate matrix is built; elaboration-input OQs deferred
 type: reference
 ---

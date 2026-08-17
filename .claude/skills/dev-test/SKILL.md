@@ -1,5 +1,7 @@
 ---
 name: dev-test
+metadata:
+  version: 0.3.1
 description: Test phase of the dev lifecycle (/dev-test or /dev orchestrator). Runs tests, performs layer-delegated PR review, appends findings to 2-report.md.
 ---
 
@@ -64,7 +66,7 @@ Run the PR review **before** the test suite so that must-fix changes are include
 
 Prompt template:
 
-> "Read `docs/Target Architecture (HLD)/README.md` to find the active version. Audit the following implementation against HLD container boundaries, data-flow direction, and NFRs from `docs/Target Architecture (HLD)/v1/Non-Functional Concerns/Requirements.md`. Also check layer-specific best practices (infrastructure: naming, removal policies, security rules, IAM least-privilege; auth: password handling, timing attacks, header validation). Files to review: `<list from plan>`. One finding per line with BUG/DESIGN/IMPROVE code." **Do not write or edit any files — return output only.**
+> "Read `docs/Target Architecture (HLD)/README.md` to find the active version. Audit the following implementation against HLD container boundaries, data-flow direction, and NFRs (read the `Non-Functional Concerns/Requirements.md` doc for that version). Also check layer-specific best practices (infrastructure: naming, removal policies, security rules, IAM least-privilege; auth: password handling, timing attacks, header validation). Files to review: `<list from plan>`. One finding per line with BUG/DESIGN/IMPROVE code." **Do not write or edit any files — return output only.**
 
 Classify each finding using triage discipline before adding it to the PR Review table. Skip for purely mechanical or single-layer changes with no cross-cutting impact.
 
@@ -92,9 +94,11 @@ Finding codes: `BUG` (incorrect behaviour), `SEC` (security), `PERF` (performanc
 
 After appending the table, check the findings for patterns worth encoding as skills:
 
-- If there are any `BUG`, `SEC`, or `DESIGN` findings that represent a **repeatable mistake** — something a skill could prevent in future — say:
+- If there are any `BUG`, `SEC`, or `DESIGN` findings that represent a **repeatable mistake** (not a one-off typo) — something that a skill or rule could prevent in future — say:
 
   > "This review found `{X}` pattern findings that look like a repeatable convention gap. Consider running `/skill-reflect` with a short description so it can be encoded as a skill."
+
+  Name the specific patterns briefly. Do not prompt this if all findings are `IMPROVE`-only or `No findings`.
 
 ## Step 5 — Commit PR review fixes
 
@@ -102,7 +106,7 @@ Follow Stage 2 of the review gate pattern (`.claude/skills/dev/pattern-review-ga
 
 ## Step 6 — Run the checks that match what changed
 
-Pick the verification gate from what the plan actually touched.
+Pick the verification gate from what the plan actually touched — blindly running all NX checks on, say, an infra ticket wastes time and gives false confidence (a clean typecheck says nothing about whether resources were tagged correctly).
 
 **For infra-only tickets** (CDK / config; no TypeScript app code changed) — the primary gate is CDK, not NX:
 
@@ -158,7 +162,7 @@ Present the result:
 >
 > Are there any AC items you'd like to verify manually before I continue?"
 
-**Stop and wait.** Do not proceed to Step 8b if any AC item is unresolved.
+**Stop and wait.** Do not proceed to Step 8b if any AC item is unresolved. If `1-plan.md` has no `## Acceptance Criteria` section, skip this step silently.
 
 ## Step 8b — Collaborative test review
 
@@ -171,7 +175,7 @@ After AC validation, review what was implemented in `1-plan.md` and suggest any 
 >
 > Anything else you'd like to test or check before moving to documentation?"
 
-**Stop and wait.** Only proceed once the developer confirms testing is complete.
+**Stop and wait.** If the developer wants to run additional checks, do so before updating the report. Only proceed once they confirm testing is complete.
 
 ## Step 9 — Update `2-report.md`
 

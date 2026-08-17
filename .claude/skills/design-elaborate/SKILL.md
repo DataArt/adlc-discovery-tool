@@ -1,6 +1,8 @@
 ---
 name: design-elaborate
-description: Elaborate phase of the design lifecycle (/design-elaborate or /design orchestrator). AC × Options matrix + AWS WAF assessment. Produces design/02 Elaborate.md.
+metadata:
+  version: 1.0.0
+description: Elaborate phase of the design lifecycle (/design-elaborate or /design orchestrator). AC × Options matrix + WAF assessment. Produces design/02 Elaborate.md.
 ---
 
 The developer wants to run the Elaborate phase of a design session. Here is their input:
@@ -25,14 +27,11 @@ Find the design folder by globbing `docs/Stories/*{TICKET}*/**`.
 
 Read in full:
 
-- `design/Report.md` — restore Track (A or B) and any Assumptions recorded during Research
+- `design/Report.md` — restore Assumptions recorded during Research
 - `design/00 Frame.md` — ACs (both known and accepted proposed)
 - `design/01 Research.md` — the options
 
 If either Frame or Research is missing, tell the developer which phase to complete first and stop.
-
-**Track A context refresh:** re-read any `docs/AI SDLC/` docs referenced in Research to ensure context is live in this session.
-**Track B context refresh:** re-read the relevant HLD container docs identified in Research.
 
 ---
 
@@ -50,7 +49,7 @@ See `.claude/skills/design/pattern-design-oq-triage.md` for the full protocol.
 
 ---
 
-## Step 3 — Build the Requirements × Options matrix and Tradeoffs table
+## Step 2 — Build the Requirements × Options matrix and Tradeoffs table
 
 **Matrix:** Rows = evaluation criteria derived from the requirements and constraints in `00 Frame.md` (functional requirements, NFRs, architectural constraints, operational concerns). Columns = every option from `01 Research.md`. Cell values: ✅ (yes) · ⚠️ (partially / with caveats) · ❌ (no). Add a brief note in any ⚠️ or ❌ cell.
 
@@ -60,7 +59,7 @@ See `.claude/skills/design/pattern-design-oq-triage.md` for the full protocol.
 
 ---
 
-## Step 3b — Write the draft and review in the IDE
+## Step 2b — Write the draft and review in the IDE
 
 By this point the matrix + tradeoffs are already the bulk of the draft content, and they are too large to review comfortably in the console. **Write `design/02 Elaborate.md` now** (matrix + tradeoffs, recommendation section left as a placeholder) using `.claude/skills/design/elaborate-template.md`, then point the developer to the file.
 
@@ -74,7 +73,7 @@ Only after confirmation, proceed to the recommendation (Step 4 fills the placeho
 
 ---
 
-## Step 4 — Write the Recommendation
+## Step 3 — Write the Recommendation
 
 State which option is recommended and why — explicitly referencing:
 
@@ -88,24 +87,24 @@ Also list the **open questions** that must be resolved before implementation beg
 
 ---
 
-## Step 5 — Fill the recommendation in 02 Elaborate.md
+## Step 4 — Fill the recommendation in 02 Elaborate.md
 
-`design/02 Elaborate.md` already exists from Step 3b (matrix + tradeoffs, confirmed). Fill the recommendation placeholder with the Step 4 recommendation + open questions; do not rewrite the matrix/tradeoffs unless corrections were raised.
+`design/02 Elaborate.md` already exists from **Step 2b** (matrix + tradeoffs, confirmed). Fill the recommendation placeholder with the Step 4 recommendation + open questions; do not rewrite the matrix/tradeoffs unless corrections were raised.
 
 Apply the write-confirm pattern (`.claude/skills/design/pattern-write-confirm.md`): say "Recommendation written to `design/02 Elaborate.md`. Review in your IDE — does the recommendation hold? Any corrections?"
 
 **Reiterate paths** — if the developer raises a concern:
 
-- Missing option in the matrix → "Reiterate from Research, Step 3 — re-delegate to `@architect` with the specific gap."
+- Missing option in the matrix → "Reiterate from Research, Step 3 — re-delegate to `{resolved architect agent}` with the specific gap."
 - Wrong or missing AC → "Reiterate from Frame, Step 4 — re-draft the Success section."
-- Tradeoff cell wrong → "Reiterate from Elaborate, Step 3 — rebuild the tradeoffs table with the correction."
+- Tradeoff cell wrong → "Reiterate from Elaborate, Step 2 — rebuild the tradeoffs table with the correction."
 - Recommendation needs revisiting after a fix → "Reiterate from Elaborate, Step 4 — restate the recommendation against the updated table."
 
 **Stop and wait.** Apply corrections and re-save if needed. Iterate until the developer confirms.
 
 ---
 
-## Step 5b — Resolve open questions
+## Step 4b — Resolve open questions
 
 Once the draft is confirmed, walk through the open questions listed in Step 4's recommendation. For each:
 
@@ -120,11 +119,11 @@ This can be a single exchange — not one stop per question. Ask:
 
 ---
 
-## Step 6 — Run closing WAF assessment
+## Step 5 — Run closing WAF assessment
 
-After `02 Elaborate.md` is approved, run a WAF assessment **of the recommended option only**.
+After `02 Elaborate.md` is approved, run a WAF assessment **of the recommended option only** against all AWS Well-Architected Framework pillars.
 
-**Track B (Project architecture) — mandatory.** Assess against all six AWS Well-Architected Framework pillars:
+**AWS Well-Architected Framework pillars:**
 
 | Pillar                 | Focus                                                                            |
 | ---------------------- | -------------------------------------------------------------------------------- |
@@ -135,15 +134,9 @@ After `02 Elaborate.md` is approved, run a WAF assessment **of the recommended o
 | Performance Efficiency | Using computing resources efficiently as demand changes                          |
 | Sustainability         | Minimising environmental impact of running cloud workloads                       |
 
-**Track A (AI SDLC content) — optional.** Ask:
-
-> "Would you like a WAF assessment of this recommendation? The pillars apply in an organisational context: Reliability → adoption resilience, Security → data privacy and access, Cost Optimisation → adoption cost, Operational Excellence → change management, Performance Efficiency → rollout scalability, Sustainability → long-term impact. (**yes** / **skip**)"
-
-**Stop and wait (Track A only).** Proceed only if the developer confirms.
-
 Use RAG ratings: 🟢 Green · 🟡 Amber · 🔴 Red.
 
-For each pillar in scope: Strengths · Gaps · Recommendations (P1 / P2 / P3).
+For each pillar: Strengths · Gaps · Recommendations (P1 / P2 / P3).
 
 Present the assessment in the console for review. Apply corrections if requested.
 
@@ -156,24 +149,24 @@ Present the assessment in the console for review. Apply corrections if requested
 **Reiterate paths** — if a P1 gap is found that the current recommendation cannot address:
 
 - Security or reliability gap at architecture level → "Reiterate from Elaborate, Step 4 — revisit the recommendation to address [gap]."
-- Gap that requires an option not in the matrix → "Reiterate from Research, Step 3 — re-delegate to `@architect` with the specific constraint."
+- Gap that requires an option not in the matrix → "Reiterate from Research, Step 3 — re-delegate to `{resolved architect agent}` with the specific constraint."
 
 ---
 
-## Step 7 — Save both artifacts
+## Step 6 — Save both artifacts
 
-**7a — 02 Elaborate.md**
+**6a — 02 Elaborate.md**
 
 Already written and confirmed in Step 5. If any corrections were made in Step 5b or Step 6, re-save now.
 
-**7b — Append WAF section to Report.md**
+**6b — Add WAF block inside Report.md**
 
-Append the following to `design/Report.md`:
+The `## WAF Assessment` section already exists in `design/Report.md` (pre-created by the template). Append a dated block **inside** that section — do not add a new `##` heading:
 
 ```markdown
-## WAF Assessment
+### WAF — Elaborate — {YYYY-MM-DD}
 
-_Assessed: {YYYY-MM-DD}. Recommended option: <option name>._
+_Recommended option: <option name>._
 
 | Pillar                 | Rating   | Headline |
 | ---------------------- | -------- | -------- |
@@ -193,13 +186,13 @@ Full elaboration: `design/02 Elaborate.md`
 
 ---
 
-## Step 8 — Do → Report → Commit
+## Step 7 — Do → Report → Commit
 
 Apply the do→report→commit pattern (`.claude/skills/design/pattern-do-report-commit.md`):
 
 **Report** — update `design/Report.md`:
 
-- Phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution 🔄 · 📤 Publish ⏳`
+- Phase tracker: `📋 Frame ✅ · 🔍 Research ✅ · 🏗 Elaborate ✅ · 📦 Solution 🔄 · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳`
 - Append to Efforts table: `| {YYYY-MM-DD} | Elaborate | Recommended <option name>; WAF: <summary of RAG ratings>; {N} P1 items |`
 
 **Commit** — suggest:

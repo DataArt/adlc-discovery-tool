@@ -1,5 +1,7 @@
 ---
 name: dev-plan
+metadata:
+  version: 0.3.1
 description: Plan phase of the dev lifecycle (/dev-plan or /dev orchestrator). Proposes implementation plan, saves 1-plan.md + 2-report.md.
 ---
 
@@ -196,7 +198,6 @@ Other rules:
 
 - Never bundle verification into the next step — it belongs at the end of the current one
 - If a step depends on a previous step, say so explicitly
-- Keep Compute-owned tables (e.g. `player_metric_events`) out of scope unless explicitly asked
 - **One step = one NX project or one cross-cutting concern.** Never mix layers in a single step (e.g. Terraform infra changes alongside `app-db` script changes). If the step title can't map cleanly to one NX project name or one concern, split it. A commit message that would require two types to be honest is a reliable signal the step is too broad.
 - **Infra/config steps require at least one live operational verification item.** Static checks (grep, file inspection) are necessary but not sufficient. For any step that touches infrastructure or configuration, at least one verification item must prove the thing actually works — e.g. `terraform init` connects to the correct backend, `terraform plan` output matches expectations, CLI confirms an access policy exists, a health check or curl returns the expected response. Do not write a verification block that is grep-only for an infra step.
 - **Do not repeat typecheck/lint in per-step verification — the pre-commit hook runs them.** The project's Husky pre-commit hook runs `typecheck` and `lint` on every commit, so a per-step `yarn nx typecheck`/`lint` instruction is redundant noise that implies manual work the hook already does. Per-step verification should be the functional check specific to the step (curl the endpoint, open the page, inspect build output). Add a single line at the top of the plan — "Pre-commit hook runs typecheck + lint on every commit" — and let the commit boundary catch type/lint regressions.

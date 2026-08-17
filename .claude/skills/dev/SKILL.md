@@ -1,5 +1,7 @@
 ---
 name: dev
+metadata:
+  version: 0.4.0
 description: >
   Full dev lifecycle orchestrator (/dev {ticket}): Plan → Implement → Test → Document.
   Trigger: "build ADLC-XX", "implement ADLC-XX", or starting a ticket from scratch.
@@ -127,8 +129,10 @@ When all four phases are done, ask about the merge request:
 > **Title:**
 >
 > ```
-> feat({ticket-lowercase}): <one-line summary>
+> {type}({ticket-lowercase}): <one-line summary>
 > ```
+>
+> _(pick the right type: `feat` for new capability, `fix` for a bug, `chore` for tooling/config, `docs` for documentation-only, `refactor` for code change with no behaviour change)_
 >
 > **Description:**
 >

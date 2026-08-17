@@ -1,5 +1,7 @@
 ---
 name: skill-triage
+metadata:
+  version: 0.4.0
 description: Cluster pending reflections into draft skills (/skill-triage). Reads .claude/reflections/, generates .claude/skills/drafts/. Run /skill-promote after.
 ---
 
@@ -174,11 +176,11 @@ Next: run /skill-promote once a draft has been validated for ~1 week.
 
 **Lifecycle doc sync** — for every skill created or updated in this session, check if it is a lifecycle phase skill and flag the corresponding lifecycle doc for review:
 
-| Skill prefix                                                                                                          | Lifecycle doc                                              |
-| --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `dev-plan`, `dev-implement`, `dev-test`, `dev-document`, `dev`                                                        | `docs/Engineering Guide/Lifecycles/01 Dev Lifecycle.md`    |
-| `design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-publish`, `design-review`, `design` | `docs/Engineering Guide/Lifecycles/02 Design Lifecycle.md` |
-| `skill-reflect`, `skill-triage`, `skill-promote`, `skill-new`                                                         | `docs/Engineering Guide/Lifecycles/03 Skill Lifecycle.md`  |
+| Skill prefix                                                                                                                                                           | Lifecycle doc                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `dev-plan`, `dev-implement`, `dev-test`, `dev-document`, `dev`                                                                                                         | `docs/Engineering Guide/Lifecycles/01 Dev Lifecycle.md`    |
+| `design-frame`, `design-research`, `design-elaborate`, `design-solution`, `design-review-gate`, `design-address-feedback`, `design-publish`, `design-review`, `design` | `docs/Engineering Guide/Lifecycles/02 Design Lifecycle.md` |
+| `skill-reflect`, `skill-triage`, `skill-promote`, `skill-new`                                                                                                          | `docs/Engineering Guide/Lifecycles/03 Skill Lifecycle.md`  |
 
 If any match, tell the developer:
 

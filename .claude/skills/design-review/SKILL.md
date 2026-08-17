@@ -1,5 +1,7 @@
 ---
 name: design-review
+metadata:
+  version: 0.4.0
 description: WAF satellite review of design artifacts (/design-review). Assesses against AWS Well-Architected Framework 6 pillars, produces design/03 Review.md. Run before /design-publish.
 ---
 
@@ -46,15 +48,13 @@ Map target to artifact:
 
 If the target artifact does not exist, tell the developer which phase to complete first and stop.
 
-Also read `design/Report.md` for existing WAF findings (to avoid duplicating already-recorded items) and the Track setting (A or B).
+Also read `design/Report.md` for existing WAF findings (to avoid duplicating already-recorded items) and the resolved `## Context` section (Source docs, Architect agent).
 
 ---
 
-## Step 2 — Read architecture context (track-dependent)
+## Step 2 — Read architecture context
 
-**Track B only:** Read `docs/Target Architecture (HLD)/README.md` to find the active version. Read the relevant container and NFR docs for the areas the design touches. Read `docs/Target Architecture (HLD)/{ACTIVE_VERSION}/Non-Functional Concerns/Requirements.md`.
-
-**Track A:** Read relevant docs from `docs/AI SDLC/03 Problem Space/` and `docs/AI SDLC/04 Solution Space/` for the areas the design touches.
+Read relevant docs under `{source docs}` (across its existing subfolders) for the areas the design touches. If the resolved track is Project, also read the active version's `Non-Functional Concerns/Requirements.md` (find the active version via `docs/Target Architecture (HLD)/README.md`).
 
 ---
 

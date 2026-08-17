@@ -35,13 +35,14 @@ This informs Q2, Q3, Q7 — the AI should propose answers from what it found, no
 
 Read in this order:
 
-| Path                              | Weight | Why                                                                  |
-| --------------------------------- | ------ | -------------------------------------------------------------------- |
-| `docs/Target Architecture (HLD)/` | 1.0    | If exists, defines containers and NFRs — must not be overwritten     |
-| `docs/Engineering Guide/`         | 0.9    | If exists, may already have conventions, principles, lifecycle docs  |
-| `docs/System Architecture (LLD)/` | 0.7    | If exists, indicates the project is already partially harnessed      |
-| `docs/Stories/` (latest 5)        | 0.5    | Sample of existing story format if any                               |
-| `AGENTS.md` / `CLAUDE.md` (root)  | 0.9    | If exists, must not be silently overwritten — confirm with developer |
+| Path                                                                                                                                                                                                                                         | Weight | Why                                                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `docs/Target Architecture (HLD)/`                                                                                                                                                                                                            | 1.0    | If exists, defines containers and NFRs — must not be overwritten                                                              |
+| `docs/Engineering Guide/`                                                                                                                                                                                                                    | 0.9    | If exists, may already have conventions, principles, lifecycle docs                                                           |
+| `docs/System Architecture (LLD)/`                                                                                                                                                                                                            | 0.7    | If exists, indicates the project is already partially harnessed                                                               |
+| `docs/Stories/` (latest 5)                                                                                                                                                                                                                   | 0.5    | Sample of existing story format if any                                                                                        |
+| `AGENTS.md` / `CLAUDE.md` (root)                                                                                                                                                                                                             | 0.9    | If exists, must not be silently overwritten — confirm with developer                                                          |
+| Any other top-level `docs/<Name>/` folder that reads as cross-project/governance rather than this-repo-specific (README mentions "platform", "product", multiple repos, or governance/principles rather than this repo's own implementation) | 0.8    | If found, informs Q10b/Q10c — propose Product-context-scoped or Two-track and the detected folder name instead of asking cold |
 
 If a doc tree already exists with content, this is an **adoption scenario** — see the section "Adopting the harness in an existing project" at the end of this file.
 
@@ -119,6 +120,22 @@ The ticket prefix and the board's `projectKey=` URL param are often different. I
 
 ---
 
+**Q10b.** _(only if Design is enabled)_ Design lifecycle scope — three modes:
+
+- **Project-scoped** (default) — `/design` always targets this project's own architecture (`docs/Target Architecture (HLD)/`), agent `@architect`. Pick this unless the project is explicitly part of a multi-repo platform with a shared cross-project docs layer.
+- **Product-context-scoped** — `/design` always targets a shared product-context layer instead of this project's own architecture (this project _is_ that shared layer — e.g. a dedicated docs/governance repo). Agent `@product-architect`.
+- **Two-track** — `/design` supports both, chosen per design session (Product or Project), resolved once in Frame and recorded in `Report.md`. Deploys both agents side by side.
+
+If Stage 1c detected an existing shared product-context-style folder (see Stage 1c), propose Product-context-scoped or Two-track and name the detected folder; otherwise ask cold. This one decision governs `{{DESIGN_DOCS_ROOT}}`, `{{DESIGN_ARCHITECT_AGENT}}`, and related placeholders consistently across every `/design` skill — see the shared conditional in `.harness-bootstrap/skills/design-frame/INTENT.md`.
+⚠️ Stop and wait.
+
+---
+
+**Q10c.** _(only if Q10b is Product-context-scoped or Two-track)_ What's the folder name under `docs/` for the shared product-context layer? Propose the folder Stage 1c detected, if any; otherwise default `Product Context`. This drives `{{PRODUCT_CONTEXT_DIR}}` everywhere.
+⚠️ Stop and wait.
+
+---
+
 **Q11.** Well-Architected Framework for the Architecture lifecycle:
 
 - Azure WAF (5 pillars: Reliability, Security, Cost, Operational Excellence, Performance Efficiency)
@@ -132,8 +149,22 @@ Drives `/war-design`, `/war-implementation`, and the `design-review` phase if De
 
 ---
 
-After all eleven questions are answered: present a summary table of all answers. Ask: "Confirm to proceed with generation? (yes / edit answer N)"
+After all questions are answered (Q1–Q11, plus Q10b/Q10c if Design is enabled, plus any question added since this file was last touched): present a summary table of all answers. Ask: "Confirm to proceed with generation? (yes / edit answer N)"
 ⚠️ Stop and wait for explicit "yes".
+
+**Persist the answers ledger.** Write `.harness-bootstrap-answers.md` at the repo root (create if missing) — one row per question key (`Q1`…`Q11`, `Q10b`, `Q10c`, and any future additions) with its resolved value. This is what `02 Update.md` Stage 0 diffs against to detect newly-added bootstrap questions on a future update, without which every future harness evolution that adds a question would have no way to know this project was never asked it. Example:
+
+```markdown
+# Bootstrap Answers
+
+| Question | Answer                              |
+| -------- | ----------------------------------- |
+| Q1       | <one-paragraph project purpose>     |
+| Q5       | PROJECT_KEY=PROJ, Jira, ...         |
+| Q10b     | Two-track                           |
+| Q10c     | PRODUCT_CONTEXT_DIR=Product Context |
+| …        | …                                   |
+```
 
 ---
 
@@ -177,9 +208,9 @@ Copy alongside each skill (verbatim, no substitution): every `*.template.md` fil
 
 **A.1 — Dev lifecycle** (always enabled)
 
-Skills: `dev/`, `dev-plan/`, `dev-implement/`, `dev-test/`, `dev-document/`, `story-folder-glob/`
+Skills: `dev/`, `dev-plan/`, `dev-implement/`, `dev-test/`, `dev-document/`
 
-Agents (in addition to the pillar-specific agent): `docs-writer/`
+Agents (in addition to the layer-specific specialist agents from Block B): `docs-writer/`
 
 For each: run substitution algorithm → write output → run INTENT.md Verify checklist.
 
@@ -198,9 +229,11 @@ Ask: "A.1 complete. Spot-check any skill (name it) or confirm to continue to A.2
 
 **A.2 — Design lifecycle** (skip entire sub-block if Design not in Q10)
 
-Skills: `design/`, `design-frame/`, `design-research/`, `design-elaborate/`, `design-solution/`, `design-review/`, `design-publish/`
+Skills: `design/`, `design-frame/`, `design-research/`, `design-elaborate/`, `design-solution/`, `design-review/`, `design-review-gate/`, `design-address-feedback/`, `design-publish/`
 
 If Q11 is "None": omit `design-review/`.
+
+Per Q10b: deploy `pattern-context-resolution.md` (companion file under `design/`) only for **Two-track** mode — omit it entirely for Project-scoped or Product-context-scoped. Deploy the `product-architect` agent (Block B) for **Product-context-scoped or Two-track**; deploy/keep `architect` for **Project-scoped or Two-track** — in Two-track mode both agents are deployed side by side.
 
 For each: run substitution algorithm → write output → run INTENT.md Verify checklist.
 
@@ -239,42 +272,29 @@ Ask: "A.4 complete. Spot-check any skill or confirm to continue to Block B?"
 
 ### Block B — Generate specialist agent scaffolds
 
-From Q2 (tech stack) and Q3 (containers), suggest specialist agents. Examples:
+From Q2 (tech stack) and Q3 (containers), suggest specialist agents. There are two agent types:
 
-- NestJS BFF → `bff` agent
-- React frontend → `web` agent
-- Terraform / CDK infrastructure → `infra` agent
-- Multi-container project (>1 in Q3) → `architect` read-only agent
+**Layer specialists** — one per application container from Q3 (e.g. `web`, `auth`, `bff`, `data`). Each uses `.harness-bootstrap/agents/layer/TEMPLATE.md` as its source; run the substitution algorithm per `layer/INTENT.md`. Examples:
+
+- TypeScript frontend → layer agent named `web`
+- Node.js API / BFF → layer agent named `bff`
+- Lambda handler → layer agent named `auth`
+
+**Cross-cutting agents** — use their own pre-built templates (do not generate from scratch):
+
+- Terraform / CDK infrastructure → `agents/infra/` template
+- Multi-container project (>1 in Q3) → `agents/architect/` template (read-only reviewer)
+- Q10b is Product-context-scoped or Two-track → `agents/product-architect/` template (see its own INTENT.md; deployed alongside `architect` in Two-track mode, not instead of it)
+- `agents/onboarding/`, `agents/docs-writer/`, `agents/scrum-master/` — always include
 
 Present the suggested list. ⚠️ Stop and wait — let the developer add, remove, or rename.
 
-**Adopt:** for each approved agent, generate a scaffold:
+**Adopt:**
 
-```
----
-name: <name>
-description: <one-line role description>
-tools: <Read, Edit, Write, Glob, Grep — restrict to read-only for analyst agents>
----
+- For each **layer specialist**: run substitution algorithm on `agents/layer/TEMPLATE.md` → resolve all `{{LAYER_*}}` and `{{NX_APP_NAME}}` placeholders per `layer/INTENT.md` Substitutions table → write to output path
+- For each **cross-cutting agent**: run substitution algorithm on that agent's `TEMPLATE.md` → write to output path
 
-## Role
-<one paragraph: what the agent owns, what it does not own>
-
-## Layer scope
-<which paths the agent works in — must be a subset of Q3>
-
-## What to enforce
-- <invariant 1>
-- <invariant 2>
-- ...
-
-## What never to do
-- Never run guarded commands (Q7): <list>
-- Never implement work outside layer scope
-- Never add features beyond what the plan step specifies
-```
-
-20–40 lines per agent. Wire stack-specific conventions from Q2 (NestJS module structure, React component patterns, etc.). Do not add elaborate personas — three sections only: scope, enforce, never.
+Layer agents are 20–40 lines. Every layer agent must have all five sections from `layer/TEMPLATE.md`: Role, Layer scope, What to enforce, Satellite review, What never to do.
 
 Output paths per Q6:
 
@@ -284,7 +304,7 @@ Output paths per Q6:
 - Kiro → `.kiro/hooks/<name>.md`
 - Windsurf → appended to `.windsurfrules` under `## Agent: <Name>`
 
-**Self-check:** verify each agent file has Role, Layer scope, What to enforce, What never to do — all four sections. No persona prose.
+**Self-check:** verify each generated layer agent file has all five sections (Role, Layer scope, What to enforce, Satellite review, What never to do) and no unresolved `{{LAYER_*}}` placeholders. No persona prose.
 
 **Stop and validate:** present the agent files. Ask: "Block B complete. Spot-check any before continuing?"
 ⚠️ Stop and wait.
@@ -316,6 +336,10 @@ most likely violate without being told. From Q7.>
 <one row per Q3 container, role and stack from Q2/Q3>
 
 See docs/Target Architecture (HLD)/README.md for the active version's full design.
+
+<If Q10b is Product-context-scoped or Two-track, add:>
+### Design Track
+`/design` is <Product-context-scoped: "scoped to docs/<PRODUCT_CONTEXT_DIR>/ only" / Two-track: "two-track: Product (docs/<PRODUCT_CONTEXT_DIR>/) or Project (docs/Target Architecture (HLD)/), resolved once in Frame and recorded in the session's Report.md ## Context section">.
 
 ### NFRs
 See docs/Target Architecture (HLD)/<active version>/Non-Functional Concerns/Requirements.md.
@@ -428,17 +452,28 @@ Copy from `.harness-bootstrap/Engineering Guide/` → `docs/Engineering Guide/` 
 | `04 AI Workflow.md`                       | `docs/Engineering Guide/04 AI Workflow.md`                       | always              |
 | `05 MCP Setup.md`                         | `docs/Engineering Guide/05 MCP Setup.md`                         | Q5 = Jira           |
 | `09 Documentation Principles.md`          | `docs/Engineering Guide/09 Documentation Principles.md`          | always              |
-| `10 Documents Flow.md`                    | `docs/Engineering Guide/10 Documents Flow.md`                    | always              |
 | `Lifecycles/00 Overview.md`               | `docs/Engineering Guide/Lifecycles/00 Overview.md`               | always              |
 | `Lifecycles/01 Dev Lifecycle.md`          | `docs/Engineering Guide/Lifecycles/01 Dev Lifecycle.md`          | always              |
 | `Lifecycles/02 Design Lifecycle.md`       | `docs/Engineering Guide/Lifecycles/02 Design Lifecycle.md`       | Design in Q10       |
 | `Lifecycles/03 Skill Lifecycle.md`        | `docs/Engineering Guide/Lifecycles/03 Skill Lifecycle.md`        | Skill in Q10        |
 | `Lifecycles/04 Architecture Lifecycle.md` | `docs/Engineering Guide/Lifecycles/04 Architecture Lifecycle.md` | Architecture in Q10 |
+| `Lifecycles/05 Documents Flow.md`         | `docs/Engineering Guide/Lifecycles/05 Documents Flow.md`         | always              |
 
 **Substitutions in installed docs:**
 
 - `Lifecycles/04 Architecture Lifecycle.md`: substitute WAF pillar list from Q11
 - `05 MCP Setup.md`: substitute Jira URL, Confluence URL from Q5
+- `Lifecycles/02 Design Lifecycle.md` and `Lifecycles/05 Documents Flow.md`: **checked in as their Two-track form** — see below for what to remove for the other two modes
+- `Lifecycles/00 Overview.md`: `{{DESIGN_ARCHITECT_AGENT}}` per Q10b
+
+**Q10b — `Lifecycles/02 Design Lifecycle.md` and `Lifecycles/05 Documents Flow.md` are written as Two-track by default.** These two files ship in this package already describing this repo's own Two-track deployment — full prose, full Mermaid diagram, no `{{}}` placeholders standing in for content, so the file is always valid and complete on its own (no broken diagram if someone opens the raw file without running substitution). **Two-track deployments: copy both files verbatim** (only `{{PRODUCT_CONTEXT_DIR}}`, `{{DESIGN_ARCHITECT_AGENT}}`, `{{DESIGN_DOCS_ROOT}}` need resolving — all three already used the normal way, safely inside quoted labels/table cells). For the other two modes, **remove** the content below — do not leave anything blank or commented out in the output.
+
+_Remove for **Project-scoped**:_
+
+- `02 Design Lifecycle.md`: the "Two tracks, one flow" paragraph; "Resolve Context (track/subfolder) → " prefix on the Frame node label; the Frame invariant's opening sentence about track resolution; the `context-resolution` pattern-table row
+- `05 Documents Flow.md`: the `PCTX[...]:::pctx` node and its `classDef pctx` line; the `SOL -->|"/design-publish (Product)"| PCTX` edge; simplify the remaining `SOL -->|"/design-publish (Project)"| HLD` edge to `SOL -->|"/design-publish\nsuggests updates"| HLD` (no qualifier — only one track exists); the `> _Context sources..._` blockquote below the diagram; the `` `/design-publish` (Product track) `` graduation row; simplify the remaining `` `/design-publish` (Project track) `` row's label back to plain `` `/design-publish` ``; the "Design graduation is track-routed..." sentence at the end of **Graduation**
+
+_Remove for **Product-context-scoped**:_ same list as Project-scoped, but mirrored — keep the `PCTX` node/classDef and the `SOL -->|...| PCTX` edge (simplified to drop the "(Product)" qualifier, same reasoning), remove the `SOL -->|...| HLD` edge and the `(Project track)` graduation row instead, keep the `(Product track)` row simplified to plain `` `/design-publish` ``. The `HLD` node itself and its `/dev-document` edges stay in both cases — those are independent of Q10b.
 
 **Adopt:** copy each file, apply per-file substitutions where listed.
 
@@ -476,6 +511,10 @@ docs/Target Architecture (HLD)/
 
 No numeric prefixes inside the version. The four entries have fixed names. WAR/ is not generated here — created on first `/war-*` run.
 
+**E.1b — Product context scaffold** _(only if Q10b is Product-context-scoped or Two-track)_
+
+Scaffold a minimal `docs/{{PRODUCT_CONTEXT_DIR}}/README.md` (router/index, one paragraph on what this layer governs) plus one empty subfolder as a starting point (ask the developer for its name, or default to `Architecture/`). Do not invent subfolder structure beyond that — subsequent `/design` sessions create subfolders as needed (Two-track: see `pattern-context-resolution.md`; Product-context-scoped: see `design-frame`'s Step 3).
+
 **E.2 — docs/README.md**
 
 If `docs/README.md` already exists with meaningful content: validate and suggest changes only.
@@ -493,7 +532,7 @@ This repository organises documentation in four tiers:
 - **Stories** — per-ticket working folders (transient)
 
 → See `Engineering Guide/02 Doc Structure.md` for the full model.
-→ See `Engineering Guide/10 Documents Flow.md` for how docs are produced and graduate.
+→ See `Engineering Guide/Lifecycles/05 Documents Flow.md` for how docs are produced and graduate.
 → See `Engineering Guide/Lifecycles/00 Overview.md` for the workflow lifecycles.
 ```
 
@@ -520,19 +559,18 @@ Before announcing completion, run this checklist. Fix every failing item.
 
 **No unresolved placeholders anywhere:**
 
-- [ ] Grep all generated files in `.claude/skills/`, `.claude/agents/`, `AGENTS.md`, `docs/Engineering Guide/`, `docs/Target Architecture (HLD)/` for `{{`, `}}`, `<PROJECT_KEY>`, `<TICKET>`, `<WAF`, `<guarded`, `@bff`, `@web`, `@architect` — none should remain
+- [ ] Grep all generated files in `.claude/skills/`, `.claude/agents/`, `AGENTS.md`, `docs/Engineering Guide/`, `docs/Target Architecture (HLD)/` for `{{`, `}}`, `LAYER_NAME`, `LAYER_PATH`, `NX_APP_NAME`, `<PROJECT_KEY>`, `<TICKET>`, `<WAF`, `<guarded` — none should remain (note: `@architect` legitimately appears in satellite-review blocks — do not flag it)
 - [ ] Project key is the actual Q5 value everywhere
 - [ ] WAF pillars are the actual Q11 values everywhere
 
 **Hard stop blocks are intact:**
 
-- [ ] `dev-implement/SKILL.md` Step 3.5 has the multi-line quoted HARD STOP block, not compressed
-- [ ] `dev-implement/SKILL.md` Steps 3.6a, 3.6b, 3.6c are three separate sub-steps
+- [ ] `dev-implement/SKILL.md` Step 3 contains the ⛔ HARD STOP block ("do not edit any file, do not update 2-report.md, do not start the next step until the developer explicitly confirms verification passed") — not compressed to a single line
 
 **Decision logic is explicit:**
 
-- [ ] `dev-plan/SKILL.md` Step 7b architecture audit asks specific questions about container, data flow, NFRs
-- [ ] `dev-document/SKILL.md` Step 1b classification is a four-question decision tree
+- [ ] `dev-plan/SKILL.md` Step 10 architecture audit asks specific questions about container boundaries, data-flow direction, and NFRs
+- [ ] `dev-document/SKILL.md` Step 1 classification uses the HLD/LLD placement matrix (HIT/MISS × HIT/MISS) — not a shortcut lookup
 
 **Orchestrators delegate, don't describe:**
 
@@ -548,6 +586,10 @@ Before announcing completion, run this checklist. Fix every failing item.
 
 - [ ] `skill-harvest/SKILL.md` is present in `.claude/skills/`
 - [ ] `skill-triage/SKILL.md` and `skill-promote/SKILL.md` end with a "Harness bootstrap sync" reminder block
+
+**Answers ledger:**
+
+- [ ] `.harness-bootstrap-answers.md` exists at the repo root with one row per question actually asked (Q1–Q11, plus Q10b/Q10c if Design was enabled) — this is what `02 Update.md` Stage 0 depends on for every future harness update
 
 **Tool wrapper is correct for Q6:**
 

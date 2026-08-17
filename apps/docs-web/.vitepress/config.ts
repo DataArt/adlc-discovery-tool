@@ -36,8 +36,9 @@ export default withMermaid(
         { text: 'Process', link: '/AI SDLC/01 Process/' },
         { text: 'Vision', link: '/AI SDLC/02 Vision/' },
         { text: 'Problem', link: '/AI SDLC/03 Problem Space/' },
-        { text: 'Solution', link: '/AI SDLC/04 Solution Space/' },
-        { text: 'Roadmap', link: '/AI SDLC/05 Roadmap/' },
+        { text: 'Goals', link: '/AI SDLC/04 Goals/' },
+        { text: 'Solution', link: '/AI SDLC/05 Solution Space/' },
+        { text: 'Roadmap', link: '/AI SDLC/06 Roadmap/' },
       ],
 
       sidebar: {
@@ -46,10 +47,11 @@ export default withMermaid(
         '/AI SDLC/03 Problem Space/': [
           { text: 'Problem Space', items: scanSection('AI SDLC/03 Problem Space') },
         ],
-        '/AI SDLC/04 Solution Space/': [
-          { text: 'Solution Space', items: scanSection('AI SDLC/04 Solution Space') },
+        '/AI SDLC/04 Goals/': [{ text: 'Goals', items: scanSection('AI SDLC/04 Goals') }],
+        '/AI SDLC/05 Solution Space/': [
+          { text: 'Solution Space', items: scanSection('AI SDLC/05 Solution Space') },
         ],
-        '/AI SDLC/05 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/05 Roadmap') }],
+        '/AI SDLC/06 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/06 Roadmap') }],
         '/AI SDLC/02 Vision/': scanSection('AI SDLC/02 Vision'),
         '/Target Architecture (HLD)/': scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
         '/System Architecture (LLD)/': scanSection('System Architecture (LLD)'),

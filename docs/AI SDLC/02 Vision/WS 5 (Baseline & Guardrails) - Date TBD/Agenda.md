@@ -24,7 +24,7 @@ _Governance covers two related sub-topics in one block — trim survey questions
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
+Anchor on the engagement's central question (see [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
 
 - Recap and validate findings from [WS 4](../WS%204%20%28People%20%26%20Context%29%20-%20Date%20TBD/Outcomes.md) (Teams & Integration · Knowledge Base) before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 
@@ -93,7 +93,7 @@ _Requires Compliance/Security and Finance attendance._
 Capture and record:
 
 - Pain points surfaced — candidates for [Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement) and [Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance)
-- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
+- Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each
 - Pilot candidate synthesis now happens in [WS 6 — Product & Projects](../WS%206%20%28Product%20%26%20Projects%29%20-%20Date%20TBD/Agenda.md); this session's job is to leave clean, validated findings for it to draw on

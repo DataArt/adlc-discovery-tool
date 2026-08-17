@@ -8,18 +8,19 @@ Each topic follows a consistent format: **current-state walkthrough → time-los
 
 ## Terminology
 
-| Term         | Meaning                                                                                                                                                                                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.** Has its own folder with an Agenda, Notes, Outcomes, and a Transcript — only Agenda exists ahead of a live session; the rest populate once it runs.                                             |
-| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop; a workshop occasionally runs two sessions if scheduling forces a split.                                                                                                           |
-| **Topic**    | A specific thread on a session's agenda — as many as fit in the time available, realistically 1–3 with real depth. Each topic is tagged to the Area it's diagnosing.                                                                                                |
-| **Area**     | A fixed diagnostic domain. The same 10 domains defined in [Process → Problem Space](/AI%20SDLC/01%20Process/03%20Problem%20Space.md); every topic belongs to exactly one Area, and every Area has a waiting [Problem Space](/AI%20SDLC/03%20Problem%20Space/) page. |
+| Term         | Meaning                                                                                                                                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Workshop** | A calendar event with the client. Target: **one session, ≤2 hours.** Has its own folder with an Agenda, Notes, Outcomes, and a Transcript — only Agenda exists ahead of a live session; the rest populate once it runs.                    |
+| **Session**  | A continuous facilitated block within a workshop. Almost always one per workshop; a workshop occasionally runs two sessions if scheduling forces a split.                                                                                  |
+| **Topic**    | A specific thread on a session's agenda — as many as fit in the time available, realistically 1–3 with real depth. Each topic is tagged to the Area it's diagnosing.                                                                       |
+| **Area**     | A fixed diagnostic domain. The same 10 domains defined in [Problem Space](/AI%20SDLC/03%20Problem%20Space/); every topic belongs to exactly one Area, and every Area has a waiting [Problem Space](/AI%20SDLC/03%20Problem%20Space/) page. |
 
 ## Purpose
 
 - Test the hypothesis that most delivery time is lost _before_ code is written — code was never the problem
 - Walk the full SDLC and land findings, area by area, into the [Problem Space](/AI%20SDLC/03%20Problem%20Space/)
-- Surface and validate [[CLIENT_NAME]]'s [Goals](/AI%20SDLC/01%20Process/02%20Goals.md) alongside Problems — the same sessions, not a separate leadership intake
+- Validate [[CLIENT_NAME]]'s [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) alongside diagnosing Problems — confirm, reorder, or cut what leadership stated upfront, the same sessions that produce Problem Space findings
+- Establish whether an [existing internal initiative](./02%20Inhouse%20Initiatives/Overview.md) is already running, so the solution is wired to it — not built as a competing track
 - Surface the governance and measurement prerequisites for a credible pilot
 - Produce a prioritised problem ranking and an agreed pilot candidate grounded in evidence from the workshops
 

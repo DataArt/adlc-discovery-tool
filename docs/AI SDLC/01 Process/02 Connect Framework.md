@@ -50,7 +50,7 @@ Strategic intents, ordered by importance. Goals define what success looks like a
 - Reduce transaction processing costs by 30%
 - Establish zero-trust security architecture
 
-→ [02 Goals](./02%20Goals.md) for [[CLIENT_NAME]]'s current goals.
+→ [04 Goals](/AI%20SDLC/04%20Goals/) for [[CLIENT_NAME]]'s current goals.
 
 ### ❓ Problem Space
 
@@ -64,7 +64,7 @@ Things to figure out, in priority order. Problems enter, get worked, produce sol
 - Data quality and fitness gaps
 - Security and compliance interpretation
 
-→ [03 Problem Space](./03%20Problem%20Space.md) for the current hypothesis and domains under diagnosis.
+→ [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/) for the current hypothesis and domains under diagnosis.
 
 ### 🔧 Solution Space
 
@@ -78,7 +78,7 @@ Work to do, organized by team. Each solution traces back to the problem it addre
 - ML risk scoring engine
 - HIPAA compliance infrastructure
 
-→ [04 Solution Space](./04%20Solution%20Space.md) for the current evaluation dimensions and pilot options.
+→ [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/) for the current evaluation dimensions and pilot options.
 
 ### 🚩 Milestones
 
@@ -92,13 +92,14 @@ Outcome-based waypoints. Defined not by scope delivered but by what becomes poss
 - MVP features live in production
 - Full digital suite & cost targets met
 
-→ [05 Milestones](./05%20Milestones.md) for the current milestone plan.
+→ [Roadmap — Milestones](/AI%20SDLC/06%20Roadmap/02%20Milestones.md) for the current milestone plan.
 
 ## How this engagement adapts it
 
-This engagement's actual process — see [01 Overview](./01%20Overview.md) — is inspired by Connect but adapted in two ways:
+This engagement's actual process — see [01 Overview](./01%20Overview.md) — is inspired by Connect but adapted in three ways:
 
-- A dedicated **Vision** stage runs upfront: discovery workshops that surface the raw material Connect's Goals and Problem Space lists need, rather than assuming it's already known.
-- **Solution Space** is structured as a **Pilot → Scale → Evolve** closed loop (see [04 Solution Space](./04%20Solution%20Space.md)), and the settled delivery shape graduates to a dedicated **Roadmap** section rather than staying inside the Milestones list alone.
+- A dedicated **Vision** stage runs upfront: discovery workshops that surface the raw material Connect's Problem Space list needs, and validate Goals against it, rather than assuming either is already known.
+- **Goals** splits into two artifacts instead of Connect's single list: an upfront **Strategic Intent** capture (raw, before Vision, from leadership conversations) and a grounded, re-scoped **Solution Goals** list (narrowed once Problem Space evidence exists) — see [04 Goals](/AI%20SDLC/04%20Goals/).
+- **Solution Space** is structured as a **Pilot → Scale → Evolve** closed loop (see [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/)), and the settled delivery shape graduates to a dedicated **Roadmap** section — which also holds the Milestones list — rather than staying inside the Milestones list alone.
 
 The principles above carry over unchanged — only the stage names and where each list's output lands differ.

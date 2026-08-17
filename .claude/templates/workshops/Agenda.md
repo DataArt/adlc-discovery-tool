@@ -22,7 +22,7 @@ _Adjust block lengths to the number of topics this workshop actually covers — 
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the Problem Space.
+Anchor on the engagement's central question (see [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)). Set this session's goal and remind the room how findings feed the Problem Space.
 
 - If this isn't the first workshop: recap and validate findings from the previous workshop before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 

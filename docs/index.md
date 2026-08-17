@@ -6,7 +6,8 @@ hero:
   text: 'for [[CLIENT_NAME]]'
   tagline: >
     A genuinely AI-assisted engagement tool that guides the discovery
-    journey end to end — capturing what's actually found, designing the
+    journey end to end — kicked off by <a href="/AI SDLC/04 Goals/02 Strategic Intent" style="color:var(--vp-c-brand-1);text-decoration:underline;font-weight:600;">Strategic Intent</a>,
+    capturing what's actually found, designing the
     AI-first solution that follows, and governing it as it scales. Every
     decision traces back to evidence, with a clear path from open
     question to proven pilot.
@@ -15,17 +16,17 @@ hero:
       text: Establish the Vision
       link: /AI SDLC/02 Vision/
     - theme: alt
-      text: Align the Goals
-      link: /AI SDLC/01 Process/02 Goals
-    - theme: alt
       text: Diagnose the Problems
       link: /AI SDLC/03 Problem Space/01 Overview
     - theme: alt
+      text: Align the Goals
+      link: /AI SDLC/04 Goals/03 Solution Goals
+    - theme: alt
       text: Engineer the Solution
-      link: /AI SDLC/04 Solution Space/01 Overview
+      link: /AI SDLC/05 Solution Space/01 Overview
     - theme: alt
       text: Sequence the Roadmap
-      link: /AI SDLC/05 Roadmap/01 Overview
+      link: /AI SDLC/06 Roadmap/01 Overview
 
 features:
   - title: The Story

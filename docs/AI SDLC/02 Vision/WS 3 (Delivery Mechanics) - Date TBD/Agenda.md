@@ -20,7 +20,7 @@ _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, tar
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
+Anchor on the engagement's central question (see [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/).
 
 - Recap and validate findings from [WS 2](../WS%202%20%28Design%20to%20Code%29%20-%20Date%20TBD/Outcomes.md) (Technical Design · Implementation) before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 
@@ -75,6 +75,6 @@ Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/
 Capture and record:
 
 - Pain points surfaced — candidates for [DevOps & Pipeline](/AI%20SDLC/03%20Problem%20Space/04%20DevOps%20%26%20Pipeline) and [Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead)
-- Goal signals surfaced — candidates for [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)
+- Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

@@ -2,7 +2,7 @@
 
 _Live capture during session + post-session synthesis. Added once the session has actually run — this is a placeholder shape, not real content._
 
-_This workshop synthesises evidence from WS 1–5 into a pilot decision. It is not Area-diagnostic and does not feed a Problem Space page directly — its output feeds [Solution Space](/AI%20SDLC/01%20Process/04%20Solution%20Space.md)._
+_This workshop synthesises evidence from WS 1–5 into a pilot decision. It is not Area-diagnostic and does not feed a Problem Space page directly — its output feeds [Solution Space](/AI%20SDLC/05%20Solution%20Space/)._
 
 ---
 
@@ -50,7 +50,7 @@ _Dimensions 1–4 are the Solution Space candidate evaluation dimensions applied
 
 ## Findings
 
-_Post-session. Feeds [Solution Space](/AI%20SDLC/01%20Process/04%20Solution%20Space.md) directly — do not let a finding stop here._
+_Post-session. Feeds [Solution Space](/AI%20SDLC/05%20Solution%20Space/) directly — do not let a finding stop here._
 
 ### Candidate Inventory — [finding title]
 

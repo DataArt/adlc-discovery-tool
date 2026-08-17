@@ -20,7 +20,7 @@ _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, tar
 
 ## Opening (~10 min) — Framing
 
-Anchor on the engagement's central question (see [Process → Goals](/AI%20SDLC/01%20Process/02%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) and [Solution Space](/AI%20SDLC/01%20Process/04%20Solution%20Space.md).
+Anchor on the engagement's central question (see [Goals — Solution Goals](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md)). Set this session's goal and remind the room how findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) and [Solution Space](/AI%20SDLC/05%20Solution%20Space/).
 
 - Recap and validate findings from [WS 5](../WS%205%20%28Baseline%20%26%20Guardrails%29%20-%20Date%20TBD/Outcomes.md) (Measurement · Governance) before opening new topics — confirm what was captured is accurate, surface corrections, and close any carry-forwards.
 - Frame the decision this session exists to make: a recommended pilot candidate, grounded in evidence gathered across WS 1–5, not the loudest voice in the room.
@@ -53,7 +53,7 @@ _Synthesis — draws on findings from all Problem Space Areas surfaced in WS 1�
 
 > **Key question:** Which candidate should the ADLC pilot start on?
 
-- Score each candidate 1–5 per dimension, on the four evaluation dimensions already defined in [Solution Space](/AI%20SDLC/01%20Process/04%20Solution%20Space.md) — Impact, Confidence, Ease, Governance fit — plus one pilot-readiness dimension Solution Space does not cover: Team AI-readiness
+- Score each candidate 1–5 per dimension, on the four evaluation dimensions already defined in [Solution Space](/AI%20SDLC/05%20Solution%20Space/) — Impact, Confidence, Ease, Governance fit — plus one pilot-readiness dimension Solution Space does not cover: Team AI-readiness
 - Capture each candidate's named owner alongside the score, for context — not scored or gated, just recorded so the decision doesn't get made blind to who would actually run the pilot
 - Totals (simple sum or weighted, agree live) produce a ranked shortlist
 - Dimensions are a draft default, not fixed — adjust weighting or add dimensions live if the room surfaces a gap

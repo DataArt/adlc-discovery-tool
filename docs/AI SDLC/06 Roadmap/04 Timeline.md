@@ -2,7 +2,7 @@
 
 > What is the phased schedule, and how do WBS items sequence against milestones and team availability?
 
-The Gantt-level view of the roadmap — [WBS](./02%20WBS.md) items sequenced against [Process — Milestones](/AI%20SDLC/01%20Process/05%20Milestones.md) and the team composition in [01 Overview](./01%20Overview.md).
+The Gantt-level view of the roadmap — [WBS](./03%20WBS.md) items sequenced against [02 Milestones](./02%20Milestones.md) and the team composition in [01 Overview](./01%20Overview.md).
 
 > [!WARNING] Populated During Engagement
 > This page is a placeholder. It is filled in once WBS items are sized and team composition is confirmed.
@@ -17,4 +17,4 @@ gantt
     TBD :done, des1, 2026-01-01, 1d
 ```
 
-_TBD — real phases, work items, and dates replace the placeholder Gantt above once [WBS](./02%20WBS.md) is populated._
+_TBD — real phases, work items, and dates replace the placeholder Gantt above once [WBS](./03%20WBS.md) is populated._

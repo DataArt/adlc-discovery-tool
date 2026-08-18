@@ -32,6 +32,9 @@ cdk.out/
 # Claude Code — personal/local overrides, never shared
 .claude/settings.local.json
 
+# Claude Code — git worktrees (agent scratch checkouts, never shared)
+.claude/worktrees/
+
 # NX
 .nx/
 

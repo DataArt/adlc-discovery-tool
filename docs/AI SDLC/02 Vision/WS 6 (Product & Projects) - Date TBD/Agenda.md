@@ -2,7 +2,7 @@
 
 _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, target ≤2 hours._
 
-**Purpose:** This is a capstone synthesis workshop, not an 11th diagnostic Area. WS 1–5 diagnosed the 10 Areas; this session does not diagnose a new SDLC domain — it synthesises the evidence already gathered into a single decision: which project/product the ADLC pilot should start on. There is no Problem Space page for this workshop.
+**Purpose:** This is a capstone synthesis workshop, not an 11th diagnostic SDLC Domain. WS 1–5 diagnosed the 10 SDLC Domains; this session does not diagnose a new SDLC domain — it synthesises the evidence already gathered into a single decision: which project/product the ADLC pilot should start on. There is no Problem Space page for this workshop.
 
 ---
 
@@ -29,7 +29,7 @@ Anchor on the engagement's central question (see [Goals — Solution Goals](/AI%
 
 ## Topic 1 — Candidate Inventory
 
-_Synthesis — draws on findings from all Problem Space Areas surfaced in WS 1–5._
+_Synthesis — draws on findings from all Problem Space SDLC Domains surfaced in WS 1–5._
 
 > **Key question:** Which projects or products are realistic candidates for the ADLC pilot?
 
@@ -49,7 +49,7 @@ _Synthesis — draws on findings from all Problem Space Areas surfaced in WS 1�
 
 ## Topic 2 — Evaluation & Scoring
 
-_Synthesis — draws on findings from all Problem Space Areas surfaced in WS 1–5._
+_Synthesis — draws on findings from all Problem Space SDLC Domains surfaced in WS 1–5._
 
 > **Key question:** Which candidate should the ADLC pilot start on?
 

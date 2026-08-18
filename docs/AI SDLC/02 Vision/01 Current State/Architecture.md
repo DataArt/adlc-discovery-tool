@@ -14,3 +14,13 @@
 - Existing architecture documentation, if [[CLIENT_NAME]] has any
 
 This is raw baseline material, not synthesis. Diagnosis and root-cause analysis happen in [Problem Space](/AI%20SDLC/03%20Problem%20Space/), not here.
+
+---
+
+## Changelog
+
+_Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
+
+| Date   | Change         | Evidence                                                                                                                              |
+| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 2 (Design to Code)](</AI%20SDLC/02%20Vision/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) |

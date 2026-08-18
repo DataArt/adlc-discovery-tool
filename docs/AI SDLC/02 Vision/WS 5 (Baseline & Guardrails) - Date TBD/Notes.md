@@ -6,7 +6,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic       | Area        | Status         |
+| Topic       | SDLC Domain | Status         |
 | ----------- | ----------- | -------------- |
 | Measurement | Measurement | ⚫ Not reached |
 | Governance  | Governance  | ⚫ Not reached |

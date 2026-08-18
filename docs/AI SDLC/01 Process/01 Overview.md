@@ -67,7 +67,7 @@ flowchart LR
     subgraph VisionStage["👁️ Vision — Establish the Vision"]
         direction TB
         WS["Workshops\n──────\nDiagnoses: Challenge + Problem Space\nBaseline: Current State\nValidates: Strategic Intent"]
-        CS["Current State\n──────\nProcess\nArchitecture\nContext Topology\nTool Inventory\nInhouse Initiatives"]
+        CS["Current State\n──────\nProcess\nArchitecture\nContext Topology\nAI Adoption\nMetrics\nTool Inventory\nInhouse Initiatives"]
         WS -->|"shapes"| CS
     end
 
@@ -134,7 +134,7 @@ Discovery workshops that build a shared picture of where delivery time is lost a
 3. **Run the workshop with the client** — validate the previous session's findings first (Strategic Intent and problem signals alike), then cover what isn't yet evidenced on either front; close by arranging the next follow-up.
 4. **Process the output** — fold workshop findings into the working draft, the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) coverage tracker, and Strategic Intent.
 5. **Repeat 3–4** until coverage is clear — every domain in Problem Space has moved past _TBD_, and Strategic Intent holds steady across a session.
-6. Once there's enough context, start drafting Current State ([Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md), [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md), [Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md), [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md), [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md)) — it graduates from Vision into its own stage from here. Strategic Intent, confirmed through this same loop, is ready to ground and re-scope into Solution Goals once Problem Space root causes hold too.
+6. Once there's enough context, start drafting Current State ([Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md), [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md), [Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md), [AI Adoption](/AI%20SDLC/02%20Vision/01%20Current%20State/AI%20Adoption.md), [Metrics](/AI%20SDLC/02%20Vision/01%20Current%20State/Metrics.md), [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md), [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md)) — it graduates from Vision into its own stage from here. Strategic Intent, confirmed through this same loop, is ready to ground and re-scope into Solution Goals once Problem Space root causes hold too.
 
 → [02 Vision](/AI%20SDLC/02%20Vision/) for the workshop programme and coverage tracker.
 

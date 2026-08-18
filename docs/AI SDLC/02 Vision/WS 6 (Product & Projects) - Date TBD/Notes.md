@@ -2,7 +2,7 @@
 
 _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
-_This is a capstone synthesis workshop, not an 11th diagnostic Area — it has no Problem Space page. Topic Coverage below tracks the two synthesis topics, not an Area diagnosis._
+_This is a capstone synthesis workshop, not an 11th diagnostic SDLC Domain — it has no Problem Space page. Topic Coverage below tracks the two synthesis topics, not an SDLC Domain diagnosis._
 
 ---
 

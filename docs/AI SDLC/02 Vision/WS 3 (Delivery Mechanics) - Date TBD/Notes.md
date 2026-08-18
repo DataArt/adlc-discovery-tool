@@ -6,7 +6,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic             | Area              | Status         |
+| Topic             | SDLC Domain       | Status         |
 | ----------------- | ----------------- | -------------- |
 | DevOps & Pipeline | DevOps & Pipeline | ⚫ Not reached |
 | Ceremony Overhead | Ceremony Overhead | ⚫ Not reached |

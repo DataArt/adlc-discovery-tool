@@ -2,7 +2,7 @@
 
 _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, target ≤2 hours._
 
-**Purpose:** Cover the cross-cutting Areas — the smallest credible measurement baseline for a pilot, and the governance (data exposure, IP, and AI token/consumption controls) that lets a pilot start without stalling.
+**Purpose:** Cover the cross-cutting SDLC Domains — the smallest credible measurement baseline for a pilot, and the governance (data exposure, IP, and AI token/consumption controls) that lets a pilot start without stalling.
 
 _Requires Compliance/Security and Finance attendance for the Governance topic — confirm before scheduling._
 
@@ -34,7 +34,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** What is the smallest credible measurement baseline that can stand up before the pilot starts?
 
-**Diagnoses:** [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md)
+**Diagnoses:** [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
@@ -59,7 +59,7 @@ _Requires Compliance/Security and Finance attendance._
 
 > **Key question:** What is the minimum viable governance — covering data exposure, IP, and token spend — that protects the organisation without stalling the pilot?
 
-**Diagnoses:** [Challenge — The Governance Gap](/The%20Story/03%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md)
+**Diagnoses:** [Challenge — The Governance Gap](/The%20Story/03%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/09%20Governance.md)
 
 **Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
@@ -92,7 +92,7 @@ _Requires Compliance/Security and Finance attendance._
 
 Capture and record:
 
-- Pain points surfaced — candidates for [Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement) and [Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance)
+- Pain points surfaced — candidates for [Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement) and [Governance](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/09%20Governance)
 - Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

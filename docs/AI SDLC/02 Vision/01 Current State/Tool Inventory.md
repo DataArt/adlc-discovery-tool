@@ -1,11 +1,11 @@
 # Tool Inventory (Current State)
 
 > [!WARNING] Populated During Engagement
-> This page is a placeholder until current-state tooling evidence exists. It adds no new evidence of its own — every row here should already be findable in [Process](./Process.md), [Architecture](./Architecture.md), [Context Topology](./Context%20Topology.md), or [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md). This is a reorganization by tool identity, not new discovery.
+> This page is a placeholder until current-state tooling evidence exists. It adds no new evidence of its own — every row here should already be findable in [Process](./Process.md), [Architecture](./Architecture.md), [Context Topology](./Context%20Topology.md), [AI Adoption](./AI%20Adoption.md), [Metrics](./Metrics.md), or [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md). This is a reorganization by tool identity, not new discovery.
 
-A consolidated, tool-by-tool inventory of what [[CLIENT_NAME]] runs today — not the target stack, not recommendations. Facts here are reorganized from [Process](./Process.md), [Architecture](./Architecture.md), [Context Topology](./Context%20Topology.md), and [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md); this page adds no new evidence, only a single index by tool identity.
+A consolidated, tool-by-tool inventory of what [[CLIENT_NAME]] runs today — not the target stack, not recommendations. Facts here are reorganized from [Process](./Process.md), [Architecture](./Architecture.md), [Context Topology](./Context%20Topology.md), [AI Adoption](./AI%20Adoption.md), [Metrics](./Metrics.md), and [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md); this page adds no new evidence, only a single index by tool identity.
 
-_Sources: TBD — list the workshop sessions and Areas this inventory was reorganized from, once they run (e.g. "Workshop 1 Session 3 (DevOps & Pipeline), Session 4 (Knowledge Base) · Workshop 3 Session 9 (AI Governance)")._
+_Sources: TBD — list the workshop sessions and SDLC Domains this inventory was reorganized from, once they run (e.g. "Workshop 1 Session 3 (DevOps & Pipeline), Session 4 (Knowledge Base) · Workshop 3 Session 9 (AI Governance)")._
 
 ---
 
@@ -123,3 +123,13 @@ _Distinct from the engineering stack above — flag overlaps (e.g. a backend obs
 ---
 
 This is raw baseline material, not synthesis. Diagnosis and root-cause analysis happen in [Problem Space](/AI%20SDLC/03%20Problem%20Space/), not here — a row flagged 🟠 or 🔴 above is a candidate for a Problem Space finding, not a conclusion in itself.
+
+---
+
+## Changelog
+
+_This page adds no evidence of its own — every change traces to the Current State page it was reorganized from, not to a workshop directly._
+
+| Date   | Change         | Evidence                                                    |
+| ------ | -------------- | ----------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Current State page — e.g. Architecture](./Architecture.md) |

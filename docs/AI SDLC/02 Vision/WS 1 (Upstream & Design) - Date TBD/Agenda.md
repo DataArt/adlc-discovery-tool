@@ -2,7 +2,7 @@
 
 _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, target ≤2 hours._
 
-**Purpose:** Test the hypothesis that most delivery time is lost before code is written — code was never the problem. This workshop covers the two most upstream, product-facing Areas — where a request becomes a story, and where that story becomes a design ready to build.
+**Purpose:** Test the hypothesis that most delivery time is lost before code is written — code was never the problem. This workshop covers the two most upstream, product-facing SDLC Domains — where a request becomes a story, and where that story becomes a design ready to build.
 
 ---
 
@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** Which requirement artefacts, if AI-drafted well, would remove the most downstream rework?
 
-**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories.md)
+**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
@@ -53,7 +53,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** How much elapsed time sits in design and handoff per feature, and what proportion is genuinely creative vs waiting or translation?
 
-**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX.md)
+**Diagnoses:** [Challenge — The Uneven Depth](/The%20Story/03%20Challenges.md#the-uneven-depth) · [Problem Space — Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/02%20Design%20%26%20UX.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
@@ -76,7 +76,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 Capture and record:
 
-- Pain points surfaced — candidates for [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/02%20Requirements%20%26%20Stories) and [Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20Design%20%26%20UX)
+- Pain points surfaced — candidates for [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories) and [Design & UX](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/02%20Design%20%26%20UX)
 - Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

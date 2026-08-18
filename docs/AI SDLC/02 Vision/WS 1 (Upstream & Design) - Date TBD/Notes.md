@@ -6,7 +6,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic                  | Area                   | Status         |
+| Topic                  | SDLC Domain            | Status         |
 | ---------------------- | ---------------------- | -------------- |
 | Requirements & Stories | Requirements & Stories | ⚫ Not reached |
 | Design & UX            | Design & UX            | ⚫ Not reached |

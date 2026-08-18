@@ -84,7 +84,7 @@ flowchart TD
     class MID missing
 ```
 
-| Area               | Team A wrote                            | Team B wrote              | AI produces                                                       |
+| SDLC Domain        | Team A wrote                            | Team B wrote              | AI produces                                                       |
 | ------------------ | --------------------------------------- | ------------------------- | ----------------------------------------------------------------- |
 | **Auth**           | JWT payload fields, token expiry: 3600s | "implement secure auth"   | Invents the session strategy — contradicts undocumented decisions |
 | **Error handling** | HTTP status codes per endpoint          | "handle errors properly"  | Applies generic patterns — misses any project convention          |
@@ -306,7 +306,7 @@ Depending on the organisation, those questions carry their own regulatory, custo
 | What can AI generate?                | Not addressed                | Output that could be mistaken for an approved, reviewed deliverable             |
 | Where do prompts and outputs end up? | Not addressed                | Third-party model providers, logged where legal/compliance needs visibility     |
 
-**How to address this — wiring Context Topology (Business Context), not the harness alone:** governance is owned at the [Business Context](/The%20Story/02%20Context%20Landscape.md) layer, above any single project — the harness can't generate a policy any more than it can set company goals. What it contributes: scoped agents (`@web`, `@auth`, `@infra`) restrict what an AI session reads and writes, and NFR docs plus guarded commands make sensitive operations explicit — legible enough to plug into a policy once one exists. The organisation's actual regulatory and IP obligations are diagnosed in [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance.md).
+**How to address this — wiring Context Topology (Business Context), not the harness alone:** governance is owned at the [Business Context](/The%20Story/02%20Context%20Landscape.md) layer, above any single project — the harness can't generate a policy any more than it can set company goals. What it contributes: scoped agents (`@web`, `@auth`, `@infra`) restrict what an AI session reads and writes, and NFR docs plus guarded commands make sensitive operations explicit — legible enough to plug into a policy once one exists. The organisation's actual regulatory and IP obligations are diagnosed in [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/09%20Governance.md).
 
 ---
 
@@ -324,7 +324,7 @@ Engineers are using AI tools across a growing number of workloads, and spend is 
 | Which workloads justify their usage?              | Unknown        |
 | Which usage patterns burn budget without output?  | Unknown        |
 
-**How to address this — session observability and dashboards:** the fix is instrumentation — session-level usage dashboards like DataArt's own [Artisyn Log Hub](https://artisyn-log-hub.labs.dataart.com/), or [LinearB](https://linearb.io/), rolled up by team, workload, and outcome. The harness gives that instrumentation something coherent to group by: scoped phases with defined outputs (`/design`, `/dev`, `/where-we-are`), so usage attributes to a phase or ticket, not one undifferentiated total. The actual baseline is diagnosed in [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement.md).
+**How to address this — session observability and dashboards:** the fix is instrumentation — session-level usage dashboards like DataArt's own [Artisyn Log Hub](https://artisyn-log-hub.labs.dataart.com/), or [LinearB](https://linearb.io/), rolled up by team, workload, and outcome. The harness gives that instrumentation something coherent to group by: scoped phases with defined outputs (`/design`, `/dev`, `/where-we-are`), so usage attributes to a phase or ticket, not one undifferentiated total. The actual baseline is diagnosed in [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement.md).
 
 ---
 

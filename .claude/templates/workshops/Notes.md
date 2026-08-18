@@ -6,10 +6,10 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic     | Area   | Status         |
-| --------- | ------ | -------------- |
-| [Topic 1] | [Area] | ⚫ Not reached |
-| [Topic 2] | [Area] | ⚫ Not reached |
+| Topic     | SDLC Domain   | Status         |
+| --------- | ------------- | -------------- |
+| [Topic 1] | [SDLC Domain] | ⚫ Not reached |
+| [Topic 2] | [SDLC Domain] | ⚫ Not reached |
 
 | Legend   | Status             |
 | -------- | ------------------ |
@@ -66,7 +66,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ---
 
-## Topic 1 — [Area name]
+## Topic 1 — [SDLC Domain name]
 
 <div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
 
@@ -94,7 +94,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ---
 
-## Topic 2 — [Area name]
+## Topic 2 — [SDLC Domain name]
 
 <div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
 

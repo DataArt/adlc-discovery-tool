@@ -6,7 +6,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic            | Area             | Status         |
+| Topic            | SDLC Domain      | Status         |
 | ---------------- | ---------------- | -------------- |
 | Technical Design | Technical Design | ⚫ Not reached |
 | Implementation   | Implementation   | ⚫ Not reached |

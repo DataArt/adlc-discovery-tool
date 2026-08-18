@@ -9,7 +9,7 @@
 
 ## Gather Metrics
 
-- Identify what's already accessible as a data source (e.g. issue tracker, VCS history, observability tooling) before instrumenting anything new. See [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/09%20Measurement).
+- Identify what's already accessible as a data source (e.g. issue tracker, VCS history, observability tooling) before instrumenting anything new. See [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement).
 - Build on any cost-allocation-per-team work already in progress rather than starting fresh.
 - Which metrics, KPIs, and observability tooling actually get instrumented is a `/design` ticket once the gap is confirmed here — not decided on this page. See [Process → Overview, Solution stage](/AI%20SDLC/01%20Process/01%20Overview.md#-solution).
 
@@ -25,7 +25,7 @@
 
 ## Identify Problems
 
-- AI-generated output reviewed and maintained to the same standard as human-produced work — a quality gain in isolation doesn't matter if the surrounding workflow wasn't restructured. See [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation).
+- AI-generated output reviewed and maintained to the same standard as human-produced work — a quality gain in isolation doesn't matter if the surrounding workflow wasn't restructured. See [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/10%20Implementation).
 - A standing governance review, re-checked against changing regulation, tooling, and risk posture — not a one-time sign-off at the end of Pilot.
 
 ## Reiterate the Solution

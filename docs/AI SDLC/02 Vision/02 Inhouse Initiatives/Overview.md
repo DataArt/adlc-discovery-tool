@@ -40,3 +40,13 @@ This engagement doesn't get to assume a blank slate. If [[CLIENT_NAME]] already 
 ---
 
 This feeds [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) directly: the gap stated there accounts for what's already running here, not just Current State without it. It also feeds [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md)'s guardrail to build on existing infrastructure rather than duplicate it.
+
+---
+
+## Changelog
+
+_Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
+
+| Date   | Change         | Evidence                                                                                                                                      |
+| ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 1 (Upstream & Design)](</AI%20SDLC/02%20Vision/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) |

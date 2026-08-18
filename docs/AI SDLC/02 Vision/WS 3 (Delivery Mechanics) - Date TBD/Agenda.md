@@ -50,11 +50,11 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** If requirements and impact analysis arrived pre-drafted and trustworthy, what would refinement and planning look like?
 
-**Diagnoses:** [Challenge — No Feedback Loop](/The%20Story/03%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead.md)
+**Diagnoses:** [Challenge — No Feedback Loop](/The%20Story/03%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/07%20Ceremony%20Overhead.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
 
-- Which ceremonies exist because information is missing upstream — and would shrink if earlier Areas improved
+- Which ceremonies exist because information is missing upstream — and would shrink if earlier SDLC Domains improved
 - The mindset shift required: workflow redesign, not a tool overlay
 
 ### Survey — Ceremony Overhead
@@ -74,7 +74,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 Capture and record:
 
-- Pain points surfaced — candidates for [DevOps & Pipeline](/AI%20SDLC/03%20Problem%20Space/04%20DevOps%20%26%20Pipeline) and [Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/08%20Ceremony%20Overhead)
+- Pain points surfaced — candidates for [DevOps & Pipeline](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/03%20DevOps%20%26%20Pipeline) and [Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/07%20Ceremony%20Overhead)
 - Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

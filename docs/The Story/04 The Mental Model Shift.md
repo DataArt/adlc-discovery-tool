@@ -6,7 +6,7 @@ Every challenge in [The Challenges](./03%20Challenges.md) assumes the harness ge
 
 ![AI Workflow Shift](/images/context/AI%20Workflow%20Shift.png)
 
-| Area             | Developer mindset (before)             | Engineer mindset (after)                                                                  |
+| SDLC Domain      | Developer mindset (before)             | Engineer mindset (after)                                                                  |
 | ---------------- | -------------------------------------- | ----------------------------------------------------------------------------------------- |
 | Primary artifact | Code is the artifact — review the diff | Context is the artifact — review the HLD, the diff follows                                |
 | Source of truth  | "I know the codebase" lives in my head | "I know the codebase" lives in docs the AI can also read                                  |

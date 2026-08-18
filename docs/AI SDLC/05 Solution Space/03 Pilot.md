@@ -9,15 +9,15 @@
 
 ## Define the Pilot Workload
 
-| Candidate   | Rationale   | Evidence                             |
-| ----------- | ----------- | ------------------------------------ |
-| [CANDIDATE] | [RATIONALE] | [Problem Space — relevant Area link] |
+| Candidate   | Rationale   | Evidence                                    |
+| ----------- | ----------- | ------------------------------------------- |
+| [CANDIDATE] | [RATIONALE] | [Problem Space — relevant SDLC Domain link] |
 
 ## Set Up an AI-Assisted Process & Toolset
 
 - Build on [[CLIENT_NAME]]'s existing AI infrastructure where one exists, rather than standing up parallel infrastructure — check [Vision → Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md) for what's already there and respect its ownership boundary.
 - Guardrails sized to whichever candidate is chosen — e.g. read-only agent access first if the pilot touches source code or sensitive content.
-- A minimal data classification baseline (e.g. public / internal / restricted / regulated) for whatever the pilot touches — not a full framework. See [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/10%20Governance).
+- A minimal data classification baseline (e.g. public / internal / restricted / regulated) for whatever the pilot touches — not a full framework. See [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/09%20Governance).
 - The actual tooling, wiring, and repo composition decisions this needs are a `/design` ticket, not drafted here — see [Process → Overview, Solution stage](/AI%20SDLC/01%20Process/01%20Overview.md#-solution).
 
 ## Set Up a Knowledge Base Scoped to the Workload (Phased)

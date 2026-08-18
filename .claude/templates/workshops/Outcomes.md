@@ -10,18 +10,18 @@ _Live capture during session + post-session synthesis._
 
 ---
 
-## Areas & Topics
+## SDLC Domains & Topics
 
 _Captured live during the brainstorm._
 
 ```mermaid
 mindmap
   root(("WS [WS_NUMBER]\nOutcomes"))
-    🟢 [Area 1]
+    🟢 [SDLC Domain 1]
       [Sub-topic]
-    🟡 [Area 2]
+    🟡 [SDLC Domain 2]
       [Sub-topic]
-    🔴 [Area 3]
+    🔴 [SDLC Domain 3]
       [Sub-topic]
 ```
 
@@ -31,17 +31,17 @@ mindmap
 | 🟡     | Neutral — acknowledged, no strong reaction            | Med      |
 | 🔴     | Flat — dismissed, felt abstract or irrelevant         | Low      |
 
-| #   | Area / Topic | Reception    | Priority         |
-| --- | ------------ | ------------ | ---------------- |
-| 1   |              | 🟢 / 🟡 / 🔴 | High / Med / Low |
+| #   | SDLC Domain / Topic | Reception    | Priority         |
+| --- | ------------------- | ------------ | ---------------- |
+| 1   |                     | 🟢 / 🟡 / 🔴 | High / Med / Low |
 
 ---
 
 ## Findings
 
-_Post-session. One sub-section per area that generated signal._
+_Post-session. One sub-section per domain that generated signal._
 
-### [Area Title]
+### [SDLC Domain Title]
 
 [Narrative finding — what was learned, what was confirmed, what surprised. Add a flowchart below if a process or flow was discussed, otherwise remove the block.]
 

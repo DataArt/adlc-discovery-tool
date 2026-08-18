@@ -6,7 +6,7 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic Coverage
 
-| Topic               | Area                | Status         |
+| Topic               | SDLC Domain         | Status         |
 | ------------------- | ------------------- | -------------- |
 | Teams & Integration | Teams & Integration | ⚫ Not reached |
 | Knowledge Base      | Knowledge Base      | ⚫ Not reached |

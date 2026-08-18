@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** How do team structure and cross-team integration patterns shape — or constrain — the organisation's ability to adopt AI tooling?
 
-**Diagnoses:** [Challenge — The Fragmentation](/The%20Story/03%20Challenges.md#the-fragmentation) · [Challenge — The Mental Model Shift](/The%20Story/03%20Challenges.md#the-mental-model-shift) · [Problem Space — Teams & Integration](/AI%20SDLC/03%20Problem%20Space/06%20Teams%20%26%20Integration.md)
+**Diagnoses:** [Challenge — The Fragmentation](/The%20Story/03%20Challenges.md#the-fragmentation) · [Challenge — The Mental Model Shift](/The%20Story/03%20Challenges.md#the-mental-model-shift) · [Problem Space — Teams & Integration](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/05%20Teams%20%26%20Integration.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
@@ -54,7 +54,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** Who owns the organisation's internal knowledge, how is it kept current, and is it consistent enough to be trusted as AI context?
 
-**Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — Inconsistent Topology](/The%20Story/03%20Challenges.md#inconsistent-topology) · [Challenge — Session Amnesia](/The%20Story/03%20Challenges.md#session-amnesia) · [Problem Space — Knowledge Base](/AI%20SDLC/03%20Problem%20Space/05%20Knowledge%20Base.md)
+**Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — Inconsistent Topology](/The%20Story/03%20Challenges.md#inconsistent-topology) · [Challenge — Session Amnesia](/The%20Story/03%20Challenges.md#session-amnesia) · [Problem Space — Knowledge Base](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/04%20Knowledge%20Base.md)
 
 **Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
@@ -78,7 +78,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 Capture and record:
 
-- Pain points surfaced — candidates for [Teams & Integration](/AI%20SDLC/03%20Problem%20Space/06%20Teams%20%26%20Integration) and [Knowledge Base](/AI%20SDLC/03%20Problem%20Space/05%20Knowledge%20Base)
+- Pain points surfaced — candidates for [Teams & Integration](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/05%20Teams%20%26%20Integration) and [Knowledge Base](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/04%20Knowledge%20Base)
 - Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

@@ -10,7 +10,7 @@ _Live capture during session + post-session synthesis. Added once the session ha
 
 ---
 
-## Areas & Topics
+## SDLC Domains & Topics
 
 _Captured live during the brainstorm._
 
@@ -29,16 +29,16 @@ mindmap
 | 🟡     | Neutral — acknowledged, no strong reaction            | Med      |
 | 🔴     | Flat — dismissed, felt abstract or irrelevant         | Low      |
 
-| #   | Area / Topic | Reception    | Priority         |
-| --- | ------------ | ------------ | ---------------- |
-| 1   | Measurement  | 🟢 / 🟡 / 🔴 | High / Med / Low |
-| 2   | Governance   | 🟢 / 🟡 / 🔴 | High / Med / Low |
+| #   | SDLC Domain / Topic | Reception    | Priority         |
+| --- | ------------------- | ------------ | ---------------- |
+| 1   | Measurement         | 🟢 / 🟡 / 🔴 | High / Med / Low |
+| 2   | Governance          | 🟢 / 🟡 / 🔴 | High / Med / Low |
 
 ---
 
 ## Findings
 
-_Post-session. One sub-section per Area that generated signal. Feeds the relevant [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain page(s) directly — do not let a finding stop here._
+_Post-session. One sub-section per SDLC Domain that generated signal. Feeds the relevant [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain page(s) directly — do not let a finding stop here._
 
 ### Measurement — [finding title]
 

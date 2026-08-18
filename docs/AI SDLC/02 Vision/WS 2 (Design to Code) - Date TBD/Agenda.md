@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** What minimum documentation standard makes agentic impact analysis viable, and who maintains it?
 
-**Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/The%20Story/03%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design.md)
+**Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/The%20Story/03%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/06%20Technical%20Design.md)
 
 **Baseline:** [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
 
@@ -53,7 +53,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** Where has AI already been applied to the coding step itself, and why hasn't that translated into faster overall delivery?
 
-**Diagnoses:** [Challenge — Vendor Lock-In](/The%20Story/03%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation.md)
+**Diagnoses:** [Challenge — Vendor Lock-In](/The%20Story/03%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/10%20Implementation.md)
 
 **Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
 
@@ -76,7 +76,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 Capture and record:
 
-- Pain points surfaced — candidates for [Technical Design](/AI%20SDLC/03%20Problem%20Space/07%20Technical%20Design) and [Implementation](/AI%20SDLC/03%20Problem%20Space/11%20Implementation)
+- Pain points surfaced — candidates for [Technical Design](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/06%20Technical%20Design) and [Implementation](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/10%20Implementation)
 - Strategic Intent validated — confirmations, reorders, or cuts for [Goals — Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)
 - What's already working — do not disrupt
 - Open questions / carry-forwards, with an owner and next step for each

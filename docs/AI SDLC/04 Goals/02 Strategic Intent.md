@@ -24,3 +24,13 @@ Whatever triggered the engagement shapes what a "win" looks like to the people w
 ---
 
 _Not yet captured — [[CLIENT_NAME]]'s actual intent is recorded here as intake and kickoff conversations happen, replacing the illustrative patterns above._
+
+---
+
+## Changelog
+
+_Captured from intake/kickoff, then confirmed, reordered, or cut as Vision workshops validate it — link the workshop that moved it, not just the intake conversation that first captured it._
+
+| Date   | Change                                                                    | Evidence                                                             |
+| ------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED — e.g. captured from kickoff / confirmed / reordered / cut] | [Intake conversation, or Workshop Outcomes once Vision validates it] |

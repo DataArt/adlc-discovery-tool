@@ -2,19 +2,19 @@
 
 _DataArt × [[CLIENT_NAME]] Agentic SDLC Discovery Workshop. Single session, target ≤2 hours._
 
-**Purpose:** [One or two sentences — what this workshop needs to establish, and which Area(s) below it covers. Every finding should be traceable back to a [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain.]
+**Purpose:** [One or two sentences — what this workshop needs to establish, and which SDLC Domain(s) below it covers. Every finding should be traceable back to a [Problem Space](/AI%20SDLC/03%20Problem%20Space/) domain.]
 
 ---
 
 ## Session Flow
 
-| Time      | Block                    |
-| --------- | ------------------------ |
-| 0:00–0:10 | Opening & framing        |
-| 0:10–0:55 | Topic 1 — [Area name]    |
-| 0:55–1:00 | Break / transition       |
-| 1:00–1:45 | Topic 2 — [Area name]    |
-| 1:45–2:00 | Closing — carry-forwards |
+| Time      | Block                        |
+| --------- | ---------------------------- |
+| 0:00–0:10 | Opening & framing            |
+| 0:10–0:55 | Topic 1 — [SDLC Domain name] |
+| 0:55–1:00 | Break / transition           |
+| 1:00–1:45 | Topic 2 — [SDLC Domain name] |
+| 1:45–2:00 | Closing — carry-forwards     |
 
 _Adjust block lengths to the number of topics this workshop actually covers — the total should not exceed 2 hours. Add or drop rows as needed._
 
@@ -28,14 +28,14 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 ---
 
-## Topic 1 — [Area name]
+## Topic 1 — [SDLC Domain name]
 
 > **Key question:** [The single question this topic needs to answer.]
 
 - [Context bullet — what's already known or hypothesised going in]
 - [Context bullet]
 
-### Survey — [Area name]
+### Survey — [SDLC Domain name]
 
 _Use these to open and steer the topic. Capture answers on the shared board._
 
@@ -45,13 +45,13 @@ _Use these to open and steer the topic. Capture answers on the shared board._
 
 ---
 
-## Topic 2 — [Area name]
+## Topic 2 — [SDLC Domain name]
 
 > **Key question:** [The single question this topic needs to answer.]
 
 - [Context bullet]
 
-### Survey — [Area name]
+### Survey — [SDLC Domain name]
 
 1. [Generic diagnostic question]
 2. [Generic diagnostic question]

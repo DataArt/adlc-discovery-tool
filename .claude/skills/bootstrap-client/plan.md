@@ -148,11 +148,26 @@ If `cdk bootstrap`/`cdk provision` fail with "Unable to resolve AWS account to u
 
 → See `docs/Engineering Guide/06 MCP Setup.md` (AWS section)
 
+### OIDC provider check (before provisioning)
+
+The GitHub Actions OIDC provider (`token.actions.githubusercontent.com`) is an AWS-account-wide singleton — `infra:provision:dev` deploys `CiStack`, which fails with `EntityAlreadyExistsException` if the provider already exists in this account and `CREATE_OIDC_PROVIDER` is left at its default `true`.
+
+```bash
+aws iam list-open-id-connect-providers --profile "$AWS_PROFILE"   # confirms whether the provider already exists in this account
+```
+
+- No `token.actions.githubusercontent.com` ARN in the output → fresh account, leave `CREATE_OIDC_PROVIDER` unset in `apps/infra/.env.dev` (defaults to `true`).
+- ARN present → another client/org sharing this account already provisioned it. Set `CREATE_OIDC_PROVIDER=false` in `apps/infra/.env.dev` before provisioning.
+
 ```bash
 yarn nx run infra:bootstrap:dev        # one-time per AWS account/region — provisions the CDK toolkit stack
 yarn nx run infra:provision:dev        # creates CloudFront, S3, Lambda@Edge IAM roles, Secrets Manager secret
 yarn nx run infra:output:dev           # prints stack outputs (distribution ID, bucket name, etc.)
 # copy printed outputs into apps/lambda-auth/.env.dev and apps/docs-web/.env.dev
+# CF_DISTRIBUTION_ID specifically must be set in BOTH files — it's the one value
+# left blank when Stage 2's bootstrap script scaffolded them, since it's only
+# known once CloudFront actually exists. lambda-auth needs it to restore the
+# CloudFront association on deploy; docs-web needs it for cache invalidation.
 yarn nx run infra:env-push:dev         # writes infra's .env.dev to SSM Parameter Store
 yarn nx run lambda-auth:env-push:dev   # writes lambda-auth's .env.dev to SSM Parameter Store
 yarn nx run site:env-push:dev          # writes docs-web's .env.dev to SSM Parameter Store

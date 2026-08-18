@@ -39,6 +39,7 @@ Status values : ⏳ Pending · 🔄 Active · ✅ Done · ⚠️ Blocked · ⏭�
 | `GITHUB_ORG` / `GITHUB_ORG_ID`          |     |
 | `GITHUB_REPO` / `GITHUB_REPO_ID`        |     |
 | `GISCUS_REPO_ID` / `GISCUS_CATEGORY_ID` |     |
+| `CREATE_OIDC_PROVIDER`                  |     |
 
 ## Narrative Sections
 

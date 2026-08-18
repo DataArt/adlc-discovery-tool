@@ -272,7 +272,18 @@ aws sts get-caller-identity --profile "$AWS_PROFILE"
 
 Expect a JSON identity block back. If it errors with "Unable to resolve AWS account to use" at any later step in this stage, this is almost always why — `.env` never created, or `$AWS_PROFILE` unset in that terminal. Send them back here rather than guessing at a different fix.
 
-### 3.2 — Provisioning, outputs, and secrets
+### 3.2 — OIDC provider check, provisioning, outputs, and secrets
+
+The GitHub Actions OIDC provider (`token.actions.githubusercontent.com`) is an AWS-account-wide singleton — `infra:provision:dev` fails with `EntityAlreadyExistsException` if it already exists in this account and `CREATE_OIDC_PROVIDER` is left at its default `true`. Check before provisioning:
+
+```bash
+aws iam list-open-id-connect-providers --profile "$AWS_PROFILE"
+```
+
+**Stop and wait** for the pasted output.
+
+- No `token.actions.githubusercontent.com` ARN in the list → fresh account, nothing to do — `CREATE_OIDC_PROVIDER` stays unset (defaults to `true`) in `apps/infra/.env.dev`. Proceed.
+- ARN present → another client/org sharing this account already provisioned it. Tell the developer to set `CREATE_OIDC_PROVIDER=false` in `apps/infra/.env.dev` themselves (a real config edit — don't ask them to paste it into chat for Claude to write), confirm once done, then proceed. Note this in `report.md`'s "Values Collected" table.
 
 ```bash
 yarn nx run infra:bootstrap:dev
@@ -281,6 +292,13 @@ yarn nx run infra:output:dev
 ```
 
 `infra:bootstrap` and `infra:provision` are guarded — always developer-run, never Claude, no exceptions. After the developer pastes `infra:output:dev`'s printed values, tell them to copy the relevant ones into `apps/lambda-auth/.env.dev` and `apps/docs-web/.env.dev` themselves (file edits with real secrets/IDs — let the developer do this edit, don't ask them to paste secret values into the chat for Claude to write).
+
+Confirm `CF_DISTRIBUTION_ID` specifically — it's the one value the scaffolded `.env.dev` files in Stage 2 were left blank for (see 2.7), and it must be set in **both** files, not just one, or `env-push` ships a partial config:
+
+- `apps/lambda-auth/.env.dev` → `CF_DISTRIBUTION_ID=` (restores the CloudFront association on deploy)
+- `apps/docs-web/.env.dev` → `CF_DISTRIBUTION_ID=` (cache invalidation on deploy)
+
+**Stop and wait** for the developer to confirm both are filled before continuing to `env-push`.
 
 ```bash
 yarn nx run infra:env-push:dev

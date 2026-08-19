@@ -13,7 +13,7 @@ sequenceDiagram
 
     rect rgb(239, 246, 255)
     Note over Lead,TS: 1 — Target State
-    Note over Lead: Given: approved Problems + Solution Goals + Current State + Inhouse Initiatives
+    Note over Lead: Given: approved Strategic Intent + confirmed Problems + prioritised Solution Goals + evidenced Current State + Inhouse Initiatives
     Lead->>TS: Create Target State (design flow)
     Lead->>Stake: Review
     Stake-->>Lead: Feedback
@@ -26,7 +26,7 @@ sequenceDiagram
 
     rect rgb(240, 253, 244)
     Note over Lead,Pilot: 2 — Pilot solution design
-    Note over Lead: Given: 1 + Target State + pilot workload identified and wired (process + project + toolset)
+    Note over Lead: Given: 1 + Target State + the one slice of it chosen as pilot workload (process + project + toolset)
     Lead->>Design: Run /design for the pilot workload
     Design-->>Pilot: Architecture.md · Design.md · Stack.md
     Lead->>Pilot: Wire to Target State + coverage matrix
@@ -51,9 +51,9 @@ sequenceDiagram
     end
 ```
 
-**1 — Target State.** Given the confirmed Problems, prioritised Solution Goals, evidenced Current State, and any [Inhouse Initiative](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md) already running, draft [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) — the concrete end-state picture. Review, wire it to what it addresses, publish. The approval gate here is optional: some engagements need sign-off before pilot design starts, others fold it into step 2's review.
+**1 — Target State.** Given the approved [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md), confirmed Problems, prioritised Solution Goals, evidenced Current State, and any [Inhouse Initiative](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md) already running, draft [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) — the concrete end-state picture. Review, wire it to what it addresses, publish. The approval gate here is optional: some engagements need sign-off before pilot design starts, others fold it into step 2's review.
 
-**2 — Pilot solution design.** Given Target State plus a pilot workload identified and wired — which process slice, which project, which toolset proves the hypothesis first — the actual topology, context/bootstrap, and process↔context↔code wiring is an architecture decision, not a Solution Space page. Run `/design` for that pilot; it produces the HLD-level spec (`Architecture.md`, `Design.md`, `Stack.md`) in [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/). Wire the result back into [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md)'s coverage matrix, review, publish.
+**2 — Pilot solution design.** Given Target State, carve out the one slice of it that becomes the pilot workload — which process slice, which project, which toolset proves the hypothesis first. Pilot isn't identified independently of Target State; it's the piece of it the team commits to proving. The actual topology, context/bootstrap, and process↔context↔code wiring is an architecture decision, not a Solution Space page. Run `/design` for that pilot; it produces the HLD-level spec (`Architecture.md`, `Design.md`, `Stack.md`) in [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/). Wire the result back into [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md)'s coverage matrix, review, publish.
 
 **3 — Scale design.** Same pattern as step 2, one level up: given the pilot's proof points, design how the pattern extends beyond it — at the high level, not down to implementation. Wire into [Scale](/AI%20SDLC/05%20Solution%20Space/04%20Scale.md).
 

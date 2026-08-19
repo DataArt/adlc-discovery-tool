@@ -1,4 +1,4 @@
-# 4 — Solution Goals
+# Goals — Solution Goals
 
 _A diagnosed Problem plus the matching Strategic Intent combine into an early Solution Goals draft — the same grounding filter [Gate Review](../02%20Gate%20Review.md) applies formally, run early per domain when the evidence is already solid._
 

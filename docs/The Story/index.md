@@ -2,7 +2,7 @@
 
 The why behind [[CLIENT_NAME]]'s platform: the industry-wide story, the common challenges the harness exists to solve, and the mindset shift adopting it requires.
 
-**ADLC** is the DataArt-led Solution Design engagement telling this story: a structured, evidence-led discovery that diagnoses an organisation's actual SDLC bottlenecks — not assumed ones — and maps a concrete path to AI-first workflow adoption from there, carried forward through its own [Strategic Intent → Vision → Problem Space → Solution Goals → Solution → Roadmap](/AI%20SDLC/01%20Process/01%20Overview.md) process.
+**ADLC** is the DataArt-led Solution Design engagement telling this story: a structured, evidence-led discovery that diagnoses an organisation's actual SDLC bottlenecks — not assumed ones — and maps a concrete path to AI-first workflow adoption from there, carried forward through its own [Investigate (Vision → Problem → Goals) → Solution (Target State → Pilot → Scale → Evolve) → Roadmap](/AI%20SDLC/01%20Process/01%20Overview.md) process.
 
 Content belongs here if it answers "why does the platform exist and what is it trying to solve?"
 

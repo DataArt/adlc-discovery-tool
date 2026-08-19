@@ -100,6 +100,6 @@ This engagement's actual process — see [01 Overview](../01%20Overview.md) — 
 
 - A dedicated **Vision** stage runs upfront: discovery workshops that surface the raw material Connect's Problem Space list needs, and validate Goals against it, rather than assuming either is already known.
 - **Goals** splits into two artifacts instead of Connect's single list: an upfront **Strategic Intent** capture (raw, before Vision, from leadership conversations) and a grounded, re-scoped **Solution Goals** list (narrowed once Problem Space evidence exists) — see [04 Goals](/AI%20SDLC/04%20Goals/).
-- **Solution Space** is structured as a **Pilot → Scale → Evolve** closed loop (see [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/)), and the settled delivery shape graduates to a dedicated **Roadmap** section — which also holds the Milestones list — rather than staying inside the Milestones list alone.
+- **Solution Space** is structured as a **Target State → Pilot → Scale → Evolve** closed loop (see [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/)), and the settled delivery shape graduates to a dedicated **Roadmap** section — which also holds the Milestones list — rather than staying inside the Milestones list alone.
 
 The principles above carry over unchanged — only the stage names and where each list's output lands differ.

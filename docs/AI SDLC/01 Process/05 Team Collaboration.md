@@ -53,10 +53,10 @@ flowchart LR
 
 ## Landing content in the repo
 
-Whatever produced the draft — a desktop app outside the repo, or Claude Code directly inside it — the same rule applies before it's published: it goes through [Workflows](./05%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
+Whatever produced the draft — a desktop app outside the repo, or Claude Code directly inside it — the same rule applies before it's published: it goes through [Workflows](./06%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
 
 1. **Branch** — `<type>/short-description`, per [Engineering Guide — Conventions](/Engineering%20Guide/01%20Conventions.md).
 2. **Commit** — `<type>(<scope>): <what changed>`, Conventional Commits. Scope is the AI SDLC section (`process`, `vision`, `problem-space`, `goals`, `solution-space`, `roadmap`) or the workshop ID (`ws1`, `ws2`, …).
-3. **Pull Request** — opened against `main`; reviewed by whoever owns the section being changed (see the agent table in `CLAUDE.md`) before merge. A PR that adds a workshop's Notes/Outcomes should also show the Changelog rows it triggered downstream (Current State, SDLC Domain, Solution Goals) — see [03 Evidence Chain](./03%20Evidence%20Chain.md).
+3. **Pull Request** — opened against `main`; reviewed by `@workshop` for a change inside a `02 Vision/WS N (…)` folder, `@discovery` for everything else under `docs/AI SDLC/` (see the agent table in `CLAUDE.md`) — before merge. A PR that adds a workshop's Notes/Outcomes should also show the Changelog rows it triggered downstream (Current State, SDLC Domain, Solution Goals) — see [04 Evidence Chain](./04%20Evidence%20Chain.md).
 
 Guarded commands (`git push`, `cdk deploy`, `yarn nx run infra:provision`) are never run directly — they're presented as instructions for the developer to run themselves, same as everywhere else in this repo.

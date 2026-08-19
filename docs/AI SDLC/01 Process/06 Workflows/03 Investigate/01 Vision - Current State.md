@@ -1,4 +1,4 @@
-# 1 — Current State
+# Vision — Current State
 
 _A workshop cycle turns into Notes, Outcomes, and — once there's enough signal — an updated Current State page._
 
@@ -39,4 +39,4 @@ sequenceDiagram
 
 **Current State — optional on any given pass.** Not every workshop moves a Current State page — only draft or update the relevant [Current State](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) page(s) (Process, Architecture, Context Topology, AI Adoption, Metrics, Tool Inventory, Inhouse Initiatives) when that same session surfaced enough signal to justify it, wiring only what it actually evidenced. When it does happen, it happens right after that workshop's Notes/Outcomes are published — not deferred to a later pass.
 
-→ [2 — SDLC Domains](./02%20SDLC%20Domains.md) for how this evidence turns into a diagnosed domain. → [Orchestration](./00%20Orchestration.md) for how all four parts chain together.
+→ [Problem — SDLC Domains](./02%20Problem%20-%20SDLC%20Domains.md) for how this evidence turns into a diagnosed domain. → [Orchestration](./00%20Orchestration.md) for how all four parts chain together.

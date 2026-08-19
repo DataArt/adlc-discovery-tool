@@ -1,4 +1,4 @@
-# 3 — Diagnose
+# Problem — Diagnose
 
 _SDLC Domain evidence gets synthesized into a Problem — a root cause, ranked and evidenced, added to the [Problems](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md) registry._
 
@@ -21,6 +21,6 @@ sequenceDiagram
 
 **Status moves forward only.** A Problem is 🟡 **Reported** the moment a single source names it, 🟢 **Confirmed** once a second, independent source corroborates it, 🔵 **Measured** once a number backs the impact claim, or ⚫ **Retracted** if it turns out to be wrong — the reason stays on record, the ID is never reused. Most problems in a discovery-scale engagement settle at 🟡 or 🟢; few reach 🔵.
 
-**Reiterate while still green.** Keep looping draft → validate as long as each pass still changes the picture — stop once the root cause holds steady across a validation session. That's what makes the Problem eligible for [Solution Goals](./04%20Solution%20Goals.md).
+**Reiterate while still green.** Keep looping draft → validate as long as each pass still changes the picture — stop once the root cause holds steady across a validation session. That's what makes the Problem eligible for [Solution Goals](./04%20Goals%20-%20Solution%20Goals.md).
 
-→ [4 — Solution Goals](./04%20Solution%20Goals.md) for how a confirmed Problem turns into a grounded goal. → [2 — SDLC Domains](./02%20SDLC%20Domains.md) for where this evidence comes from.
+→ [Goals — Solution Goals](./04%20Goals%20-%20Solution%20Goals.md) for how a confirmed Problem turns into a grounded goal. → [Problem — SDLC Domains](./02%20Problem%20-%20SDLC%20Domains.md) for where this evidence comes from.

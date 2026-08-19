@@ -30,4 +30,4 @@ sequenceDiagram
 
 **Timeline.** The WBS sequenced against milestones and team availability into a phased schedule (Gantt); see [Roadmap — Timeline](/AI%20SDLC/06%20Roadmap/04%20Timeline.md).
 
-Roadmap is the last workflow in the arc — its output is what [[CLIENT_NAME]] staffs and funds against. From here the engagement's live state is tracked on [Where We Are](../../06%20Where%20We%20Are/01%20Engagement.md), not on this page.
+Roadmap is the last workflow in the arc — its output is what [[CLIENT_NAME]] staffs and funds against. From here the engagement's live state is tracked on [Where We Are](../../07%20Where%20We%20Are/01%20Engagement.md), not on this page.

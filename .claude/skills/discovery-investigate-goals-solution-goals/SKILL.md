@@ -1,0 +1,57 @@
+---
+name: discovery-investigate-goals-solution-goals
+metadata:
+  version: 0.1.0
+description: >
+  Goals stage of Investigate (/discovery-investigate-goals-solution-goals or /discovery-investigate router).
+  Combines a diagnosed Problem with the matching Strategic Intent entry into an early Solution Goals draft — the same grounding filter Gate Review applies formally, run early per-domain when the evidence is already solid.
+---
+
+The engagement lead wants to draft or update an early Solution Goal. Here is their input:
+
+---
+
+## $ARGUMENTS
+
+---
+
+> ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
+
+> 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `.claude/skills/discovery-investigate/SKILL.md` and resume from there.
+
+This is `01 Process/06 Workflows/03 Investigate/04 Goals - Solution Goals.md` — the last part of Investigate. Optional — only runs once a domain's root cause holds steady; a domain doesn't have to wait for the formal Gate Review to get an early draft if its evidence is already solid.
+
+---
+
+## Step 1 — Confirm eligibility
+
+The Problem this draws on must be at 🟢 Confirmed or better (per `discovery-investigate-problem-diagnose`'s status ladder) and holding steady across at least one validation pass. If it's still 🟡 Reported or actively shifting, stop and say so — this isn't ready yet, route back to `discovery-investigate-problem-diagnose` instead.
+
+---
+
+## Step 2 — Draft the goal
+
+Read the confirmed Problem (`03 Problem Space/02 Diagnose/02 Problems.md`) and the matching entry in `04 Goals/02 Strategic Intent.md`. Draft a Solution Goal in `04 Goals/03 Solution Goals.md`, grounded in both — this is the same filter Gate Review applies formally ("a goal with no diagnosed problem behind it doesn't survive"), just run early and per-domain.
+
+Apply `.claude/skills/discovery/pattern-write-confirm.md`.
+
+---
+
+## Step 3 — Satellite review
+
+Apply `.claude/skills/discovery/pattern-satellite-review.md`.
+
+---
+
+## Step 4 — Do → Report → Commit
+
+Apply `.claude/skills/discovery/pattern-do-report-commit.md`:
+
+- Changelog row on `03 Solution Goals.md`
+- `07 Where We Are/02 Investigate.md`: Solution Goals row (Status, Coverage — "N drafted", Last Updated)
+- `05 Report Log.md`: one row citing the Problem + Strategic Intent entry it grounds against
+- Commit: `docs(goals): <what changed>`
+
+**Stop and wait** for commit confirmation, then re-read `.claude/skills/discovery-investigate/SKILL.md`.
+
+Gate Review is still where the full set of Solution Goals gets aligned, prioritised, and formally scored against Strategic Intent — this stage only produces the early draft.

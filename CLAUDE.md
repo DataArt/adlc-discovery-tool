@@ -42,6 +42,7 @@ Key constraint: basic auth password protection on all routes.
 | `/bootstrap-client`   | Instantiate this starter kit for a new client engagement (one-time)    |
 | `/dev`                | Dev lifecycle orchestrator — Plan → Implement → Test → Document        |
 | `/design`             | Design lifecycle orchestrator — Frame → Research → Elaborate → Solution → Review → Address Feedback → Publish |
+| `/discovery`           | Discovery engagement orchestrator — Initiation (Gate 0) → Investigate → Gate Review (Gate 1) → Solution → Solution Approval (Gate 2) → Roadmap → Final Sign-off (Gate 3) |
 | `/design-review-gate` | Opens the draft MR and records the approval gate; session pauses for out-of-band human approval |
 | `/design-address-feedback` | Only if the approver raises concerns — reiterates into the traced-to phase, then waits for re-approval |
 | `/skill-reflect`      | Brain-dump observations after completing a ticket                      |
@@ -59,11 +60,13 @@ Key constraint: basic auth password protection on all routes.
 
 ### Slash commands
 
-Orchestrators: `/dev` · `/design` · `/war` · `/where-we-are`
+Orchestrators: `/dev` · `/design` · `/discovery` · `/war` · `/where-we-are`
 
 Dev phases: `/dev-plan` → `/dev-implement` → `/dev-test` → `/dev-document`
 
 Design phases: `/design-frame` → `/design-research` → `/design-elaborate` → `/design-solution` (WAF gate: `/design-review`) → `/design-review-gate` → (`/design-address-feedback`) → `/design-publish`
+
+Discovery phases: `/discovery-investigate` (loops `/discovery-investigate-vision-current-state` → `/discovery-investigate-problem-sdlc-domains` → `/discovery-investigate-problem-diagnose` → `/discovery-investigate-goals-solution-goals` per-domain until coverage is clear) → `/discovery-solution` (stub) → `/discovery-roadmap` (stub)
 
 Skill phases: `/skill-reflect` → `/skill-triage` → `/skill-new` → `/skill-promote`
 
@@ -81,8 +84,7 @@ Patch: `/patch prepare` · `/patch apply`
 | `@infra`       | Infrastructure (`apps/infra/`)             | Read, Edit, Write, Glob, Grep       |
 | `@architect`   | All (reviewer + doc author)                | Read, Glob, Grep, Bash, Write, Edit |
 | `@docs-writer` | `docs/` (content authoring)                | Read, Edit, Write, Glob, Grep       |
-| `@discovery`   | `docs/AI SDLC/` (engagement lead)          | Read, Edit, Write, Glob, Grep, Bash |
-| `@workshop`    | `02 Vision/` WS N folders (delegated)      | Read, Edit, Write, Glob, Grep, Bash |
+| `@discovery`   | `docs/AI SDLC/` (evidence-chain reviewer, read-only) | Read, Glob, Grep            |
 
 ### Issue tracker
 

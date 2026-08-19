@@ -1,0 +1,29 @@
+---
+name: discovery-roadmap
+metadata:
+  version: 0.0.1
+description: >
+  Roadmap phase of the discovery engagement (/discovery-roadmap or /discovery orchestrator). STUB — not yet built out into stage skills.
+  Points at the Roadmap workflow and hands Milestones/WBS/Team Composition/Timeline to the engagement lead to run manually.
+---
+
+The engagement lead wants to run a Roadmap-phase session. Here is their input:
+
+---
+
+## $ARGUMENTS
+
+---
+
+> 🚧 **Stub.** This phase isn't built out into stage skills yet. Roadmap has no stages of its own per `02 Terminology.md` (0 stages — its artifacts sit directly under the phase), so its eventual build-out is more likely a single skill than a stage family like Investigate's — revisit that call when this gets built.
+
+Read `docs/AI SDLC/01 Process/06 Workflows/05 Roadmap/00 Overview.md` — given an approved Solution (Target State + Pilot + Scale), it sequences:
+
+1. **Milestones** — accountable, dated commitments → `06 Roadmap/02 Milestones.md`
+2. **WBS** — each milestone broken into scoped, sized work items → `06 Roadmap/03 WBS.md`
+3. **Team composition** — who's needed, by role, per phase → `06 Roadmap/01 Overview.md`
+4. **Timeline** — WBS sequenced against milestones + team availability (Gantt) → `06 Roadmap/04 Timeline.md`
+
+Present this to the engagement lead and hand off — do not attempt to run the sequence autonomously. When published, update `07 Where We Are/04 Roadmap.md`'s matching row(s) and append a `05 Report Log.md` row by hand, following `.claude/skills/discovery/pattern-do-report-commit.md`'s shape even though no stage skill enforces it yet.
+
+Gate 3 closes once the phased plan is reviewed end to end — report back to `/discovery` once that's true so it can record the gate and close out the engagement.

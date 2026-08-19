@@ -3,7 +3,7 @@
 _The problems driving this engagement, ranked by impact on delivery speed. The one page in [Problem Space](../) that changes as new evidence lands._
 
 > [!WARNING] Populated During Engagement
-> This page synthesizes findings gathered across [SDLC Domains](../03%20SDLC%20Domains/) and the discovery workshops. It is a placeholder until that evidence exists.
+> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
 
 ---
 
@@ -26,9 +26,9 @@ A problem can sit at 🟡 Reported through publication. That marks it as a lead,
 
 _[POPULATE — one row per problem, ordered by impact on delivery speed, highest first.]_
 
-| ID   | Problem        | Impact on Delivery Speed | Status      | SDLC Domain                            |
-| ---- | -------------- | ------------------------ | ----------- | -------------------------------------- |
-| P-01 | [PROBLEM NAME] | [IMPACT]                 | 🟡 Reported | [SDLC Domain](../03%20SDLC%20Domains/) |
+| ID   | Problem        | Impact on Delivery Speed | Status      | SDLC Domain                                                         |
+| ---- | -------------- | ------------------------ | ----------- | ------------------------------------------------------------------- |
+| P-01 | [PROBLEM NAME] | [IMPACT]                 | 🟡 Reported | [SDLC Domain](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) |
 
 ---
 
@@ -38,13 +38,13 @@ _[POPULATE — one row per problem, ordered by impact on delivery speed, highest
 
 **Observed facts:** [The concrete, checkable facts behind the claim — not the interpretation of them.]
 
-**Impact on delivery speed:** [How this shows up in the [Where Time Is Lost](./01%20Where%20Time%20Is%20Lost.md) picture — which stage(s) it slows, and by roughly how much if known.]
+**Impact on delivery speed:** [How this shows up in the [Where Gaps Sit](./01%20Where%20Gaps%20Sit.md) picture — which stage(s) it slows, and by roughly how much if known.]
 
 **Source:** [Who said this, or what document/system it was pulled from — name the source, don't anonymise it away.]
 
 **Status:** 🟡 Reported — [date / session it was first raised]
 
-**SDLC Domain:** [Link to the [SDLC Domain](../03%20SDLC%20Domains/) page holding the full supporting evidence]
+**SDLC Domain:** [Link to the [SDLC Domain](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) page holding the full supporting evidence]
 
 ---
 
@@ -56,6 +56,6 @@ _Add a numbered entry per problem as evidence lands. Once a problem's status cha
 
 _Page-level changes only — new problems, status moves, retractions. Each problem's own **Source** field carries its evidence; this table is the audit trail of the registry itself, traced to the SDLC Domain page(s) that moved it._
 
-| Date   | Change                                                  | Evidence                                    |
-| ------ | ------------------------------------------------------- | ------------------------------------------- |
-| [DATE] | [WHAT CHANGED — e.g. "P-01 added" / "P-02 moved 🟡→🟢"] | [SDLC Domain page](../03%20SDLC%20Domains/) |
+| Date   | Change                                                  | Evidence                                                                 |
+| ------ | ------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [DATE] | [WHAT CHANGED — e.g. "P-01 added" / "P-02 moved 🟡→🟢"] | [SDLC Domain page](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) |

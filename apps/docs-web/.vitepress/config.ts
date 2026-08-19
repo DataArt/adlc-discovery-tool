@@ -42,7 +42,7 @@ export default withMermaid(
       ],
 
       sidebar: {
-        '/AI SDLC/01 Process/': [{ text: 'Process', items: scanSection('AI SDLC/01 Process') }],
+        '/AI SDLC/01 Process/': scanSection('AI SDLC/01 Process'),
         '/The Story/': [{ text: 'The Story', items: scanSection('The Story') }],
         '/AI SDLC/03 Problem Space/': scanSection('AI SDLC/03 Problem Space'),
         '/AI SDLC/04 Goals/': [{ text: 'Goals', items: scanSection('AI SDLC/04 Goals') }],

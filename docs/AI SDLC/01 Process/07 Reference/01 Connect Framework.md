@@ -96,7 +96,7 @@ Outcome-based waypoints. Defined not by scope delivered but by what becomes poss
 
 ## How this engagement adapts it
 
-This engagement's actual process — see [01 Overview](./01%20Overview.md) — is inspired by Connect but adapted in three ways:
+This engagement's actual process — see [01 Overview](../01%20Overview.md) — is inspired by Connect but adapted in three ways:
 
 - A dedicated **Vision** stage runs upfront: discovery workshops that surface the raw material Connect's Problem Space list needs, and validate Goals against it, rather than assuming either is already known.
 - **Goals** splits into two artifacts instead of Connect's single list: an upfront **Strategic Intent** capture (raw, before Vision, from leadership conversations) and a grounded, re-scoped **Solution Goals** list (narrowed once Problem Space evidence exists) — see [04 Goals](/AI%20SDLC/04%20Goals/).

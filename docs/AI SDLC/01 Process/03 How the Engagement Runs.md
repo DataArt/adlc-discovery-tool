@@ -1,6 +1,6 @@
 # How the Engagement Runs
 
-_The shape every ADLC discovery engagement takes, gate to gate — a template, not a schedule. [Where We Are](./07%20Where%20We%20Are/01%20Engagement.md) is where this gets filled in with [[CLIENT_NAME]]'s actual dates and findings; this page never changes during the engagement._
+_The shape every ADLC discovery engagement takes, gate to gate — a template, not a schedule. [Where We Are](./06%20Where%20We%20Are/01%20Engagement.md) is where this gets filled in with [[CLIENT_NAME]]'s actual dates and findings; this page never changes during the engagement._
 
 Four gates bound three working phases — every phase is gated on both sides: opened by the gate before it, closed by the gate after. A gate is a checkpoint, not a ceremony — it only closes when its entry criteria hold, evidenced, not scheduled. A phase can run short or long depending on what it finds; the gate is what moves, not the calendar.
 

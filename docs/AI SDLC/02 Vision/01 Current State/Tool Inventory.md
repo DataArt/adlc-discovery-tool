@@ -66,8 +66,6 @@ flowchart LR
     style DEL fill:#F0FDF4,stroke:#10B981,color:#047857
 ```
 
-**Legend:** 🟢 Live/adopted · 🟠 Live but flagged — ungoverned, partial, or gated on a decision · 🔴 Explicit gap — named but unaddressed · ⚫ Planned — not yet started.
-
 ---
 
 ## Knowledge & Planning Systems
@@ -123,6 +121,10 @@ _Distinct from the engineering stack above — flag overlaps (e.g. a backend obs
 ---
 
 This is raw baseline material, not synthesis. Diagnosis and root-cause analysis happen in [Problem Space](/AI%20SDLC/03%20Problem%20Space/), not here — a row flagged 🟠 or 🔴 above is a candidate for a Problem Space finding, not a conclusion in itself.
+
+---
+
+**Legend:** 🟢 Live/adopted · 🟠 Live but flagged — ungoverned, partial, or gated on a decision · 🔴 Explicit gap — named but unaddressed · ⚫ Planned — not yet started.
 
 ---
 

@@ -12,7 +12,7 @@ When this skill's unit of work is complete, re-read the SKILL.md of **whichever 
 
 - A stage skill (e.g. `discovery-investigate-goals-solution-goals`) re-reads its phase skill (`discovery-investigate`).
 - A phase skill re-reads the root (`discovery`).
-- The root has no parent — it re-reads `docs/AI SDLC/01 Process/07 Where We Are/01 Engagement.md` to re-establish where the engagement stands.
+- The root has no parent — it re-reads `docs/AI SDLC/01 Process/06 Where We Are/01 Engagement.md` to re-establish where the engagement stands.
 
 This makes the chain self-healing after compaction, three levels deep — nobody needs to be manually re-invoked just because context was trimmed.
 

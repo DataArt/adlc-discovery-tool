@@ -20,7 +20,7 @@ Skip for: workshop `Agenda.md` drafts (not yet evidence — nothing to check aga
 2. Invoke `@discovery` with a read-only prompt scoped to the artifact — **"Do not write or edit any files — return output only"** — asking it to check:
    - **Citation** — the Changelog row cites the workshop, session, or conversation this derives from, not just a date
    - **Status ladder** — a Problem only moves 🟡 → 🟢 on a second, independent source, and only to 🔵 on a number backing the impact claim; nothing is marked Confirmed on a single source
-   - **Wiring** — the artifact is reachable from what it derives from and vice versa (e.g. an SDLC Domain page traces back to the Current State evidence that fed it)
+   - **Wiring** — the artifact is reachable from what it derives from and vice versa: a Problem's **SDLC Domain** field links the specific domain page it was diagnosed from (not the generic domains-overview anchor), and that domain page's own Changelog traces back to the specific Workshop Outcomes and Current State page(s) it derives from
    - **Claim strength** — nothing in the artifact asserts more than the cited evidence actually supports
 3. If **OK / no issues**: present the result to the engagement lead and continue
 4. If **corrections needed**: apply corrections, then re-invoke once more

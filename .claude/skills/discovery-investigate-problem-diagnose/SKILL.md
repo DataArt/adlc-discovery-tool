@@ -19,7 +19,7 @@ The engagement lead wants to diagnose or update a Problem. Here is their input:
 
 > 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `.claude/skills/discovery-investigate/SKILL.md` and resume from there.
 
-This is the Diagnose part of `01 Process/06 Workflows/03 Investigate/03 Problem - Diagnose.md`. Optional — only runs once a domain's evidence points to a root cause.
+This is the Diagnose part of `01 Process/07 Workflows/03 Investigate/03 Problem - Diagnose.md`. Optional — only runs once a domain's evidence points to a root cause.
 
 ---
 
@@ -31,7 +31,7 @@ Read the SDLC Domain page(s) this Problem draws on (one Problem can cite more th
 
 ## Step 2 — Draft / update the Problem
 
-Fields: ID (never reused, even if retracted), impact statement, source(s), SDLC Domain link(s).
+Fields: ID (never reused, even if retracted), impact statement, source(s), SDLC Domain link(s) — link the specific domain page(s) under `03 SDLC Domains/` this Problem was diagnosed from, not the generic domains-overview anchor.
 
 **Status moves forward only:**
 
@@ -59,7 +59,7 @@ Apply `.claude/skills/discovery/pattern-satellite-review.md` — this is the che
 Apply `.claude/skills/discovery/pattern-do-report-commit.md`:
 
 - Changelog row on `02 Problems.md`
-- `07 Where We Are/02 Investigate.md`: the matching SDLC Domain row's "Problems Diagnosed" count and Last Updated
+- `06 Where We Are/02 Investigate.md`: the matching SDLC Domain row's "Problems Diagnosed" count and Last Updated
 - `05 Report Log.md`: one row citing the domain evidence that triggered it
 - Commit: `docs(problem-space): <what changed>`
 

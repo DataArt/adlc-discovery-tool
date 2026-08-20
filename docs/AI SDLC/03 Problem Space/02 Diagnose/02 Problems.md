@@ -26,9 +26,9 @@ A problem can sit at 🟡 Reported through publication. That marks it as a lead,
 
 _[POPULATE — one row per problem, ordered by impact on delivery speed, highest first.]_
 
-| ID   | Problem        | Impact on Delivery Speed | Status      | SDLC Domain                                                         |
-| ---- | -------------- | ------------------------ | ----------- | ------------------------------------------------------------------- |
-| P-01 | [PROBLEM NAME] | [IMPACT]                 | 🟡 Reported | [SDLC Domain](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) |
+| ID   | Problem        | Impact on Delivery Speed | Status      | SDLC Domain                                                                                                     |
+| ---- | -------------- | ------------------------ | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| P-01 | [PROBLEM NAME] | [IMPACT]                 | 🟡 Reported | [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories) |
 
 ---
 
@@ -44,7 +44,7 @@ _[POPULATE — one row per problem, ordered by impact on delivery speed, highest
 
 **Status:** 🟡 Reported — [date / session it was first raised]
 
-**SDLC Domain:** [Link to the [SDLC Domain](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) page holding the full supporting evidence]
+**SDLC Domain:** [Link to the specific SDLC Domain page holding the full supporting evidence — e.g. [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories), not the domains overview]
 
 ---
 
@@ -56,6 +56,6 @@ _Add a numbered entry per problem as evidence lands. Once a problem's status cha
 
 _Page-level changes only — new problems, status moves, retractions. Each problem's own **Source** field carries its evidence; this table is the audit trail of the registry itself, traced to the SDLC Domain page(s) that moved it._
 
-| Date   | Change                                                  | Evidence                                                                 |
-| ------ | ------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [DATE] | [WHAT CHANGED — e.g. "P-01 added" / "P-02 moved 🟡→🟢"] | [SDLC Domain page](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) |
+| Date   | Change                                                  | Evidence                                                                                                        |
+| ------ | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED — e.g. "P-01 added" / "P-02 moved 🟡→🟢"] | [Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories) |

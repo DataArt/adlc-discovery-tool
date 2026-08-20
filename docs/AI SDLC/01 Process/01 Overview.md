@@ -77,7 +77,7 @@ The process applies at every scale: to the engagement as a whole, to each worksh
 > **What's driving this, what's broken, and what's worth solving?**
 
 > [!NOTE] Living Pages
-> This page describes the process itself and does not change during the engagement. Each stage below has its own home holding today's best understanding — a placeholder at the start, filled in and revised as workshops progress. For the concrete, step-by-step mechanics of how each stage actually moves, see [Workflows](./06%20Workflows/01%20Initiation.md).
+> This page describes the process itself and does not change during the engagement. Each stage below has its own home holding today's best understanding — a placeholder at the start, filled in and revised as workshops progress. For the concrete, step-by-step mechanics of how each stage actually moves, see [Workflows](./07%20Workflows/01%20Initiation.md).
 
 ### 👁️ Vision — Capture the Current State
 
@@ -85,7 +85,7 @@ The process applies at every scale: to the engagement as a whole, to each worksh
 
 Discovery workshops that build a shared, evidenced picture of today's SDLC — process, architecture, context topology, AI adoption, metrics, tooling. Current State only: Vision doesn't set a target state, propose solutions, or draft goals — that's [Goals](#-goals) and [Solution](#-solution)'s job, once this evidence exists. This is the mechanism that feeds Problem directly and validates Strategic Intent along the way: the same workshops that diagnose root causes confirm, reorder, or cut what leadership stated upfront. Strategic Intent is captured before Vision starts, not surfaced by it — but nothing in it is treated as final until Vision validates it.
 
-→ [02 Vision](/AI%20SDLC/02%20Vision/) for the workshop programme and coverage tracker. → [Investigate workflow](./06%20Workflows/03%20Investigate/00%20Orchestration.md) for how a workshop cycle actually runs.
+→ [02 Vision](/AI%20SDLC/02%20Vision/) for the workshop programme and coverage tracker. → [Investigate workflow](./07%20Workflows/03%20Investigate/00%20Orchestration.md) for how a workshop cycle actually runs.
 
 ### ❓ Problem
 
@@ -93,7 +93,7 @@ Discovery workshops that build a shared, evidenced picture of today's SDLC — p
 
 Things to figure out, in priority order. Problems enter, get worked, produce solutions and decisions, then resolve.
 
-→ [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/) for the current hypothesis and domains under diagnosis. → [Investigate workflow](./06%20Workflows/03%20Investigate/00%20Orchestration.md) and [Gate Review workflow](./06%20Workflows/02%20Gate%20Review.md) for how a hypothesis gets diagnosed and confirmed.
+→ [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/) for the current hypothesis and domains under diagnosis. → [Investigate workflow](./07%20Workflows/03%20Investigate/00%20Orchestration.md) and [Gate Review workflow](./07%20Workflows/02%20Gate%20Review.md) for how a hypothesis gets diagnosed and confirmed.
 
 ### 🎯 Goals
 
@@ -101,7 +101,7 @@ Things to figure out, in priority order. Problems enter, get worked, produce sol
 
 Two artifacts, one stage. **Intent** — the raw trigger, captured close to verbatim before diagnosis starts, usually a blunt statement of spend, ambition, or discomfort, not yet a scored objective; real enough to be the actual reason budget got approved. **Solution** — the grounded, evidenced version of Intent, narrowed to what Problem has actually diagnosed a root cause for. A goal without a diagnosed problem behind it has no evidence it's the right thing to solve; this is where that filter gets applied, in the same step as grounding it.
 
-→ [04 Goals](/AI%20SDLC/04%20Goals/) for [[CLIENT_NAME]]'s current goals, both forms. → [Initiation workflow](./06%20Workflows/01%20Initiation.md) for how Intent is captured and published. → [Gate Review workflow](./06%20Workflows/02%20Gate%20Review.md) for how Solution's fit against Intent gets scored.
+→ [04 Goals](/AI%20SDLC/04%20Goals/) for [[CLIENT_NAME]]'s current goals, both forms. → [Initiation workflow](./07%20Workflows/01%20Initiation.md) for how Intent is captured and published. → [Gate Review workflow](./07%20Workflows/02%20Gate%20Review.md) for how Solution's fit against Intent gets scored.
 
 ## 🔧 Solution
 
@@ -112,7 +112,7 @@ Target State first — the concrete end-state picture, grounded in Strategic Int
 > [!IMPORTANT] Target State, Pilot design, and Scale design are specified by running `/design`, not decided on a Solution Space page
 > Topology, context/bootstrap, and process↔context↔code wiring are architecture decisions — spanning metrics/observability/KPIs, tooling choice, repo composition, and context topology. [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) states _what_ the gap is; closing it is a `/design` ticket that produces the actual HLD-level spec (`Architecture.md`, `Design.md`, `Stack.md`) in [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/) — same as any other architecture decision in this repo, not a special case for the pilot.
 
-→ [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/) for the current evaluation dimensions, pilot options, and the full Target State → Pilot → Scale → Evolve pattern. → [Solution workflow](./06%20Workflows/04%20Solution/00%20Overview.md) for the three concrete design flows (Target State, Pilot, Scale).
+→ [05 Solution Space](/AI%20SDLC/05%20Solution%20Space/) for the current evaluation dimensions, pilot options, and the full Target State → Pilot → Scale → Evolve pattern. → [Solution workflow](./07%20Workflows/04%20Solution/00%20Overview.md) for the three concrete design flows (Target State, Pilot, Scale).
 
 ## 🗺️ Roadmap
 
@@ -120,4 +120,4 @@ Target State first — the concrete end-state picture, grounded in Strategic Int
 
 The settled shape the engagement converges on — scope, phases, timelines, team composition. No stages of its own — its artifacts (Milestones, WBS, Timeline) sit directly under the phase, per [02 Terminology](./02%20Terminology.md). Fed by the day-to-day tracked milestone list ([Roadmap — Milestones](/AI%20SDLC/06%20Roadmap/02%20Milestones.md)) as commitments firm up.
 
-→ [06 Roadmap](/AI%20SDLC/06%20Roadmap/) for the current phased plan. → [Roadmap workflow](./06%20Workflows/05%20Roadmap/00%20Overview.md) for how Milestones, WBS, team composition, and Timeline get sequenced.
+→ [06 Roadmap](/AI%20SDLC/06%20Roadmap/) for the current phased plan. → [Roadmap workflow](./07%20Workflows/05%20Roadmap/00%20Overview.md) for how Milestones, WBS, team composition, and Timeline get sequenced.

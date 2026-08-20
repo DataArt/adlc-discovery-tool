@@ -3,7 +3,7 @@
 > [!WARNING] Populated During Engagement
 > This page is a placeholder until discovery starts. The `@discovery` agent keeps it current as workshops complete, findings land, and gates close.
 
-Everything Gate 2 depends on — Target State, Pilot design, and Scale design. Only starts once Investigate closes. See [Solution workflow](../06%20Workflows/04%20Solution/00%20Overview.md).
+Everything Gate 2 depends on — Target State, Pilot design, and Scale design. Only starts once Investigate closes. See [Solution workflow](../07%20Workflows/04%20Solution/00%20Overview.md).
 
 | Item                                                                    | Status         | Target Date | Last Updated |
 | ----------------------------------------------------------------------- | -------------- | ----------- | ------------ |

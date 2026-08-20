@@ -19,7 +19,7 @@ The engagement lead wants to update an SDLC Domain page from new evidence. Here 
 
 > 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `.claude/skills/discovery-investigate/SKILL.md` and resume from there.
 
-This is the SDLC Domains part of `01 Process/06 Workflows/03 Investigate/02 Problem - SDLC Domains.md`. Optional — only runs once Current State gives a domain something to diagnose against.
+This is the SDLC Domains part of `01 Process/07 Workflows/03 Investigate/02 Problem - SDLC Domains.md`. Optional — only runs once Current State gives a domain something to diagnose against.
 
 ---
 
@@ -52,7 +52,7 @@ Apply `.claude/skills/discovery/pattern-satellite-review.md`.
 Apply `.claude/skills/discovery/pattern-do-report-commit.md`:
 
 - Changelog row on the SDLC Domain page
-- `07 Where We Are/02 Investigate.md`: this domain's row in the Problems table moves past `⏳ Not diagnosed` (Status, Last Updated — "Problems Diagnosed" count is Diagnose's job, not this stage's)
+- `06 Where We Are/02 Investigate.md`: this domain's row in the Problems table moves past `⏳ Not diagnosed` (Status, Last Updated — "Problems Diagnosed" count is Diagnose's job, not this stage's)
 - `05 Report Log.md`: one row citing the Current State evidence/workshop that triggered it
 - Commit: `docs(problem-space): <what changed>`
 

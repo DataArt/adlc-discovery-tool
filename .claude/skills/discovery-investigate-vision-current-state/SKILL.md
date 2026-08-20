@@ -19,7 +19,7 @@ The engagement lead wants to run a Vision — Current State session. Here is the
 
 > 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `.claude/skills/discovery-investigate/SKILL.md` and resume from there.
 
-This is the Vision stage of `01 Process/06 Workflows/03 Investigate/01 Vision - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
+This is the Vision stage of `01 Process/07 Workflows/03 Investigate/01 Vision - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
 
 ---
 
@@ -86,7 +86,7 @@ Apply `.claude/skills/discovery/pattern-satellite-review.md` to any Current Stat
 Apply `.claude/skills/discovery/pattern-do-report-commit.md`:
 
 - Changelog row on whichever pages changed (Current State pages carry their own `## Changelog`)
-- `07 Where We Are/02 Investigate.md`: update the Workshops row (Status, Coverage, Last Updated) and, if Step 4 ran, the Current State row(s)
+- `06 Where We Are/02 Investigate.md`: update the Workshops row (Status, Coverage, Last Updated) and, if Step 4 ran, the Current State row(s)
 - `05 Report Log.md`: one row citing this workshop
 - Commit: `docs(ws{N}): <what changed>` per `05 Team Collaboration.md`
 

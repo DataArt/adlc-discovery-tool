@@ -4,10 +4,10 @@ Used by `discovery-investigate` (and, once built, `discovery-solution`/`discover
 
 ## Investigate coverage — both must hold
 
-1. **Every SDLC Domain page has moved past its placeholder.** Read the Problems table in `07 Where We Are/02 Investigate.md` — every row must be past `⏳ Not diagnosed` with a real, workshop-evidenced working hypothesis, not a template placeholder.
+1. **Every SDLC Domain page has moved past its placeholder.** Read the Problems table in `06 Where We Are/02 Investigate.md` — every row must be past `⏳ Not diagnosed` with a real, workshop-evidenced working hypothesis, not a template placeholder.
 2. **Strategic Intent holds steady across a validation session.** The most recent Vision pass didn't surface anything that reorders or cuts an item in `04 Goals/02 Strategic Intent.md`. If it did, Intent isn't final yet — reference `01 Process/04 Evidence Chain.md`, which treats a re-derivation as the one thing Strategic Intent should never need (it's only ever validated or grounded).
 
-Per `01 Process/06 Workflows/03 Investigate/00 Orchestration.md`, this is what unblocks Gate Review — not a fixed number of workshops or a calendar date.
+Per `01 Process/07 Workflows/03 Investigate/00 Orchestration.md`, this is what unblocks Gate Review — not a fixed number of workshops or a calendar date.
 
 ## If not clear
 

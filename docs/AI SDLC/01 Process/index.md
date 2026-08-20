@@ -20,6 +20,6 @@ Investigate · Solution · Roadmap — the three gate-bound phases that structur
 | [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md)         | The gate/week template every engagement follows — static                                                              |
 | [04 Evidence Chain](./04%20Evidence%20Chain.md)                               | How a claim traces back to a workshop or conversation, not an assumption — static                                     |
 | [05 Team Collaboration](./05%20Team%20Collaboration.md)                       | How the team works in this repo — tools, commits, PRs — static                                                        |
-| [Workflows](./06%20Workflows/01%20Initiation.md)                              | The concrete, sequence-diagrammed mechanics behind each stage — static                                                |
-| [Where We Are](./07%20Where%20We%20Are/01%20Engagement.md)                    | Engagement / Investigate / Solution / Roadmap status, plus the report's own change log — kept current by `@discovery` |
+| [Workflows](./07%20Workflows/01%20Initiation.md)                              | The concrete, sequence-diagrammed mechanics behind each stage — static                                                |
+| [Where We Are](./06%20Where%20We%20Are/01%20Engagement.md)                    | Engagement / Investigate / Solution / Roadmap status, plus the report's own change log — kept current by `@discovery` |
 | [Reference — Connect Framework](./08%20Reference/01%20Connect%20Framework.md) | DataArt's original methodology this process is inspired by, and other optional background — static                    |

@@ -22,7 +22,7 @@ For the artifact you're handed:
 ## What you don't do
 
 - Don't write or edit files — you're invoked read-only; return findings as output, let the calling skill apply corrections.
-- Don't decide when a gate closes — that's `01 Process/06 Workflows/02 Gate Review.md`, a manual stakeholder session, not something you approve.
+- Don't decide when a gate closes — that's `01 Process/07 Workflows/02 Gate Review.md`, a manual stakeholder session, not something you approve.
 - Don't draft workshop material, Current State pages, Problems, or Solution Goals — the `discovery-investigate-*` skills draft these directly now; hand structural or evidentiary gaps back to them, not fixes.
 
 ## Verdict format

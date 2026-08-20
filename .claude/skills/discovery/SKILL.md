@@ -20,7 +20,7 @@ This command orchestrates the full engagement arc defined in `docs/AI SDLC/01 Pr
 
 > ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
 
-> 🗂 **No per-ticket folder.** This orchestrates one standing engagement, not a ticket that completes and archives. State lives in `docs/AI SDLC/01 Process/07 Where We Are/` — that tree _is_ the report; there is no separate `Report.md` to create.
+> 🗂 **No per-ticket folder.** This orchestrates one standing engagement, not a ticket that completes and archives. State lives in `docs/AI SDLC/01 Process/06 Where We Are/` — that tree _is_ the report; there is no separate `Report.md` to create.
 
 > 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything.
 
@@ -48,7 +48,7 @@ This is a tooling map, not a process diagram — for the Phase/Stage/Artifact pr
 
 ## Resume Detection (run first, every time)
 
-**Step 1** — Read `docs/AI SDLC/01 Process/07 Where We Are/01 Engagement.md`'s gate table. The first gate not marked Closed is where the engagement stands.
+**Step 1** — Read `docs/AI SDLC/01 Process/06 Where We Are/01 Engagement.md`'s gate table. The first gate not marked Closed is where the engagement stands.
 
 **Step 2** — Read the phase-specific status page for more detail: `02 Investigate.md` if Gate 0 is closed and Gate 1 isn't, `03 Solution.md` if Gate 1 is closed and Gate 2 isn't, `04 Roadmap.md` if Gate 2 is closed and Gate 3 isn't.
 
@@ -79,7 +79,7 @@ Where `[status]` is: `🔄` (active) · `✅` (closed/done) · `⏳` (pending)
 
 > Skip if `01 Engagement.md` shows Gate 0 Closed. Runs once, ever — Strategic Intent is never re-captured after this, only validated (by Investigate) or grounded and re-scoped (by Gate Review), per `04 Evidence Chain.md`.
 
-Follow `01 Process/06 Workflows/01 Initiation.md` directly — the root owns gate mechanics, no phase skill sits under Gate 0:
+Follow `01 Process/07 Workflows/01 Initiation.md` directly — the root owns gate mechanics, no phase skill sits under Gate 0:
 
 1. **Capture** — draft Strategic Intent close to verbatim from `$ARGUMENTS` (sales notes, RFP, kickoff transcript) or ask the engagement lead for it. `04 Goals/02 Strategic Intent.md`'s Illustrative Patterns are a starting prompt, not a checklist.
 2. **Review → publish** — present the draft to whoever's sponsoring the engagement for a light sanity check (not a workshop); publish by editing `04 Goals/02 Strategic Intent.md` directly and adding a `## Changelog` row.
@@ -107,7 +107,7 @@ On return: apply `pattern-announce-progress.md`, then:
 
 > Skip if `01 Engagement.md` shows Gate 1 Closed.
 
-Follow `01 Process/06 Workflows/02 Gate Review.md`. This is a **manual session** — the root's job is to assemble the package and record the outcome, not conduct the session autonomously:
+Follow `01 Process/07 Workflows/02 Gate Review.md`. This is a **manual session** — the root's job is to assemble the package and record the outcome, not conduct the session autonomously:
 
 1. **Assemble** — consolidate confirmed Problems, Current State, and any Solution Goals drafted mid-Investigate into one package (not a scatter of page links).
 2. **Satellite review** — apply `pattern-satellite-review.md` to the assembled package before it goes to stakeholders.
@@ -129,7 +129,7 @@ Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
 
 ## Phase 2 — Solution _(stub)_
 
-> Not yet implemented. `/discovery-solution` currently points at `01 Process/06 Workflows/04 Solution/00 Overview.md` and hands the three flows (Target State, Pilot, Scale) to the engagement lead to run manually — Pilot's `/design` step already exists and works today.
+> Not yet implemented. `/discovery-solution` currently points at `01 Process/07 Workflows/04 Solution/00 Overview.md` and hands the three flows (Target State, Pilot, Scale) to the engagement lead to run manually — Pilot's `/design` step already exists and works today.
 
 ---
 
@@ -141,7 +141,7 @@ Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
 
 ## Phase 3 — Roadmap _(stub)_
 
-> Not yet implemented. `/discovery-roadmap` currently points at `01 Process/06 Workflows/05 Roadmap/00 Overview.md` and hands Milestones/WBS/Team Composition/Timeline to the engagement lead to run manually.
+> Not yet implemented. `/discovery-roadmap` currently points at `01 Process/07 Workflows/05 Roadmap/00 Overview.md` and hands Milestones/WBS/Team Composition/Timeline to the engagement lead to run manually.
 
 ---
 
@@ -159,4 +159,4 @@ When Gate 3 closes:
 >
 > 🚦 Gate 0 ✅ -> 🔍 Investigate ✅ -> 🚦 Gate 1 ✅ -> 🔧 Solution ✅ -> 🚦 Gate 2 ✅ -> 🗺️ Roadmap ✅ -> 🚦 Gate 3 ✅
 >
-> The delivery plan in `06 Roadmap/` is what [[CLIENT_NAME]] staffs and funds against. `01 Process/07 Where We Are/` remains the historical record — `05 Report Log.md` has the full session-by-session trail.
+> The delivery plan in `06 Roadmap/` is what [[CLIENT_NAME]] staffs and funds against. `01 Process/06 Where We Are/` remains the historical record — `05 Report Log.md` has the full session-by-session trail.

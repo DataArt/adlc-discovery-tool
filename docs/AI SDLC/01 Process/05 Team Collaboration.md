@@ -53,7 +53,7 @@ flowchart LR
 
 ## Landing content in the repo
 
-Whatever produced the draft — a desktop app outside the repo, or Claude Code directly inside it — the same rule applies before it's published: it goes through [Workflows](./06%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
+Whatever produced the draft — a desktop app outside the repo, or Claude Code directly inside it — the same rule applies before it's published: it goes through [Workflows](./07%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
 
 1. **Branch** — `<type>/short-description`, per [Engineering Guide — Conventions](/Engineering%20Guide/01%20Conventions.md).
 2. **Commit** — `<type>(<scope>): <what changed>`, Conventional Commits. Scope is the AI SDLC section (`process`, `vision`, `problem-space`, `goals`, `solution-space`, `roadmap`) or the workshop ID (`ws1`, `ws2`, …).

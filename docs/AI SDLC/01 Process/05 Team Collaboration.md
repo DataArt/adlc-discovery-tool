@@ -25,7 +25,7 @@ flowchart LR
         BR --> CM --> PR
     end
 
-    TR --> Process --> Land
+    Capture --> Process --> Land
 
     classDef capture fill:#F59E0B,stroke:#B45309,color:#000
     classDef process fill:#8B5CF6,stroke:#5B21B6,color:#fff

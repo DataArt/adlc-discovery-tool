@@ -56,5 +56,10 @@ export default withMermaid(
         '/Engineering Guide/': scanSection('Engineering Guide'),
       },
     },
+    vite: {
+      optimizeDeps: {
+        include: ['mermaid', 'fastdom', 'fastdom/extensions/fastdom-promised.js'],
+      },
+    },
   })
 );

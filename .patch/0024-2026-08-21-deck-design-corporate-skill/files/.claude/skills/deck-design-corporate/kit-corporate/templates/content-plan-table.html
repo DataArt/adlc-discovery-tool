@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Plan table / timeline (116:763)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 116:763 — PLAN TABLE (a Gantt rendered as a table, for when each
+       task needs explanation columns). Sheet `.sheet--plan`: Activity col + N
+       week cols (.sheet-cell--wk 160px; fill the span cell with .sheet-cell--tl)
+       + M info cols. Dark-blue header, gray-light zebra, outer black border.
+       FLEXIBLE: add/remove rows (tasks), week columns and info columns. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-06"></div>
+      <span class="layer tag is-default" style="left:153.333px; top:82.667px; padding:0;">DISCOVERY PHASE</span>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Project Plan</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- intro (H11 24) -->
+      <p class="layer txt-h11 c-text-default" style="left:153.333px; top:280px; width:1612px;">The estimated duration of the Discovery Phase is 4 weeks. To ensure better communication with BNET stakeholders, DataArt recommends performing part of the Discovery Phase on-site (2 weeks).</p>
+
+      <!-- plan table -->
+      <div class="layer" style="left:153.333px; top:381.333px; width:1613.333px;">
+        <div class="sheet sheet--plan">
+          <div class="sheet-row sheet-row--header">
+            <div class="sheet-cell">Activity</div>
+            <div class="sheet-cell sheet-cell--wk">Week1</div>
+            <div class="sheet-cell sheet-cell--wk">Week2</div>
+            <div class="sheet-cell sheet-cell--wk">Week3</div>
+            <div class="sheet-cell sheet-cell--wk">Week4</div>
+            <div class="sheet-cell">Expected BNET Stakeholder&rsquo;s Involvement</div>
+            <div class="sheet-cell">BNET Stakeholders to Be Involved</div>
+          </div>
+          <div class="sheet-row">
+            <div class="sheet-cell">Initial kick-off meeting</div>
+            <div class="sheet-cell sheet-cell--wk sheet-cell--tl"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell">2 hours</div>
+            <div class="sheet-cell">Business and Technical stakeholders</div>
+          </div>
+          <div class="sheet-row sheet-row--zebra">
+            <div class="sheet-cell">Current system state overview</div>
+            <div class="sheet-cell sheet-cell--wk sheet-cell--tl"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell">2 meetings by 1.5 hours</div>
+            <div class="sheet-cell">Technical stakeholders</div>
+          </div>
+          <div class="sheet-row">
+            <div class="sheet-cell">Analytical use cases / Data consumption</div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk sheet-cell--tl"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell">2 meetings by 1 hour</div>
+            <div class="sheet-cell">Business stakeholders and end-users</div>
+          </div>
+          <div class="sheet-row sheet-row--zebra">
+            <div class="sheet-cell">Data deep dive</div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk sheet-cell--tl"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell">4 meetings by 1 hour</div>
+            <div class="sheet-cell">Technical stakeholders</div>
+          </div>
+          <div class="sheet-row">
+            <div class="sheet-cell">Data governance</div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk"></div>
+            <div class="sheet-cell sheet-cell--wk sheet-cell--tl"></div>
+            <div class="sheet-cell">2 meetings by 1 hour</div>
+            <div class="sheet-cell">Business and Technical stakeholders</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- footer: 2-slot -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

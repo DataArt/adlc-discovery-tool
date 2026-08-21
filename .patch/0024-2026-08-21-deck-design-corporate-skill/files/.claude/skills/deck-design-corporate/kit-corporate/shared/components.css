@@ -1,0 +1,803 @@
+/* ============================================================================
+ * DataArt Corporate Slides Kit — Components
+ * ----------------------------------------------------------------------------
+ * Mid-level components ported from the Figma "Atom Components" / "Basic
+ * Molecules" sections. Type sizes are REMAPPED to the active set (ties up):
+ *   50→48 · 44→48 · 36→40 · 32→28 · 30→28 · 26→28 · 20→21 · 15→14 · 13→14
+ *
+ * Load AFTER tokens.css and layouts.css.
+ * ========================================================================== */
+
+/* Components are self-contained: reset UA <p> margins on their text elements
+ * so they work outside a .slide (e.g. in the showcase), not only inside it. */
+/* SHORT-LABEL classes (titles, numbers, single-word cells) live in the
+ * narrowest grid tracks (6 cols = 233.333px). `anywhere` lets even a long
+ * unbreakable token (e.g. "primary+secondary") break so it never spills the
+ * track edge. A mid-token break is acceptable here because the content is short
+ * by design — see the content budgets in references/kit-map.md. */
+.nc-title, .ib-title, .ff-number, .ff-label, .cc-city {
+  margin: 0; overflow-wrap: anywhere;
+}
+/* PROSE classes (headings, paragraphs, multi-word cells) wrap at WORD
+ * boundaries and hyphenate a genuinely-too-long word, instead of breaking a
+ * normal word mid-letter ("Implementa-tion", not "Implementatio n"). The grid
+ * track still holds its formula width via `.cols > * { min-width:0 }`, so this
+ * does not reintroduce edge spill. */
+.header-heading, .nc-text, .ib-text, .cc-line, .cc-email, .sheet-cell {
+  margin: 0; overflow-wrap: break-word; hyphens: auto;
+}
+
+/* ============================================================================
+ *  Numbered Card  (Figma "Numbered Card with Description Vertical", 64:747)
+ *  ----------------------------------------------------------------------------
+ *  Figma recipe: Number Font Size = 48/32 px · Paragraph Font Size =
+ *  20/16/15/14/13 px. Number block 100×100 on background/gray-dark; number +
+ *  title in link colour, body in default text colour.
+ *  Remap applied: number 50→48 (h3) · title 36→40 (h5) · body 20→21 (h12).
+ *
+ *  <div class="numbered-card">
+ *    <div class="nc-number"><span>1</span></div>
+ *    <div class="nc-body">
+ *      <p class="nc-title">Application Continuity</p>
+ *      <p class="nc-text">DataArt provides operational continuity…</p>
+ *    </div>
+ *  </div>
+ * ========================================================================== */
+.numbered-card { box-sizing: border-box; display: flex; flex-direction: column; gap: 22.667px; align-items: flex-start; }
+
+.nc-number {
+  box-sizing: border-box; flex: none; width: 133.333px; height: 133.333px; padding: 13.333px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-surface-gray-dark);
+}
+.nc-number > * {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 58.667px; line-height: 1.33;        /* number → H3 44 (50→44) */
+  color: var(--c-text-link);
+}
+
+.nc-body { display: flex; flex-direction: column; gap: var(--gap-pair-lg); width: 100%; }
+.nc-title {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 53.333px; line-height: 1.33;        /* 40-base ×4/3 (2033:736 vertical card) */
+  color: var(--c-text-link);
+}
+.nc-text {
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 32px; line-height: 1.25;        /* 24-base ×4/3 (2033:736) */
+  color: var(--c-text-default);
+}
+
+/* ============================================================================
+ *  Tag  (Figma "tag", 82:491) — two variants.
+ *  ----------------------------------------------------------------------------
+ *  32px tall, uppercase T1 (16px, tracking 1.92px). Variant "case study" has
+ *  an Orange400→white horizontal gradient; "default" is a white chip.
+ *
+ *  <span class="tag is-case-study">case study</span>
+ *  <span class="tag is-default">label</span>
+ * ========================================================================== */
+.tag {
+  display: inline-flex; align-items: center; height: 32px; padding: 0 8px;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: 16px; line-height: 1.25; letter-spacing: 1.92px;
+  text-transform: uppercase; color: var(--c-text-default); white-space: nowrap;
+}
+.tag.is-default     { background: var(--c-white); }
+.tag.is-case-study  { background: linear-gradient(90deg, var(--c-orange-400) 0%, var(--c-white) 100%); }
+/* solid colour labels (used as pipeline "доп метки": role / duration / status) */
+.tag.is-turquoise   { background: var(--c-turquoise-400); color: var(--c-text-default); }
+.tag.is-purple      { background: var(--c-purple-400);    color: var(--c-text-contrast); }
+.tag.is-yellow      { background: var(--c-yellow-400);    color: var(--c-text-default); }
+.tag.is-orange      { background: var(--c-orange-400);    color: var(--c-text-default); }
+.tag.is-gray        { background: var(--c-gray-200);      color: var(--c-text-default); }
+
+/* ---- Numbered Card · variants ------------------------------------------- */
+/* Default (Figma 82:304): WHITE card, faint 30%-blue outline, blue
+ * number top / label bottom.  (DARK variant .is-on-dark below uses gray.) */
+.numbered-card--default {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 32px; background: var(--c-surface-white);
+  border: 1.333px solid var(--c-border-blue-soft);
+}
+.numbered-card--default .nc-number { width: auto; height: auto; padding: 0; background: none;
+  display: block; font-size: 58.667px; line-height: 1.33; color: var(--c-text-link); } /* blue number (light 82:304) */
+.numbered-card--default .nc-text { font-size: 24px; color: var(--c-text-default); }
+/* ON-DARK variant (Figma 2060:1138 "Infrastructure Cost" on a dark/gradient bg):
+ * transparent card, light-gray outline, faint Gray-5 number, white label. Put the
+ * row on a .bg-title-* (dark) slide. */
+.numbered-card--default.is-on-dark { background: transparent; border-color: var(--c-border-light); }
+.numbered-card--default.is-on-dark .nc-number { color: var(--c-gray-5); }
+.numbered-card--default.is-on-dark .nc-text   { color: var(--c-text-contrast); }
+
+/* Horizontal (82:821): number box 64×64 (dark/blue), texts to the right. */
+.numbered-card--horizontal { display: flex; flex-direction: row; gap: 32px; align-items: flex-start; }
+.numbered-card--horizontal .nc-number {
+  width: 85.333px; height: 85.333px; background: var(--c-surface-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.numbered-card--horizontal .nc-number > * { font-size: 42.667px; line-height: 1.25; color: var(--c-text-contrast); } /* H7 (32-base) */
+.numbered-card--horizontal .nc-body { gap: 21.333px; }
+.numbered-card--horizontal .nc-title { font-size: 40px; line-height: 1.25; } /* H8 (30-base) */
+.numbered-card--horizontal .nc-text  { font-size: 28px; }                    /* 20→21 */
+
+/* With Icon Vertical (82:909): blue border, number box 48, icon between title & body. */
+.numbered-card--icon { display: flex; flex-direction: column; gap: 53.333px; border: 1px solid var(--c-border-blue); }
+.numbered-card--icon .nc-number {
+  width: 64px; height: 64px; background: var(--c-surface-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.numbered-card--icon .nc-number > * { font-size: 28px; line-height: 1.25; color: var(--c-text-contrast); } /* 20→21 */
+.numbered-card--icon .nc-body { gap: 21.333px; padding: 0 32px 32px; }
+.numbered-card--icon .nc-title { font-size: 48px; line-height: 1.33; }       /* H5 (36-base) */
+.numbered-card--icon .nc-icon  { width: 64px; height: 64px; }
+.numbered-card--icon .nc-icon img { display: block; width: 100%; height: 100%; }
+.numbered-card--icon .nc-text  { font-size: 24px; }                          /* 18 stays */
+/* Title stays pinned to the top of the card; the icon + text sink to the
+   bottom as a group (the icon's auto top-margin eats the slack). Across an
+   equal-height row this top-aligns every title and bottom-aligns every
+   description, so cards stay balanced no matter how long a title or a
+   description runs. */
+.numbered-card--icon .nc-body { flex: 1 1 auto; }
+.numbered-card--icon .nc-icon { margin-top: auto; }
+
+/* ============================================================================
+ *  Sheet / Spreadsheet  (Figma "basic sheet" 43:566) — width 1613.333px.
+ *  ----------------------------------------------------------------------------
+ *  Equal-width cells, 18×10 padding, 1px black dividers, optional zebra rows
+ *  (gray-dark). Row header = H11 24; cell = H12 21; text colour icon/main.
+ *  Header-row colour can be set via .sheet-row--<colour> (7 options below).
+ *
+ *  <div class="sheet">
+ *    <div class="sheet-row sheet-row--header sheet-row--blue">
+ *      <div class="sheet-cell">Header A</div> … </div>
+ *    <div class="sheet-row"><div class="sheet-cell">Cell</div> … </div>
+ *    <div class="sheet-row sheet-row--alt"> … </div>
+ *  </div>
+ * ========================================================================== */
+.sheet { display: flex; flex-direction: column; width: 1613.333px; background: var(--c-surface-white); }
+.sheet-row { display: flex; }
+.sheet-row + .sheet-row { border-top: 1px solid var(--c-surface-black); }
+.sheet-cell {
+  flex: 1 0 0; min-width: 0; padding: 16px 13.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 32px; line-height: 1.25;
+  color: var(--c-icon-main);
+}
+.sheet-cell + .sheet-cell { border-left: 1px solid var(--c-surface-black); }
+.sheet-row--header .sheet-cell { font-size: 37.333px; }      /* H9 28 */
+.sheet-row--alt .sheet-cell    { background: rgba(226, 230, 233, 0.35); }  /* Figma 69:1160 zebra (border-light 35%) */
+
+/* Header-row colours. The current Figma basic sheet (node 69:1195) ships a
+ * BLUE header (#3453ad, white text) + a SUBTLE light zebra (the .sheet-row--alt
+ * above). Apply the header colour with .sheet-row--header + a colour modifier
+ * below (default content-table uses --blue). The other modifiers realise the
+ * named palette (White/Blue/Turquoise/Yellow/Red/Sky/Purple). */
+.sheet-row--white  .sheet-cell { background: var(--c-surface-white); color: var(--c-icon-main); }
+.sheet-row--blue   .sheet-cell { background: var(--c-blue-400);      color: var(--c-text-contrast); }
+.sheet-row--turquoise .sheet-cell { background: var(--c-turquoise-600); color: var(--c-text-contrast); }
+.sheet-row--yellow .sheet-cell { background: var(--c-yellow-400);    color: var(--c-icon-main); }
+.sheet-row--red    .sheet-cell { background: var(--c-red-600);       color: var(--c-text-contrast); }
+.sheet-row--sky    .sheet-cell { background: var(--c-sky-600);       color: var(--c-icon-main); }
+.sheet-row--purple .sheet-cell { background: var(--c-purple-600);    color: var(--c-text-contrast); }
+
+/* ---- PLAN / TIMELINE TABLE (Figma "Project Plan" 116:763) ------------------
+ * A Gantt rendered AS A TABLE — use when each task needs explanation columns.
+ * Activity col + N narrow week cols (.sheet-cell--wk, 160px) + M info cols.
+ * Fill a week cell with .sheet-cell--tl(-colour) to mark the task's span.
+ * Dark-blue header, gray-light zebra (.sheet-row--zebra), outer black border,
+ * 24px text. FLEXIBLE: add/remove rows (tasks) and week columns. Row bg lives
+ * on the ROW so a filled cell's colour paints over it. */
+.sheet--plan { border: 1px solid var(--c-surface-black); }
+.sheet--plan .sheet-row         { background: var(--c-surface-white); }
+.sheet--plan .sheet-row--zebra  { background: var(--c-surface-gray-light); }
+.sheet--plan .sheet-row--header { background: var(--c-surface-dark); }      /* dark blue */
+.sheet--plan .sheet-cell        { background: transparent; padding: 16px 13.333px; font-size: 24px; }
+.sheet--plan .sheet-row--header .sheet-cell { font-size: 24px; color: var(--c-text-contrast); }
+.sheet-cell--wk { flex: 0 0 160px; }                       /* fixed week column */
+.sheet--plan .sheet-cell--tl        { background: var(--c-turquoise-400); }  /* timeline span fill */
+.sheet--plan .sheet-cell--tl-blue   { background: var(--c-blue-400); }
+.sheet--plan .sheet-cell--tl-sky    { background: var(--c-sky-400); }
+.sheet--plan .sheet-cell--tl-yellow { background: var(--c-yellow-400); }
+.sheet--plan .sheet-cell--tl-red    { background: var(--c-red-400); }
+.sheet--plan .sheet-cell--tl-purple { background: var(--c-purple-400); }
+.sheet--plan .sheet-cell--tl-orange { background: var(--c-orange-400); }
+
+/* ============================================================================
+ *  Contact Card  (Figma "Contacts card" 43:349) — 279×488.
+ *  Picture placeholder 279×288 (surface-blue) + city / country / phone / email.
+ *  <div class="contact-card">
+ *    <div class="cc-picture"></div>            (or an <img>)
+ *    <p class="cc-city">New York</p>
+ *    <p class="cc-line">USA</p>
+ *    <p class="cc-line">+1 (212) 378 4108</p>
+ *    <a class="cc-email" href="…">New-York@dataart.com</a>
+ *  </div>
+ * ========================================================================== */
+.contact-card { position: relative; width: 372px; height: 650.667px; font-family: var(--font-sans); }
+.contact-card .cc-picture { position: absolute; left: 0; top: 0; width: 372px; height: 384px; background: var(--c-surface-blue); }
+.contact-card .cc-picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.contact-card .cc-city  { position: absolute; left: 0; top: 445.333px; font-size: 37.333px; line-height: 1.25; color: var(--c-text-default); white-space: nowrap; } /* 26→28 */
+.contact-card .cc-line  { position: absolute; left: 0; font-size: 28px; line-height: 1.25; color: var(--c-text-default); white-space: nowrap; } /* 20→21 */
+.contact-card .cc-line.is-country { top: 500px; }
+.contact-card .cc-line.is-phone   { top: 577.333px; }
+.contact-card .cc-email { position: absolute; left: 0; top: 617.333px; font-size: 28px; line-height: 1.25; color: var(--c-text-default); text-decoration: underline; white-space: nowrap; } /* L1 20→21 */
+
+/* ============================================================================
+ *  Fast Fact Card  (Figma "Fast Fact Card" 44:177) — big number + label.
+ *  <div class="fast-fact"><p class="ff-number">9,999</p><p class="ff-label">Engineers</p></div>
+ * ========================================================================== */
+.fast-fact { display: flex; flex-direction: column; align-items: flex-start; font-family: var(--font-sans); color: var(--c-text-default); }
+.fast-fact .ff-number { font-size: 58.667px; line-height: 1.33; }   /* H3 44 */
+/* Figma-accurate 26.667px (NOT the 20→21 remap): the remap read visually heavy
+ * and pushed "NSP Score in 2025" past the 233.333px card. Weight stays 400. */
+.fast-fact .ff-label  { font-size: 26.667px; line-height: 1.25; }
+
+/* ============================================================================
+ *  Divider  (Figma "Divider") — thin rules.
+ * ========================================================================== */
+/* Figma "Divider" (Sheet Header H/V) = 1px solid surfaces/black. */
+.divider-h { width: 100%; height: 1px; background: var(--c-surface-black); }
+.divider-v { width: 1.333px; height: 100%; background: var(--c-surface-black); }
+/* Sheet-header accent dividers (Figma: 110×1 / 1×24, surfaces/black). */
+.divider-sheet-h { width: 146.667px; height: 1px; background: var(--c-surface-black); }
+.divider-sheet-v { width: 1px; height: 32px; background: var(--c-surface-black); }
+
+/* ============================================================================
+ *  Person Card (Team) — two variants (Figma 104:807 / 107:1175)
+ *  ----------------------------------------------------------------------------
+ *  Horizontal: photo 94×91 + name (P2 16, two lines) + role (P7 12).
+ *  Vertical:   photo 150×150 + name (H13 20) + linkedin link (L2 16, blue).
+ * ========================================================================== */
+.person-card { display: flex; gap: 13.333px; align-items: center; }
+.person-card .pc-photo { flex: none; width: 106px; height: 106px; background: var(--c-surface-gray-dark); overflow: hidden; }  /* SQUARE photo (104:790) */
+.person-card .pc-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.person-card .pc-body { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.person-card .pc-name { display: flex; flex-direction: column; gap: 5.333px; font-family: var(--font-sans); font-size: 21.333px; line-height: 1.25; color: var(--c-text-default); }
+.person-card .pc-name p { margin: 0; }
+.person-card .pc-role { font-family: var(--font-sans); font-size: 16px; line-height: 1.25; color: var(--c-text-default); }
+/* Larger person-card variant (Figma 104:790 lower rows): name 28 / role 21.333,
+ * name→role gap 42.667, name-line gap 7.111. Use on prominent team rows. */
+.person-card--lg .pc-body { gap: 42.667px; }
+.person-card--lg .pc-name { gap: 7.111px; font-size: 28px; }
+.person-card--lg .pc-role { font-size: 21.333px; }
+
+.person-card-v { display: flex; flex-direction: column; gap: 21.333px; }
+.person-card-v .pcv-photo { width: 200px; height: 200px; background: var(--c-surface-gray-dark); }
+.person-card-v .pcv-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.person-card-v .pcv-body { display: flex; flex-direction: column; gap: 5.333px; }
+.person-card-v .pcv-name { font-family: var(--font-sans); font-size: 26.667px; line-height: 1.25; color: var(--c-text-default); margin: 0; }
+.person-card-v .pcv-link { font-family: var(--font-sans); font-size: 21.333px; line-height: 1.25; color: var(--c-text-link); text-decoration: underline; margin: 0; word-break: break-all; }
+
+/* ============================================================================
+ *  ATOM COMPONENTS
+ * ========================================================================== */
+
+/* ---- Logo --------------------------------------------------------------- */
+/* Small = 148×24 (header). Large = 426×69 (covers / contacts). Variants:
+ * default (colour) / white (on dark). The white logos are generated from the
+ * COLOURED (solid-mark) geometry recoloured to white — a SOLID white mark, not
+ * the hollow outline of Figma's monochrome export. All logo SVGs use literal
+ * fills (no var()) and preserveAspectRatio="xMidYMid meet" (never stretch). */
+.logo-small { display: inline-block; width: 197.333px; height: 32px; }
+.logo-large { display: inline-block; width: 568px; height: 92px; }
+.logo-small img, .logo-large img { display: block; width: 100%; height: 100%; }
+
+/* ---- Header (Figma "Header" variant set 38:238) -------------------------
+ * 1210 wide block: heading (H4 44 → remap 48) + DataArt logo top-right +
+ * 110×6 accent rule at the bottom of the zone. Variants:
+ *   .header--single (104px, 1-line ≤50ch) · .header--multi (182.667px, 2-line ≤100ch)
+ *   .header--2logo  (client logo slot left of the DataArt logo)
+ *   .header--case-study (use the white logo asset; sits on a dark bg)
+ * On a slide, the same positions live in layouts.css (.zone-heading etc.). */
+.header { position: relative; width: 1613.333px; }
+.header--single { height: 104px; }
+.header--multi  { height: 182.667px; }
+.header-heading {
+  position: absolute; left: 0; top: 0; width: 1352px;
+  font-family: var(--font-sans); font-weight: 400;
+  font-size: var(--slide-heading-size); line-height: 1.33;  /* 44→48 */
+  color: var(--c-text-default);
+}
+.header--2logo .header-heading { width: 1037.333px; }
+.header-logo { position: absolute; right: 0; top: 26.667px; width: 197.333px; height: 32px; }
+.header-logo img { display: block; width: 100%; height: 100%; }
+.header-clientlogo { position: absolute; right: 261.333px; top: 18.667px; height: 46.667px; }
+.header-clientlogo img { display: block; height: 100%; width: auto; }
+.header-rule { position: absolute; left: 0; bottom: 0; width: 146.667px; height: 8px; background: var(--c-text-default); }
+.header--case-study .header-heading { color: var(--c-text-contrast); }
+.header--case-study .header-rule    { background: var(--c-text-contrast); }
+
+/* ---- Footer (Figma "Footer" variant set 38:169) -------------------------
+ * 1210 wide, P7 16px. Slots: tagline (left) · topic (x311) · page (right).
+ * Variants: .footer--3slot (tagline+topic+page) · .footer--tagline-page ·
+ * .footer--tagline · .footer--website (37.333px white "dataart.com", 46.667px tall). */
+/* Slots are scoped under .footer so they never collide with the on-slide
+ * footer chrome (.footer-tagline / .page-number in layouts.css). */
+.footer { position: relative; width: 1613.333px; height: 20px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 16px; line-height: 1.25;
+  color: var(--c-text-default); white-space: nowrap; }
+.footer .footer-tagline { position: absolute; left: 0; top: 0; }
+.footer .footer-topic   { position: absolute; left: 414.667px; top: 0; }
+.footer .footer-page    { position: absolute; right: 0; top: 0; }
+.footer--website { height: 46.667px; }
+.footer .footer-web { position: absolute; right: 0; top: 0; font-size: 37.333px; line-height: 1.25; color: var(--c-text-contrast); }
+
+/* ---- Chapter Number (Figma "Chapter number" 14:244) ---------------------
+ * Big outline-vector digit, ~312px tall (width varies per digit). Asset
+ * files assets/chapter/01.svg … 09.svg. <div class="chapter-number"><img …></div> */
+.chapter-number { display: inline-block; height: 312px; }
+.chapter-number img { display: block; height: 100%; width: auto; }
+
+/* ---- Icon Block (Figma "Icon Block" variant set 45:263) -----------------
+ * Icon (SVG) + heading (H9 28) + optional paragraph (H12 21).
+ * Arrangement: default icon-left (row); .icon-block--stacked = icon on top.
+ * Icon size: 48px default (matches Figma — the glyph sits at ~48px inside its
+ * 64px box; the kit's tightly-cropped SVGs fill the box, so render them at 48 to
+ * match the visual). .icon-block--lg uses the 85×87 large icon box.
+ *
+ * ALIGNMENT (operator rule): the icon's TOP edge aligns with the TOP of the
+ * TITLE block (`align-items: flex-start`) — consistent across rows whatever the
+ * title length. The title→description gap is the normal 21.333px (set on .ib-body);
+ * the icon→text gap is 21.333px (Figma 67:955 specifies an 10.667px box gap, but its
+ * icon glyph is padded inside the 64px box → ~21.333px visual gap; we match the
+ * visual). */
+.icon-block { display: flex; align-items: flex-start; gap: 21.333px; }
+.icon-block .ib-icon { flex: none; width: 48px; height: 48px; }
+/* `object-position: center top` top-anchors the glyph inside the 64px box, so
+ * a SHORT/wide icon (e.g. infinity, 44×19) lines its symbol up with the title
+ * top like the square (44×44) icons — instead of floating in the box middle. */
+.icon-block .ib-icon img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center top; }
+/* Optional grey backing plate (Figma "Strategy Framework" pattern: the icon sits
+ * centred on a small grey square, not as a large bare glyph). OPT-IN via
+ * .is-plated — bare .ib-icon is unchanged. Plate size/radius are variables so the
+ * exact Figma values can be dropped in later without restructuring (TODO: confirm
+ * plate px + radius from Figma). */
+.icon-block .ib-icon.is-plated {
+  --ib-plate: 64px; --ib-plate-radius: 8px;
+  width: var(--ib-plate); height: var(--ib-plate);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-surface-gray-light); border-radius: var(--ib-plate-radius);
+}
+.icon-block .ib-icon.is-plated img { width: 48px; height: 48px; object-position: center; }
+.icon-block .ib-body { display: flex; flex-direction: column; gap: 21.333px; min-width: 0; }
+.icon-block .ib-title { font-family: var(--font-sans); font-weight: 400; font-size: 37.333px; line-height: 1.25; color: var(--c-text-link); }
+.icon-block .ib-text  { font-family: var(--font-sans); font-weight: 400; font-size: 28px; line-height: 1.25; color: var(--c-text-default); }
+/* Icon-block GRID (Figma 67:955) — a 2×N grid of .icon-block atoms. Two columns
+ * at content-x 153 / 1084: block width 578, column-gap 353, right margin 104
+ * (Figma-exact, intentionally not centre-filled). Body is 32px here (67:955's
+ * size, = txt-h11) vs the atom's default 28px. align-content:start tops the rows
+ * in the content zone; row-gap is the inter-row breathing room. */
+.icon-grid { display: grid; grid-template-columns: 578px 578px; column-gap: 353px;
+  row-gap: 80px; align-content: start; }
+.icon-grid .icon-block .ib-text { font-size: 28px; }  /* 67:955 body = 21-base ×4/3 */
+/* Icon ON TOP. Two arrangements — pick ONE per slide and keep every column the
+ * same; the broken look (icon centred over LEFT-aligned text) comes from mixing.
+ *   --stacked       icon + text both CENTRED (symmetric; e.g. capability columns)
+ *   --stacked-left  icon + text both LEFT-aligned — the icon's LEFT edge lines up
+ *                   with the title/body left edge (modern feature grid; the right
+ *                   choice for a "Why X?" 3-4 column row of icon + title + paragraph). */
+.icon-block--stacked { flex-direction: column; align-items: center; text-align: center; }
+.icon-block--stacked-left { flex-direction: column; align-items: flex-start; text-align: left; }
+.icon-block--lg .ib-icon { width: 113.333px; height: 116px; }
+/* Compact inline variant (82:537): icon + single text line, vertically
+ * centred (single line → centre reads best), gap 16. ≈80px row pitch. */
+.icon-block--inline { align-items: center; }
+.icon-block--inline .ib-body { gap: 0; }
+
+/* Card-title height reservation (Figma 82:681 + 64:585). In a single-row strip
+ * of cards (.cols) the body must start at the SAME baseline in every column. A
+ * 1-line title (e.g. "One-Time Audit") would otherwise pull its body up above
+ * the columns whose title wraps to 2 lines. Reserve a 2-line title box so every
+ * column's body shares one top baseline. `2lh` = exactly two line-boxes
+ * regardless of the active line-height remap.
+ * NOT applied to .icon-grid (Figma 67:955): its 2×N cells place the body
+ * directly under a (usually 1-line) title with a small fixed gap — reserving a
+ * 2nd line there opens a big empty gap that does not match the Figma block. */
+.cols .ib-title,
+.cols .nc-title { min-height: 2lh; }
+
+/* ---- Arrow (Figma "Arrow" 67:931) --------------------------------------
+ * square (16×16 icon) and long (accent line + arrowhead). */
+.arrow-square { display: inline-block; width: 21.333px; height: 21.333px; }
+.arrow-square img { display: block; width: 100%; height: 100%; }
+.arrow-long { display: inline-flex; align-items: center; width: 78.667px; }
+.arrow-long .arrow-line { flex: 1 0 0; height: 2.08px; background: var(--c-icon-accent); }
+.arrow-long .arrow-head { width: 12px; height: 21.333px; flex: none; }
+.arrow-long .arrow-head img { display: block; width: 100%; height: 100%; }
+
+/* ============================================================================
+ *  Timeline / Gantt CONSTRUCTOR  (Figma "Timelines" 116:1107)
+ *  ----------------------------------------------------------------------------
+ *  Assemble a custom project timeline of ANY size on one slide. It is a grid of
+ *  N time columns (weeks / months / sprints / phases) with rounded colour task
+ *  "pills" floating on horizontal lanes. FLEXIBLE via CSS variables — no px math:
+ *
+ *    <div class="timeline" style="--tl-cols:6; --tl-rows:7;">
+ *      <div class="timeline-head">
+ *        <span class="tl-week">Week 1</span> … ×N        (free-text unit labels)
+ *      </div>
+ *      <div class="timeline-body">
+ *        <span class="tl-col"></span> … ×N               (one per column → lane lines)
+ *        <div class="tl-bars">
+ *          <div class="tl-bar tl-bar--blue"
+ *               style="--from:1; --to:3.4; --lane:0;">Assess Current Maturity</div>
+ *          …                                              (--from/--to in column units,
+ *        </div>                                            fractional OK; --lane 0-based,
+ *      </div>                                              fractional OK)
+ *    </div>
+ *
+ *  Set --tl-cols = number of columns, --tl-rows = number of lanes. Each bar:
+ *  --from = start (column units), --to = end, --lane = lane index. Lane pitch
+ *  65.333px. Keep the whole block bottom ≤ y698. Colours are decorative (8 options).
+ * ========================================================================== */
+.timeline { width: 1613.333px; --tl-cols: 6; --tl-rows: 7; --tl-lane: 65.333px; }
+.timeline-head { display: flex; background: var(--c-surface-gray-dark); border-bottom: 1px solid var(--c-surface-black); }
+.timeline-head .tl-week {
+  flex: 1 1 0; min-width: 0; box-sizing: border-box; padding: 16px 13.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 16px; line-height: 1.25;
+  letter-spacing: 1.92px; text-transform: uppercase; color: var(--c-text-default);
+}
+.timeline-head .tl-week + .tl-week { border-left: 1px solid var(--c-surface-black); }
+.timeline-body {
+  position: relative; display: flex; background: var(--c-surface-white);
+  border-bottom: 1px solid var(--c-surface-black);
+  height: calc(16px + var(--tl-rows) * var(--tl-lane) + 32px);
+}
+.timeline-body .tl-col { flex: 1 1 0; min-width: 0; }
+.timeline-body .tl-col + .tl-col { border-left: 1px solid var(--c-surface-black); }
+.tl-bars { position: absolute; inset: 0; }
+.tl-bar {
+  position: absolute; box-sizing: border-box;
+  left:  calc(var(--from) / var(--tl-cols) * 100%);
+  width: calc((var(--to) - var(--from)) / var(--tl-cols) * 100%);
+  top:   calc(16px + var(--lane) * var(--tl-lane));
+  display: flex; align-items: center;
+  padding: 10.667px 13.333px 13.333px; border-radius: 16px; overflow: hidden;
+  font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25; /* P3 15→14 */
+  overflow-wrap: break-word; hyphens: auto;
+}
+/* decorative fills — text colour auto (white on dark, black on light) */
+.tl-bar--blue      { background: var(--c-blue-400);      color: var(--c-text-contrast); }
+.tl-bar--purple    { background: var(--c-purple-400);    color: var(--c-text-contrast); }
+.tl-bar--red       { background: var(--c-red-400);       color: var(--c-text-contrast); }
+.tl-bar--turquoise { background: var(--c-turquoise-400); color: var(--c-text-default); }
+.tl-bar--sky       { background: var(--c-sky-400);       color: var(--c-text-default); }
+.tl-bar--yellow    { background: var(--c-yellow-400);    color: var(--c-text-default); }
+.tl-bar--orange    { background: var(--c-orange-400);    color: var(--c-text-default); }
+.tl-bar--gray      { background: var(--c-gray-200);      color: var(--c-text-default); }
+
+/* ============================================================================
+ *  Pipeline / Process CONSTRUCTOR  (Figma "…Results Comparison" 118:1976)
+ *  ----------------------------------------------------------------------------
+ *  A chain of step cards joined by arrows, each step with 0/1/2 colour LABELS
+ *  on top. Stack several chains to compare scenarios. ATOMS:
+ *   • .pipe-step  — a step card: a 32px tag bar (always reserved) + a gray body.
+ *   • .pipe-step--accent — terminal/highlight card (turquoise body, centred).
+ *   • .tag(.is-…)  — the labels (role / duration / status), 1 = right-aligned,
+ *                    2 = space-between (left role + right time).
+ *   • .pipe-arrow  — the connector (thin line + arrowhead), sits in the gap.
+ *  N steps EQUAL-FILL the 1210 column (7 → 197.333px). HOW TO BUILD A CHAIN:
+ *
+ *    <div class="pipeline">
+ *      <div class="pipe-step">
+ *        <div class="pipe-tags"><span class="tag is-orange">10 min</span></div>
+ *        <div class="pipe-body">Go through Test Case Steps</div>
+ *      </div>
+ *      <span class="pipe-arrow"></span>
+ *      <div class="pipe-step">
+ *        <div class="pipe-tags"><span class="tag is-turquoise">AI Agent</span>
+ *             <span class="tag is-purple">0 min</span></div>      (2 labels)
+ *        <div class="pipe-body">Develop Test…</div>
+ *      </div>
+ *      …  <span class="pipe-arrow"></span>
+ *      <div class="pipe-step pipe-step--accent">
+ *        <div class="pipe-tags"></div><div class="pipe-body">Framework</div></div>
+ *    </div>
+ *
+ *  Per chain (optional): a row LABEL above (.txt-h11) + a SUMMARY line below
+ *  (.txt-h15 with a .c-text-link value). Stack 2 chains to compare. Keep the
+ *  lowest summary ≤ y698. Tag colours are the author's choice (decorative). */
+.pipeline { display: flex; align-items: flex-start; width: 1613.333px; }
+.pipe-step { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; }
+.pipe-tags { display: flex; height: 32px; align-items: center; justify-content: flex-end; }
+.pipe-tags .tag + .tag { margin-left: auto; }      /* 2 tags → push 2nd to the right */
+.pipe-tags .tag { padding: 0 8px; justify-content: center; }
+.pipe-body {
+  background: var(--c-surface-gray-dark); padding: 21.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 24px; line-height: 1.25;
+  color: var(--c-text-default);
+  /* pipe labels are usually a SINGLE short word in a narrow (≈197.333px) step.
+   * With `break-word`, Chrome emergency-breaks a lone over-long word mid-letter
+   * ("Implementatio n"); `normal` + hyphens lets it sit on one line or
+   * hyphenate cleanly ("Implemen-tation"). Keep labels terse (see kit-map
+   * content budgets) so they never need an emergency break. */
+  overflow-wrap: normal; hyphens: auto;
+}
+.pipe-step--accent .pipe-body { background: var(--c-turquoise-400); text-align: center; }
+.pipe-arrow {
+  flex: 0 0 38.667px; align-self: flex-start; margin-top: 32px; height: 53.333px;
+  display: flex; align-items: center;
+}
+.pipe-arrow::before { content: ""; flex: 1 1 auto; height: 2.08px; background: var(--c-icon-main); }
+.pipe-arrow::after  { content: ""; flex: none;
+  border-left: 10.667px solid var(--c-icon-main);
+  border-top: 6.667px solid transparent; border-bottom: 6.667px solid transparent; }
+
+/* ============================================================================
+ *  Next-steps / Roadmap CONSTRUCTOR  (Figma "Moving Forward" 118:1005)
+ *  ----------------------------------------------------------------------------
+ *  A horizontal N-step roadmap: a row of colour panels (the step content) sitting
+ *  on a baseline axis of numbered circles + arrows, with a captioned icon under
+ *  each step. ATOMS:
+ *   • .steps / .steps-col — equal-fill colour panels (border-left divider,
+ *     self-stretch → equal height). Colour ramp typically white → gray-light →
+ *     gray-dark → turquoise → blue (progress toward the goal). Content: a
+ *     `.steps-title` (bold) and/or `.steps-list` bullets and/or plain <p> (21.333px).
+ *   • .step-num — 53.333px numbered circle on the axis (panel bottom-left).
+ *   • .step-arrow-axis — the forward arrow on the axis to the next step.
+ *   • .steps-caps / .step-cap — caption band under the axis: icon 48 + label 14.
+ *  HOW TO BUILD:
+ *    <div class="layer steps" style="left:153.333px; top:362.667px;">
+ *      <div class="steps-col">…content…<span class="step-num">1</span>
+ *           <span class="step-arrow-axis"></span></div>
+ *      <div class="steps-col steps-col--gray-light">…<span class="step-num">2</span>…</div>
+ *      … <div class="steps-col steps-col--blue">…<span class="step-num">5</span>…</div>
+ *    </div>
+ *    <div class="layer steps-caps" style="left:153.333px; top:714.667px;">
+ *      <div class="step-cap"><span class="sc-icon"><img …></span><p class="sc-label">…</p></div> …
+ *    </div>
+ *  FLEXIBLE: N steps equal-fill; any colour per panel; title/bullets/plain text;
+ *  one caption per step (icon swappable). Plain white slide. Keep captions ≤698. */
+.steps { position: relative; display: flex; align-items: stretch; width: 1613.333px; }
+.steps-col {
+  flex: 1 1 0; min-width: 0; box-sizing: border-box; position: relative;
+  border-left: 1px solid var(--c-surface-black); padding: 21.333px;
+  background: var(--c-surface-white);
+  font-family: var(--font-sans); font-weight: 400; font-size: 21.333px; line-height: 1.25;
+  color: var(--c-text-default); overflow-wrap: break-word; hyphens: auto;
+}
+.steps-col--gray-light { background: var(--c-surface-gray-light); }
+.steps-col--gray-dark  { background: var(--c-surface-gray-dark); }
+.steps-col--turquoise  { background: var(--c-turquoise-400); }
+.steps-col--blue       { background: var(--c-blue-400); color: var(--c-text-contrast); }
+.steps-col .steps-title { font-weight: 700; margin: 0 0 16px; }     /* P1 16 bold */
+.steps-col .steps-list  { margin: 0; padding-left: 32px; list-style: disc; }
+.steps-col .steps-list li { margin: 0; }
+.steps-col > p { margin: 0; }
+.step-num {
+  position: absolute; left: -28px; bottom: -26.667px; z-index: 2;
+  width: 53.333px; height: 53.333px; box-sizing: border-box;
+  border: 1px solid var(--c-surface-black); border-radius: 53.333px;
+  background: var(--c-surface-white); color: var(--c-text-default);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans); font-size: 21.333px; line-height: 1;
+}
+.step-arrow-axis {
+  position: absolute; left: 25.333px; bottom: -10.667px; width: calc(100% - 53.333px); height: 21.333px;
+  display: flex; align-items: center; z-index: 1;
+}
+.step-arrow-axis::before { content: ""; flex: 1 1 auto; height: 2.08px; background: var(--c-icon-main); }
+.step-arrow-axis::after  { content: ""; flex: none;
+  border-left: 10.667px solid var(--c-icon-main);
+  border-top: 6.667px solid transparent; border-bottom: 6.667px solid transparent; }
+.steps-col:last-child .step-arrow-axis { width: calc(100% - 25.333px); }  /* reach the edge */
+.steps-caps { display: flex; width: 1613.333px; }
+/* Figma 118:1005 caption "Icon Block": gap 12, icon 48. Alignment is
+ * items-center for a SINGLE-LINE label (icon vertically centred on the line)
+ * and items-start for a MULTI-LINE label (icon level with the first line).
+ * Default to center (the common case — a 1-line caption); add `.step-cap--top`
+ * on captions that wrap to 2+ lines. */
+.step-cap { flex: 1 1 0; min-width: 0; padding-left: 26.667px; display: flex; gap: 12px; align-items: center; }
+.step-cap--top { align-items: flex-start; }
+.step-cap .sc-icon { flex: none; width: 48px; height: 48px; }
+.step-cap .sc-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.step-cap .sc-label { min-width: 0; font-family: var(--font-sans); font-size: 18.667px; line-height: 1.25; color: var(--c-text-default); }
+
+/* ============================================================================
+ *  Placeholder box  (Part 51)
+ *  Scaffolds a section the HUMAN fills from the DataArt Slides Library —
+ *  primarily Case Studies. The skill inserts a section divider + this
+ *  placeholder; it NEVER fabricates the real content (no fake "Case Study
+ *  Title" cards). A centred dashed box with a short instruction.
+ * ========================================================================= */
+.placeholder-box {
+  left: 293.333px; top: 386.667px; width: 1333.333px; height: 400px; box-sizing: border-box;
+  border: 2.667px dashed var(--c-border-blue); border-radius: 21.333px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 21.333px; padding: 53.333px; text-align: center; background: var(--c-surface-white);
+}
+.placeholder-box .ph-title { font-family: var(--font-sans); font-weight: 400; font-size: 48px; line-height: 1.33; color: var(--c-text-link); }
+.placeholder-box .ph-text  { font-family: var(--font-sans); font-weight: 400; font-size: 28px; line-height: 1.25; color: var(--c-text-default); max-width: 1013.333px; }
+
+/* ============================================================================
+ *  Media frame  (migration / re-skin: real diagrams, screenshots, photos)
+ *  A neutral container for a source image carried over from a deck we are
+ *  re-skinning. The frame matches the kit (gray-light fill, soft radius); the
+ *  image is shown WHOLE (object-fit:contain) so a wide schema or a tall
+ *  screenshot never crops or stretches — it letterboxes inside the box. Put it
+ *  on a positioned .layer (set the box geometry there); the <img> fills it.
+ *  When the slot is still empty, the .media-frame--empty + .mf-hint show the
+ *  "drop a visual here" instruction (same role as .placeholder-box, image-shaped).
+ * ========================================================================= */
+.media-frame {
+  box-sizing: border-box; width: 100%; height: 100%; overflow: hidden;
+  background: var(--c-surface-gray-light); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.media-frame > img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.media-frame--empty { padding: 0 53.333px; text-align: center; }
+.media-frame .mf-hint { font-family: var(--font-sans); font-weight: 400; font-size: 32px; line-height: 1.25; color: var(--c-text-default); opacity: .45; }
+.media-caption { font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25; color: var(--c-text-default); margin: 0; }
+
+/* ============================================================================
+ *  PHASE TIMELINE / PROJECT-SIZE CONSTRUCTOR  (Figma 2067:1162)
+ *  ----------------------------------------------------------------------------
+ *  Reproduces 2067:1162 exactly, kept flexible. N phases of VARIABLE width
+ *  (--span = duration units). Per phase, top→bottom:
+ *    • .ptl-title  — 32px Arial regular, in a fixed 181.333px top zone so every
+ *                    panel starts at the SAME y (461) regardless of title length.
+ *    • .ptl-panel  — an ALTERNATING tint panel (--a #f1f2f2 / --b #f8fafa) that
+ *                    backs the body + footer; carries the body at top and the
+ *                    footer bottom-pinned (justify-content:space-between).
+ *    • .ptl-body   — 18.667px Arial regular, padded 21.333 inside the panel.
+ *    • .ptl-foot   — the bottom group:
+ *        - .ptl-bar  : a row of `--span` equal UNIT CELLS (cell count = duration
+ *                      units; the more cells, the longer the phase), coloured by
+ *                      a .ptl-bar--{purple|blue|turquoise|sky} modifier, with a
+ *                      1.333px white divider between cells.
+ *        - .ptl-people : a row of N person icons (= team size).
+ *        - .ptl-cap    : a single-line "N People, M weeks" caption.
+ *  Between phases, a wide → arrow (arrow-flow-wide.svg, 102.5×10) straddles each
+ *  boundary at y757 — added as separate .layer divs, one per gap, centred on the
+ *  cumulative-span boundary x.
+ *
+ *  WHEN TO USE: only when the PROJECT SIZE is known — i.e. you can state a team
+ *  count AND a duration per phase (e.g. "4 people, 6 weeks"). The unit cells +
+ *  person icons exist to communicate effort/size. If size is unknown, use
+ *  content-process (named-stage flow) or content-timeline (dated milestones).
+ *
+ *    <div class="layer phase-tl" style="left:153.333px; top:280px;">
+ *      <div class="ptl-col" style="--span:2;">
+ *        <p class="ptl-title">Phase A</p>
+ *        <div class="ptl-panel ptl-panel--a">
+ *          <p class="ptl-body">…</p>
+ *          <div class="ptl-foot">
+ *            <div class="ptl-bar ptl-bar--purple"><span class="ptl-cell"></span><span class="ptl-cell"></span></div>
+ *            <div class="ptl-people"><img src="…/user.svg"><img src="…/user.svg"></div>
+ *            <p class="ptl-cap">2 People, 4 weeks</p>
+ *          </div>
+ *        </div>
+ *      </div>
+ *      …more .ptl-col (alternate --a/--b; put `--span` .ptl-cell per bar)…
+ *      <div class="layer" style="left:317px; top:757px; width:102.5px; height:10px;"><img src="…/arrow-flow-wide.svg" …></div>
+ *    </div>
+ * ========================================================================== */
+.phase-tl { display: flex; width: 1613.333px; height: 671.333px; align-items: stretch; }
+.phase-tl .ptl-col { flex: var(--span, 1) 1 0; min-width: 0; box-sizing: border-box;
+  display: flex; flex-direction: column; }
+.phase-tl .ptl-title { flex: none; height: 181.333px; margin: 0; padding-right: 21.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 32px; line-height: 1.25;
+  color: var(--c-text-default); }
+.phase-tl .ptl-panel { flex: 1 1 0; box-sizing: border-box; display: flex; flex-direction: column;
+  justify-content: space-between; padding: 21.333px 0; }
+.phase-tl .ptl-panel--a { background: var(--c-surface-gray-light); }     /* #f1f2f2 (Figma Gray 6) */
+.phase-tl .ptl-panel--b { background: var(--c-surface-gray-lightest); }  /* #f8fafa */
+.phase-tl .ptl-body { margin: 0; padding: 0 21.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25;
+  color: var(--c-text-default); }
+.phase-tl .ptl-foot { display: block; }
+/* bar = N unit cells; 1.333px gaps show the white strip behind = the dividers */
+.phase-tl .ptl-bar { display: flex; gap: 1.333px; height: 29.333px; background: var(--c-surface-white); }
+.phase-tl .ptl-bar .ptl-cell { flex: 1 1 0; min-width: 0; height: 100%; }
+.phase-tl .ptl-bar--purple    .ptl-cell { background: var(--c-purple-400); }
+.phase-tl .ptl-bar--blue      .ptl-cell { background: var(--c-blue-400); }
+.phase-tl .ptl-bar--turquoise .ptl-cell { background: var(--c-turquoise-400); }
+.phase-tl .ptl-bar--sky       .ptl-cell { background: var(--c-sky-400); }
+.phase-tl .ptl-people { display: flex; gap: 4px; margin-top: 32px; padding-left: 21.333px; }
+.phase-tl .ptl-people img { width: 38.667px; height: 38.667px; object-fit: contain; flex: none; }
+.phase-tl .ptl-cap { margin: 18.667px 0 0; padding-left: 21.333px; white-space: nowrap;
+  font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25;
+  color: var(--c-text-default); }
+
+/* ============================================================================
+ *  NUMBERED MILESTONE TIMELINE CONSTRUCTOR  (Figma 2072:1604 "Typical Approach")
+ *  ----------------------------------------------------------------------------
+ *  N equal phases on a horizontal AXIS. Per phase: icon + title (above the axis)
+ *  + a numbered block (sitting ON the axis) + a description (below). Use for an
+ *  ordered set of project STAGES / an approach (Discovery → … → Support).
+ *  FLEXIBLE: N columns (equal), free icon/title/number/description per phase.
+ *  Titles share a fixed height so the numbers line up on the axis.
+ *
+ *    <div class="milestone-tl">
+ *      <span class="ms-axis"></span>
+ *      <div class="ms-col"><img class="ms-icon" src="…"><p class="ms-title">Discovery</p>
+ *        <span class="ms-num">1</span><p class="ms-desc">…</p></div>  … ×N
+ *    </div>
+ * ========================================================================== */
+.milestone-tl { position: relative; display: flex; width: 1613.333px; }
+.milestone-tl .ms-col { flex: 1 1 0; min-width: 0; position: relative; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: flex-start; padding-right: 21.333px; }
+/* axis: a segment from each block's centre to the next block's centre (none on
+ * the last column, so the line never overshoots) — block top y = icon 70.667 +
+ * 16 + title 80 = 166.667, block centre y = +42.667 = 209.333 */
+.milestone-tl .ms-col:not(:last-child)::after { content: ""; position: absolute;
+  left: 42.667px; top: 205.333px; width: 100%; height: 8px; background: var(--c-surface-blue); z-index: 0; }
+.milestone-tl .ms-icon { width: 70.667px; height: 70.667px; object-fit: contain; margin-bottom: 16px; }
+.milestone-tl .ms-title { font-family: var(--font-sans); font-weight: 400; font-size: 32px;
+  line-height: 1.25; color: var(--c-text-default); margin: 0; height: 80px; }
+.milestone-tl .ms-num { width: 85.333px; height: 85.333px; border-radius: 8px; flex: none;
+  position: relative; z-index: 1;
+  background: var(--c-surface-blue); color: var(--c-text-contrast); display: flex;
+  align-items: center; justify-content: center; font-family: var(--font-sans);
+  font-size: 42.667px; line-height: 1; margin-bottom: 24px; }
+.milestone-tl .ms-desc { font-family: var(--font-sans); font-weight: 400; font-size: 18.667px;
+  line-height: 1.25; color: var(--c-text-default); margin: 0; }
+
+/* ============================================================================
+ *  SPRINT / PHASE ROADMAP CONSTRUCTOR  (Figma 2067:1367 "Timeline Framework 2")
+ *  ----------------------------------------------------------------------------
+ *  A delivery timeline read as PHASE BANDS over a SPRINT AXIS: a ghost
+ *  pre-phase band (Discovery) + an active phase band (Development) split into
+ *  sprint sub-shades; the axis overlays the lower band with dots + sprint
+ *  labels + a gray->solid-blue->dashed line + "2 weeks" duration captions; a
+ *  span BRACKET below marks the open-ended total. Use to map a project onto
+ *  time-boxed sprints (SCRUM-style), esp. when the start is fixed but the tail
+ *  is open. FLEXIBLE: any --span per band/leg, any sprint count, and a
+ *  ghost / solid / dashed line per leg.
+ *
+ *    <div class="sprint-rm">
+ *      <div class="srm-bands"> .srm-group--ghost(--span) + .srm-group--active(--span) w/ N .srm-shade </div>
+ *      <div class="srm-axis">  N .srm-leg(--span) each .srm-dot/.srm-lbl/[.srm-dur] + .srm-end </div>
+ *      <div class="srm-bracket-row"> .srm-spacer(--span) + .srm-bracket(--span) </div>
+ *    </div>
+ * ========================================================================== */
+.sprint-rm { position: relative; width: 1613.333px; }
+
+/* phase bands (background rectangles + phase labels) */
+.srm-bands { display: flex; align-items: stretch; height: 190px; }
+.srm-group { flex: var(--span,1) 1 0; min-width: 0; position: relative; }
+.srm-group--ghost { background: var(--c-surface-gray-light); }
+.srm-group--active { display: flex; }
+.srm-band-label { position: absolute; left: 21.333px; top: 24px; z-index: 2;
+  font-family: var(--font-sans); font-weight: 700; font-size: 32px; line-height: 1.25; white-space: nowrap; }
+.srm-group--ghost .srm-band-label { color: var(--c-gray-400); }
+.srm-group--active .srm-band-label { color: var(--c-text-default); }
+.srm-shade { flex: var(--s,1) 1 0; min-width: 0; background: rgba(52,67,173,0.30); }
+.srm-shade--2 { background: rgba(52,67,173,0.42); }
+.srm-shade--3 { background: rgba(52,67,173,0.54); }
+.srm-shade--4 { background: rgba(52,67,173,0.66); }
+.srm-shade + .srm-shade { border-left: 1.333px dashed var(--c-surface-white); }
+
+/* sprint axis — overlays the lower part of the bands */
+.srm-axis { position: absolute; left: 0; right: 0; top: 0; height: 190px; display: flex; }
+.srm-leg { flex: var(--span,1) 1 0; min-width: 0; position: relative; }
+.srm-leg::before { content: ""; position: absolute; left: 0; right: 0; top: 156px;
+  border-top: 2.667px solid var(--c-blue-400); }
+.srm-leg--ghost::before { border-top: 2px solid var(--c-gray-400); }
+.srm-leg--dashed::before { border-top-style: dashed; }
+.srm-leg .srm-dot { position: absolute; left: 0; top: 156px; transform: translate(-50%,-50%); z-index: 1;
+  width: 14.667px; height: 14.667px; border-radius: 50%; background: var(--c-blue-400); }
+.srm-leg--ghost .srm-dot { background: var(--c-gray-400); }
+.srm-leg .srm-lbl { position: absolute; left: 0; top: 110px; font-family: var(--font-sans);
+  font-weight: 400; font-size: 24px; line-height: 1.25; color: var(--c-text-default); white-space: nowrap; }
+.srm-leg--ghost .srm-lbl { color: var(--c-gray-400); }
+.srm-leg .srm-dur { position: absolute; left: 0; right: 0; top: 196px; text-align: center;
+  font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25; color: var(--c-text-default); }
+.srm-end { position: absolute; right: 0; top: 0; height: 190px; width: 0; }
+.srm-end .srm-dot { position: absolute; right: 0; left: auto; top: 156px; transform: translate(50%,-50%);
+  z-index: 1; width: 14.667px; height: 14.667px; border-radius: 50%; background: var(--c-blue-400); }
+.srm-end .srm-lbl { position: absolute; right: 0; top: 110px; font-family: var(--font-sans);
+  font-weight: 400; font-size: 24px; line-height: 1.25; color: var(--c-text-default); white-space: nowrap; }
+
+/* span bracket below the axis (open-ended total) */
+.srm-bracket-row { display: flex; margin-top: 60px; }
+.srm-bracket-row .srm-spacer { flex: var(--span,1) 1 0; min-width: 0; }
+.srm-bracket { flex: var(--span,1) 1 0; min-width: 0; position: relative; padding-top: 32px; text-align: center; }
+.srm-bracket .srm-line { position: absolute; left: 9.333px; right: 9.333px; top: 0; height: 0;
+  border-top: 2px solid var(--c-text-default); }
+.srm-bracket .srm-line::before, .srm-bracket .srm-line::after { content: ""; position: absolute; top: -5.333px;
+  width: 0; height: 0; border-top: 5.333px solid transparent; border-bottom: 5.333px solid transparent; }
+.srm-bracket .srm-line::before { left: -9.333px; border-right: 9.333px solid var(--c-text-default); }
+.srm-bracket .srm-line::after  { right: -9.333px; border-left: 9.333px solid var(--c-text-default); }
+.srm-bracket .srm-bracket-lbl { font-family: var(--font-sans); font-weight: 400; font-size: 18.667px;
+  line-height: 1.25; color: var(--c-text-default); }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Stats + Map (use as is)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Stats + visual composition: 2×N Fast Fact stats (left) + a free visual
+       area (right). Reuses .fast-fact. Use this for a CLIENT / company
+       "X today" overview: replace the sample stats with the client's real
+       numbers, and fill the right slot with a CLIENT-relevant visual (their
+       coverage map, a product shot, a chart) OR leave the labelled placeholder
+       for the human to drop one in. NEVER place DataArt's own global-presence
+       map here — that map is DataArt's footprint and belongs only on
+       asis-fastfacts. (The `dataart_map_reused` verify gate blocks it.) -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-03"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Global Scale at a Glance</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- stats: 2 columns of fast facts -->
+      <div class="layer" style="left:153.333px; top:280px; width:509.333px;">
+        <div style="display:grid; grid-template-columns:repeat(2,233.333px); gap:42.667px;">
+          <div class="fast-fact"><p class="ff-number">9,999</p><p class="ff-label">Consultants &amp; Engineers</p></div>
+          <div class="fast-fact"><p class="ff-number">30+</p><p class="ff-label">Years in Business</p></div>
+          <div class="fast-fact"><p class="ff-number">25</p><p class="ff-label">Countries</p></div>
+          <div class="fast-fact"><p class="ff-number">700+</p><p class="ff-label">Active Clients</p></div>
+          <div class="fast-fact"><p class="ff-number">20</p><p class="ff-label">Industry Practices</p></div>
+          <div class="fast-fact"><p class="ff-number">5</p><p class="ff-label">Innovation Labs</p></div>
+        </div>
+      </div>
+
+      <!-- visual placeholder — drop a CLIENT-relevant visual here (their
+           coverage map, product shot, chart) or leave this note for the human.
+           Do NOT use the DataArt global-presence map. -->
+      <div class="layer" style="left:741.333px; top:280px; width:1025.333px; height:650.667px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center; text-align:center; padding:0 53.333px;">
+        <span class="txt-h11 c-text-default" style="opacity:.45">Insert a relevant visual here<br>(client map / product shot / chart)</span>
+      </div>
+
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer footer-section txt-p7 c-text-default">About</p>
+      <p class="layer page-number txt-p7 c-text-default">2</p>
+    </div>
+  </div>
+</body>
+</html>

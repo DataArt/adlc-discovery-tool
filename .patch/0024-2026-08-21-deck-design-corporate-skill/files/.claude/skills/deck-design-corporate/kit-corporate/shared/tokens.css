@@ -1,0 +1,245 @@
+/* ============================================================================
+ * DataArt Corporate Slides Kit — Design tokens
+ * ----------------------------------------------------------------------------
+ * Brand-new visual system, ported 1:1 from the Figma file
+ *   "DataArt-Slides-Design-Element-Kit" (page "UI Library").
+ * Source of truth = Figma structured data (colour swatch fills + text labels,
+ * typography variables). NOT a re-skin of the legacy /kit/ DataArt deck kit.
+ *
+ * This file owns:
+ *   – colour palette (8 primitive families + semantic tokens)
+ *   – typography utility classes (.txt-h0…h15, .txt-p1…p7, .txt-tag, .txt-l1…l6)
+ *   – slide canvas (.slide-stage / .slide / .layer) at 1920 × 1080
+ *
+ * Pair with:
+ *   – shared/layouts.css     — background layers, heading/content zones, columns
+ *   – shared/components.css  — icon block, numbered card, sheet, tag, divider, …
+ * ========================================================================== */
+
+:root {
+  /* ---- Primitive colour palette ------------------------------------------
+   * Step names + values match the Figma "Color Tokens" frame (node 2100:763)
+   * 1:1. Gray is a monotonic tonal ramp: White / 75 / 100 / 200 / 400 / 600 /
+   * 900 / Black (--c-gray-white … --c-gray-black). Colour families use Figma's
+   * 100 / 200 / 400 / 600 / 800 scale. Blue is Figma's 5-step ramp (the kit's
+   * old 8-step blue was replaced). NOTE: Red & Yellow Figma TEXT labels were
+   * stale (label != fill); the actual swatch fills are used.
+   */
+  --c-gray-white:    #ffffff;   /* White          */
+  --c-gray-75:   #f1f2f2;   /* Figma Gray 75  */
+  --c-gray-100:  #e3e4e5;   /* Figma Gray 100 */
+  --c-gray-5:    #e0e0e0;   /* Figma "Gray 5" (gradation node 2100:764) — faint big card numbers */
+  --c-gray-200:  #d6d7d8;   /* Figma Gray 200 */
+  --c-gray-400:  #a1a4a6;   /* Figma Gray 400 */
+  --c-gray-600:  #707477;   /* Figma Gray 600 */
+  --c-gray-900:  #2c3337;   /* Figma Gray 900 */
+  --c-gray-black:  #000000;   /* Black          */
+
+  --c-blue-100: #b0c6ff;
+  --c-blue-200: #284086;
+  --c-blue-400: #3453ad;
+  --c-blue-600: #1a316d;
+  --c-blue-800: #0a1e53;
+
+  --c-sky-100:   #cbf2ff;
+  --c-sky-200:   #89e2ff;
+  --c-sky-400:   #53cff8;
+  --c-sky-600:   #21b9ec;
+  --c-sky-800:   #0095c7;
+
+  --c-yellow-100: #fef9d7;   /* Figma Yellow 100 */
+  --c-yellow-200: #ffe088;   /* Figma Yellow 200 (was #ffed6b) */
+  --c-yellow-400: #ffcf4b;   /* Figma Yellow 400 (was #ffde55) */
+  --c-yellow-600: #ffc90f;   /* Figma Yellow 600 (was #f2c012) */
+  --c-yellow-800: #dfa000;   /* Figma Yellow 800 (was #cfa200) */
+
+  --c-turquoise-100: #b5f1ee;
+  --c-turquoise-200: #73e0da;
+  --c-turquoise-400: #2bc6bf;
+  --c-turquoise-600: #08a8a4;
+  --c-turquoise-800: #067c7a;
+
+  --c-red-100:   #ffdbd6;
+  --c-red-200:   #ff7b69;
+  --c-red-400:   #f0503c;
+  --c-red-600:   #d33a26;
+  --c-red-800:   #9e2111;
+
+  --c-purple-100: #ddc5fe;
+  --c-purple-200: #a77fe5;
+  --c-purple-400: #70529f;
+  --c-purple-600: #5c4089;
+  --c-purple-800: #482d72;
+
+  --c-orange-100: #fff0d2;
+  --c-orange-200: #ffd380;
+  --c-orange-400: #ffb133;
+  --c-orange-600: #e58d00;
+  --c-orange-800: #a56709;
+
+  /* ---- Semantic tokens (Figma: Colors/Text|Background|Icon|Border|Surfaces) */
+  --c-text-default:  var(--c-gray-black);   /* #000000 — text on light bg     */
+  --c-text-contrast: var(--c-gray-white);     /* #ffffff — text on dark bg      */
+  --c-text-link:     var(--c-blue-400);   /* #3453ad — Colors/Text/link     */
+
+  --c-icon-main:     var(--c-gray-black);   /* #000000 — Colors/Icon/main     */
+  --c-icon-accent:   var(--c-blue-400);   /* #3453ad — Colors/Icon/accent   */
+
+  --c-border-blue:   var(--c-blue-400);   /* #3453ad — Colors/Border/blue   */
+  --c-border-blue-soft: rgba(52, 83, 173, 0.3);  /* 30% blue — numbered-card default outline (82:304) */
+  --c-border-light:  #e2e6e9;             /* Colors/Border/Light (gradation node 2100:764) — light card/table outlines */
+
+  /* Surfaces / backgrounds (block & card fills) */
+  --c-surface-white:     var(--c-gray-white);    /* #ffffff — background/default */
+  --c-surface-black:     var(--c-gray-black);  /* #000000 — surfaces/black     */
+  --c-surface-blue:      var(--c-blue-400);  /* #3453ad — surfaces/blue      */
+  --c-surface-dark:      var(--c-blue-400);  /* #3453ad — background/dark (number boxes) */
+  --c-surface-gray-light: var(--c-gray-75);  /* #f1f2f2 — background/gray-light */
+  --c-surface-gray-lightest: #f8fafa;       /* background/gray-light (lightest panel tint) */
+  --c-surface-gray-dark:  var(--c-gray-200); /* #d6d7d8 — background/gray-dark  */
+
+  --c-white:         var(--c-gray-white);
+  --c-black:         var(--c-gray-black);
+
+  /* ---- Typography primitives --------------------------------------------- */
+  --font-sans: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Title → body pairing rule (Figma "Pairs" section, node 90:537).
+   * The vertical gap between a title block and its body text is read from
+   * the red "measurer" box per pair — it VARIES by title size band.
+   * Apply as the vertical offset between the title .layer and body .layer.
+   *
+   *   (gap values below are the 1920-mode px = base gap × 4/3; the title-size
+   *    columns use the base ladder names.)
+   *   band            title sizes        base→1920 gap   active titles
+   *   --gap-pair-lg   50,48,44,40,36,32   24 → 32         H0 · H1 · H3 · H5
+   *   --gap-pair-md   30,28,26            20 → 26.667     H9
+   *   --gap-pair-sm   24,21               18 → 24         H11 · H12
+   *   --gap-pair-xs   20,18               16 → 21.333     H14 / H15
+   */
+  --gap-pair-lg: 32px;
+  --gap-pair-md: 26.667px;
+  --gap-pair-sm: 24px;
+  --gap-pair-xs: 21.333px;
+}
+
+/* ============================================================================
+ *  Page chrome around the canvas
+ * ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--c-gray-900);   /* dark stage behind the slide (was gray-100, now a light step) */
+}
+
+.slide-stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Canonical canvas = 1920 × 1080 (Figma-native, 16:9). */
+.slide {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin-left: -960px;
+  margin-top: -540px;
+  font-family: var(--font-sans);
+  color: var(--c-text-default);
+  overflow: hidden;
+  transform-origin: center center;
+  transform: scale(var(--slide-scale, 1));
+}
+
+.layer { position: absolute; }
+.flip-y { transform: scaleY(-1); }
+
+/* Reset UA margins inside the slide so .layer top/left coords are exact
+ * (a <p>'s default 1em block margin otherwise shifts text off its zone). */
+.slide :where(p, h1, h2, h3, h4, h5, h6, ul, ol, figure, blockquote) { margin: 0; }
+
+/* ============================================================================
+ *  Typography utility classes  (Figma: published Heading/Paragraph/Tag/Link styles)
+ *  ----------------------------------------------------------------------------
+ *  Apply to a `<p>`/`<span>` inside a `.layer …`. `.layer` places the box at
+ *  absolute coords; the `.txt-*` class supplies size / weight / line-height.
+ *  Colour is NOT included — set via `.c-*`.
+ *
+ *  GRADATION — matches the current Figma type sheet (node 2100:764) 1:1. Role
+ *  names match Figma; the ramp skips only h2/h4/h6, p1/p4, l1/l3/l5.
+ *
+ *  Family = Arial. Headings H0–H5 use line-height 1.33 (published Figma type
+ *  styles); H7+ and all paragraphs/links/tag use 1.25. (Real cover/divider
+ *  slides tighten their heading instance to ~1.15, but the published STYLE —
+ *  and therefore the kit token — is 1.33.) Only H14 is Bold (700); rest 400.
+ *
+ *  SIZES = 1920-native = the Figma base ladder × 4/3 (canvas 1920×1080). The
+ *  Figma type tokens are named by BASE (1440) size but carry the ×4/3 value
+ *  (e.g. token "font-sizes/44" = 58.67px, "font-sizes/12" = 16px). The kit
+ *  matches that: every .txt-* below is base × 4/3 so on-slide text equals Figma.
+ *  base ladder = 74 64 44 36 32 30 28 26 24 21 20 18 16 15 14 13 12  (H0 H1 H3
+ *  H5 H7 H8 H9 H10 H11 H12 H13 H14 H15 P2 P3 P5 P6 P7); ×4/3 values used below.
+ *  (2026-07 wrongly dropped ×4/3 on this ladder while positions + the header
+ *  title stayed 1920-scaled, so body text rendered a step small vs Figma —
+ *  restored here.)
+ * ========================================================================== */
+
+[class^="txt-"], [class*=" txt-"] { font-family: var(--font-sans); }
+
+/* Headings — new Figma gradation (node 2100:764). base ladder × 4/3 for 1920.
+ *   base:  74   64   44   36   32   30   28   26   24   21   20   18   18
+ *   level: H0   H1   H3   H5   H7   H8   H9   H10  H11  H12  H13  H14  H15
+ * H0–H5 use line-height 1.33; H7+ use 1.25. Only H14 is Bold. */
+.txt-h0  { font-weight: 400; font-size: 98.667px; line-height: 1.33; letter-spacing: 0; }
+.txt-h1  { font-weight: 400; font-size: 85.333px; line-height: 1.33; letter-spacing: 0; }
+.txt-h3  { font-weight: 400; font-size: 58.667px; line-height: 1.33; letter-spacing: 0; }  /* H3 (7:15860) */
+.txt-h5  { font-weight: 400; font-size: 48px;     line-height: 1.33; letter-spacing: 0; }  /* H5 (7:15860) */
+.txt-h7  { font-weight: 400; font-size: 42.667px; line-height: 1.25; letter-spacing: 0; }  /* 32-base (new) */
+.txt-h8  { font-weight: 400; font-size: 40px;     line-height: 1.25; letter-spacing: 0; }  /* 30-base (new) */
+.txt-h9  { font-weight: 400; font-size: 37.333px; line-height: 1.25; letter-spacing: 0; }
+.txt-h10 { font-weight: 400; font-size: 34.667px; line-height: 1.25; letter-spacing: 0; }  /* 26-base (new) */
+.txt-h11 { font-weight: 400; font-size: 32px;     line-height: 1.25; letter-spacing: 0; }
+.txt-h12 { font-weight: 400; font-size: 28px;     line-height: 1.25; letter-spacing: 0; }
+.txt-h13 { font-weight: 400; font-size: 26.667px; line-height: 1.25; letter-spacing: 0; }  /* 20-base (new) */
+.txt-h14 { font-weight: 700; font-size: 24px;     line-height: 1.25; letter-spacing: 0; }
+.txt-h15 { font-weight: 400; font-size: 24px;     line-height: 1.25; letter-spacing: 0; }
+
+/* Paragraphs — new gradation (P2 16 · P3 15 · P5 14 · P6 13 · P7 12, × 4/3) */
+.txt-p2  { font-weight: 400; font-size: 21.333px; line-height: 1.25; }
+.txt-p3  { font-weight: 400; font-size: 20px;     line-height: 1.25; }   /* 15-base (new) */
+.txt-p5  { font-weight: 400; font-size: 18.667px; line-height: 1.25; }
+.txt-p6  { font-weight: 400; font-size: 17.333px; line-height: 1.25; }   /* 13-base (new) */
+.txt-p7  { font-weight: 400; font-size: 16px;     line-height: 1.25; }
+
+/* Tag T1 — uppercase, tracking 1.92px (Figma letterSpacing 12% of 16px). */
+.txt-tag { font-weight: 400; font-size: 16px; line-height: 1.25; letter-spacing: 1.92px; text-transform: uppercase; }
+
+/* Links (active only) — underlined, like the Figma "Simple Link" styles. */
+.txt-l2  { font-weight: 400; font-size: 21.333px; line-height: 1.25; text-decoration: underline; }
+.txt-l4  { font-weight: 400; font-size: 18.667px; line-height: 1.25; text-decoration: underline; }
+.txt-l6  { font-weight: 400; font-size: 16px; line-height: 1.25; text-decoration: underline; }
+
+/* Weight modifiers — work on any .txt-* class. */
+.is-bold    { font-weight: 700; }
+.is-regular { font-weight: 400; }
+
+/* ============================================================================
+ *  Colour helpers — pair with any .txt-* class (foreground colour).
+ * ========================================================================== */
+.c-text-default  { color: var(--c-text-default); }
+.c-text-contrast { color: var(--c-text-contrast); }
+.c-white   { color: var(--c-gray-white); }
+.c-black   { color: var(--c-gray-black); }
+.c-blue    { color: var(--c-blue-400); }
+.c-sky     { color: var(--c-sky-600); }
+.c-yellow  { color: var(--c-yellow-600); }
+.c-turquoise { color: var(--c-turquoise-600); }
+.c-red     { color: var(--c-red-600); }
+.c-purple  { color: var(--c-purple-600); }
+.c-orange  { color: var(--c-orange-600); }

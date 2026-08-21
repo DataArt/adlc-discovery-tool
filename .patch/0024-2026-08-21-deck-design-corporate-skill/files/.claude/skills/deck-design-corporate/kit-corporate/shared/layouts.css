@@ -1,0 +1,374 @@
+/* ============================================================================
+ * DataArt Corporate Slides Kit — Layouts
+ * ----------------------------------------------------------------------------
+ * Full-bleed background layers + (later) heading/content zones and the
+ * canonical chrome positions. Ported from the Figma "Backgrounds" section
+ * (node 27:71) and "Layout Principles" (node 1:7).
+ *
+ * Load AFTER tokens.css, BEFORE components.css.
+ * ========================================================================== */
+
+/* ============================================================================
+ *  Background layer
+ *  ----------------------------------------------------------------------------
+ *  Each background is a full-bleed raster image (Figma exported them at @2x,
+ *  3840×2160, drawn into the 1920×1080 canvas with object-cover). Drop a
+ *  `<div class="layer bg bg-…">` as the FIRST child of `.slide`.
+ *
+ *  USAGE RULE (from the Figma "Template Backgrounds" page, 121:693/694):
+ *   • TITLE backgrounds (.bg-title-01 … 06, "Style=Dark") split into TWO pools
+ *     by ROLE (the 6 are NOT interchangeable):
+ *       – COVER + FINAL pool  = bg-title-03 / 04 / 05  (vivid, warm accents).
+ *         Slide 1 cover and the closing slide draw from here.
+ *       – SECTION-DIVIDER pool = bg-title-01 / 02 / 06  (muted, no warm accent).
+ *         Internal chapter-start dividers draw from here, ONE per section.
+ *     (bg-title-0N maps 1:1 to Figma Background/Dark/0N/Title; verified meanΔ=0.)
+ *   • CONTENT backgrounds (.bg-content-01 … 08, "Style=Light") — use on
+ *     content slides. Pick ONE content background per section and keep it
+ *     for every slide in that section (one background per section).
+ * ========================================================================== */
+
+.bg {
+  inset: 0;                       /* fill the whole .slide (1920×1080) */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Title backgrounds (Dark) — covers, chapter starts, final slide. */
+.bg-title-01 { background-image: url(../assets/backgrounds/bg-title-01.jpg); }
+.bg-title-02 { background-image: url(../assets/backgrounds/bg-title-02.jpg); }
+.bg-title-03 { background-image: url(../assets/backgrounds/bg-title-03.jpg); }
+.bg-title-04 { background-image: url(../assets/backgrounds/bg-title-04.jpg); }
+.bg-title-05 { background-image: url(../assets/backgrounds/bg-title-05.jpg); }
+.bg-title-06 { background-image: url(../assets/backgrounds/bg-title-06.jpg); }
+
+/* Content backgrounds (Light) — one per section. */
+.bg-content-01 { background-image: url(../assets/backgrounds/bg-content-01.jpg); }
+.bg-content-02 { background-image: url(../assets/backgrounds/bg-content-02.jpg); }
+.bg-content-03 { background-image: url(../assets/backgrounds/bg-content-03.jpg); }
+.bg-content-04 { background-image: url(../assets/backgrounds/bg-content-04.jpg); }
+.bg-content-05 { background-image: url(../assets/backgrounds/bg-content-05.jpg); }
+.bg-content-06 { background-image: url(../assets/backgrounds/bg-content-06.jpg); }
+.bg-content-07 { background-image: url(../assets/backgrounds/bg-content-07.jpg); }
+.bg-content-08 { background-image: url(../assets/backgrounds/bg-content-08.jpg); }
+
+/* Cover (Light) — two-logo cover background (Figma 120:498). */
+.bg-cover-light { background-image: url(../assets/backgrounds/bg-cover-light.jpg); }
+
+/* Content above the background layer. */
+.slide > .layer:not(.bg) { z-index: 1; }
+
+/* ============================================================================
+ *  Canonical grid & zones (Figma "Layout Principles", nodes 36:134 / 63:289;
+ *  real slide 64:585). All coords are slide-local on the 1920×1080 canvas.
+ *  ----------------------------------------------------------------------------
+ *  Side margins are a symmetric 153.333px → content column is 1613.333px wide.
+ *  Vertical rhythm (top→bottom):
+ *    • 86   header/heading zone top
+ *    • heading height 96px (1-line) or 182.667px (2-line)
+ *    • content zone — its BOTTOM is fixed at y=698 in both variants;
+ *        1-line: top 210, height 488
+ *        2-line: top 269, height 429
+ *    • 739  footer baseline (20px tall)
+ *
+ *  HEADING CHARACTER LIMITS (Layout Principles annotations):
+ *    • 1-line heading (96px zone)  → heading text ≤ 50 characters.
+ *    • 2-line heading (182.667px zone) → heading text ≤ 100 characters.
+ *    Keep headings within these so the heading stays inside its zone and
+ *    does not push into the content area.
+ *
+ *  CONTENT VERTICAL ALIGNMENT (Layout Principles annotations):
+ *    • default → content sits at the TOP of the content zone (.cols start).
+ *    • .zone-content.is-vcenter → the content block is vertically CENTERED
+ *      within the content area ("placeholder-content vertically centered
+ *      within the content area").
+ *    • full-page centring ("content vertically centered on the entire page")
+ *      is used by title/cover layouts — see .stage-center below.
+ *
+ *  SOURCE NOTE: the Figma annotations for the 2/3/4-column row-2 frames read
+ *  "1-stroke heading" but specify Height=182.667px + ≤100 chars — that is the
+ *  2-line (2-stroke) family; the "1-stroke" wording is a copy-paste typo in
+ *  the source (82:404 correctly says "2-stroke"). Treated here as 2-line.
+ * ========================================================================== */
+
+/* ---- Heading zone -------------------------------------------------------- */
+/* Place the slide heading <p> in here. Figma's Header renders it as H3 (44px);
+ * see --slide-heading-size below (pending active-set reconciliation). */
+.zone-heading { left: 153.333px; top: 114.667px; width: 1613.333px; }
+
+/* The 110×6 accent rule that sits at the BOTTOM of the heading zone. */
+.heading-rule {
+  left: 153.333px; top: 210.667px;            /* 86 + 72  (1-line heading) */
+  width: 146.667px; height: 8px;
+  background: var(--c-text-default);
+}
+.heading-rule.is-2line { top: 297.333px; } /* 86 + 137 (2-line heading) */
+
+/* ---- Content zone -------------------------------------------------------- */
+.zone-content { left: 153.333px; top: 280px; width: 1613.333px; height: 650.667px; }   /* 1-line heading */
+.zone-content.is-2line { top: 358.667px; height: 572px; }                       /* 2-line heading */
+
+/* ---- Column grid (inside the content zone) ------------------------------- */
+/* Gap is a fixed 42.667px; the browser computes equal column widths
+ * (3 cols → 509.333px each, matching Figma exactly). */
+.cols { display: grid; gap: 42.667px; align-content: start; height: 100%; }
+/* Let columns hold their formula width regardless of a card's longest word
+ * (default min-width:auto would blow the track out at 5–6 columns). */
+.cols > * { min-width: 0; }
+/* Column count = number of items. Width auto from N (gap 32): 1→1210 ·
+ * 2→589 · 3→382 · 4→278 · 5→217 · 6→175. This is the variation axis for
+ * card-row content templates (verified vs Figma: 5→217 / 6→175). */
+.cols-1 { grid-template-columns: 1fr; }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.cols-5 { grid-template-columns: repeat(5, 1fr); }
+.cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+/* Optional 1px vertical rule centred in a column gap (as on slide 64:585). */
+.col-divider { width: 1px; background: var(--c-surface-black); }
+
+/* ---- Content vertical alignment ----------------------------------------- */
+/* Default: content anchored to the TOP of the content zone (.cols start). */
+/* is-vcenter: content block vertically CENTERED within the content area. */
+.zone-content.is-vcenter { display: flex; flex-direction: column; justify-content: center; }
+.zone-content.is-vcenter > .cols { height: auto; align-content: center; }
+
+/* Full-page vertical centring ("content vertically centered on the entire
+ * page") — used by title / cover / section-divider / final layouts. Spans the
+ * full 1080px height within the 153.333px side margins. */
+.stage-center {
+  left: 153.333px; right: 153.333px; top: 0; bottom: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+/* ============================================================================
+ *  Canonical chrome (positions from real slide 64:585 Header/Footer)
+ * ========================================================================== */
+
+/* Logo — DataArt Small (Header component, native 167×27 × 4/3), top-right.
+ * Right edge stays at 1766.667px; box enlarged ~+13% per new Figma (was 197.333×32). */
+.logo { left: 1544px; top: 138.667px; width: 222.667px; height: 36px; }
+.logo img { display: block; width: 100%; height: 100%; }
+
+/* Footer — three P7 (16px) slots on the y=739 baseline. */
+.footer-tagline { left: 153.333px;  top: 985.333px; }   /* e.g. "Your Partner for Progress" */
+.footer-section { left: 568px;  top: 985.333px; }   /* current section name */
+.page-number    { right: 153.333px; top: 985.333px; text-align: right; }  /* slide number */
+
+/* ============================================================================
+ *  Slide-heading style.
+ *  The Header is a COMPONENT placed on 1920 slides scaled ×4/3, so its title
+ *  renders at 58.667px (= base H3 44 ×4/3), NOT the base 44 of `.txt-h3`. Etalon:
+ *  Figma 66:779 / 84:469. Title box caps at 1352px so long titles clear the logo.
+ *  (Content type uses the base ladder; only this header chrome is the scaled H3.)
+ * ========================================================================== */
+:root { --slide-heading-size: 58.667px; }   /* header H3 rendered on 1920 slides (base 44 ×4/3) */
+.slide-heading { font-family: var(--font-sans); font-weight: 400;
+                 font-size: var(--slide-heading-size); line-height: 1.33;
+                 max-width: 1352px; }   /* logo-clearance cap (Figma Header title box) */
+
+/* ============================================================================
+ *  COVER / TITLE LAYOUTS  (Figma "Cover Templates", node 102:667)
+ *  ----------------------------------------------------------------------------
+ *  Three title-type slides on a DARK (title) background, white logo + text.
+ *  Text is editable but must stay inside its block (fixed width → wraps via
+ *  overflow-wrap; fixed top/left per design tokens). Use one of the
+ *  .bg-title-0X backgrounds as the first .layer.
+ *
+ *  BACKGROUND RULE (role-based pools, Figma 121:693/694 — supersedes the old
+ *  "cycle all 6 by document order"):
+ *    • COVER → pool {bg-title-03, 04, 05}. Default cover = 03.
+ *    • FINAL → pool {bg-title-03, 05} ONLY. **bg-title-04 is FORBIDDEN on the
+ *      final slide.** Default final = 05 (a different vivid bg than the cover).
+ *    • SECTION DIVIDERS → pool {bg-title-01, 02, 06}, ONE per section, rotate
+ *      by section index: section1 = 01 · section2 = 02 · section3 = 06 ·
+ *      section4 = 01 · …  (X = pool[(sectionIndex - 1) mod 3]).
+ *    The deck assembler (skill) applies this; the kit exposes all 6 bgs.
+ *    NOTE: statement.html (84:443) is its own format and keeps bg-title-06.
+ *    (Independent of the chapter NUMBER, which counts sections 01–09.)
+ *
+ *  ── 1. COVER ──────────────────────────────────────────────────────────────
+ *  Redesigned to the new Figma cover (node 28:119, 1920×1080):
+ *  Logo Large white (195,181) 426×69 (fixed size, NOT canvas-scaled) · H0 98.667
+ *  heading (lh 1.15, instance) bottom-aligned in a (509.333,504) 1104×226 block ·
+ *  website "dataart.com" (37.333px, bottom-right) at y=941.
+ *  Heading guidance: ≤ ~55 chars (2 lines in the 226px block).               */
+.cover-logo { left: 195px; top: 181px; width: 426px; height: 69px; }
+.cover-logo img { display: block; width: 100%; height: 100%; }
+.cover-heading {
+  left: 509.333px; top: 504px; width: 1104px; height: 226px;
+  display: flex; flex-direction: column; justify-content: flex-end;  /* bottom-aligned */
+  font-family: var(--font-sans); font-weight: 400; font-size: 98.667px; line-height: 1.15;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+.cover-web {
+  left: 153.333px; top: 941px; width: 1613.333px; height: 46.667px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 37.333px; line-height: 1.25;
+  color: var(--c-text-contrast); text-align: right;
+}
+
+/*  ── 1b. COVER — TWO LOGOS (ours + client) ──────────────────────────────────
+ *  LIGHT cover (Figma 120:498 background) used when the cover must show BOTH
+ *  the DataArt logo and the client's logo. DataArt COLORED logo top-left +
+ *  client-logo placeholder to its right; big DARK heading lower-left;
+ *  "dataart.com" bottom-right (dark, underlined). Coords derived from the
+ *  reference screenshot (the Figma node is a flat image, no structured frame). */
+.cover2-logo { left: 153.333px; top: 210.667px; width: 470.667px; height: 76px; }
+.cover2-logo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: left center; }
+.cover2-clientlogo {
+  left: 705.333px; top: 132px; width: 396px; height: 237.333px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px dashed var(--c-gray-600); color: var(--c-gray-600);
+  font-family: var(--font-sans); font-weight: 400; font-size: 18.667px; line-height: 1.25;
+}
+.cover2-clientlogo img { max-width: 80%; max-height: 70%; object-fit: contain; }
+.cover2-heading {
+  left: 626.667px; top: 521.333px; width: 1062.667px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 98.667px; line-height: 1.33;
+  color: var(--c-text-default); overflow-wrap: break-word;
+}
+.cover2-web {
+  left: 153.333px; top: 898.667px; width: 1613.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 37.333px; line-height: 1.25;
+  color: var(--c-text-default); text-align: right; text-decoration: underline;
+}
+
+/*  ── 2. SECTION DIVIDER ─────────────────────────────────────────────────────
+ *  Redesigned to the new Figma divider (node 31:61): chapter-number vector at
+ *  the LEFT edge (0,508) 282.667×312, heading H1 85.333 (lh 1.15, instance) to
+ *  its right (372,489.333) 1241.333×196. Swap chapter SVG + heading text.
+ *  Heading guidance: ≤ ~55 chars (2 lines max in the 226.667px block).          */
+/* The big chapter digit bleeds off the left edge (Figma: a ~378px-wide "01"
+ * vector shifted left:-100 inside a left:0 clip window). Anchor by a FIXED left
+ * bleed (margin-left) — NOT the right edge — so the leading "0" is clipped by the
+ * same amount for every number. Right-anchoring (justify-content:flex-end) made
+ * wider digits (02-09 viewBox ~328 vs 01's 284) bleed 150px+ and swallow the "0".
+ * The window is wide enough (< the heading's left at 372) that the second digit
+ * is never right-clipped. */
+.divider-chapter { left: 0; top: 508px; width: 360px; height: 312px; overflow: hidden; }
+.divider-chapter img { display: block; height: 100%; width: auto; margin-left: -96px; }
+.divider-heading {
+  left: 372px; top: 489.333px; width: 1241.333px; height: 196px;
+  display: flex; align-items: flex-start;
+  font-family: var(--font-sans); font-weight: 400; font-size: 85.333px; line-height: 1.15;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+
+/*  ── 3. FINAL / CLOSING ─────────────────────────────────────────────────────
+ *  H1 64 heading (394,319) 931×85, then a block of contact lines (394,436)
+ *  931 wide, H12 21, gap 16. Footer standard.                               */
+.final-heading {
+  left: 525.333px; top: 425.333px; width: 1241.333px; height: 113.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 85.333px; line-height: 1.33;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+.final-contacts {
+  left: 525.333px; top: 581.333px; width: 1241.333px;
+  display: flex; flex-direction: column; gap: 21.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 28px; line-height: 1.25;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+.final-contacts p { margin: 0; }
+
+/* ============================================================================
+ *  CONTENT TEMPLATE PATTERNS  (Figma category 102:789)
+ *  Body slides built on the same grid/tokens; content & counts are variable.
+ * ========================================================================== */
+
+/* ── Statement / Lead (84:443) — dark bg, big H0 heading + H11 lead, both
+ *    bottom-anchored at lower-left; 3-slot footer. -------------------------- */
+.statement-heading {
+  /* width 1003 (matches the lead) so a longer claim wraps to ~3 lines low on
+   * the slide instead of towering up a narrow 589 column off the top edge.
+   * Bottom-anchored at y=452 (grows upward); keep the heading ≤ ~80 chars. */
+  left: 153.333px; bottom: 477.333px; width: 1337.333px;
+  font-family: var(--font-sans); font-weight: 400; font-size: 98.667px; line-height: 1.33;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+.statement-lead {
+  left: 153.333px; bottom: 286.667px; width: 1337.333px;   /* bottom edge at y=595 */
+  font-family: var(--font-sans); font-weight: 400; font-size: 32px; line-height: 1.25;
+  color: var(--c-text-contrast); overflow-wrap: break-word;
+}
+
+/* ── Box / logo grid (68:1052) — R×C of fixed-height boxes, gap 32.
+ *    Default 4 columns; add boxes to fill more rows (auto-wrap). Box = blue
+ *    placeholder; drop a logo <img> inside. ---------------------------------- */
+.box-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 42.667px; }
+.box-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.box-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.box-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+.box-grid > * { min-width: 0; }
+.logo-box {
+  height: 213.333px; background: var(--c-surface-dark);
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-box img { max-width: 70%; max-height: 50%; }
+
+/* ── Stacked list (67:955) — N full-width Icon Block rows. Reuses .icon-block
+ *    (icon-left + title H9 28 + body H12 21). VARIATION: N rows. ----------- */
+.stack { display: flex; flex-direction: column; gap: 42.667px; }
+
+/* ── Comparison (84:469) — 2 columns (589 each, gap 32), each a column
+ *    heading (H9 28) + M items (bold H14 18 sub-heading + P2 16 paragraph).
+ *    VARIATION: M items per column. ---------------------------------------- */
+.compare { display: grid; grid-template-columns: repeat(2, 1fr); gap: 42.667px; }
+.compare > * { min-width: 0; }
+.compare-col   { display: flex; flex-direction: column; gap: 32px; }
+.compare-head  { font-family: var(--font-sans); font-weight: 400; font-size: 37.333px; line-height: 1.25; color: var(--c-text-link); }
+.compare-items { display: flex; flex-direction: column; gap: 21.333px; }
+.compare-item  { display: flex; flex-direction: column; gap: 21.333px; }
+.compare-item-head { font-family: var(--font-sans); font-weight: 700; font-size: 24px; line-height: 1.25; color: var(--c-text-default); }
+.compare-item-text { font-family: var(--font-sans); font-weight: 400; font-size: 21.333px; line-height: 1.25; color: var(--c-text-default); }
+
+/* ── Split (82:767) — left narrative (518) + right list (589, at centre+16).
+ *    Left heading H6 36→40 link + H11 24 paragraphs; right = stacked
+ *    .numbered-card--horizontal. VARIATION: N list items. ------------------- */
+.split-left  { left: 153.333px; top: 280px; width: 690.667px; }
+.split-right { left: 981.333px; top: 280px; width: 785.333px; display: flex; flex-direction: column; gap: 42.667px; }
+.split-heading   { font-family: var(--font-sans); font-weight: 400; font-size: 48px; line-height: 1.33; color: var(--c-text-link); margin: 0; }
+.split-lead      { font-family: var(--font-sans); font-weight: 400; font-size: 32px; line-height: 1.25; color: var(--c-text-default); margin: 32px 0 0; }
+.split-lead .hl  { color: var(--c-text-link); }
+
+/* ── Process flow (66:779) — N columns each (label H7 32→28 link, icon 85×87,
+ *    paragraph H15 18), vertical dividers between, arrows between + a long
+ *    connector. Built with .cols-N + .flow-step in the template. ----------- */
+.flow-step { display: flex; flex-direction: column; align-items: center; gap: 10.667px; text-align: center; }
+.flow-label { font-family: var(--font-sans); font-weight: 400; font-size: 37.333px; line-height: 1.25; color: var(--c-text-link); }
+.flow-icon  { width: 113.333px; height: 116px; }
+.flow-icon img { display: block; width: 100%; height: 100%; }
+.flow-text  { font-family: var(--font-sans); font-weight: 400; font-size: 24px; line-height: 1.25; color: var(--c-text-default); }
+
+/* ── Process flow — FLEXIBLE N-step constructor (66:779). A flex row of
+ *    .proc-step columns (equal 1 1 0) with a → .proc-arrow in every gap. Each
+ *    step stacks icon + label (.flow-label) + text (.flow-text). Add/remove a
+ *    .proc-step (and the .proc-arrow before it) and the row recomputes — no
+ *    manual coordinates. Arrow sits at the icon's vertical centre (icon-first,
+ *    so label/text wrapping never shifts it). --------------------------------- */
+.process { display: flex; align-items: flex-start; width: 1613.333px; }
+.process .proc-step { flex: 1 1 0; min-width: 0; box-sizing: border-box;
+  display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+  gap: 21.333px; padding: 0 16px; }
+.process .proc-arrow { flex: 0 0 42.667px; align-self: flex-start; margin-top: 51px;
+  height: 13.333px; display: flex; align-items: center; }
+.process .proc-arrow::before { content: ""; flex: 1 1 auto; height: 2.08px; background: var(--c-icon-accent); }
+.process .proc-arrow::after { content: ""; flex: none;
+  border-left: 10.667px solid var(--c-icon-accent);
+  border-top: 6.667px solid transparent; border-bottom: 6.667px solid transparent; }
+
+/* ── Team — vertical cards grid (106:950): .cols-3 of .person-card-v.
+ *    Team — roles org-chart (104:790): per row a category label (175) + a
+ *    grid of horizontal .person-card (279 each, gap 32). VARIATION: rows &
+ *    cards per row (3–10 people). ------------------------------------------ */
+.team-roles { display: flex; flex-direction: column; gap: 42.667px; }
+.team-row   { display: flex; gap: 181.333px; align-items: flex-start; }
+.team-cat   { flex: none; width: 233.333px; font-family: var(--font-sans); font-size: 32px; line-height: 1.25; color: var(--c-text-default); }  /* H11 24 */
+.team-people { display: grid; grid-template-columns: repeat(3, 372px); gap: 42.667px; }
+
+/* ── Quote (85:666) — large centred quote + attribution, centred in content. */
+.quote-text { font-family: var(--font-sans); font-weight: 400; font-size: 58.667px; line-height: 1.33; color: var(--c-text-default); }
+.quote-attr { font-family: var(--font-sans); font-weight: 400; font-size: 26.667px; line-height: 1.25; color: var(--c-text-link); margin: 32px 0 0; }
+

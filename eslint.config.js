@@ -12,5 +12,6 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     '.nx/**',
     '.yarn/**',
     '.claude/skills/**',
+    '.patch/**',
   ],
 });

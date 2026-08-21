@@ -1,0 +1,252 @@
+# Execution checkpoints — when to pause and ask the human
+
+Loaded by `agent/orchestrator.md` and both skill SKILL.md files when a
+checkpoint trigger fires. Owns the canonical specification for the two
+checkpoint moments where a skill must pause before continuing.
+
+---
+
+## Why this exists
+
+Before this file, skills proceeded straight from brief detection to
+artifact generation. Two failure modes followed:
+
+1. **Throwaway work on ambiguous briefs.** The skill builds 8 slides,
+   then the user says "no, this isn't what I meant" — 30 minutes lost
+   on something a 30-second plan-review could have caught.
+2. **Irreversible handoff with no last sign-off.** PPTX export, deploys,
+   and similar "deliverable" steps left the agent's loop and went to
+   the client without a deliberate user OK on the visual result. By the
+   time a problem was noticed, the PPTX was already in someone's inbox.
+
+The fix is two formal checkpoints — one before expensive build work,
+one before the final irreversible deliverable. Both reuse the same
+mechanism (`AskUserQuestion` in standalone mode, envelope fields in
+handoff mode) so the policy is uniform across environments.
+
+---
+
+## Two-checkpoint pattern
+
+### Checkpoint #0 — pre-materialization
+
+Fires **before** the skill starts building real artifact files.
+
+**Triggers (any one is sufficient):**
+
+- `task_type: deck` and `deck_length ≥ 6 slides` (counted from the
+  narrative arc produced at Step 5).
+- `task_type: digital_product` (always `artifact_intent:
+pitch_concept_site`) and `section_count ≥ 4`.
+- The brief has flagged ambiguity (`human_review.ambiguity_flags`
+  populated, or the agent itself notices that more than one defensible
+  direction survives the AIMS pass).
+- Iteration run where direction changed
+  (`iteration_context.direction_changed: true`).
+
+If **none** of the above hold (smoke build, well-scoped tiny artifact),
+Checkpoint #0 is skipped — the skill goes straight to materialization.
+
+**What to emit (chat):**
+
+1. A short slide / section / screen plan as a Markdown table. For decks:
+
+   ```
+   | # | Slug          | Template                 | Purpose (one line)                              |
+   |---|---------------|--------------------------|-------------------------------------------------|
+   | 1 | cover         | 01-cover.html            | Hook — set the deck's belief target             |
+   | 2 | who-we-are    | 02-section-dark-hero-…   | Establish authority via one defensible claim     |
+   | … | …             | …                        | …                                                |
+   ```
+
+   For product POCs (workflow): same shape, with `Screen / Component /
+Purpose`. For promo sites: `Section / Reference / Purpose`.
+
+2. Exactly one `AskUserQuestion` call:
+
+   ```
+   Q: "Approve this plan?"
+     options:
+       - Approve              → proceed to materialization
+       - Modify (which?)      → collect textual feedback, redraft
+       - Restart from brief   → go back to Step 5 (narrative)
+   ```
+
+**Loop / escalate:**
+
+- "Modify" can iterate at most 3 times. On the 4th round the skill must
+  emit an escalation flag (`escalation_flags: [checkpoint_0_thrash]`)
+  and stop, asking the user to rebrief.
+- "Restart" loops back at most once. Second restart → escalate similarly.
+
+### Checkpoint #1 — pre-final-deliverable
+
+Fires **always**, after all per-slide / per-screen verification has
+passed and before any irreversible export.
+
+For decks the irreversible step is **PPTX export**. For product POCs
+it's **deploy to preview URL** or **final bundle export** (whichever
+applies given `desired_outcome`).
+
+**What to emit (chat):**
+
+1. A short recap (3 lines max):
+   - Artifact name and slide / screen count.
+   - One-line narrative summary (echoed back from the original plan).
+   - URLs / paths the human should open to look at the rendered result.
+
+2. Exactly one `AskUserQuestion` call. For decks:
+
+   ```
+   Q: "Looks good — export to pptx?"
+     options:
+       - Yes, export pptx                → run scripts/export-pptx.sh
+       - Changes needed                  → collect feedback, iterate
+       - Skip pptx (HTML only)           → finish, leave deck as HTML
+   ```
+
+   For product POCs:
+
+   ```
+   Q: "Ready to finalize?"
+     options:
+       - Yes — finalize per desired_outcome   → deploy or bundle
+       - Changes needed                       → iterate
+       - Discard                              → stop, no deliverable
+   ```
+
+**Loop / escalate:**
+
+- "Changes needed" runs the same 3-iteration cap as Checkpoint #0.
+- "Discard" / "Skip" terminates cleanly with the appropriate
+  `checkpoint_history` entry; `pptx_path` / `deploy_url` is `null`.
+
+---
+
+## Standalone vs handoff behaviour
+
+The mechanism differs by environment but the **policy is identical**.
+
+| Aspect                    | Standalone mode (Claude Code / Claude.ai) | Handoff mode (AIMS64 platform)                              |
+| ------------------------- | ----------------------------------------- | ----------------------------------------------------------- |
+| How the plan is shown     | Markdown table in chat                    | `slide_plan` / `section_plan` field in envelope             |
+| How approval is asked     | `AskUserQuestion` tool call               | UI-rendered decision in the external platform               |
+| How approval is received  | Tool answer comes back to the agent       | Next-turn handoff envelope with `human_review.checkpoint_*` |
+| What "iterate" looks like | Free-form follow-up message               | Structured `feedback[]` array in re-handoff envelope        |
+
+Skills must support **both**. The skill detects environment from the
+input shape (same auto-detect rule as `task_type:` YAML at the top of
+input), then emits either AskUserQuestion or envelope fields.
+
+---
+
+## Claude Code plan-mode integration
+
+If the user activates Claude Code plan-mode (the `/plan` slash command
+or environment indicator), file-write tools are blocked by the harness.
+A skill that tries `Write` or `Edit` in plan-mode will receive a
+permission error.
+
+The skill must:
+
+1. Detect that write tools are unavailable. The simplest signal is to
+   attempt `Write` on a small probe file early in the workflow and
+   catch the rejection. (Less aggressive: read the
+   `<system-reminder>` block — Claude Code plan-mode prepends an
+   explicit "Plan mode is active" reminder.)
+2. If write is blocked, emit the **Checkpoint #0 plan** as the final
+   response — full slide / screen / section table, no `AskUserQuestion`
+   (the user will approve via plan-mode's native UI). No materialization
+   is attempted.
+3. Do not call `ExitPlanMode` from inside the skill — that is the
+   harness's job once the user approves.
+
+This gives the user two equivalent paths to the same outcome:
+
+- **Path A (normal mode):** brief → AIMS pass → Checkpoint #0 fires →
+  AskUserQuestion → approval → materialize.
+- **Path B (plan mode):** `/plan` + brief → AIMS pass → Checkpoint #0
+  plan emitted as final response → user approves via plan-mode UI →
+  user exits plan-mode → skill re-runs and materializes.
+
+---
+
+## Application to `digital-product-poc`
+
+Same two checkpoints, slightly different triggers.
+
+### Checkpoint #0 — pre-materialization for product POCs
+
+Triggers (any one):
+
+- `artifact_intent: pitch_concept_site` with `section_count ≥ 4`.
+- Brief asks for "full site" / "complete pitch" / similar broad scope.
+- `iteration_context.direction_changed: true`.
+
+Emits an analogous plan table:
+
+```
+| # | Screen / Section | 21st.dev ref / shadcn primitive | Purpose            |
+|---|------------------|---------------------------------|--------------------|
+| … | …                | …                               | …                  |
+```
+
+### Checkpoint #1 — pre-final-deliverable for product POCs
+
+Always fires. The "irreversible" step depends on `desired_outcome`:
+
+- `files_only` → no deploy; AskUserQuestion is "Ready to hand off
+  these files?" (one-shot review of file list + key screenshots).
+- `preview_deploy` → "Ready to deploy to preview URL?" — yes triggers
+  the publish step.
+- `decide_later` → "Decide now: files-only / preview / discard?"
+  becomes a 3-option AskUserQuestion (treat it as one of the above).
+
+---
+
+## Threshold rationale
+
+The numeric triggers (6 slides, 4 sections, 3 screens) are chosen
+deliberately:
+
+- **<6 slides for decks** = usually a smoke build, a one-pager, or a
+  3-block follow-up to an existing deck. The checkpoint overhead
+  (~30 s of plan generation + a user click) is not paid back.
+- **≥6 slides** = real sales / capability / pitch deck with a non-trivial
+  narrative arc. Errors compound across slides; planning value rises
+  sharply.
+- **4 sections for promo sites** = past the "hero + 2 supporting" mark,
+  the section choices encode an actual marketing structure that the
+  user should sign off on before render.
+- **3 screens for workflow POCs** = past the "single screen" mark, the
+  flow has state transitions and interaction logic that the user must
+  validate before integration code starts.
+
+Adjust thresholds in this file only — do not hardcode them in
+SKILL.md.
+
+---
+
+## Output contract additions
+
+Both skills must include in their output envelope:
+
+```yaml
+checkpoint_history:
+  - checkpoint: 0
+    decision: approved | modified | restarted | skipped
+    iterations: <int> # how many AskUserQuestion rounds before resolution
+    notes: <optional string>
+  - checkpoint: 1
+    decision: yes | changes_needed | skipped | discarded
+    iterations: <int>
+    notes: <optional string>
+```
+
+If a checkpoint did not fire (e.g. Checkpoint #0 skipped because deck
+was <6 slides), the corresponding entry uses `decision: skipped` and
+`iterations: 0`. The array is always present, never null.
+
+The orchestrator validates this array on receipt — an empty or
+missing `checkpoint_history` for an artifact that required Checkpoint
+#1 is an automatic escalation.

@@ -17,7 +17,7 @@ flowchart LR
         CS -.->|"repeat until coverage clear"| WS
     end
 
-    G1{{"Findings Approval"}}
+    G1{{"Steering Meeting"}}
 
     subgraph SolutionPhase["🔧 Solution — 1–2 weeks"]
         direction TB
@@ -60,8 +60,8 @@ flowchart LR
 
 | Phase          | Opens at              | Closes at             | Duration  |
 | -------------- | --------------------- | --------------------- | --------- |
-| 🔍 Investigate | (0) Kick-off          | (1) Findings Approval | 1–3 weeks |
-| 🔧 Solution    | (1) Findings Approval | (2) Solution Approval | 1–2 weeks |
+| 🔍 Investigate | (0) Kick-off          | (1) Steering Meeting  | 1–3 weeks |
+| 🔧 Solution    | (1) Steering Meeting  | (2) Solution Approval | 1–2 weeks |
 | 🗺️ Roadmap     | (2) Solution Approval | (3) Final Sign-off    | 1 week    |
 
 Every gate except the first and last does double duty — it's the exit criteria for the phase before it and the entry criteria for the phase after. Nothing skips a side: a phase can't start without its opening gate closed, and its own output isn't trusted until its closing gate closes.
@@ -71,7 +71,7 @@ Every gate except the first and last does double duty — it's the exit criteria
 | Gate                  | Closes when                                                                                                                                                                                                                                                                  | Produces                                                                         |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | (0) Kick-off          | [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) + [Early Direction](/AI%20SDLC/05%20Solution%20Space/index.md#early-direction) are captured and published                                                                                               | The raw target the rest of the engagement is measured against                    |
-| (1) Findings Approval | [Problem Space](/AI%20SDLC/03%20Problem%20Space/) coverage is clear, [findings](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md) + [goal fit](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md) are approved                                                    | Confirmed Problems + prioritised Solution Goals, scored against Strategic Intent |
+| (1) Steering Meeting  | [Problem Space](/AI%20SDLC/03%20Problem%20Space/) coverage is clear, [findings](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md) + [goal fit](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md) are approved                                                    | Confirmed Problems + prioritised Solution Goals, scored against Strategic Intent |
 | (2) Solution Approval | [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) and [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md) designs are published and reviewed, and [Scale](/AI%20SDLC/05%20Solution%20Space/04%20Scale.md) design too where the engagement runs one | An approved Solution, proven against Solution Goals + Problems                   |
 | (3) Final Sign-off    | [Milestones](/AI%20SDLC/06%20Roadmap/02%20Milestones.md), [WBS](/AI%20SDLC/06%20Roadmap/03%20WBS.md), [team composition](/AI%20SDLC/06%20Roadmap/01%20Overview.md#team-composition), and [Timeline](/AI%20SDLC/06%20Roadmap/04%20Timeline.md) are sequenced                  | A phased delivery plan [[CLIENT_NAME]] can staff and fund                        |
 

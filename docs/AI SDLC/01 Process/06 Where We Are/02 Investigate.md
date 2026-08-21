@@ -51,14 +51,14 @@ See [Evidence Chain](../04%20Evidence%20Chain.md) for why Solution Goals depends
 
 ### Workshops
 
-| Workshop | Item                                                                                                                                                | Status           | Coverage           | Target Date | Last Updated |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------ | ----------- | ------------ |
-| WS1      | [Upstream & Design](</AI%20SDLC/02%20Capture/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Agenda.md>) — Requirements & Stories · Design & UX | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
-| WS2      | [Design to Code](</AI%20SDLC/02%20Capture/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Agenda.md>) — Technical Design · Implementation            | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
-| WS3      | [Delivery Mechanics](</AI%20SDLC/02%20Capture/WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Agenda.md>) — DevOps & Pipeline · Ceremony Overhead  | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
-| WS4      | [People & Context](</AI%20SDLC/02%20Capture/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Agenda.md>) — Teams & Integration · Knowledge Base   | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
-| WS5      | [Baseline & Guardrails](</AI%20SDLC/02%20Capture/WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Agenda.md>) — Measurement · Governance     | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
-| WS6      | [Product & Projects](</AI%20SDLC/02%20Capture/WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>) — pilot selection synthesis          | ⏳ Not scheduled | — (synthesis only) | [DATE]      | —            |
+| Workshop | Item                                                                                                                                                               | Status           | Coverage           | Target Date | Last Updated |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- | ------------------ | ----------- | ------------ |
+| WS1      | [Upstream & Design](</AI%20SDLC/02%20Capture/04%20Workshops/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Agenda.md>) — Requirements & Stories · Design & UX | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
+| WS2      | [Design to Code](</AI%20SDLC/02%20Capture/04%20Workshops/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Agenda.md>) — Technical Design · Implementation            | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
+| WS3      | [Delivery Mechanics](</AI%20SDLC/02%20Capture/04%20Workshops/WS%203%20(Delivery%20Mechanics)%20-%20Date%20TBD/Agenda.md>) — DevOps & Pipeline · Ceremony Overhead  | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
+| WS4      | [People & Context](</AI%20SDLC/02%20Capture/04%20Workshops/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Agenda.md>) — Teams & Integration · Knowledge Base   | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
+| WS5      | [Baseline & Guardrails](</AI%20SDLC/02%20Capture/04%20Workshops/WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Agenda.md>) — Measurement · Governance     | ⏳ Not scheduled | 0/2 SDLC Domains   | [DATE]      | —            |
+| WS6      | [Product & Projects](</AI%20SDLC/02%20Capture/04%20Workshops/WS%206%20(Product%20%26%20Projects)%20-%20Date%20TBD/Agenda.md>) — pilot selection synthesis          | ⏳ Not scheduled | — (synthesis only) | [DATE]      | —            |
 
 ### Current State
 

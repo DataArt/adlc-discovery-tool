@@ -39,12 +39,12 @@ Ask what this session is processing:
 
 > "Do you have a transcript or written answers to process into Notes, or are we drafting the Agenda for a session that hasn't run yet?"
 
-**If Agenda** — follow `.claude/templates/workshops/Agenda.md`'s structure exactly (Header → Session Flow → Opening → per-topic Survey sections → Closing), ≤2 hours total, one SDLC Domain per topic. Skip the Opening's recap for WS1 (nothing to validate yet). Write to `WS N (Title) - [Date]/Agenda.md`. Apply `.claude/skills/discovery/pattern-write-confirm.md`.
+**If Agenda** — follow `.claude/templates/workshops/Agenda.md`'s structure exactly (Header → Session Flow → Opening → per-topic Survey sections → Closing), ≤2 hours total, one SDLC Domain per topic. Skip the Opening's recap for WS1 (nothing to validate yet). Write to `04 Workshops/WS N (Title) - [Date]/Agenda.md`. Apply `.claude/skills/discovery/pattern-write-confirm.md`.
 
 **If Notes/Outcomes** — process per the pipeline:
 
 1. Extract raw text if source is `.docx` (`textutil -convert txt -stdout` on macOS, or unzip + parse `word/document.xml`)
-2. If asked to preserve the raw transcript verbatim, follow `.claude/templates/workshops/Transcript.md`'s rules exactly (verbatim only — paragraph breaks and speaker headers are the only edits) and save to `WS N (Title) - [Date]/transcript/Transcript.md`
+2. If asked to preserve the raw transcript verbatim, follow `.claude/templates/workshops/Transcript.md`'s rules exactly (verbatim only — paragraph breaks and speaker headers are the only edits) and save to `04 Workshops/WS N (Title) - [Date]/Transcript.md`
 3. Read `Agenda.md` for topic structure and survey questions
 4. Map transcript content to topics chronologically; for each topic reached, answer each survey question with transcript evidence
 5. Synthesise the key question answer per topic — don't copy-paste

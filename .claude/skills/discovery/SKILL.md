@@ -28,18 +28,22 @@ This command orchestrates the full engagement arc defined in `docs/AI SDLC/01 Pr
 
 ## Skill Hierarchy
 
-This root delegates to a phase skill per phase; `discovery-investigate` further delegates to one stage skill per Investigate workflow doc. `discovery-solution`/`discovery-roadmap` are stubs today — no stage skills under them yet.
+This root delegates to a phase skill per phase and to the same gate skill, parameterized by gate number, at every gate; `discovery-investigate` further delegates to one stage skill per Investigate workflow doc. `discovery-solution`/`discovery-roadmap` are stubs today — no stage skills under them yet.
 
 ```mermaid
 mindmap
   root((discovery))
+    gate0("🚦 discovery-gate 0")
     investigate("🔍 discovery-investigate")
       capture["discovery-investigate-capture-current-state"]
       domains["discovery-investigate-problem-sdlc-domains"]
       diagnose["discovery-investigate-problem-diagnose"]
       goals["discovery-investigate-goals-solution-goals"]
+    gate1("🚦 discovery-gate 1")
     solution("🔧 discovery-solution — stub")
+    gate2("🚦 discovery-gate 2")
     roadmap("🗺️ discovery-roadmap — stub")
+    gate3("🚦 discovery-gate 3")
 ```
 
 This is a tooling map, not a process diagram — for the Phase/Stage/Artifact process this executes, see `01 Process/01 Overview.md` and `02 Terminology.md`.
@@ -79,13 +83,9 @@ Where `[status]` is: `🔄` (active) · `✅` (closed/done) · `⏳` (pending)
 
 > Skip if `01 Engagement.md` shows Gate 0 Closed. Runs once, ever — Strategic Intent is never re-captured after this, only validated (by Investigate) or grounded and re-scoped (by Gate Review), per `04 Evidence Chain.md`.
 
-Follow `01 Process/07 Workflows/01 Initiation.md` directly — the root owns gate mechanics, no phase skill sits under Gate 0:
+Follow the `/discovery-gate 0` skill exactly — it drafts the kickoff session Agenda into `02 Capture/`, optionally builds a deck, then captures Strategic Intent + Early Direction per `01 Process/07 Workflows/01 Initiation.md` and records the sponsor's outcome.
 
-1. **Capture** — draft Strategic Intent close to verbatim from `$ARGUMENTS` (sales notes, RFP, kickoff transcript) or ask the engagement lead for it. `04 Goals/02 Strategic Intent.md`'s Illustrative Patterns are a starting prompt, not a checklist.
-2. **Review → publish** — present the draft to whoever's sponsoring the engagement for a light sanity check (not a workshop); publish by editing `04 Goals/02 Strategic Intent.md` directly and adding a `## Changelog` row.
-3. **Derive Early Direction** — draft the likely pilot domain / known constraints / stated aspirations the same intake conversation signalled, into `05 Solution Space/index.md#early-direction` as an explicit, labelled hypothesis. Its Changelog row cites the Strategic Intent entries it derives from.
-
-Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
+On return: apply `pattern-announce-progress.md`, then:
 
 > "Ready to start Investigate? Type **yes** to continue, or **no** to stop here and resume later with `/discovery-investigate`."
 
@@ -107,21 +107,9 @@ On return: apply `pattern-announce-progress.md`, then:
 
 > Skip if `01 Engagement.md` shows Gate 1 Closed.
 
-Follow `01 Process/07 Workflows/02 Gate Review.md`. This is a **manual session** — the root's job is to assemble the package and record the outcome, not conduct the session autonomously:
+Follow the `/discovery-gate 1` skill exactly — it assembles the findings package, drafts the session Agenda into `02 Capture/`, optionally builds a recap deck, then records the stakeholder outcome.
 
-1. **Assemble** — consolidate confirmed Problems, Current State, and any Solution Goals drafted mid-Investigate into one package (not a scatter of page links).
-2. **Satellite review** — apply `pattern-satellite-review.md` to the assembled package before it goes to stakeholders.
-3. **Align + prioritise** — rank Problems by impact; drop any Solution Goal with no diagnosed Problem behind it.
-4. **Score fit** — map each surviving Solution Goal back to the Strategic Intent entry it traces to.
-5. **STOP** and present:
-
-   > "Present this package to stakeholders (online or offline — not an async approval). Reply with the outcome: **approved** (findings hold, fit is acceptable) or **flagged: `<items>`** (re-evaluation needed)."
-
-6. **On the reply** — exactly one of:
-   - **Approved** → mark the surviving Problems and Solution Goals Confirmed + Changelog. Gate 1 closes.
-   - **Flagged** → apply the loop-back note above for each flagged item, then re-run this gate once every flagged item is re-addressed.
-
-Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
+On return: apply `pattern-announce-progress.md`, then:
 
 > "Gate 1 closed. Ready to start Solution? Type **yes** to continue, or **no** to stop here."
 
@@ -133,9 +121,15 @@ Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
 
 ---
 
-## Gate 2 — Solution Approval _(stub)_
+## Gate 2 — Solution Approval
 
-> Closing criteria are defined in `03 How the Engagement Runs.md` — Target State, Pilot, and (where run) Scale designs published and reviewed. Record the outcome manually in `01 Engagement.md` until `/discovery-solution` is built out. The loop-back note above still applies here — a flagged item can trace all the way back to Investigate, not just to Solution's own artifacts.
+> Skip if `01 Engagement.md` shows Gate 2 Closed.
+
+Follow the `/discovery-gate 2` skill exactly — same mechanic as Gate 0/1 (Agenda into `02 Capture/`, optional deck, present, record outcome), even though `/discovery-solution` itself is still a stub: its Assemble step just points at whatever Target State/Pilot/Scale artifacts already exist (Pilot's `/design` step already works today).
+
+On return: apply `pattern-announce-progress.md`, then:
+
+> "Gate 2 closed. Ready to start Roadmap? Type **yes** to continue, or **no** to stop here."
 
 ---
 
@@ -145,9 +139,13 @@ Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
 
 ---
 
-## Gate 3 — Final Sign-off _(stub)_
+## Gate 3 — Final Sign-off
 
-> Closing criteria are defined in `03 How the Engagement Runs.md` — Milestones, WBS, team composition, and Timeline sequenced. Record the outcome manually in `01 Engagement.md` until `/discovery-roadmap` is built out. The loop-back note above still applies — the same rule, one gate further down the chain.
+> Skip if `01 Engagement.md` shows Gate 3 Closed.
+
+Follow the `/discovery-gate 3` skill exactly — same mechanic, even though `/discovery-roadmap` itself is still a stub: its Assemble step just points at whatever Milestones/WBS/Timeline artifacts the engagement lead has produced manually so far.
+
+This is the engagement's last gate — on return, go straight to Completion below.
 
 ---
 

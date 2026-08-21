@@ -1,0 +1,6 @@
+# Regeneratable QA/debug output from deck-design-corporate's verify pipeline.
+# Re-run scripts/verify-deck-headless.py to reproduce; only the slide HTML
+# and the exported .pptx are the actual deliverable.
+_shot-*.png
+_verify-sheet-*.png
+_verify-report.json

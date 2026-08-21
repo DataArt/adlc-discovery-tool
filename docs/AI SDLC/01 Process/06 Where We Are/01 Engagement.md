@@ -10,7 +10,7 @@ The top-level view — which gate the engagement is at, and the overall timeline
 ```mermaid
 flowchart LR
     G0{{"Kick-off"}}
-    G1{{"Findings Approval"}}
+    G1{{"Steering Meeting"}}
     G2{{"Solution Approval"}}
     G3{{"Final Sign-off"}}
 
@@ -32,7 +32,7 @@ _TBD — recolor everything up to and including the current gate/phase green, th
 | Gate                       | Target Date | Closed Date | Status         |
 | -------------------------- | ----------- | ----------- | -------------- |
 | Gate 0 — Kick-off          | [DATE]      | [DATE]      | ⏳ Not started |
-| Gate 1 — Findings Approval | [DATE]      | [DATE]      | ⏳ Not started |
+| Gate 1 — Steering Meeting  | [DATE]      | [DATE]      | ⏳ Not started |
 | Gate 2 — Solution Approval | [DATE]      | [DATE]      | ⏳ Not started |
 | Gate 3 — Final Sign-off    | [DATE]      | [DATE]      | ⏳ Not started |
 

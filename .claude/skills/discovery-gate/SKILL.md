@@ -1,0 +1,162 @@
+---
+name: discovery-gate
+metadata:
+  version: 0.1.0
+description: >
+  Gate-agnostic gate session skill (/discovery-gate {0-3} or /discovery orchestrator).
+  Handles all four gates (Kick-off, Steering Meeting, Solution Approval, Final Sign-off) with the same mechanic: draft the session Agenda into docs/AI SDLC/02 Capture/, optionally build a recap deck from it via deck-design-corporate, run that gate's specific closing checks, then record the stakeholder outcome.
+---
+
+The engagement lead wants to run a gate session. Here is their input:
+
+---
+
+## $ARGUMENTS
+
+---
+
+> ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
+
+> 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When the gate closes, re-read `.claude/skills/discovery/SKILL.md` and resume the root orchestrator.
+
+Every gate is **manual, online or offline** — this skill's job is to prepare the materials and record the outcome, not to conduct the session. The mechanic is identical across all four gates; only the package being reviewed and the closing checks differ (table below).
+
+---
+
+## Step 1 — Identify the gate
+
+`$ARGUMENTS` should name a gate number (0–3). If it doesn't, read `docs/AI SDLC/01 Process/06 Where We Are/01 Engagement.md`'s gate table and use the first gate not marked Closed. Confirm which gate before continuing.
+
+If that gate already shows Closed, report it and stop.
+
+---
+
+## Step 2 — Verify prerequisites
+
+| Gate                  | Prerequisite                                                                | If not met, point to     |
+| --------------------- | --------------------------------------------------------------------------- | ------------------------ |
+| 0 — Kick-off          | None — this is the engagement's first gate.                                 | —                        |
+| 1 — Steering Meeting  | `pattern-coverage-check.md` reports Investigate coverage clear.             | `/discovery-investigate` |
+| 2 — Solution Approval | Target State and Pilot designs exist (Scale where the engagement runs one). | `/discovery-solution`    |
+| 3 — Final Sign-off    | Milestones, WBS, and Timeline exist.                                        | `/discovery-roadmap`     |
+
+If the prerequisite isn't met, tell the engagement lead what's missing and stop — do not proceed to Step 3.
+
+---
+
+## Step 3 — Assemble the package
+
+What's being reviewed at this gate:
+
+| Gate | Package                                                                                                                                                                                                                                             |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0    | The raw intake (sales notes, RFP, kickoff transcript) and the draft [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) + [Early Direction](/AI%20SDLC/05%20Solution%20Space/index.md#early-direction) hypothesis derived from it. |
+| 1    | Confirmed Problems, the Current State they're evidenced from, and any Solution Goals drafted mid-Investigate — consolidated into one package, not a scatter of page links.                                                                          |
+| 2    | [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md), [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md) (its `/design` artifacts), and [Scale](/AI%20SDLC/05%20Solution%20Space/04%20Scale.md) where run.                  |
+| 3    | [Milestones](/AI%20SDLC/06%20Roadmap/02%20Milestones.md), [WBS](/AI%20SDLC/06%20Roadmap/03%20WBS.md), team composition, and [Timeline](/AI%20SDLC/06%20Roadmap/04%20Timeline.md).                                                                   |
+
+---
+
+## Step 4 — Draft the Agenda, or process a completed session
+
+Every gate placeholder folder — `docs/AI SDLC/02 Capture/03 Gates/Gate {N} ({Gate Name}) - Date TBD/` — already carries four files: `Agenda.md`, `Notes.md`, `Outcomes.md`, `Transcript.md`, built from `.claude/templates/gate-review/`'s matching templates. `Agenda.md` alone carries real generic content ahead of any real session (same as a workshop's placeholder); the other three are placeholder-shaped until a session actually happens.
+
+Ask, unless `$ARGUMENTS` already makes it obvious:
+
+> "Do you have a transcript or written notes to process from a session that already happened, or are we drafting/updating the Agenda for a session that hasn't run yet?"
+
+**Stop and wait.**
+
+**If Agenda** — ask for the actual date if not already given. Update `Agenda.md` in place with this run's real content and specifics (same convention as a workshop's `WS N (Title) - Date TBD` folder): fill in the real date (rename the folder from `- Date TBD` to `- {Date}`), and refine each block from the Step 3 package — add/drop numbered blocks to match what this specific gate actually has content for; never pad, never compress two distinct points into one block. Apply `.claude/skills/discovery/pattern-write-confirm.md`.
+
+**If Notes/Outcomes** — process per the pipeline:
+
+1. Extract raw text if source is `.docx` (`textutil -convert txt -stdout` on macOS, or unzip + parse `word/document.xml`)
+2. If asked to preserve the raw transcript verbatim, follow `.claude/templates/gate-review/Transcript.md`'s rules exactly (verbatim only — paragraph breaks and speaker headers are the only edits) and save to `Transcript.md`
+3. Read this gate's `Agenda.md` for block structure and check questions
+4. Map transcript content to blocks chronologically; for each block reached, answer its check question with transcript evidence
+5. Synthesise the answer per block — don't copy-paste
+6. Note unreached blocks as carry-forwards
+7. Extract concrete numbers into a Key Numbers table; distil Key Themes
+8. Write `Notes.md` following `.claude/templates/gate-review/Notes.md` exactly — status indicators (🟢🟡🔵⚫), update the Block Coverage table
+9. Update `Outcomes.md` incrementally per `.claude/templates/gate-review/Outcomes.md` (Summary, Session Blocks mindmap, Findings, Next Steps) — including the **Gate Outcome** section (approved / flagged, per what the transcript evidences the stakeholders actually decided)
+
+Apply `.claude/skills/discovery/pattern-write-confirm.md` for `Notes.md`/`Outcomes.md`.
+
+---
+
+## Step 5 — Satellite review
+
+Gate 1 only: apply `.claude/skills/discovery/pattern-satellite-review.md` to the Step 3 package (not the Agenda itself — Agenda drafts are excluded by that pattern's own skip rule).
+
+Gates 0, 2, 3: skip for now — the evidence-chain reviewer's scope (`pattern-satellite-review.md`) covers Problems/Current State/Solution Goals specifically; extend it the same way once Solution/Roadmap stage skills are built out.
+
+---
+
+## Step 6 — Optional deck
+
+Ask:
+
+> "Build a recap deck from this agenda for the session? (yes/no)"
+
+**Stop and wait.**
+
+- **Yes** → invoke the `deck-design-corporate` skill (standalone mode) with a brief built from the now-confirmed Agenda: audience, format/duration, pre-read requirement, and the per-block content from Step 4. Let it run its own workflow and checkpoints to completion — do not shortcut its plan-review or pre-pptx gates. When it returns, record the resulting `decks/<deck-name>/` path in the Agenda's **Preparation Notes** section.
+- **No** → skip. Note in Preparation Notes that a deck can be produced later by re-running this skill or invoking `deck-design-corporate` directly.
+
+---
+
+## Step 7 — Gate-specific closing checks
+
+| Gate | Checks                                                                                                                                                                                                          |
+| ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0    | Present the draft Strategic Intent; confirm, reorder, or cut. Present Early Direction; gather feedback.                                                                                                         |
+| 1    | **Align + prioritise** — rank Problems by impact; drop any Solution Goal with no diagnosed Problem behind it. **Score fit** — map each surviving Solution Goal back to the Strategic Intent entry it traces to. |
+| 2    | Confirm Target State direction still matches the Solution Goals confirmed at Gate 1. Confirm Pilot design is reviewed (its own `/design-review-gate` already ran). Confirm Scale design credibility, where run. |
+| 3    | Confirm Milestones, WBS, team composition, and Timeline are internally consistent and staffable.                                                                                                                |
+
+---
+
+## Step 8 — STOP and present
+
+If Step 4 took the **Notes/Outcomes** path and `Outcomes.md`'s **Gate Outcome** section is already filled in from the transcript, use that recorded result directly — skip re-asking, go to Step 9.
+
+Otherwise:
+
+> "Present this package to stakeholders (online or offline — not an async approval). Reply with the outcome: **approved** (findings/design/plan hold, fit is acceptable) or **flagged: `<items>`** (re-evaluation needed)."
+
+**Stop and wait for the reply.**
+
+---
+
+## Step 9 — On the reply
+
+Exactly one of:
+
+- **Approved** → mark the relevant artifacts Confirmed + Changelog for this gate (Strategic Intent + Early Direction for Gate 0; Problems + Solution Goals for Gate 1; Target State/Pilot/Scale for Gate 2; Milestones/WBS/Timeline for Gate 3). This gate closes.
+- **Flagged** → re-open each flagged item at whichever stage or phase actually originated it (Investigate stage, Solution flow, or Roadmap flow, per `03 How the Engagement Runs.md`'s loop-back note), reprocess forward through every layer downstream of it, then re-run this gate once every flagged item is re-addressed.
+
+---
+
+## Step 10 — Do → Report → Commit
+
+Apply `.claude/skills/discovery/pattern-do-report-commit.md` per its existing per-gate mapping in that pattern's table — plus a Report Log row that also cites the Agenda and, if built, the deck path.
+
+---
+
+## Step 11 — Announce + return
+
+Apply `.claude/skills/discovery/pattern-announce-progress.md`, then the matching next-phase prompt:
+
+- Gate 0 closed → "Ready to start Investigate? Type **yes** to continue, or **no** to stop here and resume later with `/discovery-investigate`."
+- Gate 1 closed → "Ready to start Solution? Type **yes** to continue, or **no** to stop here."
+- Gate 2 closed → "Ready to start Roadmap? Type **yes** to continue, or **no** to stop here."
+- Gate 3 closed → this is the engagement's last gate — report completion per `discovery/SKILL.md`'s Completion section.
+
+🔁 Re-read `.claude/skills/discovery/SKILL.md` and resume the root orchestrator.
+
+---
+
+## Reiterate paths
+
+If a later gate flags an item that traces back to a gate that already closed (including this one), re-enter at Step 7 for that gate with the flagged item — same steps, same reporting, no special "correction mode."

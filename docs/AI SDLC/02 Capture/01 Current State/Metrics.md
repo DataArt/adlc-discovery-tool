@@ -29,6 +29,6 @@ This is raw baseline material, not synthesis. What a pilot needs to prove itself
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                                               |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 5 (Baseline & Guardrails)](</AI%20SDLC/02%20Capture/WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                                                              |
+| ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 5 (Baseline & Guardrails)](</AI%20SDLC/02%20Capture/04%20Workshops/WS%205%20(Baseline%20%26%20Guardrails)%20-%20Date%20TBD/Outcomes.md>) |

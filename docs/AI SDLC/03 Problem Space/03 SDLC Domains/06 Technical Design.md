@@ -29,6 +29,6 @@ _To be populated from workshop discovery._
 
 _Every change to this page traces to the workshop and/or Current State evidence that justified it._
 
-| Date   | Change         | Evidence                                                                                                                                                                                                              |
-| ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [WS 2 (Design to Code) Outcomes](</AI%20SDLC/02%20Capture/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md) |
+| Date   | Change         | Evidence                                                                                                                                                                                                                             |
+| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [DATE] | [WHAT CHANGED] | [WS 2 (Design to Code) Outcomes](</AI%20SDLC/02%20Capture/04%20Workshops/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md) |

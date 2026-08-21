@@ -35,6 +35,8 @@ sequenceDiagram
 
 **Capture.** Strategic Intent is captured via `/bootstrap-client` from sales conversations, an RFP, or kickoff discussions — before Capture workshops begin. [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md)'s Illustrative Patterns are a starting prompt for that conversation, not a checklist to accept as-is.
 
+**Materials.** Ahead of Review → publish, `/discovery-gate 0` drafts a kickoff session Agenda into `02 Capture/`, and — optionally — builds a deck from it. Preparing the materials is scripted; the sponsor review itself is not.
+
 **Review → publish.** The draft goes to whoever's sponsoring the engagement for a sanity check before it's treated as settled — this is a light pass, not a workshop; Capture does the real validation later. Publishing means editing `Strategic Intent.md` directly and adding a row to its `## Changelog`.
 
 **Derive Early Direction.** The same intake conversation almost always signals more than raw intent — a likely pilot domain, a known constraint, a stated aspiration. That goes into [Solution Space](/AI%20SDLC/05%20Solution%20Space/index.md)'s `## Early Direction` section as an explicit, labelled hypothesis — not a confirmed finding, refined once Problem Space evidence exists. Its Changelog row cites the Strategic Intent it was derived from, so the trace holds in both directions.

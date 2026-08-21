@@ -29,6 +29,6 @@ _To be populated from workshop discovery._
 
 _Every change to this page traces to the workshop and/or Current State evidence that justified it._
 
-| Date   | Change         | Evidence                                                                                                                                                                                                                              |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [WS 4 (People & Context) Outcomes](</AI%20SDLC/02%20Capture/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md) |
+| Date   | Change         | Evidence                                                                                                                                                                                                                                             |
+| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [WS 4 (People & Context) Outcomes](</AI%20SDLC/02%20Capture/04%20Workshops/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md) |

@@ -24,6 +24,6 @@ This is raw baseline material, not synthesis. Why adoption has or hasn't moved d
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                               |
-| ------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 2 (Design to Code)](</AI%20SDLC/02%20Capture/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                                              |
+| ------ | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 2 (Design to Code)](</AI%20SDLC/02%20Capture/04%20Workshops/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) |

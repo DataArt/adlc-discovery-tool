@@ -43,6 +43,7 @@ Key constraint: basic auth password protection on all routes.
 | `/dev`                | Dev lifecycle orchestrator — Plan → Implement → Test → Document        |
 | `/design`             | Design lifecycle orchestrator — Frame → Research → Elaborate → Solution → Review → Address Feedback → Publish |
 | `/discovery`           | Discovery engagement orchestrator — Initiation (Gate 0) → Investigate → Gate Review (Gate 1) → Solution → Solution Approval (Gate 2) → Roadmap → Final Sign-off (Gate 3) |
+| `/discovery-gate`      | Gate-agnostic gate skill (`/discovery-gate {0-3}`) — drafts the session Agenda into Capture, optionally builds a recap deck, runs that gate's closing checks, and records the stakeholder outcome |
 | `/design-review-gate` | Opens the draft MR and records the approval gate; session pauses for out-of-band human approval |
 | `/design-address-feedback` | Only if the approver raises concerns — reiterates into the traced-to phase, then waits for re-approval |
 | `/skill-reflect`      | Brain-dump observations after completing a ticket                      |
@@ -66,7 +67,7 @@ Dev phases: `/dev-plan` → `/dev-implement` → `/dev-test` → `/dev-document`
 
 Design phases: `/design-frame` → `/design-research` → `/design-elaborate` → `/design-solution` (WAF gate: `/design-review`) → `/design-review-gate` → (`/design-address-feedback`) → `/design-publish`
 
-Discovery phases: `/discovery-investigate` (loops `/discovery-investigate-capture-current-state` → `/discovery-investigate-problem-sdlc-domains` → `/discovery-investigate-problem-diagnose` → `/discovery-investigate-goals-solution-goals` per-domain until coverage is clear) → `/discovery-solution` (stub) → `/discovery-roadmap` (stub)
+Discovery phases: `/discovery-gate 0` → `/discovery-investigate` (loops `/discovery-investigate-capture-current-state` → `/discovery-investigate-problem-sdlc-domains` → `/discovery-investigate-problem-diagnose` → `/discovery-investigate-goals-solution-goals` per-domain until coverage is clear) → `/discovery-gate 1` → `/discovery-solution` (stub) → `/discovery-gate 2` → `/discovery-roadmap` (stub) → `/discovery-gate 3`
 
 Skill phases: `/skill-reflect` → `/skill-triage` → `/skill-new` → `/skill-promote`
 

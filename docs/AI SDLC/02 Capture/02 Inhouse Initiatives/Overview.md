@@ -47,6 +47,6 @@ This feeds [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                                       |
-| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 1 (Upstream & Design)](</AI%20SDLC/02%20Capture/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                                                      |
+| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 1 (Upstream & Design)](</AI%20SDLC/02%20Capture/04%20Workshops/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) |

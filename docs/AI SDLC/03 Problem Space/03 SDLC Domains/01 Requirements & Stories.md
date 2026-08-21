@@ -29,6 +29,6 @@ _To be populated from workshop discovery._
 
 _Every change to this page traces to the workshop and/or Current State evidence that justified it._
 
-| Date   | Change         | Evidence                                                                                                                                                                                                            |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [WS 1 (Upstream & Design) Outcomes](</AI%20SDLC/02%20Capture/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) |
+| Date   | Change         | Evidence                                                                                                                                                                                                                           |
+| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [WS 1 (Upstream & Design) Outcomes](</AI%20SDLC/02%20Capture/04%20Workshops/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) · [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) |

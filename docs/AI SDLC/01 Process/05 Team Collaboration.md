@@ -11,10 +11,10 @@ flowchart LR
         WS --> TR
     end
 
-    subgraph Process["Process — AI-assisted"]
+    subgraph Process["Process — AI-assisted, against this repo"]
         direction TB
-        CD["Claude Desktop / Codex Desktop\n(non-technical team members)"]
-        CC["Claude Code + IDE\n(engineers)"]
+        CD["Claude Desktop\n(managers) — /discovery"]
+        CC["Claude Code + IDE\n(architects) — /design · /dev"]
     end
 
     subgraph Land["Land — in the repo"]
@@ -42,18 +42,18 @@ flowchart LR
 
 ## Who uses what
 
-| Role                                                    | Tool                           | Does                                                                                                                                                   |
-| ------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Engineers doing repo work (docs, skills, agents, infra) | Claude Code + IDE              | Runs the `/dev`, `/design`, `/discovery`-agent workflows directly against this repo; owns the actual commits.                                          |
-| Non-technical team members processing workshop output   | Claude Desktop / Codex Desktop | Turns a raw transcript or written-answer set into a draft Notes/Outcomes write-up _before_ it enters the repo — no repo access required for this step. |
-| Whoever runs the workshop                               | Any note-taking tool           | Captures the transcript itself; the tool doesn't matter, only that it lands as `Transcript.md` for the workshop folder to process.                     |
+| Role                                                             | Tool                 | Does                                                                                                                                                                                                        |
+| ---------------------------------------------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Architects doing repo work (docs, skills, agents, infra, design) | Claude Code + IDE    | Runs `/dev` and `/design` directly against this repo; owns the actual commits.                                                                                                                              |
+| Managers running the engagement                                  | Claude Desktop       | Clones the repo and runs `/discovery` directly against it — see [09 Claude Desktop Setup](./09%20Claude%20Desktop%20Setup.md); owns their own branch/commit/PR, same guarded-command pattern as architects. |
+| Whoever runs the workshop                                        | Any note-taking tool | Captures the transcript itself; the tool doesn't matter, only that it lands as `Transcript.md` for the workshop folder to process.                                                                          |
 
 > [!WARNING] Populated During Bootstrap
-> The exact desktop-app roles above are illustrative — confirm which tools the [[CLIENT_NAME]] engagement team actually has access to (Claude Desktop, Codex Desktop, or neither) during `/bootstrap-client`, and replace this table with what's real for this engagement.
+> Confirm who is actually filling the architect and manager roles for the [[CLIENT_NAME]] engagement during `/bootstrap-client`, and replace this table with the real names/handles.
 
 ## Landing content in the repo
 
-Whatever produced the draft — a desktop app outside the repo, or Claude Code directly inside it — the same rule applies before it's published: it goes through [Workflows](./07%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
+Whether it's a manager in Claude Desktop or an architect in Claude Code, both work directly against a cloned copy of this repo — the same rule applies before anything is published: it goes through [Workflows](./07%20Workflows/01%20Initiation.md)'s review → publish → wire-traceability pattern, not straight from draft to merged.
 
 1. **Branch** — `<type>/short-description`, per [Engineering Guide — Conventions](/Engineering%20Guide/01%20Conventions.md).
 2. **Commit** — `<type>(<scope>): <what changed>`, Conventional Commits. Scope is the AI SDLC section (`process`, `capture`, `problem-space`, `goals`, `solution-space`, `roadmap`) or the workshop ID (`ws1`, `ws2`, …).

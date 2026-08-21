@@ -1,0 +1,85 @@
+---
+aside: false
+---
+
+# Claude Desktop Setup
+
+_Getting a non-technical team member from a cold laptop to running `/discovery` and opening a PR — no IDE, no prior git experience required._
+
+## Prerequisites
+
+| Tool           | Account                   | Download                      |
+| -------------- | ------------------------- | ----------------------------- |
+| Git            | https://github.com/signup | https://git-scm.com/downloads |
+| Claude Desktop | https://claude.ai/login   | https://claude.ai/download    |
+
+## Env setup
+
+1. Clone the repo and move into it:
+
+   ```bash
+   git clone https://github.com/DataArt/adlc-discovery-tool.git
+   cd adlc-discovery-tool
+   ```
+
+2. Run the setup script for your OS — it installs Node (via nvm), enables Yarn via corepack, offers to install and authenticate the GitHub CLI, and installs workspace dependencies:
+
+   ```bash
+   # macOS
+   bash scripts/setup/setup-mac.sh
+   ```
+
+   ```powershell
+   # Windows
+   powershell -ExecutionPolicy Bypass -File scripts/setup/setup-windows.ps1
+   ```
+
+## Tool setup
+
+1. Open Claude Desktop.
+2. Switch to the **Code** tab.
+3. Set the working directory to the `adlc-discovery-tool` folder you cloned in Env setup.
+4. Start prompting.
+
+![Claude Desktop — Code tab and working directory picker](/images/process/claude-desktop-code-tab.png)
+
+_Red arrows: switch to the **Code** tab (top), then set the working directory to the cloned repo folder (bottom bar)._
+
+This is what matters: the skills and conventions that drive the engagement (`.claude/skills/`, `CLAUDE.md`) live inside that folder. Once it's set as the working directory, Claude sees them exactly as Claude Code does.
+
+## Contribution guide
+
+Once the project is open:
+
+| Action           | Why                               | How                                                                                    | Example                                                |
+| ---------------- | --------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `/discovery`     | Guided flow for the engagement.   | Type it and follow the prompts.                                                        | `/discovery` — "we're preparing for the Gate 1 review" |
+| Free-form prompt | Anything outside a formal stage.  | Just describe what you want.                                                           | "What's our current status?"                           |
+| Preview changes  | See edits on the live site first. | Ask Claude to show you.                                                                | "Show me the site with these changes."                 |
+| Create a PR      | Lands changes for review.         | Ask Claude — guarded commands are never run automatically, it hands you what to paste. | "Open a PR for this."                                  |
+
+![Claude Desktop — free-form status prompt, plus the commit and Create PR bar](/images/process/claude-desktop-status-and-pr.png)
+
+_Red arrows: the project and session in the sidebar (left), and a free-form status prompt (right) — the bottom bar shows the commit box and Create PR button once there are changes to land._
+
+![Claude Desktop — "show me the site with these changes" opens a live local preview next to the chat](/images/process/claude-desktop-preview-site.png)
+
+_Red arrows: a free-form preview prompt (top), and the **Open** button that launches the live local preview next to the chat (bottom)._
+
+## Use cases
+
+The discovery engagement moves through a fixed sequence — Initiation → Investigate (loop) → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md). Here's what each situation looks like as a prompt:
+
+| Situation you're in                                   | Example prompt                                                                                   |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Kicking off the engagement                            | `/discovery` — "let's run the kickoff"                                                           |
+| Just finished a client workshop, have a transcript    | `/discovery` — "here's today's workshop transcript, turn it into Notes and update Current State" |
+| Enough evidence gathered, need to name the root cause | `/discovery` — "what's the underlying problem here, and which SDLC domain does it affect?"       |
+| A problem is diagnosed, need it framed as a goal      | `/discovery` — "turn this problem into a Solution Goal"                                          |
+| Preparing for a steering meeting                      | `/discovery` — "prepare the agenda and recap deck for the Gate 1 review"                         |
+| Checking where things stand                           | `/discovery` — "what's our current status?"                                                      |
+| Wrapping up the engagement                            | `/discovery` — "let's run the final sign-off"                                                    |
+
+One command, always: `/discovery` plus a sentence of context. Claude figures out the stage — you don't need to remember anything else. If you're unsure what stage you're in, just ask: "Where are we in the engagement?"
+
+→ See [05 Team Collaboration](./05%20Team%20Collaboration.md) for how this fits the rest of the team's workflow.

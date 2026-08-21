@@ -88,8 +88,8 @@ versioning) layered on top of this artifact-based rollback.
 
 ## Related
 
-- [Accounts & Environments](Projects/Infrastructure/01%20Accounts%20%26%20Environments.md) — the dev/staging/production environments this branching model targets
-- [Deployment](04%20Deployment.md) — how each merge actually builds and deploys, per project type
-- [Architecture Overview](00%20Overview.md) — how the whole product fits together
+- [Local Provisioning Runbook](Infrastructure/01%20Local%20Provisioning%20Runbook.md) — the dev/staging/production environments this branching model targets
+- [Deploy Lifecycle](Infrastructure/02%20Deploy%20Lifecycle.md) — how each merge actually builds and deploys, per project type
+- [Target Architecture](<../Target%20Architecture%20(HLD)/README.md>) — how the whole product fits together
 
 _Source: adapted from Confluence "Branching Strategy" (space TS, page 20414501)._

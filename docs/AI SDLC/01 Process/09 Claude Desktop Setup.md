@@ -18,8 +18,8 @@ _Getting a non-technical team member from a cold laptop to running `/discovery` 
 1. Clone the repo and move into it:
 
    ```bash
-   git clone https://github.com/DataArt/adlc-discovery-tool.git
-   cd adlc-discovery-tool
+   git clone https://github.com/[[GITHUB_ORG]]/[[GITHUB_REPO]].git
+   cd [[GITHUB_REPO]]
    ```
 
 2. Run the setup script for your OS — it installs Node (via nvm), enables Yarn via corepack, offers to install and authenticate the GitHub CLI, and installs workspace dependencies:
@@ -38,7 +38,7 @@ _Getting a non-technical team member from a cold laptop to running `/discovery` 
 
 1. Open Claude Desktop.
 2. Switch to the **Code** tab.
-3. Set the working directory to the `adlc-discovery-tool` folder you cloned in Env setup.
+3. Set the working directory to the `[[GITHUB_REPO]]` folder you cloned in Env setup.
 4. Start prompting.
 
 ![Claude Desktop — Code tab and working directory picker](/images/process/claude-desktop-code-tab.png)

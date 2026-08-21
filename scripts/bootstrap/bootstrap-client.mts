@@ -5,7 +5,8 @@
 // Does exactly four things, and nothing else — no free-text generation, no judgment calls.
 // Same input always produces the same output; safe to re-run (skips work already done).
 //
-//   1. Literal find-replace of [[CLIENT_NAME]] across every git-tracked text file
+//   1. Literal find-replace of [[CLIENT_NAME]], [[GITHUB_ORG]], [[GITHUB_REPO]] across every
+//      git-tracked text file (e.g. the clone command in `09 Claude Desktop Setup.md`)
 //   2. Rewrite the {org} placeholder in the 3 project.json files (infra, docs-web, lambda-auth)
 //   3. Scaffold apps/{infra,docs-web,lambda-auth}/.env.dev from .env.example + collected values —
 //      every deterministic value (org/env/locationShort/region-templated shapes, same formula as
@@ -195,10 +196,14 @@ function listTrackedTextFiles(): string[] {
     .filter((f) => !BINARY_EXTENSIONS.has(extname(f).toLowerCase()));
 }
 
-function replaceClientNameToken(v: Answers): { filesChanged: number; replacements: number } {
+function replaceTokens(v: Answers): { filesChanged: number; replacements: number } {
   let filesChanged = 0;
   let replacements = 0;
-  const token = '[[CLIENT_NAME]]';
+  const tokens: [token: string, value: string][] = [
+    ['[[CLIENT_NAME]]', v.clientName],
+    ['[[GITHUB_ORG]]', v.githubOrg],
+    ['[[GITHUB_REPO]]', v.githubRepo],
+  ];
 
   for (const relPath of listTrackedTextFiles()) {
     if (SELF_EXCLUDE_PREFIXES.some((prefix) => relPath.startsWith(prefix))) continue;
@@ -210,15 +215,22 @@ function replaceClientNameToken(v: Answers): { filesChanged: number; replacement
     } catch {
       continue; // unreadable as utf-8 — skip rather than guess
     }
-    const count = content.split(token).length - 1;
-    if (count === 0) continue;
+
+    let fileReplacements = 0;
+    for (const [token, value] of tokens) {
+      const count = content.split(token).length - 1;
+      if (count === 0) continue;
+      fileReplacements += count;
+      content = content.split(token).join(value);
+    }
+    if (fileReplacements === 0) continue;
 
     filesChanged += 1;
-    replacements += count;
-    console.log(`  ${v.dryRun ? '[dry-run] would update' : 'updating'} ${relPath} (${count}x)`);
+    replacements += fileReplacements;
+    console.log(`  ${v.dryRun ? '[dry-run] would update' : 'updating'} ${relPath} (${fileReplacements}x)`);
 
     if (!v.dryRun) {
-      writeFileSync(abs, content.split(token).join(v.clientName), 'utf-8');
+      writeFileSync(abs, content, 'utf-8');
     }
   }
 
@@ -327,8 +339,8 @@ function main() {
 
   console.log(`\n${answers.dryRun ? '🔍 DRY RUN — no files will be written\n' : '✏️  Applying personalization\n'}`);
 
-  console.log('Step 1 — [[CLIENT_NAME]] find-replace');
-  const { filesChanged, replacements } = replaceClientNameToken(answers);
+  console.log('Step 1 — [[CLIENT_NAME]] / [[GITHUB_ORG]] / [[GITHUB_REPO]] find-replace');
+  const { filesChanged, replacements } = replaceTokens(answers);
   console.log(`  → ${filesChanged} file(s), ${replacements} replacement(s)\n`);
 
   console.log('Step 2 — project.json {org} placeholders');
@@ -351,7 +363,7 @@ function main() {
     console.log('\nStill manual (not this script\'s job):');
     console.log('  - AWS account setup, `cdk bootstrap`, first `cdk deploy` — see the Quick Setup Guide');
     console.log('  - CF_DISTRIBUTION_ID stays blank until after `infra:provision` + `infra:output` — see the Quick Setup Guide');
-    console.log('  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]]');
+    console.log('  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]], [[GITHUB_ORG]], or [[GITHUB_REPO]]');
   }
 }
 

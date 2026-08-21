@@ -1,0 +1,366 @@
+---
+name: bootstrap-client
+description: Instantiate this starter kit for a new client engagement (/bootstrap-client). Orchestrates 4 stages — Environment & Repo (manual, gated on verification) → Bootstrap (client identity Q&A, deterministic apply, narrative personalization, Discussions/giscus) → Infrastructure & Deploy → CI/CD. Every mutating or external command is an instruction the developer runs in their own terminal and pastes results back from — Claude never executes those directly. Full command reference in plan.md, live progress in report.md.
+---
+
+The developer wants to bootstrap this starter kit for a new client. Here is their input:
+
+---
+
+## $ARGUMENTS
+
+---
+
+> ⚠️ Follow every stage in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
+
+This orchestrates the full bootstrap flow across 4 stages: **Environment & Repo → Bootstrap → Infrastructure & Deploy → CI/CD**. `plan.md` (in this skill folder) has the full command reference for every stage — this file controls flow, gates, and validation.
+
+**Every command that mutates state or touches an external/credentialed system (GitHub, AWS, git remotes) is an instruction for the developer to run in their own terminal — never executed by Claude directly.** The one exception is local, read-only checks against files already on disk (e.g. `git remote -v`, a `grep`) — Claude runs those directly to validate. See `pattern-run-and-validate.md` for the loop and why this line is drawn where it is.
+
+`report.md` (in this skill folder) is this instance's live progress record. Read it first to resume. Every "mark X in `report.md`" or "update `report.md`" instruction below means **use the Edit tool on it right then, before your next message** — not a description of the update in your response text. A step is not done until `report.md` reflects it.
+
+---
+
+## Resume check
+
+Read `report.md`'s header table. If the `Stage` row shows anything other than all four stages `⏳`:
+
+> "Found an existing bootstrap report — `{stage row from report.md}`. Resume from where you left off, or restart from scratch?"
+
+**Stop and wait.**
+
+- **Resume** → skip to the first stage/step not yet `✅`.
+- **Restart** → continue from Stage 1, overwriting `report.md`'s rows as each step is actually redone (don't blank the file up front).
+
+If `report.md` shows no progress yet, continue normally from Stage 1.
+
+---
+
+## Stage tracker
+
+Display this banner at every stage transition, and keep `report.md`'s `Stage` row in sync with it:
+
+```
+1️⃣ Environment & Repo [status] · 2️⃣ Bootstrap [status] · 3️⃣ Infrastructure & Deploy [status] · 4️⃣ CI/CD [status]
+```
+
+Where `[status]` is one of: `🔄` (active) · `✅` (done) · `⏳` (pending)
+
+---
+
+## Stage 1 — Environment & Repo
+
+Entirely manual — `plan.md` Stage 1 has the exact commands (prerequisites, environment, repo creation, initial commit). This orchestrator doesn't walk through it step by step; it gates on the outcome only.
+
+Ask:
+
+> "Before we start: have you completed prerequisites, environment setup, created the new repo, and detached this clone from the starter kit's own origin? (**yes** / **no** — if no, see `plan.md` Stage 1 for the exact commands, then come back)"
+
+**Stop and wait.**
+
+- **No** → point to `plan.md` Stage 1, stop here.
+- **Yes** → verify directly (local, read-only — the `pattern-run-and-validate.md` exception):
+
+```bash
+git remote -v
+```
+
+- Still shows `DataArt/adlc-discovery-tool` as origin → not actually detached. Explain, point back to `plan.md` Stage 1's `git remote remove origin` / `git remote add origin` commands, stop.
+- Origin is something else (or absent) → confirmed. Mark Stage 1 `✅` in `report.md`, proceed to Stage 2.
+
+---
+
+## Stage 2 — Bootstrap
+
+### 2.0 — Detect current state
+
+Local, read-only — run directly, no developer round-trip needed:
+
+```bash
+grep -rl "\[\[CLIENT_NAME\]\]" --include="*.md" --include="*.ts" --include="*.vue" --include="*.json" . 2>/dev/null | grep -v "scripts/bootstrap/\|\.claude/skills/bootstrap-client/"
+```
+
+- Non-empty → mechanical sub-phase not (fully) done. Continue to 2.1.
+- Empty → `[[CLIENT_NAME]]` fully resolved already. Ask: "This instance already looks bootstrapped — skip the mechanical setup and jump to the narrative sections?" **Stop and wait.** If confirmed, skip to 2.8. If the developer wants to re-run anyway, continue to 2.1.
+
+Then, for each page below, grep for its anchor text (present = not yet filled):
+
+| Page                                      | Anchor text (present = not yet filled)                               |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| `docs/AI SDLC/01 Process/index.md`        | `[Why a structured problem→solution framework matters for`           |
+| `docs/AI SDLC/02 Capture/index.md`        | `[Known constraints that will shape how discovery actually runs for` |
+| `docs/AI SDLC/03 Problem Space/index.md`  | `[What pain points`                                                  |
+| `docs/AI SDLC/04 Solution Space/index.md` | `[Early signal on where the solution might land`                     |
+
+Build the list of still-unfilled pages for 2.8. Report the split up front if mixed.
+
+### 2.1 — Client name
+
+> "What's the client's name? This replaces `[[CLIENT_NAME]]` everywhere across the docs (~80 occurrences)."
+
+**Stop and wait.**
+
+### 2.2 — Org prefix and deployment region
+
+Derive a suggested `ORG_PREFIX`: lowercase, alphanumeric + hyphens, ≤20 characters — it feeds AWS resource names, IAM role names, and SSM paths.
+
+> "Suggested org prefix: `{slug}` — used in every AWS resource name, IAM role, and SSM path. Accept, or give me a different one?"
+
+**Stop and wait.** Validate against `^[a-z0-9]([a-z0-9-]{0,18}[a-z0-9])?$`.
+
+> "Which AWS region will this deploy to, and what's the short location code for resource names (e.g. `us-east-1` / `ue1`, `eu-west-1` / `euw1`)?"
+
+**Stop and wait.** Validate the location code against `^[a-z0-9]{2,10}$`.
+
+### 2.3 — GitHub org/repo
+
+> "Which GitHub org and repo will this instance live in? (e.g. `AcmeCorp/adlc-discovery-acme`)"
+
+**Stop and wait.**
+
+These values also drive the `[[GITHUB_ORG]]` / `[[GITHUB_REPO]]` find-replace in Step 2.6 — beyond OIDC and CI/CD wiring, they fill in the actual `git clone` command and working-directory instructions in `09 Claude Desktop Setup.md`, so get them right.
+
+If the repo already exists, fetch the numeric IDs the OIDC trust policy needs — apply `pattern-run-and-validate.md`:
+
+```bash
+gh api repos/{org}/{repo} --jq '{repoId: .id, orgId: .owner.id}'
+```
+
+Print this, **stop and wait** for the developer to run it and paste back the JSON. Parse `repoId`/`orgId` from what they paste — do not fetch it yourself.
+
+If the repo doesn't exist yet:
+
+> "Create the repo first: `gh repo create {org}/{repo} --private` (or via github.com), then tell me when it's done and I'll give you the ID-fetch command."
+
+**Stop and wait** until both numeric IDs are confirmed.
+
+### 2.4 — Giscus (comments widget)
+
+> "Before I can wire up comments:
+>
+> 1. Enable **Discussions** on `{org}/{repo}` (repo Settings → General → Features)
+> 2. Install the giscus GitHub App (https://github.com/apps/giscus), scoped to `{org}/{repo}`
+> 3. Create a Discussions category for comments — Announcements format (reuse "ADLC Comments", or pick your own)
+>
+> Tell me once all three are done — or say skip if you want to wire up comments later."
+
+**Stop and wait.**
+
+If confirmed, apply `pattern-run-and-validate.md` for the ID fetch — the repo is private, so giscus.app's own config tool can't see it, that's expected:
+
+```bash
+gh api graphql -f query='
+  query {
+    repository(owner: "{org}", name: "{repo}") {
+      id
+      discussionCategories(first: 10) {
+        nodes { id name }
+      }
+    }
+  }
+'
+```
+
+Print this, **stop and wait** for the developer to run it and paste back the JSON. `repository.id` → `GISCUS_REPO_ID`. Match the category name from above against `discussionCategories.nodes` → that node's `id` → `GISCUS_CATEGORY_ID`.
+
+If skipped, leave both values empty — the script handles missing Giscus values gracefully.
+
+### 2.5 — Confirm before writing anything
+
+> "Here's everything I'll apply:
+>
+> | Value                            |                          |
+> | -------------------------------- | ------------------------ |
+> | `CLIENT_NAME`                    | `{value}`                |
+> | `ORG_PREFIX`                     | `{value}`                |
+> | `AWS_REGION` / `LOCATION_SHORT`  | `{value}` / `{value}`    |
+> | `GITHUB_ORG` / `GITHUB_ORG_ID`   | `{value}` / `{value}`    |
+> | `GITHUB_REPO` / `GITHUB_REPO_ID` | `{value}` / `{value}`    |
+> | `GISCUS_REPO_ID`                 | `{value or "— skipped"}` |
+> | `GISCUS_CATEGORY_ID`             | `{value or "— skipped"}` |
+>
+> Confirm to proceed?"
+
+**Stop and wait for explicit confirmation.** Fill in `report.md`'s "Values Collected" table with these once confirmed.
+
+### 2.6 — Dry run, then apply
+
+Apply `pattern-run-and-validate.md` — print the dry-run command:
+
+```bash
+yarn bootstrap:client --client-name "{value}" --org-prefix {value} \
+  --aws-region {value} --location-short {value} \
+  --github-org {value} --github-org-id {value} \
+  --github-repo {value} --github-repo-id {value} \
+  [--giscus-repo-id {value}] [--giscus-category-id {value}] \
+  --dry-run
+```
+
+**Stop and wait** for the developer to run it and paste back the output. Read the pasted file/replacement counts as-is — don't re-derive or summarize them yourself. Ask:
+
+> "This will change `{N}` files (`{M}` replacements) plus the 3 `project.json` files, scaffold `.env.dev` files where they don't already exist, and replace `README.md` with `CONTRIBUTING.md`'s content (removing `CONTRIBUTING.md`). Apply for real?"
+
+**Stop and wait.** If confirmed, print the exact same command with `--dry-run` removed, **stop and wait** for the developer to run it and paste back the output.
+
+If the pasted output shows an error (invalid input, missing required value), relay it directly — do not paraphrase or guess at a fix. Return to whichever step collects that value. Mark 2.6 `✅` in `report.md` once the real apply's output is pasted back clean.
+
+### 2.7 — Report (mechanical sub-phase)
+
+Summarize what changed, from the pasted script output. Then note:
+
+- `CF_DISTRIBUTION_ID` stays blank in the scaffolded `.env.dev` files — the one genuinely AWS-assigned value, known only after Stage 3.
+- Do not suggest a commit yet — the narrative sub-phase below still has to run or be explicitly skipped first, so the developer commits once with everything.
+
+### 2.8 — Personalized narrative sections (optional)
+
+Four pages each carry a placeholder "story" section:
+
+| Page                                      | Section                                      | Hedge required?                                                  |
+| ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| `docs/AI SDLC/01 Process/index.md`        | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
+| `docs/AI SDLC/02 Capture/index.md`        | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
+| `docs/AI SDLC/03 Problem Space/index.md`  | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
+| `docs/AI SDLC/04 Solution Space/index.md` | Early Direction                              | **Yes** — same reason                                            |
+
+Only ask about the subset 2.0 flagged as still-unfilled. Optional beyond that:
+
+> "{N} docs page(s) still have placeholder 'story' sections — {list}. Want to fill these in now, or skip and leave them as placeholders for later?"
+
+**Stop and wait.** If skipped, go straight to Completion — leave the placeholders and callouts exactly as they are. Do not fabricate an answer.
+
+If proceeding, ask **one** open-ended question, not four:
+
+> "Tell me the engagement story — why are we here? What's driving this for `{CLIENT_NAME}`: how it came about, what they're hoping to get out of it, and anything they've already told you about where it hurts or where they'd like to end up."
+
+**Stop and wait.**
+
+### 2.9 — Derive and confirm each section
+
+Not a shell command — Claude drafts these directly (write-confirm pattern), same as any other doc content in this repo:
+
+| Page           | Facet to extract                                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Process        | Why a structured problem→solution framework matters here — what they're trying to achieve, why not jump straight to a fix                  |
+| Capture        | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
+| Problem Space  | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
+| Solution Space | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
+
+If the story doesn't cover a page, leave its placeholder as-is — don't force a facet out of material that isn't there.
+
+1. Draft 2–4 sentences pulling that page's facet from the story. Match this repo's tone — short sentences, no marketing language. For Problem Space/Solution Space, the prose itself should read as tentative, not just the callout above it.
+2. Write the file.
+3. Say: "Updated `{page}`'s `{section}` section. Review — any corrections?"
+4. **Stop and wait.** Repeat until confirmed.
+5. Move to the next in-scope page. Update `report.md`'s "Narrative Sections" table as each is confirmed.
+
+Once done (or all skipped), mark Stage 2 `✅` in `report.md`, proceed to Stage 3.
+
+---
+
+## Stage 3 — Infrastructure & Deploy
+
+Every command below is `pattern-run-and-validate.md` — print, stop and wait, developer runs and pastes back, validate, update `report.md`.
+
+### 3.1 — AWS SSO
+
+This stage's commands run in the developer's own terminal, which may not be the one that had Stage 1's `source .env` run in it — `.env` may not even exist yet if Stage 1 skipped that step:
+
+```bash
+ls .env || cp .env.example .env   # create it if missing — then fill in AWS_PROFILE before continuing
+source .env
+aws sso login --profile "$AWS_PROFILE"
+aws sts get-caller-identity --profile "$AWS_PROFILE"
+```
+
+Expect a JSON identity block back. If it errors with "Unable to resolve AWS account to use" at any later step in this stage, this is almost always why — `.env` never created, or `$AWS_PROFILE` unset in that terminal. Send them back here rather than guessing at a different fix.
+
+### 3.2 — OIDC provider check, provisioning, outputs, and secrets
+
+The GitHub Actions OIDC provider (`token.actions.githubusercontent.com`) is an AWS-account-wide singleton — `infra:provision:dev` fails with `EntityAlreadyExistsException` if it already exists in this account and `CREATE_OIDC_PROVIDER` is left at its default `true`. Check before provisioning:
+
+```bash
+aws iam list-open-id-connect-providers --profile "$AWS_PROFILE"
+```
+
+**Stop and wait** for the pasted output.
+
+- No `token.actions.githubusercontent.com` ARN in the list → fresh account, nothing to do — `CREATE_OIDC_PROVIDER` stays unset (defaults to `true`) in `apps/infra/.env.dev`. Proceed.
+- ARN present → another client/org sharing this account already provisioned it. Tell the developer to set `CREATE_OIDC_PROVIDER=false` in `apps/infra/.env.dev` themselves (a real config edit — don't ask them to paste it into chat for Claude to write), confirm once done, then proceed. Note this in `report.md`'s "Values Collected" table.
+
+```bash
+yarn nx run infra:bootstrap:dev
+yarn nx run infra:provision:dev
+yarn nx run infra:output:dev
+```
+
+`infra:bootstrap` and `infra:provision` are guarded — always developer-run, never Claude, no exceptions. After the developer pastes `infra:output:dev`'s printed values, tell them to copy the relevant ones into `apps/lambda-auth/.env.dev` and `apps/docs-web/.env.dev` themselves (file edits with real secrets/IDs — let the developer do this edit, don't ask them to paste secret values into the chat for Claude to write).
+
+Confirm `CF_DISTRIBUTION_ID` specifically — it's the one value the scaffolded `.env.dev` files in Stage 2 were left blank for (see 2.7), and it must be set in **both** files, not just one, or `env-push` ships a partial config:
+
+- `apps/lambda-auth/.env.dev` → `CF_DISTRIBUTION_ID=` (restores the CloudFront association on deploy)
+- `apps/docs-web/.env.dev` → `CF_DISTRIBUTION_ID=` (cache invalidation on deploy)
+
+**Stop and wait** for the developer to confirm both are filled before continuing to `env-push`.
+
+```bash
+yarn nx run infra:env-push:dev
+yarn nx run lambda-auth:env-push:dev
+yarn nx run site:env-push:dev
+```
+
+```bash
+cp apps/lambda-auth/.secrets.example apps/lambda-auth/.secrets.dev   # if it doesn't already exist
+node -e "const{createHash}=require('crypto');console.log(createHash('sha256').update('your-password').digest('hex'))"
+```
+
+Tell the developer to paste the printed hash into `DOCS_BASIC_AUTH_HASH=` in `apps/lambda-auth/.secrets.dev` themselves, then:
+
+```bash
+yarn nx run lambda-auth:sm-push:dev
+```
+
+### 3.3 — Deployment
+
+```bash
+yarn nx run lambda-auth:deploy:dev
+yarn nx run site:deploy:dev
+```
+
+Auth handler first — restores the basic-auth gate before site content becomes reachable (see `docs/Engineering Guide/Infrastructure/02 Deploy Lifecycle.md`). Do not reorder these.
+
+Mark Stage 3 `✅` in `report.md`, proceed to Stage 4.
+
+---
+
+## Stage 4 — CI/CD
+
+`pattern-run-and-validate.md` throughout.
+
+```bash
+yarn nx run infra:output-ci:dev
+```
+
+**Stop and wait** for the pasted `DeployRoleArn`. Then:
+
+```bash
+gh api repos/{org}/{repo}/environments/dev -X PUT
+
+gh variable set IAM_ROLE_ARN --env dev --repo {org}/{repo} --body "{value from infra:output-ci:dev}"
+gh variable set AWS_REGION --env dev --repo {org}/{repo} --body "{value from apps/infra/.env.dev}"
+gh variable set SITE_SSM_ENV_PARAM --env dev --repo {org}/{repo} --body "/{org_prefix}/dev/docs/site/env"
+gh variable set LAMBDA_AUTH_SSM_ENV_PARAM --env dev --repo {org}/{repo} --body "/{org_prefix}/dev/docs/lambda-auth/env"
+```
+
+**Stop and wait** for confirmation each ran cleanly. Mark Stage 4 `✅` in `report.md`.
+
+---
+
+## Completion
+
+Summarize `report.md`'s final state — which stages ran this session vs. were already done from a prior run, which narrative sections were filled vs. left as placeholders.
+
+Suggest a commit message reflecting what actually changed:
+
+> `chore: bootstrap client — {CLIENT_NAME}`
+
+**Stop and wait** for the developer to confirm the commit. This skill never commits or pushes on its own — `git push` is a guarded command.

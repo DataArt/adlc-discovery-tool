@@ -6,7 +6,7 @@ After a stage skill publishes an evidence-bearing artifact, or the root assemble
 
 ## When to trigger
 
-- After `discovery-investigate-vision-current-state` publishes or updates a Current State page
+- After `discovery-investigate-capture-current-state` publishes or updates a Current State page
 - After `discovery-investigate-problem-sdlc-domains` publishes or updates an SDLC Domain page
 - After `discovery-investigate-problem-diagnose` publishes or updates a Problems registry entry (including a status move, e.g. 🟡 → 🟢)
 - After `discovery-investigate-goals-solution-goals` publishes or updates a Solution Goals draft

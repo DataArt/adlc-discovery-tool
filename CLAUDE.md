@@ -66,7 +66,7 @@ Dev phases: `/dev-plan` → `/dev-implement` → `/dev-test` → `/dev-document`
 
 Design phases: `/design-frame` → `/design-research` → `/design-elaborate` → `/design-solution` (WAF gate: `/design-review`) → `/design-review-gate` → (`/design-address-feedback`) → `/design-publish`
 
-Discovery phases: `/discovery-investigate` (loops `/discovery-investigate-vision-current-state` → `/discovery-investigate-problem-sdlc-domains` → `/discovery-investigate-problem-diagnose` → `/discovery-investigate-goals-solution-goals` per-domain until coverage is clear) → `/discovery-solution` (stub) → `/discovery-roadmap` (stub)
+Discovery phases: `/discovery-investigate` (loops `/discovery-investigate-capture-current-state` → `/discovery-investigate-problem-sdlc-domains` → `/discovery-investigate-problem-diagnose` → `/discovery-investigate-goals-solution-goals` per-domain until coverage is clear) → `/discovery-solution` (stub) → `/discovery-roadmap` (stub)
 
 Skill phases: `/skill-reflect` → `/skill-triage` → `/skill-new` → `/skill-promote`
 

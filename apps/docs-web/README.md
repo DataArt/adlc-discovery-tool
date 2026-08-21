@@ -1,7 +1,7 @@
 # docs-web
 
 VitePress 1.x docs site serving `docs/` as the ADLC Discovery Tool documentation — AI SDLC
-content (Problem Space, Solution Space, Vision), Target Architecture (HLD), and Engineering
+content (Problem Space, Solution Space, Capture), Target Architecture (HLD), and Engineering
 Guide. Mermaid diagram rendering included.
 
 ```mermaid

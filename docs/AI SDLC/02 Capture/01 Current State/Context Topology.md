@@ -22,6 +22,6 @@ This is raw baseline material, not synthesis. Diagnosis and root-cause analysis 
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                                    |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 4 (People & Context)](</AI%20SDLC/02%20Vision/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                                     |
+| ------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 4 (People & Context)](</AI%20SDLC/02%20Capture/WS%204%20(People%20%26%20Context)%20-%20Date%20TBD/Outcomes.md>) |

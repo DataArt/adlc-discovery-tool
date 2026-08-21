@@ -88,7 +88,7 @@ Then, for each page below, grep for its anchor text (present = not yet filled):
 | Page                                      | Anchor text (present = not yet filled)                               |
 | ----------------------------------------- | -------------------------------------------------------------------- |
 | `docs/AI SDLC/01 Process/index.md`        | `[Why a structured problem→solution framework matters for`           |
-| `docs/AI SDLC/02 Vision/index.md`         | `[Known constraints that will shape how discovery actually runs for` |
+| `docs/AI SDLC/02 Capture/index.md`        | `[Known constraints that will shape how discovery actually runs for` |
 | `docs/AI SDLC/03 Problem Space/index.md`  | `[What pain points`                                                  |
 | `docs/AI SDLC/04 Solution Space/index.md` | `[Early signal on where the solution might land`                     |
 
@@ -216,7 +216,7 @@ Four pages each carry a placeholder "story" section:
 | Page                                      | Section                                      | Hedge required?                                                  |
 | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
 | `docs/AI SDLC/01 Process/index.md`        | Why This Matters for `{CLIENT_NAME}`         | No                                                               |
-| `docs/AI SDLC/02 Vision/index.md`         | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
+| `docs/AI SDLC/02 Capture/index.md`        | Finding `{CLIENT_NAME}`'s Improvement Points | No                                                               |
 | `docs/AI SDLC/03 Problem Space/index.md`  | Entering Hypothesis                          | **Yes** — this is pre-workshop anecdote, not a validated finding |
 | `docs/AI SDLC/04 Solution Space/index.md` | Early Direction                              | **Yes** — same reason                                            |
 
@@ -239,7 +239,7 @@ Not a shell command — Claude drafts these directly (write-confirm pattern), sa
 | Page           | Facet to extract                                                                                                                           |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Process        | Why a structured problem→solution framework matters here — what they're trying to achieve, why not jump straight to a fix                  |
-| Vision         | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
+| Capture        | Constraints that'll shape how discovery actually runs — industry specifics, team structure, prior AI initiatives, stakeholder availability |
 | Problem Space  | Pain points already mentioned — sales conversations, an RFP, public information                                                            |
 | Solution Space | Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations                                 |
 

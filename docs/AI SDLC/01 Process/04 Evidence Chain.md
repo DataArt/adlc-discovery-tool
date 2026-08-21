@@ -6,7 +6,7 @@ _The engagement is a data pipeline: one primary source, one append-only log, eve
 flowchart LR
     IN["🗯️ Strategic Intent\n──────\nLeadership intent\nCaptured upfront, not yet evidenced"]
 
-    subgraph VisionStage["👁️ Vision — Establish the Vision"]
+    subgraph CaptureStage["👁️ Capture — Capture the Current State"]
         direction TB
         WS["Workshops\n──────\nDiagnoses: Challenge + Problem Space\nBaseline: Current State\nValidates: Strategic Intent"]
         CS["Current State\n──────\nProcess\nArchitecture\nContext Topology\nAI Adoption\nMetrics\nTool Inventory\nInhouse Initiatives"]
@@ -37,7 +37,7 @@ flowchart LR
     class IN,SG go
     class SO so
 
-    style VisionStage fill:#FFFBEB,stroke:#B45309,color:#B45309
+    style CaptureStage fill:#FFFBEB,stroke:#B45309,color:#B45309
 ```
 
 ## Pipeline Principles

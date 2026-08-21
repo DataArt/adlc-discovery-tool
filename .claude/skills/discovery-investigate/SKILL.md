@@ -4,7 +4,7 @@ metadata:
   version: 0.1.0
 description: >
   Investigate phase of the discovery engagement (/discovery-investigate or /discovery orchestrator).
-  Loops Vision → Problem (SDLC Domains → Diagnose) → Goals per-domain until Problem Space coverage is clear, per 01 Process/07 Workflows/03 Investigate/00 Orchestration.md.
+  Loops Capture → Problem (SDLC Domains → Diagnose) → Goals per-domain until Problem Space coverage is clear, per 01 Process/07 Workflows/03 Investigate/00 Orchestration.md.
 ---
 
 The engagement lead wants to run an Investigate-phase session. Here is their input:
@@ -41,12 +41,12 @@ Ask, unless `$ARGUMENTS` already makes it obvious:
 
 ## Step 3 — Run the matching stage skill
 
-| Session type                  | Stage skill                                  |
-| ----------------------------- | -------------------------------------------- |
-| (a) Workshop                  | `discovery-investigate-vision-current-state` |
-| (b) SDLC Domain update        | `discovery-investigate-problem-sdlc-domains` |
-| (c) Diagnose/update a Problem | `discovery-investigate-problem-diagnose`     |
-| (d) Early Solution Goal       | `discovery-investigate-goals-solution-goals` |
+| Session type                  | Stage skill                                   |
+| ----------------------------- | --------------------------------------------- |
+| (a) Workshop                  | `discovery-investigate-capture-current-state` |
+| (b) SDLC Domain update        | `discovery-investigate-problem-sdlc-domains`  |
+| (c) Diagnose/update a Problem | `discovery-investigate-problem-diagnose`      |
+| (d) Early Solution Goal       | `discovery-investigate-goals-solution-goals`  |
 
 Follow that skill exactly. Each stage skill applies its own `pattern-do-report-commit.md` (Changelog → `02 Investigate.md` row → `05 Report Log.md` row → commit) — do not duplicate that reporting here.
 
@@ -54,7 +54,7 @@ A single real-world session often chains stages — a workshop with enough signa
 
 > "Does this session's evidence also move the next stage? (e.g. does this Current State update give an SDLC Domain something to diagnose against?)"
 
-If yes, run the next matching stage skill in the same session, in order (Vision → Problem/SDLC Domains → Problem/Diagnose → Goals) — never skip backward.
+If yes, run the next matching stage skill in the same session, in order (Capture → Problem/SDLC Domains → Problem/Diagnose → Goals) — never skip backward.
 
 ---
 

@@ -34,7 +34,7 @@ export default withMermaid(
 
       nav: [
         { text: 'Process', link: '/AI SDLC/01 Process/' },
-        { text: 'Vision', link: '/AI SDLC/02 Vision/' },
+        { text: 'Capture', link: '/AI SDLC/02 Capture/' },
         { text: 'Problem', link: '/AI SDLC/03 Problem Space/' },
         { text: 'Goals', link: '/AI SDLC/04 Goals/' },
         { text: 'Solution', link: '/AI SDLC/05 Solution Space/' },
@@ -50,7 +50,7 @@ export default withMermaid(
           { text: 'Solution Space', items: scanSection('AI SDLC/05 Solution Space') },
         ],
         '/AI SDLC/06 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/06 Roadmap') }],
-        '/AI SDLC/02 Vision/': scanSection('AI SDLC/02 Vision'),
+        '/AI SDLC/02 Capture/': scanSection('AI SDLC/02 Capture'),
         '/Target Architecture (HLD)/': scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
         '/System Architecture (LLD)/': scanSection('System Architecture (LLD)'),
         '/Engineering Guide/': scanSection('Engineering Guide'),

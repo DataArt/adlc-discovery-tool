@@ -28,7 +28,7 @@ Navigation index for this repository's documentation.
 
 A DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-first workflow adoption across [[CLIENT_NAME]]. Covers problem space analysis, solution framing, and structured discovery workshops.
 
-→ [AI SDLC — Vision](AI%20SDLC/02%20Vision/00%20Overview.md)
+→ [AI SDLC — Capture](AI%20SDLC/02%20Capture/00%20Overview.md)
 → [AI SDLC — Process](AI%20SDLC/01%20Process/01%20Overview.md) — the Goals·Problem·Solution·Milestones facilitation arc used to run every workshop session
 → [AI SDLC — Goals Overview](AI%20SDLC/04%20Goals/01%20Overview.md) — Strategic Intent (upfront) and Solution Goals (grounded and re-scoped once Problems are evidenced)
 → [AI SDLC — Solution Space Overview](AI%20SDLC/05%20Solution%20Space/01%20Overview.md) — the solution's Target State → Pilot → Scale → Evolve stages, with draft ideas grounded in Problem Space findings

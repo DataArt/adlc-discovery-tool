@@ -32,7 +32,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — The Legacy Wall](/The%20Story/03%20Challenges.md#the-legacy-wall) · [Problem Space — Technical Design](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/06%20Technical%20Design.md)
 
-**Baseline:** [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+**Baseline:** [Current State — Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md) · [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md)
 
 - A single service can span multiple systems and tech stacks
 - What AI-assisted impact analysis requires: dependency knowledge, service maps, accurate documentation
@@ -55,7 +55,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — Vendor Lock-In](/The%20Story/03%20Challenges.md#vendor-lock-in) · [Problem Space — Implementation](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/10%20Implementation.md)
 
-**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md)
 
 - Candidate hypothesis: commit or PR volume may be up since AI coding tools were introduced, while lead time hasn't moved proportionally
 - Coding-step gains only show up in delivery if the rest of the pipeline absorbs the extra throughput

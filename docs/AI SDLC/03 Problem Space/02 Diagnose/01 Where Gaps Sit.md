@@ -3,7 +3,7 @@
 _The path one piece of work takes from idea to production, and where it actually breaks down. Not only time — a stage can lose time, but it can also lose quality, coverage, or ownership without losing a single minute on the clock._
 
 > [!WARNING] Populated During Engagement
-> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
+> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
 
 ---
 
@@ -69,7 +69,7 @@ _[DESCRIBE THE REPRESENTATIVE TASK — a real, recent, mid-sized piece of work, 
 
 ---
 
-The stage-by-stage detail behind this baseline is gathered in [SDLC Domains](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) — each stage above maps to one or more SDLC Domain pages, which hold the underlying evidence. Named problems drawn from this picture are tracked in [Problems](./02%20Problems.md).
+The stage-by-stage detail behind this baseline is gathered in [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) — each stage above maps to one or more SDLC Domain pages, which hold the underlying evidence. Named problems drawn from this picture are tracked in [Problems](./02%20Problems.md).
 
 ---
 

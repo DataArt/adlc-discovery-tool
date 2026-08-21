@@ -6,7 +6,7 @@ outline: [2, 3]
 
 > [!TIP] Three Phases, Six Stages, One Living System
 >
-> This engagement runs three phases — Investigate (Vision → Problem → Goals), Solution (Target State → Pilot → Scale → Evolve), Roadmap (no stages of its own) — see [02 Terminology](./02%20Terminology.md) if "phase" and "stage" aren't already clear. Every stage is a living artifact that evolves as the team learns, not a static document. The process is inspired by [DataArt's Connect Framework](./08%20Reference/01%20Connect%20Framework.md) (Goals → Problem Space → Solution Space → Milestones) — adapted with an upfront Vision stage, Goals split into a raw upfront form (Strategic Intent) and a grounded, re-scoped form (Solution Goals), and a Target State → Pilot → Scale → Evolve solution loop. See [Connect Framework](./08%20Reference/01%20Connect%20Framework.md) for the original methodology and exactly how this adapts it.
+> This engagement runs three phases — Investigate (Capture → Problem → Goals), Solution (Target State → Pilot → Scale → Evolve), Roadmap (no stages of its own) — see [02 Terminology](./02%20Terminology.md) if "phase" and "stage" aren't already clear. Every stage is a living artifact that evolves as the team learns, not a static document. The process is inspired by [DataArt's Connect Framework](./08%20Reference/01%20Connect%20Framework.md) (Goals → Problem Space → Solution Space → Milestones) — adapted with an upfront Capture stage, Goals split into a raw upfront form (Strategic Intent) and a grounded, re-scoped form (Solution Goals), and a Target State → Pilot → Scale → Evolve solution loop. See [Connect Framework](./08%20Reference/01%20Connect%20Framework.md) for the original methodology and exactly how this adapts it.
 
 ## Process Grain
 
@@ -19,9 +19,9 @@ flowchart LR
     subgraph InvestigateGroup["🔍 Investigate: What's driving this, what's broken, and what's worth solving?"]
         direction TB
         G["🎯 Goals\nWhat's evidenced and worth solving?"]
-        V["👁️ Vision\nWhat's actually happening today?"]
+        C["👁️ Capture\nWhat's actually happening today?"]
         P["❓ Problem\nWhat is broken, and why?"]
-        V --> P --> G
+        C --> P --> G
     end
 
     subgraph SolutionGroup["🔧 Solution: What would change the outcome — not just the speed?"]
@@ -37,13 +37,13 @@ flowchart LR
 
     R["🗺️ Roadmap\nWhat's the phased plan?"]
 
-    IN -.->|"informs"| V
+    IN -.->|"informs"| C
     IN -.->|"grounds + re-scopes"| G
     IN -.->|"anchors"| TSt
     InvestigateGroup --> SolutionGroup --> R
 
     classDef intent fill:#F59E0B,stroke:#B45309,color:#000
-    classDef vision fill:#8B5CF6,stroke:#5B21B6,color:#fff
+    classDef capture fill:#8B5CF6,stroke:#5B21B6,color:#fff
     classDef problem fill:#EF4444,stroke:#B91C1C,color:#fff
     classDef goals fill:#10B981,stroke:#047857,color:#fff
     classDef target fill:#8B5CF6,stroke:#5B21B6,color:#fff
@@ -53,7 +53,7 @@ flowchart LR
     classDef roadmap fill:#3B82F6,stroke:#1D4ED8,color:#fff
 
     class IN intent
-    class V vision
+    class C capture
     class P problem
     class G goals
     class TSt target
@@ -66,7 +66,7 @@ flowchart LR
     style SolutionGroup fill:#EEF2FF,stroke:#6366F1,color:#4338CA
 ```
 
-Strategic Intent sets the target upfront, raw, before Investigate's stage loop even starts. Vision surfaces the raw material and validates it. Problem gets diagnosed. Goals grounds Intent and re-scopes it against that evidence, in one step, producing Solution Goals. Solution turns Intent and Goals into a concrete Target State, proves one piece of it as Pilot, then extends and revises what worked through Scale → Evolve. Roadmap is the settled shape the engagement converges on.
+Strategic Intent sets the target upfront, raw, before Investigate's stage loop even starts. Capture surfaces the raw material and validates it. Problem gets diagnosed. Goals grounds Intent and re-scopes it against that evidence, in one step, producing Solution Goals. Solution turns Intent and Goals into a concrete Target State, proves one piece of it as Pilot, then extends and revises what worked through Scale → Evolve. Roadmap is the settled shape the engagement converges on.
 
 The process applies at every scale: to the engagement as a whole, to each workshop day, and to each individual session. The arc is the same; only the grain changes.
 
@@ -79,13 +79,13 @@ The process applies at every scale: to the engagement as a whole, to each worksh
 > [!NOTE] Living Pages
 > This page describes the process itself and does not change during the engagement. Each stage below has its own home holding today's best understanding — a placeholder at the start, filled in and revised as workshops progress. For the concrete, step-by-step mechanics of how each stage actually moves, see [Workflows](./07%20Workflows/01%20Initiation.md).
 
-### 👁️ Vision — Capture the Current State
+### 👁️ Capture — Capture the Current State
 
 > **What's actually happening today, and where is delivery time being lost?**
 
-Discovery workshops that build a shared, evidenced picture of today's SDLC — process, architecture, context topology, AI adoption, metrics, tooling. Current State only: Vision doesn't set a target state, propose solutions, or draft goals — that's [Goals](#-goals) and [Solution](#-solution)'s job, once this evidence exists. This is the mechanism that feeds Problem directly and validates Strategic Intent along the way: the same workshops that diagnose root causes confirm, reorder, or cut what leadership stated upfront. Strategic Intent is captured before Vision starts, not surfaced by it — but nothing in it is treated as final until Vision validates it.
+Discovery workshops that build a shared, evidenced picture of today's SDLC — process, architecture, context topology, AI adoption, metrics, tooling. Current State only: Capture doesn't set a target state, propose solutions, or draft goals — that's [Goals](#-goals) and [Solution](#-solution)'s job, once this evidence exists. This is the mechanism that feeds Problem directly and validates Strategic Intent along the way: the same workshops that diagnose root causes confirm, reorder, or cut what leadership stated upfront. Strategic Intent is captured before Capture starts, not surfaced by it — but nothing in it is treated as final until Capture validates it.
 
-→ [02 Vision](/AI%20SDLC/02%20Vision/) for the workshop programme and coverage tracker. → [Investigate workflow](./07%20Workflows/03%20Investigate/00%20Orchestration.md) for how a workshop cycle actually runs.
+→ [02 Capture](/AI%20SDLC/02%20Capture/) for the workshop programme and coverage tracker. → [Investigate workflow](./07%20Workflows/03%20Investigate/00%20Orchestration.md) for how a workshop cycle actually runs.
 
 ### ❓ Problem
 

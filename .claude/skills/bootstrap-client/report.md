@@ -46,7 +46,7 @@ Status values : ⏳ Pending · 🔄 Active · ✅ Done · ⚠️ Blocked · ⏭�
 | Page           | Status |
 | -------------- | ------ |
 | Process        | ⏳     |
-| Vision         | ⏳     |
+| Capture        | ⏳     |
 | Problem Space  | ⏳     |
 | Solution Space | ⏳     |
 

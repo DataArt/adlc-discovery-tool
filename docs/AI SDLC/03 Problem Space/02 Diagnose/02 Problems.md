@@ -3,7 +3,7 @@
 _The problems driving this engagement, ranked by impact on delivery speed. The one page in [Problem Space](../) that changes as new evidence lands._
 
 > [!WARNING] Populated During Engagement
-> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Vision/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
+> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
 
 ---
 

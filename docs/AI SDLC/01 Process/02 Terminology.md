@@ -14,10 +14,10 @@ _The three words every other page in this section uses without redefining: **Pha
 flowchart LR
     subgraph InvestigatePhase["🔍 Investigate phase — Gate 0 to Gate 1"]
         direction TB
-        subgraph VisionStage["👁️ Vision stage"]
+        subgraph CaptureStage["👁️ Capture stage"]
             direction LR
-            VA1["Workshops\nsession cycle, evidenced"]
-            VA2["Current State\ntoday's SDLC, evidenced"]
+            CA1["Workshops\nsession cycle, evidenced"]
+            CA2["Current State\ntoday's SDLC, evidenced"]
         end
         subgraph ProblemStage["❓ Problem stage"]
             direction LR
@@ -29,7 +29,7 @@ flowchart LR
             GA1["Intent\nraw trigger, upfront"]
             GA2["Solution\ngrounded, re-scoped goals"]
         end
-        VisionStage --> ProblemStage --> GoalsStage
+        CaptureStage --> ProblemStage --> GoalsStage
     end
 
     subgraph SolutionPhase["🔧 Solution phase — Gate 1 to Gate 2"]
@@ -61,7 +61,7 @@ flowchart LR
 
     InvestigatePhase --> SolutionPhase --> RoadmapPhase
 
-    classDef visionA fill:#F5F3FF,stroke:#8B5CF6,color:#1E293B
+    classDef captureA fill:#F5F3FF,stroke:#8B5CF6,color:#1E293B
     classDef problemA fill:#FEF2F2,stroke:#EF4444,color:#1E293B
     classDef goalsA fill:#ECFDF5,stroke:#10B981,color:#1E293B
     classDef targetA fill:#F5F3FF,stroke:#8B5CF6,color:#1E293B
@@ -70,7 +70,7 @@ flowchart LR
     classDef evolveA fill:#ECFDF5,stroke:#10B981,color:#1E293B
     classDef roadmapA fill:#DBEAFE,stroke:#3B82F6,color:#1E293B
 
-    class VA1,VA2 visionA
+    class CA1,CA2 captureA
     class PA1,PA2 problemA
     class GA1,GA2 goalsA
     class TSA targetA
@@ -83,7 +83,7 @@ flowchart LR
     style SolutionPhase fill:#EEF2FF,stroke:#6366F1,color:#4338CA
     style RoadmapPhase fill:#EFF6FF,stroke:#3B82F6,color:#1D4ED8
 
-    style VisionStage fill:#EDE9FE,stroke:#8B5CF6,color:#5B21B6
+    style CaptureStage fill:#EDE9FE,stroke:#8B5CF6,color:#5B21B6
     style ProblemStage fill:#FEE2E2,stroke:#EF4444,color:#B91C1C
     style GoalsStage fill:#D1FAE5,stroke:#10B981,color:#047857
 
@@ -97,7 +97,7 @@ _Target State → Pilot → Scale → Evolve is a closed loop in practice — Ev
 
 | Phase           | Stage        | Artifacts                                            | Lives in                                                                                                                                      |
 | --------------- | ------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Investigate** | Vision       | Workshops, Current State                             | [02 Vision](/AI%20SDLC/02%20Vision/)                                                                                                          |
+| **Investigate** | Capture      | Workshops, Current State                             | [02 Capture](/AI%20SDLC/02%20Capture/)                                                                                                        |
 | **Investigate** | Problem      | SDLC Domains, Diagnose (Problems registry)           | [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/)                                                                                          |
 | **Investigate** | Goals        | Intent (Strategic Intent), Solution (Solution Goals) | [04 Goals](/AI%20SDLC/04%20Goals/)                                                                                                            |
 | **Solution**    | Target State | Target State                                         | [05 Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md)                                                   |
@@ -108,6 +108,6 @@ _Target State → Pilot → Scale → Evolve is a closed loop in practice — Ev
 
 ## Reading the Stage Order
 
-**A stage is a folder, not a time slice.** Vision → Problem → Goals reads like a strict sequence, and mostly runs that way — but it isn't a hard rule. [Investigate — Orchestration](./07%20Workflows/03%20Investigate/00%20Orchestration.md) has Problem and Goals looping back into each other per domain, and Goals' Intent artifact is captured before Vision even starts, at Gate 0 by [Initiation](./07%20Workflows/01%20Initiation.md) — before the Investigate phase's own loop begins. "Stage" tells you which folder an artifact's page lives in, not when in the phase it gets touched.
+**A stage is a folder, not a time slice.** Capture → Problem → Goals reads like a strict sequence, and mostly runs that way — but it isn't a hard rule. [Investigate — Orchestration](./07%20Workflows/03%20Investigate/00%20Orchestration.md) has Problem and Goals looping back into each other per domain, and Goals' Intent artifact is captured before Capture even starts, at Gate 0 by [Initiation](./07%20Workflows/01%20Initiation.md) — before the Investigate phase's own loop begins. "Stage" tells you which folder an artifact's page lives in, not when in the phase it gets touched.
 
 → [01 Overview](./01%20Overview.md) for how these phases and stages connect end to end. → [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md) for how phases map onto gates and weeks.

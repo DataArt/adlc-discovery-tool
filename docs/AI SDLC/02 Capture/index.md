@@ -1,6 +1,6 @@
-# Vision
+# Capture
 
-Building a shared picture of [[CLIENT_NAME]]'s current state, where it needs to get to, and the solution hypotheses in between — current state, future state, and the drafts and hypotheses that connect them. The workshop programme below is the _mechanism_ that builds this vision, not the goal itself: short, focused sessions that locate where delivery time is lost and where agentic AI could change the outcome, not just accelerate the existing process. Findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) diagnosis and, once validated, [Process](/AI%20SDLC/01%20Process/).
+Building a shared picture of [[CLIENT_NAME]]'s current state, where it needs to get to, and the solution hypotheses in between — current state, future state, and the drafts and hypotheses that connect them. The workshop programme below is the _mechanism_ that builds this picture, not the goal itself: short, focused sessions that locate where delivery time is lost and where agentic AI could change the outcome, not just accelerate the existing process. Findings feed the [Problem Space](/AI%20SDLC/03%20Problem%20Space/) diagnosis and, once validated, [Process](/AI%20SDLC/01%20Process/).
 
 ## Finding [[CLIENT_NAME]]'s Improvement Points
 

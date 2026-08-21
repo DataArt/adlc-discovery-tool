@@ -32,7 +32,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — The Fragmentation](/The%20Story/03%20Challenges.md#the-fragmentation) · [Challenge — The Mental Model Shift](/The%20Story/03%20Challenges.md#the-mental-model-shift) · [Problem Space — Teams & Integration](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/05%20Teams%20%26%20Integration.md)
 
-**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) · [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md)
 
 - How squads are structured: dedicated product squads, shared platform teams, embedded roles
 - Where cross-team friction creates the most delay
@@ -56,7 +56,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — The Drift](/The%20Story/03%20Challenges.md#the-drift) · [Challenge — Inconsistent Topology](/The%20Story/03%20Challenges.md#inconsistent-topology) · [Challenge — Session Amnesia](/The%20Story/03%20Challenges.md#session-amnesia) · [Problem Space — Knowledge Base](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/04%20Knowledge%20Base.md)
 
-**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md)
 
 - Inventory of internal knowledge stores: where knowledge lives today
 - Ownership, governance, and maintenance model

@@ -36,7 +36,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement.md)
 
-**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md)
 
 - Candidate metric set: delivery-lifecycle metrics plus stage-level cycle times (idea → story → design → build → test → release)
 - What data already exists in the team's own tools today
@@ -61,7 +61,7 @@ _Requires Compliance/Security and Finance attendance._
 
 **Diagnoses:** [Challenge — The Governance Gap](/The%20Story/03%20Challenges.md#the-governance-gap) · [Challenge — The Attribution Gap](/The%20Story/03%20Challenges.md#the-attribution-gap) · [Problem Space — Governance](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/09%20Governance.md)
 
-**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md)
+**Baseline:** [Current State — Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md)
 
 - No formal data governance outside regulated-data services is a common starting point; extending it to cover AI tooling is the gap
 - Pragmatic data classification: public / internal / restricted / regulated

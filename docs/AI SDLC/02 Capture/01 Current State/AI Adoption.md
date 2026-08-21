@@ -3,7 +3,7 @@
 > [!WARNING] Populated During Engagement
 > This page is a placeholder until current-state AI-usage evidence exists. Fill in only what's confirmed — from intake conversations, existing documentation [[CLIENT_NAME]] provides, or early discovery workshops.
 
-Where AI tools are actually used across [[CLIENT_NAME]]'s SDLC today — not the target state, not recommendations. Distinct from [Inhouse Initiatives](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md): that page covers a named, owned program, if one exists. This page covers actual usage — organic or sanctioned — whether or not a formal initiative sits behind it.
+Where AI tools are actually used across [[CLIENT_NAME]]'s SDLC today — not the target state, not recommendations. Distinct from [Inhouse Initiatives](/AI%20SDLC/02%20Capture/02%20Inhouse%20Initiatives/Overview.md): that page covers a named, owned program, if one exists. This page covers actual usage — organic or sanctioned — whether or not a formal initiative sits behind it.
 
 ## What Goes Here
 
@@ -24,6 +24,6 @@ This is raw baseline material, not synthesis. Why adoption has or hasn't moved d
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                              |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 2 (Design to Code)](</AI%20SDLC/02%20Vision/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                               |
+| ------ | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 2 (Design to Code)](</AI%20SDLC/02%20Capture/WS%202%20(Design%20to%20Code)%20-%20Date%20TBD/Outcomes.md>) |

@@ -6,7 +6,7 @@ outline: [2, 3]
 
 > Of what we set out to achieve, what's actually evidenced and worth engineering a solution against?
 
-Where [Strategic Intent](./02%20Strategic%20Intent.md) is raw and unshaped, this is the grounded version: achievable within a stated horizon (short/mid/long term), wired to the piece of Intent that justifies it, checked against any [Inhouse Initiative](/AI%20SDLC/02%20Vision/02%20Inhouse%20Initiatives/Overview.md) already running, grounded in [Current State](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) as it actually stands today, and narrowed to what [Problem Space](/AI%20SDLC/03%20Problem%20Space/) has actually evidenced. A goal without a diagnosed problem behind it has no evidence it's the right thing to solve; a goal that duplicates or contradicts an existing internal initiative isn't grounded either; a goal that doesn't check against Current State risks solving something that's already true — this page is where all four filters get applied, in the same step as grounding it. [Solution Space](/AI%20SDLC/05%20Solution%20Space/)'s Target State and coverage matrix are checked against this list, not the raw Intent.
+Where [Strategic Intent](./02%20Strategic%20Intent.md) is raw and unshaped, this is the grounded version: achievable within a stated horizon (short/mid/long term), wired to the piece of Intent that justifies it, checked against any [Inhouse Initiative](/AI%20SDLC/02%20Capture/02%20Inhouse%20Initiatives/Overview.md) already running, grounded in [Current State](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) as it actually stands today, and narrowed to what [Problem Space](/AI%20SDLC/03%20Problem%20Space/) has actually evidenced. A goal without a diagnosed problem behind it has no evidence it's the right thing to solve; a goal that duplicates or contradicts an existing internal initiative isn't grounded either; a goal that doesn't check against Current State risks solving something that's already true — this page is where all four filters get applied, in the same step as grounding it. [Solution Space](/AI%20SDLC/05%20Solution%20Space/)'s Target State and coverage matrix are checked against this list, not the raw Intent.
 
 > [!WARNING] Populated During Engagement
 > This page is a placeholder until Problem Space root causes hold steady. It is drafted once the picture is clear enough to say, with evidence, which pieces of Strategic Intent are achievable, by when, and in what order — then validated with stakeholders alongside the Problem Space findings that support them.
@@ -50,7 +50,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 **Traces to Inhouse Initiative:** Check against any existing knowledge-base or context-ingestion effort — don't stand up a second one.
 
-**Current State Evidence:** [TBD — link to [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) / [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md) showing what context already exists and in what form]
+**Current State Evidence:** [TBD — link to [Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md) / [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md) showing what context already exists and in what form]
 
 **Evidence (Problem Space):** [TBD — Problem Space domain link]
 
@@ -70,7 +70,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 **Traces to Inhouse Initiative:** Respect any tooling standard the initiative has already mandated org-wide.
 
-**Current State Evidence:** [TBD — link to [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md) showing where tools/patterns already diverge across teams]
+**Current State Evidence:** [TBD — link to [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md) showing where tools/patterns already diverge across teams]
 
 **Evidence (Problem Space):** [TBD — Problem Space domain link]
 
@@ -90,7 +90,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 **Traces to Inhouse Initiative:** Build on any existing AI governance policy rather than drafting a parallel one.
 
-**Current State Evidence:** [TBD — link to [Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) / [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md) showing what governance controls, if any, already exist]
+**Current State Evidence:** [TBD — link to [Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) / [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md) showing what governance controls, if any, already exist]
 
 **Evidence (Problem Space):** [TBD — Problem Space domain link]
 
@@ -110,7 +110,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 **Traces to Inhouse Initiative:** Align with any existing cost/observability tooling the initiative already runs.
 
-**Current State Evidence:** [TBD — link to [Tool Inventory](/AI%20SDLC/02%20Vision/01%20Current%20State/Tool%20Inventory.md) showing what cost/usage visibility, if any, already exists]
+**Current State Evidence:** [TBD — link to [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md) showing what cost/usage visibility, if any, already exists]
 
 **Evidence (Problem Space):** [TBD — Problem Space domain link]
 
@@ -130,7 +130,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 **Traces to Inhouse Initiative:** Avoid locking to whatever vendor the initiative already picked, unless that choice is itself the target.
 
-**Current State Evidence:** [TBD — link to [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md) / [Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md) showing how tightly current architecture is already coupled to a specific vendor]
+**Current State Evidence:** [TBD — link to [Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md) / [Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md) showing how tightly current architecture is already coupled to a specific vendor]
 
 **Evidence (Problem Space):** [TBD — Problem Space domain link]
 

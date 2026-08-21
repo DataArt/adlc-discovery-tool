@@ -1,9 +1,9 @@
 # Inhouse Initiatives (Current State)
 
 > [!WARNING] Populated During Engagement
-> This page is a placeholder until intake or early Vision workshops confirm what actually exists. Not every client has this — leave it as "None known" rather than inventing one.
+> This page is a placeholder until intake or early Capture workshops confirm what actually exists. Not every client has this — leave it as "None known" rather than inventing one.
 
-Whether [[CLIENT_NAME]] already has an internal initiative toward AI-assisted delivery, started before this engagement — and if so, what it is, who owns it, and where it stands. This is raw baseline material, same as [Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md), [Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md), and [Context Topology](/AI%20SDLC/02%20Vision/01%20Current%20State/Context%20Topology.md) — not synthesis, not a recommendation.
+Whether [[CLIENT_NAME]] already has an internal initiative toward AI-assisted delivery, started before this engagement — and if so, what it is, who owns it, and where it stands. This is raw baseline material, same as [Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md), [Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md), and [Context Topology](/AI%20SDLC/02%20Capture/01%20Current%20State/Context%20Topology.md) — not synthesis, not a recommendation.
 
 ---
 
@@ -47,6 +47,6 @@ This feeds [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02
 
 _Every change to this page traces to the workshop that produced it — link the session, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                                      |
-| ------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 1 (Upstream & Design)](</AI%20SDLC/02%20Vision/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) |
+| Date   | Change         | Evidence                                                                                                                                       |
+| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Workshop Outcomes — e.g. WS 1 (Upstream & Design)](</AI%20SDLC/02%20Capture/WS%201%20(Upstream%20%26%20Design)%20-%20Date%20TBD/Outcomes.md>) |

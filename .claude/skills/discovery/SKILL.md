@@ -34,7 +34,7 @@ This root delegates to a phase skill per phase; `discovery-investigate` further 
 mindmap
   root((discovery))
     investigate("🔍 discovery-investigate")
-      vision["discovery-investigate-vision-current-state"]
+      capture["discovery-investigate-capture-current-state"]
       domains["discovery-investigate-problem-sdlc-domains"]
       diagnose["discovery-investigate-problem-diagnose"]
       goals["discovery-investigate-goals-solution-goals"]
@@ -95,7 +95,7 @@ Apply `pattern-do-report-commit.md`. Apply `pattern-announce-progress.md`, then:
 
 > Skip if `pattern-coverage-check.md` already reports coverage clear and Gate 1 is closed.
 
-Follow the `/discovery-investigate` skill exactly — it loops its 3 stages (Vision, Problem, Goals) until `pattern-coverage-check.md` reports coverage clear.
+Follow the `/discovery-investigate` skill exactly — it loops its 3 stages (Capture, Problem, Goals) until `pattern-coverage-check.md` reports coverage clear.
 
 On return: apply `pattern-announce-progress.md`, then:
 

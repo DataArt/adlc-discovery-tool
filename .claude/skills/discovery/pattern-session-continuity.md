@@ -1,6 +1,6 @@
 # Pattern: Session Continuity
 
-Applies to every skill in the `discovery` family — the root (`discovery`), every phase skill (`discovery-investigate`, `discovery-solution`, `discovery-roadmap`), and every stage skill beneath them (`discovery-investigate-vision-current-state`, etc.).
+Applies to every skill in the `discovery` family — the root (`discovery`), every phase skill (`discovery-investigate`, `discovery-solution`, `discovery-roadmap`), and every stage skill beneath them (`discovery-investigate-capture-current-state`, etc.).
 
 ## On entry (top of each skill)
 

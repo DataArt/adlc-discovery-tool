@@ -30,7 +30,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 > **Key question:** What does the delivery toolchain actually look like, and where does it add friction rather than confidence?
 
-**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Vision/01%20Current%20State/Architecture.md)
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) · [Current State — Architecture](/AI%20SDLC/02%20Capture/01%20Current%20State/Architecture.md)
 
 - CI/CD stack, pipeline ownership, and current run times
 - Flaky tests and pipeline failures as named delivery constraints
@@ -52,7 +52,7 @@ Anchor on the engagement's central question (see [Goals — Strategic Intent](/A
 
 **Diagnoses:** [Challenge — No Feedback Loop](/The%20Story/03%20Challenges.md#no-feedback-loop) · [Problem Space — Ceremony Overhead](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/07%20Ceremony%20Overhead.md)
 
-**Baseline:** [Current State — Process](/AI%20SDLC/02%20Vision/01%20Current%20State/Process.md)
+**Baseline:** [Current State — Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md)
 
 - Which ceremonies exist because information is missing upstream — and would shrink if earlier SDLC Domains improved
 - The mindset shift required: workflow redesign, not a tool overlay

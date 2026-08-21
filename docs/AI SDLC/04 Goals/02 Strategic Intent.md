@@ -5,7 +5,7 @@
 The raw trigger, captured close to verbatim from whoever's sponsoring this engagement. Usually a blunt statement of spend, ambition, or discomfort — not yet a scored objective, but real enough to be the actual reason budget got approved. This is the sole upfront artifact: no separate "shaping" step between this and what [Solution Goals](./03%20Solution%20Goals.md) does once Problems are diagnosed.
 
 > [!WARNING] Populated During Bootstrap / Kickoff
-> Captured from sales conversations, an RFP, or the kickoff call — before Vision workshops begin. The examples below are illustrative patterns, not [[CLIENT_NAME]]'s actual intent; replace them entirely once real intake happens.
+> Captured from sales conversations, an RFP, or the kickoff call — before Capture workshops begin. The examples below are illustrative patterns, not [[CLIENT_NAME]]'s actual intent; replace them entirely once real intake happens.
 
 ---
 
@@ -19,7 +19,7 @@ Real engagements tend to start from one of a small number of blunt triggers. The
 
 ## Why This Matters
 
-Whatever triggered the engagement shapes what a "win" looks like to the people who approved the budget — even when it's phrased more like a complaint or an ambition than a plan. [Vision](/AI%20SDLC/02%20Vision/) workshops validate this against evidence as they run; [Solution Goals](./03%20Solution%20Goals.md) is where it gets narrowed into what's actually achievable once Problems are diagnosed. If Solution Goals doesn't trace back to something on this page, it's solving a problem nobody with budget authority actually asked about.
+Whatever triggered the engagement shapes what a "win" looks like to the people who approved the budget — even when it's phrased more like a complaint or an ambition than a plan. [Capture](/AI%20SDLC/02%20Capture/) workshops validate this against evidence as they run; [Solution Goals](./03%20Solution%20Goals.md) is where it gets narrowed into what's actually achievable once Problems are diagnosed. If Solution Goals doesn't trace back to something on this page, it's solving a problem nobody with budget authority actually asked about.
 
 ---
 
@@ -29,8 +29,8 @@ _Not yet captured — [[CLIENT_NAME]]'s actual intent is recorded here as intake
 
 ## Changelog
 
-_Captured from intake/kickoff, then confirmed, reordered, or cut as Vision workshops validate it — link the workshop that moved it, not just the intake conversation that first captured it._
+_Captured from intake/kickoff, then confirmed, reordered, or cut as Capture workshops validate it — link the workshop that moved it, not just the intake conversation that first captured it._
 
-| Date   | Change                                                                    | Evidence                                                             |
-| ------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [DATE] | [WHAT CHANGED — e.g. captured from kickoff / confirmed / reordered / cut] | [Intake conversation, or Workshop Outcomes once Vision validates it] |
+| Date   | Change                                                                    | Evidence                                                              |
+| ------ | ------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [DATE] | [WHAT CHANGED — e.g. captured from kickoff / confirmed / reordered / cut] | [Intake conversation, or Workshop Outcomes once Capture validates it] |

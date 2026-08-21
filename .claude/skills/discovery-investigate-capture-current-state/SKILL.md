@@ -1,13 +1,13 @@
 ---
-name: discovery-investigate-vision-current-state
+name: discovery-investigate-capture-current-state
 metadata:
   version: 0.1.0
 description: >
-  Vision stage of Investigate (/discovery-investigate-vision-current-state or /discovery-investigate router).
-  Turns a workshop cycle into Notes, Outcomes, and — once there's enough signal — an updated Current State page. Produces docs/AI SDLC/02 Vision/ artifacts.
+  Capture stage of Investigate (/discovery-investigate-capture-current-state or /discovery-investigate router).
+  Turns a workshop cycle into Notes, Outcomes, and — once there's enough signal — an updated Current State page. Produces docs/AI SDLC/02 Capture/ artifacts.
 ---
 
-The engagement lead wants to run a Vision — Current State session. Here is their input:
+The engagement lead wants to run a Capture — Current State session. Here is their input:
 
 ---
 
@@ -19,13 +19,13 @@ The engagement lead wants to run a Vision — Current State session. Here is the
 
 > 🔁 **Session continuity** (`.claude/skills/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `.claude/skills/discovery-investigate/SKILL.md` and resume from there.
 
-This is the Vision stage of `01 Process/07 Workflows/03 Investigate/01 Vision - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
+This is the Capture stage of `01 Process/07 Workflows/03 Investigate/01 Capture - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
 
 ---
 
 ## Step 1 — Identify the workshop
 
-Read `docs/AI SDLC/02 Vision/00 Overview.md`'s coverage tracker.
+Read `docs/AI SDLC/02 Capture/00 Overview.md`'s coverage tracker.
 
 - If `$ARGUMENTS` names a workshop (e.g. "WS3"), use it.
 - Otherwise, if DataArt already has context for an unrun workshop, offer the internal survey pass first: synthesize past engagement notes/artifacts into a working draft (confirmed / open / needs a workshop) before presenting it.
@@ -71,7 +71,7 @@ Only proceed if this session surfaced enough signal to justify it — not every 
 
 > "Does this session's evidence justify updating Current State? If so, which page(s) — Process, Architecture, Context Topology, AI Adoption, Metrics, Tool Inventory, or Inhouse Initiatives?"
 
-If yes: draft/update the named page(s) under `docs/AI SDLC/02 Vision/01 Current State/`, wired to this workshop specifically (not a generic citation). Apply `.claude/skills/discovery/pattern-write-confirm.md`.
+If yes: draft/update the named page(s) under `docs/AI SDLC/02 Capture/01 Current State/`, wired to this workshop specifically (not a generic citation). Apply `.claude/skills/discovery/pattern-write-confirm.md`.
 
 ---
 

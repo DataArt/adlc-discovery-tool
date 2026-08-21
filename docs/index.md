@@ -13,8 +13,8 @@ hero:
     question to proven pilot.
   actions:
     - theme: brand
-      text: Establish the Vision
-      link: /AI SDLC/02 Vision/
+      text: Capture the Current State
+      link: /AI SDLC/02 Capture/
     - theme: alt
       text: Diagnose the Problems
       link: /AI SDLC/03 Problem Space/01 Overview

@@ -12,8 +12,11 @@ See `docs/Engineering Guide/01 Conventions.md`.
 
 **Critical — violating either of these is a hard stop:**
 
-- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:provision`, `git push`
+- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:provision`
+- **`git push`** — not a guarded command; runs after explicit per-action approval (a permission prompt in Claude Code, the Create PR button in Claude Desktop), never silently
 - **Region** — must never appear hardcoded in source or documentation anywhere; it is deployment configuration only
+
+**Default scope** — unless a prompt names a different location, treat it as concerning `docs/AI SDLC/` (the engagement content: capture, problem space, goals, solution, roadmap). Work outside that folder only when explicitly asked.
 
 Commit format: `<type>(<scope>): <what>` (Conventional Commits). Branch format: `<type>/short-description`. Package manager: `yarn` — never `npm` or `npx`.
 
@@ -28,6 +31,8 @@ Commit format: `<type>(<scope>): <what>` (Conventional Commits). Branch format: 
 Data flow: Browser → CloudFront (Lambda@Edge auth gate) → S3 (VitePress static build).
 
 See `docs/Target Architecture (HLD)/README.md` for the active version's full design.
+
+Local preview of the docs site: `yarn nx run site:serve`.
 
 ### NFRs
 

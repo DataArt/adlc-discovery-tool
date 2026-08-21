@@ -18,7 +18,13 @@
       "Bash(mkdir:*)",
       "Bash(cat:*)"
     ],
-    "deny": ["Bash(cdk deploy:*)", "Bash(git push:*)", "Bash(yarn nx run infra:provision:*)"]
+    "deny": ["Bash(cdk deploy:*)", "Bash(yarn nx run infra:provision:*)"]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "git commit and git push in this repository (including via the Claude Desktop Create PR button) are expected, everyday actions for both managers and architects — do not soft-deny or hard-deny them"
+    ]
   },
   "hooks": {
     "PostToolUse": [

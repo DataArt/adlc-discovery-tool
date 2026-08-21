@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Use-as-is — Contacts (40:244)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- USE-AS-IS · 40:244 "Contacts" — 4 Contact Cards (office photo + city +
+       country + phone + email) in a row. FIXED composition (insert as-is).
+       INSERTION RULE: always place this slide BEFORE the last (final) slide.
+       Office photos: assets/graphics/offices/*.jpg (swap per the deck's offices). -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-01"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Contacts</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <div class="layer" style="left:153.333px; top:280px; width:1613.333px; display:flex; gap:42.667px;">
+        <div class="contact-card">
+          <div class="cc-picture"><img src="../assets/graphics/offices/newyork.jpg" alt="New York"></div>
+          <p class="cc-city">New York</p>
+          <p class="cc-line is-country">USA</p>
+          <p class="cc-line is-phone">+1 (212) 378 4108</p>
+          <a class="cc-email" href="mailto:New-York@dataart.com">New-York@dataart.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="cc-picture"><img src="../assets/graphics/offices/london.jpg" alt="London"></div>
+          <p class="cc-city">London</p>
+          <p class="cc-line is-country">UK</p>
+          <p class="cc-line is-phone">+44 (0) 2070999464</p>
+          <a class="cc-email" href="mailto:UK-Sales@dataart.com">UK-Sales@dataart.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="cc-picture"><img src="../assets/graphics/offices/dubai.jpg" alt="Dubai"></div>
+          <p class="cc-city">Dubai</p>
+          <p class="cc-line is-country">UAE</p>
+          <p class="cc-line is-phone">+971 4 561 3771</p>
+          <a class="cc-email" href="mailto:Dubai-sales@dataart.com">Dubai-sales@dataart.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="cc-picture"><img src="../assets/graphics/offices/munich.jpg" alt="Munich"></div>
+          <p class="cc-city">Munich</p>
+          <p class="cc-line is-country">Germany</p>
+          <p class="cc-line is-phone">+49 (89) 74539023</p>
+          <a class="cc-email" href="mailto:DE-Sales@dataart.com">DE-Sales@dataart.com</a>
+        </div>
+      </div>
+
+      <!-- footer: 2-slot (tagline + page) -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Media (diagram / screenshot)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- MEDIA — slide-heading + one large framed visual + optional caption.
+       Use when a source slide is dominated by a single diagram / schema /
+       screenshot / chart that must be carried over (deck migration). The image
+       shows WHOLE (object-fit:contain) inside .media-frame — a wide or tall
+       source image letterboxes, never crops or stretches. Drop the source
+       image into tmp/decks/<deck>/assets/ and point <img src> at it relatively
+       (e.g. ../../assets/img/slide-07-diagram.png). Replace .media-frame--empty
+       + .mf-hint with the <img> once you have the file; keep the caption ≤ ~110
+       chars (or delete the caption layer). -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-06"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">How It Works</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- large framed visual (115,210) 1210×452 — caption sits just below -->
+      <div class="layer" style="left:153.333px; top:280px; width:1613.333px; height:602.667px;">
+        <div class="media-frame media-frame--empty">
+          <span class="mf-hint">Insert the source diagram / screenshot here</span>
+          <!-- <img src="../../assets/img/slide-07-diagram.png" alt="Architecture diagram"> -->
+        </div>
+      </div>
+      <p class="layer media-caption" style="left:153.333px; top:898.667px; width:1613.333px;">Caption: one line describing the visual (optional).</p>
+
+      <!-- footer: 2-slot (tagline + page) -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

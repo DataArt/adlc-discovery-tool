@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Numbered boxes (82:304)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 82:304 — intro line + a row of Numbered Card DEFAULT boxes
+       (gray-light, blue border, number top / label bottom). FLEXIBLE template:
+       boxes FILL the row via `.cols-N` (N = box count) — wider boxes when
+       there's space, no empty slots, no text overflow (text wraps inside).
+       5 boxes → .cols-5 (289.333px); 2 → .cols-2 (785.333px); 6 → .cols-6 (233.333px).
+       + two caption lines below. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-03"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Infrastructure Cost</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- intro (H12 21) -->
+      <p class="layer txt-h12 c-text-default" style="left:153.333px; top:280px; width:1352px;">Assuming hosting on AWS, that will include:</p>
+
+      <!-- boxes: 6-col grid (233.333px), 5 placed -->
+      <div class="layer" style="left:153.333px; top:368px; width:1613.333px;">
+        <div class="cols cols-5">
+          <div class="numbered-card numbered-card--default"><span class="nc-number">1</span><p class="nc-text">CloudFront distribution</p></div>
+          <div class="numbered-card numbered-card--default"><span class="nc-number">2</span><p class="nc-text">Two compute instances (Fargate)</p></div>
+          <div class="numbered-card numbered-card--default"><span class="nc-number">3</span><p class="nc-text">Load balancer</p></div>
+          <div class="numbered-card numbered-card--default"><span class="nc-number">4</span><p class="nc-text">Managed RDS PostgreSQL (primary+secondary in instances)</p></div>
+          <div class="numbered-card numbered-card--default"><span class="nc-number">5</span><p class="nc-text">S3 storage for images and static assets</p></div>
+        </div>
+      </div>
+
+      <!-- captions (H12 21, blue spans) -->
+      <p class="layer txt-h12 c-text-default" style="left:153.333px; top:749.333px; width:713.333px;">This setup will be able to handle up <span class="c-text-link">to ~100 requests/sec</span> which is equivalent of <span class="c-text-link">about 500 simultaneous users</span></p>
+      <p class="layer txt-h12 c-text-default" style="left:981.333px; top:749.333px; width:414.667px;">Cost of this setup will be <span class="c-text-link">$350–$400/month</span></p>
+
+      <!-- footer (3-slot) -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer footer-section txt-p7 c-text-default">SciRec Psychometric Assessment Platform</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

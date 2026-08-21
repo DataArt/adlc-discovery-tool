@@ -1,0 +1,414 @@
+# Verification — pixel checks + console clean via Claude Preview MCP
+
+**Read this** at Step 10 of the workflow (after every slide has been
+materialised). The script `scripts/verify-slide.sh <slide-file>`
+generates a self-contained JS snippet you pass to `preview_eval` via
+the Claude Preview MCP; the snippet returns a JSON pass/fail report.
+
+This file documents what is checked and how to react to failures.
+
+---
+
+## 1. Static server
+
+The kit and decks are static HTML. Start a local server from the repo
+root so the slides can resolve their relative paths:
+
+```
+python3 -m http.server 4180
+```
+
+Then the deck is reachable at:
+
+```
+http://localhost:4180/tmp/decks/<deck-name>/slide-NN-<slug>.html
+```
+
+The kit templates used for baseline regression are at:
+
+```
+http://localhost:4180/kit-corporate/templates/<name>.html
+```
+
+If you have a `slides-deck` profile in `.claude/launch.json`, that
+profile already runs this server.
+
+---
+
+## 2. What is checked
+
+`scripts/verify-slide.sh` emits a JS evaluator that, when run inside
+the page (via `preview_eval`), checks six canonical rect positions and
+console cleanliness. The expected values come from
+`references/kit-map.md` §1.
+
+| Check                                                      | Expected                                                      |
+| ---------------------------------------------------------- | ------------------------------------------------------------- |
+| `.slide` rect at native viewport (1920 × 1080)             | `{ x: 0, y: 0, width: 1920, height: 1080 }`                   |
+| `.slide` `position`                                        | `absolute` (NOT `relative`)                                   |
+| `.logo` rect                                               | `{ x: 1569.333, y: 141.333, width: 197.333, height: 32 }`     |
+| `.logo` right edge                                         | `right ≤ 1920` (= 1766.667)                                   |
+| `.zone-heading` / `.slide-heading` rect (non-cover slides) | `{ x: 115, y: 86 }`                                           |
+| `.page-number` rect.y                                      | `≈ 985.333` (footer row)                                      |
+| Content elements bottom edge                               | `≤ 1080` (no overflow off-canvas; content zone ends y930.667) |
+| Every `<img src>` resolved                                 | `naturalWidth > 0` (no 404s)                                  |
+| Console                                                    | No errors, no warnings                                        |
+
+Cover, section-divider and final slides intentionally do **not** have
+`.zone-heading` / `.slide-heading`. The evaluator skips that one
+assertion when the element is absent.
+
+---
+
+## 3. Recommended verification flow
+
+1. Materialise every slide via `scripts/materialize-slide.sh`.
+2. Make sure `python3 -m http.server 4180` is running.
+3. For each new slide, run:
+
+   ```
+   scripts/verify-slide.sh tmp/decks/<deck>/slide-NN-<slug>.html
+   ```
+
+   This prints a JS snippet on stdout. The snippet:
+   - assumes it is run **inside the slide page** at native viewport,
+   - returns a JSON object of the shape
+     ```
+     {
+       "slide_file": "<path>",
+       "rect_checks": [
+         { "name": "slide-canvas", "passed": true | false, "actual": {…}, "expected": {…} },
+         …
+       ],
+       "image_errors": [ "src that failed to load", … ],
+       "console_errors": [],
+       "console_warnings": [],
+       "passed": true | false
+     }
+     ```
+
+4. Pass that snippet into the `preview_eval` tool of Claude Preview MCP,
+   targeting the local URL of the slide. Read back the JSON.
+
+5. If `passed: false`, look at the offending check, fix the slide HTML,
+   and re-run. Common failures:
+
+   - **`logo` wrong x/y** → the slide moved the logo block; restore
+     the canonical position (1569.333, 141.333, 197.333 × 32) from
+     `references/kit-map.md` §1.
+   - **`slide-heading` wrong y** → an extra layer above the heading is
+     pushing it down; check for stray `position: relative` containers.
+   - **`page-number` wrong y** → the slide overrode the footer `y985.333`
+     rule, or the `.slide` height is not 1080.
+   - **`.slide` is `position: relative`** → the canonical `.slide` is
+     `position: absolute`; restore it so the layer coordinate system
+     resolves against the canvas.
+   - **`image_errors` non-empty** → the path arithmetic is wrong; if you
+     used `scripts/materialize-slide.sh`, the paths should be
+     `../../../kit-corporate/assets/<dir>/<file>` for kit assets or
+     `./assets/<file>` for deck-local assets. Hand-edits often miss this.
+
+6. Sanity-check the slide at a scaled viewport (e.g. 720 × 405). The
+   inline `--slide-scale` script should keep the slide centred and fit;
+   the `.slide` rect should remain `1920 × 1080` in slide-space.
+
+---
+
+## 4. Baseline regression (optional)
+
+When you change anything that touches `kit-corporate/shared/tokens.css`
+(you shouldn't — kit is read-only — but in a wider refactor this
+matters), re-render at least one of the kit templates:
+
+- `templates/cover.html` (cover pattern),
+- `templates/content-cards.html` (content grid),
+- `templates/final.html` (closing slide).
+
+The rect checks above should remain identical to a known-good baseline.
+If they drift, the change broke a canonical position and must be
+reverted or escalated before any new deck is produced.
+
+---
+
+## 5. Universal UX catalog (conditional)
+
+If any slide contains an **interactive UI mockup** — a form, input
+field, or button beyond a static call-to-action — consult
+`agent/references/ux-guidelines.md` after the pixel + console pass.
+
+Filter `agent/references/data/ux-guidelines.csv`:
+
+```bash
+awk -F, 'NR > 1 \
+         && $10 == "High" \
+         && ($4 == "Web" || $4 == "All") \
+         && $11 == "universal"' \
+    agent/references/data/ux-guidelines.csv
+```
+
+Apply only `High`-severity universal rules — decks are mostly static
+visuals, and a full UX pass is overkill. A pure static deck (no
+form, no input, no interactive button) skips this section entirely;
+the kit's typography / colour / composition rules already cover the
+relevant ground.
+
+Violations of any `High`-severity rule on an interactive mockup
+flag `ux_rule_violation: <No>: <Issue>: <slide>: <fix-hint>` in the
+verification report and block ship.
+
+---
+
+## 6. Kit composition contrast gates (Part 33)
+
+Three class-presence + bounding-rect based gates that catch
+contrast failures the agent cannot self-spot reliably. All three
+run as part of `scripts/verify-slide.sh`'s `preview_eval` payload
+and report under `composition_contrast` in the JSON result.
+
+### § 6.1 — Text-over-image gate
+
+For every `<img>` in the slide, the gate checks whether any visible
+text element's bounding rect intersects the image's bounding rect.
+If yes, the `<img>` must be inside an `.image-overlay` wrapper, and
+the wrapper must carry one of `scrim-bottom` / `scrim-top` /
+`scrim-left` / `scrim-radial`.
+
+Violations:
+
+- `text_over_image_missing_scrim` — text intersects `<img>`, no
+  `.image-overlay` wrapper. Fix: wrap the image + text in
+  `<div class="image-overlay scrim-X">…</div>` per § 0.10b.
+- `text_over_image_scrim_direction_missing` — wrapper exists but
+  no scrim direction modifier. Fix: add `scrim-bottom` / etc.
+- `text_over_image_scrim_direction_mismatch` — the text bbox does
+  not intersect the scrim's opaque zone (e.g. text at top with
+  `scrim-bottom`). Fix: pick correct direction per text position.
+
+### § 6.2 — Card-pair contrast gate
+
+For every `.card.is-light` / `.card.is-dark`, the gate computes the
+luminance of the nearest ancestor `.layer`'s background. Light cards
+require dark/colored parent (luminance < 0.5); dark cards require
+light parent (luminance > 0.5).
+
+Computed luminance uses the WCAG relative-luminance formula on the
+parent's computed `background-color` plus, when the parent has a
+gradient, an averaged sample of the gradient's stops. Illustration
+backgrounds (`.layer` containing an `<img>` or `<svg>` that fills
+its bounds) skip this check — the kit cannot reason about their
+dominant tone without rendering, so the rule defers to human review.
+
+Violations:
+
+- `card_pair_contrast_violated` — light card on light parent or
+  dark card on dark parent. Fix: change the parent surface or
+  swap to the opposite card variant per § 0.16.
+
+### § 6.3 — Title rhythm gate
+
+For every `.txt-h1` / `.txt-h2` / `.txt-hero` whose immediate next
+DOM sibling is `.txt-body` / `.txt-body-lg`, the gate checks that
+both live inside a `.title-stack` flex container.
+
+Violation:
+
+- `title_rhythm_missing_stack` — title and body siblings sitting
+  loose, not inside `.title-stack`. Fix: wrap them per § 0.9c.
+
+### § 6.7 — Kit stylesheet source check (Part 40)
+
+The rect-check `css-loaded` at the top of every slide confirms 3
+kit shared stylesheets (`tokens.css` / `layouts.css` /
+`components.css`) are linked. The § 6.7 gate goes further: it
+rejects substituted stylesheet sources that would let the slide
+"look like" the kit without actually using it.
+
+Detection (three independent sub-checks, any one fires):
+
+1. **External CDN links** — `<link rel="stylesheet" href="...">`
+   pointing at common CDN hosts (`cdnjs`, `jsdelivr`, `unpkg`,
+   `tailwindcss.com`, `cdn.*`). The kit's value is its locked
+   visual language; pulling Tailwind / utilities from a CDN
+   substitutes that language with generic styles.
+2. **Non-kit local stylesheets** — `<link>` to a relative path
+   that starts with `../` or `./` but does NOT include
+   `/kit-corporate/shared/`. Indicates the agent emitted slide-local CSS
+   files or pointed at some other source. _Two link forms are
+   both accepted_ (because the gate keys on the `/kit-corporate/shared/`
+   segment, not on a specific prefix):
+   - `../../../kit-corporate/shared/<file>.css` — slide links to the
+     bundled kit at `<skill-dir>/kit-corporate/` (canonical form, used
+     by `materialize-slide.sh`).
+   - `kit-corporate/shared/<file>.css` or `./kit-corporate/shared/<file>.css` —
+     slide links to a self-contained copy of the kit
+     relocated under `tmp/decks/<deck-name>/kit-corporate/` (Cowork
+     fallback when `../../../` doesn't resolve to the bundled
+     kit). The copy must be unmodified kit files — no edits,
+     no merges, no minified bundles.
+3. **Inline `<style>` blocks > 200 chars** — heuristic that the
+   agent wrote its own CSS instead of relying on
+   `components.css`. Short inline styles (< 200 chars) are
+   tolerated for one-off positioning.
+
+Violations:
+
+- `kit_substitution_external_cdn` — CDN href listed in `actual`.
+  Fix: remove the `<link>`, use `../../../kit-corporate/shared/components.css`.
+- `kit_substitution_non_kit_local` — non-kit local href listed.
+  Fix: replace with kit path, or move the styles into a kit
+  contribution PR if a new pattern is genuinely needed.
+- `kit_substitution_inline_styles` — N inline `<style>` blocks
+  over the 200-char threshold. Fix: move rules to kit
+  `components.css` (PR), use existing kit utilities, or compose
+  with kit primitives.
+
+All three are **hard gates** — any violation blocks ship.
+
+The `css-loaded` rect-check (top of file) and § 6.7 here form a
+two-stage defence: rect-check confirms the kit IS linked; § 6.7
+confirms the kit is the ONLY source. Both must pass.
+
+### § 6.10 — DataArt-map-reuse gate (`dataart_map_reused`)
+
+The DataArt global-presence map (`assets/graphics/fastfacts-map.png`)
+depicts DataArt's own footprint and belongs ONLY on `asis-fastfacts`.
+A recurring failure is forking the Fast Facts layout for a client
+"X today" overview and dragging the map along — it is meaningless to
+the client. The gate fires when the slide file is NOT the
+`asis-fastfacts` template yet the DOM has an
+`img[src*="fastfacts-map"]`. **Hard gate** — fix by replacing the map
+with a client-relevant visual or a labelled placeholder (use
+`content-stats-map`, whose right slot is already a placeholder). The
+real `asis-fastfacts.html` is exempt by filename.
+
+### § 6.6 — Nowrap-overflow gate (Part 39)
+
+Catches horizontal text overflow in kit's nowrap-slot patterns
+(`.bullet-row p`, `.col-num`, `.stat-row`, `.slide-heading`,
+`.footer-tagline`) and any other element where text content
+exceeds its visible slot.
+
+Detection logic walks every visible text element and checks two
+overflow signals:
+
+1. **Direct overflow** — `scrollWidth > clientWidth + 2.667px` — the
+   element's content is wider than its content box (visible
+   right-side clip or extension).
+2. **Nowrap parent-slot overflow** — when `white-space: nowrap`
+   is set, the element's rect grows with the content rather
+   than clipping; the rect compared against parent's content
+   width reveals the leak into the neighbouring slot.
+
+Either signal flags the element. Reported as
+`nowrap_overflow: <selector>: <text-width-px>vs<slot-width-px>`
+with a 40-char text preview for context.
+
+Fixes (in order of preference):
+
+- Shorten the text to the kit's char-limit for that slot
+  (composition-rules.md § 0.19).
+- Use a different slot pattern with more room
+  (`.stat-row` instead of `.bullet-row` for longer copy).
+- Restructure the layout (vertical stack instead of horizontal
+  grid).
+
+This is a **catch-all** gate: it doesn't matter which slot the
+text sits in or whether the kit has explicit char-limit docs —
+if the rendered text overflows its container, the gate fires.
+
+### § 6.5 — Bullet-grid in narrow column gate (Part 38)
+
+Verifies that `.disc-list` / `.disc-list.has-icons` bullets do
+not lay out in a 2-per-row grid inside a column whose content
+width is ≤ 500 px. PowerPoint Arial drift can push wrapped
+bullet text into the neighbouring column in narrow contexts;
+vertical stacking removes the risk.
+
+Detection: walks every `<ul class="disc-list">`, computes
+y-coordinates of direct `<li>` children, flags when ≥ 2 items
+share the same y (within 10-px tolerance) AND the nearest sized
+ancestor's width is ≤ 500 px.
+
+Violation:
+
+- `bullet_grid_in_narrow_column: <selector>: <column-width-px>` —
+  bullets in multi-column layout inside a narrow parent. Fix:
+  remove `grid-cols-2` / `flex-wrap`, stack bullets vertically
+  per composition-rules.md § 0.18.
+
+### § 6.4 — Bottom-edge padding gate (Part 34)
+
+Verifies every content element's bottom edge stays within the
+content zone (slide canvas is 1080 px tall; the content zone ends at
+y930.667, so a content element's bottom must be ≤ 930.667 px in canvas
+coordinates). Excludes the footer row (`.footer-tagline` /
+`.footer-section` / `.page-number`, canonical kit position at y985.333).
+
+Violation:
+
+- `bottom_padding_violated` — element bottom edge crosses the
+  content-zone bottom at y930.667. Fix: lift element 40-80 px or
+  rebalance the slide's bottom-half composition per § 0.17.
+  If the slide genuinely needs all the vertical space (e.g.
+  data-heavy table that won't compress), consider splitting
+  across two slides.
+
+The gate reports one violation per slide (cascade-failures where
+a parent layer and its child both overshoot get deduplicated to
+the first detection).
+
+### § 6.12 — Safe-zone + logo-overlap gate (Part 58, BLOCKING)
+
+Two failures the older gates missed:
+
+- **`text_outside_safe_zone`** — a text line crossing the kit's L/R safe
+  margins (`153.333` / `1766.667` px). Guards against text running to / off the
+  slide edge.
+- **`text_overlaps_logo`** — a text line colliding with the top-right `.logo`.
+  The heading zone is `1613.333` px wide (ends at `1766.667`) but the logo sits
+  at `x=1569`, so an over-long heading runs under the logo (the "…the lifecycle:
+  the ADLC" case). Shorten the heading.
+
+Both measure **tight `Range` line-boxes** (the actual glyph extent), not the
+element rect — a full-width block container never false-fires. (`text-over-image`
+§ 6.1 misses the logo because the logo is < 50 px tall.)
+
+### § 6.13 — Stacked text overlap gate (Part 58, BLOCKING)
+
+**`stacked_text_overlap`** — two LEAF text elements (`<p>`/`<h*>`/`<li>` with no
+nested block child) whose `Range` line-boxes intersect by > 4 px in both axes =
+one block's text has dropped onto another (the "description runs under the next
+row / a divider line" case). Leaf-only comparison avoids a container's union-box
+spanning a whole cards zone and false-firing. Fix by shortening the copy or
+moving the lower element down. Verified: zero false positives across all ~36 kit
+templates.
+
+### Aggregation
+
+`composition_contrast.passed` is `true` only when all three sub-
+gates produce zero violations. Any violation listed pushes the
+slide into the same `passed: false` bucket as a console error —
+block ship.
+
+---
+
+## 7. What you do **not** verify here
+
+- Narrative quality / story coherence — that is the AIMS self-check at
+  Step 11 of the workflow in SKILL.md.
+- Subjective visual taste — that is for human review.
+- Content accuracy — surface weak claims via `weak_claim: true` in
+  `deck_output.slides[]`.
+- **Pixel-level scrim adequacy.** The gate at § 6.1 confirms the
+  scrim is present and direction is correct; it does NOT measure
+  whether the scrim's alpha is strong enough for the specific
+  photo's contrast distribution under the text. If the agent
+  authored a `.scrim-bottom` with a near-transparent gradient that
+  doesn't actually dim the photo's bright zone, human review
+  catches it — the kit's default scrim strength (≥ 60% alpha at
+  the dense end) is calibrated to handle typical cases.
+
+This file's checks catch only the mechanical, kit-binding failures:
+positions, asset 404s, console errors, missing kit utility wrappers
+for known-fragile patterns. Everything else is a higher-level
+review.

@@ -11,5 +11,6 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     '**/.vitepress/cache/**',
     '.nx/**',
     '.yarn/**',
+    '.claude/skills/**',
   ],
 });

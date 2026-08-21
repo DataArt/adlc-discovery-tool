@@ -51,12 +51,12 @@ This is what matters: the skills and conventions that drive the engagement (`.cl
 
 Once the project is open:
 
-| Action           | Why                               | How                                                                                    | Example                                                |
-| ---------------- | --------------------------------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `/discovery`     | Guided flow for the engagement.   | Type it and follow the prompts.                                                        | `/discovery` — "we're preparing for the Gate 1 review" |
-| Free-form prompt | Anything outside a formal stage.  | Just describe what you want.                                                           | "What's our current status?"                           |
-| Preview changes  | See edits on the live site first. | Ask Claude to show you.                                                                | "Show me the site with these changes."                 |
-| Create a PR      | Lands changes for review.         | Ask Claude — guarded commands are never run automatically, it hands you what to paste. | "Open a PR for this."                                  |
+| Action           | Why                               | How                                                                     | Example                                                |
+| ---------------- | --------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------ |
+| `/discovery`     | Guided flow for the engagement.   | Type it and follow the prompts.                                         | `/discovery` — "we're preparing for the Gate 1 review" |
+| Free-form prompt | Anything outside a formal stage.  | Just describe what you want.                                            | "What's our current status?"                           |
+| Preview changes  | See edits on the live site first. | Ask Claude to show you.                                                 | "Show me the site with these changes."                 |
+| Create a PR      | Lands changes for review.         | Ask Claude, then click **Create PR** in the bottom bar when it appears. | "Open a PR for this."                                  |
 
 ![Claude Desktop — free-form status prompt, plus the commit and Create PR bar](/images/process/claude-desktop-status-and-pr.png)
 
@@ -65,6 +65,10 @@ _Red arrows: the project and session in the sidebar (left), and a free-form stat
 ![Claude Desktop — "show me the site with these changes" opens a live local preview next to the chat](/images/process/claude-desktop-preview-site.png)
 
 _Red arrows: a free-form preview prompt (top), and the **Open** button that launches the live local preview next to the chat (bottom)._
+
+![Claude Desktop — /create-pr, and the Create PR button once changes are ready](/images/process/claude-desktop-create-pr.png)
+
+_Red arrow: once your branch has changes, click **Create PR** in the bottom bar — Claude pushes the branch and opens the PR for you, no terminal needed._
 
 ## Use cases
 

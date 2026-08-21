@@ -12,7 +12,8 @@ See `docs/Engineering Guide/01 Conventions.md`.
 
 **Critical — violating either of these is a hard stop:**
 
-- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:provision`, `git push`
+- **Guarded commands** — never run directly; present as instructions for the developer: `cdk deploy`, `yarn nx run infra:provision`
+- **`git push`** — not a guarded command; runs after explicit per-action approval (a permission prompt in Claude Code, the Create PR button in Claude Desktop), never silently
 - **Region** — must never appear hardcoded in source or documentation anywhere; it is deployment configuration only
 
 **Default scope** — unless a prompt names a different location, treat it as concerning `docs/AI SDLC/` (the engagement content: capture, problem space, goals, solution, roadmap). Work outside that folder only when explicitly asked.

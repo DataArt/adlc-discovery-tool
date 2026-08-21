@@ -6,6 +6,26 @@
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["nx", "run", "site:serve"],
       "port": 5173
+    },
+    {
+      "name": "commit",
+      "runtimeExecutable": "git",
+      "runtimeArgs": ["commit"]
+    },
+    {
+      "name": "push",
+      "runtimeExecutable": "git",
+      "runtimeArgs": ["push"]
+    },
+    {
+      "name": "pull",
+      "runtimeExecutable": "git",
+      "runtimeArgs": ["pull"]
+    },
+    {
+      "name": "checkout-main",
+      "runtimeExecutable": "git",
+      "runtimeArgs": ["checkout", "main"]
     }
   ]
 }

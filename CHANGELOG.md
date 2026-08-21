@@ -1,0 +1,35 @@
+## 1.0.0 (2026-08-21)
+
+### Features
+
+- **bootstrap:** add /bootstrap-client skill + deterministic apply script ([a30a453](https://github.com/DataArt/adlc-discovery-tool/commit/a30a45365113ca900af550f3f054db8c373fb67b))
+- **bootstrap:** add narrative personalization phase + idempotent re-runs ([6a33d38](https://github.com/DataArt/adlc-discovery-tool/commit/6a33d389d4182c5ff9ba0f494e92836535c27b6a))
+- **bootstrap:** fix bootstrap ([27d8eda](https://github.com/DataArt/adlc-discovery-tool/commit/27d8edaf0e1745b6a68f5e4f0466e196ad172d3b))
+- **bootstrap:** fix self replacement ([b83b33a](https://github.com/DataArt/adlc-discovery-tool/commit/b83b33a4ece97dcf8849bf89966b872c3253b727))
+- **bootstrap:** resolve GITHUB_ORG/GITHUB_REPO placeholders on client bootstrap ([a1b1f58](https://github.com/DataArt/adlc-discovery-tool/commit/a1b1f58dde76af2afc5139fea78538e3aaf2e21c))
+- **bootstrap:** Step 8 now asks a single open-ended "what's the engagement story" question, and Step 9 derives each page's specific facet ([4bcf2c5](https://github.com/DataArt/adlc-discovery-tool/commit/4bcf2c59d6327d3db261343f9c0c286d37a2e4a4))
+- **discovery:** add discovery agent, Connect Framework page, 5-stage process ([c358ba0](https://github.com/DataArt/adlc-discovery-tool/commit/c358ba0855396eb214b6361c31d9ddf0ce60d857))
+- **discovery:** add discovery skill family, narrow [@discovery](https://github.com/discovery) to satellite reviewer ([b00e6d8](https://github.com/DataArt/adlc-discovery-tool/commit/b00e6d8ede840f8d806842f7cde6cd984c538ef6))
+- **discovery:** add gate-agnostic discovery-gate skill, restructure Capture into Gates/Workshops ([751109b](https://github.com/DataArt/adlc-discovery-tool/commit/751109bd621ea8a691bbe3cdfe9ad7b116154eec))
+- **docs:** add LLD container docs for Web, Auth, Infrastructure ([a478eeb](https://github.com/DataArt/adlc-discovery-tool/commit/a478eebcacbd3a08a0016096e3d0d0673f791386))
+- **patch:** add cross-project patch prepare/apply skills ([f5da4b0](https://github.com/DataArt/adlc-discovery-tool/commit/f5da4b04179f4fe77bfe3e7038aaad62b8650c0f))
+- **patch:** add discovery skill family, narrow [@discovery](https://github.com/discovery) to satellite reviewer ([567f89d](https://github.com/DataArt/adlc-discovery-tool/commit/567f89d1960f4c87eaaa402397cc7cc7d0e5f53d))
+- **patch:** add discovery skill family, narrow [@discovery](https://github.com/discovery) to satellite reviewer ([3ef5bfd](https://github.com/DataArt/adlc-discovery-tool/commit/3ef5bfdae2d7526e6e7d73fca553fb8fa988aa19))
+- **process:** add Claude Desktop setup path for engagement managers ([9db395e](https://github.com/DataArt/adlc-discovery-tool/commit/9db395e618cb390807164180c28864de1672ee81))
+- **release:** add semantic-release as post-merge job ([70d41a8](https://github.com/DataArt/adlc-discovery-tool/commit/70d41a89b82ec14e1d95fc58eda83881aba6fd10))
+- **skills:** add deck-design-corporate skill for DataArt-branded decks ([09ba542](https://github.com/DataArt/adlc-discovery-tool/commit/09ba542dd114b6bbdd2631f60293ae1a9879bb6d))
+- **vision:** add WS6 capstone workshop for pilot candidate selection ([ea94059](https://github.com/DataArt/adlc-discovery-tool/commit/ea94059f6f8074dc0fb92bdfa26f8e6410748ec5))
+
+### Bug Fixes
+
+- **bootstrap:** make report.md updates an explicit tool-use directive ([bbd6e34](https://github.com/DataArt/adlc-discovery-tool/commit/bbd6e3480dedbbefd32e7c823af8a04a7d8a99ec))
+- **bootstrap:** make report.md updates an explicit tool-use directive ([c023e6c](https://github.com/DataArt/adlc-discovery-tool/commit/c023e6ca3a4bd88cf03164b03a7b8c5831052539))
+- **bootstrap:** make report.md updates an explicit tool-use directive ([23ca41a](https://github.com/DataArt/adlc-discovery-tool/commit/23ca41a4f4c3f2b757f6ec350d90bf858128d9e2))
+- **bootstrap:** populate all env vars ([58162ab](https://github.com/DataArt/adlc-discovery-tool/commit/58162ab6464d1b02230a3a3e30a873ce289c387d))
+- **ci:** load env from SSM before building the site, not just before deploying ([8828f67](https://github.com/DataArt/adlc-discovery-tool/commit/8828f675e17b174965ad1f755147ff181696eeb4))
+- **deps:** bump mermaid and eslint to clear moderate audit findings ([a76cbcc](https://github.com/DataArt/adlc-discovery-tool/commit/a76cbccfecc7b05afcf17f9621f6b09d261dbd8a))
+- **docs:** repair dead links in Branching Strategy Related section ([2957ca2](https://github.com/DataArt/adlc-discovery-tool/commit/2957ca27d08527f3dea9e85dcda1487c92de1766))
+- **git:** untrack accidental worktree gitlink, ignore .claude/worktrees/ ([d368606](https://github.com/DataArt/adlc-discovery-tool/commit/d3686065d0d20af5999fe2566f89cd28f540ec1f))
+- **infra:** namespace CDK stacks by org/workload, share GitHub OIDC provider across clients ([4fd4bb7](https://github.com/DataArt/adlc-discovery-tool/commit/4fd4bb7524c115bd052cbcea48a6398d3478b1e7))
+- **release:** add missing conventional-changelog-conventionalcommits dep ([99ce7ea](https://github.com/DataArt/adlc-discovery-tool/commit/99ce7ead86d10fac12a1336e0ab40900b358f007))
+- **release:** upgrade semantic-release plugins, pin conventionalcommits preset ([a3a5882](https://github.com/DataArt/adlc-discovery-tool/commit/a3a5882eb2d51d1573df30723dae7125b0a12c09))

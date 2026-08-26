@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.0.0...v1.0.1) (2026-08-26)
+
+### Bug Fixes
+
+- **windows:** fix checkout/setup breakages for Windows contributors ([1fbd316](https://github.com/DataArt/adlc-discovery-tool/commit/1fbd3161aab7e9881259ffdc500cc969a4456340))
+
 ## 1.0.0 (2026-08-21)
 
 ### Features

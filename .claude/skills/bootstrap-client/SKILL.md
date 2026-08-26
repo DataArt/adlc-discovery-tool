@@ -118,7 +118,7 @@ Derive a suggested `ORG_PREFIX`: lowercase, alphanumeric + hyphens, ≤20 charac
 
 **Stop and wait.**
 
-These values also drive the `[[GITHUB_ORG]]` / `[[GITHUB_REPO]]` find-replace in Step 2.6 — beyond OIDC and CI/CD wiring, they fill in the actual `git clone` command and working-directory instructions in `09 Claude Desktop Setup.md`, so get them right.
+These values also drive the `[[GITHUB_ORG]]` / `[[GITHUB_REPO]]` find-replace in Step 2.6 — beyond OIDC and CI/CD wiring, they fill in the actual `git clone` command and working-directory instructions in `09 Collaboration/02 Claude Desktop Setup.md`, so get them right.
 
 If the repo already exists, fetch the numeric IDs the OIDC trust policy needs — apply `pattern-run-and-validate.md`:
 

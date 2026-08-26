@@ -73,7 +73,7 @@ _Red arrow: once your branch has changes, click **Create PR** in the bottom bar 
 
 ## Use cases
 
-The discovery engagement moves through a fixed sequence — Initiation → Investigate (loop) → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md). Here's what each situation looks like as a prompt:
+The discovery engagement moves through a fixed sequence — Initiation → Investigate (loop) → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md). Here's what each situation looks like as a prompt:
 
 | Situation you're in                                   | Example prompt                                                                                   |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -87,4 +87,4 @@ The discovery engagement moves through a fixed sequence — Initiation → Inves
 
 One command, always: `/discovery` plus a sentence of context. Claude figures out the stage — you don't need to remember anything else. If you're unsure what stage you're in, just ask: "Where are we in the engagement?"
 
-→ See [05 Team Collaboration](./05%20Team%20Collaboration.md) for how this fits the rest of the team's workflow.
+→ See [Team Collaboration](./01%20Team%20Collaboration.md) for how this fits the rest of the team's workflow.

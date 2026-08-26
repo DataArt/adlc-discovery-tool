@@ -8,7 +8,7 @@ Reworks several sections of `docs/Context/02 Challenges.md`: pull-quotes tighten
 
 - `docs/public/images/context/AI Workflow Shift.png`
 - `docs/public/images/context/Confused AI in the Policy Factory.png`
-- `docs/public/images/context/Context Foundation: Stable Tools vs. Broken Migration.png`
+- `docs/public/images/context/Context Foundation - Stable Tools vs. Broken Migration.png`
 - `docs/public/images/context/Context Lost on the Assembly Line.png`
 - `docs/public/images/context/Teams Feed a Broken Estate Machine.png`
 - `docs/public/images/context/The Attribution Gap.png`

@@ -30,7 +30,8 @@ _Getting a non-technical team member from a cold laptop to running `/discovery` 
    ```
 
    ```powershell
-   # Windows
+   # Windows — open PowerShell with "Run as Administrator" first;
+   # nvm-windows needs elevation to create its Node version symlink.
    powershell -ExecutionPolicy Bypass -File scripts/setup/setup-windows.ps1
    ```
 

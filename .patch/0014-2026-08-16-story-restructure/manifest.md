@@ -13,7 +13,7 @@ Three new diagram images were added to `docs/public/images/context/` to illustra
 - `docs/The Story/01 From Broken Handoffs to Governed AI.md`
 - `docs/The Story/04 The Mental Model Shift.md`
 - `docs/The Story/index.md`
-- `docs/public/images/context/AI Factory: From Intent to Confuse.png`
+- `docs/public/images/context/AI Factory - From Intent to Confuse.png`
 - `docs/public/images/context/AI-Powered Software Lifecycle Pipeline.png`
 - `docs/public/images/context/From Business Ideas to Customer Confusion.png`
 

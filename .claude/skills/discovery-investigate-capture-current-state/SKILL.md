@@ -88,7 +88,7 @@ Apply `.claude/skills/discovery/pattern-do-report-commit.md`:
 - Changelog row on whichever pages changed (Current State pages carry their own `## Changelog`)
 - `06 Where We Are/02 Investigate.md`: update the Workshops row (Status, Coverage, Last Updated) and, if Step 4 ran, the Current State row(s)
 - `05 Report Log.md`: one row citing this workshop
-- Commit: `docs(ws{N}): <what changed>` per `09 Collaboration/01 Team Collaboration.md`
+- Commit: `docs(ws{N}): <what changed>` per `09 Contribution/01 Team Collaboration.md`
 
 **Stop and wait** for commit confirmation, then re-read `.claude/skills/discovery-investigate/SKILL.md` per session continuity.
 

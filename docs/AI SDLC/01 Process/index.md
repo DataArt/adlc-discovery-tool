@@ -24,4 +24,5 @@ Investigate · Solution · Roadmap — the three gate-bound phases that structur
 | [Reference — Connect Framework](./08%20Reference/01%20Connect%20Framework.md)               | DataArt's original methodology this process is inspired by, and other optional background — static                    |
 | [Contribution — Team Collaboration](./09%20Contribution/01%20Team%20Collaboration.md)       | How the team works in this repo — tools, commits, PRs — static                                                        |
 | [Contribution — Claude Desktop Setup](./09%20Contribution/02%20Claude%20Desktop%20Setup.md) | Getting a non-technical team member from a cold laptop to running `/discovery` and opening a PR — static              |
-| [Contribution — Branching Policy](./09%20Contribution/03%20Branching%20Policy.md)           | Trunk-based development — `main` + short-lived feature branches — static                                              |
+| [Contribution — Codex Desktop Setup](./09%20Contribution/03%20Codex%20Desktop%20Setup.md)   | Getting a non-technical team member from a cold laptop to running `$discovery` and opening a PR — static              |
+| [Contribution — Branching Policy](./09%20Contribution/04%20Branching%20Policy.md)           | Trunk-based development — `main` + short-lived feature branches — static                                              |

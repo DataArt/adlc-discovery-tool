@@ -1,0 +1,74 @@
+---
+name: discovery-investigate-problem-diagnose
+metadata:
+  version: 0.1.0
+description: >
+  Problem stage of Investigate — Diagnose part (/discovery-investigate-problem-diagnose or /discovery-investigate router).
+  Synthesizes SDLC Domain evidence into a Problem — a root cause, ranked and evidenced, added to the Problems registry.
+---
+
+The engagement lead wants to diagnose or update a Problem. Here is their input:
+
+---
+
+## $ARGUMENTS
+
+---
+
+> ⚠️ Follow every step in order. Do not skip, summarize, or improvise. If you are unsure, ask before deviating.
+
+> 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `{{skills_root}}/discovery-investigate/SKILL.md` and resume from there.
+
+This is the Diagnose part of `01 Process/07 Workflows/03 Investigate/03 Problem - Diagnose.md`. Optional — only runs once a domain's evidence points to a root cause.
+
+---
+
+## Step 1 — Identify the evidence and target
+
+Read the SDLC Domain page(s) this Problem draws on (one Problem can cite more than one domain). Read `docs/AI SDLC/03 Problem Space/02 Diagnose/02 Problems.md` — is this a new Problem, or does existing evidence update one already in the registry?
+
+---
+
+## Step 2 — Draft / update the Problem
+
+Fields: ID (never reused, even if retracted), impact statement, source(s), SDLC Domain link(s) — link the specific domain page(s) under `03 SDLC Domains/` this Problem was diagnosed from, not the generic domains-overview anchor.
+
+**Status moves forward only:**
+
+| Status       | Requires                                                               |
+| ------------ | ---------------------------------------------------------------------- |
+| 🟡 Reported  | A single source names it                                               |
+| 🟢 Confirmed | A second, independent source corroborates it                           |
+| 🔵 Measured  | A number backs the impact claim                                        |
+| ⚫ Retracted | It turns out to be wrong — the reason stays on record, ID never reused |
+
+Do not move status past what the current evidence actually supports — most problems in a discovery-scale engagement settle at 🟡 or 🟢; few reach 🔵, and that's expected, not a gap to force-fill.
+
+Apply `{{skills_root}}/discovery/pattern-write-confirm.md` — the engagement lead corroborates, quantifies, or retracts.
+
+---
+
+## Step 3 — Satellite review
+
+Apply `{{skills_root}}/discovery/pattern-satellite-review.md` — this is the checkpoint most likely to catch a premature status move (Confirmed on one source).
+
+---
+
+## Step 4 — Do → Report → Commit
+
+Apply `{{skills_root}}/discovery/pattern-do-report-commit.md`:
+
+- Changelog row on `02 Problems.md`
+- `06 Where We Are/02 Investigate.md`: the matching SDLC Domain row's "Problems Diagnosed" count and Last Updated
+- `05 Report Log.md`: one row citing the domain evidence that triggered it
+- Commit: `docs(problem-space): <what changed>`
+
+**Stop and wait** for commit confirmation, then re-read `{{skills_root}}/discovery-investigate/SKILL.md`.
+
+---
+
+## Reiterate while still green
+
+Keep looping draft → validate as long as each pass still changes the picture — stop once the root cause holds steady across a validation session. That's what makes it eligible for Solution Goals.
+
+→ `discovery-investigate-goals-solution-goals` for how a confirmed Problem turns into a grounded goal.

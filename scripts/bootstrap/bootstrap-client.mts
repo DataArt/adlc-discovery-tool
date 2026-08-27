@@ -2,11 +2,11 @@
 // Run via tsx (already this repo's convention for TS scripts — see apps/infra/cdk.json,
 // apps/lambda-auth's build), not node's native type-stripping.
 //
-// Does exactly four things, and nothing else — no free-text generation, no judgment calls.
+// Does exactly five things, and nothing else — no free-text generation, no judgment calls.
 // Same input always produces the same output; safe to re-run (skips work already done).
 //
 //   1. Literal find-replace of [[CLIENT_NAME]], [[GITHUB_ORG]], [[GITHUB_REPO]] across every
-//      git-tracked text file (e.g. the clone command in `09 Claude Desktop Setup.md`)
+//      git-tracked text file (e.g. the clone commands in the Claude and Codex Desktop setup docs)
 //   2. Rewrite the {org} placeholder in the 3 project.json files (infra, docs-web, lambda-auth)
 //   3. Scaffold apps/{infra,docs-web,lambda-auth}/.env.dev from .env.example + collected values —
 //      every deterministic value (org/env/locationShort/region-templated shapes, same formula as
@@ -15,6 +15,7 @@
 //   4. Replace the starter-kit pitch README.md with CONTRIBUTING.md's content, then remove
 //      CONTRIBUTING.md — once bootstrapped, a team working in this repo needs local-dev/structure
 //      docs as their README, not "how to launch a new client engagement" (already done)
+//   5. Regenerate Claude and Codex projections from the canonical `.agent/` harness
 //
 // Invoked by the /bootstrap-client skill after it has collected and confirmed every value
 // with the developer — this script performs no Q&A of its own.
@@ -38,8 +39,20 @@ const REPO_ROOT = execFileSync('git', ['rev-parse', '--show-toplevel']).toString
 
 // Extensions we never treat as text — binary files must never be find-replaced.
 const BINARY_EXTENSIONS = new Set([
-  '.png', '.jpg', '.jpeg', '.gif', '.ico', '.woff', '.woff2', '.ttf', '.eot',
-  '.pdf', '.docx', '.xlsx', '.zip', '.lock',
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.ico',
+  '.woff',
+  '.woff2',
+  '.ttf',
+  '.eot',
+  '.pdf',
+  '.docx',
+  '.xlsx',
+  '.zip',
+  '.lock',
 ]);
 
 const PROJECT_JSON_FILES = [
@@ -51,7 +64,16 @@ const PROJECT_JSON_FILES = [
 // The bootstrap tooling's own files reference `[[CLIENT_NAME]]` literally, in prose that
 // documents what it does (e.g. "replaces [[CLIENT_NAME]] everywhere"). Find-replacing those
 // would corrupt the tooling's own comments/docs — exclude it from Step 1 specifically.
-const SELF_EXCLUDE_PREFIXES = ['scripts/bootstrap/', '.claude/skills/bootstrap-client/'];
+const SELF_EXCLUDE_PREFIXES = [
+  'scripts/bootstrap/',
+  '.agent/skills/bootstrap-client/',
+  '.claude/skills/',
+  '.claude/agents/',
+  '.agents/skills/',
+  '.codex/',
+  'CLAUDE.md',
+  'AGENTS.md',
+];
 
 interface EnvScaffold {
   example: string;
@@ -139,8 +161,14 @@ function parseAndValidateArgs(): Answers {
   });
 
   const required = [
-    'client-name', 'org-prefix', 'aws-region', 'location-short',
-    'github-org', 'github-org-id', 'github-repo', 'github-repo-id',
+    'client-name',
+    'org-prefix',
+    'aws-region',
+    'location-short',
+    'github-org',
+    'github-org-id',
+    'github-repo',
+    'github-repo-id',
   ] as const;
   const missing = required.filter((k) => !values[k]);
   if (missing.length > 0) {
@@ -166,7 +194,9 @@ function parseAndValidateArgs(): Answers {
     ['github-repo-id', values['github-repo-id']],
   ] as const) {
     if (!/^\d+$/.test(val!)) {
-      throw new Error(`--${flag} "${val}" must be numeric — fetch it via \`gh api repos/{org}/{repo}\`.`);
+      throw new Error(
+        `--${flag} "${val}" must be numeric — fetch it via \`gh api repos/{org}/{repo}\`.`
+      );
     }
   }
 
@@ -227,7 +257,9 @@ function replaceTokens(v: Answers): { filesChanged: number; replacements: number
 
     filesChanged += 1;
     replacements += fileReplacements;
-    console.log(`  ${v.dryRun ? '[dry-run] would update' : 'updating'} ${relPath} (${fileReplacements}x)`);
+    console.log(
+      `  ${v.dryRun ? '[dry-run] would update' : 'updating'} ${relPath} (${fileReplacements}x)`
+    );
 
     if (!v.dryRun) {
       writeFileSync(abs, content, 'utf-8');
@@ -275,7 +307,9 @@ function scaffoldEnvDevFiles(v: Answers): { created: string[]; skipped: string[]
     }
     if (existsSync(targetAbs)) {
       skipped.push(scaffold.target);
-      console.log(`  ${scaffold.target} already exists — not overwritten (merge manually if needed)`);
+      console.log(
+        `  ${scaffold.target} already exists — not overwritten (merge manually if needed)`
+      );
       continue;
     }
 
@@ -337,7 +371,9 @@ function swapReadmeForContributing(v: Answers): boolean {
 function main() {
   const answers = parseAndValidateArgs();
 
-  console.log(`\n${answers.dryRun ? '🔍 DRY RUN — no files will be written\n' : '✏️  Applying personalization\n'}`);
+  console.log(
+    `\n${answers.dryRun ? '🔍 DRY RUN — no files will be written\n' : '✏️  Applying personalization\n'}`
+  );
 
   console.log('Step 1 — [[CLIENT_NAME]] / [[GITHUB_ORG]] / [[GITHUB_REPO]] find-replace');
   const { filesChanged, replacements } = replaceTokens(answers);
@@ -355,15 +391,29 @@ function main() {
   const swapped = swapReadmeForContributing(answers);
   console.log(`  → ${swapped ? 'done' : 'skipped'}\n`);
 
+  if (!answers.dryRun) {
+    console.log('Step 5 — regenerate AI coding tool projections');
+    execFileSync('yarn', ['harness:generate'], { cwd: REPO_ROOT, stdio: 'inherit' });
+    console.log('  → Claude and Codex projections current\n');
+  }
+
   console.log('─'.repeat(60));
-  console.log(answers.dryRun ? 'Dry run complete — re-run without --dry-run to apply.' : 'Bootstrap complete.');
+  console.log(
+    answers.dryRun ? 'Dry run complete — re-run without --dry-run to apply.' : 'Bootstrap complete.'
+  );
   console.log('─'.repeat(60));
 
   if (!answers.dryRun) {
-    console.log('\nStill manual (not this script\'s job):');
-    console.log('  - AWS account setup, `cdk bootstrap`, first `cdk deploy` — see the Quick Setup Guide');
-    console.log('  - CF_DISTRIBUTION_ID stays blank until after `infra:provision` + `infra:output` — see the Quick Setup Guide');
-    console.log('  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]], [[GITHUB_ORG]], or [[GITHUB_REPO]]');
+    console.log("\nStill manual (not this script's job):");
+    console.log(
+      '  - AWS account setup, `cdk bootstrap`, first `cdk deploy` — see the Quick Setup Guide'
+    );
+    console.log(
+      '  - CF_DISTRIBUTION_ID stays blank until after `infra:provision` + `infra:output` — see the Quick Setup Guide'
+    );
+    console.log(
+      '  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]], [[GITHUB_ORG]], or [[GITHUB_REPO]]'
+    );
   }
 }
 

@@ -11,6 +11,8 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     '**/.vitepress/cache/**',
     '.nx/**',
     '.yarn/**',
+    '.agent/skills/**',
+    '.agents/skills/**',
     '.claude/skills/**',
     '.patch/**',
   ],

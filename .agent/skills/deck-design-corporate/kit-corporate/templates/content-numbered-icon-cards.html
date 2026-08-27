@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Numbered icon cards (82:849)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 82:849 — a row of N "Numbered Card with Icon Vertical" cards
+       (blue border; dark 48 number box top-left; title H6 36→40 link; icon 48;
+       body H15 18). FLEXIBLE: N = step count → set `.cols-N` (2→589 · 3→382 ·
+       4→278 · 5→216 · 6→175) and add/remove cards. Cards use min-height:442.667px
+       and the grid stretches them to EQUAL height (grows past 332 if a narrow
+       column needs more lines); text wraps inside — never a fixed count. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-06"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">The PoC-First Sales Journey</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <div class="layer" style="left:153.333px; top:280px; width:1613.333px;">
+        <div class="cols cols-5">
+          <div class="numbered-card numbered-card--icon" style="min-height:442.667px;"><div class="nc-number"><span>1</span></div>
+            <div class="nc-body"><p class="nc-title">Qualify</p><span class="nc-icon"><img src="../assets/icons/icon-sample-1.svg" alt=""></span><p class="nc-text">Identify PoC-ready opportunities in your pipeline</p></div></div>
+          <div class="numbered-card numbered-card--icon" style="min-height:442.667px;"><div class="nc-number"><span>2</span></div>
+            <div class="nc-body"><p class="nc-title">Scope</p><span class="nc-icon"><img src="../assets/icons/icon-sample-2.svg" alt=""></span><p class="nc-text">Define the client problem and agree success criteria</p></div></div>
+          <div class="numbered-card numbered-card--icon" style="min-height:442.667px;"><div class="nc-number"><span>3</span></div>
+            <div class="nc-body"><p class="nc-title">Build</p><span class="nc-icon"><img src="../assets/icons/icon-finance.svg" alt=""></span><p class="nc-text">Engineering builds a working prototype in 2-4 weeks</p></div></div>
+          <div class="numbered-card numbered-card--icon" style="min-height:442.667px;"><div class="nc-number"><span>4</span></div>
+            <div class="nc-body"><p class="nc-title">Present</p><span class="nc-icon"><img src="../assets/icons/icon-sample-1.svg" alt=""></span><p class="nc-text">Demo the PoC to decision-makers and key stakeholders</p></div></div>
+          <div class="numbered-card numbered-card--icon" style="min-height:442.667px;"><div class="nc-number"><span>5</span></div>
+            <div class="nc-body"><p class="nc-title">Convert</p><span class="nc-icon"><img src="../assets/icons/icon-sample-2.svg" alt=""></span><p class="nc-text">Use the PoC outcome to drive the full contract signature</p></div></div>
+        </div>
+      </div>
+
+      <!-- footer: 2-slot (tagline + page) -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

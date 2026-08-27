@@ -4,15 +4,13 @@ _Portable conventions that apply regardless of which AI tool is used._
 
 ---
 
-## Root context file — CLAUDE.md is canonical
+## Root context file — `.agent/instructions.md` is canonical
 
-This project is Claude-Code-only. CLAUDE.md is the single authoritative root context file, loaded on every session — project instructions, rules, pointers. There is no separate AGENTS.md or tool-specific wrapper; CLAUDE.md holds the real content directly.
+`.agent/instructions.md` is the single authoritative root context source, loaded on every session — project instructions, rules, pointers. `CLAUDE.md` and `AGENTS.md` are deterministic generated projections of it, rendered by `yarn harness:generate`; neither is hand-edited directly. → See `09 Harness Generation.md` for how generation works.
 
-**If this harness is ever extended to another AI tool**, that tool's root file should point to CLAUDE.md rather than duplicating its content — don't maintain the same rules in two places.
+Structure of `.agent/instructions.md`: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `07 Documentation Principles.md` for length budgets per doc type.
 
-Structure of CLAUDE.md: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `07 Documentation Principles.md` for length budgets per doc type.
-
-Do not auto-generate the root context file from scratch — generate a scaffold and edit by hand. Auto-generated root context is generic; hand-edited root context is precise.
+Do not auto-generate the canonical file from scratch — edit `.agent/instructions.md` by hand for precision, then regenerate its projections. Auto-generated root context is generic; hand-edited root context is precise.
 
 ---
 
@@ -34,7 +32,7 @@ Format: `NN Title Case.md` — two-digit prefix, space, Title Case, `.md`.
 
 Pick the next available number within the folder. Update README references when adding or renaming.
 
-Numbers 04–08 in `Engineering Guide/` are reserved for project-specific articles (Getting Started, Local Dev Setup, Deployment, etc.) added by the team over time.
+Numbers 04 onward in `Engineering Guide/` are project-specific articles (Getting Started, MCP Setup, Harness Generation, etc.) added by the team over time — no fixed upper bound.
 
 ---
 

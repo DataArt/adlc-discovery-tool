@@ -1,0 +1,198 @@
+# Deck migration — re-skin an existing presentation into the Corporate kit
+
+Read this when the job is **"take this deck and put it into our template"**:
+the user supplies an existing presentation (a `.pptx`, a PDF, or screenshots)
+and wants it rebuilt on the DataArt Corporate kit — **keeping the content,
+slide count, and order**, but **adapting the design** to our tokens/templates.
+
+This is a THIRD mode, distinct from the two in `SKILL.md`:
+
+| Mode          | Trigger                                                                                                                | What it does                                        |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| standalone    | a natural-language brief                                                                                               | builds a fresh deck (AIMS arc + corporate skeleton) |
+| handoff       | `task_type: deck` YAML                                                                                                 | same, from an AIMS64 envelope                       |
+| **migration** | a **source deck file** + "convert / re-skin / перевести в наш шаблон" (standalone) OR a `source_deck:` block (handoff) | **re-skins the source 1:1 into the kit**            |
+
+## The core idea — fidelity of CONTENT, freedom of DESIGN
+
+The old failure was treating a migration like a fresh brief: the deck got
+force-rebuilt into the DataArt pitch (mandatory fast-facts / capabilities /
+contacts), source text was dropped, and slides we had no template for looked
+bad. The fix is a clear split of what you preserve vs what you may change.
+
+**PRESERVE (content fidelity):**
+
+- **Slide order** — the source sequence is authoritative (NOT the AIMS arc).
+- **Slide count** — one source slide → one kit slide by default. You MAY split
+  an overstuffed slide into 2 (see "Splitting"), never silently drop one.
+- **The substantive text** — claims, numbers, names, the real argument. Trim
+  only to fit a layout budget; never cut the meaning.
+- **Real images** — diagrams, schemas, architecture drawings, screenshots,
+  charts, product shots carry over (see "Images").
+
+**FREE TO CHANGE (design freedom — be bold):**
+
+- Visual hierarchy: promote the source title to a big `slide-heading` (H3 48)
+  or a `statement` (H0 74); make the point land.
+- Restructure a wall of bullets into `content-icon-cards`, `content-comparison`,
+  `content-numbered-boxes`, a `content-stacked-list`, etc.
+- Add a relevant **library icon** (kit-map § 8) where it strengthens a point.
+- Insert our **section dividers** between the source's logical sections.
+- Recolour everything to our tokens; replace the source's chrome (their logo,
+  backgrounds, footers) with the kit's.
+
+> Mantra: _the words are theirs, the look is ours._ If you find yourself
+> rewriting the argument, stop — you are in fresh-build mode by mistake.
+
+## The DataArt skeleton does NOT apply here
+
+In migration mode the mandatory inserts (`asis-fastfacts`, `asis-capabilities`,
+`content-nextsteps`, `asis-contacts`) are **NOT auto-added**, and the
+`mandatory_slides_present` preflight gate is **N/A** (skip it). The source deck
+defines the structure.
+
+**Offer them once.** After you have the source profile (below), ask the user
+(one question): _"Append DataArt fast-facts / capabilities / next-steps /
+contacts, or keep the deck 1:1?"_ — default **keep 1:1**. Only add the ones the
+user opts into, at the natural place (fast-facts after the opener, contacts
+before the close). If a source slide is ALREADY a fast-facts / contacts / etc.
+slide, just re-skin it in place (do not duplicate).
+
+## Step-by-step
+
+### 1. Ingest the source
+
+**`.pptx` (the common case):**
+
+```
+python3 scripts/extract-source-deck.py <source.pptx> tmp/decks/<deck>/_source
+```
+
+Then READ `tmp/decks/<deck>/_source/SUMMARY.md` (one line per slide) and
+`source.json` (per-slide title / subtitle / `body_blocks` with bullet `level` /
+tables / notes / images). EYEBALL `_source/montage.png` to see every extracted
+image and decide which are real content vs chrome.
+
+If `title` is `null` (decks built on a "Blank" layout often have no title
+placeholder), treat the first prominent `body_block` as the heading.
+
+**PDF / images / no `.pptx`:** read the rendered pages with vision and
+hand-author `source.json` in the same schema (index, title, body_blocks,
+tables, images). `pypdf` can pull PDF text; crop diagrams from page
+screenshots if you need the image. The rest of the flow is identical.
+
+### 2. Profile each source slide → pick a kit template (reverse chooser)
+
+For each source slide, read its text hierarchy + media and choose the closest
+kit template. This is the forward chooser (kit-map § 7) run backwards:
+
+| Source slide looks like…                                                                | Use                                                                                                                                                            |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Title + subtitle only (opener / section break / one big line)                           | `cover` / `section-divider` / `statement`                                                                                                                      |
+| 3–5 short headed blocks                                                                 | `content-cards` · `content-numbered-icon-cards` · `content-icon-cards`                                                                                         |
+| 4 parallel points (challenges / pillars / capability areas), each title + 1-2 sentences | `content-icon-grid` (2×N icon-block grid)                                                                                                                      |
+| A wall of bullets                                                                       | `content-stacked-list` · `content-list-tagged` (or SPLIT)                                                                                                      |
+| Two things compared                                                                     | `content-comparison`                                                                                                                                           |
+| A table / matrix / pricing                                                              | `content-table`                                                                                                                                                |
+| Steps / arrows / a timeline / a roadmap / a phased framework                            | `content-process` · `content-framework` (named stages / maturity model) · `content-pipeline` · `content-timeline` · `content-plan-table` · `content-nextsteps` |
+| A big quote / testimonial                                                               | `quote`                                                                                                                                                        |
+| **One dominant diagram / schema / screenshot / chart**                                  | **`content-media`**                                                                                                                                            |
+| **An explanation paired with an image**                                                 | **`content-text-media`** (or `content-split`)                                                                                                                  |
+| A grid of logos                                                                         | `content-logo-grid`                                                                                                                                            |
+| People / team                                                                           | `content-team` · `content-team-roles`                                                                                                                          |
+| Stats about DataArt (verbatim)                                                          | `asis-fastfacts`                                                                                                                                               |
+| Stats about the client                                                                  | `content-stats-map`                                                                                                                                            |
+
+**No clean fit? Improvise within tokens.** Compose a free-form slide from the
+kit's primitives — never invent a parallel visual system, never pull in
+Tailwind/CDN, never edit kit files. The vocabulary:
+
+- `.slide` + a `.layer bg bg-content-0N` (pick one per section).
+- `.layer zone-heading` + `.slide-heading` + `.heading-rule` + `.logo`.
+- content in absolutely-positioned `.layer`s inside the content zone
+  (left 153.333, top 280 [or 358.667 for a 2-line heading], width ≤ 1613.333, bottom ≤ 930.667).
+- columns via `.cols-N` (1→1613.333 · 2→785.333 · 3→509.333 · 4→370.667 · 5→289.333 · 6→233.333, gap 42.667).
+- type via `.txt-h0/h1/h3/h5/h9/h11/h12/h14/h15 · .txt-p2/p5/p7`; colour via
+  `.c-text-default / .c-text-link / .c-text-contrast`; accents via `.c-blue`…
+- components: `.icon-block`, `.numbered-card`, `.sheet`, `.tag`, `.media-frame`.
+- footer: `.footer-tagline` + `.footer-section` (optional) + `.page-number`.
+
+> **Icon-on-top feature grids** (a "Why X?" row of icon + title + paragraph —
+> very common in source decks): reach for the **`content-icon-grid`** template
+> first (the faithful 67:955 2×N icon-block grid — ideal for 4, or 2/6, parallel
+> points). Hand-build with `.cols-N` + `.icon-block --stacked-left` only when the
+> count or shape doesn't fit that template. Either way the icon, title, and body
+> all share one left edge; keep the arrangement identical across every column. Do
+> NOT centre the icon over left-aligned text — that ragged misalignment is a
+> classic re-skin slip. Use `--stacked` only when the whole column is centred.
+
+> **Card vertical rhythm** (Agenda / overview boxes — title + icon + body in a
+> bordered card): top-anchor the content with fixed gaps and let spare height
+> fall to the bottom — never `justify-content: space-between` (it floats the
+> icon to a different height per card). If titles differ in line count, give the
+> title a 2-line `min-height` so every icon starts at the same Y. Use
+> `numbered-card--icon` (top-anchored), not `numbered-card--default`
+> (`space-between`, for short bottom-pinned labels only).
+
+### 3. Fill with source content (light edits only)
+
+Move the source text in verbatim, then trim ONLY to fit the layout budgets.
+Before materialising, budget-check (Step 6a of SKILL.md):
+
+```
+python3 scripts/check-copy-budget.py  < planned-copy.json
+```
+
+When something is over budget, in priority order: (1) tighten wording without
+losing meaning, (2) move to a wider layout / fewer columns, (3) **split the
+slide** — never truncate the point away.
+
+### 4. Images — carry the real ones, drop the chrome
+
+From `source.json` `images[]` (confirmed against `montage.png`):
+
+- **Keep** `kind_guess: diagram_or_photo` — copy the file from `_source/img/`
+  into `tmp/decks/<deck>/assets/` and place it with `content-media` /
+  `content-text-media` (or a free-form `.media-frame` `.layer`). It shows whole
+  (`object-fit:contain`) — a wide schema or tall screenshot letterboxes, never
+  crops. Reference it relatively, e.g. `../../assets/img/slide07-img0.png`.
+- **Drop** `full_bleed_background` / `banner` / `logo` — that is the source's
+  own chrome. We set our background and the DataArt logo. (Some exported decks
+  bake the WHOLE slide as one full-bleed image — never carry that; rebuild the
+  slide from its text + any inset diagrams.)
+- **Re-draw** `small_icon` with a kit library icon (kit-map § 8) when it helps.
+- **Never** put DataArt's own `fastfacts-map.png` on a migrated slide
+  (the `dataart_map_reused` gate blocks it).
+
+### 5. Splitting (when one source slide is too dense)
+
+If a slide carries two distinct ideas, or more text than any single layout holds
+at budget, split it into 2 kit slides that sit consecutively (preserving order):
+e.g. a 12-bullet slide → a `content-stacked-list` + a `content-icon-cards`, or
+an intro paragraph slide + a detail slide. Note the split in your summary so the
+user sees why the count grew. Splitting is encouraged; dropping is not.
+
+### 6. Verify — including content coverage
+
+Run the normal headless verify, then the migration coverage gate:
+
+```
+python3 scripts/verify-deck-headless.py tmp/decks/<deck>
+python3 scripts/check-migration-coverage.py tmp/decks/<deck>/_source/source.json tmp/decks/<deck>
+```
+
+The coverage gate compares each source slide's words against the built deck's
+text and flags any slide that lost > ~30% (content moved by a split still
+counts — it scores the whole deck). Restore or re-split anything flagged, or
+confirm the cut was intentional. This is the `migration_coverage_ok` preflight
+gate (migration mode only).
+
+## Definition of done (migration)
+
+- Every source slide is represented, in order (count equal, or higher only via
+  flagged splits — never lower without an explicit, surfaced reason).
+- Coverage gate passes (or each low slide is explained).
+- All slides on the kit: kit stylesheets only, our chrome, no source branding.
+- Real source diagrams carried over in `content-media` / `content-text-media`.
+- No DataArt skeleton force-inserted (only what the user opted into).
+- Standard gates pass (headless verify, em-dash, dataart_map_reused, asset_404).

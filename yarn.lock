@@ -99,6 +99,7 @@ __metadata:
     tsx: "npm:^4.0.0"
     typescript: "npm:^5.7.0"
     typescript-eslint: "npm:^8.0.0"
+    yaml: "npm:^2.9.0"
   languageName: unknown
   linkType: soft
 
@@ -10019,7 +10020,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:2.9.0, yaml@npm:^2.7.0":
+"yaml@npm:2.9.0, yaml@npm:^2.7.0, yaml@npm:^2.9.0":
   version: 2.9.0
   resolution: "yaml@npm:2.9.0"
   bin:

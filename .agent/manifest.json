@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "canonical": {
+    "instructions": ".agent/instructions.md",
+    "skills": ".agent/skills",
+    "agents": ".agent/agents",
+    "mcp": ".agent/mcp.json"
+  },
+  "providers": {
+    "claude": {
+      "instructions": "CLAUDE.md",
+      "skills": ".claude/skills",
+      "agents": ".claude/agents",
+      "mcp": ".mcp.json",
+      "invocationPrefix": "/"
+    },
+    "codex": {
+      "instructions": "AGENTS.md",
+      "skills": ".agents/skills",
+      "agents": ".codex/agents",
+      "mcp": ".codex/config.toml",
+      "invocationPrefix": "$"
+    }
+  }
+}

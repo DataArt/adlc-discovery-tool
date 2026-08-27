@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content - Phase timeline / project size (2067:1162)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 2067:1162 - PHASE TIMELINE / PROJECT-SIZE CONSTRUCTOR. N phases
+       of variable width (--span = duration units). Per phase: 32px title (top) +
+       an alternating tint panel (--a/--b) carrying a body + a footer (unit-cell
+       bar coloured per phase + a row of N person icons + an "N People, M weeks"
+       caption). Wide -> arrows straddle each phase boundary. USE ONLY when the
+       project size is known (team count + duration per phase); otherwise use
+       content-process or content-timeline. FLEXIBLE: 2-N phases, set --span and
+       add `--span` .ptl-cell per bar; alternate panel --a/--b; one arrow per gap. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-04"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Projects size and timeline examples</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <div class="layer phase-tl" style="left:153.333px; top:280px;">
+        <div class="ptl-col" style="--span:2;">
+          <p class="ptl-title">Data Governance Capabilities Assessment</p>
+          <div class="ptl-panel ptl-panel--a">
+            <p class="ptl-body">A data governance assessment project evaluates an organization&rsquo;s data management practices, ensuring alignment with compliance standards, business objectives, and quality requirements.</p>
+            <div class="ptl-foot">
+              <div class="ptl-bar ptl-bar--purple"><span class="ptl-cell"></span><span class="ptl-cell"></span></div>
+              <div class="ptl-people"><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""></div>
+              <p class="ptl-cap">2 People, 4 weeks</p>
+            </div>
+          </div>
+        </div>
+        <div class="ptl-col" style="--span:3;">
+          <p class="ptl-title">Data Governance Framework design</p>
+          <div class="ptl-panel ptl-panel--b">
+            <p class="ptl-body">A project to develop a data governance framework aims to establish formal procedures, guidelines, and policies to manage and protect data assets effectively across an organization.</p>
+            <div class="ptl-foot">
+              <div class="ptl-bar ptl-bar--blue"><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span></div>
+              <div class="ptl-people"><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""></div>
+              <p class="ptl-cap">4 People, 6 weeks</p>
+            </div>
+          </div>
+        </div>
+        <div class="ptl-col" style="--span:6;">
+          <p class="ptl-title">Data Catalog implementation</p>
+          <div class="ptl-panel ptl-panel--a">
+            <p class="ptl-body">A data catalog implementation project focuses on deploying a centralized repository to facilitate the organization, discovery, and management of an enterprise&rsquo;s data assets.</p>
+            <div class="ptl-foot">
+              <div class="ptl-bar ptl-bar--turquoise"><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span></div>
+              <div class="ptl-people"><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""></div>
+              <p class="ptl-cap">4 People, 12 weeks</p>
+            </div>
+          </div>
+        </div>
+        <div class="ptl-col" style="--span:4;">
+          <p class="ptl-title">Data Quality tool implementation</p>
+          <div class="ptl-panel ptl-panel--b">
+            <p class="ptl-body">A data quality tool implementation project involves integrating and configuring a system designed to monitor, cleanse, and ensure the accuracy and consistency of data across the enterprise.</p>
+            <div class="ptl-foot">
+              <div class="ptl-bar ptl-bar--sky"><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span><span class="ptl-cell"></span></div>
+              <div class="ptl-people"><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""><img src="../assets/icons/library/user.svg" alt=""></div>
+              <p class="ptl-cap">4 People, 9 weeks</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- wide -> arrows straddling each phase boundary (y757, slide-absolute) —
+           outside .phase-tl so `left` is slide-relative. Centred on the
+           cumulative-span boundary x: after spans 2 / 5 / 11 of 15. -->
+      <div class="layer" style="left:317px; top:757px; width:102.5px; height:10px;"><img src="../assets/icons/arrow-flow-wide.svg" style="display:block; width:100%; height:100%;" alt=""></div>
+      <div class="layer" style="left:640px; top:757px; width:102.5px; height:10px;"><img src="../assets/icons/arrow-flow-wide.svg" style="display:block; width:100%; height:100%;" alt=""></div>
+      <div class="layer" style="left:1285px; top:757px; width:102.5px; height:10px;"><img src="../assets/icons/arrow-flow-wide.svg" style="display:block; width:100%; height:100%;" alt=""></div>
+
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer footer-section txt-p7 c-text-default">Data Governance Proposal</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

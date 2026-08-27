@@ -91,20 +91,21 @@ yarn nx run lambda-auth:typecheck   # TypeScript check — auth handler
 
 ---
 
-## Claude Code (AI assistant)
+## AI coding tool (Claude Code or Codex)
 
-This project uses Claude Code with MCP servers for AWS, GitHub, and Atlassian access. On first use — and at the start of each session — load your credentials and launch:
+This project supports Claude Code and Codex as equally supported coding tools, both running the same `/dev`, `/design`, `/discovery`, etc. workflows from one canonical `.agent/` harness — see `09 Harness Generation.md`. Each tool uses MCP servers for AWS, GitHub, and Atlassian access. On first use — and at the start of each session — load your credentials and launch:
 
 ```bash
 source .env && claude
+# or
+source .env && codex
 ```
 
 If you haven't set up `.env` yet, copy the example file and fill in your credentials:
 
 ```bash
 cp .env.example .env
-# edit .env, then:
-source .env && claude
+# edit .env, then launch your tool as above
 ```
 
 See `06 MCP Setup.md` for the full credentials guide.
@@ -127,4 +128,5 @@ See `06 MCP Setup.md` for the full credentials guide.
 → See `01 Conventions.md` for commit format and branch naming.
 → See `03 Engineer Role.md` for the AI-assisted dev workflow.
 → See `04 AI Coding Tool Compatibility.md` for slash commands and agent roles.
-→ See `06 MCP Setup.md` to connect Claude Code to AWS, GitHub, and Atlassian.
+→ See `06 MCP Setup.md` to connect Claude or Codex to AWS, GitHub, and Atlassian.
+→ See `09 Harness Generation.md` for how the canonical harness renders into each tool's configuration.

@@ -67,4 +67,4 @@ If CI fails: ask Claude, "CI failed, can you check what's wrong and fix it?" —
 
 _Red arrow: CI is green — the PR is ready. Ask colleagues to review, then merge._
 
-→ See [Team Collaboration](./01%20Team%20Collaboration.md) for how commit/push/PR actually lands in this repo, and [Claude Desktop Setup](./02%20Claude%20Desktop%20Setup.md) for the manager-facing flow.
+→ See [Team Collaboration](./01%20Team%20Collaboration.md) for how commit/push/PR actually lands in this repo, plus the setup guide for [Claude Desktop](./02%20Claude%20Desktop%20Setup.md) or [Codex Desktop](./03%20Codex%20Desktop%20Setup.md).

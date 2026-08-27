@@ -13,8 +13,10 @@ The top-level articles cover conventions and setup — read [02 Doc Structure](.
 | [03 Engineer Role](./03%20Engineer%20Role.md)                                   | The engineer/AI division of labour — creative direction vs. workflow execution     |
 | [04 AI Coding Tool Compatibility](./04%20AI%20Coding%20Tool%20Compatibility.md) | How harness concepts map to each AI coding agent's primitives                      |
 | [05 Getting Started](./05%20Getting%20Started.md)                               | First-time setup and daily commands for the monorepo                               |
-| [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude Code to AWS, GitHub, and Atlassian via MCP                       |
+| [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude or Codex to AWS, GitHub, and Atlassian via MCP                   |
 | [07 Documentation Principles](./07%20Documentation%20Principles.md)             | Why these principles exist, what they are, and which structure fits which doc type |
+| [08 Branching Strategy](./08%20Branching%20Strategy.md)                         | Git Flow branching aligned with CI/CD environments — preview, Dev, Staging, Prod   |
+| [09 Harness Generation](./09%20Harness%20Generation.md)                         | How `.agent/` is rendered into Claude's and Codex's native projections             |
 
 ### Lifecycles
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cover — two logos (120:498)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- COVER · TWO LOGOS — light bg, used when the cover shows BOTH the DataArt
+       logo and the client's logo. DataArt COLORED logo top-left + a client-logo
+       placeholder box to its right; big dark heading lower-left; dataart.com
+       bottom-right. Replace .cover2-clientlogo's content with the client logo
+       <img>. Editable: heading + client logo. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-cover-light"></div>
+
+      <!-- DataArt colored logo (light bg) -->
+      <div class="layer cover2-logo"><img src="../assets/logo/dataart-logo-large.svg" alt="DataArt"></div>
+
+      <!-- client logo placeholder (fill with client's logo) -->
+      <div class="layer cover2-clientlogo">Client logo</div>
+
+      <!-- title -->
+      <p class="layer cover2-heading">Type title here</p>
+
+      <!-- website -->
+      <p class="layer cover2-web">dataart.com</p>
+    </div>
+  </div>
+</body>
+</html>

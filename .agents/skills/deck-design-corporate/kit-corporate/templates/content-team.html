@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Team (vertical cards)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 106:950 — grid of "person card vertical" (photo 150×150 + name
+       H13 20 + LinkedIn L2 16 link). `.cols-N` (3 → 509.333px), wraps into rows with
+       gap 32 (row pitch ≈ 247). VARIATION: 3–10 people (cols-N + extra rows). -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-05"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Our AI Adoption Leaders</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <div class="layer zone-content">
+        <div class="cols cols-3">
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Steve Wilson, AI Consultant</p><p class="pcv-link">https://www.linkedin.com/in/steve-wilson-cap-x/</p></div></div>
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Mike Peterson, Advisory CTO</p><p class="pcv-link">https://www.linkedin.com/in/mikepeterson3/</p></div></div>
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Raama Hari Dev, AI Strategist</p><p class="pcv-link">https://www.linkedin.com/in/raamadev/</p></div></div>
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Mustafa Mustansir, AI Consultant</p><p class="pcv-link">https://www.linkedin.com/in/mustafa-mustansir-biz/</p></div></div>
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Luidmila Dezhkina, Solution Architect</p><p class="pcv-link">https://www.linkedin.com/in/luidmila-dezhkina/</p></div></div>
+          <div class="person-card-v"><div class="pcv-photo"></div><div class="pcv-body"><p class="pcv-name">Dmytro Baykov, VP of AI, DataArt</p><p class="pcv-link">https://www.linkedin.com/in/dmytro-baikovv/</p></div></div>
+        </div>
+      </div>
+
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer footer-section txt-p7 c-text-default">Business Application Transformation for CFA Institute</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

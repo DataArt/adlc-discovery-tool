@@ -28,7 +28,7 @@ A secondary reason: frontier AI models follow ~150–200 instructions reliably b
 
 **Certainty principle** — architecture docs (HLD and LLD) state only settled outcomes. No comparisons, open questions, or rationale. Those belong in `Stories/<TICKET>/design/`. → See `docs/README.md`.
 
-**Don't auto-generate root context** — CLAUDE.md and its equivalents are the highest-leverage files in the harness. Generate a scaffold from the bootstrap prompt, then edit by hand. Auto-generated root context is generic; hand-edited root context is precise.
+**Don't auto-generate root context** — `.agent/instructions.md` is the highest-leverage file in the harness. Generate a scaffold from the bootstrap prompt, then edit it by hand. `CLAUDE.md` and `AGENTS.md` are deterministic renders of it produced by `yarn harness:generate`, never edited directly. Auto-generated root context is generic; hand-edited root context is precise.
 
 ---
 

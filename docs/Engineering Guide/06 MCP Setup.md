@@ -1,6 +1,6 @@
 # MCP Setup
 
-_Connect Claude Code to AWS, GitHub, and Atlassian via Model Context Protocol._
+_Connect Claude or Codex to AWS, GitHub, and Atlassian via Model Context Protocol._
 
 ---
 
@@ -66,22 +66,33 @@ A valid JSON response with your `Account` and `Arn` confirms the AWS MCP server 
 
 ---
 
-## 2. Load env vars and start Claude Code
+## 2. Generate provider configuration
+
+`.agent/mcp.json` is canonical. Generate `.mcp.json` for Claude and `.codex/config.toml` for Codex:
+
+```bash
+yarn harness:generate
+```
+
+## 3. Load env vars and start your coding agent
 
 Source the file in your current shell session, then launch:
 
 ```bash
 source .env && claude
+# or
+source .env && codex
 ```
 
-Claude Code picks up `.mcp.json` from the project root automatically and starts all configured MCP servers.
+Each tool picks up its generated provider-native configuration and starts the configured MCP servers.
 
 ---
 
-## 3. Verify connections
+## 4. Verify connections
 
 ```bash
 claude mcp list
+# or use the Codex MCP listing command in your installed Codex version
 ```
 
 All three servers should show as connected: `aws-mcp`, `github`, and `mcp-atlassian` (if Atlassian vars are set).

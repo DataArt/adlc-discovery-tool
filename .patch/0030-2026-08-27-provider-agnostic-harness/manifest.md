@@ -1,10 +1,10 @@
 # Patch 0030 — Provider-agnostic harness
 
-Introduces `.harness/` as the canonical AI harness and deterministic Claude/Codex projections for instructions, skills, agents, and MCP configuration. Adds the provider-aware generator, Codex desktop contribution guide, compatibility documentation, bootstrap integration, and supporting dependency/configuration changes.
+Introduces `.harness/` as the canonical AI harness and deterministic Claude/Codex projections for instructions, skills, agents, and MCP configuration. Adds the provider-aware generator, Codex desktop contribution guide, compatibility documentation, provider-selective bootstrap and patch regeneration flows, and supporting dependency/configuration changes.
 
 Generated provider projections (`CLAUDE.md`, `AGENTS.md`, `.claude/skills/`, `.claude/agents/`, `.agents/skills/`, `.codex/agents/`, `.mcp.json`, and `.codex/config.toml`) and `yarn.lock` are intentionally omitted. Regenerate the projections from the canonical harness and refresh the target repository's lockfile after applying.
 
-> Contains canonical harness changes. After applying, regenerate provider projections with `yarn harness:generate`.
+> Contains canonical harness changes. After applying, choose Claude, Codex, or both when regenerating provider projections.
 
 ## Added
 

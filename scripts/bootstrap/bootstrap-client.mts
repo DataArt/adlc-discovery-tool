@@ -2,7 +2,7 @@
 // Run via tsx (already this repo's convention for TS scripts — see apps/infra/cdk.json,
 // apps/lambda-auth's build), not node's native type-stripping.
 //
-// Does exactly five things, and nothing else — no free-text generation, no judgment calls.
+// Does exactly four things, and nothing else — no free-text generation, no judgment calls.
 // Same input always produces the same output; safe to re-run (skips work already done).
 //
 //   1. Literal find-replace of [[CLIENT_NAME]], [[GITHUB_ORG]], [[GITHUB_REPO]] across every
@@ -15,10 +15,10 @@
 //   4. Replace the starter-kit pitch README.md with CONTRIBUTING.md's content, then remove
 //      CONTRIBUTING.md — once bootstrapped, a team working in this repo needs local-dev/structure
 //      docs as their README, not "how to launch a new client engagement" (already done)
-//   5. Regenerate Claude and Codex projections from the canonical `.harness/` harness
 //
 // Invoked by the /bootstrap-client skill after it has collected and confirmed every value
-// with the developer — this script performs no Q&A of its own.
+// with the developer — this script performs no Q&A of its own. Provider projections are
+// regenerated separately after the developer chooses Claude, Codex, or both in the skill.
 //
 // Usage:
 //   yarn bootstrap:client \
@@ -391,12 +391,6 @@ function main() {
   const swapped = swapReadmeForContributing(answers);
   console.log(`  → ${swapped ? 'done' : 'skipped'}\n`);
 
-  if (!answers.dryRun) {
-    console.log('Step 5 — regenerate AI coding tool projections');
-    execFileSync('yarn', ['harness:generate'], { cwd: REPO_ROOT, stdio: 'inherit' });
-    console.log('  → Claude and Codex projections current\n');
-  }
-
   console.log('─'.repeat(60));
   console.log(
     answers.dryRun ? 'Dry run complete — re-run without --dry-run to apply.' : 'Bootstrap complete.'
@@ -413,6 +407,9 @@ function main() {
     );
     console.log(
       '  - Review `git diff` before committing — this touched every file containing [[CLIENT_NAME]], [[GITHUB_ORG]], or [[GITHUB_REPO]]'
+    );
+    console.log(
+      '  - Regenerate the selected AI coding tool projections — the bootstrap skill provides the matching command'
     );
   }
 }

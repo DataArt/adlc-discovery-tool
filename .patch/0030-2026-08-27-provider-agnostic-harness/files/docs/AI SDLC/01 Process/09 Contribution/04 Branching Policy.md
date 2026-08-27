@@ -25,18 +25,20 @@ gitGraph
 
 ## Before starting new work
 
-Always start from a fresh `main`, not wherever your last branch left off — start a new session per new task rather than continuing in an old branch's session:
+Always start from a fresh `main`, not wherever your last branch left off. Start a new assistant session for each task rather than continuing in an old branch's context.
 
-| Situation            | Example prompt                    |
-| -------------------- | --------------------------------- |
-| Starting a new task  | "switch to main and pull"         |
-| Just want to sync up | "pull latest version of the repo" |
+| Situation            | Example prompt                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------- |
+| Starting a new task  | "Switch to `main`, pull the latest changes, then create a feature branch for this task." |
+| Just want to sync up | "Pull the latest version of the repo."                                                   |
 
-Claude runs `checkout-main` and `pull` directly as named launch configs (`.claude/launch.json`) — no need to type git yourself.
+The assistant should confirm the resulting branch and whether `main` is current before beginning the task. If a command needs approval, approve it in the provider's normal command flow.
 
-1. Click **+** next to the project name to start a new session.
-2. Check the branch picker — pick `main`, or ask Claude to switch to it.
-3. Ask: "pull latest version of the repo."
+1. Start a new session for the task.
+2. Ask: "Switch to `main` and pull the latest changes."
+3. Ask: "Create a `<type>/short-description` branch for this task."
+
+The screenshots below show the same flow in Claude Desktop. Codex Desktop screenshots can be added later; the prompts and policy are the same for both providers.
 
 ![Claude Desktop — new session button and branch picker](/images/process/claude-desktop-new-session-branch.png)
 
@@ -44,7 +46,7 @@ _Red arrows: **+** starts a new session (left), the branch picker shows every lo
 
 ![Claude Desktop — "pull latest version of the repo" fast-forwards the working tree](/images/process/claude-desktop-pull-latest.png)
 
-Once it confirms the pull, you're on a clean, current `main` and ready to describe the next task.
+Once the assistant confirms the pull and new branch, describe the task in that session.
 
 ## Rules
 
@@ -55,13 +57,21 @@ Once it confirms the pull, you're on a clean, current `main` and ready to descri
 
 ## After opening a PR
 
-Watch the **CI** badge next to the PR bar — it turns from pending to pass/fail once checks run. A common failure is a deadlink the docs-site build check caught.
+After opening a PR, ask the assistant to monitor its checks:
+
+> Watch the PR checks and tell me when CI passes or what failed.
+
+A common failure is a dead link caught by the docs-site build. The screenshots below show Claude Desktop's CI indicator; other providers expose the same repository checks through their own interface.
 
 ![Claude Desktop — CI status badge on the PR bar](/images/process/claude-desktop-ci-status.png)
 
 _Red arrow: the CI badge next to your PR — click it to see what failed._
 
-If CI fails: ask Claude, "CI failed, can you check what's wrong and fix it?" — Claude fixes the issue and pushes the update to the same branch. Don't merge until CI is green.
+If CI fails, prompt:
+
+> CI failed. Check the failing checks, explain the cause, fix it on this branch, and ask before pushing.
+
+Don't merge until CI is green.
 
 ![Claude Desktop — CI badge turned green on the PR bar](/images/process/claude-desktop-ci-green.png)
 

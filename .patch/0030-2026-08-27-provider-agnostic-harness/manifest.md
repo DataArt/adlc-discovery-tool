@@ -272,6 +272,7 @@ Generated provider projections (`CLAUDE.md`, `AGENTS.md`, `.claude/skills/`, `.c
 - `.harness/skills/where-we-are/SKILL.md`
 - `.harness/skills/where-we-are/report-template.md`
 - `docs/AI SDLC/01 Process/09 Contribution/03 Codex Desktop Setup.md`
+- `docs/AI SDLC/01 Process/09 Contribution/05 Quick Walkthrough.md`
 - `docs/Engineering Guide/09 Harness Generation.md`
 - `scripts/harness/README.md`
 - `scripts/harness/generate.mts`

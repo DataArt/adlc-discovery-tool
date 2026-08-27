@@ -74,7 +74,6 @@ flowchart LR
     WS["Workshop evidence"] --> CS["Current State"] --> DOM["Domain findings"] --> PROB["Formal Problems"] --> GOAL["Goals"] --> SOL["Target State · Pilot"]
 
     classDef evidence fill:#3B82F6,stroke:#1D4ED8,color:#fff
-    classDef draft fill:#F59E0B,stroke:#B45309,color:#000
     classDef assessed fill:#F59E0B,stroke:#B45309,color:#000
     classDef outcome fill:#10B981,stroke:#047857,color:#fff
 

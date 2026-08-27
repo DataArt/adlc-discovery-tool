@@ -55,7 +55,7 @@ The repository supplies Codex with the same canonical engagement behavior as Cla
 | `.codex/agents/`     | Codex subagent definitions in TOML.                      |
 | `.codex/config.toml` | MCP server configuration.                                |
 
-These files are already generated and committed to the repository. Contributors do not need to generate them during setup. If the harness itself changes, maintainers edit the canonical files under `.agent/` and regenerate the provider projections.
+These files are already generated and committed to the repository. Contributors do not need to generate them during setup. If the harness itself changes, maintainers edit the canonical files under `.harness/` and regenerate the provider projections.
 
 ## Contribution guide
 

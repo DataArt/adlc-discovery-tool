@@ -1,6 +1,6 @@
 # Harness Generator
 
-Regenerates Claude Code's and Codex's configuration files from the canonical `.agent/` harness, so both tools can run this repo's `/dev`, `/design`, `/discovery`, etc. workflows independently. `.agent/manifest.json` maps canonical paths to each provider's output paths.
+Regenerates Claude Code's and Codex's configuration files from the canonical `.harness/` harness, so both tools can run this repo's `/dev`, `/design`, `/discovery`, etc. workflows independently. `.harness/manifest.json` maps canonical paths to each provider's output paths.
 
 ```mermaid
 flowchart LR
@@ -45,9 +45,9 @@ yarn harness:generate --provider claude  # scope to one provider (repeatable)
 yarn harness:generate --provider codex
 ```
 
-Never hand-edit `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.agents/`, or `.codex/` — edit `.agent/`, then regenerate.
+Never hand-edit `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.agents/`, or `.codex/` — edit `.harness/`, then regenerate.
 
-Adding a third provider: add its paths to `.agent/manifest.json`, add a `HarnessProvider` subclass under `providers/`, and register the constructor in `PROVIDER_CLASSES` in `generate.mts`.
+Adding a third provider: add its paths to `.harness/manifest.json`, add a `HarnessProvider` subclass under `providers/`, and register the constructor in `PROVIDER_CLASSES` in `generate.mts`.
 
 ## Links
 

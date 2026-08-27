@@ -21,9 +21,9 @@ flowchart LR
     H -.future engagement.-> Wind[Windsurf]:::portable
 ```
 
-Claude and Codex are active, independently usable projections of the canonical `.agent/` harness. The other tools remain documented portability targets.
+Claude and Codex are active, independently usable projections of the canonical `.harness/` harness. The other tools remain documented portability targets.
 
-Never edit `CLAUDE.md`, `AGENTS.md`, `.claude/skills/`, `.claude/agents/`, `.agents/skills/`, or `.codex/` directly. Edit `.agent/`, then run:
+Never edit `CLAUDE.md`, `AGENTS.md`, `.claude/skills/`, `.claude/agents/`, `.agents/skills/`, or `.codex/` directly. Edit `.harness/`, then run:
 
 ```bash
 # Both providers (default)
@@ -69,13 +69,13 @@ yarn harness:check --provider codex
 
 ## Canonical source and projections
 
-`.agent/` is the only source of truth:
+`.harness/` is the only source of truth:
 
-- `.agent/instructions.md` — shared project instructions
-- `.agent/skills/` — complete skill bundles, including scripts, references, templates, and assets
-- `.agent/agents/` — shared specialist-agent definitions
-- `.agent/mcp.json` — shared MCP server declarations
-- `.agent/manifest.json` — provider output mapping
+- `.harness/instructions.md` — shared project instructions
+- `.harness/skills/` — complete skill bundles, including scripts, references, templates, and assets
+- `.harness/agents/` — shared specialist-agent definitions
+- `.harness/mcp.json` — shared MCP server declarations
+- `.harness/manifest.json` — provider output mapping
 
 The generator renders complete root instructions rather than pointer files, so safety and project rules do not depend on either tool following a cross-file reference. Claude skill invocations remain `/skill`; Codex projections use `$skill`. Canonical relative skill paths use `{{skills_root}}` and are resolved per provider.
 
@@ -104,6 +104,6 @@ The following work regardless of tool — they are file-system conventions, not 
 - The `docs/` four-tier structure (HLD / LLD / Engineering Guide / Stories)
 - The certainty principle
 - The `07 Documentation Principles.md` doc-type cheat sheet
-- A single canonical root context file at `.agent/instructions.md`
-- Canonical `SKILL.md` bundles at `.agent/skills/`
+- A single canonical root context file at `.harness/instructions.md`
+- Canonical `SKILL.md` bundles at `.harness/skills/`
 - Persisted workflow state and human approval gates in ordinary repository artifacts

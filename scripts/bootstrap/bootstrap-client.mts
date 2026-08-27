@@ -15,7 +15,7 @@
 //   4. Replace the starter-kit pitch README.md with CONTRIBUTING.md's content, then remove
 //      CONTRIBUTING.md — once bootstrapped, a team working in this repo needs local-dev/structure
 //      docs as their README, not "how to launch a new client engagement" (already done)
-//   5. Regenerate Claude and Codex projections from the canonical `.agent/` harness
+//   5. Regenerate Claude and Codex projections from the canonical `.harness/` harness
 //
 // Invoked by the /bootstrap-client skill after it has collected and confirmed every value
 // with the developer — this script performs no Q&A of its own.
@@ -66,7 +66,7 @@ const PROJECT_JSON_FILES = [
 // would corrupt the tooling's own comments/docs — exclude it from Step 1 specifically.
 const SELF_EXCLUDE_PREFIXES = [
   'scripts/bootstrap/',
-  '.agent/skills/bootstrap-client/',
+  '.harness/skills/bootstrap-client/',
   '.claude/skills/',
   '.claude/agents/',
   '.agents/skills/',

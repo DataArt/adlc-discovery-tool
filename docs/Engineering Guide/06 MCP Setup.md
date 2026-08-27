@@ -68,7 +68,7 @@ A valid JSON response with your `Account` and `Arn` confirms the AWS MCP server 
 
 ## 2. Generate provider configuration
 
-`.agent/mcp.json` is canonical. Generate `.mcp.json` for Claude and `.codex/config.toml` for Codex:
+`.harness/mcp.json` is canonical. Generate `.mcp.json` for Claude and `.codex/config.toml` for Codex:
 
 ```bash
 yarn harness:generate

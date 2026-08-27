@@ -16,7 +16,7 @@ The top-level articles cover conventions and setup — read [02 Doc Structure](.
 | [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude or Codex to AWS, GitHub, and Atlassian via MCP                   |
 | [07 Documentation Principles](./07%20Documentation%20Principles.md)             | Why these principles exist, what they are, and which structure fits which doc type |
 | [08 Branching Strategy](./08%20Branching%20Strategy.md)                         | Git Flow branching aligned with CI/CD environments — preview, Dev, Staging, Prod   |
-| [09 Harness Generation](./09%20Harness%20Generation.md)                         | How `.agent/` is rendered into Claude's and Codex's native projections             |
+| [09 Harness Generation](./09%20Harness%20Generation.md)                         | How `.harness/` is rendered into Claude's and Codex's native projections           |
 
 ### Lifecycles
 

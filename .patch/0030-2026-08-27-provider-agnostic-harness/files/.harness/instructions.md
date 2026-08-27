@@ -1,6 +1,6 @@
 # ADLC Discovery Tool
 
-This file and the bundles under `.agent/` are canonical. `CLAUDE.md`, `AGENTS.md`, and provider directories are deterministic generated projections; edit `.agent/` and run `yarn harness:generate`.
+This file and the bundles under `.harness/` are canonical. `CLAUDE.md`, `AGENTS.md`, and provider directories are deterministic generated projections; edit `.harness/` and run `yarn harness:generate`.
 
 ## Why
 

@@ -51,7 +51,7 @@ export abstract class HarnessProvider {
 
   /** Renders `sourceRoot` into `targetRoot` and then deletes anything under
    *  `targetRoot` that no longer has a canonical source — a rename or deletion
-   *  in `.agent/` must not leave stale files behind in a provider's tree. */
+   *  in `.harness/` must not leave stale files behind in a provider's tree. */
   protected syncTree(sourceRoot: string, targetRoot: string): void {
     const expected = new Set<string>();
     this.renderTree(sourceRoot, targetRoot, expected);

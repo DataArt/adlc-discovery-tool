@@ -50,18 +50,22 @@ Against the confirmed base ref, collect:
 
 Classify every path as **Added**, **Updated**, **Renamed** (git reported `R<NN>`/`C<NN>` status — record both the old and new path, not just the new one), or **Deleted**.
 
-### Canonical skill filtering
+### Generated-file filtering
 
-Before presenting the list, remove generated provider skill paths:
+Before presenting the list, remove files that are reproducible from portable source files and therefore must not travel in a patch bundle:
 
 - `.claude/skills/**`
 - `.agents/skills/**`
 - `.claude/agents/**`
 - `.codex/agents/**`
+- `CLAUDE.md` and `AGENTS.md`
+- `.mcp.json` and `.codex/config.toml`
+- root `CHANGELOG.md`
+- dependency lockfiles: `yarn.lock`, `package-lock.json`, `pnpm-lock.yaml`, `bun.lock`, and `bun.lockb`
 
-Do **not** remove `.agent/skills/**` or `.agent/agents/**`: those are canonical sources and must remain eligible for the patch. If the same logical skill or agent appears under canonical and provider directories, keep only its `.agent/` changes.
+Do **not** remove `.harness/skills/**` or `.harness/agents/**`: those are canonical sources and must remain eligible for the patch. If the same logical skill or agent appears under canonical and provider directories, keep only its `.harness/` changes.
 
-Tell the developer which generated paths were omitted. Generated projections are reproducible with `yarn harness:generate` and must not travel in the bundle.
+Tell the developer which generated paths were omitted and group them by reason. Harness projections are reproducible with `yarn harness:generate`; dependency lockfiles are recreated with the target repo's package manager; the root changelog is recreated by the release workflow. Canonical changelogs nested inside portable source trees, such as `.harness/skills/<name>/CHANGELOG.md`, are not generated repository changelogs and remain eligible.
 
 ---
 
@@ -92,7 +96,7 @@ Create the bundle folder with:
 
 Deleted paths (and the old-path half of Renamed entries) are recorded in `manifest.md` only — there is no content to carry for a deletion.
 
-If the bundle contains any `.agent/skills/**` or `.agent/agents/**` path, add this note to `manifest.md`:
+If the bundle contains any `.harness/skills/**` or `.harness/agents/**` path, add this note to `manifest.md`:
 
 > Contains canonical harness changes. After applying, regenerate provider projections with `yarn harness:generate`.
 

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "canonical": {
-    "instructions": ".agent/instructions.md",
-    "skills": ".agent/skills",
-    "agents": ".agent/agents",
-    "mcp": ".agent/mcp.json"
+    "instructions": ".harness/instructions.md",
+    "skills": ".harness/skills",
+    "agents": ".harness/agents",
+    "mcp": ".harness/mcp.json"
   },
   "providers": {
     "claude": {

@@ -1,4 +1,4 @@
-// Regenerates every coding-tool projection from the canonical `.agent/` harness.
+// Regenerates every coding-tool projection from the canonical `.harness/` harness.
 // Adding a provider means adding a `HarnessProvider` subclass under `providers/`
 // and registering its constructor in PROVIDER_CLASSES — this file never branches
 // on a provider name.

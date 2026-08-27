@@ -4,13 +4,13 @@ _Portable conventions that apply regardless of which AI tool is used._
 
 ---
 
-## Root context file — `.agent/instructions.md` is canonical
+## Root context file — `.harness/instructions.md` is canonical
 
-`.agent/instructions.md` is the single authoritative root context source, loaded on every session — project instructions, rules, pointers. `CLAUDE.md` and `AGENTS.md` are deterministic generated projections of it, rendered by `yarn harness:generate`; neither is hand-edited directly. → See `09 Harness Generation.md` for how generation works.
+`.harness/instructions.md` is the single authoritative root context source, loaded on every session — project instructions, rules, pointers. `CLAUDE.md` and `AGENTS.md` are deterministic generated projections of it, rendered by `yarn harness:generate`; neither is hand-edited directly. → See `09 Harness Generation.md` for how generation works.
 
-Structure of `.agent/instructions.md`: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `07 Documentation Principles.md` for length budgets per doc type.
+Structure of `.harness/instructions.md`: WHY (2–3 sentences) → WHAT (rules + pointers) → HOW (commands / agents). Length: 60–130 lines. → See `07 Documentation Principles.md` for length budgets per doc type.
 
-Do not auto-generate the canonical file from scratch — edit `.agent/instructions.md` by hand for precision, then regenerate its projections. Auto-generated root context is generic; hand-edited root context is precise.
+Do not auto-generate the canonical file from scratch — edit `.harness/instructions.md` by hand for precision, then regenerate its projections. Auto-generated root context is generic; hand-edited root context is precise.
 
 ---
 

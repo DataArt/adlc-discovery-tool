@@ -93,7 +93,7 @@ yarn nx run lambda-auth:typecheck   # TypeScript check — auth handler
 
 ## AI coding tool (Claude Code or Codex)
 
-This project supports Claude Code and Codex as equally supported coding tools, both running the same `/dev`, `/design`, `/discovery`, etc. workflows from one canonical `.agent/` harness — see `09 Harness Generation.md`. Each tool uses MCP servers for AWS, GitHub, and Atlassian access. On first use — and at the start of each session — load your credentials and launch:
+This project supports Claude Code and Codex as equally supported coding tools, both running the same `/dev`, `/design`, `/discovery`, etc. workflows from one canonical `.harness/` harness — see `09 Harness Generation.md`. Each tool uses MCP servers for AWS, GitHub, and Atlassian access. On first use — and at the start of each session — load your credentials and launch:
 
 ```bash
 source .env && claude

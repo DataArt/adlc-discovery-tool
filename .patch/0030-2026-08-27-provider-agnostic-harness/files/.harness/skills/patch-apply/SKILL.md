@@ -54,11 +54,20 @@ If the manifest has no explicit **Renamed** section but its Summary describes a 
 
 Before applying, classify skill paths in the manifest:
 
-- `.agent/skills/**` — canonical; apply normally.
-- `.agent/agents/**` — canonical; apply normally.
+- `.harness/skills/**` — canonical; apply normally.
+- `.harness/agents/**` — canonical; apply normally.
 - `.claude/skills/**`, `.agents/skills/**`, `.claude/agents/**`, and `.codex/agents/**` — generated provider projections; do not apply.
 
-For a legacy bundle containing only provider skill or agent paths, stop and ask for a new bundle prepared from the source repo's canonical `.agent/**` changes. If canonical and generated copies are both present, ignore the generated copies, report them as derived duplicates, and continue with the canonical paths.
+Also ignore generated repository files if a legacy bundle contains them:
+
+- `CLAUDE.md` and `AGENTS.md`
+- `.mcp.json` and `.codex/config.toml`
+- root `CHANGELOG.md`
+- dependency lockfiles: `yarn.lock`, `package-lock.json`, `pnpm-lock.yaml`, `bun.lock`, and `bun.lockb`
+
+Report every ignored path and why. Regenerate harness projections once after canonical harness changes are applied, run the target repo's package manager to refresh its own lockfile when dependency manifests changed, and leave root changelog generation to the release workflow. Do not ignore canonical changelogs nested inside portable source trees, such as `.harness/skills/<name>/CHANGELOG.md`.
+
+For a legacy bundle containing only provider skill or agent paths, stop and ask for a new bundle prepared from the source repo's canonical `.harness/**` changes. If canonical and generated copies are both present, ignore the generated copies, report them as derived duplicates, and continue with the canonical paths.
 
 ---
 
@@ -111,7 +120,7 @@ Batch the confirmations sensibly (e.g. "these 6 are clean adds, apply all?") rat
 
 ### 5e — Regenerate provider skills
 
-If any `.agent/skills/**` or `.agent/agents/**` path was added, updated, renamed, or deleted, run `yarn harness:generate` once after all files in this bundle are reconciled. Treat the resulting provider changes as expected generated output; do not register them as separately applied patch files.
+If any `.harness/skills/**` or `.harness/agents/**` path was added, updated, renamed, or deleted, run `yarn harness:generate` once after all files in this bundle are reconciled. Treat the resulting provider changes as expected generated output; do not register them as separately applied patch files.
 
 ---
 

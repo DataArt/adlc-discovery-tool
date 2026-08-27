@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="xMidYMid meet" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group">
+<path id="Vector" d="M1 24V20.64L6.07999 18.51C6.45999 17.04 7.00999 15.66 7.70999 14.37L5.56 9.10001L8.73999 5.77L13.77 8.03C15 7.29 16.32 6.71001 17.72 6.32001L19.75 1H24.25L26.28 6.32001C27.68 6.71001 29 7.29 30.23 8.03L35.26 5.77L38.44 9.10001L36.29 14.37C37 15.66 37.55 17.04 37.92 18.51L43 20.64V24" stroke="var(--stroke-0, black)" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_2" d="M22 36V29" stroke="var(--stroke-0, black)" stroke-width="2"/>
+<path id="Vector_3" d="M28 24L39 29V34" stroke="var(--stroke-0, black)" stroke-width="2"/>
+<path id="Vector_4" d="M16 24L5 29V34" stroke="var(--stroke-0, black)" stroke-width="2"/>
+<path id="Vector_5" d="M22 44C24.21 44 26 42.21 26 40C26 37.79 24.21 36 22 36C19.79 36 18 37.79 18 40C18 42.21 19.79 44 22 44Z" stroke="var(--stroke-0, black)" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_6" d="M39 42C41.21 42 43 40.21 43 38C43 35.79 41.21 34 39 34C36.79 34 35 35.79 35 38C35 40.21 36.79 42 39 42Z" stroke="var(--stroke-0, black)" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_7" d="M5 42C2.79 42 1 40.21 1 38C1 35.79 2.79 34 5 34C7.21 34 9 35.79 9 38C9 40.21 7.21 42 5 42Z" stroke="var(--stroke-0, black)" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+<path id="Vector_8" d="M22 29C25.31 29 28 26.31 28 23C28 19.69 25.31 17 22 17C18.69 17 16 19.69 16 23C16 26.31 18.69 29 22 29Z" stroke="var(--stroke-0, #3453AD)" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square"/>
+</g>
+</svg>

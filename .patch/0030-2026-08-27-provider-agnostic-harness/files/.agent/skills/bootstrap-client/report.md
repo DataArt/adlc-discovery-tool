@@ -1,0 +1,55 @@
+# Bootstrap Report
+
+_Starts blank. Filled in as each stage is confirmed during a real `/bootstrap-client` run — becomes part of this instance's own history once committed alongside the bootstrap changes._
+
+| Field                 | Value                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| Client                | —                                                                                        |
+| Org Prefix            | —                                                                                        |
+| AWS Region / Location | —                                                                                        |
+| GitHub                | —                                                                                        |
+| Status                | ⏳ Not started                                                                           |
+| Stage                 | 1️⃣ Environment & Repo ⏳ · 2️⃣ Bootstrap ⏳ · 3️⃣ Infrastructure & Deploy ⏳ · 4️⃣ CI/CD ⏳ |
+
+## Progress
+
+| #   | Step                        | Status     | Notes |
+| --- | --------------------------- | ---------- | ----- |
+| 1   | Environment & Repo detached | ⏳ Pending |       |
+| 2.1 | Client identity Q&A         | ⏳ Pending |       |
+| 2.2 | Mechanical apply            | ⏳ Pending |       |
+| 2.3 | Narrative personalization   | ⏳ Pending |       |
+| 2.4 | Repo Discussions / giscus   | ⏳ Pending |       |
+| 3.1 | AWS SSO                     | ⏳ Pending |       |
+| 3.2 | Infra provisioning          | ⏳ Pending |       |
+| 3.3 | Deployment                  | ⏳ Pending |       |
+| 4.1 | CI/CD variables             | ⏳ Pending |       |
+
+<!--
+Status values : ⏳ Pending · 🔄 Active · ✅ Done · ⚠️ Blocked · ⏭️ Skipped
+-->
+
+## Values Collected
+
+| Value                                   |     |
+| --------------------------------------- | --- |
+| `CLIENT_NAME`                           |     |
+| `ORG_PREFIX`                            |     |
+| `AWS_REGION` / `LOCATION_SHORT`         |     |
+| `GITHUB_ORG` / `GITHUB_ORG_ID`          |     |
+| `GITHUB_REPO` / `GITHUB_REPO_ID`        |     |
+| `GISCUS_REPO_ID` / `GISCUS_CATEGORY_ID` |     |
+| `CREATE_OIDC_PROVIDER`                  |     |
+
+## Narrative Sections
+
+| Page           | Status |
+| -------------- | ------ |
+| Process        | ⏳     |
+| Capture        | ⏳     |
+| Problem Space  | ⏳     |
+| Solution Space | ⏳     |
+
+## Issues Encountered
+
+_Log anything that didn't go as expected — error and fix — so the next person bootstrapping a sibling instance doesn't hit it blind._

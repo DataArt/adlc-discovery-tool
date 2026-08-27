@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content - Framework (Fix -> Grow -> Transform)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 66:779 - PHASED FRAMEWORK. N columns (here 3), each = icon (top)
+       + blue title (H9) + a horizontal rule + body paragraph. Vertical dividers
+       between columns; a -> arrow sits in each gap to show progression
+       (Fix -> Grow -> Transform). Cols at x153/753/1353, body width 413.333.
+       FLEXIBLE: 2-4 columns; swap icons/titles/body. Use when a story is a
+       directional progression of named stages (maturity, phases, journey). -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-02"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Strategic Framework: Fix &rarr; Grow &rarr; Transform</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- vertical dividers between the 3 columns -->
+      <div class="layer" style="left:723px; top:311px; width:1.333px; height:581px; background:var(--c-surface-black);"></div>
+      <div class="layer" style="left:1320px; top:311px; width:1.333px; height:581px; background:var(--c-surface-black);"></div>
+
+      <!-- -> arrows in the gaps (progression) -->
+      <div class="layer" style="left:682px; top:546px; width:29px; height:10px;"><img src="../assets/icons/arrow-flow.svg" style="display:block; width:100%; height:100%; object-fit:contain;" alt=""></div>
+      <div class="layer" style="left:1279px; top:546px; width:29px; height:10px;"><img src="../assets/icons/arrow-flow.svg" style="display:block; width:100%; height:100%; object-fit:contain;" alt=""></div>
+
+      <!-- column heads — icon + blue title + rule, fixed at the top of each column -->
+      <div class="layer" style="left:153px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../assets/icons/icon-sample-1.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:153px; top:434px; width:413.333px;">Fix</p>
+      <div class="layer" style="left:153px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <div class="layer" style="left:753px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../assets/icons/icon-finance.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:753px; top:434px; width:413.333px;">Grow</p>
+      <div class="layer" style="left:753px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <div class="layer" style="left:1353px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../assets/icons/icon-sample-2.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:1353px; top:434px; width:413.333px;">Transform</p>
+      <div class="layer" style="left:1353px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <!-- DESCRIPTIONS — one bottom-anchored flex row (bottom:188 → bottom edge at
+           y892, the column-divider baseline). align-items:flex-start makes EVERY
+           column's body start at the SAME level (set by the tallest column), and
+           the whole group grows UPWARD together as content is added — so the
+           descriptions stay mutually aligned + bottom-pinned, never ragged. -->
+      <div class="layer" style="left:153px; top:567px; width:1613.333px; display:flex; gap:186.667px; align-items:flex-start;">
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Address legacy systems creating operational risk. Eliminate performance bottlenecks and workflow blockers.</p>
+          <p class="txt-h15 c-text-default">Migrate off platforms where maintenance cost exceeds their value.</p>
+          <p class="txt-h15 c-text-default">Stabilise the core so the next phase can build on solid ground.</p>
+        </div>
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Scale the platform to new markets and channels. Add the capabilities that unlock revenue.</p>
+          <p class="txt-h15 c-text-default">Harden reliability and observability as load and complexity grow.</p>
+          <p class="txt-h15 c-text-default">Turn the stabilised core into a platform that compounds value.</p>
+        </div>
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Re-imagine the operating model around AI-native workflows.</p>
+          <p class="txt-h15 c-text-default">Turn data into a competitive moat, not a maintenance burden.</p>
+          <p class="txt-h15 c-text-default">Position for the next decade of the business, not the last one.</p>
+        </div>
+      </div>
+
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer footer-section txt-p7 c-text-default">MMS Support Partnership Proposal</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

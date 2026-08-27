@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Pipeline / Process (118:1976)</title>
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/layouts.css">
+<link rel="stylesheet" href="../shared/components.css">
+</head>
+<body>
+  <!-- Canonical 118:1976 — PIPELINE / PROCESS CONSTRUCTOR. A chain of step cards
+       (`.pipe-step`) joined by `.pipe-arrow`, each with 0/1/2 colour labels
+       (`.tag.is-*`) on top; terminal `.pipe-step--accent`. N steps equal-fill
+       the row. Stack chains to compare (here: Without AI / With AI), each with a
+       row label + a summary line. Plain white slide. FLEXIBLE: N steps, 1+
+       chains, 0–2 labels/step, any tag colour. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg" style="background:var(--c-surface-white);"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">AI Integration Results Comparison</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- ── Chain 1: Without AI ───────────────────────────────────────────── -->
+      <p class="layer txt-h11 c-text-default" style="left:153.333px; top:280px;">Without AI</p>
+      <div class="layer pipeline" style="left:153.333px; top:341.333px;">
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">10 min</span></div><div class="pipe-body">Go through Test Case Steps</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">3 h</span></div><div class="pipe-body">Develop Test (Utilities, Mapping, Script, etc)</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">20 min</span></div><div class="pipe-body">Configure Input Data</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">10 min</span></div><div class="pipe-body">Dry Run</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">10 min</span></div><div class="pipe-body">Code Review</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-case-study">20 min</span></div><div class="pipe-body">Code Updates</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step pipe-step--accent"><div class="pipe-tags"></div><div class="pipe-body">Framework</div></div>
+      </div>
+      <p class="layer txt-h15 c-text-default" style="left:153.333px; top:560px;">Total Engineer&rsquo;s Time Spent:&nbsp;<span class="c-text-link">4 hours 15 minutes</span></p>
+
+      <!-- ── Chain 2: With AI ──────────────────────────────────────────────── -->
+      <p class="layer txt-h11 c-text-default" style="left:153.333px; top:620px;">With AI</p>
+      <div class="layer pipeline" style="left:153.333px; top:681.333px;">
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-turquoise">AI Agent</span><span class="tag is-purple">0 min</span></div><div class="pipe-body">Go through Test Case Steps</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-turquoise">AI Agent</span><span class="tag is-purple">0 min</span></div><div class="pipe-body">Develop Test (Utilities, Mapping, Script, etc)</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-yellow">QAA</span><span class="tag is-gray">10-20 min</span></div><div class="pipe-body">Configure Input Data</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-turquoise">AI Agent</span><span class="tag is-purple">0 min</span></div><div class="pipe-body">Dry Run</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-yellow">QAA</span><span class="tag is-orange">20 min</span></div><div class="pipe-body">Code Review</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step"><div class="pipe-tags"><span class="tag is-yellow">QAA</span><span class="tag is-orange">30-40 min</span></div><div class="pipe-body">Code Updates</div></div>
+        <span class="pipe-arrow"></span>
+        <div class="pipe-step pipe-step--accent"><div class="pipe-tags"></div><div class="pipe-body">Framework</div></div>
+      </div>
+      <p class="layer txt-h15 c-text-default" style="left:153.333px; top:900px;">Total Engineer&rsquo;s Time Spent:&nbsp;<span class="c-text-link">~1 hour 10 minutes</span></p>
+
+      <!-- footer: 2-slot -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">99</p>
+    </div>
+  </div>
+</body>
+</html>

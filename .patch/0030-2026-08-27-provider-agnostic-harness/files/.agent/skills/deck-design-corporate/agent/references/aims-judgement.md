@@ -1,0 +1,394 @@
+# AIMS judgement — operationalising the framework
+
+**Read this file when** running the AIMS pass — at orchestrator Step 2,
+and inside each skill's `AIMS` section. It owns the actual probes, the
+60/40 visibility rule, the hypothesis-first protocol, the depth dial,
+and the ambition floor.
+
+## Why this file exists
+
+`agent/AIMS64.md` declares the framework: four blocks (Approach,
+Interaction, Modularisation, Stewardship), each with a 60 % AI / 40 %
+human split, each with a column of human-owned decisions like
+_"interprets the real stakeholder need"_, _"chooses the interaction
+model"_, _"decides what becomes standard"_, _"interprets what signals
+mean"_.
+
+Without this file, those declarations stay declarations. The orchestrator
+asks `"what is the audience"` instead of probing the _real_ stakeholder
+need; the skill asks `"narrative or product flow?"` instead of committing
+to an interaction model; nothing actively defends ambition.
+
+This file is the methodology. The framework's claim is that _value moved
+to judgement_ — the AIMS pass is where that judgement happens. If the
+pass is shallow, the framework is decorative.
+
+## How callers use this file
+
+- `agent/orchestrator.md` Step 2 invokes the full pass (all four blocks).
+  Output: `hypotheses[]` from A; an `interaction_model` per hypothesis
+  from I; `selected_design_systems` and a `quality_bar` from M; an
+  `ambition_check` and a `trust_risks[]` from S. The two surviving
+  hypotheses become Direction A and Direction B at Step 5.
+- Each skill (`agent/skills/<name>/SKILL.md`) invokes a narrowed pass at
+  execution time — same four blocks, but artifact-specific probes
+  (the deck skills double down on narrative & audience belief;
+  digital-product-poc doubles down on interaction model).
+- The `scope_level` field from the brief / handoff selects depth (small
+  / medium / broad) — see the Depth dial below.
+
+## The 60/40 visibility rule
+
+The framework's premise is that AI handles ~60 % of execution and humans
+own ~40 % of judgement. For that split to mean anything in practice,
+**every decision the AIMS pass produces must be tagged with its
+provenance** — so the human reviewer knows what they actually decided vs
+what the AI assumed.
+
+In `review_package` (orchestrator Step 6), emit
+`decisions_provenance: { <decision_key>: <provenance> }` with values:
+
+- `ai_proposed` — the AI produced this; the human did not yet engage.
+  Must be confirmed or overridden in human review.
+- `human_decided` — the human explicitly chose this (either upstream in
+  the brief, or in a prior iteration).
+- `human_modified` — the AI proposed something, the human changed it.
+
+> _Why this matters:_ without provenance tags, every decision looks
+> equally "agreed". Half the value of the human-review step is forcing
+> the human to _engage_ with the AI's proposals; provenance is what
+> makes "did the human actually engage with this?" answerable.
+
+Required keys in `decisions_provenance` (at minimum):
+
+```
+- hypothesis_1, hypothesis_2, ...
+- interaction_model
+- selected_design_systems
+- quality_bar
+- direction_a, direction_b
+- ambition_role_for_each_direction
+- trust_risks
+```
+
+## Hypothesis-first protocol (Approach output)
+
+The single biggest leverage point: **A produces hypotheses, not just a
+"normalised brief".** Hypotheses are testable claims about what would
+move the business needle. They become the _spine_ of the rest of the
+pass — I picks interaction models per hypothesis, M selects systems per
+hypothesis, S validates each — and ultimately the two surviving
+hypotheses become Direction A / Direction B at Step 5.
+
+### Hypothesis template (use this exact shape)
+
+```
+H<n>: If we <move>, <stakeholder> will believe we can <outcome>,
+       because <reason>.
+       Risk: <one-liner of what could go wrong>.
+       Evidence we'd need: <one-liner of what would prove or disprove>.
+       Ambition role: bold | defensible.
+```
+
+### Rules
+
+- Produce 2–4 hypotheses (count depends on depth dial below).
+- Each `<move>` must be **substantively different** — not cosmetic. If
+  H1 and H2 differ only in colour scheme, they're not hypotheses, they
+  re skins.
+- Among the produced hypotheses, **at least one must be `bold`** (takes
+  a creative position the stakeholder might push back on) and **at
+  least one must be `defensible`** (the safe-but-credible option). The
+  human-review step picks between them; if both are safe, there's no
+  real decision happening.
+- Each hypothesis must name its `<stakeholder>` precisely — not "the
+  user" but "the sales VP reviewing the deck on Thursday" or "the
+  workflow operator who currently uses three apps to do this".
+
+### Example (deck context)
+
+```
+H1: If we lead with a single big statistic about audit-cycle waste,
+     the sales VP will believe DataArt can compress their delivery
+     pipeline, because the number is verifiable and visible.
+     Risk: feels generic if the stat is wrong-feeling.
+     Evidence we'd need: pull the real audit-cycle number from the
+     prior client engagement.
+     Ambition role: defensible.
+
+H2: If we structure the deck as a side-by-side "current vs after"
+     screenshot story, the sales VP will believe we can take over
+     their next refactor, because we show, not tell.
+     Risk: only works if the "after" screenshot is convincing —
+     filler mocks hurt more than help.
+     Evidence we'd need: a real "after" mock from the kit, not a
+     placeholder.
+     Ambition role: bold.
+```
+
+## Depth dial — adapt by `scope_level`
+
+All four blocks always run. **Depth** changes by scope_level.
+
+| `scope_level` | Hypotheses | A probes | I probes | M probes | S probes |
+| ------------- | ---------- | -------- | -------- | -------- | -------- |
+| `small`       | 2          | 2        | 2        | 1        | 2        |
+| `medium`      | 2–3        | 4        | 3        | 2        | 3        |
+| `broad`       | 3–4        | 6+       | 5        | 4        | 4        |
+
+> _Why never skip:_ the framework explicitly mentions partial
+> combinations like `A·M·S` (pre-sale, no Interaction) and `M·S`
+> (support only). In our orchestrator we don't skip blocks — we run all
+> four — because even pre-sale work needs an interaction-model
+> commitment (live presentation vs leave-behind is an I decision), and
+> even support work needs an A check (is this still the same
+> stakeholder, same need, or has it drifted?). Skipping a block
+> silently drops judgement that may matter.
+
+`scope_level` is computed at Step 1 of the orchestrator (in standalone
+mode: ask the user once; in handoff mode: read from the envelope).
+
+## A — Approach probes
+
+Approach interprets the real stakeholder need, sets success criteria,
+and produces hypotheses.
+
+### Stakeholder reality (`small`: pick 1; `medium`: pick 2; `broad`: all 3)
+
+1. **Stated vs implied need.** What the brief literally asks for vs what
+   the stakeholder is actually trying to achieve. Where do those
+   diverge? (e.g., "build a deck about our refactor service" vs
+   "convince the customer their refactor is overdue").
+2. **Regret check.** What would make this stakeholder regret choosing us
+   six months from now? Concrete failure mode, not platitudes.
+3. **Past-attempts diff.** What did past attempts at this fail to
+   deliver, and why? If this is the first attempt, what does the
+   stakeholder fear about it?
+
+### Success criteria (`small`: pick 1; `medium`: pick 1; `broad`: both)
+
+4. **Measurable target.** What does success look like six months out,
+   measurably? Pipeline conversions, deals closed, ARR, user adoption,
+   internal sign-off — name the metric.
+5. **Failure target.** What outcome would prove this was a bad use of
+   budget? (Often more diagnostic than the success target.)
+
+### Market context (`medium`+: pick 1; `broad`: both)
+
+6. **Category convention.** What do peer / competitor artifacts in this
+   space look like? What's the expected shape, and where do we want to
+   deliberately deviate?
+7. **Audience saturation.** What has this audience seen too much of
+   already that we should avoid (decorative SaaS hero with three
+   bullets, six-card feature grid, fake-logo wall)?
+
+### Hypothesis production (`always`)
+
+8. **Generate hypotheses** per the template above. Count per depth dial.
+
+### Approach output
+
+Feeds `review_package.{normalised_brief, audience_or_user, business_goal,
+emotional_target, belief_target, success_metric, failure_signal,
+category_convention_note, audience_saturation_note, hypotheses[]}` plus
+`decisions_provenance.hypothesis_<n>`. Canonical schema in
+`review-presentation.md § Surface 2`.
+
+## I — Interaction probes
+
+Interaction commits to a model per hypothesis. The orchestrator's job at
+this step is to make the commitment _explicit_, not infer it from
+context.
+
+### Interaction model commitment (`always`)
+
+For **each hypothesis**, pick one model. Don't allow "tbd" or "mix":
+
+- **Deck artifacts:** `live_presentation` (someone walks through it) |
+  `leave_behind_pdf` (read alone after meeting) |
+  `interactive_walkthrough` (web-served, paced by reader) |
+  `async_send_and_forget` (email-attached).
+- **Product POC artifacts:** `linear_wizard` (steps with a clear next) |
+  `dashboard_exploration` (data + filters, user drives) |
+  `query_driven` (search/command-first) | `event_stream` (live feed,
+  reactive) | `async_task_queue` (submit, come back later).
+
+### Control & override moments (`medium`+)
+
+- Where can the user back out, undo, save state, re-enter, share?
+- For decks: where in the flow can the presenter pause, take a question,
+  fork the narrative? (live_presentation) Or: how does the reader know
+  what's next? (leave_behind_pdf).
+
+### Edge cases & constraints (`broad`)
+
+- Device: desktop-only, mobile-OK, projected on a screen?
+- Locale: English only, multi-lang?
+- Accessibility: contrast, focus order, screen-reader, reduced-motion?
+- Performance: how long can first viewport take?
+- Offline: must it work without network?
+
+### Interaction output
+
+Feeds `review_package.{interaction_models[], control_moments,
+constraints, first_viewport_strategy}` plus
+`decisions_provenance.interaction_model`. Canonical schema in
+`review-presentation.md § Surface 2`.
+
+## M — Modularisation probes
+
+Modularisation picks the systems and references. The probes here
+distinguish "select-a-design-system" mechanics (which the skills handle)
+from the _governance_ question (which the orchestrator owns).
+
+### Standardisation (`medium`+)
+
+- Does anything in this artifact become reusable across future
+  decks/products? (A new template? A composed component? A new style of
+  proof block?) If yes, the M output flags it — the kit owner can
+  promote it later.
+
+### Quality bar (`always`)
+
+Set explicitly, never inferred:
+
+- `pre_sale_credibility` — must look credible, doesn't need to ship.
+- `mvp_for_production` — must work, will be iterated.
+- `production_grade` — must ship as-is, full quality.
+
+This drives how strictly composition rules apply in the skill (e.g.,
+shadcn FieldGroup discipline is mandatory at `production_grade`, can be
+relaxed at `pre_sale_credibility`).
+
+### Engineering reality (`broad`)
+
+- What's the handoff after this POC ships? Real backend, mocked data,
+  pure demo? Names of repos, owners, hand-off date?
+- Does this need to integrate with existing systems? Auth, telemetry,
+  feature flags?
+
+### Iteration governance (`broad`, iteration runs only)
+
+- What guardrails must persist across iteration runs? (E.g., "never
+  change the cover slide", "logo position is locked", "this section is
+  out of scope for this iteration".)
+
+### Modularisation output
+
+Feeds `review_package.{selected_contexts, selected_design_systems,
+selected_references, required_integrations, runtime_preset,
+quality_bar, reusable_candidates}` plus `engineering_handoff` (at
+`broad` only), `iteration_guardrails` (iteration only), and
+`decisions_provenance.{selected_design_systems, quality_bar}`. Canonical
+schema in `review-presentation.md § Surface 2`.
+
+## S — Stewardship probes
+
+Stewardship is where ambition is defended and trust is protected. The
+framework explicitly says it must _not flatten ambition_ — this is the
+operational implementation.
+
+### Ambition floor (`always`)
+
+After A produces hypotheses with `ambition_role`, and I commits
+interaction models, walk through the _bold_ hypotheses one more time:
+
+- Did the bold hypothesis get trimmed for safety during I (interaction
+  model commitment) or M (quality bar) selection? If yes, **re-bold it
+  before Step 5**.
+- Concrete checks: is the bold direction's headline punchy or
+  passive-aggressive? Does the bold direction's interaction model
+  actually risk anything (a confident claim, a different layout, an
+  unconventional opener), or is it cosmetically different from the
+  defensible one?
+- If both surviving hypotheses ended up safe after the M pass, the
+  ambition_check fails: redo or escalate to human.
+
+Emit `ambition_check: { both_safe: bool, bold_direction_trimmed: bool,
+notes: string }`.
+
+### Trust risk (`always`)
+
+- What specific element in this artifact could erode the stakeholder's
+  trust? List concrete items, not generalities. Examples:
+  - "Logo wall has placeholder logos — must replace before send."
+  - "Premium adjectives ('best-in-class', 'cutting-edge') without
+    backing — strip or back with evidence."
+  - "Six-card feature grid that's just filler — replace with three
+    meaningful claims."
+  - "Generic 'we believe in collaboration' statement — name the
+    specific behaviour instead."
+- For client-facing concept work: at least 2 trust risks should be
+  surfaced. If you can't find any, you didn't look hard enough.
+
+### Iteration prioritisation (`iteration runs only`)
+
+- Of all the feedback from the previous run, what was the **one** most
+  important thing to fix? What was noise?
+- What's preserved on purpose vs preserved by inertia?
+
+### Follow-up path (`medium`+)
+
+- After this artifact ships, what's the next step? Designer review
+  before delivery? Engineering handoff? Pitch meeting? Iteration based
+  on stakeholder feedback?
+- Who owns that next step?
+
+### Stewardship output
+
+Feeds `review_package.{ambition_check, trust_risks, follow_up_path,
+risks, escalation_flags}` plus `iteration_priority` (iteration only)
+and `decisions_provenance.ambition_role_for_each_direction`. Canonical
+schema in `review-presentation.md § Surface 2`.
+
+## Skill-level adaptations
+
+The skills invoke the same probes, but emphasise different blocks:
+
+### deck skills (studio + corporate)
+
+- **A double-down on narrative & audience belief.** Stakeholder reality
+  probes get more weight: "What does the audience already believe?
+  What evidence would surprise them? What's the one slide they'll
+  quote afterwards?".
+- **I — commit to presentation mode.** `live_presentation` vs
+  `leave_behind_pdf` vs `interactive_walkthrough` drives everything
+  downstream: slide count, density, where proof sits, whether to write
+  speaker notes.
+- **M — flag slide-level reusables.** When a custom sub-object is
+  introduced, ask: "Does this become a new kit template?".
+- **S — cover-slide ambition check.** The cover is the most visible
+  trim-for-safety target. Verify it's still striking after S.
+
+### digital-product-poc
+
+- **A — desirability is the only intent.** `digital-product-poc` is
+  promo-only (`pitch_concept_site`). The opening probe is "what does
+  the client need to BELIEVE after seeing this, and what would make
+  them say 'no thanks'?". Then the standard regret-check + measurable
+  success metric.
+- **I — narrative interaction model.** Pick the promo narrative model
+  (hero-led / proof-led / story-led / problem-agitate-resolve) and
+  apply it consistently across sections. Belief precedes interaction —
+  the first viewport must land the claim before scroll.
+- **M — engineering reality drives quality_bar.** If this POC will be
+  handed to engineering for a real build, `quality_bar:
+mvp_for_production`. If it stays as a demo / pitch artifact,
+  `pre_sale_credibility`.
+- **S — anti-AI-signal rules become operational here.** Trust risks
+  for promo: fake testimonials, generic feature grids, premium
+  adjectives without proof, SaaS-app-cliché compositions, any section
+  that would read identical on five unrelated B2B sites.
+
+## What this file does **not** own
+
+- Skill-specific composition rules (those live in
+  `agent/skills/<name>/references/*.md`).
+- The Markdown brief / JSON spec / AskUserQuestion plumbing for review
+  (those live in `agent/references/review-presentation.md`).
+- The list of fields in `review_package` / `human_review` /
+  `skill_handoff` (owned by `orchestrator.md` Steps 6/7/8).
+- Routing decisions (deck vs product) — `orchestrator.md` Steps 1–3.
+
+This file is only the **methodology** — the probes and rules that turn
+AIMS64 from a poster into an operating model.

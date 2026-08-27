@@ -1,0 +1,568 @@
+# Kit map — DataArt Corporate Slides Kit
+
+**Read this before drafting any slide.** It is the operational dictionary
+for the **Corporate** kit: canonical pixel positions, colour tokens,
+typography ramp, backgrounds, the ~30 templates with their usage
+captions, the deck-assembly order, and the content-shape → template
+chooser. Detail that does _not_ change shape per slide lives here so
+SKILL.md can stay terse.
+
+The kit is a brand-new visual system ported 1:1 from the Figma file
+_"DataArt Slides Design Element Kit"_ (page "UI Library"). It is **not**
+a re-skin of any legacy deck kit. Source files:
+
+- `kit-corporate/shared/tokens.css` — colours, typography, canvas.
+- `kit-corporate/shared/layouts.css` — backgrounds, zones, chrome, layouts.
+- `kit-corporate/shared/components.css` — atoms & molecules.
+- `kit-corporate/templates/*.html` — the ~30 canonical templates.
+- `kit-corporate/showcase/index.html` — visual index + the per-template
+  "how I use this" notes that §5 below condenses.
+
+---
+
+## 1. Canvas, zones, and canonical positions
+
+The slide canvas is **fixed at 1920 × 1080 px** (Figma-native 16:9).
+The page is centred via `.slide-stage` + `.slide` (tokens.css); a
+`--slide-scale` transform auto-fits smaller viewports.
+
+Side margins are a symmetric **153.333 px** → a **1613.333 px** content column.
+Column gap is a fixed **42.667 px**. The following positions are
+**canonical** on every content slide:
+
+| Element               | Class                              | Position / size                                 | Notes                                   |
+| --------------------- | ---------------------------------- | ----------------------------------------------- | --------------------------------------- |
+| Heading zone          | `.zone-heading` + `.slide-heading` | (153.333, 114.667), width 1613.333              | heading text is H3 64 (see §3)          |
+| Accent rule (1-line)  | `.heading-rule`                    | (153.333, **210.667**), 146.667×8               | bottom of a 1-line h96 heading          |
+| Accent rule (2-line)  | `.heading-rule.is-2line`           | (153.333, **297.333**), 146.667×8               | bottom of a 2-line h182.667 heading     |
+| Content zone (1-line) | `.zone-content`                    | top **280**, height 650.667 → **ends y930.667** | nothing crosses y930.667                |
+| Content zone (2-line) | `.zone-content.is-2line`           | top **358.667**, height 572 → ends y930.667     | used when heading wraps to 2 lines      |
+| Logo (content slides) | `.logo`                            | (1569.333, 141.333), **197.333×32**, top-right  | small logo; use **colored** on light bg |
+| Footer tagline        | `.footer-tagline`                  | (153.333, **985.333**)                          | e.g. "Your Partner for Progress"        |
+| Footer section        | `.footer-section`                  | (568, 985.333)                                  | current section name (3-slot footer)    |
+| Page number           | `.page-number`                     | flush-**right** @153.333, y985.333              | text-align right                        |
+
+- **Heading character limits:** 1-line ≤ 50 chars; 2-line ≤ 100 chars
+  (keep the heading inside its zone).
+- **Footer slots:** 3-slot = tagline + section + page (default on content
+  slides); **2-slot = tagline + page** (when there's no section topic);
+  `footer--website` = "dataart.com" only (covers). Tagline/page colours
+  flip to white on dark slides.
+- **Column grid:** `.cols-N` equal-fill inside the content zone — widths
+  1→1613.333 · 2→785.333 · 3→509.333 · 4→370.667 · 5→289.333 · 6→233.333 (gap 42.667). Pick N by the
+  item count so a row is always full and text never overflows.
+- **Covers** use a **large** logo (white on dark title bgs, colored on the
+  light two-logo cover) and full-page vertical centring (`.stage-center`).
+- **Logo colour rule (hard):** the **colored** logo
+  (`dataart-logo-{small,large}.svg`) is for **light backgrounds only**. On any
+  **dark / coloured** background (covers, section dividers, statement, dark
+  panels) use the **white** logo (`dataart-logo-{small,large}-white.svg`) — a
+  white outline faceted mark + white wordmark. Never place the colored logo on
+  a dark slide. (Content slides are light → colored small logo; the cover &
+  dark slides → white.)
+
+---
+
+## 2. Colour tokens
+
+Every colour is a CSS variable in `tokens.css`. Apply via a `.c-*` helper
+or a token reference. **Never hardcode brand hex literals.**
+
+**8 primitive families** (swatch fills are authoritative; steps per
+tokens.css):
+
+| Family    | Steps                                                                                                                          | Notes                                        |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| Gray      | 0 `#fff` · 50 `#f8fafa` · 100 `#42484b` · 200 `#e2e6e9` · 300 `#373d41` · 400 `#7d8486` · 500 `#2f3539` · 600 `#000`           | **not a tint ramp** — a set of working greys |
+| Blue      | 0 `#ebeef7` · 50 `#d2d7e8` · 100 `#7b87a8` · 200 `#5d78c0` · 300 `#4961b3` · **400 `#3453ad`** · 500 `#284086` · 600 `#213773` | **Blue 400 is THE single brand accent**      |
+| Sky       | 200 `#cbf2ff` · 300 `#89e2ff` · 400 `#53cff8` · 500 `#21b9ec` · 600 `#0095c7`                                                  | categorical accent only                      |
+| Yellow    | 200 `#fef9d7` · 300 `#ffed6b` · 400 `#ffde55` · 500 `#f2c012` · 600 `#cfa200`                                                  | categorical / baked into vivid title bgs     |
+| Turquoise | 200 `#b5f1ee` · 300 `#73e0da` · 400 `#2bc6bf` · 500 `#08a8a4` · 600 `#067c7a`                                                  | categorical accent only                      |
+| Red       | 200 `#ffdbd6` · 300 `#ff7b69` · 400 `#f0503c` · 500 `#d33a26` · 600 `#9e2111`                                                  | categorical accent only                      |
+| Purple    | 200 `#ddc5fe` · 300 `#a77fe5` · 400 `#70529f` · 500 `#5c4089` · 600 `#482d72`                                                  | categorical accent only                      |
+| Orange    | 200 `#fff0d2` · 300 `#ffd380` · 400 `#ffb133` · 500 `#e58d00` · 600 `#a56709`                                                  | 400 = case-study tag gradient                |
+
+**Semantic tokens:**
+
+| Token                                   | Value                | Use                                                  |
+| --------------------------------------- | -------------------- | ---------------------------------------------------- |
+| `--c-text-default`                      | `#000` (Gray 600)    | body text on light bg                                |
+| `--c-text-contrast`                     | `#fff` (Gray 0)      | text on dark bg                                      |
+| `--c-text-link`                         | Blue 400 `#3453ad`   | links                                                |
+| `--c-icon-accent` / `--c-border-blue`   | Blue 400 `#3453ad`   | accent icons, card borders                           |
+| `--c-surface-white`                     | `#fff`               | default surface                                      |
+| `--c-surface-black`                     | `#000`               | black surface / dividers-as-fill                     |
+| `--c-surface-blue` / `--c-surface-dark` | Blue 400 `#3453ad`   | number boxes, dark surfaces                          |
+| `--c-surface-gray-light`                | `#f8fafa` (Gray 50)  | light card fill                                      |
+| `--c-surface-gray-dark`                 | `#e2e6e9` (Gray 200) | dividers / zebra / `--alt` rows / photo placeholders |
+
+> **Mono-accent rule.** Almost every "accent" on a slide is **Blue 400**
+> (links, card numbers/number boxes, icon-block titles, highlighted
+> phrases, card borders). Keep slides mono-accent unless a slide must
+> distinguish categories — then reach for Sky / Turquoise / Yellow /
+> Red / Purple / Orange. Helpers: `.c-blue .c-sky .c-yellow .c-turquoise
+.c-red .c-purple .c-orange .c-white .c-black .c-text-default
+.c-text-contrast`.
+
+---
+
+## 3. Typography (Arial active set)
+
+Apply one `.txt-*` class for size/weight/line-height. Colour is set
+separately via `.c-*`. Family = Arial. Headings H0–H6 use line-height
+1.33; everything else 1.25. Only H14 is Bold. The ramp is intentionally
+**non-contiguous** (names match Figma; greyed-out rows were pruned).
+
+| Role            | Class                                      | Size                                           | Used for                                                |
+| --------------- | ------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------- |
+| Heading 74      | `.txt-h0`                                  | 74                                             | cover & statement headings (big-title moments)          |
+| Heading 64      | `.txt-h1`                                  | 64                                             | section-divider & final headings                        |
+| Heading 48      | `.txt-h3` / `.slide-heading`               | 48                                             | **standard slide heading** (top of every content slide) |
+| Heading 40      | `.txt-h5`                                  | 40                                             | card titles, split/process headings                     |
+| Heading 28      | `.txt-h9`                                  | 28                                             | sub-headings, comparison/numbered-card titles           |
+| Heading 24      | `.txt-h11`                                 | 24                                             | sheet header / lead-ins, summary lines                  |
+| Heading 21      | `.txt-h12`                                 | 21                                             | **workhorse card body** size                            |
+| Heading 18 bold | `.txt-h14`                                 | 18 **bold**                                    | small emphasis labels (comparison sub-heads)            |
+| Heading 18      | `.txt-h15`                                 | 18                                             | small body                                              |
+| Paragraph 16    | `.txt-p2`                                  | 16                                             | paragraph body                                          |
+| Paragraph 14    | `.txt-p5`                                  | 14                                             | captions                                                |
+| Paragraph 12    | `.txt-p7`                                  | 12                                             | **footer & fine print everywhere**                      |
+| Tag             | `.txt-tag`                                 | 12 uppercase, tracking 1.44                    | chips                                                   |
+| Links           | `.txt-l2` 16 · `.txt-l4` 14 · `.txt-l6` 12 | underlined links (e.g. LinkedIn on team cards) |
+
+Weight modifiers: `.is-bold` (700) / `.is-regular` (400) on any `.txt-*`.
+
+- **Locked size-remap** — components built on Figma's pruned sizes snap
+  to the nearest active size (ties round up): **50→48, 44→48, 36→40,
+  32→28, 30→28, 26→28, 20→21, 15→14, 13→14**. So a card may render a
+  "literal" 28/40 even though the curated `.txt-*` set lists only the
+  active ladder. The slide heading is Figma H4 44 → snapped to **H3 48**.
+- **Title → body pairing gap** (set by **title** size, tokens
+  `--gap-pair-lg/md/sm/xs`): title ≥32 → **24**; 26–30 → **20**;
+  21–24 → **18**; 18–20 → **16**.
+
+---
+
+## 4. Backgrounds
+
+Drop a `<div class="layer bg bg-…">` as the FIRST child of `.slide`.
+Two families, each role-bound (Figma 121:693/694 — **not**
+interchangeable):
+
+**Title (dark) `.bg-title-01 … 06` — split into two role pools:**
+
+- **Vivid pool 03 / 04 / 05** (warm accents) → **cover + final**.
+  Cover = 03 (pool 03/04/05). **Final = 05 — `bg-title-04` is FORBIDDEN on
+  the final slide** (final pool is {03, 05} only). Keep cover and final on
+  different vivid bgs.
+- **Muted pool 01 / 02 / 06** → **section dividers**, ONE per section,
+  rotating by section index (1→01, 2→02, 3→06, 4→01, …).
+- `statement.html` is its own dark format and keeps **bg-title-06**.
+
+**Content (light) `.bg-content-01 … 08`** → content slides. Pick **ONE
+per section** and reuse it on every slide in that section (so a section
+reads as a unit).
+
+**`.bg-cover-light`** → only the two-logo cover (`cover-2logo.html`).
+
+Some use-as-is and constructor slides are **plain white** (no bg layer),
+e.g. pipeline / next-steps panels carry their own colour.
+
+---
+
+## 5. TEMPLATE CATALOG (~30 templates)
+
+Located at `kit-corporate/templates/`. Each is a full slide ready to
+copy. Node = Figma node id (`—` = flat image, no structured node).
+Captions condensed from showcase §8/§9/§10 `.use` notes.
+
+### Covers / title slides (§8)
+
+| Template               | Node    | Use for / varies                                                                                                                               |
+| ---------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cover.html`           | —       | **Slide 1, standard.** Dark bg (03) + white large logo + H0 74 title + dataart.com. Use when there's no client logo.                           |
+| `cover-2logo.html`     | 120:498 | **Slide 1, partnership variant.** Light bg + colored DataArt logo + client-logo slot + dark title. Use whenever the deck must show both logos. |
+| `section-divider.html` | —       | **Each chapter start.** Muted bg (01/02/06) + big chapter number (auto-increment) + section title. One per section.                            |
+| `final.html`           | —       | **Closing slide.** Vivid bg **05** (NOT 04 — forbidden on final) + "Thank you" + 4 contact lines. Last slide.                                  |
+
+### Content templates — count-flexible (§9)
+
+| Template                           | Node                         | Use for / varies                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content-cards.html`               | 64:585                       | 2–4 ordered points + short explainer + summary line. Varies: N cards (col-dividers between).                                                                                                                                                                                                                                                                                                                                                                                           |
+| `content-numbered-boxes.html`      | 82:304                       | **Default template whenever the content is an infra/hosting/cost breakdown** — numbered boxes (what's included) + a two-column summary-caption footer (a capacity line + a cost line, each with an accent-coloured number/range). Don't substitute `content-cards` here: the summary footer is the whole point of a cost slide (the reader's eye goes there first) and `content-cards` has no equivalent slot. Varies: 2–6 boxes (fill the row).                                       |
+| `content-numbered-icon-cards.html` | 82:849                       | Step-by-step journey (number + icon + short text). Varies: N steps (cols-N 2–6; best 2–5 — at 6 the 53.333px title may wrap).                                                                                                                                                                                                                                                                                                                                                          |
+| `content-icon-cards.html`          | 82:681                       | A few "highlights" with a longer paragraph each, under a sub-heading. Varies: N cards (2–4).                                                                                                                                                                                                                                                                                                                                                                                           |
+| `statement.html`                   | 84:443                       | One big claim on a dark slide between sections. H0 heading + lead. Fixed format (bg-title-06).                                                                                                                                                                                                                                                                                                                                                                                         |
+| `content-logo-grid.html`           | 68:1052                      | Client/partner/integration logos + caption. Varies: R×C of 279×160 boxes (gap 32).                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `content-table.html`               | 69:1160                      | Structured data — phases, pricing, comparison matrices. Varies: rows × cols; highlight rows with `--alt`.                                                                                                                                                                                                                                                                                                                                                                              |
+| `content-icon-grid.html`           | 67:955                       | **2×N grid** of icon-blocks (icon + blue title + 1-2 sentence body) — the faithful 67:955 layout. Use for 4 (or 2/6) parallel points: challenges, value pillars, capability areas. Varies: N blocks, 2 per row.                                                                                                                                                                                                                                                                        |
+| `content-stacked-list.html`        | (stack variant)              | A few full-width points, each a title + sentence — icon-block rows STACKED vertically, 1 per row. Use when points need the full width; for a balanced 2×2 use `content-icon-grid`. Varies: N rows.                                                                                                                                                                                                                                                                                     |
+| `content-icon-list.html`           | 82:537                       | **Compact single-line icon list** — a tag + secondary heading over a full-width rule, then N one-line rows (icon + one sentence, optional blue emphasis span), ~80px pitch. Use for a dense checklist / feature-line list where each point is ONE line. For icon + title + paragraph rows use `content-stacked-list`. Varies: 4-6 rows.                                                                                                                                                |
+| `content-list-tagged.html`         | 82:537                       | Dense single-line bullet list under a tag + heading (scope/enhancements). Varies: N compact rows.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `content-process.html`             | — (kit-original, NOT 66:779) | Linear left→right FLOW: N steps, each = icon + blue label + body, all **left-aligned** (`.proc-step`); → arrows in the gaps. FLEXIBLE flex row (`.process` of `.proc-step` + `.proc-arrow`) — add/remove a step, layout recomputes; icon-first so arrows stay centred. Use for a delivery/workflow SEQUENCE (Design → Build → Verify). Distinct from `content-framework` (66:779), which is the columned phased layout with per-column rules + vertical dividers. Varies: 2-6 columns. |
+| `content-framework.html`           | 66:779                       | Phased FRAMEWORK: N columns, each icon + blue title + a horizontal rule + body paragraph; vertical dividers between and → arrows in the gaps. Use for a directional progression of named stages (Fix → Grow → Transform, a maturity model, a phased plan). Varies: 2-4 columns.                                                                                                                                                                                                        |
+| `content-comparison.html`          | 84:469                       | "What changes vs what stays" — 2 columns of bold-sub + paragraph items + framed summary. Varies: M items/column.                                                                                                                                                                                                                                                                                                                                                                       |
+| `content-split.html`               | 82:767                       | A concept explained on the left + a numbered step list on the right. Varies: N list items.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `content-team.html`                | 106:950                      | People with photo + name + LinkedIn (square photos). Varies: 3–10 people (cols-N + rows).                                                                                                                                                                                                                                                                                                                                                                                              |
+| `content-team-roles.html`          | 104:790                      | Delivery team grouped by role/category (round avatars, category label per row). Varies: rows × people.                                                                                                                                                                                                                                                                                                                                                                                 |
+| `quote.html`                       | 85:666                       | A single testimonial / pull-quote. Large quote (48) centred + attribution.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `content-stats-map.html`           | —                            | Stats + visual: a grid of Fast Facts beside a free map/chart/illustration area. Varies: # of stats; drop any graphic into the right slot.                                                                                                                                                                                                                                                                                                                                              |
+| `content-media.html`               | —                            | Heading + one large framed visual (`.media-frame`, `object-fit:contain`) + optional caption. For a dominant diagram / schema / screenshot / chart — esp. carrying a real image over during a deck **migration**.                                                                                                                                                                                                                                                                       |
+| `content-text-media.html`          | —                            | Heading + left text column (785.333) + right framed visual (785.333). For an explanation paired with an image (diagram / screenshot / product shot). Flip lefts to put the image on the left.                                                                                                                                                                                                                                                                                          |
+| `content-placeholder.html`         | —                            | **Section the HUMAN fills from the Slides Library — primarily CASE STUDIES.** A dashed "add your slides here" box. Edit the heading / ph-title / ph-text; the skill NEVER fabricates the real content.                                                                                                                                                                                                                                                                                 |
+
+### Process constructors (§9 — fully flexible)
+
+These four are **constructors**: you set the structure via CSS vars /
+atoms rather than picking from fixed slots. Describe the variation axis
+when materialising.
+
+| Template                           | Node      | Variation axis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content-timeline.html`            | 116:1107  | **DEPRECATED — do not select for new decks.** Gantt/roadmap with `--tl-cols`/`--tl-rows` task pills. Superseded by the three named timelines below, which read faster on a presentation slide and each map to one real client question (size? order? sprint cadence?) instead of a generic project-management grid. Kept only for `references/deck-migration.md` re-skins where the source deck already has a Gantt slide — even then, prefer re-mapping to `content-phase-timeline` or `content-sprint-roadmap` if the source data fits.                            |
+| `content-phase-timeline.html`      | 2067:1162 | **Phase timeline / PROJECT SIZE.** N phases of variable width (`--span` = duration units). Per phase: a 32px title + an alternating tint panel (`--a`/`--b`) carrying a body + a footer = a unit-cell bar (one `.ptl-cell` per duration unit, coloured purple/blue/turquoise/sky) + a row of N person icons (= team) + an "N people, M weeks" caption; wide → arrows straddle each boundary. **USE ONLY when project size is known** (team count + per-phase duration) — see the timeline picker gate below. Custom: `--span`, cells, icon count, panel `--a`/`--b`. |
+| `content-milestone-timeline.html`  | 2072:1604 | **Numbered milestone timeline.** N equal phases on one horizontal axis; per phase an icon + title (above) + a numbered block sitting ON the axis + a short description (below). `.milestone-tl` / `.ms-col` (icon/title/`.ms-num`/desc); axis auto-connects blocks and never overshoots the last. Use for an ORDERED standard approach where the COUNT + ORDER carry the message, not duration. Varies: 2–N phases, free icon/title/number/text.                                                                                                                     |
+| `content-sprint-roadmap.html`      | 2067:1367 | **Sprint / phase roadmap.** Phase BANDS (ghost pre-phase + active phase split into sprint sub-shades) over a SPRINT AXIS (`.srm-*`): dots + sprint labels + a gray→solid→dashed line + "2 weeks" captions, plus a span BRACKET for the open-ended total + two explanation blocks. Use to map a project onto time-boxed SCRUM sprints when the start is fixed and the tail is open. Varies: `--span` per band/leg, sprint count, ghost/solid/dashed line per leg.                                                                                                     |
+| `content-plan-table.html`          | 116:763   | **Plan-as-table** when each task needs explanation columns. `.sheet--plan`: Activity + N week cols (`.sheet-cell--tl` span) + M info cols. Varies: rows, week cols, info cols.                                                                                                                                                                                                                                                                                                                                                                                       |
+| `content-pipeline.html`            | 118:1976  | **Process/pipeline chain** (compare scenarios by stacking chains). Atoms: `.pipe-step` (32px tag bar + gray body) · `.tag.is-*` labels (0–2/step) · `.pipe-arrow` · `.pipe-step--accent` terminal. Varies: N steps, 1+ chains, labels.                                                                                                                                                                                                                                                                                                                               |
+| `content-pipeline-comparison.html` | 2067:1284 | **Two-row A/B pipeline comparison** (e.g. Without AI / With AI). Each row = label (H11) + a `.pipeline` of N `.pipe-step` + a totals line (H15, accent value in blue). Reuses pipeline atoms. Varies: N steps/row (keep both rows equal so columns align), tag colours.                                                                                                                                                                                                                                                                                              |
+| `content-nextsteps.html`           | 118:1005  | **"What happens next" roadmap.** Atoms: `.steps-col` colour panels (progress ramp) on `.step-num` circles + `.step-arrow-axis`, `.step-cap` (icon + 18.667px label) under each. Varies: N steps, colours/titles/bullets, one caption each.                                                                                                                                                                                                                                                                                                                           |
+
+### Use-as-is slides (§10 — fixed, rule-inserted, NOT count-flexed)
+
+Ready-made compositions dropped in **as-is**. Each has a fixed
+**insertion rule**. Three of them are **MANDATORY** — they ship in
+_every_ DataArt corporate deck regardless of topic (they are NOT
+AIMS-gated and NOT the model's choice). The other two are conditional.
+
+| Template                 | Node     | Status      | Content · **insertion rule**                                                                                                                                                                                                                                                                               |
+| ------------------------ | -------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `asis-fastfacts.html`    | 96:546   | **ALWAYS**  | 8 corporate stats + global-presence map. **Insert right AFTER the cover.** **VERBATIM DataArt only** — do NOT relabel, restate, or swap in client metrics; its global-presence map is DataArt-specific and must never appear on any other slide. For a _client's_ metrics use `content-stats-map` instead. |
+| `asis-capabilities.html` | 112:692  | **ALWAYS**  | 4 capability columns (Innovate / Build / Modernize / Operate). **Insert right AFTER the Fast Facts slide.**                                                                                                                                                                                                |
+| `asis-contacts.html`     | 40:244   | **ALWAYS**  | 4 office contact cards (placeholder photos). **Insert second-to-last, right BEFORE the final slide.**                                                                                                                                                                                                      |
+| `asis-partnerships.html` | 99:652   | conditional | 9 partner logos (AWS, Microsoft, GCP, Databricks, Snowflake, Salesforce, HubSpot, Stripe, Adobe) + caption. **Insert ONLY if the project involves partnerships & integrations.**                                                                                                                           |
+| `asis-microsoft.html`    | 107:1064 | conditional | Statement + 6 industry icons. **Insert ONLY if the project involves Microsoft technologies / a Microsoft partnership.**                                                                                                                                                                                    |
+
+Also **ALWAYS**: `content-nextsteps.html` (a "what happens next"
+roadmap) near the end, right before contacts. And **ASK-first**:
+`content-team.html` / `content-team-roles.html` — a team / who-delivers
+slide is included only when the user opts in (chat) or the handoff
+envelope carries team members (see § 6 + SKILL.md Step 5b).
+
+---
+
+## 6. Deck assembly order (the FIXED corporate skeleton)
+
+Every DataArt corporate deck is the AIMS narrative arc (§ narrative-arc.md)
+wrapped in a **fixed skeleton**. The `ALWAYS` rows below are mandatory —
+insert them in _every_ deck, in these positions, even if the brief never
+mentions them. They are the corporate frame; the arc fills the middle.
+
+```
+cover  (or cover-2logo if a client logo is supplied)
+  → asis-fastfacts          ALWAYS — right after the cover
+  → asis-capabilities       ALWAYS — right after fast-facts
+  → …content slides…        the AIMS arc; pick templates by content shape (§7)
+        section-divider between sections
+          – chapter number auto-increments 01, 02, 03…
+          – one bg-content-NN per section, reused across its slides
+          – section-divider bg rotates the muted pool 01/02/06
+  → [asis-partnerships]     IF the project has partnerships / integrations
+  → [asis-microsoft]        IF the project involves Microsoft
+  → [content-team(-roles)]  ASK-first — only if the user opted in / handoff
+                            carries team members (SKILL.md Step 5b)
+  → content-nextsteps       ALWAYS — the "what happens next" roadmap
+  → asis-contacts           ALWAYS — second-to-last, right before final
+  → final
+```
+
+`ALWAYS` = non-negotiable insert. `[…]` = conditional. `ASK-first` =
+include only on opt-in. Cover draws the vivid title-bg pool 03/04/05;
+the final slide draws {03, 05} only (**bg-title-04 forbidden on final**);
+statement keeps bg-title-06.
+
+**Self-check before declaring the deck done** (also enforced by SKILL.md
+Step 9c + the pre-output preflight): the deck contains, in order,
+`asis-fastfacts` (after cover) · `asis-capabilities` · … · `content-nextsteps`
+· `asis-contacts` (before final). If any is missing, add it.
+
+---
+
+## 7. Content-shape → template chooser
+
+| If the content is…                                                                       | Use                                                                                                                                                                                                                                              |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ordered points / steps with explainers                                                   | `content-cards` · `content-numbered-boxes` · `content-numbered-icon-cards`                                                                                                                                                                       |
+| A few highlights with longer paragraphs                                                  | `content-icon-cards` (1 row) · `content-icon-grid` (2×N grid) · `content-stacked-list` (full-width rows)                                                                                                                                         |
+| 4 parallel points (challenges / pillars / areas), each title + 1-2 sentences             | `content-icon-grid`                                                                                                                                                                                                                              |
+| A dense one-line checklist / feature list (4-6 short points)                             | `content-icon-list`                                                                                                                                                                                                                              |
+| A dense single-line bullet list                                                          | `content-list-tagged`                                                                                                                                                                                                                            |
+| A comparison (what changes vs stays)                                                     | `content-comparison` · `content-table`                                                                                                                                                                                                           |
+| Structured data / pricing / matrix                                                       | `content-table`                                                                                                                                                                                                                                  |
+| A process / pipeline / roadmap / timeline                                                | `content-process` · `content-pipeline` · `content-nextsteps` · `content-phase-timeline` · `content-milestone-timeline` · `content-sprint-roadmap` · `content-plan-table` (`content-timeline` is DEPRECATED — migration re-skins only, see below) |
+| Infrastructure / hosting / cost breakdown (numbered items + a cost + a capacity caption) | `content-numbered-boxes` — **default choice**, do not fall back to `content-cards` here: the two-column summary-caption footer (capacity line + cost line) is this template's whole reason to exist                                              |
+
+**Timeline / process picker — when to use which** (they overlap; pick by what
+the slide must MAKE THE READER SEE):
+
+> **Project size gates `content-phase-timeline`.** That template's whole job is
+> to show EFFORT/SIZE — phase widths = duration units, a row of person icons =
+> team count, an "N people, M weeks" caption per phase. So use it ONLY when the
+> project size is established (a team count AND a duration per phase). Decide
+> first: in a chat brief, if size is not stated and a delivery/timeline slide is
+> needed, ASK the user once — "Do you have a project size (team + weeks per
+> phase)?" YES → `content-phase-timeline`. NO → a size-free timeline:
+> `content-milestone-timeline` (ordered approach, no duration),
+> `content-sprint-roadmap` (start fixed, tail open), or `content-process`
+> (plain named-stage flow). In handoff mode, use phase-timeline only if the
+> envelope carries team + duration per phase; otherwise fall back as above.
+>
+> **`content-timeline` (Gantt) is DEPRECATED — never pick it for a new deck.**
+> A grid of overlapping task bars answers "who does what when," which is a
+> project-management artefact, not a sales narrative — it makes the reader
+> hunt for the point instead of landing it. Every case that used to reach for
+> the Gantt has a sharper home in one of the three timelines below: team +
+> duration known → `content-phase-timeline`; a named methodology →
+> `content-milestone-timeline`; SCRUM cadence with an open tail →
+> `content-sprint-roadmap`. If none of the three fit (e.g. a migration re-skin
+> whose source deck IS a Gantt), see `content-timeline`'s row above.
+
+- **`content-phase-timeline`** (PROJECT SIZE — gated above) — N sequential
+  phases over a unit-segmented colour track where each phase's WIDTH = its
+  duration (cells = units), with a row of person icons (= team count) + an
+  "N people, M weeks" caption per phase and → arrows between phases. Use ONLY
+  when team count + per-phase duration are known. Custom: `--span` per phase,
+  one `.ptl-cell` per duration unit, icon count = team, panel `--a`/`--b`.
+  **Narrative pattern** — one sentence naming what the phase produces (not
+  what the team does day-to-day), e.g. _"A data catalog implementation
+  project focuses on deploying a centralized repository to facilitate the
+  organization, discovery, and management of an enterprise's data assets."_
+  The reader should be able to read only the phase titles + captions and
+  still get the shape of the engagement (what's biggest, what's smallest).
+- **`content-milestone-timeline`** — an ORDERED standard approach as numbered
+  milestones on a single axis (icon + title above, number on the axis,
+  description below). The COUNT + ORDER carry the message; all phases read as
+  equal weight. Use for "our typical approach" / a methodology walkthrough —
+  prefer over phase-timeline when duration is NOT the point, and over
+  content-process when you want numbered milestones with a connecting axis.
+  **Narrative pattern** — title = the phase's OUTPUT as a noun, not a verb
+  ("Discovery", not "We discover"); the one-line description underneath
+  states the OUTCOME of that phase in a client-facing register, e.g.
+  _"Validating the approach against real constraints and stakeholder
+  criteria."_ Never repeat the title's word in the description — the reader
+  is scanning left-to-right in ~2 seconds per milestone.
+- **`content-sprint-roadmap`** — a delivery plan mapped onto time-boxed SCRUM
+  sprints: phase bands (a fixed Discovery start + an open-ended Development tail
+  shown as a dashed line) over a sprint axis with "2 weeks" cadence captions and
+  a "Y weeks–months" total bracket. Use when the START is committed but the
+  sprint COUNT / total duration is still open (X sprints, Y weeks) — it makes
+  the uncertainty explicit rather than faking a fixed end date.
+  **Narrative pattern** — the left callout answers the ONE question a client
+  always asks about an open-ended estimate ("why don't you know the end
+  date?") in plain terms — cadence + when the real number gets fixed, e.g.
+  _"We embrace the SCRUM methodology with 2-week sprints... the exact number
+  of sprints (X) and weeks or months (Y) will be defined during the Discovery
+  Phase."_ The right list is a flat scope list ("We will work on…"), not a
+  second timeline — keep it to 5-6 short lines so it doesn't out-weigh the axis.
+- **`content-pipeline`** — a STEP-BY-STEP process chain with per-step labels
+  (duration, role, tool) and arrows; stack two chains to compare scenarios
+  (e.g. with vs without AI). Use for a workflow with metrics per step.
+- **`content-nextsteps`** — a forward "what happens next" ROADMAP: colour
+  panels on a numbered axis with a captioned icon under each. Use to close a
+  deck with the path forward.
+- **`content-process`** — a left→right FLOW of steps (icon + blue label + body,
+  all left-aligned; → arrows in the gutters). A LINEAR sequence template — NOT
+  the same layout as `content-framework` (66:779, the columned phased layout
+  with per-column rules + vertical dividers). Use for a sequential journey of
+  phases/stages; scales to 2-6 steps.
+- **`content-plan-table`** — a plan that needs explanation COLUMNS per task
+  (a Gantt rendered as a table). Use when each row needs prose, not just a bar.
+
+Every one is a CUSTOM constructor: segments/steps/lanes are not fixed — set
+their count and size, vary the content, but the type scale, colours, dividers
+and spacing stay inside the kit grammar.
+| A phased framework / progression of named stages | `content-framework` (Fix → Grow → Transform; maturity model; 2-4 columns with → arrows) |
+| A concept + a numbered step list | `content-split` |
+| People / a team | `content-team` (photos) · `content-team-roles` (org-chart) |
+| Stats / numbers about **DataArt** | `asis-fastfacts` (DataArt corporate stats + DataArt map — verbatim, never client-edited) |
+| Stats / numbers about the **client** (e.g. "Acme today") | `content-stats-map` (custom stats + a client-relevant visual or a labelled placeholder) · `cards-row`. NOT `asis-fastfacts` — never carry DataArt's map onto a client slide. |
+| A customer quote | `quote` |
+| One big diagram / schema / screenshot / chart | `content-media` (framed, shows whole) |
+| An explanation paired with an image | `content-text-media` (text + image) · `content-split` |
+| One big claim / thesis | `statement` |
+| Client / partner / integration logos | `content-logo-grid` · `asis-partnerships` |
+| **Case studies / proof / client stories** | **section-divider ("Case Studies") + `content-placeholder` — see the rule below. NEVER fabricate case-study cards.** |
+
+**Rotate the rendering across the deck (anti-monotony).** The chooser maps a
+content _shape_ to a template, but consecutive slides often share a shape — e.g.
+three "value / benefits / impact" slides are each "a few parallel points", and a
+naïve pass renders every one as the same `content-icon-grid`. Don't. **Never reuse
+the same content template more than twice in a row.** When a shape recurs, rotate
+among its interchangeable renderings and reach into the wider palette:
+
+- _A few parallel points_ → rotate `content-icon-grid` (2×N) · `content-icon-cards`
+  (1 row) · `content-stacked-list` (full-width rows) · `content-numbered-icon-cards`
+  · `content-comparison` (recast as two groupings) · `content-stats-map` (lead with
+  a number) · `content-text-media` (pair the point with an image).
+- _Steps / stages_ → `content-process` · `content-framework` · `content-pipeline` ·
+  a timeline variant.
+- In a long text-only run, deliberately pull in at least one **image**
+  (`content-text-media` / `content-media`) and, where the content carries a number,
+  one **stat** slide (`content-stats-map`) — the kit's formats, paragraphs, and
+  pictures should all earn a place, not one grid on repeat.
+
+This is **orthogonal to the background rule** (§ 4): the section keeps ONE
+background; only the LAYOUT rotates. `verify-deck.sh` emits a layout-streak report
+(informational, never blocks) when a content template repeats > 2× consecutively —
+treat it as a prompt to vary before shipping.
+
+### Case studies = a section the human fills (Part 51)
+
+Do **not** invent case-study content (no fake "Case Study Title" cards,
+no "Placeholder, to be completed" body). DataArt keeps real, approved
+case-study slides in its **Slides Library** — the human drops the right
+ones in. When a deck calls for case studies / proof, the skill scaffolds
+the section and stops there:
+
+1. a **section divider** with the next chapter number and the title
+   **"Case Studies"** (`section-divider.html`), then
+2. one **`content-placeholder.html`** slide ("Add your case studies here")
+   right after it.
+
+The person replaces the placeholder with their chosen client stories.
+This is the ONLY correct handling of case studies / proof.
+
+When a template doesn't fit perfectly: flex the variation axis (N
+cards / rows / cols, M items, constructor vars) before reaching for a
+different template. Stay inside the kit's tokens, classes, and atoms —
+never invent a parallel visual system or edit kit files.
+
+### Card-type guardrails (pick the RIGHT card, don't overstuff)
+
+The single most common layout break is using the wrong card for the
+content and then overflowing it. Match the card to the text shape:
+
+- **`numbered-card` (vertical, 53.333px title)** is for a SHORT label
+  (1–2 words) + a brief line — e.g. "Discovery", "Build". A 53.333px title in
+  a 3-col (509.333px) / 5-col (289.333px) track wraps to 2–3 lines and collides
+  with neighbours. For "N aspects, each a real heading + a paragraph",
+  do **NOT** use numbered-card — use **`content-comparison`** (37.333px heads,
+  2 columns) or **`content-icon-cards`** (icon + 37.333px title + paragraph).
+- **Icon-on-top feature columns** ("Why X?" rows of icon + title + paragraph,
+  3–4 across): use `.icon-block` with ONE arrangement for the whole row —
+  `--stacked-left` (icon + title + body all LEFT-aligned; the icon's left edge
+  lines up with the text) or `--stacked` (all CENTRED). **Never mix a centred
+  icon over left-aligned text** — that is the ragged "icons floating off to the
+  side" look (a real migration failure). Default to `--stacked-left` for a
+  left-aligned text column; `--stacked` only when the whole column is centred.
+- **Card vertical rhythm — TOP-anchor, never distribute.** In a row of equal-
+  height cards (title + icon + body in a bordered box, e.g. an Agenda), stack
+  the content from the TOP with fixed gaps (number/title → icon → body) and let
+  the leftover height fall to the BOTTOM. Do **NOT** use
+  `justify-content: space-between` or vertically-centre the middle block — that
+  floats the icon to a different height in every card (the "icon+text looks
+  pinned to the bottom / jumps around" bug). If the titles differ in line count
+  (one wraps, another doesn't), **reserve the title height** so every icon
+  starts at the same Y: give the title a `min-height` of two lines
+  (53.333px × 1.33 × 2 ≈ 141.333px; 37.333px × 1.25 × 2 ≈ 93.333px). Verified: with a reserved
+  title height the icon row aligns to the pixel even when titles wrap unevenly.
+  `numbered-card--icon` already top-anchors; `numbered-card--default` is
+  `space-between` **by design** — use it ONLY for the canonical numbered-boxes
+  (a number on top + a SHORT label pinned to the bottom), never with an
+  icon + multi-line body.
+- **Vertical dividers** are part of a template's `zones_decoration` and
+  sit on the grid gutters. Never hand-place a `.col-divider` / `.divider-v`
+  at an arbitrary x — it will cut through wrapped text. Let the template's
+  dividers stay where they are.
+- **DataArt-branded assets stay on their own slides.** The DataArt
+  global-presence map (`assets/graphics/fastfacts-map.png`) belongs ONLY to
+  `asis-fastfacts` — it depicts DataArt's footprint and means nothing to a
+  client. When you fork the Fast Facts _layout_ for any other (client) slide,
+  do NOT carry that map: use a client-relevant visual, or leave a **labelled
+  placeholder** ("Insert [client] coverage map / product visual here").
+  `content-stats-map` already ships that placeholder slot — prefer it for a
+  client "X today" / company-overview slide. (`verify` blocks the DataArt map
+  on any non-`asis-fastfacts` slide via the `dataart_map_reused` gate.)
+- **Two-column summary captions** (the footer pattern in `content-numbered-boxes`
+  etc.): keep the 42.667px gutter and each column ≤ 785.333px. If the text is long,
+  prefer the `.cols.cols-2` grid (auto 785.333 + 42.667 gutter, `min-width:0`) over
+  hand-positioned `.layer` `<p>`s, and keep each caption within the budget
+  below so the two columns don't visually touch.
+
+### Content budgets (stay within, or the layout breaks)
+
+Text longer than these overflows the zone, wraps into dividers, or crowds
+the next column. Trim the copy (or drop to a wider layout / fewer columns)
+to fit — the kit is content-faithful, not magic.
+
+| Element                                                 | Budget                                                        |
+| ------------------------------------------------------- | ------------------------------------------------------------- |
+| Slide heading (1-line zone / 2-line zone)               | ≤ 50 chars · ≤ 100 chars                                      |
+| Cover heading                                           | ≤ ~70 chars · Section-divider heading ≤ ~55                   |
+| `numbered-card` title (53.333px)                        | ≤ ~18 chars (≤ 2 words); body ≤ ~140 chars                    |
+| `cols-N` 53.333px card title                            | cols-3 ≤ ~24 · cols-5 ≤ ~16 · avoid multi-word at cols-6      |
+| Icon-card / comparison head (37.333px)                  | ≤ ~30 chars                                                   |
+| Comparison item-head (24px bold) / item-text (21.333px) | ≤ ~40 · ≤ ~140 chars                                          |
+| `pipe-step` label                                       | ≤ ~12 chars (one short word) at ≥ 6 steps; ≤ ~22 at ≤ 4 steps |
+| Two-column summary caption (785.333px @28px)            | ≤ ~110 chars each                                             |
+
+When in doubt, **render the slide and look** (SKILL.md Step 9): text that
+crosses a divider, touches a neighbouring column, or breaks a word
+mid-letter means the copy is over budget — shorten it or change layout.
+
+## 8. Icon library (reusable line icons)
+
+Whenever a template has an icon slot — `.icon-block`, numbered-icon
+cards, `content-process` / `content-nextsteps` captions, capability
+columns — pull from the curated set in
+`assets/icons/library/` instead of inventing or hot-linking art. They
+are 44×44 line icons, 2.667px stroke, two-tone **`#000000` ink + `#3453ad`
+Blue 400 accent** — already on-brand, so drop in as-is with **no
+recolouring**:
+
+```html
+<span class="ib-icon"><img src="../assets/icons/library/ai-brain.svg" alt="" /></span>
+```
+
+Pick by meaning (full table in `assets/icons/library/manifest.json`):
+
+| Need                                | Icon                       |
+| ----------------------------------- | -------------------------- |
+| Goals / strategy / "why now"        | `goal-target`              |
+| Innovation / R&D / "Innovate"       | `innovation-wand`          |
+| Discovery / research / audit        | `discovery-search`         |
+| Integration / system fit            | `integration-puzzle`       |
+| Software dev / "Build"              | `code-window` · `terminal` |
+| Automation / CI-CD / pipelines      | `workflow`                 |
+| Infrastructure / hosting            | `server`                   |
+| Cloud / SaaS / migration            | `cloud`                    |
+| Web + mobile / cross-device         | `responsive-devices`       |
+| AI / ML / GenAI                     | `ai-brain`                 |
+| Compute / performance / embedded    | `cpu-chip`                 |
+| IoT / connected devices             | `iot-circuit`              |
+| Automation / robotics               | `automation-robot`         |
+| Analytics / reporting               | `chart-bar`                |
+| Growth / ROI / outcomes             | `chart-growth`             |
+| Market share / breakdown            | `chart-pie`                |
+| Security / compliance               | `security-shield`          |
+| Privacy / encryption / access       | `privacy-lock`             |
+| Certification / ISO                 | `certificate`              |
+| Quality / assurance                 | `quality-seal`             |
+| Teams / staffing                    | `team`                     |
+| Partnership / client relationship   | `partnership-handshake`    |
+| Knowledge transfer / training       | `knowledge-sharing`        |
+| A user / persona / role             | `user`                     |
+| Scaling team / hiring               | `add-user`                 |
+| Distributed systems / architecture  | `network-nodes`            |
+| Global delivery / reach             | `globe`                    |
+| Continuous / managed / scalable     | `infinity-continuous`      |
+| Configuration / "Operate"           | `settings-gear`            |
+| Maintenance / support / "Modernize" | `maintenance-tools`        |
+| Time-to-market / schedule           | `clock`                    |
+| Communication / consulting          | `chat`                     |
+| Contact / email                     | `mail`                     |
+| Scope / requirements / checklist    | `task-list`                |
+
+If no icon fits a concept, prefer the closest one over inventing a new
+visual style — these 35 keep every deck's iconography consistent.

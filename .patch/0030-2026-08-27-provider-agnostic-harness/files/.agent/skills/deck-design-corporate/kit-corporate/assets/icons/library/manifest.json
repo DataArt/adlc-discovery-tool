@@ -1,0 +1,131 @@
+{
+  "_comment": "Reusable icon library for the DataArt Corporate Slides Kit. 35 line icons, 44x44 viewBox, 2px stroke, two-tone (#000000 ink + #3453AD Blue400 accent) — already on-brand, no recolouring needed. Drop into any .icon-block / .pipe / numbered-icon-card slot via <img src=\"…/assets/icons/library/<name>.svg\">. Picked for software-engineering / IT-consulting decks. 'use' = when to reach for it during deck assembly.",
+  "style": { "viewBox": "0 0 44 44", "stroke_width": 2, "ink": "#000000", "accent": "#3453AD" },
+  "groups": {
+    "Strategy & discovery": [
+      {
+        "name": "goal-target",
+        "use": "Objectives, goals, 'why now', strategic focus, KPIs/targets."
+      },
+      {
+        "name": "innovation-wand",
+        "use": "Innovation, ideation, R&D, transformation, the 'Innovate' capability."
+      },
+      {
+        "name": "discovery-search",
+        "use": "Discovery phase, research, assessment, audit, finding the right approach."
+      },
+      {
+        "name": "integration-puzzle",
+        "use": "Integration, system fit, solving complexity, modular pieces coming together."
+      }
+    ],
+    "Engineering & delivery": [
+      {
+        "name": "code-window",
+        "use": "Software development, custom engineering, app delivery, the 'Build' capability."
+      },
+      { "name": "terminal", "use": "Backend / DevOps / CLI / scripting, low-level engineering." },
+      {
+        "name": "workflow",
+        "use": "Process automation, CI/CD pipelines, orchestration, repeatable flows."
+      },
+      {
+        "name": "server",
+        "use": "Infrastructure, hosting, on-prem/back-end systems, the platform layer."
+      },
+      {
+        "name": "cloud",
+        "use": "Cloud, SaaS, cloud migration, anything hosted/managed off-device."
+      },
+      {
+        "name": "responsive-devices",
+        "use": "Multi-platform, web + mobile, cross-device UX, responsive front-ends."
+      }
+    ],
+    "Emerging tech": [
+      {
+        "name": "ai-brain",
+        "use": "AI / ML / GenAI, intelligence, smart features, the AI value prop."
+      },
+      { "name": "cpu-chip", "use": "Compute, performance, hardware/embedded, AI infrastructure." },
+      { "name": "iot-circuit", "use": "IoT, connected devices, embedded systems, sensors/edge." },
+      {
+        "name": "automation-robot",
+        "use": "Automation, robotics, manufacturing, hands-off operations."
+      }
+    ],
+    "Data & analytics": [
+      { "name": "chart-bar", "use": "Analytics, reporting, metrics, comparing categories." },
+      { "name": "chart-growth", "use": "Growth, ROI, business outcomes, upward trends, results." },
+      {
+        "name": "chart-pie",
+        "use": "Distribution, market share, composition, breakdown by segment."
+      }
+    ],
+    "Security & quality": [
+      {
+        "name": "security-shield",
+        "use": "Security, compliance, protection, risk mitigation (check = verified-secure)."
+      },
+      {
+        "name": "privacy-lock",
+        "use": "Data privacy, encryption, access control, confidentiality."
+      },
+      {
+        "name": "certificate",
+        "use": "Certification, ISO/standards credentials, formal accreditation."
+      },
+      { "name": "quality-seal", "use": "Quality, assurance, guarantee, a vetted standard met." }
+    ],
+    "People & collaboration": [
+      { "name": "team", "use": "Teams, squads, dedicated team / staffing, group capability." },
+      {
+        "name": "partnership-handshake",
+        "use": "Partnership, client relationship, deals, long-term collaboration."
+      },
+      {
+        "name": "knowledge-sharing",
+        "use": "Knowledge transfer, training, mentoring, enablement."
+      },
+      { "name": "user", "use": "A single user, persona, role, individual stakeholder." },
+      { "name": "add-user", "use": "Scaling the team, hiring, onboarding, adding capacity." }
+    ],
+    "Network & scale": [
+      {
+        "name": "network-nodes",
+        "use": "Distributed systems, architecture, microservices, connected platform."
+      },
+      {
+        "name": "globe",
+        "use": "Global delivery, worldwide reach, multi-region, international presence."
+      },
+      {
+        "name": "infinity-continuous",
+        "use": "Continuous (DevOps/CD), ongoing/managed services, unlimited scalability."
+      }
+    ],
+    "Operations & support": [
+      {
+        "name": "settings-gear",
+        "use": "Configuration, operations, the 'Operate' capability, tuning/setup."
+      },
+      {
+        "name": "maintenance-tools",
+        "use": "Maintenance, support, modernization/fixing, the 'Modernize' capability."
+      },
+      { "name": "clock", "use": "Time-to-market, speed, schedule, turnaround, deadlines." }
+    ],
+    "Communication & docs": [
+      { "name": "chat", "use": "Communication, collaboration, consulting, conversation/feedback." },
+      {
+        "name": "mail",
+        "use": "Contact, email, outreach, get-in-touch (good on contacts slides)."
+      },
+      {
+        "name": "task-list",
+        "use": "Scope, requirements, checklist, deliverables, structured to-dos."
+      }
+    ]
+  }
+}

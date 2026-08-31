@@ -57,6 +57,8 @@ Ask what this session is processing:
 
 Apply `{{skills_root}}/discovery/pattern-write-confirm.md` for `Notes.md`/`Outcomes.md`.
 
+Capture's job stops at faithfully recording what happened — deciding which quotes carry diagnostic signal and folding them into the Claims ledger is Diagnose's call, made against a specific Problem, not a judgment call to make here. See `discovery-investigate-problem-diagnose` for that.
+
 ---
 
 ## Step 3 — Update `00 Overview.md`

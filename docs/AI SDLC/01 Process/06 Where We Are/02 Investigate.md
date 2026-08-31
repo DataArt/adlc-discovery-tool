@@ -73,7 +73,7 @@ See [Evidence Chain](../04%20Evidence%20Chain.md) for why Solution Goals depends
 
 ### Problems
 
-Rolls up into the [Problems registry](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md) — one row per [SDLC Domain](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains), each counting how many Problems have been diagnosed against it so far (can be more than one per domain).
+Rolls up into the [Problems registry](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md) — one row per [SDLC Domain](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains), each counting how many Problems have been diagnosed against it so far (can be more than one per domain). Diagnosing a Problem here also extracts its supporting quotes into [Claims](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/03%20Claims.md) and lands a row on the [Where Gaps Sit](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/01%20Where%20Gaps%20Sit.md) heatmap — this table, Claims, and that heatmap should never drift apart.
 
 | SDLC Domain                                                                                                     | Status           | Problems Diagnosed | Last Updated |
 | --------------------------------------------------------------------------------------------------------------- | ---------------- | ------------------ | ------------ |

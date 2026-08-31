@@ -35,7 +35,7 @@ sequenceDiagram
     end
 ```
 
-**Workshop cycle.** Loop until clear: internal survey first where DataArt already has context (saves [[CLIENT_NAME]]'s time before their first session), then the workshop itself — validate the previous session's findings before covering what isn't yet evidenced, close by arranging the next follow-up. Each pass produces a [workshop folder](/AI%20SDLC/02%20Capture/)'s Notes and Outcomes from its Transcript.
+**Workshop cycle.** Loop until clear: internal survey first where DataArt already has context (saves [[CLIENT_NAME]]'s time before their first session), then the workshop itself — validate the previous session's findings before covering what isn't yet evidenced, close by arranging the next follow-up. Each pass produces a [workshop folder](/AI%20SDLC/02%20Capture/)'s Notes and Outcomes from its Transcript. Notes carries the workshop's verbatim quotes — that's what [Problem — Diagnose](./03%20Problem%20-%20Diagnose.md) later pulls from into [Claims](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/03%20Claims.md); Capture doesn't extract Claims itself, it just has to preserve the quotes faithfully.
 
 **Current State — optional on any given pass.** Not every workshop moves a Current State page — only draft or update the relevant [Current State](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md) page(s) (Process, Architecture, Context Topology, AI Adoption, Metrics, Tool Inventory, Inhouse Initiatives) when that same session surfaced enough signal to justify it, wiring only what it actually evidenced. When it does happen, it happens right after that workshop's Notes/Outcomes are published — not deferred to a later pass.
 

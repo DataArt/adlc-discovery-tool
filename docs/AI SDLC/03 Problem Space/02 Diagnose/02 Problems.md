@@ -38,7 +38,7 @@ _[POPULATE — one row per problem, ordered by impact on delivery speed, highest
 
 **Observed facts:** [The concrete, checkable facts behind the claim — not the interpretation of them.]
 
-**Impact on delivery speed:** [How this shows up in the [Where Gaps Sit](./01%20Where%20Gaps%20Sit.md) picture — which stage(s) it slows, and by roughly how much if known.]
+**Impact on delivery speed:** [Lead with the [Where Gaps Sit](./01%20Where%20Gaps%20Sit.md) stage name(s) this slows — e.g. "Refinement & Planning — ...". Where Gaps Sit's heatmap aggregates this field across every Problem, so name the stage(s) explicitly, and by roughly how much if known.]
 
 **Source:** [Who said this, or what document/system it was pulled from — name the source, don't anonymise it away.]
 

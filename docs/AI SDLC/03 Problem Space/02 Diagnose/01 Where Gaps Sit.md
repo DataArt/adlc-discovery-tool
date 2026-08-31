@@ -1,9 +1,13 @@
+---
+aside: false
+---
+
 # Where Gaps Sit
 
-_The path one piece of work takes from idea to production, and where it actually breaks down. Not only time — a stage can lose time, but it can also lose quality, coverage, or ownership without losing a single minute on the clock._
+_The path one piece of work takes from idea to production, and where it actually breaks down. Not only time — a stage can lose time, but it can also lose quality, coverage, or ownership without losing a single minute on the clock. A heatmap of [Problems](./02%20Problems.md), not an independent finding — each Problem's own **Impact on delivery speed** field says which stage it slows; this page rolls that up. Problems themselves are diagnosed from [Claims](./03%20Claims.md), the raw quotes each one draws on._
 
 > [!WARNING] Populated During Engagement
-> This page synthesizes findings gathered across [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) and the discovery workshops. It is a placeholder until that evidence exists.
+> This page aggregates [Problems](./02%20Problems.md) — which draw on [Claims](./03%20Claims.md) and [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) — onto the pipeline below. It is a placeholder until that evidence exists.
 
 ---
 
@@ -45,9 +49,27 @@ flowchart LR
 
 ---
 
+## Problem Density Heatmap
+
+_One row per pipeline stage, aggregated from every Problem's **Impact on delivery speed** field on [Problems](./02%20Problems.md) — not filled in independently. A Problem that names two stages appears in both rows. Re-derive this table whenever a Problem is added, moves status, or is retracted._
+
+| Stage                   | Problems                               | Dominant Gap Type                               | Claims Backing                   |
+| ----------------------- | -------------------------------------- | ----------------------------------------------- | -------------------------------- |
+| Idea → Backlog          | _[Problem IDs + status, e.g. 🟢 P-01]_ | [Time / Quality / Coverage / Governance / None] | _[Claims IDs from 03 Claims.md]_ |
+| Refinement & Planning   | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+| Design & UX             | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+| Technical Design        | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+| Build (code generation) | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+| Test & Pipeline         | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+| Review → Production     | _[Problem IDs + status]_               | [Time / Quality / Coverage / Governance / None] | _[Claims IDs]_                   |
+
+**Where it's worst:** [Name the 1-2 stages carrying the most/highest-status Problems — that's the headline this page exists to produce.]
+
+---
+
 ## One Task, Idea to Production
 
-_[DESCRIBE THE REPRESENTATIVE TASK — a real, recent, mid-sized piece of work, walked stage by stage. Not an average across all tickets; one concrete example the room will recognise.]_
+_A single concrete example, not the aggregate — complements the heatmap above with one representative task the room will recognise, rather than a rollup across all diagnosed Problems. [DESCRIBE THE REPRESENTATIVE TASK — a real, recent, mid-sized piece of work, walked stage by stage.]_
 
 | Stage                   | Typical Duration | Gap Type                                        | Notes                |
 | ----------------------- | ---------------- | ----------------------------------------------- | -------------------- |
@@ -69,14 +91,14 @@ _[DESCRIBE THE REPRESENTATIVE TASK — a real, recent, mid-sized piece of work, 
 
 ---
 
-The stage-by-stage detail behind this baseline is gathered in [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) — each stage above maps to one or more SDLC Domain pages, which hold the underlying evidence. Named problems drawn from this picture are tracked in [Problems](./02%20Problems.md).
+To dig into why a stage is hot, follow a Problem ID in the heatmap above to its full entry on [Problems](./02%20Problems.md).
 
 ---
 
 ## Changelog
 
-_Every change to this page traces to the SDLC Domain page(s) whose evidence moved it — link the source, don't just describe the change._
+_Every change to this page traces to the Problem whose addition, status move, or retraction shifted the heatmap — link the Problem entry, don't just describe the change._
 
-| Date   | Change         | Evidence                                                                                                                                   |
-| ------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [DATE] | [WHAT CHANGED] | [SDLC Domain page — e.g. Requirements & Stories](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/01%20Requirements%20%26%20Stories.md) |
+| Date   | Change         | Evidence                                  |
+| ------ | -------------- | ----------------------------------------- |
+| [DATE] | [WHAT CHANGED] | [Problem — e.g. P-01](./02%20Problems.md) |

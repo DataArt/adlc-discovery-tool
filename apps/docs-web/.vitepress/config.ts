@@ -11,7 +11,6 @@ export default withMermaid(
     head: [['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }]],
 
     srcDir: '../../docs',
-    srcExclude: ['Stories/**'],
 
     themeConfig: {
       search: {
@@ -33,12 +32,26 @@ export default withMermaid(
       ],
 
       nav: [
-        { text: 'Engagement', link: '/AI SDLC/01 Engagement/' },
-        { text: 'Capture', link: '/AI SDLC/02 Capture/' },
-        { text: 'Problem', link: '/AI SDLC/03 Problem Space/' },
-        { text: 'Goals', link: '/AI SDLC/04 Goals/' },
-        { text: 'Solution', link: '/AI SDLC/05 Solution Space/' },
-        { text: 'Roadmap', link: '/AI SDLC/06 Roadmap/' },
+        {
+          text: 'Engagement',
+          link: '/AI SDLC/01 Engagement/',
+          activeMatch: '^/AI SDLC/01 Engagement/',
+        },
+        { text: 'Capture', link: '/AI SDLC/02 Capture/', activeMatch: '^/AI SDLC/02 Capture/' },
+        {
+          text: 'Problem',
+          link: '/AI SDLC/03 Problem Space/',
+          activeMatch: '^/AI SDLC/03 Problem Space/',
+        },
+        { text: 'Goals', link: '/AI SDLC/04 Goals/', activeMatch: '^/AI SDLC/04 Goals/' },
+        {
+          text: 'Solution',
+          link: '/AI SDLC/05 Solution Space/',
+          activeMatch: '^/AI SDLC/05 Solution Space/',
+        },
+        { text: 'Roadmap', link: '/AI SDLC/06 Roadmap/', activeMatch: '^/AI SDLC/06 Roadmap/' },
+        { text: '🚧', link: '/Stories/', activeMatch: '^/Stories/(?!archive/)' },
+        { text: '🗄️', link: '/Stories/archive/', activeMatch: '^/Stories/archive/' },
       ],
 
       sidebar: {
@@ -54,6 +67,8 @@ export default withMermaid(
         '/Target Architecture (HLD)/': scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
         '/System Architecture (LLD)/': scanSection('System Architecture (LLD)'),
         '/Engineering Guide/': scanSection('Engineering Guide'),
+        '/Stories/': [{ text: 'WIP', items: scanSection('Stories', { exclude: ['archive'] }) }],
+        '/Stories/archive/': [{ text: 'Archive', items: scanSection('Stories/archive') }],
       },
     },
     vite: {

@@ -3,6 +3,7 @@ import { onMounted, watch, nextTick } from 'vue';
 import { useRoute } from 'vitepress';
 import type { Theme } from 'vitepress';
 import Layout from './Layout.vue';
+import './custom.css';
 
 function openOverlay(content: SVGElement | HTMLImageElement) {
   const overlay = document.createElement('div');

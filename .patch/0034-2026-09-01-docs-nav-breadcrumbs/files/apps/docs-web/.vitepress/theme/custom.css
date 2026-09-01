@@ -1,0 +1,34 @@
+/* Stronger active-state highlighting for nav + sidebar than default theme */
+
+/* Top nav: filled pill instead of a subtle color shift */
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+  background-color: var(--vp-c-brand-soft);
+  border-radius: 6px;
+}
+
+/* Sidebar: soft background band + thicker indicator + bold text */
+.VPSidebarItem.is-active > .item {
+  background-color: var(--vp-c-brand-soft);
+  border-radius: 6px;
+}
+
+.VPSidebarItem.level-0.is-active > .item .indicator,
+.VPSidebarItem.level-1.is-active > .item .indicator,
+.VPSidebarItem.level-2.is-active > .item .indicator,
+.VPSidebarItem.level-3.is-active > .item .indicator,
+.VPSidebarItem.level-4.is-active > .item .indicator,
+.VPSidebarItem.level-5.is-active > .item .indicator {
+  background-color: var(--vp-c-brand-1);
+  width: 4px;
+}
+
+.VPSidebarItem.level-0.is-active > .item .link > .text,
+.VPSidebarItem.level-1.is-active > .item .link > .text,
+.VPSidebarItem.level-2.is-active > .item .link > .text,
+.VPSidebarItem.level-3.is-active > .item .link > .text,
+.VPSidebarItem.level-4.is-active > .item .link > .text,
+.VPSidebarItem.level-5.is-active > .item .link > .text {
+  font-weight: 600 !important;
+}

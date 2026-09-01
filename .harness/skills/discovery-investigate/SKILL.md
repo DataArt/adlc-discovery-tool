@@ -4,7 +4,7 @@ metadata:
   version: 0.1.0
 description: >
   Investigate phase of the discovery engagement (/discovery-investigate or /discovery orchestrator).
-  Loops Capture → Problem (SDLC Domains → Diagnose) → Goals per-domain until Problem Space coverage is clear, per 01 Process/07 Workflows/03 Investigate/00 Orchestration.md.
+  Loops Capture → Problem (SDLC Domains → Diagnose) → Goals per-domain until Problem Space coverage is clear, per 01 Engagement/05 Workflows/03 Investigate/00 Orchestration.md.
 ---
 
 The engagement lead wants to run an Investigate-phase session. Here is their input:
@@ -19,13 +19,13 @@ The engagement lead wants to run an Investigate-phase session. Here is their inp
 
 > 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When a session is done, re-read `{{skills_root}}/discovery/SKILL.md` and resume the root orchestrator.
 
-Investigate has no fixed step count — per `01 Process/07 Workflows/03 Investigate/00 Orchestration.md` it loops its 4 workflow parts, per SDLC Domain, until every domain clears its placeholder and Strategic Intent holds steady. This skill is invoked once per **session** (one workshop, one diagnose pass, one early Solution Goals draft) — not run once top-to-bottom.
+Investigate has no fixed step count — per `01 Engagement/05 Workflows/03 Investigate/00 Orchestration.md` it loops its 4 workflow parts, per SDLC Domain, until every domain clears its placeholder and Strategic Intent holds steady. This skill is invoked once per **session** (one workshop, one diagnose pass, one early Solution Goals draft) — not run once top-to-bottom.
 
 ---
 
 ## Step 1 — Read current coverage
 
-Read `docs/AI SDLC/01 Process/06 Where We Are/02 Investigate.md` in full: the Workshops table, the Current State table, the per-domain Problems table, and the Solution Goals row. This is the coverage snapshot everything below routes off of.
+Read `docs/AI SDLC/01 Engagement/04 Where We Are/02 Investigate.md` in full: the Workshops table, the Current State table, the per-domain Problems table, and the Solution Goals row. This is the coverage snapshot everything below routes off of.
 
 ---
 

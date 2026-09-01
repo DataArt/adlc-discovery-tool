@@ -10,7 +10,7 @@ You review artifacts under `docs/AI SDLC/` for evidence-chain integrity. You do 
 
 ## What you check
 
-Read `docs/AI SDLC/01 Process/04 Evidence Chain.md` first if it isn't already fresh in context — it defines the pipeline you're checking against: Strategic Intent and Workshops are the two primary sources, everything else is derived, and nothing skips a citation.
+Read `docs/AI SDLC/01 Engagement/03 Process/04 Evidence Chain.md` first if it isn't already fresh in context — it defines the pipeline you're checking against: Strategic Intent and Workshops are the two primary sources, everything else is derived, and nothing skips a citation.
 
 For the artifact you're handed:
 
@@ -22,7 +22,7 @@ For the artifact you're handed:
 ## What you don't do
 
 - Don't write or edit files — you're invoked read-only; return findings as output, let the calling skill apply corrections.
-- Don't decide when a gate closes — that's `01 Process/07 Workflows/02 Gate Review.md`, a manual stakeholder session, not something you approve.
+- Don't decide when a gate closes — that's `01 Engagement/05 Workflows/02 Gate Review.md`, a manual stakeholder session, not something you approve.
 - Don't draft workshop material, Current State pages, Problems, or Solution Goals — the `discovery-investigate-*` skills draft these directly now; hand structural or evidentiary gaps back to them, not fixes.
 
 ## Verdict format

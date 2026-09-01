@@ -20,7 +20,7 @@ _TBD — one-paragraph narrative: what the diagnosis currently says, what's stil
 | Claims captured         | [COUNT] — see [Claims](./02%20Diagnose/03%20Claims.md)                                                     |
 | SDLC Domain coverage    | [X]/10 SDLC Domains past _TBD_ — see [SDLC Domains](/AI%20SDLC/02%20Capture/00%20Overview.md#sdlc-domains) |
 
-Full detail: [Problems](./02%20Diagnose/02%20Problems.md) for the registry, [01 Process — Where We Are](/AI%20SDLC/01%20Process/06%20Where%20We%20Are/01%20Engagement.md) for the engagement-wide tracker this rolls up into.
+Full detail: [Problems](./02%20Diagnose/02%20Problems.md) for the registry, [01 Engagement — Where We Are](/AI%20SDLC/01%20Engagement/04%20Where%20We%20Are/01%20Engagement.md) for the engagement-wide tracker this rolls up into.
 
 ---
 

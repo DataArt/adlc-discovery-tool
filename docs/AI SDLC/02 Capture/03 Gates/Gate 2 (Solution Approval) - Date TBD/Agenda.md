@@ -1,6 +1,6 @@
 # [DRAFT] Gate 2 (Solution Approval) Agenda — Date TBD
 
-_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 2's Solution Approval session (see [How the Engagement Runs](/AI%20SDLC/01%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates)). Presents the designed Solution — Target State, Pilot, and Scale where the engagement runs one — for approval before Roadmap._
+_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 2's Solution Approval session (see [How the Engagement Runs](/AI%20SDLC/01%20Engagement/03%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates)). Presents the designed Solution — Target State, Pilot, and Scale where the engagement runs one — for approval before Roadmap._
 
 **Audience:** Whoever approves funding/staffing for the pilot — usually the same sponsor from Gate 0 and Gate 1.
 
@@ -29,7 +29,7 @@ flowchart LR
     class B5 closing
 ```
 
-_Drop block 3 (Scale) if this engagement isn't running a Scale design — see [How the Engagement Runs](/AI%20SDLC/01%20Process/03%20How%20the%20Engagement%20Runs.md), Scale only applies "where the engagement runs one"._
+_Drop block 3 (Scale) if this engagement isn't running a Scale design — see [How the Engagement Runs](/AI%20SDLC/01%20Engagement/03%20Process/03%20How%20the%20Engagement%20Runs.md), Scale only applies "where the engagement runs one"._
 
 ---
 

@@ -36,15 +36,15 @@ sequenceDiagram
     end
 ```
 
-**Present.** Manual, online or offline — a session, not an async approval. Findings come as one consolidated package, not a scatter of pages — the confirmed Problems, the Current State they're evidenced from, and any Solution Goals already drafted mid-Investigate. Stakeholders see the same evidence trail [04 Evidence Chain](../04%20Evidence%20Chain.md) describes, not a summary of it.
+**Present.** Manual, online or offline — a session, not an async approval. Findings come as one consolidated package, not a scatter of pages — the confirmed Problems, the Current State they're evidenced from, and any Solution Goals already drafted mid-Investigate. Stakeholders see the same evidence trail [04 Evidence Chain](../03%20Process/04%20Evidence%20Chain.md) describes, not a summary of it.
 
 **Materials.** Ahead of Present, `/discovery-gate 1` assembles the package, drafts a session Agenda into `02 Capture/`, and — optionally — builds a recap deck from it. Preparing the materials is scripted; presenting them to stakeholders is not.
 
 **Align and prioritise.** Problems get ranked by impact on delivery speed. Solution Goals get checked against the Problems that evidence them — a goal with no diagnosed problem behind it doesn't survive this step.
 
-**Score fit.** Every surviving Solution Goal gets mapped back to the [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) it traces to — how much of what leadership originally asked for is actually evidenced and achievable (e.g. "80% fit; 3 items need re-evaluation"). This is where Strategic Intent formally becomes Solution Goals, per [Process Grain](../01%20Overview.md#process-grain).
+**Score fit.** Every surviving Solution Goal gets mapped back to the [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) it traces to — how much of what leadership originally asked for is actually evidenced and achievable (e.g. "80% fit; 3 items need re-evaluation"). This is where Strategic Intent formally becomes Solution Goals, per [Process Grain](../03%20Process/01%20Overview.md#process-grain).
 
 > [!IMPORTANT] Any stage or phase can be revisited, not just Investigate
-> Gate Review isn't a one-way door. A flagged item re-opens at whichever stage or phase actually originated it — Intent, Capture, Problem, Goals, even a prior Gate Review — and reprocesses forward through every layer downstream of it, the same evidence-driven correction [How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md) describes for any gate. What can't happen is a revision with no evidence behind it; the Changelog row is where that justification gets recorded, not just the fact that something changed.
+> Gate Review isn't a one-way door. A flagged item re-opens at whichever stage or phase actually originated it — Intent, Capture, Problem, Goals, even a prior Gate Review — and reprocesses forward through every layer downstream of it, the same evidence-driven correction [How the Engagement Runs](../03%20Process/03%20How%20the%20Engagement%20Runs.md) describes for any gate. What can't happen is a revision with no evidence behind it; the Changelog row is where that justification gets recorded, not just the fact that something changed.
 
 Gate Review closing is what unlocks the [Solution workflow](./04%20Solution/00%20Overview.md) — Target State, Pilot, and Scale are all specified against the Problems and Solution Goals this gate confirms.

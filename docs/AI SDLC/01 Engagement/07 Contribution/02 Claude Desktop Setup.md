@@ -73,7 +73,7 @@ _Red arrow: once your branch has changes, click **Create PR** in the bottom bar 
 
 ## Use cases
 
-The discovery engagement moves through a fixed sequence — Initiation → Investigate (loop) → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md). Here's what each situation looks like as a prompt:
+The discovery engagement moves through a fixed sequence — Initiation → Investigate (loop) → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](../03%20Process/03%20How%20the%20Engagement%20Runs.md). Here's what each situation looks like as a prompt:
 
 | Situation you're in                                   | Example prompt                                                                                   |
 | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ |

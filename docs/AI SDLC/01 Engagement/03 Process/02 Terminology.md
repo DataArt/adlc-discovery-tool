@@ -108,6 +108,6 @@ _Target State → Pilot → Scale → Evolve is a closed loop in practice — Ev
 
 ## Reading the Stage Order
 
-**A stage is a folder, not a time slice.** Capture → Problem → Goals reads like a strict sequence, and mostly runs that way — but it isn't a hard rule. [Investigate — Orchestration](./07%20Workflows/03%20Investigate/00%20Orchestration.md) has Problem and Goals looping back into each other per domain, and Goals' Intent artifact is captured before Capture even starts, at Gate 0 by [Initiation](./07%20Workflows/01%20Initiation.md) — before the Investigate phase's own loop begins. "Stage" tells you which folder an artifact's page lives in, not when in the phase it gets touched.
+**A stage is a folder, not a time slice.** Capture → Problem → Goals reads like a strict sequence, and mostly runs that way — but it isn't a hard rule. [Investigate — Orchestration](../05%20Workflows/03%20Investigate/00%20Orchestration.md) has Problem and Goals looping back into each other per domain, and Goals' Intent artifact is captured before Capture even starts, at Gate 0 by [Initiation](../05%20Workflows/01%20Initiation.md) — before the Investigate phase's own loop begins. "Stage" tells you which folder an artifact's page lives in, not when in the phase it gets touched.
 
 → [01 Overview](./01%20Overview.md) for how these phases and stages connect end to end. → [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md) for how phases map onto gates and weeks.

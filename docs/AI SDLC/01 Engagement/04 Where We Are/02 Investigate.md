@@ -7,7 +7,7 @@ outline: [2, 3]
 > [!WARNING] Populated During Engagement
 > This page is a placeholder until discovery starts. The `@discovery` agent keeps it current as workshops complete, findings land, and gates close.
 
-Everything Gate 1 depends on — workshops, Current State, SDLC Domains, and any Solution Goals drafted early. See [Investigate — Orchestration](../07%20Workflows/03%20Investigate/00%20Orchestration.md) for how these connect.
+Everything Gate 1 depends on — workshops, Current State, SDLC Domains, and any Solution Goals drafted early. See [Investigate — Orchestration](../05%20Workflows/03%20Investigate/00%20Orchestration.md) for how these connect.
 
 ```mermaid
 flowchart LR
@@ -41,7 +41,7 @@ _TBD — SDLC Domains, governance stakeholders, or topics no session has reached
 - **Strategic Intent**: ⏳ Not captured → 🔄 Captured → ✅ Confirmed (validated through Capture)
 - **Solution Goals**: ⏳ Not shaped → 🔄 Shaped → ✅ Confirmed (validated with stakeholders) — can't shape until Problems is confirmed
 
-See [Evidence Chain](../04%20Evidence%20Chain.md) for why Solution Goals depends on Problems.
+See [Evidence Chain](../03%20Process/04%20Evidence%20Chain.md) for why Solution Goals depends on Problems.
 
 ### Strategic Intent
 
@@ -96,7 +96,7 @@ _Coverage = domains past ⏳. "Problems Diagnosed" is the registry count for tha
 | ---------------------------------------------------------------- | ------------- | --------- | ------------ |
 | [Solution Goals](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md) | ⏳ Not shaped | 0 drafted | —            |
 
-Investigate closes into [Gate Review](../07%20Workflows/02%20Gate%20Review.md) once every Workshop and Current State row is filled, and every Problems row has moved past _TBD_.
+Investigate closes into [Gate Review](../05%20Workflows/02%20Gate%20Review.md) once every Workshop and Current State row is filled, and every Problems row has moved past _TBD_.
 
 ---
 

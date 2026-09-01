@@ -1,6 +1,6 @@
 # Goals
 
-Strategic intent, in two forms: the raw trigger, and what the solution is actually held accountable to once problems are diagnosed. Not the process for reaching either — that's [Process](/AI%20SDLC/01%20Process/).
+Strategic intent, in two forms: the raw trigger, and what the solution is actually held accountable to once problems are diagnosed. Not the process for reaching either — that's [Engagement](/AI%20SDLC/01%20Engagement/).
 
 ## Initial Direction
 

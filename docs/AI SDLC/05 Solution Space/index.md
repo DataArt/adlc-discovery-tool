@@ -10,7 +10,7 @@ The solution being designed for [[CLIENT_NAME]] — what gets built and rolled o
 [Early signal on where the solution might land — likely pilot domain, known constraints, stated aspirations.]
 
 > [!NOTE] Historical Record, Not a Formal Input
-> Early Direction closes [Gate 0](/AI%20SDLC/01%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates) alongside Strategic Intent and is never formally re-consumed the way Strategic Intent is — Target State doesn't list it as a "given," and no workflow re-opens or re-scores it. It stays on this page as the recorded early guess, useful for comparing against what Target State actually lands on once evidence exists — not as a tracked artifact in its own right.
+> Early Direction closes [Gate 0](/AI%20SDLC/01%20Engagement/03%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates) alongside Strategic Intent and is never formally re-consumed the way Strategic Intent is — Target State doesn't list it as a "given," and no workflow re-opens or re-scores it. It stays on this page as the recorded early guess, useful for comparing against what Target State actually lands on once evidence exists — not as a tracked artifact in its own right.
 
 ## How This Space Works
 

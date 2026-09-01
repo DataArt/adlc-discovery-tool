@@ -5,7 +5,7 @@
 > [!WARNING] Populated During Engagement
 > These pages are placeholders until discovery starts. The `@discovery` agent keeps them current as workshops complete, findings land, and gates close.
 
-The top-level view — which gate the engagement is at, and the overall timeline. See [How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md) for what each gate means.
+The top-level view — which gate the engagement is at, and the overall timeline. See [How the Engagement Runs](../03%20Process/03%20How%20the%20Engagement%20Runs.md) for what each gate means.
 
 ```mermaid
 flowchart LR

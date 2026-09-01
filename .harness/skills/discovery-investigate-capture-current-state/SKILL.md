@@ -19,7 +19,7 @@ The engagement lead wants to run a Capture — Current State session. Here is th
 
 > 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `{{skills_root}}/discovery-investigate/SKILL.md` and resume from there.
 
-This is the Capture stage of `01 Process/07 Workflows/03 Investigate/01 Capture - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
+This is the Capture stage of `01 Engagement/05 Workflows/03 Investigate/01 Capture - Current State.md`. It has two independent halves — running/processing a workshop, and (optionally, only when that workshop justifies it) updating Current State.
 
 ---
 

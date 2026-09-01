@@ -1,6 +1,6 @@
 # [DRAFT] Gate 1 (Steering Meeting) Agenda — Date TBD
 
-_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 1's [Gate Review](/AI%20SDLC/01%20Process/07%20Workflows/02%20Gate%20Review.md) session. A leadership-level recap of what Investigate found, and alignment on where the engagement goes next._
+_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 1's [Gate Review](/AI%20SDLC/01%20Engagement/05%20Workflows/02%20Gate%20Review.md) session. A leadership-level recap of what Investigate found, and alignment on where the engagement goes next._
 
 **Audience:** Whoever sponsors the engagement and needs to approve the Problems + Solution Goals before Solution design starts.
 

@@ -1,6 +1,6 @@
 # [DRAFT] Gate 3 (Final Sign-off) Agenda — Date TBD
 
-_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 3's Final Sign-off session (see [How the Engagement Runs](/AI%20SDLC/01%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates)). Presents the phased delivery plan — Milestones, WBS, team composition, and Timeline — for final sign-off._
+_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 3's Final Sign-off session (see [How the Engagement Runs](/AI%20SDLC/01%20Engagement/03%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates)). Presents the phased delivery plan — Milestones, WBS, team composition, and Timeline — for final sign-off._
 
 **Audience:** Whoever staffs and funds the delivery plan — the same sponsor who approved the Solution at Gate 2.
 

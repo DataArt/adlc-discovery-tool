@@ -3,7 +3,7 @@
 > [!WARNING] Populated During Engagement
 > This page is a placeholder until discovery starts. The `@discovery` agent keeps it current as workshops complete, findings land, and gates close.
 
-Everything Gate 3 depends on — Milestones, WBS, team composition, Timeline. Only starts once Solution closes. See [Roadmap workflow](../07%20Workflows/05%20Roadmap/00%20Overview.md).
+Everything Gate 3 depends on — Milestones, WBS, team composition, Timeline. Only starts once Solution closes. See [Roadmap workflow](../05%20Workflows/05%20Roadmap/00%20Overview.md).
 
 | Item                                                                          | Status         | Target Date | Last Updated |
 | ----------------------------------------------------------------------------- | -------------- | ----------- | ------------ |

@@ -2,7 +2,7 @@
 
 After a stage skill publishes an evidence-bearing artifact, or the root assembles a package for a gate, invoke `@discovery` as a read-only reviewer before presenting the result to the engagement lead.
 
-`@discovery` no longer owns the discovery flow — the `discovery`/`discovery-investigate`/`discovery-*` skills do. Its remaining job is to check that what a skill is about to publish actually honours [04 Evidence Chain](/AI%20SDLC/01%20Process/04%20Evidence%20Chain.md), the same way `@architect` checks structural soundness for `/design`.
+`@discovery` no longer owns the discovery flow — the `discovery`/`discovery-investigate`/`discovery-*` skills do. Its remaining job is to check that what a skill is about to publish actually honours [04 Evidence Chain](/AI%20SDLC/01%20Engagement/03%20Process/04%20Evidence%20Chain.md), the same way `@architect` checks structural soundness for `/design`.
 
 ## When to trigger
 

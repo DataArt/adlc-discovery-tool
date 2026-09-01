@@ -19,7 +19,7 @@ The engagement lead wants to draft or update an early Solution Goal. Here is the
 
 > 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `{{skills_root}}/discovery-investigate/SKILL.md` and resume from there.
 
-This is `01 Process/07 Workflows/03 Investigate/04 Goals - Solution Goals.md` — the last part of Investigate. Optional — only runs once a domain's root cause holds steady; a domain doesn't have to wait for the formal Gate Review to get an early draft if its evidence is already solid.
+This is `01 Engagement/05 Workflows/03 Investigate/04 Goals - Solution Goals.md` — the last part of Investigate. Optional — only runs once a domain's root cause holds steady; a domain doesn't have to wait for the formal Gate Review to get an early draft if its evidence is already solid.
 
 ---
 

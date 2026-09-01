@@ -1,6 +1,6 @@
 # [DRAFT] Gate 0 (Kick-off) Agenda — Date TBD
 
-_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 0's [Initiation](/AI%20SDLC/01%20Process/07%20Workflows/01%20Initiation.md) session. A formal kickoff: confirm the raw intent captured at intake, present the Early Direction hypothesis, and agree the Investigate workshop programme._
+_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate 0's [Initiation](/AI%20SDLC/01%20Engagement/05%20Workflows/01%20Initiation.md) session. A formal kickoff: confirm the raw intent captured at intake, present the Early Direction hypothesis, and agree the Investigate workshop programme._
 
 **Audience:** The engagement sponsor and whoever owns delivery day-to-day — the same people who supplied the intake conversation this agenda's content is drawn from.
 

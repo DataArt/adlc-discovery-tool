@@ -1,6 +1,6 @@
 # [DRAFT] Gate {N} ({Gate Name}) Agenda — [DATE]
 
-_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate {N}'s [{Gate Name}](/AI%20SDLC/01%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates) session. [One line: what kind of session this is — a formal leadership-level recap, a working review.]_
+_[[CLIENT_NAME]] × DataArt ADLC discovery — Gate {N}'s [{Gate Name}](/AI%20SDLC/01%20Engagement/03%20Process/03%20How%20the%20Engagement%20Runs.md#the-four-gates) session. [One line: what kind of session this is — a formal leadership-level recap, a working review.]_
 
 **Audience:** [Names/roles — who needs to be in the room]
 

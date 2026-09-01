@@ -11,7 +11,7 @@
 
 - Identify what's already accessible as a data source (e.g. issue tracker, VCS history, observability tooling) before instrumenting anything new. See [Problem Space — Measurement](/AI%20SDLC/03%20Problem%20Space/03%20SDLC%20Domains/08%20Measurement).
 - Build on any cost-allocation-per-team work already in progress rather than starting fresh.
-- Which metrics, KPIs, and observability tooling actually get instrumented is a `/design` ticket once the gap is confirmed here — not decided on this page. See [Process → Overview, Solution phase](/AI%20SDLC/01%20Process/01%20Overview.md#-solution).
+- Which metrics, KPIs, and observability tooling actually get instrumented is a `/design` ticket once the gap is confirmed here — not decided on this page. See [Process → Overview, Solution phase](/AI%20SDLC/01%20Engagement/03%20Process/01%20Overview.md#-solution).
 
 ## Analyse
 

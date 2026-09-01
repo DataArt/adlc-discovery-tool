@@ -33,7 +33,7 @@ export default withMermaid(
       ],
 
       nav: [
-        { text: 'Process', link: '/AI SDLC/01 Process/' },
+        { text: 'Engagement', link: '/AI SDLC/01 Engagement/' },
         { text: 'Capture', link: '/AI SDLC/02 Capture/' },
         { text: 'Problem', link: '/AI SDLC/03 Problem Space/' },
         { text: 'Goals', link: '/AI SDLC/04 Goals/' },
@@ -42,7 +42,7 @@ export default withMermaid(
       ],
 
       sidebar: {
-        '/AI SDLC/01 Process/': scanSection('AI SDLC/01 Process'),
+        '/AI SDLC/01 Engagement/': scanSection('AI SDLC/01 Engagement'),
         '/The Story/': [{ text: 'The Story', items: scanSection('The Story') }],
         '/AI SDLC/03 Problem Space/': scanSection('AI SDLC/03 Problem Space'),
         '/AI SDLC/04 Goals/': [{ text: 'Goals', items: scanSection('AI SDLC/04 Goals') }],

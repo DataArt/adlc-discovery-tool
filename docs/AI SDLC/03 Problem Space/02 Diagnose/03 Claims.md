@@ -7,7 +7,7 @@ aside: false
 _The raw quotes behind every Problem — one row per claim, append-only. The evidence trail [Problems](./02%20Problems.md) draws on, and how several people pointing at the same root cause from different angles strengthens it._
 
 > [!WARNING] Populated During Engagement
-> This page fills in during Diagnose, as a Problem is drafted or updated — [discovery-investigate-problem-diagnose](/AI%20SDLC/01%20Process/07%20Workflows/03%20Investigate/03%20Problem%20-%20Diagnose.md) traces the Problem's cited SDLC Domain evidence back to the specific Workshop `Notes.md` it came from and pulls the supporting quotes from there. It is a placeholder until that evidence exists.
+> This page fills in during Diagnose, as a Problem is drafted or updated — [discovery-investigate-problem-diagnose](/AI%20SDLC/01%20Engagement/05%20Workflows/03%20Investigate/03%20Problem%20-%20Diagnose.md) traces the Problem's cited SDLC Domain evidence back to the specific Workshop `Notes.md` it came from and pulls the supporting quotes from there. It is a placeholder until that evidence exists.
 
 ---
 

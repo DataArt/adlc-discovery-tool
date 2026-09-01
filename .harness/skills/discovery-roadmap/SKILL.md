@@ -17,7 +17,7 @@ The engagement lead wants to run a Roadmap-phase session. Here is their input:
 
 > 🚧 **Stub.** This phase isn't built out into stage skills yet. Roadmap has no stages of its own per `02 Terminology.md` (0 stages — its artifacts sit directly under the phase), so its eventual build-out is more likely a single skill than a stage family like Investigate's — revisit that call when this gets built.
 
-Read `docs/AI SDLC/01 Process/07 Workflows/05 Roadmap/00 Overview.md` — given an approved Solution (Target State + Pilot + Scale), it sequences:
+Read `docs/AI SDLC/01 Engagement/05 Workflows/05 Roadmap/00 Overview.md` — given an approved Solution (Target State + Pilot + Scale), it sequences:
 
 1. **Milestones** — accountable, dated commitments → `06 Roadmap/02 Milestones.md`
 2. **WBS** — each milestone broken into scoped, sized work items → `06 Roadmap/03 WBS.md`

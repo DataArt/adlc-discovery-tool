@@ -25,7 +25,7 @@ Use the prompts below in one conversation so the assistant can keep the site and
 
 > Where are we in the engagement?
 
-The answer should come from [Where We Are — Engagement](../06%20Where%20We%20Are/01%20Engagement.md) and the active phase tracker, not from document count or assumptions.
+The answer should come from [Where We Are — Engagement](../04%20Where%20We%20Are/01%20Engagement.md) and the active phase tracker, not from document count or assumptions.
 
 ## 2 — Start the Site
 
@@ -45,10 +45,10 @@ Open the local URL it returns.
 
 Follow:
 
-1. [Process Overview](../01%20Overview.md)
-2. [How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md)
-3. [Evidence Chain](../04%20Evidence%20Chain.md)
-4. [Where We Are — Engagement](../06%20Where%20We%20Are/01%20Engagement.md)
+1. [Process Overview](../03%20Process/01%20Overview.md)
+2. [How the Engagement Runs](../03%20Process/03%20How%20the%20Engagement%20Runs.md)
+3. [Evidence Chain](../03%20Process/04%20Evidence%20Chain.md)
+4. [Where We Are — Engagement](../04%20Where%20We%20Are/01%20Engagement.md)
 
 ## 4 — Walk Through the Evidence
 

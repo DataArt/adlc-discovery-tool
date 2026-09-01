@@ -19,7 +19,7 @@ The engagement lead wants to update an SDLC Domain page from new evidence. Here 
 
 > 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `{{skills_root}}/discovery-investigate/SKILL.md` and resume from there.
 
-This is the SDLC Domains part of `01 Process/07 Workflows/03 Investigate/02 Problem - SDLC Domains.md`. Optional — only runs once Current State gives a domain something to diagnose against.
+This is the SDLC Domains part of `01 Engagement/05 Workflows/03 Investigate/02 Problem - SDLC Domains.md`. Optional — only runs once Current State gives a domain something to diagnose against.
 
 ---
 

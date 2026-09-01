@@ -25,7 +25,7 @@ Every gate is **manual, online or offline** — this skill's job is to prepare t
 
 ## Step 1 — Identify the gate
 
-`$ARGUMENTS` should name a gate number (0–3). If it doesn't, read `docs/AI SDLC/01 Process/06 Where We Are/01 Engagement.md`'s gate table and use the first gate not marked Closed. Confirm which gate before continuing.
+`$ARGUMENTS` should name a gate number (0–3). If it doesn't, read `docs/AI SDLC/01 Engagement/04 Where We Are/01 Engagement.md`'s gate table and use the first gate not marked Closed. Confirm which gate before continuing.
 
 If that gate already shows Closed, report it and stop.
 

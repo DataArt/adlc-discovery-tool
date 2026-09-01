@@ -19,7 +19,7 @@ The engagement lead wants to diagnose or update a Problem. Here is their input:
 
 > 🔁 **Session continuity** (`{{skills_root}}/discovery/pattern-session-continuity.md`): if resuming after context compaction, re-read this full SKILL.md before doing anything. When done, re-read `{{skills_root}}/discovery-investigate/SKILL.md` and resume from there.
 
-This is the Diagnose part of `01 Process/07 Workflows/03 Investigate/03 Problem - Diagnose.md`. Optional — only runs once a domain's evidence points to a root cause.
+This is the Diagnose part of `01 Engagement/05 Workflows/03 Investigate/03 Problem - Diagnose.md`. Optional — only runs once a domain's evidence points to a root cause.
 
 ---
 

@@ -72,7 +72,7 @@ Codex asks for approval when an action crosses its configured permission boundar
 
 ## Use cases
 
-The discovery engagement moves through Initiation → Investigate → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](../03%20How%20the%20Engagement%20Runs.md).
+The discovery engagement moves through Initiation → Investigate → Gate Review → Solution → Solution Approval → Roadmap → Final Sign-off, per [03 How the Engagement Runs](../03%20Process/03%20How%20the%20Engagement%20Runs.md).
 
 | Situation you’re in                                   | Example prompt                                                                                 |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------- |

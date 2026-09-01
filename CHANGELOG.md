@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.1.1...v1.2.0) (2026-09-01)
+
+### Features
+
+- **web:** add breadcrumb navigation ([b14a0f2](https://github.com/DataArt/adlc-discovery-tool/commit/b14a0f26463c70f40c017e48f1055cb7b549f417))
+- **web:** wire up Stories nav and strengthen active-page highlighting ([3a65c9a](https://github.com/DataArt/adlc-discovery-tool/commit/3a65c9aa7bd18fa5b5ce0bb2b2d694381ab8dcc7))
+
 ## [1.1.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.1.0...v1.1.1) (2026-09-01)
 
 ### Bug Fixes

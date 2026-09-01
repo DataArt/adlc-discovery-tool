@@ -133,9 +133,9 @@ flowchart TD
     2. `actions/setup-node@v4` (node 24, cache yarn)
     3. `yarn install --immutable`
     4. `yarn npm audit --all --severity moderate`
-    5. `yarn nx affected --target=lint --base=origin/${{ github.base_ref }} --head=HEAD`
-    6. `yarn nx affected --target=typecheck --base=origin/${{ github.base_ref }} --head=HEAD`
-    7. `yarn nx affected --target=build --base=origin/${{ github.base_ref }} --head=HEAD`
+    5. `yarn nx affected --target=lint --base=origin/<PR base branch> --head=HEAD` (base branch resolved from the GitHub Actions PR context)
+    6. `yarn nx affected --target=typecheck --base=origin/<PR base branch> --head=HEAD` (same base resolution)
+    7. `yarn nx affected --target=build --base=origin/<PR base branch> --head=HEAD` (same base resolution)
   - No AWS credentials — pure code quality
 
 **Verification:**
@@ -159,10 +159,10 @@ flowchart TD
     1. `actions/checkout@v4` (`fetch-depth: 0`)
     2. `actions/setup-node@v4` (node 24, cache yarn)
     3. `yarn install --immutable`
-    4. `aws-actions/configure-aws-credentials@v4` — role `${{ vars.IAM_ROLE_ARN }}`, region `${{ vars.AWS_REGION }}`
+    4. `aws-actions/configure-aws-credentials@v4` — role from the `IAM_ROLE_ARN` repo variable, region from the `AWS_REGION` repo variable
     5. Compute affected: `yarn nx show projects --affected --base=HEAD~1 --head=HEAD` → store project list in step output
-    6. **If `site` affected**: run `ENV_PARAM_NAME=${{ vars.SITE_SSM_ENV_PARAM }} bash scripts/ci/env-export.sh` then `yarn nx run site:deploy:ci`
-    7. **If `lambda-auth` affected**: run `ENV_PARAM_NAME=${{ vars.LAMBDA_AUTH_SSM_ENV_PARAM }} bash scripts/ci/env-export.sh` then `yarn nx run lambda-auth:deploy:ci`
+    6. **If `site` affected**: run `ENV_PARAM_NAME=<value of the SITE_SSM_ENV_PARAM repo variable> bash scripts/ci/env-export.sh` then `yarn nx run site:deploy:ci`
+    7. **If `lambda-auth` affected**: run `ENV_PARAM_NAME=<value of the LAMBDA_AUTH_SSM_ENV_PARAM repo variable> bash scripts/ci/env-export.sh` then `yarn nx run lambda-auth:deploy:ci`
   - `infra` is never deployed by CD
 
 - Required GitHub Actions **variables** to set (Settings → Secrets and variables → Actions → Variables):

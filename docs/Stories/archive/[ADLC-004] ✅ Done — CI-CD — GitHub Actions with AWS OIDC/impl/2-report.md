@@ -56,7 +56,7 @@ Multiple rounds of debugging before green:
 4. **OIDC trust policy — immutable subject claims**: Repos created after June 1, 2026 use numeric IDs in the sub claim (`repo:[[GITHUB_ORG]]@[[GITHUB_ORG_ID]]/[[GITHUB_REPO]]@[[GITHUB_REPO_ID]]:*`). Trust policy had `repo:[[GITHUB_ORG]]/[[GITHUB_REPO]]:*`. Fixed in `ci-stack.ts`; trust policy patched directly in IAM console (no local AWS creds for redeploy).
 5. **GitHub environment `dev` required**: `vars.*` only resolves when the job has `environment: dev` set. Added to job config.
 6. **`env-export.sh` before build**: `build.ts` inlines `SM_SECRET_NAME` + `AWS_REGION` via esbuild `define` — OIDC auth and SSM env export must run before the build target.
-7. **VitePress SSR crash on plan file**: `docs/Stories/.../1-plan.md` contains `${{ github.base_ref }}` which Vue SSR interprets as template interpolation. Fixed by adding `srcExclude: ['Stories/**']` to `apps/docs-web/.vitepress/config.ts`.
+7. **VitePress SSR crash on plan file**: `docs/Stories/.../1-plan.md` contains the literal GitHub Actions mustache syntax for `github.base_ref`, which Vue SSR interprets as template interpolation. Fixed by adding `srcExclude: ['Stories/**']` to `apps/docs-web/.vitepress/config.ts`.
 
 ### Step 5 — Docs: Engineering Guide update
 
@@ -67,7 +67,7 @@ Created a dedicated `Engineering Guide/Infrastructure/` subfolder and consolidat
 - `02 Deploy Lifecycle.md` (was `10`)
 - `03 CI-CD Pipeline.md` (new) — full CI/CD reference: OIDC flow, CI/CD workflow steps, SSM env-fetch pattern, GitHub variables table, guarded operations
 
-Remaining root docs renumbered: `09 Documentation Principles.md` → `07`. All cross-references (01 Conventions, 02 Doc Structure, 04 AI Workflow, HLD Auth.md, README.md) updated. Fixed two additional issues: `infra:deploy` → `infra:provision` in the principle diagram and Deploy Lifecycle doc; `${{ github.base_ref }}` in CI-CD Pipeline rewritten as prose to avoid Vue SSR template interpolation crash. Build green throughout.
+Remaining root docs renumbered: `09 Documentation Principles.md` → `07`. All cross-references (01 Conventions, 02 Doc Structure, 04 AI Workflow, HLD Auth.md, README.md) updated. Fixed two additional issues: `infra:deploy` → `infra:provision` in the principle diagram and Deploy Lifecycle doc; the `github.base_ref` GitHub Actions mustache reference in CI-CD Pipeline rewritten as prose to avoid Vue SSR template interpolation crash. Build green throughout.
 
 ## Deviation Audit
 

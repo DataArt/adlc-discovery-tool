@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.0.1...v1.1.0) (2026-09-01)
+
+### Features
+
+- **harness:** add provider-agnostic agent generation ([cea7c61](https://github.com/DataArt/adlc-discovery-tool/commit/cea7c61bcdf30a7476941a8235061fe7ae6ff7bb))
+- **harness:** select provider regeneration ([9e22645](https://github.com/DataArt/adlc-discovery-tool/commit/9e226458800a9304f1c9cf00a7ba3e763ed1fb1d))
+- **patch-apply:** auto-regenerate harness projections after apply ([dc4a646](https://github.com/DataArt/adlc-discovery-tool/commit/dc4a646269b95ff93dee56452b0ec20b02af4999))
+- **problem-space:** add Claims ledger, derive Where Gaps Sit from Problems ([7b2d263](https://github.com/DataArt/adlc-discovery-tool/commit/7b2d263e321e0dd118ae81396c79458338cf4bcc))
+
+### Bug Fixes
+
+- **web:** collapse nested sidebar sections past top level ([25f7904](https://github.com/DataArt/adlc-discovery-tool/commit/25f790444abcdeb8837fc7229fbfcdbf0a010d6f))
+
 ## [1.0.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.0.0...v1.0.1) (2026-08-26)
 
 ### Bug Fixes

@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.2.0...v1.2.1) (2026-09-01)
+
+### Bug Fixes
+
+- **web:** escape GitHub Actions mustache syntax breaking VitePress SSR ([695e07b](https://github.com/DataArt/adlc-discovery-tool/commit/695e07ba25fce22a577817bba318216e1eaf5b78))
+
 ## [1.2.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.1.1...v1.2.0) (2026-09-01)
 
 ### Features

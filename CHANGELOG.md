@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.1.0...v1.1.1) (2026-09-01)
+
+### Bug Fixes
+
+- **infra:** bump site bucket suffix to s3-02 to dodge global name collision ([dc42f7a](https://github.com/DataArt/adlc-discovery-tool/commit/dc42f7a7d65d6c237051d4d333919822bc438550))
+
 ## [1.1.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.0.1...v1.1.0) (2026-09-01)
 
 ### Features

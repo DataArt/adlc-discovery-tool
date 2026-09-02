@@ -13,38 +13,27 @@ _Getting a non-technical team member from a cold laptop to running `/discovery` 
 | Git            | https://github.com/signup | https://git-scm.com/downloads |
 | Claude Desktop | https://claude.ai/login   | https://claude.ai/download    |
 
-## Env setup
+Once you have a GitHub account, share your username with the engagement lead or repo admin so they can grant you access to the repo — without that, cloning fails regardless of which method you use.
 
-1. Clone the repo and move into it:
+## Setup
 
-   ```bash
-   git clone https://github.com/[[GITHUB_ORG]]/[[GITHUB_REPO]].git
-   cd [[GITHUB_REPO]]
+1. Clone the repo — see [GitHub Repo Setup](./04%20GitHub%20Repo%20Setup.md) (Option A, GitHub Desktop) for the no-terminal walkthrough.
+
+2. Open Claude Desktop, switch to the **Code** tab, and set the working directory to the `[[GITHUB_REPO]]` folder you just cloned.
+
+   ![Claude Desktop — Code tab and working directory picker](/images/process/claude-desktop-code-tab.png)
+
+   _Red arrows: switch to the **Code** tab (top), then set the working directory to the cloned repo folder (bottom bar)._
+
+3. Ask Claude to set up the environment for you — no separate terminal needed:
+
+   ```
+   Run scripts/setup/setup.sh to set up this project.
    ```
 
-2. Run the setup script for your OS — it installs Node (via nvm), enables Yarn via corepack, offers to install and authenticate the GitHub CLI, and installs workspace dependencies:
+   This one script works on both Mac and Windows — it detects the OS itself and hands off to the right platform script, so there's no guessing which one to name. Claude asks for approval before running it — approve it. It installs Node (via nvm), enables Yarn via corepack, offers to install and authenticate the GitHub CLI, and installs workspace dependencies.
 
-   ```bash
-   # macOS
-   bash scripts/setup/setup-mac.sh
-   ```
-
-   ```powershell
-   # Windows — open PowerShell with "Run as Administrator" first;
-   # nvm-windows needs elevation to create its Node version symlink.
-   powershell -ExecutionPolicy Bypass -File scripts/setup/setup-windows.ps1
-   ```
-
-## Tool setup
-
-1. Open Claude Desktop.
-2. Switch to the **Code** tab.
-3. Set the working directory to the `[[GITHUB_REPO]]` folder you cloned in Env setup.
-4. Start prompting.
-
-![Claude Desktop — Code tab and working directory picker](/images/process/claude-desktop-code-tab.png)
-
-_Red arrows: switch to the **Code** tab (top), then set the working directory to the cloned repo folder (bottom bar)._
+4. Start prompting — see [Quick Walkthrough](./06%20Quick%20Walkthrough.md) for four prompts to try first.
 
 This is what matters: the skills and conventions that drive the engagement (`.claude/skills/`, `CLAUDE.md`) live inside that folder. Once it's set as the working directory, Claude sees them exactly as Claude Code does.
 

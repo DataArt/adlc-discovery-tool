@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.2.1...v1.3.0) (2026-09-02)
+
+### Features
+
+- **process:** no-terminal repo setup and assistant-run env setup for Desktop managers ([6495cf2](https://github.com/DataArt/adlc-discovery-tool/commit/6495cf2127b1079dc1f1e1a21f83ee3d086a907c))
+
 ## [1.2.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.2.0...v1.2.1) (2026-09-01)
 
 ### Bug Fixes

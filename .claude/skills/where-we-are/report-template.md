@@ -57,6 +57,6 @@ HLD containers with significant open questions or TBD sections:
 
 | Priority | Action     | Command                                        |
 | -------- | ---------- | ---------------------------------------------- |
-| P1       | {{action}} | `/dev-document <TICKET>` or `/design <TICKET>` |
+| P1       | {{action}} | `/dev document <TICKET>` or `/design <TICKET>` |
 | P2       | {{action}} |                                                |
 | P3       | {{action}} |                                                |

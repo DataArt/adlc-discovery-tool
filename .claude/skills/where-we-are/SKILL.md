@@ -161,7 +161,7 @@ HLD containers with significant open questions or TBD sections that should be re
 
 | Priority | Action | Command                                        |
 | -------- | ------ | ---------------------------------------------- |
-| P1       | ...    | `/dev-document {TICKET}` or `/design {TICKET}` |
+| P1       | ...    | `/dev document {TICKET}` or `/design {TICKET}` |
 | ...      |        |                                                |
 ```
 
@@ -194,5 +194,5 @@ After saving (or if developer declined):
 > "Saved to `docs/System Architecture (LLD)/where-we-are/{date}-gap-report.md`.
 >
 > To re-run after new deliveries: `/where-we-are`
-> To document a container's LLD: `/dev-document {TICKET}`
-> To run a full WAF code audit: `/war-implementation`"
+> To document a container's LLD: `/dev document {TICKET}`
+> To run a full WAF code audit: `/war implementation`"

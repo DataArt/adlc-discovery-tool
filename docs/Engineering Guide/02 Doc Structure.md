@@ -95,7 +95,7 @@ docs/System Architecture (LLD)/
 
 **Engineering Guide:** numbered articles (`NN Title Case.md`). Operational and procedural content only — no architecture.
 
-**Stories:** per-ticket working folders, archived after `/dev-document` completes. Not permanent reference docs.
+**Stories:** per-ticket working folders, archived after `/dev document` completes. Not permanent reference docs.
 
 ---
 

@@ -38,6 +38,9 @@ cdk.out/
 # NX
 .nx/
 
+# Claude Code — portable harness-bootstrap toolkit (personalized copies live in .claude/)
+/.claude/skills/harness-bootstrap/
+
 # Yarn Berry
 .yarn/cache
 .yarn/unplugged

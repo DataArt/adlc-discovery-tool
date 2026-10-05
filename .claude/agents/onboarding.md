@@ -43,7 +43,7 @@ Walk through these first, then branch based on their answer above.
 For DataArt consultants and [[CLIENT_NAME]] stakeholders focused on workshops and recommendations:
 
 - [ ] **Design workflow** — explain that `/design ADLC-XXX <topic>` starts a design session. Frame asks whether it's a **Product** design (engagement content — reads from and publishes to `docs/AI SDLC/`) or a **Project** design (this repo's own architecture — `docs/Target Architecture (HLD)/`). Most engagement work is Product track.
-- [ ] **Existing context** — point them to `docs/AI SDLC/03 Problem Space/` and `docs/AI SDLC/04 Solution Space/` — this is what's been established so far.
+- [ ] **Existing context** — point them to `docs/AI SDLC/03 Problem Space/` and `docs/AI SDLC/05 Solution Space/` — this is what's been established so far.
 - [ ] **Reference materials** — `raw-artifacts/` is where source PDFs, DOCX documents, and other raw engagement material go. Empty by default in a fresh instance — populated as the engagement produces source material.
 - [ ] **Skill lifecycle** — if they'll be capturing patterns, explain `/skill-reflect` after a session. One sentence: "After a ticket, brain-dump anything that surprised you."
 

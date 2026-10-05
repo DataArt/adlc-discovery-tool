@@ -1,4 +1,4 @@
-# Design Lifecycle — Frame → Research → Elaborate → Solution → Review → Address Feedback → Publish
+# Design Lifecycle — Frame → Research → Evaluate → Solution → Review Gate → Address Feedback → Publish
 
 _Produces an approved architectural design before implementation begins._
 
@@ -35,11 +35,11 @@ flowchart TD
 
     F["📋 Frame\nResolve Context (track/subfolder) → Write 00 Frame.md → IDE review → confirm Requirements"]:::phase
     R["🔍 Research\nDelegate options → OQ triage → Write 01 Research.md"]:::phase
-    E["🏗 Elaborate\nRequirements × Options matrix + Tradeoffs → Write 02 Elaborate.md → IDE review"]:::phase
+    E["🏗 Evaluate\nRequirements × Options matrix + Tradeoffs → Write 02 Evaluate.md → IDE review"]:::phase
     EW["WAF assessment → Report.md"]:::phase
     S1["📦 Solution\nArchitecture.md → IDE review"]:::phase
     S2["Design.md → Stack.md → Efforts.md\n(each: write → IDE review → confirm)"]:::phase
-    SGATE["/design-review WAF gate → Report.md"]:::gate
+    SGATE["WAF review gate (patterns/waf-review.md) → Report.md"]:::gate
     REV["🔎 Review\nSuggest MR → developer opens draft MR"]:::phase
     PAPPROVE{"⏸ human approval\n(out-of-band)"}:::human
     AF["💬 Address Feedback\nReiterate into earlier phase → re-approve"]:::phase
@@ -48,7 +48,7 @@ flowchart TD
     ARC_R["{resolved architect agent}\n3–5 options, no recommendation"]:::sat
     OQT["design-oq-triage\nV/E interactive loop"]:::sat
     ARC_S["{resolved architect agent}\narchitecture review\n(optional gate)"]:::sat
-    DR["/design-review\nWAF — 6 pillars"]:::sat
+    DR["patterns/waf-review.md\nWAF — 6 pillars"]:::sat
     DW["@docs-writer\ndoc updates"]:::sat
     ARC_P["{resolved architect agent}\ndoc impact + review\nmax 2 passes"]:::sat
 
@@ -72,33 +72,33 @@ flowchart TD
 
 ## Phases
 
-**Orchestrator:** `/design <TICKET>` — runs all seven phases in one session, stopping at each boundary for confirmation. Bail out at any point and resume with the individual command. Review, Address Feedback, and Publish are three separate skills so each stays independently invocable and resumable: `/design-review-gate` opens the draft MR and the session pauses; `/design-address-feedback` only runs if the approver raises concerns (loops back to an earlier phase, then re-approves); `/design-publish` runs once the gate is approved.
+**Orchestrator:** `/design <TICKET>` — runs all seven phases in one session, stopping at each boundary for confirmation. Bail out at any point and resume with the individual subcommand: `/design frame|research|evaluate|solution|review-gate|address-feedback|publish <TICKET>`. Review Gate, Address Feedback, and Publish stay independently invocable and resumable: `/design review-gate` opens the draft MR and the session pauses; `/design address-feedback` only runs if the approver raises concerns (loops back to an earlier phase, then re-approves); `/design publish` runs once the gate is approved.
 
 | Phase                | Individual command                  | What it produces                                                                                       |
 | -------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **Frame**            | `/design-frame <TICKET>`            | Problem statement, known + proposed requirements, boundaries → `design/00 Frame.md`                    |
-| **Research**         | `/design-research <TICKET>`         | 3–5 neutral options via `{resolved architect agent}` — no recommendation → `design/01 Research.md`     |
-| **Elaborate**        | `/design-elaborate <TICKET>`        | Requirements × Options matrix, tradeoffs, recommendation, WAF assessment → `design/02 Elaborate.md`    |
-| **Solution**         | `/design-solution <TICKET>`         | Certainty-principle artifacts → `solution/Architecture.md`, `Design.md`, `Stack.md`, `Efforts.md`      |
-| **Review**           | `/design-review-gate <TICKET>`      | Draft MR opened, gate recorded in `Report.md`, session pauses for out-of-band human approval           |
-| **Address Feedback** | `/design-address-feedback <TICKET>` | Only if the approver raises concerns — reiterates into the traced-to phase, then waits for re-approval |
-| **Publish**          | `/design-publish <TICKET>`          | `{dest docs}` updated, implementation tickets created, story archived                                  |
+| **Frame**            | `/design frame <TICKET>`            | Problem statement, known + proposed requirements, boundaries → `design/00 Frame.md`                    |
+| **Research**         | `/design research <TICKET>`         | 3–5 neutral options via `{resolved architect agent}` — no recommendation → `design/01 Research.md`     |
+| **Evaluate**         | `/design evaluate <TICKET>`         | Requirements × Options matrix, tradeoffs, recommendation, WAF assessment → `design/02 Evaluate.md`     |
+| **Solution**         | `/design solution <TICKET>`         | Certainty-principle artifacts → `solution/Architecture.md`, `Design.md`, `Stack.md`, `Efforts.md`      |
+| **Review Gate**      | `/design review-gate <TICKET>`      | Draft MR opened, gate recorded in `Report.md`, session pauses for out-of-band human approval           |
+| **Address Feedback** | `/design address-feedback <TICKET>` | Only if the approver raises concerns — reiterates into the traced-to phase, then waits for re-approval |
+| **Publish**          | `/design publish <TICKET>`          | `{dest docs}` updated, implementation tickets created, story archived                                  |
 
 ---
 
 ## Invariants
 
-**Frame:** The track (Product or Project) and its subfolder are resolved once, via `pattern-context-resolution.md`, and written to `Report.md`'s `## Context` section before requirements are drafted — no later phase re-asks or re-derives this. Requirements must include both known (from ticket) and proposed (gaps found by AI — NFRs, observability, GDPR). Proposed requirements are labelled `[proposed]` and must be explicitly accepted or rejected by the developer before the phase saves. These requirements become the evaluation criteria rows in the Requirements × Options matrix during Elaborate.
+**Frame:** The track (Product or Project) and its subfolder are resolved once, via `pattern-context-resolution.md`, and written to `Report.md`'s `## Context` section before requirements are drafted — no later phase re-asks or re-derives this. Requirements must include both known (from ticket) and proposed (gaps found by AI — NFRs, observability, GDPR). Proposed requirements are labelled `[proposed]` and must be explicitly accepted or rejected by the developer before the phase saves. These requirements become the evaluation criteria rows in the Requirements × Options matrix during Evaluate.
 
 **Research:** `{resolved architect agent}` returns options only — no recommendation. At least one "minimal change" option and at least one industry-standard approach must be included. No judgment is made here. Open questions from `{resolved architect agent}` are triaged interactively — one at a time — as **(V) Viability** (would disqualify an option) or **(E) Elaboration-input** (affects cost/detail only). All `(V)` OQs must be resolved before Research saves. See `pattern-design-oq-triage.md`. If Frame implied more than one independent decision, this phase loops once per decision — see `pattern-multi-decision-split.md`.
 
-**Elaborate:** Every requirement from `00 Frame.md` and every WAF pillar must be addressed. The recommendation must be falsifiable: it states which assumption, if wrong, would change the recommendation. Open questions are resolved with the developer before Solution begins. A closing WAF assessment runs on the recommended option only. `02 Elaborate.md` is written to disk for IDE review before the WAF assessment runs. Loops per decision under the same multi-decision policy as Research.
+**Evaluate:** Every requirement from `00 Frame.md` and every WAF pillar must be addressed. The recommendation must be falsifiable: it states which assumption, if wrong, would change the recommendation. Open questions are resolved with the developer before Solution begins. A closing WAF assessment runs on the recommended option only. `02 Evaluate.md` is written to disk for IDE review before the WAF assessment runs. Loops per decision under the same multi-decision policy as Research.
 
-**Solution:** Certainty principle applies. `solution/` files contain only settled decisions and their direct consequences — no rationale, no rejected alternatives, no open questions. Each file is written to disk for IDE review as it is completed. After `Architecture.md` is confirmed, an optional `{resolved architect agent}` read-only review gate checks structural completeness before `Design.md` is started (see `pattern-design-architect-review.md`). A `/design-review` WAF gate runs after all four files are confirmed. `Efforts.md` must include an Operational Costs section (ongoing infra consumption at expected scale). Under the multi-decision policy, `Design.md` loops per decision but `Architecture.md` stays a single integrated file — one section per decision. These files drive `{dest docs}` updates (Publish) and implementation (`/dev`).
+**Solution:** Certainty principle applies. `solution/` files contain only settled decisions and their direct consequences — no rationale, no rejected alternatives, no open questions. Each file is written to disk for IDE review as it is completed. After `Architecture.md` is confirmed, an optional `{resolved architect agent}` read-only review gate checks structural completeness before `Design.md` is started (see `pattern-design-architect-review.md`). A WAF review gate (`patterns/waf-review.md`) runs after all four files are confirmed. `Efforts.md` must include an Operational Costs section (ongoing infra consumption at expected scale). Under the multi-decision policy, `Design.md` loops per decision but `Architecture.md` stays a single integrated file — one section per decision. These files drive `{dest docs}` updates (Publish) and implementation (`/dev`).
 
-**Review:** The AI suggests the MR title/body but does not open it. The developer opens the MR and pastes the URL. Session ends here — this is a genuine session boundary, not just a phase transition, since it waits on an out-of-band human approval.
+**Review Gate:** The AI suggests the MR title/body but does not open it. The developer opens the MR and pastes the URL. Session ends here — this is a genuine session boundary, not just a phase transition, since it waits on an out-of-band human approval.
 
-**Address Feedback:** Only runs if the approver raises concerns. The AI identifies which phase/step the concern traces to and suggests a named reiterate path (e.g. "Reiterate from Elaborate, Step 4"); it does not decide the fix unilaterally. The MR must be re-approved before Publish proceeds.
+**Address Feedback:** Only runs if the approver raises concerns. The AI identifies which phase/step the concern traces to and suggests a named reiterate path (e.g. "Reiterate from Evaluate, Step 4"); it does not decide the fix unilaterally. The MR must be re-approved before Publish proceeds.
 
 **Publish:** The AI does not approve its own gate — a human must approve the MR out-of-band, with no unresolved concerns, before this phase runs. `{resolved architect agent}` identifies `{dest docs}` that need updating; `@docs-writer` applies the updates and `{resolved architect agent}` reviews (max 2 passes). Archive and implementation-ticket creation happen after that review is clean.
 
@@ -111,10 +111,10 @@ Patterns are shared multi-step protocols co-located in `.claude/skills/design/`.
 | Pattern                             | File                                 | What it enforces                                                                                                  | Applied in                                                                                                 |
 | ----------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **context-resolution**              | `pattern-context-resolution.md`      | Resolves Product/Project track, source/dest docs, subfolder, and architect agent exactly once                     | Frame Step 3                                                                                               |
-| **multi-decision-split**            | `pattern-multi-decision-split.md`    | Default per-decision file-split policy when Frame implies multiple independent decisions                          | Research Step 1, Elaborate Step 1, Solution Step 3                                                         |
-| **do → report → commit** _(design)_ | `pattern-do-report-commit.md`        | Update Report.md tracker → append Efforts row → present commit → STOP → announce next phase                       | End of Frame, Research, Elaborate, Solution                                                                |
+| **multi-decision-split**            | `pattern-multi-decision-split.md`    | Default per-decision file-split policy when Frame implies multiple independent decisions                          | Research Step 1, Evaluate Step 1, Solution Step 3                                                          |
+| **do → report → commit** _(design)_ | `pattern-do-report-commit.md`        | Update Report.md tracker → append Efforts row → present commit → STOP → announce next phase                       | End of Frame, Research, Evaluate, Solution                                                                 |
 | **announce-progress** _(design)_    | `pattern-announce-progress.md`       | `✅ Done / 📋 After this phase` at every phase boundary                                                           | `design/SKILL.md` phase transitions (incl. Review, Address Feedback); `pattern-do-report-commit.md` step 4 |
-| **design-oq-triage**                | `pattern-design-oq-triage.md`        | Two-tier OQ classification (V/E), interactive one-at-a-time loop, persist as Assumptions in Report.md             | Research Step 3b, Elaborate Step 1b                                                                        |
+| **design-oq-triage**                | `pattern-design-oq-triage.md`        | Two-tier OQ classification (V/E), interactive one-at-a-time loop, persist as Assumptions in Report.md             | Research Step 3b, Evaluate Step 1b                                                                         |
 | **design-architect-review**         | `pattern-design-architect-review.md` | `{resolved architect agent}` read-only gate after Architecture.md; max 2 iterations; excludes doc gaps from scope | Solution Step 2b                                                                                           |
 | **satellite-review** _(design)_     | `pattern-satellite-review.md`        | `{resolved architect agent}` read-only reviewer of design artifacts; OK / corrections; max 2 iterations           | Solution Step 2b (via `pattern-design-architect-review.md`), Publish Step 4                                |
 | **write-confirm** _(design)_        | `pattern-write-confirm.md`           | Write file to disk before asking for approval; developer reviews in IDE; iterate until confirmed                  | All phases (per artifact)                                                                                  |

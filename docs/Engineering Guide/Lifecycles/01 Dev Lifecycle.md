@@ -1,4 +1,4 @@
-# Dev Lifecycle — Plan → Implement → Test → Document
+# Dev Lifecycle — Context Gathering → Ceremony → Plan → Implement → Test → Document
 
 _Delivers a ticket from problem statement to documented, merged code._
 
@@ -12,11 +12,11 @@ The Dev lifecycle is the core delivery workflow. Every ticket — feature, bug f
 
 ## When to use it
 
-Always. There is no ticket that bypasses this lifecycle. For large or novel tickets, run the Design lifecycle first; `/design-publish` creates the Dev tickets when design is approved.
+Always. There is no ticket that bypasses this lifecycle. For large or novel tickets, run the Design lifecycle first; `/design publish` creates the Dev tickets when design is approved.
 
 ## When NOT to use it
 
-There is no "skip Dev" path. The phases can be run individually (`/dev-plan`, `/dev-implement`, `/dev-test`, `/dev-document`) or all at once (`/dev`), but the sequence is always the same.
+There is no "skip Dev" path. The phases can be run individually (`/dev context|ceremony|plan|implement|test|document <TICKET>`) or all at once (`/dev <TICKET>`), but the sequence is always the same.
 
 ---
 
@@ -26,6 +26,8 @@ There is no "skip Dev" path. The phases can be run individually (`/dev-plan`, `/
 flowchart TD
     START(["▶ /dev TICKET"]):::actor
 
+    CG["🎯 Context Gathering\nStory folder + 0-intent.md + 2-report.md skeleton"]:::phase
+    CE["🚀 Ceremony\nFeature branch checkout confirmed"]:::phase
     P["📋 Plan\nRead HLD + LLD → audit against architecture\nWrite 1-plan.md + 2-report.md skeleton"]:::phase
     I1["🔨 Implement\nOne step at a time"]:::phase
     ISTEP["Execute step → verify\n→ report → commit → developer confirms"]:::phase
@@ -39,7 +41,7 @@ flowchart TD
     ARC_T["@architect\nHLD + NFR audit\n(multi-container or infra tickets)"]:::sat
     ARC_D["@architect\ndeviation audit\n(undocumented decisions in plan + report)"]:::sat
 
-    START --> P --> I1 --> ISTEP --> ILOOP
+    START --> CG --> CE --> P --> I1 --> ISTEP --> ILOOP
     ILOOP -->|yes| ISTEP
     ILOOP -->|no| T --> D --> DONE
 
@@ -58,18 +60,30 @@ flowchart TD
 
 ## Phases
 
-**Orchestrator:** `/dev <TICKET> <problem statement>` — runs all four phases in one session, stopping at each boundary for confirmation. Bail out at any point and resume with the individual command.
+**Orchestrator:** `/dev <TICKET> <problem statement>` — runs all six phases in one session, stopping at each boundary for confirmation. Bail out at any point and resume with the individual subcommand: `/dev context|ceremony|plan|implement|test|document <TICKET>`.
 
-| Phase         | Individual command             | What it produces                                                               |
-| ------------- | ------------------------------ | ------------------------------------------------------------------------------ |
-| **Plan**      | `/dev-plan <TICKET> <problem>` | `1-plan.md` (immutable) + `2-report.md` (skeleton) in `Stories/<TICKET>/impl/` |
-| **Implement** | `/dev-implement <TICKET>`      | Code commits, one step at a time; findings captured in `2-report.md`           |
-| **Test**      | `/dev-test <TICKET>`           | Build + test + lint results; PR review appended to `2-report.md`               |
-| **Document**  | `/dev-document <TICKET>`       | Updated READMEs / LLD / Engineering Guide; story archived                      |
+| Phase                 | Individual command                | What it produces                                                                  |
+| --------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| **Context Gathering** | `/dev context <TICKET> <problem>` | Story folder, `0-intent.md`, `2-report.md` (skeleton) in `Stories/<TICKET>/impl/` |
+| **Ceremony**          | `/dev ceremony <TICKET>`          | Feature branch checkout confirmed                                                 |
+| **Plan**              | `/dev plan <TICKET>`              | `1-plan.md` (immutable); `2-report.md` Progress table populated                   |
+| **Implement**         | `/dev implement <TICKET>`         | Code commits, one step at a time; findings captured in `2-report.md`              |
+| **Test**              | `/dev test <TICKET>`              | Build + test + lint results; PR review appended to `2-report.md`                  |
+| **Document**          | `/dev document <TICKET>`          | Updated READMEs / LLD / Engineering Guide; story archived                         |
 
 ---
 
 ## Invariants
+
+**Context Gathering:**
+
+- Creates the story folder and `0-intent.md` from the problem statement, plus a `2-report.md` skeleton — no design or planning content is written here.
+- Reuses an existing story folder/local ID for the ticket if one already exists rather than creating a duplicate.
+
+**Ceremony:**
+
+- No external issue tracker exists for this project, so there is no assign/transition step — the phase's only job is confirming the developer is on the correct feature branch.
+- Branch checkout is a manual operation (sign-off gate) — the AI presents the `git checkout -b` command; it never runs it.
 
 **Plan:**
 
@@ -88,7 +102,7 @@ flowchart TD
 - Surface architecture deviations from the plan at the start of the phase.
 - **Satellite review:** after completing any non-trivial step, the worker agent invokes `@architect` as a read-only reviewer before presenting verification. Verdict is go or reiterate. Maximum 3 iterations; escalate to the developer if unresolved. Skip for mechanical steps (rename, config value, dependency bump).
 - **Implementation notes:** if a step passed first try, a one-liner is enough. If validation surfaced errors or required multi-step troubleshooting, write a full incident record — initial error, each hypothesis ruled out, final root cause and fix. A terse "fixed" entry is not acceptable for a troubleshooting chain. Notes added at the bottom, in ascending step order.
-- **TD triage:** when the developer resolves a tech debt item now, invoke `/dev-plan` but skip to Step 6 (bypass Jira/context setup — context is already established). Append TD steps to the existing `1-plan.md`.
+- **TD triage:** when the developer resolves a tech debt item now, invoke `/dev plan` but skip to Step 6 (bypass tracker/context setup — context is already established). Append TD steps to the existing `1-plan.md`.
 
 **Test:**
 
@@ -138,4 +152,4 @@ Patterns are shared multi-step protocols co-located in `.claude/skills/dev/`. Th
 Thoughts: need new BFF module, seed data, web API client.
 ```
 
-Claude guides through all four phases, stopping at each boundary.
+Claude guides through all six phases, stopping at each boundary.

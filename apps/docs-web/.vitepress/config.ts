@@ -44,6 +44,7 @@ const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
     { text: 'Roadmap', link: '/AI SDLC/06 Roadmap/', activeMatch: '^/AI SDLC/06 Roadmap/' },
     { text: '🚧', link: '/Stories/', activeMatch: '^/Stories/(?!archive/)' },
     { text: '🗄️', link: '/Stories/archive/', activeMatch: '^/Stories/archive/' },
+    { text: '🎬', link: '/Demo/', activeMatch: '^/Demo/' },
   ],
 
   sidebar: {
@@ -59,6 +60,7 @@ const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
     '/Engineering Guide/': scanSection('Engineering Guide'),
     '/Stories/': [{ text: 'WIP', items: scanSection('Stories', { exclude: ['archive'] }) }],
     '/Stories/archive/': [{ text: 'Archive', items: scanSection('Stories/archive') }],
+    '/Demo/': scanSection('Demo'),
   },
 
   indexedDirs: collectIndexedDirs(),

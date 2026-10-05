@@ -31,7 +31,7 @@ A DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-fi
 → [AI SDLC — Capture](AI%20SDLC/02%20Capture/00%20Overview.md)
 → [AI SDLC — Process](AI%20SDLC/01%20Engagement/03%20Process/01%20Overview.md) — the Goals·Problem·Solution·Milestones facilitation arc used to run every workshop session
 → [AI SDLC — Goals Overview](AI%20SDLC/04%20Goals/01%20Overview.md) — Strategic Intent (upfront) and Solution Goals (grounded and re-scoped once Problems are evidenced)
-→ [AI SDLC — Solution Space Overview](AI%20SDLC/05%20Solution%20Space/01%20Overview.md) — the solution's Target State → Pilot → Scale → Evolve stages, with draft ideas grounded in Problem Space findings
+→ [AI SDLC — Solution Space Overview](AI%20SDLC/05%20Solution%20Space/00%20Overview.md) — the solution's Target State → Pilot → Scale → Evolve stages, with draft ideas grounded in Problem Space findings
 → [AI SDLC — Roadmap Overview](AI%20SDLC/06%20Roadmap/01%20Overview.md) — draft phased delivery plan: scope, phases, timelines, and team composition
 
 ## Demo Presentation

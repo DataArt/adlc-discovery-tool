@@ -61,7 +61,7 @@ The four stages below follow the repository’s `/bootstrap-client` workflow. Th
 | Infrastructure and deployment | Hosted workspace and access configuration                | Technical owner                     |
 | CI/CD                         | Publishing pipeline for reviewed changes                 | Technical owner                     |
 
-Source: [Bootstrap Client skill](../../.claude/skills/bootstrap-client/SKILL.md). The role split is suggested presentation guidance; confirm actual owners for the engagement.
+Source: Bootstrap Client skill (`.claude/skills/bootstrap-client/SKILL.md`). The role split is suggested presentation guidance; confirm actual owners for the engagement.
 
 ## Existing interface illustration
 

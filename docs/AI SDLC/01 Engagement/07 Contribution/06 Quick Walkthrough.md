@@ -56,14 +56,14 @@ Follow:
 
 Follow:
 
-| Evidence layer  | Page                                                                                                                                    |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Workshops       | [Capture Overview](/AI%20SDLC/02%20Capture/00%20Overview.md)                                                                            |
-| Current State   | [Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md)                                                                      |
-| Domain findings | [Problem Space](/AI%20SDLC/03%20Problem%20Space/01%20Overview.md)                                                                       |
-| Formal Problems | [Problems Registry](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md)                                                     |
-| Goals           | [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) · [Solution Goals](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md) |
-| Solution        | [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) · [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md)       |
+| Evidence layer  | Page                                                                                                                                                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Workshops       | [Capture Overview](/AI%20SDLC/02%20Capture/00%20Overview.md)                                                                                                  |
+| Current State   | [Process](/AI%20SDLC/02%20Capture/01%20Current%20State/Process.md)                                                                                            |
+| Domain findings | [Problem Space](/AI%20SDLC/03%20Problem%20Space/01%20Overview.md)                                                                                             |
+| Formal Problems | [Problems Registry](/AI%20SDLC/03%20Problem%20Space/02%20Diagnose/02%20Problems.md)                                                                           |
+| Goals           | [Strategic Intent](/AI%20SDLC/04%20Goals/02%20Strategic%20Intent.md) · [Solution Goals](/AI%20SDLC/04%20Goals/03%20Solution%20Goals.md)                       |
+| Solution        | [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md) · [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot/01%20Overview.md) |
 
 Read every warning, evidence tier, status, and open item. A populated-looking template is not necessarily confirmed engagement content.
 

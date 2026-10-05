@@ -35,11 +35,11 @@ This engagement doesn't get to assume a blank slate. If [[CLIENT_NAME]] already 
 - Does [[CLIENT_NAME]] have any existing internal initiative toward AI-assisted delivery?
 - Who owns it, and do they have a seat at this engagement's gate reviews?
 - What has it already tried, and what did it learn — including anything that didn't work?
-- Which parts of [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) does it already cover, narrowing the actual gap this engagement needs to close?
+- Which parts of [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md) does it already cover, narrowing the actual gap this engagement needs to close?
 
 ---
 
-This feeds [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) directly: the gap stated there accounts for what's already running here, not just Current State without it. It also feeds [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md)'s guardrail to build on existing infrastructure rather than duplicate it.
+This feeds [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md) directly: the gap stated there accounts for what's already running here, not just Current State without it. It also feeds [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot/01%20Overview.md)'s guardrail to build on existing infrastructure rather than duplicate it.
 
 ---
 

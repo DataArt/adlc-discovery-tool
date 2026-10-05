@@ -4,8 +4,6 @@
 
 The proposed **engineering harness** makes AI assistance instructed and aware of the project it is working in. **Documentation is its backbone**: it gives the AI the architectural context, engineering conventions, constraints and approval rules needed to act within the team's expectations. **Dev and Design are the core skills** that turn this context into repeatable engineering work. Jira and Confluence retain upstream WHAT and WHY; connectors load that intent into the harness, while project documentation in Git records HOW. See the [Knowledge Base](../04%20Knowledge%20Base/Overview.md) and [Governance](../06%20Governance/Overview.md) model.
 
-![Implementation Harness](/images/solution-space/implementation-harness.png)
-
 ## Documentation is the backbone
 
 The harness depends on maintained documentation to answer two questions for AI assistance: **what do I need to know about this system, and what rules must I follow when changing it?** This provides both project awareness and governance: documented instructions guide actions, reviews and approvals, reducing the need for the AI to guess intent or reconstruct decisions.

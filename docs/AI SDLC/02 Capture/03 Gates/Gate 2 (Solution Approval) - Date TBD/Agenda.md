@@ -40,12 +40,12 @@ _Drop block 3 (Scale) if this engagement isn't running a Scale design — see [H
 
 ## 1. Recap: Target State (10 min)
 
-- Restate the target-state design direction from [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) — how it answers the Solution Goals confirmed at Gate 1.
+- Restate the target-state design direction from [Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md) — how it answers the Solution Goals confirmed at Gate 1.
 - **Check question for the audience:** does this direction still match what was approved at Gate 1?
 
 ## 2. Present: Pilot Design (20 min)
 
-- Recommended option and key trade-offs from the Pilot's `/design` artifacts — see [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md).
+- Recommended option and key trade-offs from the Pilot's `/design` artifacts — see [Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot/01%20Overview.md).
 - Key Well-Architected Framework findings from the design's Review phase.
 - **Check question for the audience:** any concerns before this becomes what gets built?
 

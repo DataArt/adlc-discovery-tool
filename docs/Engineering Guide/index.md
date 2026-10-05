@@ -4,7 +4,7 @@ Cross-cutting conventions, operational procedures, and lifecycle playbooks that 
 
 ## How This Guide Works
 
-The top-level articles cover conventions and setup — read [02 Doc Structure](./02%20Doc%20Structure.md) first for the full four-tier documentation model this repo follows. [Lifecycles](./Lifecycles/00%20Overview.md) documents the four lifecycles (Dev, Design, Skill, Architecture) that structure all work end to end. [Infrastructure](./Infrastructure/00%20Configuration%20%26%20Secrets.md) covers deploy-related operational runbooks. Unlike the AI SDLC docs, this guide is stable reference material — it changes when a convention changes, not as the engagement progresses.
+The top-level articles cover conventions and setup — read [02 Doc Structure](./02%20Doc%20Structure.md) first for the full four-tier documentation model this repo follows. [Lifecycles](./Lifecycles/00%20Overview.md) documents the four lifecycles (Dev, Design, Evolve, Architecture) that structure all work end to end. [Infrastructure](./Infrastructure/00%20Configuration%20%26%20Secrets.md) covers deploy-related operational runbooks. Unlike the AI SDLC docs, this guide is stable reference material — it changes when a convention changes, not as the engagement progresses.
 
 | Page                                                                            | Holds                                                                              |
 | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -16,18 +16,17 @@ The top-level articles cover conventions and setup — read [02 Doc Structure](.
 | [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude or Codex to AWS, GitHub, and Atlassian via MCP                   |
 | [07 Documentation Principles](./07%20Documentation%20Principles.md)             | Why these principles exist, what they are, and which structure fits which doc type |
 | [08 Branching Strategy](./08%20Branching%20Strategy.md)                         | Git Flow branching aligned with CI/CD environments — preview, Dev, Staging, Prod   |
-| [09 Harness Generation](./09%20Harness%20Generation.md)                         | How `.harness/` is rendered into Claude's and Codex's native projections           |
 
 ### Lifecycles
 
-| Page                                                                       | Holds                                                                   |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [00 Overview](./Lifecycles/00%20Overview.md)                               | The four lifecycles, how they interact, and when to use each one        |
-| [01 Dev Lifecycle](./Lifecycles/01%20Dev%20Lifecycle.md)                   | Plan → Implement → Test → Document — ticket to merged, documented code  |
-| [02 Design Lifecycle](./Lifecycles/02%20Design%20Lifecycle.md)             | Frame → Research → Elaborate → Solution → Publish — approved design     |
-| [03 Skill Lifecycle](./Lifecycles/03%20Skill%20Lifecycle.md)               | Reflect → Triage → New → Promote — grows the shared convention library  |
-| [04 Architecture Lifecycle](./Lifecycles/04%20Architecture%20Lifecycle.md) | Periodic audit commands — gaps between design, implementation, docs     |
-| [05 Documents Flow](./Lifecycles/05%20Documents%20Flow.md)                 | How documentation is born, refined, and graduates to its permanent home |
+| Page                                                                       | Holds                                                                     |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [00 Overview](./Lifecycles/00%20Overview.md)                               | The four lifecycles, how they interact, and when to use each one          |
+| [01 Dev Lifecycle](./Lifecycles/01%20Dev%20Lifecycle.md)                   | Plan → Implement → Test → Document — ticket to merged, documented code    |
+| [02 Design Lifecycle](./Lifecycles/02%20Design%20Lifecycle.md)             | Frame → Research → Elaborate → Solution → Publish — approved design       |
+| [03 Evolve Lifecycle](./Lifecycles/03%20Evolve%20Lifecycle.md)             | Reflect → Triage → Validate → Adopt — grows the shared convention library |
+| [04 Architecture Lifecycle](./Lifecycles/04%20Architecture%20Lifecycle.md) | Periodic audit commands — gaps between design, implementation, docs       |
+| [05 Documents Flow](./Lifecycles/05%20Documents%20Flow.md)                 | How documentation is born, refined, and graduates to its permanent home   |
 
 ### Infrastructure
 

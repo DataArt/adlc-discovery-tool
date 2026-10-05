@@ -47,7 +47,7 @@ This is a recommendation for the documented pilot, not a record of stakeholder a
 | **[Client's design tool] and project Git**         | [Note existing connector/MCP use and reliability if captured.] Git holds project context.                           | Include design context for UI work and project context for feasibility/impact, with explicit source links and owner review.                                               |
 | **[Client's AI platform] and knowledge ingestion** | Platform capabilities exist; [note whether organisation-level ingestion work has started, if captured].             | Assess existing orchestration with the platform owner. Distinguish live squad connectors from planned central ingestion.                                                  |
 
-Sources: [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md), [AI Adoption](/AI%20SDLC/02%20Capture/01%20Current%20State/AI%20Adoption.md), and the relevant [Workshop](/AI%20SDLC/02%20Capture/04%20Workshops/) notes covering connector policy, once captured. These describe captured observations, not a fresh technical access check.
+Sources: [Tool Inventory](/AI%20SDLC/02%20Capture/01%20Current%20State/Tool%20Inventory.md), [AI Adoption](/AI%20SDLC/02%20Capture/01%20Current%20State/AI%20Adoption.md), and the relevant [Workshop](/AI%20SDLC/02%20Capture/00%20Overview.md) notes covering connector policy, once captured. These describe captured observations, not a fresh technical access check.
 
 ## Shared rules for the pilot
 

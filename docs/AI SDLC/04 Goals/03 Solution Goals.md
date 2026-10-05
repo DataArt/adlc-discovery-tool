@@ -140,7 +140,7 @@ Every goal gets an ID the day it's first drafted, and keeps it for the life of t
 
 ---
 
-Once this list holds steady, it feeds directly into [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md) and the coverage matrix that [Solution Space — 01 Overview](/AI%20SDLC/05%20Solution%20Space/01%20Overview.md) describes: every row above should be traceable to at least one solution element by the time Pilot is defined.
+Once this list holds steady, it feeds directly into [Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md) and the coverage matrix that [Solution Space — Overview](/AI%20SDLC/05%20Solution%20Space/00%20Overview.md) describes: every row above should be traceable to at least one solution element by the time Pilot is defined.
 
 _Not yet agreed — [[CLIENT_NAME]]'s confirmed Solution Goals are recorded here once Problem Space evidence holds steady. Add a numbered entry per goal as it's drafted; once a goal's status changes, update both the Registry row and its own section in the same edit — they should never disagree._
 

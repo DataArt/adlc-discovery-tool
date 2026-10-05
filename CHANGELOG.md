@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.4.0...v1.5.0) (2026-10-05)
+
+### Features
+
+- **docs:** generalize Solution Space into reusable blueprint structure ([dd553f4](https://github.com/DataArt/adlc-discovery-tool/commit/dd553f4c9183c8b9eaec890ee10b91dbf3816bc4))
+
+### Bug Fixes
+
+- **docs:** repair missing asset and stale documentation links ([ea48991](https://github.com/DataArt/adlc-discovery-tool/commit/ea48991a476a230cbcc66e2bc14ac9c7ca9c513c))
+
 ## [1.4.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.3.0...v1.4.0) (2026-10-05)
 
 ### Features

@@ -44,6 +44,7 @@ const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
     { text: 'Roadmap', link: '/AI SDLC/06 Roadmap/', activeMatch: '^/AI SDLC/06 Roadmap/' },
     { text: '🚧', link: '/Stories/', activeMatch: '^/Stories/(?!archive/)' },
     { text: '🗄️', link: '/Stories/archive/', activeMatch: '^/Stories/archive/' },
+    { text: '🎬', link: '/Demo/', activeMatch: '^/Demo/' },
   ],
 
   sidebar: {
@@ -51,9 +52,7 @@ const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
     '/The Story/': [{ text: 'The Story', items: scanSection('The Story') }],
     '/AI SDLC/03 Problem Space/': scanSection('AI SDLC/03 Problem Space'),
     '/AI SDLC/04 Goals/': [{ text: 'Goals', items: scanSection('AI SDLC/04 Goals') }],
-    '/AI SDLC/05 Solution Space/': [
-      { text: 'Solution Space', items: scanSection('AI SDLC/05 Solution Space') },
-    ],
+    '/AI SDLC/05 Solution Space/': scanSection('AI SDLC/05 Solution Space'),
     '/AI SDLC/06 Roadmap/': [{ text: 'Roadmap', items: scanSection('AI SDLC/06 Roadmap') }],
     '/AI SDLC/02 Capture/': scanSection('AI SDLC/02 Capture'),
     '/Target Architecture (HLD)/': scanSection(`Target Architecture (HLD)/${HLD_VERSION}`),
@@ -61,6 +60,7 @@ const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
     '/Engineering Guide/': scanSection('Engineering Guide'),
     '/Stories/': [{ text: 'WIP', items: scanSection('Stories', { exclude: ['archive'] }) }],
     '/Stories/archive/': [{ text: 'Archive', items: scanSection('Stories/archive') }],
+    '/Demo/': scanSection('Demo'),
   },
 
   indexedDirs: collectIndexedDirs(),

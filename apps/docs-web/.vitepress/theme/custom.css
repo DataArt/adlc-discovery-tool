@@ -1,3 +1,25 @@
+/* Wider layout on large screens — VitePress caps content at 1440px by default,
+   leaving large empty gutters on wide monitors. This is the single variable
+   every layout piece (nav, sidebar, content, local-nav, footer) reads from,
+   gated behind VitePress's own `min-width: 1440px` media query, so it only
+   takes effect when the display actually has the room. */
+:root {
+  --vp-layout-max-width: 1600px;
+}
+
+/* The prose column itself has its own, separate cap (VPDoc.vue's scoped
+   `.content-container { max-width: 688px }`) that `--vp-layout-max-width`
+   above doesn't touch — override it directly so text actually fills the
+   wider page instead of leaving a second pair of gutters either side. */
+@media (min-width: 1280px) {
+  .VPDoc.has-aside .content-container {
+    /* !important needed: VPDoc.vue's own rule is a Vue scoped style, which
+       compiles to an extra [data-v-xxxx] attribute selector — that outranks
+       an equal-specificity global selector regardless of CSS source order. */
+    max-width: 1000px !important;
+  }
+}
+
 /* Stronger active-state highlighting for nav + sidebar than default theme */
 
 /* Top nav: filled pill instead of a subtle color shift */

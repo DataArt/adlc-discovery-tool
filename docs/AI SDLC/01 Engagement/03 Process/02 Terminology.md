@@ -95,16 +95,16 @@ flowchart LR
 
 _Target State → Pilot → Scale → Evolve is a closed loop in practice — Evolve feeds learnings back into Pilot and refines Target State (see [01 Overview — Process Grain](./01%20Overview.md#process-grain)) — flattened here to a straight chain so the stage order stays readable._
 
-| Phase           | Stage        | Artifacts                                            | Lives in                                                                                                                                      |
-| --------------- | ------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Investigate** | Capture      | Workshops, Current State                             | [02 Capture](/AI%20SDLC/02%20Capture/)                                                                                                        |
-| **Investigate** | Problem      | SDLC Domains, Diagnose (Problems registry)           | [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/)                                                                                          |
-| **Investigate** | Goals        | Intent (Strategic Intent), Solution (Solution Goals) | [04 Goals](/AI%20SDLC/04%20Goals/)                                                                                                            |
-| **Solution**    | Target State | Target State                                         | [05 Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State.md)                                                   |
-| **Solution**    | Pilot        | Pilot design + HLD (`Architecture`/`Design`/`Stack`) | [05 Solution Space — Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot.md), [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/) |
-| **Solution**    | Scale        | Scale design                                         | [05 Solution Space — Scale](/AI%20SDLC/05%20Solution%20Space/04%20Scale.md)                                                                   |
-| **Solution**    | Evolve       | Evolve (learnings loop back into Pilot)              | [05 Solution Space — Evolve](/AI%20SDLC/05%20Solution%20Space/05%20Evolve.md)                                                                 |
-| **Roadmap**     | _none_       | Milestones, WBS, Timeline (+ Team Composition)       | [06 Roadmap](/AI%20SDLC/06%20Roadmap/)                                                                                                        |
+| Phase           | Stage        | Artifacts                                            | Lives in                                                                                                                                                    |
+| --------------- | ------------ | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Investigate** | Capture      | Workshops, Current State                             | [02 Capture](/AI%20SDLC/02%20Capture/)                                                                                                                      |
+| **Investigate** | Problem      | SDLC Domains, Diagnose (Problems registry)           | [03 Problem Space](/AI%20SDLC/03%20Problem%20Space/)                                                                                                        |
+| **Investigate** | Goals        | Intent (Strategic Intent), Solution (Solution Goals) | [04 Goals](/AI%20SDLC/04%20Goals/)                                                                                                                          |
+| **Solution**    | Target State | Target State                                         | [05 Solution Space — Target State](/AI%20SDLC/05%20Solution%20Space/02%20Target%20State/00%20Overview.md)                                                   |
+| **Solution**    | Pilot        | Pilot design + HLD (`Architecture`/`Design`/`Stack`) | [05 Solution Space — Pilot](/AI%20SDLC/05%20Solution%20Space/03%20Pilot/01%20Overview.md), [Target Architecture (HLD)](/Target%20Architecture%20%28HLD%29/) |
+| **Solution**    | Scale        | Scale design                                         | [05 Solution Space — Scale](/AI%20SDLC/05%20Solution%20Space/04%20Scale.md)                                                                                 |
+| **Solution**    | Evolve       | Evolve (learnings loop back into Pilot)              | [05 Solution Space — Evolve](/AI%20SDLC/05%20Solution%20Space/05%20Evolve.md)                                                                               |
+| **Roadmap**     | _none_       | Milestones, WBS, Timeline (+ Team Composition)       | [06 Roadmap](/AI%20SDLC/06%20Roadmap/)                                                                                                                      |
 
 ## Reading the Stage Order
 

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "answers": {
+    "Q1": {
+      "question": "Project purpose and why it exists",
+      "value": "The ADLC Discovery Tool is a structured, evidence-led engagement tool — a DataArt-led Solution Design engagement diagnosing SDLC bottlenecks and mapping a path to AI-first workflow adoption for the client. The harness tracks design work, engineering decisions, and skill patterns from discovery through publication.",
+      "source": "CLAUDE.md#Why",
+      "status": "confirmed"
+    },
+    "Q2": {
+      "question": "Languages, frameworks, runtime, datastore, cloud; propose from config",
+      "value": "TypeScript throughout. Web: VitePress 1.x on Vite. Auth: Node.js Lambda@Edge. Infrastructure: AWS CDK. Static origin: S3, served via CloudFront.",
+      "source": "CLAUDE.md#Architecture",
+      "status": "confirmed"
+    },
+    "Q3": {
+      "question": "Named containers/layers; drives CONTAINER_LIST and specialist scope",
+      "value": "Web, Auth, Infrastructure",
+      "source": "CLAUDE.md#Architecture",
+      "status": "confirmed"
+    },
+    "Q4": {
+      "question": "Primary data flow and integrations",
+      "value": "Browser → CloudFront (Lambda@Edge auth gate) → S3 (VitePress static build)",
+      "source": "CLAUDE.md#Architecture",
+      "status": "confirmed"
+    },
+    "Q5": {
+      "question": "Tracker (Jira/Linear/GitHub Issues/none); ticket prefix, tracker URL, optional Confluence/board details",
+      "value": "No external issue tracker. Internal ticket prefix: ADLC (e.g. ADLC-001). Story folders in docs/Stories/. No Jira/Confluence URLs.",
+      "source": "CLAUDE.md#Issue tracker",
+      "status": "confirmed"
+    },
+    "Q6": {
+      "question": "Claude Code/Codex CLI/Cursor/Kiro/Windsurf/multiple; select installation paths and exactly one project instruction destination",
+      "value": "Claude Code only. Codex projections (.agents/, .codex/, AGENTS.md) retired on 2026-09-15 — decided with the developer to drop cross-provider generation when adopting harness-bootstrap canonical as the sole source of truth (see run report for this launch).",
+      "source": "developer decision 2026-09-15 (this launch run)",
+      "status": "confirmed"
+    },
+    "Q7": {
+      "question": "Commit format, branch naming, build/check commands, guarded commands",
+      "value": "Commit format: Conventional Commits (`<type>(<scope>): <what>`). Branch format: `<type>/short-description`. Package manager: yarn (never npm/npx). Guarded commands (never run directly, present as developer instructions): `cdk deploy`, `yarn nx run infra:provision`. `git push` runs after explicit per-action approval, never silently. Region must never be hardcoded in source or docs — deployment configuration only.",
+      "source": "CLAUDE.md#Conventions",
+      "status": "confirmed"
+    },
+    "Q8": {
+      "question": "Confirmed NFR targets: availability, latency, residency, accessibility, cost, etc.",
+      "value": "See docs/Target Architecture (HLD)/v1/Non-Functional Concerns/Requirements.md. Key: basic auth password protection on all routes (NFR-1), credentials from Secrets Manager not hardcoded (NFR-2), region never hardcoded (NFR-3), infra as code via CDK (NFR-4), VitePress build fails on dead links (NFR-5), giscus comments gated by GitHub repo permission (NFR-6). No cost ceiling; small team, ~10 internal users; fixed-duration engagement.",
+      "source": "docs/Target Architecture (HLD)/v1/Non-Functional Concerns/Requirements.md",
+      "status": "confirmed"
+    },
+    "Q9": {
+      "question": "Team, pace, risks, other constraints",
+      "value": "Small team, internal access only (~10 users); fixed-duration engagement scope; no cost ceiling defined.",
+      "source": ".harness-bootstrap-answers.md (legacy)",
+      "status": "confirmed"
+    },
+    "Q10": {
+      "question": "Enabled Dev/Design/Skill/Architecture lifecycles; default all, Dev required",
+      "value": "All four lifecycles enabled: Dev, Design, Skill, Architecture (all present under .claude/skills/)",
+      "source": ".claude/skills/",
+      "status": "verified"
+    },
+    "Q10b": {
+      "question": "If Design: Project-scoped (default), Product-context-scoped, or Two-track; propose from detected shared docs",
+      "value": "Two-track — confirmed with developer 2026-08-16. /design supports both Product (docs/AI SDLC/, @discovery-owned engagement content) and Project (docs/Target Architecture (HLD)/, this repo's own architecture) tracks, resolved per session in Frame.",
+      "source": ".harness-bootstrap-answers.md (legacy, confirmed 2026-08-16)",
+      "status": "confirmed"
+    },
+    "Q10c": {
+      "question": "If Product-context or Two-track: shared folder under project:docs/; propose detected name or Product Context",
+      "value": "PRODUCT_CONTEXT_DIR = AI SDLC — confirmed with developer 2026-08-16.",
+      "source": ".harness-bootstrap-answers.md (legacy, confirmed 2026-08-16)",
+      "status": "confirmed"
+    },
+    "Q11": {
+      "question": "Azure/AWS/GCP/custom WAF with explicit pillars, or None; governs assessments and NFR output",
+      "value": "AWS WAF (6 pillars: Reliability, Security, Cost Optimisation, Operational Excellence, Performance Efficiency, Sustainability) — matches installed war-design/SKILL.md pillar table.",
+      "source": ".claude/skills/war-design/SKILL.md",
+      "status": "verified"
+    }
+  }
+}

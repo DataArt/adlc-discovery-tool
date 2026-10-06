@@ -1,3 +1,9 @@
+## [1.6.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.0...v1.6.1) (2026-10-06)
+
+### Bug Fixes
+
+- **deps:** bump nx to 23.2.1 to resolve security advisories ([b177b6d](https://github.com/DataArt/adlc-discovery-tool/commit/b177b6de8c7b60a8de6bfe39d35a8a2f05f666ac))
+
 ## [1.6.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.5.0...v1.6.0) (2026-10-06)
 
 ### Features

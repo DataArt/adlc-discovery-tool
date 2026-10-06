@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.5.0...v1.6.0) (2026-10-06)
+
+### Features
+
+- **decks:** add ADLC "The Story" slide deck ([0d4db56](https://github.com/DataArt/adlc-discovery-tool/commit/0d4db56658ee32b67cf9f7d7ec220344660544ce))
+
 ## [1.5.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.4.0...v1.5.0) (2026-10-05)
 
 ### Features

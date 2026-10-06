@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Content — Next steps / Roadmap (118:1005)</title>
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/tokens.css">
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/layouts.css">
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/components.css">
+</head>
+<body>
+  <!-- Canonical 118:1005 — NEXT-STEPS / ROADMAP CONSTRUCTOR. A row of colour
+       step panels (`.steps-col`, white→gray→turquoise→blue progress) on a
+       baseline axis of numbered circles (`.step-num`) + forward arrows
+       (`.step-arrow-axis`), with a captioned icon (`.step-cap`) under each step.
+       FLEXIBLE: N steps equal-fill; any colour/title/bullets per panel; one
+       caption (icon + 18.667px label) per step. Plain white slide. -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg" style="background:var(--c-surface-white);"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">Moving Forward</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- intro (H11 24) -->
+      <p class="layer txt-h11 c-text-default" style="left:153.333px; top:280px; width:1612px;">The ADLC engagement carries this story forward through its own structured, evidence-led process.</p>
+
+      <!-- step panels on the axis -->
+      <div class="layer steps" style="left:153.333px; top:362.667px;">
+        <div class="steps-col">
+          <p>Gate 0: Initiation</p>
+          <span class="step-num">1</span><span class="step-arrow-axis"></span>
+        </div>
+        <div class="steps-col steps-col--gray-light">
+          <ul class="steps-list"><li>Capture current state</li><li>Diagnose SDLC domains against the ten challenges</li><li>Define solution goals with the team</li></ul>
+          <span class="step-num">2</span><span class="step-arrow-axis"></span>
+        </div>
+        <div class="steps-col steps-col--gray-dark">
+          <ul class="steps-list"><li>Gate 1 review of evidence and diagnosis</li></ul>
+          <span class="step-num">3</span><span class="step-arrow-axis"></span>
+        </div>
+        <div class="steps-col steps-col--turquoise">
+          <p class="steps-title">Solution and Roadmap</p>
+          <ul class="steps-list"><li>Target state, pilot, and scale plan approved at Gate 2</li></ul>
+          <span class="step-num">4</span><span class="step-arrow-axis"></span>
+        </div>
+        <div class="steps-col steps-col--blue">
+          <p>Gate 3: Final sign-off and harness bootstrap</p>
+          <span class="step-num">5</span><span class="step-arrow-axis"></span>
+        </div>
+      </div>
+
+      <!-- caption band. Icons pulled from the curated assets/icons/library/ set
+           per kit-map.md § 8 (picked by caption meaning, not decoratively) —
+           two-tone vector line icons, not the old fixed raster PNGs. -->
+      <div class="layer steps-caps" style="left:153.333px; top:714.667px;">
+        <div class="step-cap"><span class="sc-icon"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/discovery-search.svg" alt=""></span><p class="sc-label">Stakeholder kickoff</p></div>
+        <div class="step-cap step-cap--top"><span class="sc-icon"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/task-list.svg" alt=""></span><p class="sc-label">Workshops across SDLC domains, per-domain evidence capture</p></div>
+        <div class="step-cap"><span class="sc-icon"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/quality-seal.svg" alt=""></span><p class="sc-label">Gate review</p></div>
+        <div class="step-cap step-cap--top"><span class="sc-icon"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/chart-growth.svg" alt=""></span><p class="sc-label">Target state, pilot scope, scale plan</p></div>
+        <div class="step-cap"><span class="sc-icon"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/goal-target.svg" alt=""></span><p class="sc-label">Harness live</p></div>
+      </div>
+
+      <!-- footer: 2-slot -->
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">22</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -150,7 +150,19 @@ The case highlights two improvements: **one place to see what is ready**, and **
 
 ## Supporting materials
 
-The additional progress screenshot is retained below. All screenshots above link to their full-size image.
+::: details Original slide text — seven-slide outline
+
+<!--@include: ../../raw-artifacts/day2day/00a — Slide text for the deck.md-->
+
+:::
+
+::: details Original account — full narrative
+
+<!--@include: ../../raw-artifacts/day2day/00b — Talk text, long version.md-->
+
+:::
+
+The presenter’s original slide text and long narrative are preserved in `raw-artifacts/day2day/` and embedded above for reference. The additional progress screenshot is also retained. All screenshots above link to their full-size image.
 
 ::: details Additional screenshot — sync in progress
 
@@ -166,6 +178,8 @@ _An intermediate progress capture, retained with the complete source material._
 
 ## Related references
 
+- [Original slide text](https://github.com/DataArt/adlc-discovery-tool/blob/main/raw-artifacts/day2day/00a%20%E2%80%94%20Slide%20text%20for%20the%20deck.md) — presenter-provided outline, preserved as a source artifact
+- [Original full narrative](https://github.com/DataArt/adlc-discovery-tool/blob/main/raw-artifacts/day2day/00b%20%E2%80%94%20Talk%20text,%20long%20version.md) — presenter-provided account, preserved as a source artifact
 - [Team Collaboration](<../AI SDLC/01 Engagement/07 Contribution/01 Team Collaboration.md>) — contribution and review workflow
 - [Collinson workspace](https://d39lj4dq6ly541.cloudfront.net/) — the client engagement featured in this case
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>What Is This Tool</title>
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/tokens.css">
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/layouts.css">
+<link rel="stylesheet" href="../../.claude/skills/deck-design-corporate/kit-corporate/shared/components.css">
+</head>
+<body>
+  <!-- Canonical 66:779 - PHASED FRAMEWORK. N columns (here 3), each = icon (top)
+       + blue title (H9) + a horizontal rule + body paragraph. Vertical dividers
+       between columns; a -> arrow sits in each gap to show progression
+       (Fix -> Grow -> Transform). Cols at x153/753/1353, body width 413.333.
+       FLEXIBLE: 2-4 columns; swap icons/titles/body. Use when a story is a
+       directional progression of named stages (maturity, phases, journey). -->
+  <div class="slide-stage">
+    <div class="slide">
+      <div class="layer bg bg-content-02"></div>
+      <div class="layer zone-heading"><p class="slide-heading c-text-default">What is this tool?</p></div>
+      <div class="layer heading-rule"></div>
+      <div class="layer logo"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/logo/dataart-logo-small.svg" alt="DataArt"></div>
+
+      <!-- vertical dividers between the 3 columns -->
+      <div class="layer" style="left:723px; top:311px; width:1.333px; height:581px; background:var(--c-surface-black);"></div>
+      <div class="layer" style="left:1320px; top:311px; width:1.333px; height:581px; background:var(--c-surface-black);"></div>
+
+      <!-- -> arrows in the gaps (progression) -->
+      <div class="layer" style="left:682px; top:546px; width:29px; height:10px;"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/arrow-flow.svg" style="display:block; width:100%; height:100%; object-fit:contain;" alt=""></div>
+      <div class="layer" style="left:1279px; top:546px; width:29px; height:10px;"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/arrow-flow.svg" style="display:block; width:100%; height:100%; object-fit:contain;" alt=""></div>
+
+      <!-- column heads — icon + blue title + rule, fixed at the top of each column -->
+      <div class="layer" style="left:153px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/discovery-search.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:153px; top:434px; width:413.333px;">Investigate</p>
+      <div class="layer" style="left:153px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <div class="layer" style="left:753px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/integration-puzzle.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:753px; top:434px; width:413.333px;">Solution</p>
+      <div class="layer" style="left:753px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <div class="layer" style="left:1353px; top:320px; width:94px; height:95px; background:var(--c-surface-gray-light); display:flex; align-items:center; justify-content:center;"><img src="../../.claude/skills/deck-design-corporate/kit-corporate/assets/icons/library/chart-growth.svg" style="display:block; width:56px; height:56px; object-fit:contain;" alt=""></div>
+      <p class="layer txt-h3 c-blue" style="left:1353px; top:434px; width:413.333px;">Roadmap</p>
+      <div class="layer" style="left:1353px; top:551px; width:447px; height:1px; background:var(--c-surface-black);"></div>
+
+      <!-- DESCRIPTIONS — one bottom-anchored flex row (bottom:188 → bottom edge at
+           y892, the column-divider baseline). align-items:flex-start makes EVERY
+           column's body start at the SAME level (set by the tallest column), and
+           the whole group grows UPWARD together as content is added — so the
+           descriptions stay mutually aligned + bottom-pinned, never ragged. -->
+      <div class="layer" style="left:153px; top:567px; width:1613.333px; display:flex; gap:186.667px; align-items:flex-start;">
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Capture today's workflow and diagnose root causes.</p>
+          <p class="txt-h15 c-text-default">Ground strategic intent in <span class="hl-bold">evidenced</span> goals.</p>
+        </div>
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Define the target state and the pilot that proves it.</p>
+          <p class="txt-h15 c-text-default">Plan how learning informs scale and evolution.</p>
+        </div>
+        <div style="width:413.333px; display:flex; flex-direction:column; gap:21.333px;">
+          <p class="txt-h15 c-text-default">Sequence milestones, work, and ownership.</p>
+          <p class="txt-h15 c-text-default">A delivery plan the client can staff and fund.</p>
+        </div>
+      </div>
+
+      <p class="layer footer-tagline txt-p7 c-text-default">Your Partner for Progress</p>
+      <p class="layer page-number txt-p7 c-text-default">06</p>
+    </div>
+  </div>
+</body>
+</html>

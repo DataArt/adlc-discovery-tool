@@ -74,7 +74,7 @@ Likely this: if evidence traceability and multi-person review aren't a constrain
 :::
 
 ::: details Who is the intended audience for ADLC, given the session was billed for architects? — Lyudmila Dezhkina, 16:07
-Per [the "When to use this tool" table](<01 What Is This Tool.md#when-to-use-this-tool>), the audience is whoever owns discovery for an engagement: starting a client engagement, investigating recurring delivery problems, assessing AI adoption, or scoping a pilot. That's often an architect, but the table doesn't gate on the role. Mariam Chaduneli's read in the session (anyone running discovery, not only architects) matches what's actually written, not just an opinion offered in the moment.
+Architects, and the billing was accurate: correcting the read given in the session. Per the [Launching a New Client Engagement](<07 Launching a New Client Engagement.md>) page, someone has to do the technical setup before a team can use any of this (environment, repository, bootstrap, deployment), and that's architect-level work. Architects are also the ones actively driving the Investigate phase day to day. Mariam Chaduneli's read in the session ("anyone running discovery, not only architects") was reasonable from what was on screen, since the [Getting Started Case](<05 Getting Started Case.md>) shows a nontechnical contributor using the tool once it's set up, but using it and setting it up for a team are different jobs. Architects are the ones who can do both.
 :::
 
 ::: details "What is transferrable to another project was not clear, but I'm sure there might be some useful skills at least. I did not know it was targeted to architects )" — Viktoriya Zinovyeva, closing summary
@@ -82,7 +82,7 @@ Two separate points worth answering directly rather than folding together.
 
 **What's transferable:** the harness (skills, agents, conventions), the methodology skeleton (phases, gates, evidence chain), and the bootstrap tooling that detaches a fresh client repository from the starter's history (`/bootstrap-client`) — the "Which parts of the tool can be reused in another discovery engagement?" entry above has the detail. What doesn't transfer is the findings, evidence, and recommendations themselves, since those belong to the engagement that produced them. The uncertainty in the room was fair: the demo showed the _output_ of one engagement, not the reusable parts in isolation, so "some useful skills, probably" was a reasonable read from what was actually on screen.
 
-**Not knowing it targeted architects:** it doesn't, by design — see the "Who is the intended audience for ADLC?" entry above. That the session's billing suggested otherwise is a framing gap on the invite, not a property of the tool, and worth fixing for the next session rather than leaving as a standing ambiguity.
+**Not knowing it targeted architects:** it does, by design — see the "Who is the intended audience for ADLC?" entry above. Architects are actively involved in the Investigate phase, and they're the technical people who can set the tool up for the team in the first place. The session billing was accurate; what wasn't stated plainly was _why_ architects specifically, and that's worth saying up front next time rather than leaving it implicit.
 :::
 
 ## The framework

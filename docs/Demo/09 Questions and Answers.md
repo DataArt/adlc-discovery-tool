@@ -77,8 +77,12 @@ Likely this: if evidence traceability and multi-person review aren't a constrain
 Per [the "When to use this tool" table](<01 What Is This Tool.md#when-to-use-this-tool>), the audience is whoever owns discovery for an engagement: starting a client engagement, investigating recurring delivery problems, assessing AI adoption, or scoping a pilot. That's often an architect, but the table doesn't gate on the role. Mariam Chaduneli's read in the session (anyone running discovery, not only architects) matches what's actually written, not just an opinion offered in the moment.
 :::
 
-::: details The most balanced read from the session — Viktoriya Zinovyeva, closing summary
-The team found a way to structure project information so both people and agents can use it, a step up from Confluence plus Jira or a team channel. A lighter "portal" makes sense for small, short projects. What's less clear is what transfers to other engagements, though some skills likely would. That reusability question is answered above; the rest is a fair standing critique, not refuted here.
+::: details "What is transferrable to another project was not clear, but I'm sure there might be some useful skills at least. I did not know it was targeted to architects )" — Viktoriya Zinovyeva, closing summary
+Two separate points worth answering directly rather than folding together.
+
+**What's transferable:** the harness (skills, agents, conventions), the methodology skeleton (phases, gates, evidence chain), and the bootstrap tooling that detaches a fresh client repository from the starter's history (`/bootstrap-client`) — the "Which parts of the tool can be reused in another discovery engagement?" entry above has the detail. What doesn't transfer is the findings, evidence, and recommendations themselves, since those belong to the engagement that produced them. The uncertainty in the room was fair: the demo showed the _output_ of one engagement, not the reusable parts in isolation, so "some useful skills, probably" was a reasonable read from what was actually on screen.
+
+**Not knowing it targeted architects:** it doesn't, by design — see the "Who is the intended audience for ADLC?" entry above. That the session's billing suggested otherwise is a framing gap on the invite, not a property of the tool, and worth fixing for the next session rather than leaving as a standing ambiguity.
 :::
 
 ## The framework

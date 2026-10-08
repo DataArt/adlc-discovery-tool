@@ -69,7 +69,7 @@ The harness (skills, agents, conventions), the methodology skeleton (phases, gat
 :::
 
 ::: details What am I missing? — Pavel Khrulev, 16:03, after 40 minutes of not seeing it
-If evidence traceability and multi-person review aren't a constraint on how you work, a lighter personal setup may genuinely be enough. This tool is built for a team that must jointly justify its conclusions to a client, where "that was already covered" has to be checkable, not remembered. If that's not the working mode, the gap he described may be real.
+If evidence traceability and multi-person review aren't a constraint on how you work, a lighter personal setup (Obsidian, a repo, an assistant) may genuinely be enough. This tool is built for a team that must jointly justify its conclusions to a client, where "that was already covered" has to be checkable, not remembered. If that's not the working mode, the gap may be real.
 :::
 
 ::: details Who is the intended audience for ADLC, given the session was billed for architects? — Lyudmila Dezhkina, 16:07

@@ -58,7 +58,7 @@ Partly, and that framing is fair as far as it goes. The repository is a shared w
 :::
 
 ::: details What depth should architects show, and what here goes beyond tools any end user has? — Lyudmila Dezhkina, 15:41
-Open. Nothing in this tool's documentation sets a depth bar for an architect-billed session, and this demo doesn't answer it either, since most of what's on screen (the repo, the skills, the published site) is usable by a nontechnical contributor by design (see [Getting Started Case](https://d2dn3olm9x55r4.cloudfront.net/Demo/05%20Getting%20Started%20Case.html)). That's a deliberate property, not architectural depth. Where architectural judgment actually shows up is in the Solution phase (target state, pilot scope, architecture alignment reviews) which this demo doesn't cover. Worth resolving directly with whoever scoped the session, not something the tool settles on its own.
+This demo is about involving architects in the discovery phase itself, for ADLC specifically, not about showing solution-architecture depth. Most of what's on screen (the repo, the skills, the published site) is usable by a nontechnical contributor by design (see [Getting Started Case](https://d2dn3olm9x55r4.cloudfront.net/Demo/05%20Getting%20Started%20Case.html)); that's deliberate, not a gap. Architectural judgment shows up later, in the Solution phase (target state, pilot scope, architecture alignment reviews), which this demo doesn't cover.
 :::
 
 ::: details Could the same portal or knowledge base be built in Confluence, or a repo with the right structure? — Viktoriya Zinovyeva, 15:49; Alina Haloshyna

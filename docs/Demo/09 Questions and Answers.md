@@ -16,7 +16,7 @@ OpenSpec’s default workflow organizes a software change through proposal, spec
 :::
 
 ::: details Why not use the original Connect Framework?
-Connect is the broader framework and the inspiration for this tool. Its Goals → Problem Space → Solution Space → Milestones model serves a broad range of engagements. This tool narrows that methodology exclusively to ADLC discovery, adding Current State capture, SDLC domains, source traceability, Strategic Intent versus Solution Goals, and the Target State → Pilot → Scale → Evolve loop. [Source: local Connect adaptation](<../AI SDLC/01 Engagement/06 Reference/01 Connect Framework.md>).
+Connect is the broader framework and the inspiration for this tool. Its Goals → Problem Space → Solution Space → Milestones model serves a broad range of engagements. This tool narrows that methodology exclusively to ADLC discovery, adding Current State capture, SDLC domains, source traceability, Strategic Intent versus Solution Goals, and the Target State → Pilot → Scale → Evolve loop. [Source: local Connect adaptation](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/06%20Reference/01%20Connect%20Framework.html).
 :::
 
 ::: details Is this a website, a methodology, or an AI tool?
@@ -28,7 +28,7 @@ AI helps prepare and check artifacts. People review interpretations and record s
 :::
 
 ::: details How do we trust a finding?
-Follow its cited sources and confidence status. Independent corroboration supports confirmation; measured impact needs a number. Missing evidence remains an explicit gap. See [Evidence Chain](<../AI SDLC/01 Engagement/03 Process/04 Evidence Chain.md>).
+Follow its cited sources and confidence status. Independent corroboration supports confirmation; measured impact needs a number. Missing evidence remains an explicit gap. See [Evidence Chain](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/03%20Process/04%20Evidence%20Chain.html).
 :::
 
 ::: details Is the whole lifecycle automated?
@@ -50,15 +50,15 @@ Kept here with attribution, the same evidence discipline the tool asks of
 every other finding: a claim without its source is just an opinion.
 
 ::: details What problem does the tool solve, and why do we need the evidence chain? — Pavel Khrulev, 15:27
-Discovery generates a lot of scattered evidence: workshop notes, assumptions, half-confirmed findings. Without a structure, a confident-sounding conclusion two weeks later can't be checked against what was actually said. The evidence chain keeps every recommendation traceable back through Solution Goals → Problems → Capture → Strategic Intent, each link carrying a citation and a confidence status, so a disagreement or a piece of new evidence can reopen exactly the right step instead of reopening the whole conclusion. See [Evidence Chain](<../AI SDLC/01 Engagement/03 Process/04 Evidence Chain.md>).
+Discovery generates a lot of scattered evidence: workshop notes, assumptions, half-confirmed findings. Without a structure, a confident-sounding conclusion two weeks later can't be checked against what was actually said. The evidence chain keeps every recommendation traceable back through Solution Goals → Problems → Capture → Strategic Intent, each link carrying a citation and a confidence status, so a disagreement or a piece of new evidence can reopen exactly the right step instead of reopening the whole conclusion. See [Evidence Chain](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/03%20Process/04%20Evidence%20Chain.html).
 :::
 
 ::: details Is the purpose to organise the discovery team's output? Is this basically a team workspace? — Viktoriya Zinovyeva, 15:36 & 15:43
-Partly, and that framing is fair as far as it goes. The repository is a shared workspace: the team's discovery output lives there, reviewed through the same branch, commit, and pull-request flow as code. But the workspace is the mechanism, not the point. What it's organising for is traceability under review, not just a shared place to store things, since the same files that hold the findings are what a stakeholder later reads to agree or challenge them. See [Collaboration](<04 Collaboration.md>).
+Partly, and that framing is fair as far as it goes. The repository is a shared workspace: the team's discovery output lives there, reviewed through the same branch, commit, and pull-request flow as code. But the workspace is the mechanism, not the point. What it's organising for is traceability under review, not just a shared place to store things, since the same files that hold the findings are what a stakeholder later reads to agree or challenge them. See [Collaboration](https://d2dn3olm9x55r4.cloudfront.net/Demo/04%20Collaboration.html).
 :::
 
 ::: details What depth should architects show, and what here goes beyond tools any end user has? — Lyudmila Dezhkina, 15:41
-Open. Nothing in this tool's documentation sets a depth bar for an architect-billed session, and this demo doesn't answer it either, since most of what's on screen (the repo, the skills, the published site) is usable by a nontechnical contributor by design (see [Getting Started Case](<05 Getting Started Case.md>)). That's a deliberate property, not architectural depth. Where architectural judgment actually shows up is in the Solution phase (target state, pilot scope, architecture alignment reviews) which this demo doesn't cover. Worth resolving directly with whoever scoped the session, not something the tool settles on its own.
+Open. Nothing in this tool's documentation sets a depth bar for an architect-billed session, and this demo doesn't answer it either, since most of what's on screen (the repo, the skills, the published site) is usable by a nontechnical contributor by design (see [Getting Started Case](https://d2dn3olm9x55r4.cloudfront.net/Demo/05%20Getting%20Started%20Case.html)). That's a deliberate property, not architectural depth. Where architectural judgment actually shows up is in the Solution phase (target state, pilot scope, architecture alignment reviews) which this demo doesn't cover. Worth resolving directly with whoever scoped the session, not something the tool settles on its own.
 :::
 
 ::: details Could the same portal or knowledge base be built in Confluence, or a repo with the right structure? — Viktoriya Zinovyeva, 15:49; Alina Haloshyna
@@ -66,7 +66,7 @@ Yes, honestly: the publishing layer (structured pages, a searchable site) is not
 :::
 
 ::: details Which parts of the tool can be reused in another discovery engagement? — Viktoriya Zinovyeva, 15:54
-The harness (skills, agents, conventions), the methodology skeleton (phases, gates, evidence chain), and the bootstrap tooling that detaches a fresh client repository from the starter's history (`/bootstrap-client`). What does not transfer: the findings, evidence, and recommendations themselves, those are specific to the engagement that produced them. See [Launching a New Client Engagement](<07 Launching a New Client Engagement.md>).
+The harness (skills, agents, conventions), the methodology skeleton (phases, gates, evidence chain), and the bootstrap tooling that detaches a fresh client repository from the starter's history (`/bootstrap-client`). What does not transfer: the findings, evidence, and recommendations themselves, those are specific to the engagement that produced them. See [Launching a New Client Engagement](https://d2dn3olm9x55r4.cloudfront.net/Demo/07%20Launching%20a%20New%20Client%20Engagement.html).
 :::
 
 ::: details What am I missing? — Pavel Khrulev, 16:03, after 40 minutes of not seeing it
@@ -74,7 +74,7 @@ Likely this: if evidence traceability and multi-person review aren't a constrain
 :::
 
 ::: details Who is the intended audience for ADLC, given the session was billed for architects? — Lyudmila Dezhkina, 16:07
-Architects, and the billing was accurate: correcting the read given in the session. Per the [Launching a New Client Engagement](<07 Launching a New Client Engagement.md>) page, someone has to do the technical setup before a team can use any of this (environment, repository, bootstrap, deployment), and that's architect-level work. Architects are also the ones actively driving the Investigate phase day to day. Mariam Chaduneli's read in the session ("anyone running discovery, not only architects") was reasonable from what was on screen, since the [Getting Started Case](<05 Getting Started Case.md>) shows a nontechnical contributor using the tool once it's set up, but using it and setting it up for a team are different jobs. Architects are the ones who can do both.
+Architects, and the billing was accurate: correcting the read given in the session. Per the [Launching a New Client Engagement](https://d2dn3olm9x55r4.cloudfront.net/Demo/07%20Launching%20a%20New%20Client%20Engagement.html) page, someone has to do the technical setup before a team can use any of this (environment, repository, bootstrap, deployment), and that's architect-level work. Architects are also the ones actively driving the Investigate phase day to day. Mariam Chaduneli's read in the session ("anyone running discovery, not only architects") was reasonable from what was on screen, since the [Getting Started Case](https://d2dn3olm9x55r4.cloudfront.net/Demo/05%20Getting%20Started%20Case.html) shows a nontechnical contributor using the tool once it's set up, but using it and setting it up for a team are different jobs. Architects are the ones who can do both.
 :::
 
 ::: details "What is transferrable to another project was not clear, but I'm sure there might be some useful skills at least. I did not know it was targeted to architects )" — Viktoriya Zinovyeva, closing summary
@@ -109,11 +109,11 @@ flowchart LR
 
 ## Related references
 
-- [Connect Framework](<../AI SDLC/01 Engagement/06 Reference/01 Connect Framework.md>) — broader methodology, adaptation, and original diagram
+- [Connect Framework](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/06%20Reference/01%20Connect%20Framework.html) — broader methodology, adaptation, and original diagram
 - [OpenSpec default workflow](https://openspec.dev/docs/schemas/spec-driven) — proposal, specification, design, and implementation tasks
-- [Evidence Chain](<../AI SDLC/01 Engagement/03 Process/04 Evidence Chain.md>) — confidence, citations, and corrections
-- [Team Collaboration](<../AI SDLC/01 Engagement/07 Contribution/01 Team Collaboration.md>) — contribution and review
+- [Evidence Chain](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/03%20Process/04%20Evidence%20Chain.html) — confidence, citations, and corrections
+- [Team Collaboration](https://d2dn3olm9x55r4.cloudfront.net/AI%20SDLC/01%20Engagement/07%20Contribution/01%20Team%20Collaboration.html) — contribution and review
 
 ---
 
-[Presentation](index.md) · [Previous](<08 Collinson Case.md>)
+[Presentation](https://d2dn3olm9x55r4.cloudfront.net/Demo/) · [Previous](https://d2dn3olm9x55r4.cloudfront.net/Demo/08%20Collinson%20Case.html)

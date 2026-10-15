@@ -66,26 +66,21 @@ export class CiStack extends cdk.Stack {
     });
   }
 
-  // Trust-policy `sub` claims GitHub's OIDC token presents per event, scoped exactly —
-  // no trailing wildcard — so a pull_request run can never assume the push-triggered
-  // deploy role, and vice versa. See
+  // Repo scoping only — NOT the event/ref distinction. Both ci.yml and cd.yml declare
+  // `environment: dev` (needed to resolve the dev Environment's vars.*), and GitHub's
+  // OIDC token overrides `sub` to `repo:OWNER/REPO:environment:dev` whenever a job
+  // declares an environment, REGARDLESS of the triggering event — so `sub` alone
+  // cannot tell a pull_request run apart from a push-to-main run here. The event/ref
+  // distinction instead uses the separate `ref`/`event_name` claims below, which are
+  // unaffected by the environment override. See
   // https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
-  private pushToMainSub(
+  private repoSub(
     githubOrg: string,
     githubOrgId: string,
     githubRepo: string,
     githubRepoId: string
   ) {
-    return `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:ref:refs/heads/main`;
-  }
-
-  private pullRequestSub(
-    githubOrg: string,
-    githubOrgId: string,
-    githubRepo: string,
-    githubRepoId: string
-  ) {
-    return `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:pull_request`;
+    return `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:*`;
   }
 
   // The GitHub Actions OIDC provider is an AWS-account-wide singleton, keyed by its
@@ -127,11 +122,13 @@ export class CiStack extends cdk.Stack {
       assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn, {
         StringEquals: {
           'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-          // Immutable subject claim, scoped to pushes on main only (cd.yml) — a
-          // pull_request run presents a different sub and cannot assume this role.
-          // Repos created after Jun 2026 include numeric org/repo IDs; find these at
-          // https://api.github.com/repos/{org}/{repo}
-          'token.actions.githubusercontent.com:sub': this.pushToMainSub(
+          // `ref`, not `sub`, carries the push-to-main distinction here (see repoSub's
+          // comment). Repos created after Jun 2026 include numeric org/repo IDs in
+          // `sub`; find these at https://api.github.com/repos/{org}/{repo}
+          'token.actions.githubusercontent.com:ref': 'refs/heads/main',
+        },
+        StringLike: {
+          'token.actions.githubusercontent.com:sub': this.repoSub(
             githubOrg,
             githubOrgId,
             githubRepo,
@@ -167,7 +164,12 @@ export class CiStack extends cdk.Stack {
       assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn, {
         StringEquals: {
           'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-          'token.actions.githubusercontent.com:sub': this.pullRequestSub(
+          // `event_name`, not `sub`, carries the pull_request distinction here (see
+          // repoSub's comment).
+          'token.actions.githubusercontent.com:event_name': 'pull_request',
+        },
+        StringLike: {
+          'token.actions.githubusercontent.com:sub': this.repoSub(
             githubOrg,
             githubOrgId,
             githubRepo,

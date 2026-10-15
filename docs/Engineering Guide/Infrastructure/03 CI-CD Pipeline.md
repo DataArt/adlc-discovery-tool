@@ -95,12 +95,17 @@ workflow:
 1. GitHub generates an OIDC token scoped to the repo, the triggering event, and the workflow run
 2. STS validates against `CiStack`'s OIDC provider:
    - `aud = sts.amazonaws.com`
-   - `sub` is matched with `StringEquals` against the **exact** claim for that event — no
-     trailing wildcard — so a `pull_request` run can never present a token that satisfies the
-     deploy role's trust policy, and vice versa:
-     - CI Read Role: `repo:{githubOrg}@{githubOrgId}/{githubRepo}@{githubRepoId}:pull_request`
-     - Deploy Role: `repo:{githubOrg}@{githubOrgId}/{githubRepo}@{githubRepoId}:ref:refs/heads/main`
-     - numeric org/repo IDs required for repos created after June 2026
+   - `sub` is matched with `StringLike` only for **repo scoping** —
+     `repo:{githubOrg}@{githubOrgId}/{githubRepo}@{githubRepoId}:*` (numeric org/repo IDs required
+     for repos created after June 2026). It is **not** used to distinguish the two roles: both
+     workflows declare `environment: dev` (needed to resolve `vars.*`), and GitHub overrides `sub`
+     to `repo:OWNER/REPO:environment:dev` whenever a job declares an environment — identically for
+     `ci.yml` and `cd.yml` — regardless of the triggering event. An earlier version of this trust
+     policy tried to match an event-specific `sub` suffix and silently could never succeed.
+   - The event/ref distinction instead uses separate claims unaffected by that override, matched
+     with `StringEquals`: CI Read Role requires `event_name = pull_request`; Deploy Role requires
+     `ref = refs/heads/main`. A `pull_request` run can never present a token satisfying the deploy
+     role's trust policy, and vice versa.
 3. STS returns short-lived credentials valid for the job duration, scoped to that role's
    permissions only
 

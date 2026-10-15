@@ -356,12 +356,13 @@ Mark Stage 3 `✅` in `report.md`, proceed to Stage 4.
 yarn nx run infra:output-ci:dev
 ```
 
-**Stop and wait** for the pasted `DeployRoleArn`. Then:
+**Stop and wait** for the pasted `DeployRoleArn` and `CiReadRoleArn`. Then:
 
 ```bash
 gh api repos/{org}/{repo}/environments/dev -X PUT
 
-gh variable set IAM_ROLE_ARN --env dev --repo {org}/{repo} --body "{value from infra:output-ci:dev}"
+gh variable set IAM_ROLE_ARN --env dev --repo {org}/{repo} --body "{DeployRoleArn from infra:output-ci:dev}"
+gh variable set IAM_CI_ROLE_ARN --env dev --repo {org}/{repo} --body "{CiReadRoleArn from infra:output-ci:dev}"
 gh variable set AWS_REGION --env dev --repo {org}/{repo} --body "{value from apps/infra/.env.dev}"
 gh variable set SITE_SSM_ENV_PARAM --env dev --repo {org}/{repo} --body "/{org_prefix}/dev/docs/site/env"
 gh variable set LAMBDA_AUTH_SSM_ENV_PARAM --env dev --repo {org}/{repo} --body "/{org_prefix}/dev/docs/lambda-auth/env"

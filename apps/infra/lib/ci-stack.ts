@@ -43,11 +43,49 @@ export class CiStack extends cdk.Stack {
       githubRepo,
       githubRepoId
     );
+    const ciReadRole = this.createCiReadRole(
+      oidcProvider,
+      names,
+      environment,
+      workload,
+      orgPrefix,
+      githubOrg,
+      githubOrgId,
+      githubRepo,
+      githubRepoId
+    );
 
     new cdk.CfnOutput(this, 'DeployRoleArn', {
       value: deployRole.roleArn,
-      description: 'Set as IAM_ROLE_ARN GitHub Actions variable',
+      description: 'Set as IAM_ROLE_ARN GitHub Actions variable (cd.yml only — push to main)',
     });
+
+    new cdk.CfnOutput(this, 'CiReadRoleArn', {
+      value: ciReadRole.roleArn,
+      description: 'Set as IAM_CI_ROLE_ARN GitHub Actions variable (ci.yml only — pull_request)',
+    });
+  }
+
+  // Trust-policy `sub` claims GitHub's OIDC token presents per event, scoped exactly —
+  // no trailing wildcard — so a pull_request run can never assume the push-triggered
+  // deploy role, and vice versa. See
+  // https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#understanding-the-oidc-token
+  private pushToMainSub(
+    githubOrg: string,
+    githubOrgId: string,
+    githubRepo: string,
+    githubRepoId: string
+  ) {
+    return `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:ref:refs/heads/main`;
+  }
+
+  private pullRequestSub(
+    githubOrg: string,
+    githubOrgId: string,
+    githubRepo: string,
+    githubRepoId: string
+  ) {
+    return `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:pull_request`;
   }
 
   // The GitHub Actions OIDC provider is an AWS-account-wide singleton, keyed by its
@@ -89,17 +127,55 @@ export class CiStack extends cdk.Stack {
       assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn, {
         StringEquals: {
           'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-        },
-        StringLike: {
-          // Immutable subject claim — repos created after Jun 2026 include numeric org/repo IDs.
-          // Find these at https://api.github.com/repos/{org}/{repo}
-          'token.actions.githubusercontent.com:sub': `repo:${githubOrg}@${githubOrgId}/${githubRepo}@${githubRepoId}:*`,
+          // Immutable subject claim, scoped to pushes on main only (cd.yml) — a
+          // pull_request run presents a different sub and cannot assume this role.
+          // Repos created after Jun 2026 include numeric org/repo IDs; find these at
+          // https://api.github.com/repos/{org}/{repo}
+          'token.actions.githubusercontent.com:sub': this.pushToMainSub(
+            githubOrg,
+            githubOrgId,
+            githubRepo,
+            githubRepoId
+          ),
         },
       }),
       inlinePolicies: {
         S3Deploy: this.buildS3Policy(names.siteBucket),
         CloudFrontDeploy: this.buildCloudFrontPolicy(),
         LambdaDeploy: this.buildLambdaPolicy(names.authFn),
+        SsmRead: this.buildSsmPolicy(environment, workload, orgPrefix),
+      },
+    });
+  }
+
+  // CI (pull_request) only needs to read non-secret build-time config from SSM — it
+  // must never hold S3/CloudFront/Lambda write permissions, since that would let an
+  // unreviewed PR branch deploy or overwrite the auth Lambda before merge.
+  private createCiReadRole(
+    oidcProvider: iam.IOpenIdConnectProvider,
+    names: ReturnType<typeof naming>,
+    environment: string,
+    workload: string,
+    orgPrefix: string,
+    githubOrg: string,
+    githubOrgId: string,
+    githubRepo: string,
+    githubRepoId: string
+  ): iam.Role {
+    return new iam.Role(this, 'CiReadRole', {
+      roleName: names.ciReadRole,
+      assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn, {
+        StringEquals: {
+          'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
+          'token.actions.githubusercontent.com:sub': this.pullRequestSub(
+            githubOrg,
+            githubOrgId,
+            githubRepo,
+            githubRepoId
+          ),
+        },
+      }),
+      inlinePolicies: {
         SsmRead: this.buildSsmPolicy(environment, workload, orgPrefix),
       },
     });

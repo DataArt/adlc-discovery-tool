@@ -13,11 +13,11 @@ gitGraph
     branch feat/adlc-042-short-desc
     commit id: "feature work"
     checkout main
-    merge feat/adlc-042-short-desc id: "PR squash-merged" tag: "v1.6.0"
+    merge feat/adlc-042-short-desc id: "adlc-042 squash-merged" tag: "v1.6.0"
     branch fix/adlc-051-short-desc
     commit id: "urgent fix"
     checkout main
-    merge fix/adlc-051-short-desc id: "PR squash-merged" tag: "v1.6.1"
+    merge fix/adlc-051-short-desc id: "adlc-051 squash-merged" tag: "v1.6.1"
 ```
 
 ## Environment Mapping

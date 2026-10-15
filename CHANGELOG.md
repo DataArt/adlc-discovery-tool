@@ -1,3 +1,9 @@
+## [1.6.3](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.2...v1.6.3) (2026-10-15)
+
+### Bug Fixes
+
+- **web:** disable raw HTML passthrough in markdown to close stored-XSS gap ([06e1296](https://github.com/DataArt/adlc-discovery-tool/commit/06e12968e4cea2bb8b706b9a09b8f660769d092f))
+
 ## [1.6.2](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.1...v1.6.2) (2026-10-15)
 
 ### Bug Fixes

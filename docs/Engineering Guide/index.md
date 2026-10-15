@@ -16,6 +16,7 @@ The top-level articles cover conventions and setup — read [02 Doc Structure](.
 | [06 MCP Setup](./06%20MCP%20Setup.md)                                           | Connecting Claude or Codex to AWS, GitHub, and Atlassian via MCP                                             |
 | [07 Documentation Principles](./07%20Documentation%20Principles.md)             | Why these principles exist, what they are, and which structure fits which doc type                           |
 | [08 Branching Strategy](./08%20Branching%20Strategy.md)                         | Trunk-based branching aligned with the actual CI/CD pipeline — `main`, short-lived `feat/*`/`fix/*` branches |
+| [09 Harness Security](./09%20Harness%20Security.md)                             | The "lethal trifecta" prompt-injection risk in discovery ingestion, and the mitigation in place              |
 
 ### Lifecycles
 

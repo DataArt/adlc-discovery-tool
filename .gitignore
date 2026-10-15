@@ -41,6 +41,19 @@ cdk.out/
 # Claude Code — portable harness-bootstrap toolkit (personalized copies live in .claude/)
 /.claude/skills/harness-bootstrap/
 
+# Claude Code — deck-design-corporate skill (local kit/toolchain, not shared)
+/.claude/skills/deck-design-corporate/
+
+# Generated decks
+/decks/
+
+# Obsidian vault metadata
+/.obsidian/
+
+# Raw working artifacts (local scratch, not shared)
+/raw-artifacts/*
+!/raw-artifacts/.gitkeep
+
 # Yarn Berry
 .yarn/cache
 .yarn/unplugged

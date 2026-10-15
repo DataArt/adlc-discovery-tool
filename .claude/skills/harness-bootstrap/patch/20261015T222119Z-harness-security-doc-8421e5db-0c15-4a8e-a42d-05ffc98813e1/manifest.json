@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "id": "8421e5db-0c15-4a8e-a42d-05ffc98813e1",
+  "created_at": "2026-10-15T22:21:19Z",
+  "origin": "adlc-discovery-tool",
+  "operation": "harvest",
+  "summary": "New Engineering Guide article: the 'lethal trifecta' prompt-injection risk in harness skills that ingest external content (untrusted content + sensitive/write access + outbound action), and the mitigation pattern (an explicit 'data, not instructions' rule wired into the actual ingestion point, plus naming any configured MCP connector as requiring the same per-action scrutiny as other guarded actions). Generalized from a project-specific doc describing the same risk in a discovery-engagement transcript-ingestion skill; file paths and skill-specific examples replaced with generic framing.",
+  "package_version": "1.0.0",
+  "requires": [],
+  "resolves": [],
+  "changes": [
+    {
+      "operation": "add",
+      "path": "canonical/docs/Engineering Guide/06 Harness Security.md",
+      "old_path": null,
+      "before_sha256": null,
+      "after_sha256": "f87cb44428f9aafa9e75346289de46cbc6e5a63a938aa3d5807012d4d2d4672c",
+      "payload": "files/canonical/docs/Engineering Guide/06 Harness Security.md",
+      "payload_sha256": "f87cb44428f9aafa9e75346289de46cbc6e5a63a938aa3d5807012d4d2d4672c",
+      "deployment": "mapped",
+      "mapping": {
+        "kind": "doc",
+        "intent": null,
+        "output_rule": "docs/Engineering Guide/09 Harness Security.md",
+        "compare": "content"
+      }
+    }
+  ]
+}

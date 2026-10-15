@@ -26,13 +26,17 @@ flowchart LR
 
     subgraph CI_STACK ["  CiStack — {region}  "]
         OIDC["🔑 GitHub OIDC Provider"]:::iam
-        ROLE["🛡️ CI Deploy Role\nS3 · CF · Lambda · SSM"]:::iam
+        DEPLOY_ROLE["🛡️ Deploy Role\nS3 · CF · Lambda · SSM\nsub: push to main"]:::iam
+        CI_ROLE["🔎 CI Read Role\nSSM only\nsub: pull_request"]:::iam
     end
 
-    GH(["⚙️ GitHub Actions"]):::ci
+    GH_CD(["⚙️ GitHub Actions\ncd.yml — push to main"]):::ci
+    GH_CI(["⚙️ GitHub Actions\nci.yml — pull_request"]):::ci
 
-    GH -->|"AssumeRoleWithWebIdentity"| ROLE
-    ROLE -.->|"scoped to"| OIDC
+    GH_CD -->|"AssumeRoleWithWebIdentity"| DEPLOY_ROLE
+    GH_CI -->|"AssumeRoleWithWebIdentity"| CI_ROLE
+    DEPLOY_ROLE -.->|"scoped to"| OIDC
+    CI_ROLE -.->|"scoped to"| OIDC
 
     LAE_PH -.->|"cross-stack ref\n(Lambda version ARN)"| CF_DEF
 
@@ -67,7 +71,7 @@ _Auth decision path (401 challenge vs pass-through) is shown in `Containers/Auth
 - IAM roles and resource policies
 - All resources defined as CDK constructs — no manual provisioning
 - Secrets Manager secret provisioned as an empty placeholder (`{}`); value is populated post-deploy by `lambda-auth:sm-push` — never set by CDK
-- GitHub OIDC provider (`CiStack`) enabling GitHub Actions to authenticate via short-lived credentials; scoped IAM deploy role with least-privilege policies for S3, CloudFront, Lambda, and SSM
+- GitHub OIDC provider (`CiStack`) enabling GitHub Actions to authenticate via short-lived credentials; two roles, each trusted for exactly one triggering event — a pull_request-only read role (SSM only) and a push-to-main-only deploy role (S3, CloudFront, Lambda, SSM) — so a PR can never assume deploy-grade credentials before human review
 
 ## Technology
 

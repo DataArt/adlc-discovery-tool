@@ -1,3 +1,9 @@
+## [1.6.7](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.6...v1.6.7) (2026-10-15)
+
+### Bug Fixes
+
+- **infra:** fix OIDC trust condition broken by environment: dev override ([4f64412](https://github.com/DataArt/adlc-discovery-tool/commit/4f644126ef5e1ec0babdc20816ead915609bb816))
+
 ## [1.6.6](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.5...v1.6.6) (2026-10-15)
 
 ### Bug Fixes

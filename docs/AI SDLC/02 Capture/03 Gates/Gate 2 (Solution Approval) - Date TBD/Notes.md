@@ -38,17 +38,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Purpose:** The Solution is designed and reviewed — get it approved before Roadmap sequencing starts.
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### Facilitator framing
 
@@ -62,17 +62,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 1 — Recap Target State
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Does this direction still match what was approved at Gate 1?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B1_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -82,17 +82,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 2 — Present Pilot Design
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Any concerns before this becomes what gets built?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B2_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -102,17 +102,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 3 — Present Scale Design
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Does the scale path look credible given what's known about the wider organisation?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B3_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -122,11 +122,11 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Explicit Ask
 
-<div style="background:#FFFBEB;border-left:4px solid #F59E0B;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: warning
 
 **Asks raised:** Formal approval of the Pilot design; confirmed funding/staffing for the pilot team.
 
-</div>
+:::
 
 ### Response
 

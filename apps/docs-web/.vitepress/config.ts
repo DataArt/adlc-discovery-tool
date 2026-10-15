@@ -1,8 +1,25 @@
 import { withMermaid } from 'vitepress-plugin-mermaid';
 import { defineConfig } from 'vitepress';
-import type { DefaultTheme } from 'vitepress';
+import type { DefaultTheme, MarkdownRenderer } from 'vitepress';
+import container from 'markdown-it-container';
 import { scanSection, collectIndexedDirs } from './utils/sidebar';
 import { HLD_VERSION } from './utils/constants';
+
+// A custom container is the sanctioned way to get a styled wrapper div without raw
+// HTML passthrough — see "Custom Containers" in the VitePress markdown guide. The
+// colored callout boxes in gate/workshop notes map onto VitePress's built-in
+// `::: info` / `::: tip` / `::: warning` containers instead (same blue/green/amber).
+function registerContainers(md: MarkdownRenderer) {
+  md.use(container, 'screenshot', {
+    render: (tokens: { nesting: number }[], idx: number) =>
+      tokens[idx].nesting === 1 ? '<div class="screenshot">\n' : '</div>\n',
+  });
+
+  md.use(container, 'figure-720', {
+    render: (tokens: { nesting: number }[], idx: number) =>
+      tokens[idx].nesting === 1 ? '<div class="figure-720">\n' : '</div>\n',
+  });
+}
 
 const themeConfig: DefaultTheme.Config & { indexedDirs: string[] } = {
   search: {
@@ -74,6 +91,15 @@ export default withMermaid(
     head: [['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }]],
 
     srcDir: '../../docs',
+
+    // Raw HTML in markdown source is disabled — any <script>/<iframe>/event-handler
+    // attribute pasted into docs/ (e.g. from a workshop transcript) renders as inert
+    // text instead of executing in readers' browsers. Styled wrapper divs that used
+    // to rely on raw HTML passthrough now go through the custom containers above.
+    markdown: {
+      html: false,
+      config: registerContainers,
+    },
 
     themeConfig,
     vite: {

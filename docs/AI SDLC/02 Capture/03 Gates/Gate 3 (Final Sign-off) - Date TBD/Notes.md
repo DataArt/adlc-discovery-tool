@@ -38,17 +38,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Purpose:** The delivery plan is sequenced — this is the engagement's final sign-off before execution starts.
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### Facilitator framing
 
@@ -62,17 +62,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 1 — Recap Milestones
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Do these dates still hold given anything that's changed since Gate 2?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B1_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -82,17 +82,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 2 — Recap WBS & Team Composition
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Is this staffing realistic against what `[[CLIENT_NAME]]` can actually commit?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B2_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -102,17 +102,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 3 — Recap Timeline
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Any external dependency or deadline this doesn't yet account for?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B3_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -122,11 +122,11 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Explicit Ask
 
-<div style="background:#FFFBEB;border-left:4px solid #F59E0B;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: warning
 
 **Asks raised:** Final sign-off on the delivery plan; confirmed staffing and funding commitments.
 
-</div>
+:::
 
 ### Response
 

@@ -40,17 +40,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** [from Agenda]
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### [[CLIENT_NAME]] context
 
@@ -68,17 +68,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic 1 — Measurement
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** What is the smallest credible measurement baseline that can stand up before the pilot starts?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T1_ANSWER]
 
-</div>
+:::
 
 ### Q1 — [question]
 
@@ -92,17 +92,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic 2 — Governance
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** What is the minimum viable governance — covering data exposure, IP, and token spend — that protects the organisation without stalling the pilot?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T2_ANSWER]
 
-</div>
+:::
 
 ### Q1 — Data exposure & IP — [question]
 

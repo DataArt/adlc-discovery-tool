@@ -40,17 +40,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** [from Agenda]
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### [[CLIENT_NAME]] context
 
@@ -68,17 +68,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic 1 — Teams & Integration
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** How do team structure and cross-team integration patterns shape — or constrain — the organisation's ability to adopt AI tooling?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T1_ANSWER]
 
-</div>
+:::
 
 ### Q1 — [question]
 
@@ -92,17 +92,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Topic 2 — Knowledge Base
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** Who owns the organisation's internal knowledge, how is it kept current, and is it consistent enough to be trusted as AI context?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T2_ANSWER]
 
-</div>
+:::
 
 ### Q1 — [question]
 

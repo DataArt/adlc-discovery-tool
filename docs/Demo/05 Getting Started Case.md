@@ -19,11 +19,11 @@ The repository clone succeeded. The next command failed because the `#` prompt s
 
 The example shows that a nontechnical contributor may need a little help with unfamiliar terminal conventions. The correction was small and specific.
 
-<div class="getting-started-screenshot">
+::: screenshot
 
 [![Setup conversation identifying an accidentally copied hash symbol and clarifying the command](<./getting started/image (1).png>)](<./getting started/image (1).png>)
 
-</div>
+:::
 
 _An extra copied character caused the setup issue; a brief clarification resolved what to enter._
 
@@ -33,11 +33,11 @@ In the later screenshot, a plain-language request brings in the latest changes f
 
 The request builds on the engagement’s existing structure. The contributor supplies the source material and context; the assistant can use the repository’s workflow and documents to carry out the requested work. The screenshot records the request, rather than its completed result.
 
-<div class="getting-started-screenshot">
+::: screenshot
 
 [![Repository update followed by a discovery request to process workshop transcripts, correct a date, and preserve agendas](<./getting started/image.png>)](<./getting started/image.png>)
 
-</div>
+:::
 
 _Plain-language instructions refer to shared workshops and artifacts without restating the engagement from scratch._
 
@@ -78,13 +78,3 @@ flowchart LR
 ---
 
 [Presentation](index.md) · [Previous](<04 Collaboration.md>) · [Next](<06 Day-to-Day Collaboration Case.md>)
-
-<style>
-.getting-started-screenshot img {
-  display: block;
-  max-width: 100%;
-  max-height: 420px;
-  width: auto;
-  margin: 0 auto;
-}
-</style>

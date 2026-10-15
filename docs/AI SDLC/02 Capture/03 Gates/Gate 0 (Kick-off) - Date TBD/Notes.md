@@ -38,17 +38,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Purpose:** Formal start of the engagement — confirm Strategic Intent, sign off Early Direction, agree the workshop programme.
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### Facilitator framing
 
@@ -62,17 +62,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 1 — Confirm Strategic Intent
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Does this still match what leadership actually wants out of the engagement? Anything to confirm, reorder, or cut?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B1_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -82,17 +82,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 2 — Present Early Direction
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Does this look like a plausible starting point, or is there an obvious correction before Investigate begins?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B2_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -102,17 +102,17 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Block 3 — Agree Workshop Programme
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Check question:** Who needs to be in the room for each workshop, and when can they commit?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [B3_ANSWER]
 
-</div>
+:::
 
 ### Summary
 
@@ -122,11 +122,11 @@ _Transcript: `[TRANSCRIPT_FILENAME]` · [DURATION] · Started: [START_TIME]_
 
 ## Explicit Ask
 
-<div style="background:#FFFBEB;border-left:4px solid #F59E0B;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: warning
 
 **Asks raised:** Named contacts per SDLC Domain, calendar commitment for Investigate, any data-access prerequisites.
 
-</div>
+:::
 
 ### Response
 

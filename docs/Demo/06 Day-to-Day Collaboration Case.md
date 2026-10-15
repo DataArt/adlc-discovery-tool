@@ -25,11 +25,11 @@ This case follows the supplied screenshots and the supplied account of that sess
 
 The PM and the assistant work from the same repository context.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Repository update summarising new commits and the outdated execution plan](./day2day/01%20%E2%80%94%20Update%20the%20repository.png)](./day2day/01%20%E2%80%94%20Update%20the%20repository.png)
 
-</div>
+:::
 
 _The repository has moved forward; the plan needs another check._
 
@@ -39,11 +39,11 @@ The assistant compares plan rows with the work recorded in the repository. It id
 
 A document’s presence does not settle every decision. Missing context becomes a question for its owner.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Plan comparison followed by questions about gates, staffing, and unresolved dates](./day2day/02-03%20%E2%80%94%20Plan%20check%20and%20questions%20only%20the%20PM%20can%20answer.png)](./day2day/02-03%20%E2%80%94%20Plan%20check%20and%20questions%20only%20the%20PM%20can%20answer.png)
 
-</div>
+:::
 
 _Repository evidence establishes some updates; decisions made on calls need the PM’s input._
 
@@ -53,11 +53,11 @@ The PM answers in plain language. The assistant translates those decisions into 
 
 The first proposal uses 20 October for Gate 3. The PM subsequently places it two weeks after Gate 2, on 27 October. That remains an internal planning date, not a client commitment.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![PM answers, proposed dates, and a warning about unassigned work](./day2day/04-05%20%E2%80%94%20PM%20answers%20and%20the%20staffing%20risk.png)](./day2day/04-05%20%E2%80%94%20PM%20answers%20and%20the%20staffing%20risk.png)
 
-</div>
+:::
 
 _The assistant identifies the scheduling risk; the PM owns the decision._
 
@@ -67,19 +67,19 @@ In this engagement, the Excel file is the source of truth for the execution plan
 
 The update still leaves work unassigned. Recording a new date does not resolve the staffing gap.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Updated Excel plan with a 5 October sync date and revised milestone statuses](./day2day/06a%20%E2%80%94%20Excel%20plan%20after%20the%20update.png)](./day2day/06a%20%E2%80%94%20Excel%20plan%20after%20the%20update.png)
 
-</div>
+:::
 
 _The maintained plan remains in Excel._
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Summary of Excel changes, backup and integrity checks, and remaining staffing risk](./day2day/06b%20%E2%80%94%20What%20changed%20in%20the%20Excel%20plan.png)](./day2day/06b%20%E2%80%94%20What%20changed%20in%20the%20Excel%20plan.png)
 
-</div>
+:::
 
 _The change summary makes completed work, new commitments, and open risks visible._
 
@@ -93,19 +93,19 @@ The assistant syncs the site page from the spreadsheet and commits both files on
 
 The spreadsheet and the published page have distinct roles: one maintains the plan; the other gives the team a shared view.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Assistant summary of the synced site page and committed spreadsheet changes](./day2day/07a%20%E2%80%94%20Site%20page%20synced%20and%20committed.png)](./day2day/07a%20%E2%80%94%20Site%20page%20synced%20and%20committed.png)
 
-</div>
+:::
 
 _The sync includes a dated summary, updated rows, risk notes, and a changelog entry._
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Pull request describing the plan update and showing its merged status](./day2day/07b%20%E2%80%94%20Pull%20request.png)](./day2day/07b%20%E2%80%94%20Pull%20request.png)
 
-</div>
+:::
 
 _The pull request records the reason for the change and the scope reviewed by the PM._
 
@@ -113,27 +113,27 @@ _The pull request records the reason for the change and the scope reviewed by th
 
 The PM reviews and merges the change. The supplied record shows both a successful merge and deployment. The site displays “Synced as of 5 Oct 2026,” identifies Excel as the source, and retains the distinction between confirmed dates and internal planning assumptions.
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![GitHub confirmation of a merged pull request and successful deployment](./day2day/08a%20%E2%80%94%20Pull%20request%20merged%20and%20deployed.png)](./day2day/08a%20%E2%80%94%20Pull%20request%20merged%20and%20deployed.png)
 
-</div>
+:::
 
 _The record shows the reviewed change reached the deployed site._
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Published execution-plan page with sync date, source-of-truth note, and planning caveats](./day2day/08b%20%E2%80%94%20Site%20page%2C%20synced%20as%20of%205%20Oct.png)](./day2day/08b%20%E2%80%94%20Site%20page%2C%20synced%20as%20of%205%20Oct.png)
 
-</div>
+:::
 
 _The team can see when the page was synced and which commitments remain unsettled._
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Published plan table showing dates, statuses, milestones, goals, and outcomes](./day2day/08c%20%E2%80%94%20Site%20page%2C%20plan%20table.png)](./day2day/08c%20%E2%80%94%20Site%20page%2C%20plan%20table.png)
 
-</div>
+:::
 
 _The shared page exposes the plan’s status and purpose row by row._
 
@@ -164,17 +164,17 @@ The case highlights two improvements: **one place to see what is ready**, and **
 
 The presenter’s original slide text and long narrative are preserved in `raw-artifacts/day2day/` and embedded above for reference. The additional progress screenshot is also retained. All screenshots above link to their full-size image.
 
-::: details Additional screenshot — sync in progress
+:::: details Additional screenshot — sync in progress
 
-<div class="day2day-screenshot">
+::: screenshot
 
 [![Assistant working on repository author identity and committing during the sync](./day2day/extra%20%E2%80%94%20sync%20in%20progress%20%28not%20needed%29.png)](./day2day/extra%20%E2%80%94%20sync%20in%20progress%20%28not%20needed%29.png)
 
-</div>
+:::
 
 _An intermediate progress capture, retained with the complete source material._
 
-:::
+::::
 
 ## Related references
 
@@ -186,13 +186,3 @@ _An intermediate progress capture, retained with the complete source material._
 ---
 
 [Presentation](index.md) · [Previous](<05 Getting Started Case.md>) · [Next](<07 Launching a New Client Engagement.md>)
-
-<style>
-.day2day-screenshot img {
-  display: block;
-  max-width: 100%;
-  max-height: 420px;
-  width: auto;
-  margin: 0 auto;
-}
-</style>

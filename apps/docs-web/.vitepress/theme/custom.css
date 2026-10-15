@@ -54,3 +54,22 @@
 .VPSidebarItem.level-5.is-active > .item .link > .text {
   font-weight: 600 !important;
 }
+
+/* ::: screenshot container (config.ts registerContainers) — centers a demo
+   screenshot and caps its height so tall captures don't dominate the page. */
+.screenshot img {
+  display: block;
+  max-width: 100%;
+  max-height: 420px;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* ::: figure-720 container (config.ts registerContainers) — caps a diagram/figure
+   at a fixed display width, centered, replacing a raw <img width="720"> tag. */
+.figure-720 img {
+  display: block;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}

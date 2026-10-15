@@ -42,17 +42,17 @@ _This is a capstone synthesis workshop, not an 11th diagnostic SDLC Domain — i
 
 ## Opening — Framing
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** [from Agenda]
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [OPENING_ANSWER]
 
-</div>
+:::
 
 ### [[CLIENT_NAME]] context
 
@@ -70,17 +70,17 @@ _This is a capstone synthesis workshop, not an 11th diagnostic SDLC Domain — i
 
 ## Topic 1 — Candidate Inventory
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** Which projects or products are realistic candidates for the ADLC pilot?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T1_ANSWER]
 
-</div>
+:::
 
 ### Q1 — [question]
 
@@ -94,17 +94,17 @@ _This is a capstone synthesis workshop, not an 11th diagnostic SDLC Domain — i
 
 ## Topic 2 — Evaluation & Scoring
 
-<div style="background:#EFF6FF;border-left:4px solid #3B82F6;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: info
 
 **Key question:** Which candidate should the ADLC pilot start on?
 
-</div>
+:::
 
-<div style="background:#ECFDF5;border-left:4px solid #10B981;padding:12px 16px;border-radius:4px;margin:8px 0">
+::: tip
 
 **Answer:** [T2_ANSWER]
 
-</div>
+:::
 
 ### Q1 — Impact — [question]
 

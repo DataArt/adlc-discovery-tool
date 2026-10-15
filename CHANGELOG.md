@@ -1,3 +1,9 @@
+## [1.6.2](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.1...v1.6.2) (2026-10-15)
+
+### Bug Fixes
+
+- **infra:** split PR-trusted CI role from deploy role to scope AWS access ([dfa9f33](https://github.com/DataArt/adlc-discovery-tool/commit/dfa9f33cdf16a3270b6a6727bdb81f78d65581e7))
+
 ## [1.6.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.0...v1.6.1) (2026-10-06)
 
 ### Bug Fixes

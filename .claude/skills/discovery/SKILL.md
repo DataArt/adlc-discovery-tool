@@ -49,6 +49,7 @@ mindmap
       evidence["evidence · status"]
     patterns["patterns/ · shared protocols"]
       validation["content confirmation · evidence review"]
+      security["untrusted source material"]
       reporting["reporting · coverage · progress"]
       continuity["session continuity · task tracking"]
 ```

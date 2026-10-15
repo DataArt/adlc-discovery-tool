@@ -1,3 +1,9 @@
+## [1.6.5](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.4...v1.6.5) (2026-10-15)
+
+### Bug Fixes
+
+- **harness:** mitigate lethal-trifecta prompt injection in discovery ingestion ([6b93568](https://github.com/DataArt/adlc-discovery-tool/commit/6b93568258416adabd90fb95240b2fe6b5fb1e9e))
+
 ## [1.6.4](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.3...v1.6.4) (2026-10-15)
 
 ### Bug Fixes

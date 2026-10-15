@@ -1,3 +1,9 @@
+## [1.6.4](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.3...v1.6.4) (2026-10-15)
+
+### Bug Fixes
+
+- **infra:** add CloudFront and S3 access logging ([5a756bb](https://github.com/DataArt/adlc-discovery-tool/commit/5a756bbe9b643f5fd5e0a0529cfffd2861530f4d))
+
 ## [1.6.3](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.2...v1.6.3) (2026-10-15)
 
 ### Bug Fixes

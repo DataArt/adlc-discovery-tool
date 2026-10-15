@@ -14,6 +14,7 @@ export function naming({
   const prefix = `${org}-${env}-${wl}-${loc}`;
   return {
     siteBucket: `${prefix}-s3-02`,
+    logsBucket: `${prefix}-s3-03`,
     authFn: `${prefix}-fn-01`,
     authSecret: `${org}/${env}/${wl}/lambda-auth`,
     ssmEnvParam: (app: string) => `/${org}/${env}/${wl}/${app}/env`,

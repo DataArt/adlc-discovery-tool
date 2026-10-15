@@ -28,25 +28,47 @@ export class DocsStack extends cdk.Stack {
     const { environment, workload, locationShort, orgPrefix, cfPriceClass, edgeStack } = props;
     const names = naming({ orgPrefix, environment, workload, locationShort });
 
-    const siteBucket = this.createSiteBucket(names.siteBucket);
+    const logsBucket = this.createLogsBucket(names.logsBucket);
+    const siteBucket = this.createSiteBucket(names.siteBucket, logsBucket);
     const secret = this.createAuthSecret(names.authSecret);
-    const distribution = this.createDistribution(siteBucket, edgeStack, cfPriceClass);
+    const distribution = this.createDistribution(siteBucket, logsBucket, edgeStack, cfPriceClass);
 
     new cdk.CfnOutput(this, 'CloudFrontDomain', { value: distribution.distributionDomainName });
     new cdk.CfnOutput(this, 'CloudFrontDistributionId', { value: distribution.distributionId });
     new cdk.CfnOutput(this, 'SiteBucketName', { value: siteBucket.bucketName });
+    new cdk.CfnOutput(this, 'LogsBucketName', { value: logsBucket.bucketName });
     new cdk.CfnOutput(this, 'AuthSecretArn', { value: secret.secretArn });
     new cdk.CfnOutput(this, 'AuthSecretName', { value: secret.secretName });
     new cdk.CfnOutput(this, 'AuthLambdaFunctionName', { value: edgeStack.authFnName });
   }
 
-  private createSiteBucket(bucketName: string): s3.Bucket {
+  // Shared by both S3 server-access logs (site bucket reads) and CloudFront
+  // standard logs (viewer requests). OBJECT_WRITER ownership is required for
+  // CloudFront's log delivery, which writes via an ACL grant, not a bucket policy —
+  // BucketOwnerEnforced (the CDK default) disables ACLs entirely and would silently
+  // break CloudFront log delivery. S3's own server-access-log delivery uses a bucket
+  // policy instead (wired automatically by `serverAccessLogsBucket` below), so it
+  // works under either ownership setting.
+  private createLogsBucket(bucketName: string): s3.Bucket {
+    return new s3.Bucket(this, 'LogsBucket', {
+      bucketName,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      enforceSSL: true,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
+      lifecycleRules: [{ expiration: cdk.Duration.days(180) }],
+    });
+  }
+
+  private createSiteBucket(bucketName: string, logsBucket: s3.Bucket): s3.Bucket {
     return new s3.Bucket(this, 'SiteBucket', {
       bucketName,
       versioned: true,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
       enforceSSL: true,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      serverAccessLogsBucket: logsBucket,
+      serverAccessLogsPrefix: 's3-access-logs/',
     });
   }
 
@@ -60,11 +82,15 @@ export class DocsStack extends cdk.Stack {
 
   private createDistribution(
     siteBucket: s3.Bucket,
+    logsBucket: s3.Bucket,
     edgeStack: EdgeStack,
     cfPriceClass: string
   ): cloudfront.Distribution {
     return new cloudfront.Distribution(this, 'Distribution', {
       defaultRootObject: 'index.html',
+      enableLogging: true,
+      logBucket: logsBucket,
+      logFilePrefix: 'cf-access-logs/',
       // S3 returns 403 (not 404) for missing objects on private buckets.
       // Remap to the VitePress 404 page so browsers get a proper not-found response.
       errorResponses: [

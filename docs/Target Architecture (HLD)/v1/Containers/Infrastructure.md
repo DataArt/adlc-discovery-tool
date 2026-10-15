@@ -22,6 +22,7 @@ flowchart LR
     subgraph DOCS_STACK ["  DocsStack — {region}  "]
         CF_DEF["☁️ CloudFront distribution"]:::cf
         S3_DEF["🪣 S3 bucket · IAM · OAC"]:::s3
+        LOGS["📜 Logs bucket\nCF access logs · S3 access logs"]:::s3
     end
 
     subgraph CI_STACK ["  CiStack — {region}  "]
@@ -47,6 +48,8 @@ flowchart LR
     LAE_PH -.->|"provisions viewer-request"| LAE
     CF_DEF -.->|"defines"| CF
     S3_DEF -.->|"defines"| S3
+    CF -.->|"access logs"| LOGS
+    S3 -.->|"access logs"| LOGS
 
     classDef client fill:#2C3E50,stroke:#1A252F,color:#fff
     classDef cdk    fill:#065F46,stroke:#064e3b,color:#fff
@@ -71,6 +74,7 @@ _Auth decision path (401 challenge vs pass-through) is shown in `Containers/Auth
 - IAM roles and resource policies
 - All resources defined as CDK constructs — no manual provisioning
 - Secrets Manager secret provisioned as an empty placeholder (`{}`); value is populated post-deploy by `lambda-auth:sm-push` — never set by CDK
+- Dedicated, private logs bucket captures both CloudFront standard access logs (every viewer request — IP, path, status, edge location) and the site bucket's own S3 server-access logs, with a 180-day expiration lifecycle rule; previously neither existed
 - GitHub OIDC provider (`CiStack`) enabling GitHub Actions to authenticate via short-lived credentials; two roles, each trusted for exactly one triggering event — a pull_request-only read role (SSM only) and a push-to-main-only deploy role (S3, CloudFront, Lambda, SSM) — so a PR can never assume deploy-grade credentials before human review
 
 ## Technology

@@ -1,3 +1,9 @@
+## [1.6.6](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.5...v1.6.6) (2026-10-15)
+
+### Bug Fixes
+
+- **docs:** dedupe gitGraph commit ids in Branching Strategy diagram ([fc1d7d4](https://github.com/DataArt/adlc-discovery-tool/commit/fc1d7d45d6105bfb8365e06bce89630a89e872d5))
+
 ## [1.6.5](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.4...v1.6.5) (2026-10-15)
 
 ### Bug Fixes

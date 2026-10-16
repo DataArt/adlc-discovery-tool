@@ -1,0 +1,1312 @@
+{
+  "schema_version": 2,
+  "lifecycle": "dev",
+  "ticket": "WEB-42354",
+  "author": "UNIVERSE\\nsmolyansky",
+  "tracking_started_at": "2026-09-30T07:46:13.377Z",
+  "ticket_created_at": null,
+  "ticket_created_source": null,
+  "started_at": "2026-09-30T07:46:20.153Z",
+  "completed_at": "2026-09-30T09:21:26.015Z",
+  "coverage": "from_tracking_start",
+  "stages": [
+    {
+      "id": "context",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "e3c8b1d7-3c2d-4254-95f1-48eec3b13857",
+          "started_at": "2026-09-30T07:46:20.153Z",
+          "ended_at": "2026-09-30T07:46:20.332Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "ceremony",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "3cd27e51-8573-41d7-ab50-a598d4f3093f",
+          "started_at": "2026-09-30T07:46:50.376Z",
+          "ended_at": "2026-09-30T07:47:11.171Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "plan",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+          "started_at": "2026-09-30T07:47:11.247Z",
+          "ended_at": "2026-09-30T07:54:44.499Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "implement",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+          "started_at": "2026-09-30T07:55:05.840Z",
+          "ended_at": "2026-09-30T08:41:41.609Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "test",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+          "started_at": "2026-09-30T08:41:41.704Z",
+          "ended_at": "2026-09-30T09:03:18.638Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "document",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "e8c4c1c3-ef73-4c24-b390-b125fc0d9542",
+          "started_at": "2026-09-30T09:03:27.012Z",
+          "ended_at": "2026-09-30T09:21:16.640Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "steps": [
+    {
+      "id": "step-01",
+      "title": "Spaces service: fix the give-up branch",
+      "order": 1,
+      "plan_ref": "1-plan.md#step-1",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7",
+          "started_at": "2026-09-30T08:01:52.961Z",
+          "ended_at": "2026-09-30T08:08:15.767Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-02",
+      "title": "Spaces service: add country preference",
+      "order": 2,
+      "plan_ref": "1-plan.md#step-2",
+      "depends_on": ["step-01"],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36",
+          "started_at": "2026-09-30T08:10:22.614Z",
+          "ended_at": "2026-09-30T08:23:51.748Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-03",
+      "title": "Spaces resolvers: pass geo country at 3 call sites",
+      "order": 3,
+      "plan_ref": "1-plan.md#step-3",
+      "depends_on": ["step-02"],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "8d00c76d-2e8c-471d-9dcc-76d12b714059",
+          "started_at": "2026-09-30T08:25:19.473Z",
+          "ended_at": "2026-09-30T08:32:50.030Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-04",
+      "title": "Spaces controller: match IP country in GetUserNearestCenterId",
+      "order": 4,
+      "plan_ref": "1-plan.md#step-4",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "45702e3c-281e-40a5-88c9-3bc39bf8236d",
+          "started_at": "2026-09-30T08:33:48.853Z",
+          "ended_at": "2026-09-30T08:40:45.449Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "intervals": [
+    {
+      "id": "e94ca7fd-beb3-46a2-bce4-16339f98b9aa",
+      "stage_id": "context",
+      "stage_attempt_id": "e3c8b1d7-3c2d-4254-95f1-48eec3b13857",
+      "step": null,
+      "kind": "work",
+      "activity": "investigation",
+      "started_at": "2026-09-30T07:46:20.153Z",
+      "ended_at": "2026-09-30T07:46:20.332Z",
+      "last_observed_at": "2026-09-30T07:46:20.332Z"
+    },
+    {
+      "id": "d133b3e4-f27a-4b7e-8ee1-0b1e47515a91",
+      "stage_id": "ceremony",
+      "stage_attempt_id": "3cd27e51-8573-41d7-ab50-a598d4f3093f",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-09-30T07:46:50.376Z",
+      "ended_at": "2026-09-30T07:47:11.171Z",
+      "last_observed_at": "2026-09-30T07:47:11.171Z"
+    },
+    {
+      "id": "c91b24f0-b19e-428a-99f5-33a480a5622b",
+      "stage_id": "plan",
+      "stage_attempt_id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-09-30T07:47:11.247Z",
+      "ended_at": "2026-09-30T07:52:52.366Z",
+      "last_observed_at": "2026-09-30T07:52:52.366Z"
+    },
+    {
+      "id": "7cd6e712-794e-451b-93a5-ebdacdf3264f",
+      "stage_id": "plan",
+      "stage_attempt_id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting sign-off on persisted 1-plan.md (Plan Step 5)",
+      "started_at": "2026-09-30T07:52:52.366Z",
+      "ended_at": "2026-09-30T07:54:03.935Z",
+      "last_observed_at": "2026-09-30T07:54:03.935Z"
+    },
+    {
+      "id": "3532e521-9ac6-4a3a-8ccd-1476e5430233",
+      "stage_id": "plan",
+      "stage_attempt_id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-09-30T07:54:03.935Z",
+      "ended_at": "2026-09-30T07:54:44.499Z",
+      "last_observed_at": "2026-09-30T07:54:44.499Z"
+    },
+    {
+      "id": "47fb6c70-41cd-41d2-8280-65fa2701bdc0",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": null,
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T07:55:05.840Z",
+      "ended_at": "2026-09-30T07:55:05.933Z",
+      "last_observed_at": "2026-09-30T07:55:05.933Z"
+    },
+    {
+      "id": "2a594d52-3071-474b-a53c-286c9d379d05",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting developer commit of 1-plan.md (Plan Step 6)",
+      "started_at": "2026-09-30T07:55:05.933Z",
+      "ended_at": "2026-09-30T08:01:16.267Z",
+      "last_observed_at": "2026-09-30T08:01:16.267Z"
+    },
+    {
+      "id": "0afe7621-89f3-4f22-bcf6-10246682be69",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": null,
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:01:16.267Z",
+      "ended_at": "2026-09-30T08:01:52.961Z",
+      "last_observed_at": "2026-09-30T08:01:52.961Z"
+    },
+    {
+      "id": "d18e1d6a-90f8-4d34-a7af-55e72e5d873b",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:01:52.961Z",
+      "ended_at": "2026-09-30T08:04:49.462Z",
+      "last_observed_at": "2026-09-30T08:04:49.462Z"
+    },
+    {
+      "id": "5d69ac46-a607-48c3-968c-98963ce67abc",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:04:49.462Z",
+      "ended_at": "2026-09-30T08:04:58.161Z",
+      "last_observed_at": "2026-09-30T08:04:58.161Z"
+    },
+    {
+      "id": "4fa789a5-82fc-4a45-9e85-0751b18336c5",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:04:58.161Z",
+      "ended_at": "2026-09-30T08:05:05.940Z",
+      "last_observed_at": "2026-09-30T08:05:05.940Z"
+    },
+    {
+      "id": "0b64196a-8cad-4616-8058-1eec7754172f",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:05:05.940Z",
+      "ended_at": "2026-09-30T08:05:14.342Z",
+      "last_observed_at": "2026-09-30T08:05:14.342Z"
+    },
+    {
+      "id": "d1c17cf8-7749-4abc-a1dd-3ae21323ec23",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:05:14.342Z",
+      "ended_at": "2026-09-30T08:05:23.644Z",
+      "last_observed_at": "2026-09-30T08:05:23.644Z"
+    },
+    {
+      "id": "4d03e8b3-7c32-44cc-afa2-22859271ae90",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:05:23.644Z",
+      "ended_at": "2026-09-30T08:05:29.000Z",
+      "last_observed_at": "2026-09-30T08:05:29.000Z"
+    },
+    {
+      "id": "f3ee70c8-3a98-4670-acfc-2a722cf5a539",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:05:29.000Z",
+      "ended_at": "2026-09-30T08:05:41.545Z",
+      "last_observed_at": "2026-09-30T08:05:41.545Z"
+    },
+    {
+      "id": "0acd7f8a-5ea5-4ee9-8077-78b3b6aadd9b",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "wait",
+      "reason": "user_input",
+      "detail": "Awaiting Step 1 verification sign-off",
+      "started_at": "2026-09-30T08:05:41.545Z",
+      "ended_at": "2026-09-30T08:08:15.509Z",
+      "last_observed_at": "2026-09-30T08:08:15.509Z"
+    },
+    {
+      "id": "2225940f-2d70-4d6b-ac95-20cad0375b99",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:08:15.509Z",
+      "ended_at": "2026-09-30T08:08:15.767Z",
+      "last_observed_at": "2026-09-30T08:08:15.767Z"
+    },
+    {
+      "id": "abb55605-c64c-4877-ac0a-ead243308cc2",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:10:22.614Z",
+      "ended_at": "2026-09-30T08:13:55.930Z",
+      "last_observed_at": "2026-09-30T08:13:55.930Z"
+    },
+    {
+      "id": "fe2ff472-2103-4421-884d-a388b3a992df",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:13:55.930Z",
+      "ended_at": "2026-09-30T08:14:14.106Z",
+      "last_observed_at": "2026-09-30T08:14:14.106Z"
+    },
+    {
+      "id": "c7340d6c-94b2-4422-a655-386d6239e2e5",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:14:14.106Z",
+      "ended_at": "2026-09-30T08:14:40.302Z",
+      "last_observed_at": "2026-09-30T08:14:40.302Z"
+    },
+    {
+      "id": "47af0c79-12f7-44ae-b08f-a906c32cccac",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:14:40.302Z",
+      "ended_at": "2026-09-30T08:14:50.206Z",
+      "last_observed_at": "2026-09-30T08:14:50.206Z"
+    },
+    {
+      "id": "290d9b8c-f089-4b0e-b17e-ad4a655d5048",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:14:50.206Z",
+      "ended_at": "2026-09-30T08:14:57.401Z",
+      "last_observed_at": "2026-09-30T08:14:57.401Z"
+    },
+    {
+      "id": "2c4ac13b-cee3-4f25-a6de-2604b165fd7c",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:14:57.401Z",
+      "ended_at": "2026-09-30T08:15:05.288Z",
+      "last_observed_at": "2026-09-30T08:15:05.288Z"
+    },
+    {
+      "id": "ddcd0500-36a0-437b-811f-e2d01187b932",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:15:05.288Z",
+      "ended_at": "2026-09-30T08:15:14.905Z",
+      "last_observed_at": "2026-09-30T08:15:14.905Z"
+    },
+    {
+      "id": "b797eabc-a68b-4c2e-99d8-042225811eb6",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "wait",
+      "reason": "user_input",
+      "detail": "Awaiting Step 2 verification sign-off",
+      "started_at": "2026-09-30T08:15:14.905Z",
+      "ended_at": "2026-09-30T08:23:51.521Z",
+      "last_observed_at": "2026-09-30T08:23:51.521Z"
+    },
+    {
+      "id": "29ed1157-8d80-487f-864b-feb1fac62778",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:23:51.521Z",
+      "ended_at": "2026-09-30T08:23:51.748Z",
+      "last_observed_at": "2026-09-30T08:23:51.748Z"
+    },
+    {
+      "id": "7383329c-f032-4fcb-9c42-61c84fe397f2",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:25:19.473Z",
+      "ended_at": "2026-09-30T08:27:19.865Z",
+      "last_observed_at": "2026-09-30T08:27:19.865Z"
+    },
+    {
+      "id": "e102197a-3275-4505-aee7-2fe1ecd61bfc",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:27:19.865Z",
+      "ended_at": "2026-09-30T08:28:06.389Z",
+      "last_observed_at": "2026-09-30T08:28:06.389Z"
+    },
+    {
+      "id": "cf6b335d-cadf-4830-8c81-a708c4eb8560",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:28:06.389Z",
+      "ended_at": "2026-09-30T08:28:32.608Z",
+      "last_observed_at": "2026-09-30T08:28:32.608Z"
+    },
+    {
+      "id": "3055329f-6ab0-41b9-acfb-eb0ae11f3d7f",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:28:32.608Z",
+      "ended_at": "2026-09-30T08:28:46.419Z",
+      "last_observed_at": "2026-09-30T08:28:46.419Z"
+    },
+    {
+      "id": "6a25ab2c-ef48-4e52-bf49-b989da8e8eb6",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:28:46.419Z",
+      "ended_at": "2026-09-30T08:28:54.781Z",
+      "last_observed_at": "2026-09-30T08:28:54.781Z"
+    },
+    {
+      "id": "da3c2202-b777-4e73-a3fb-ac4c7e13568e",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "wait",
+      "reason": "user_input",
+      "detail": "Awaiting Step 3 verification sign-off (incl. live page check)",
+      "started_at": "2026-09-30T08:28:54.781Z",
+      "ended_at": "2026-09-30T08:32:49.719Z",
+      "last_observed_at": "2026-09-30T08:32:49.719Z"
+    },
+    {
+      "id": "2871fe41-8ee5-4003-b696-d3a58a88f9d9",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:32:49.719Z",
+      "ended_at": "2026-09-30T08:32:50.030Z",
+      "last_observed_at": "2026-09-30T08:32:50.030Z"
+    },
+    {
+      "id": "30c0a20a-43ec-4692-a625-6833578e214d",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:33:48.853Z",
+      "ended_at": "2026-09-30T08:36:15.324Z",
+      "last_observed_at": "2026-09-30T08:36:15.324Z"
+    },
+    {
+      "id": "9f44410c-8228-4719-a94a-bb9832b70cbf",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:36:15.324Z",
+      "ended_at": "2026-09-30T08:36:51.158Z",
+      "last_observed_at": "2026-09-30T08:36:51.158Z"
+    },
+    {
+      "id": "78ec95f4-b8a9-41cf-9531-9330aa624899",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:36:51.158Z",
+      "ended_at": "2026-09-30T08:37:58.906Z",
+      "last_observed_at": "2026-09-30T08:37:58.906Z"
+    },
+    {
+      "id": "f3527416-04c8-4f6f-b6b0-690c22e78519",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:37:58.906Z",
+      "ended_at": "2026-09-30T08:38:14.724Z",
+      "last_observed_at": "2026-09-30T08:38:14.724Z"
+    },
+    {
+      "id": "6f0b80da-d334-4876-a633-03f072a037cd",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-09-30T08:38:14.724Z",
+      "ended_at": "2026-09-30T08:38:38.859Z",
+      "last_observed_at": "2026-09-30T08:38:38.859Z"
+    },
+    {
+      "id": "8b67570c-c271-483e-bcef-b94c8230cb6b",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "wait",
+      "reason": "user_input",
+      "detail": "Awaiting Step 4 verification sign-off (incl. live endpoint check)",
+      "started_at": "2026-09-30T08:38:38.859Z",
+      "ended_at": "2026-09-30T08:40:45.222Z",
+      "last_observed_at": "2026-09-30T08:40:45.222Z"
+    },
+    {
+      "id": "2d81f69e-df5c-4a31-88bc-88c95715fa58",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:40:45.222Z",
+      "ended_at": "2026-09-30T08:40:45.449Z",
+      "last_observed_at": "2026-09-30T08:40:45.449Z"
+    },
+    {
+      "id": "df2afb33-b202-462c-858d-6a83e1233cc7",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:41:41.704Z",
+      "ended_at": "2026-09-30T08:44:20.227Z",
+      "last_observed_at": "2026-09-30T08:44:20.227Z"
+    },
+    {
+      "id": "d65856c4-4139-4077-bc47-139af8f17542",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:44:20.227Z",
+      "ended_at": "2026-09-30T08:44:51.094Z",
+      "last_observed_at": "2026-09-30T08:44:51.094Z"
+    },
+    {
+      "id": "55f8d8db-47bd-4193-a90f-fdf4cfec1b2b",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:44:51.094Z",
+      "ended_at": "2026-09-30T08:45:13.118Z",
+      "last_observed_at": "2026-09-30T08:45:13.118Z"
+    },
+    {
+      "id": "64978348-4f5b-44d3-9bea-01a8932323a3",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:45:13.118Z",
+      "ended_at": "2026-09-30T08:45:23.348Z",
+      "last_observed_at": "2026-09-30T08:45:23.348Z"
+    },
+    {
+      "id": "aeed7234-dbc2-47c7-86ce-5ba26bf0b588",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:45:23.348Z",
+      "ended_at": "2026-09-30T08:55:15.950Z",
+      "last_observed_at": "2026-09-30T08:55:15.950Z"
+    },
+    {
+      "id": "135b6bf4-47c6-4d1c-aeaa-5feb68978d6f",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "kind": "work",
+      "activity": "verification",
+      "started_at": "2026-09-30T08:55:15.950Z",
+      "ended_at": "2026-09-30T09:03:18.638Z",
+      "last_observed_at": "2026-09-30T09:03:18.638Z"
+    },
+    {
+      "id": "d01baaa7-6cea-4daf-836a-e1d96403db76",
+      "stage_id": "document",
+      "stage_attempt_id": "e8c4c1c3-ef73-4c24-b390-b125fc0d9542",
+      "step": null,
+      "kind": "work",
+      "activity": "documentation",
+      "started_at": "2026-09-30T09:03:27.012Z",
+      "ended_at": "2026-09-30T09:21:16.640Z",
+      "last_observed_at": "2026-09-30T09:21:16.640Z"
+    }
+  ],
+  "checks": [
+    {
+      "id": "context-signoff-01",
+      "stage_id": "context",
+      "stage_attempt_id": "e3c8b1d7-3c2d-4254-95f1-48eec3b13857",
+      "step": null,
+      "name": "Context scope sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T07:46:20.245Z",
+      "ended_at": "2026-09-30T07:46:20.245Z",
+      "result": "passed",
+      "evidence_ref": "Developer selected 'Yes - Spaces only, all 6 items' at the Step 4 sign-off gate",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "plan-draft-signoff-01",
+      "stage_id": "plan",
+      "stage_attempt_id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+      "step": null,
+      "name": "Plan Mode draft approval",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T07:52:52.277Z",
+      "ended_at": "2026-09-30T07:52:52.277Z",
+      "result": "passed",
+      "evidence_ref": "Developer approved the plan via ExitPlanMode: 'User has approved your plan.'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "plan-persisted-signoff-01",
+      "stage_id": "plan",
+      "stage_attempt_id": "c3475e1d-9bb7-4c00-915b-b21d7736c751",
+      "step": null,
+      "name": "Persisted plan sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T07:54:04.021Z",
+      "ended_at": "2026-09-30T07:54:04.021Z",
+      "result": "passed",
+      "evidence_ref": "Developer selected 'Ready - start Implement' at the Plan Step 5 gate on impl/1-plan.md",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "plan-commit-authz-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": null,
+      "name": "Plan commit authorization",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T08:01:16.372Z",
+      "ended_at": "2026-09-30T08:01:16.372Z",
+      "result": "passed",
+      "evidence_ref": "Developer: 'skip them via commit. Proceed' - authorized orchestrator-run commits excluding appsettings.Development.json and appsettings.Spaces.json",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "step-01-test-run-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "name": "Spaces LocationSearchServiceTest",
+      "kind": "test",
+      "started_at": "2026-09-30T08:04:49.462Z",
+      "ended_at": "2026-09-30T08:04:58.161Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces LocationSearchServiceTest",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:04:58.161Z"
+    },
+    {
+      "id": "step-01-test-full-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "name": "Spaces full test suite",
+      "kind": "test",
+      "started_at": "2026-09-30T08:05:05.940Z",
+      "ended_at": "2026-09-30T08:05:14.342Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces full test suite",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:05:14.342Z"
+    },
+    {
+      "id": "step-01-build-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "name": "Spaces brand build",
+      "kind": "build",
+      "started_at": "2026-09-30T08:05:23.644Z",
+      "ended_at": "2026-09-30T08:05:29.000Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces brand build",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:05:29.000Z"
+    },
+    {
+      "id": "step-01-acceptance-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "69ac8a31-8ce9-4ff2-9cbf-1946083a7fa7"
+      },
+      "name": "Step 1 developer verification",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T08:08:15.633Z",
+      "ended_at": "2026-09-30T08:08:15.633Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied: 'Step 1 passes, proceed with Step 2'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "step-02-build-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "name": "Spaces brand build",
+      "kind": "build",
+      "started_at": "2026-09-30T08:13:55.930Z",
+      "ended_at": "2026-09-30T08:14:14.106Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces brand build",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:14:14.106Z"
+    },
+    {
+      "id": "step-02-test-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "name": "Spaces LocationSearchServiceTest",
+      "kind": "test",
+      "started_at": "2026-09-30T08:14:40.302Z",
+      "ended_at": "2026-09-30T08:14:50.206Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces LocationSearchServiceTest",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:14:50.206Z"
+    },
+    {
+      "id": "step-02-test-full-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "name": "Spaces full test suite",
+      "kind": "test",
+      "started_at": "2026-09-30T08:14:57.401Z",
+      "ended_at": "2026-09-30T08:15:05.288Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces full test suite",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:15:05.288Z"
+    },
+    {
+      "id": "step-02-acceptance-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "97b4a3f2-6ee2-4ae3-a258-af485d12ab36"
+      },
+      "name": "Step 2 developer verification",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T08:23:51.616Z",
+      "ended_at": "2026-09-30T08:23:51.616Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied: 'Step 2 passes, proceed with Step 3'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "step-03-build-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "name": "Spaces brand build",
+      "kind": "build",
+      "started_at": "2026-09-30T08:27:19.865Z",
+      "ended_at": "2026-09-30T08:28:06.389Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces brand build",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:28:06.389Z"
+    },
+    {
+      "id": "step-03-test-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "name": "Spaces full test suite",
+      "kind": "test",
+      "started_at": "2026-09-30T08:28:32.608Z",
+      "ended_at": "2026-09-30T08:28:46.419Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces full test suite",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:28:46.419Z"
+    },
+    {
+      "id": "step-03-acceptance-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "8d00c76d-2e8c-471d-9dcc-76d12b714059"
+      },
+      "name": "Step 3 developer verification",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T08:32:49.859Z",
+      "ended_at": "2026-09-30T08:32:49.859Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied: 'Step 3 passes, proceed with Step 4'. Developer did not state whether the live Vigo page check was performed; AC-5 live verification tracked as outstanding for the Test stage.",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "step-04-build-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "name": "Spaces brand build",
+      "kind": "build",
+      "started_at": "2026-09-30T08:36:15.324Z",
+      "ended_at": "2026-09-30T08:36:51.158Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces brand build",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:36:51.158Z"
+    },
+    {
+      "id": "step-04-test-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "name": "Spaces full test suite",
+      "kind": "test",
+      "started_at": "2026-09-30T08:37:58.906Z",
+      "ended_at": "2026-09-30T08:38:14.724Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Spaces full test suite",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:38:14.724Z"
+    },
+    {
+      "id": "step-04-acceptance-01",
+      "stage_id": "implement",
+      "stage_attempt_id": "b478c7dc-3b60-441e-be17-272cac18e9cf",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "45702e3c-281e-40a5-88c9-3bc39bf8236d"
+      },
+      "name": "Step 4 developer verification",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T08:40:45.312Z",
+      "ended_at": "2026-09-30T08:40:45.312Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied: 'Step 4 passes, proceed'. Developer did not state whether the live usernearestcenterid check was run; AC-6 live verification tracked as outstanding for the Test stage.",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "test-build-sln-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "Full solution build",
+      "kind": "build",
+      "started_at": "2026-09-30T08:42:40.566Z",
+      "ended_at": "2026-09-30T08:44:20.227Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for Full solution build",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:44:20.227Z"
+    },
+    {
+      "id": "test-unittests-ark-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "IWG.Ark.UnitTests",
+      "kind": "test",
+      "started_at": "2026-09-30T08:44:33.537Z",
+      "ended_at": "2026-09-30T08:44:51.094Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for IWG.Ark.UnitTests",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:44:51.094Z"
+    },
+    {
+      "id": "test-unittests-iwg-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "IWG.UnitTests",
+      "kind": "test",
+      "started_at": "2026-09-30T08:45:00.968Z",
+      "ended_at": "2026-09-30T08:45:13.118Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for IWG.UnitTests",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:45:13.118Z"
+    },
+    {
+      "id": "test-spaces-final-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "IWG.Ark.Web.Spaces.Tests",
+      "kind": "test",
+      "started_at": "2026-09-30T08:45:13.257Z",
+      "ended_at": "2026-09-30T08:45:23.348Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for IWG.Ark.Web.Spaces.Tests",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:45:23.348Z"
+    },
+    {
+      "id": "test-spaces-rf001-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "IWG.Ark.Web.Spaces.Tests",
+      "kind": "test",
+      "started_at": "2026-09-30T08:54:58.741Z",
+      "ended_at": "2026-09-30T08:55:15.950Z",
+      "result": "passed",
+      "evidence_ref": "Command exit recorded for IWG.Ark.Web.Spaces.Tests",
+      "source": "command",
+      "exit_code": 0,
+      "signal": null,
+      "last_observed_at": "2026-09-30T08:55:15.950Z"
+    },
+    {
+      "id": "test-ac-decision-01",
+      "stage_id": "test",
+      "stage_attempt_id": "e923e99d-4ecd-4ea4-8e5c-10022f72a78d",
+      "step": null,
+      "name": "Test stage findings and AC disposition",
+      "kind": "acceptance",
+      "started_at": "2026-09-30T09:03:18.455Z",
+      "ended_at": "2026-09-30T09:03:18.455Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied 'not the issues, proceed' - deferring RF-002/RF-003 as TD-1/TD-2 and proceeding with AC-5/AC-6 unverified, handed to QA WEB-42355",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    }
+  ],
+  "usage_samples": [],
+  "metrics": {
+    "as_of": "2026-09-30T09:21:26.151Z",
+    "lead_time_seconds": null,
+    "cycle_time_seconds": 5705.862,
+    "observed_work_seconds": 3833.218,
+    "observed_wait_seconds": 1473.7839999999999,
+    "open_work_seconds": 0,
+    "open_wait_seconds": 0,
+    "unclassified_seconds": 405.6360000000002,
+    "rework_seconds": 0,
+    "blocked_seconds": 0,
+    "approval_wait_seconds": 441.903,
+    "failed_checks": 0,
+    "first_pass_verification_rate": 1,
+    "human_reported_seconds": null,
+    "tokens": null,
+    "token_coverage": "unavailable"
+  },
+  "quality": {
+    "version": 1,
+    "as_of": "2026-09-30T09:21:26.146Z",
+    "source": "2-report.md",
+    "source_sha256": "ddc118413209e7a757bc0e86d40893f04e9cd68b3dc36617a3ef4b9544ea9968",
+    "findings": {
+      "total": 5,
+      "by_kind": {
+        "deviation": 0,
+        "bug": 0,
+        "design": 1,
+        "improve": 3,
+        "security": 0,
+        "performance": 1,
+        "docs": 0
+      },
+      "by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 1,
+        "low": 3,
+        "info": 1
+      },
+      "by_classification": {
+        "introduced": 4,
+        "pre-existing": 1,
+        "ruled-out": 0,
+        "advisory": 0
+      },
+      "by_resolution": {
+        "open": 0,
+        "fixed": 1,
+        "accepted": 2,
+        "tech-debt": 2,
+        "doc-updated": 0
+      },
+      "deviations_by_type": {
+        "contradiction": 0,
+        "extension": 0,
+        "omission": 0
+      },
+      "pr_review": {
+        "total": 5,
+        "by_kind": {
+          "deviation": 0,
+          "bug": 0,
+          "design": 1,
+          "improve": 3,
+          "security": 0,
+          "performance": 1,
+          "docs": 0
+        },
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 1,
+          "low": 3,
+          "info": 1
+        }
+      }
+    },
+    "tech_debt": {
+      "total": 3,
+      "ticketed": 0,
+      "unticketed": 3
+    },
+    "tests": {
+      "written": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "scopes": 5
+    },
+    "test_runs": {
+      "recorded": 10,
+      "failed": 0,
+      "errors": 0,
+      "interrupted": 0
+    },
+    "closure_issues": []
+  }
+}

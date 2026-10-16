@@ -37,6 +37,7 @@ not rows copied from the source project.
 | eg-ai-workflow            | doc   | content   | `canonical/docs/Engineering Guide/04 AI Workflow.md`                       | `docs/Engineering Guide/04 AI Workflow.md`                       |
 | eg-mcp-setup              | doc   | content   | `canonical/docs/Engineering Guide/05 MCP Setup.md`                         | `docs/Engineering Guide/05 MCP Setup.md`                         |
 | eg-harness-security       | doc   | content   | `canonical/docs/Engineering Guide/06 Harness Security.md`                  | `docs/Engineering Guide/09 Harness Security.md`                  |
+| eg-branching-strategy     | doc   | content   | `canonical/docs/Engineering Guide/07 Branching Strategy.md`                | `docs/Engineering Guide/08 Branching Strategy.md`                |
 | eg-doc-principles         | doc   | content   | `canonical/docs/Engineering Guide/Documentation/01 Principles.md`          | `docs/Engineering Guide/Documentation/01 Principles.md`          |
 | eg-doc-structure          | doc   | content   | `canonical/docs/Engineering Guide/Documentation/02 Structure.md`           | `docs/Engineering Guide/Documentation/02 Structure.md`           |
 | eg-hld-interface          | doc   | content   | `canonical/docs/Engineering Guide/Documentation/03 HLD Intent.md`          | `docs/Engineering Guide/Documentation/03 HLD Intent.md`          |

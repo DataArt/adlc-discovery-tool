@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "id": "5bfc0b5b-ee62-45b3-b48a-85ef33f17180",
+  "created_at": "2026-10-16T07:13:46Z",
+  "origin": "adlc-discovery-tool",
+  "operation": "harvest",
+  "summary": "New Engineering Guide article: a trunk-based branching strategy (one long-lived main, short-lived feat/fix branches, squash merge, tag-driven rollback) generalized from this project's own doc. Project-specific ticket-prefix examples, concrete workflow filenames, and project-specific cross-references replaced with generic framing; kept the Mermaid gitGraph (with a note on why each merge needs a distinct custom commit id, since reusing one label fails to render) and the environment/branch-protection/rollback tables as adaptable templates.",
+  "package_version": "1.0.0",
+  "requires": [],
+  "resolves": [],
+  "changes": [
+    {
+      "operation": "add",
+      "path": "canonical/docs/Engineering Guide/07 Branching Strategy.md",
+      "old_path": null,
+      "before_sha256": null,
+      "after_sha256": "ace57d0a5fa8ef6407e3e154ab4f39f5ccef64515073803eea6c4cbbfe6a3e30",
+      "payload": "files/canonical/docs/Engineering Guide/07 Branching Strategy.md",
+      "payload_sha256": "ace57d0a5fa8ef6407e3e154ab4f39f5ccef64515073803eea6c4cbbfe6a3e30",
+      "deployment": "mapped",
+      "mapping": {
+        "kind": "doc",
+        "intent": null,
+        "output_rule": "docs/Engineering Guide/08 Branching Strategy.md",
+        "compare": "content"
+      }
+    }
+  ]
+}

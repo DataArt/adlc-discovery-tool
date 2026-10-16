@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.7...v1.7.0) (2026-10-16)
+
+### Features
+
+- boot new harness ([ac1619a](https://github.com/DataArt/adlc-discovery-tool/commit/ac1619af5f1172ae176fe5085d89193226377b0b))
+
 ## [1.6.7](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.6...v1.6.7) (2026-10-15)
 
 ### Bug Fixes

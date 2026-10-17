@@ -22,10 +22,10 @@ _Resolved once in Frame, via `patterns/context-resolution.md`. Every later phase
 ## State
 
 ```yaml
-current_stage: solution
-completed_stages: [frame, research, evaluate]
-selected_artifacts: []
-next_action: 'Proceed to Solution'
+current_stage: review-gate
+completed_stages: [frame, research, evaluate, solution]
+selected_artifacts: [architecture, design, stack, efforts]
+next_action: 'Open draft MR for Review Gate'
 context_fingerprint: ''
 ```
 
@@ -35,11 +35,15 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 ## Evidence
 
-| Source                                      | Read at stage | Relevant decision or constraint                                                         | Reference/version                     |
-| ------------------------------------------- | ------------- | --------------------------------------------------------------------------------------- | ------------------------------------- |
-| BSIMM review (Dmitry Vyrostkov, 2026-10-15) | Frame         | No SSO — single shared Basic Auth password, no per-user identity/attribution/revocation | Supervisor comment, 15 Oct 2026 21:26 |
-| BSIMM review (Dmitry Vyrostkov, 2026-10-15) | Frame         | No password policy — any value accepted as the shared Basic Auth password               | Supervisor comment, 15 Oct 2026 21:26 |
-| `apps/lambda-auth/src/handler.ts`           | Frame         | Current Basic Auth implementation — Lambda@Edge viewer-request function                 | Repo, as of 2026-10-17                |
+| Source                                                  | Read at stage | Relevant decision or constraint                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Reference/version                     |
+| ------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| BSIMM review (Dmitry Vyrostkov, 2026-10-15)             | Frame         | No SSO — single shared Basic Auth password, no per-user identity/attribution/revocation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Supervisor comment, 15 Oct 2026 21:26 |
+| BSIMM review (Dmitry Vyrostkov, 2026-10-15)             | Frame         | No password policy — any value accepted as the shared Basic Auth password                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Supervisor comment, 15 Oct 2026 21:26 |
+| `apps/lambda-auth/src/handler.ts`                       | Frame         | Current Basic Auth implementation — Lambda@Edge viewer-request function                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Repo, as of 2026-10-17                |
+| Solution concern scan (`interfaces/INTENT.md`)          | Solution      | Material: boundaries/ownership (per-mode CDK build selection), data/state (session cookie + Secrets Manager payload), interfaces (OIDC callback route/PKCE), security (token handling), reliability (refresh flow, JWKS cache TTL), performance (edge token-exchange latency — WAF P2), operations (build tooling, NFR-7 attribution), evolution (migration default for existing instances). Informational: cost (already settled Green in WAF). Not applicable: compliance/residency — no regulatory driver raised for this engagement. Selected interfaces: architecture, design, stack, efforts (all four apply — boundaries, behavior/contracts, stack, and implementation slices all change).                                              | design/Report.md, 2026-10-17          |
+| Developer specification session                         | Solution      | Migration default: existing deployed instances default to `basic` mode if `authMode` is left unset on next deploy — no behavior change without an explicit opt-in                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Developer confirmation, 2026-10-17    |
+| Developer specification session                         | Solution      | NFR-7 attribution (OQ-2): correlate via CloudWatch execution logs — Lambda@Edge logs the authenticated principal alongside CloudFront's `x-edge-request-id`, joined manually to the CloudFront/S3 access-log entry for the same request; no new infrastructure                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Developer confirmation, 2026-10-17    |
+| Design quality gate (`patterns/design-quality-gate.md`) | Solution      | PASS, after remediation — all 6 checks passed. One gap found and closed: two Frame-accepted proposed ECs (20+ char passphrase policy for `basic` mode; non-production-safe warning for `none` mode) had no corresponding decision in Architecture.md — added as D9/D10 and propagated to Design.md/Efforts.md. No Mermaid CLI available in this repo; ran a syntax-oriented inspection instead of automated rendering (two real syntax errors already caught and fixed interactively during drafting: a semicolon inside a sequenceDiagram message, and `call` as a reserved-keyword classDef name). All relative links verified to resolve (`[stat.json](stat.json)` in this file; all other file references are prose code-spans, not links). | design/Report.md, 2026-10-17          |
 
 ## Status
 
@@ -47,7 +51,7 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | Ticket | DESIGN-20261017-UX3J                                                                                                  |
 | Status | 🔄 In Progress                                                                                                        |
-| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate ✅ · 📦 Solution 🔄 · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
+| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate ✅ · 📦 Solution ✅ · 🔎 Review 🔄 · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
 
 ---
 
@@ -57,15 +61,15 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 29m 21s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
+Observed work: 1h 1m 13s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
 
 | Stage                      | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks |
 | -------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- |
 | frame (completed)          | 2026-10-17T11:31:47.678Z | 2026-10-17T11:37:27.905Z | 5m 40s      | 5m 40s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | research (completed)       | 2026-10-17T11:37:28.063Z | 2026-10-17T11:53:09.198Z | 15m 41s     | 15m 41s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | evaluate (completed)       | 2026-10-17T11:53:09.360Z | 2026-10-17T12:01:09.189Z | 8m 0s       | 8m 0s   | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| solution (active)          | 2026-10-17T12:01:09.347Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| review-gate (pending)      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| solution (completed)       | 2026-10-17T12:01:09.347Z | 2026-10-17T12:33:01.357Z | 31m 52s     | 31m 52s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| review-gate (active)       | 2026-10-17T12:33:01.505Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | address-feedback (pending) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
 | publish (pending)          | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
 
@@ -118,6 +122,23 @@ _Recommended option: Option C's deployment shape (per-mode Lambda bundles, CDK-s
 
 Full elaboration: `design/02 Evaluate.md`
 
+### WAF — Solution — 2026-10-17
+
+_Target: `solution/Architecture.md` + `solution/Design.md` (the chosen approach as implemented in the solution artifacts)._
+
+| Pillar                 | Rating   | Headline                                                                                                                                                                                                                                 |
+| ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Security               | 🟡 Amber | All 4 Evaluate-phase gaps closed (open-redirect validation, invalid-signature fail-closed, dedicated signing key, cookie size budget) — only the not-yet-performed independent security review remains, tracked as a pre-production gate |
+| Reliability            | 🟢 Green | Silent refresh, migration-safe default, rollout-consistency note, and a concrete handling for every failure scenario now specified                                                                                                       |
+| Cost Optimization      | 🟢 Green | No new paid AWS service; unchanged from Evaluate                                                                                                                                                                                         |
+| Operational Excellence | 🟢 Green | Both prior P1 gaps closed — NFR-7 attribution mechanism (D7) and `AUTH_MODE` build-time guard (D1) now concrete                                                                                                                          |
+| Performance Efficiency | 🟢 Green | Unchanged; token-exchange edge latency test explicitly tracked in Efforts                                                                                                                                                                |
+| Sustainability         | 🟢 Green | Unchanged                                                                                                                                                                                                                                |
+
+**P1 items: none.** All 4 P1 items from the Evaluate-phase WAF assessment are closed via settled Architecture.md decisions (D1, D2, D3, D4, D6, D7). The independent security review (Architecture.md D2, Efforts Ticket 3) is a scheduled pre-production verification gate, not an unresolved design gap.
+
+Full elaboration: `solution/Architecture.md`, `solution/Design.md`
+
 ---
 
 ## Gate
@@ -130,11 +151,12 @@ Full elaboration: `design/02 Evaluate.md`
 
 ## Efforts
 
-| Date       | Phase    | Notes                                                                                                                                                                                                                                                                                       |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                                             |
-| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input)                            |
-| 2026-10-17 | Evaluate | Recommended Option C's deployment shape running Option A's token flow (direct Entra ID OIDC, no Cognito) — developer's explicit steer; WAF: 2 Green, 3 Amber, 0 Red; 4 P1 items (security review, refresh-token flow, NFR-7 attribution, authMode deploy guard); 6 OQs deferred to Solution |
+| Date       | Phase    | Notes                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                                                                                                                                                             |
+| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input)                                                                                                                                            |
+| 2026-10-17 | Evaluate | Recommended Option C's deployment shape running Option A's token flow (direct Entra ID OIDC, no Cognito) — developer's explicit steer; WAF: 2 Green, 3 Amber, 0 Red; 4 P1 items (security review, refresh-token flow, NFR-7 attribution, authMode deploy guard); 6 OQs deferred to Solution                                                                                                                 |
+| 2026-10-17 | Solution | Selected artifacts written (Architecture, Design, Stack, Efforts — 3 tickets after consolidation); @architect structural review found 6 gaps, resolved in 1 reiteration (OK on 2nd pass); 2 Mermaid syntax errors fixed interactively; design quality gate found and closed 1 gap (D9/D10 added for passphrase policy + none-mode warning); closing WAF: 4/6 Green, 1 Amber (pending security review), 0 P1 |
 
 ---
 

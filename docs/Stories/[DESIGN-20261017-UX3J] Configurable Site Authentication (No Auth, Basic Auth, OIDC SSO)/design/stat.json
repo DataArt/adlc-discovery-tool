@@ -38,21 +38,29 @@
     },
     {
       "id": "evaluate",
-      "status": "active",
+      "status": "completed",
       "attempts": [
         {
           "id": "668a33b3-53d5-430b-9265-7db3d78bb127",
           "started_at": "2026-10-17T11:53:09.360Z",
-          "ended_at": null,
+          "ended_at": "2026-10-17T12:01:09.189Z",
           "trigger": "initial",
-          "outcome": null
+          "outcome": "completed"
         }
       ]
     },
     {
       "id": "solution",
-      "status": "pending",
-      "attempts": []
+      "status": "active",
+      "attempts": [
+        {
+          "id": "afc1e827-37b1-42c1-a9cb-1054d409608a",
+          "started_at": "2026-10-17T12:01:09.347Z",
+          "ended_at": null,
+          "trigger": "initial",
+          "outcome": null
+        }
+      ]
     },
     {
       "id": "review-gate",
@@ -102,22 +110,33 @@
       "kind": "work",
       "activity": "review",
       "started_at": "2026-10-17T11:53:09.360Z",
+      "ended_at": "2026-10-17T12:01:09.189Z",
+      "last_observed_at": "2026-10-17T12:01:09.189Z"
+    },
+    {
+      "id": "a569b645-6f79-413a-a5dd-f912ffec648c",
+      "stage_id": "solution",
+      "stage_attempt_id": "afc1e827-37b1-42c1-a9cb-1054d409608a",
+      "step": null,
+      "kind": "work",
+      "activity": "documentation",
+      "started_at": "2026-10-17T12:01:09.347Z",
       "ended_at": null,
-      "last_observed_at": "2026-10-17T11:53:09.360Z"
+      "last_observed_at": "2026-10-17T12:01:09.347Z"
     }
   ],
   "checks": [],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-10-17T11:53:09.508Z",
+    "as_of": "2026-10-17T12:01:09.498Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 1281.362,
+    "observed_work_seconds": 1761.191,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
     "wait_seconds_to_date": 0,
-    "unclassified_seconds": 0.6219999999998436,
+    "unclassified_seconds": 0.7829999999999018,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,

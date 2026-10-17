@@ -22,10 +22,10 @@ _Resolved once in Frame, via `patterns/context-resolution.md`. Every later phase
 ## State
 
 ```yaml
-current_stage: evaluate
-completed_stages: [frame, research]
+current_stage: solution
+completed_stages: [frame, research, evaluate]
 selected_artifacts: []
-next_action: 'Proceed to Evaluate'
+next_action: 'Proceed to Solution'
 context_fingerprint: ''
 ```
 
@@ -47,7 +47,7 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | Ticket | DESIGN-20261017-UX3J                                                                                                  |
 | Status | 🔄 In Progress                                                                                                        |
-| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate 🔄 · 📦 Solution ⏳ · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
+| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate ✅ · 📦 Solution 🔄 · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
 
 ---
 
@@ -57,14 +57,14 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 21m 21s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
+Observed work: 29m 21s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
 
 | Stage                      | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks |
 | -------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- |
 | frame (completed)          | 2026-10-17T11:31:47.678Z | 2026-10-17T11:37:27.905Z | 5m 40s      | 5m 40s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | research (completed)       | 2026-10-17T11:37:28.063Z | 2026-10-17T11:53:09.198Z | 15m 41s     | 15m 41s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| evaluate (active)          | 2026-10-17T11:53:09.360Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| solution (pending)         | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| evaluate (completed)       | 2026-10-17T11:53:09.360Z | 2026-10-17T12:01:09.189Z | 8m 0s       | 8m 0s   | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| solution (active)          | 2026-10-17T12:01:09.347Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | review-gate (pending)      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
 | address-feedback (pending) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
 | publish (pending)          | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
@@ -96,6 +96,28 @@ _Filled in during the Evaluate phase closing step and updated by any `patterns/w
 
 <!-- Append dated blocks here. Each block added by Evaluate or the waf-review pattern. -->
 
+### WAF — Evaluate — 2026-10-17
+
+_Recommended option: Option C's deployment shape (per-mode Lambda bundles, CDK-synth-time selection) running Option A's token flow (direct Entra ID OIDC, authorization-code + PKCE, no Cognito)._
+
+| Pillar                 | Rating   | Headline                                                                                                                                                                    |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Security               | 🟡 Amber | Standards-based OAuth2/PKCE with no unexercised auth code per deployed mode, but no MSAL safety net — hand-rolled PKCE/JWT validation is unreviewed security-sensitive code |
+| Reliability            | 🟡 Amber | Per-mode bundles reduce blast radius, but no native refresh/revocation library; JWKS cache TTL and CDK `authMode` guard both undefined                                      |
+| Cost Optimization      | 🟢 Green | No new paid AWS service; smaller per-mode bundles; matches developer's stated preference                                                                                    |
+| Operational Excellence | 🟡 Amber | Triples build/test surface; NFR-7 access-log attribution mechanism not yet defined                                                                                          |
+| Performance Efficiency | 🟢 Green | Smaller cold-start payload, no extra network hop; token-exchange edge latency untested                                                                                      |
+| Sustainability         | 🟢 Green | No new always-on service; smaller per-invocation footprint                                                                                                                  |
+
+**P1 items (resolve before implementation):**
+
+- Independent security review of the hand-rolled OIDC/PKCE/JWT validation code
+- Explicit refresh-token flow design and testing (expiry handling, fallback to re-login)
+- Resolve OQ-2 — authenticated-identity attribution into CloudFront/S3 access logs (NFR-7)
+- Build/deploy-time guard against a missing or mistyped CDK `authMode` context parameter (OQ-1)
+
+Full elaboration: `design/02 Evaluate.md`
+
 ---
 
 ## Gate
@@ -108,10 +130,11 @@ _Filled in during the Evaluate phase closing step and updated by any `patterns/w
 
 ## Efforts
 
-| Date       | Phase    | Notes                                                                                                                                                                                                                                                            |
-| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                  |
-| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input) |
+| Date       | Phase    | Notes                                                                                                                                                                                                                                                                                       |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                                             |
+| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input)                            |
+| 2026-10-17 | Evaluate | Recommended Option C's deployment shape running Option A's token flow (direct Entra ID OIDC, no Cognito) — developer's explicit steer; WAF: 2 Green, 3 Amber, 0 Red; 4 P1 items (security review, refresh-token flow, NFR-7 attribution, authMode deploy guard); 6 OQs deferred to Solution |
 
 ---
 

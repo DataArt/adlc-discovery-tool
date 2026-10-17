@@ -22,10 +22,10 @@ _Resolved once in Frame, via `patterns/context-resolution.md`. Every later phase
 ## State
 
 ```yaml
-current_stage: research
-completed_stages: [frame]
+current_stage: evaluate
+completed_stages: [frame, research]
 selected_artifacts: []
-next_action: 'Proceed to Research'
+next_action: 'Proceed to Evaluate'
 context_fingerprint: ''
 ```
 
@@ -47,7 +47,7 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 | ------ | --------------------------------------------------------------------------------------------------------------------- |
 | Ticket | DESIGN-20261017-UX3J                                                                                                  |
 | Status | 🔄 In Progress                                                                                                        |
-| Phase  | 📋 Frame ✅ · 🔍 Research 🔄 · 🏗 Evaluate ⏳ · 📦 Solution ⏳ · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
+| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate 🔄 · 📦 Solution ⏳ · 🔎 Review ⏳ · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
 
 ---
 
@@ -57,26 +57,36 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 5m 40s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 0s
+Observed work: 21m 21s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
 
-| Stage                      | Started (UTC)            | Completed (UTC)          | Elapsed     | Work   | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks |
-| -------------------------- | ------------------------ | ------------------------ | ----------- | ------ | ---- | ------------ | ------------- | ------------------- | -------- | ------------- |
-| frame (completed)          | 2026-10-17T11:31:47.678Z | 2026-10-17T11:37:27.905Z | 5m 40s      | 5m 40s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| research (active)          | 2026-10-17T11:37:28.063Z | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| evaluate (pending)         | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
-| solution (pending)         | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
-| review-gate (pending)      | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
-| address-feedback (pending) | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
-| publish (pending)          | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| Stage                      | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks |
+| -------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- |
+| frame (completed)          | 2026-10-17T11:31:47.678Z | 2026-10-17T11:37:27.905Z | 5m 40s      | 5m 40s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| research (completed)       | 2026-10-17T11:37:28.063Z | 2026-10-17T11:53:09.198Z | 15m 41s     | 15m 41s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| evaluate (active)          | 2026-10-17T11:53:09.360Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| solution (pending)         | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| review-gate (pending)      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| address-feedback (pending) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| publish (pending)          | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
 
 <!-- design-metrics:end -->
 
 ## Assumptions
 
-_Filled in during Research OQ triage. One row per open question answered or classified._
+_From Research OQ triage (2026-10-17)._
 
-| #   | Open question | V/E | Answer / status |
-| --- | ------------- | --- | --------------- |
+| #   | Open question                                                                                                                                    | V/E | Answer / status                                                                                                                                                                                              |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------ | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Does "no separate authorizer component" (EC2) rule out Cognito (Opt 2) and/or a CloudFront Function (Opt 5)?                                     | (E) | Does not disqualify either — weigh as a normal tradeoff in Evaluate, not a hard exclusion.                                                                                                                   |
+| 2   | Is silent token refresh in scope, or is re-login after expiry acceptable (~10 internal users)?                                                   | (V) | Silent refresh is required — any option must support a refresh-token flow.                                                                                                                                   |
+| 3   | Is "wait for JWT expiry" (no instant revocation) an acceptable logout/session-invalidation SLA?                                                  | (V) | Acceptable — no deny-list or Cognito `GlobalSignOut` required to close the BSIMM finding.                                                                                                                    |
+| 4   | Multi-region Lambda@Edge JWKS/secret cache staleness across edge-location replicas — acceptable risk?                                            | (E) | Acceptable; document a cache TTL policy in Solution.                                                                                                                                                         |
+| 5   | Is Amazon Cognito an acceptable new AWS service dependency for this engagement?                                                                  | (V) | Acceptable, but staying within existing services (Lambda@Edge + Secrets Manager) is preferred — Cognito remains viable but deprioritized vs. Option 1.                                                       |
+| 6   | Clock-skew tolerance for JWT `exp`/`nbf`/`iat` validation at the edge — viability or detail?                                                     | (E) | Standard leeway (e.g. 60–300s) is fine for all options; resolve in Solution.                                                                                                                                 |
+| 7   | PKCE verifier/state cookie attributes (TTL, SameSite) and CSRF/state-replay protection on callback                                               | (E) | Standard OAuth2 PKCE cookie hardening applies equally to all options; resolve in Solution.                                                                                                                   |
+| 8   | Secrets Manager payload shape change (adding an OIDC client secret alongside/instead of the hash)                                                | (E) | Straightforward extension of existing secret/`sm-push` tooling; resolve in Solution.                                                                                                                         |
+| 9   | Entra app-registration redirect-URI stability vs. Admins Helpdesk lead time                                                                      | (E) | Operational risk to document/plan around; does not disqualify any option.                                                                                                                                    |
+| 10  | Does "attribution" (BSIMM Finding 1) need to reach CloudFront/S3 access logs (NFR-7), or is Lambda@Edge CloudWatch execution logging sufficient? | (V) | Must reach CloudFront/S3 access logs — CloudWatch execution logging alone is not sufficient; NFR-7's access-log pipeline needs the authenticated identity (e.g. via a custom header or log-enrichment step). |
 
 ---
 
@@ -98,9 +108,10 @@ _Filled in during the Evaluate phase closing step and updated by any `patterns/w
 
 ## Efforts
 
-| Date       | Phase | Notes                                                                                                                                                                                                           |
-| ---------- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-17 | Frame | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual) |
+| Date       | Phase    | Notes                                                                                                                                                                                                                                                            |
+| ---------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                  |
+| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input) |
 
 ---
 

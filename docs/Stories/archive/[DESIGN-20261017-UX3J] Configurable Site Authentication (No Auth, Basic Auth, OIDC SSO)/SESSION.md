@@ -249,3 +249,37 @@ While a Publish review pass ran in the background, the human asked for a message
 
 - **Human decisions:** requested this `SESSION.md` as a deliberate showcase artifact, then in follow-up turns asked for the comparison sequence diagram and this phase-grouped reconstruction to be added.
 - **Agents involved:** none — authored directly.
+
+---
+
+## 7. Context captured & documentation updated
+
+### Context captured (`design/Report.md` Evidence table)
+
+Every fact the design relied on was recorded with its source and the stage that read it — not carried only in conversation history:
+
+| Source                                                  | Captured at | What it established                                                                                                                                                                           |
+| ------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BSIMM review (Dmitry Vyrostkov, 2026-10-15) — Finding 1 | Frame       | No SSO — shared Basic Auth password, no per-user identity/attribution/revocation                                                                                                              |
+| BSIMM review (Dmitry Vyrostkov, 2026-10-15) — Finding 2 | Frame       | No password policy — any value accepted as the shared password                                                                                                                                |
+| `apps/lambda-auth/src/handler.ts` (repo, read directly) | Frame       | Current Basic Auth implementation — Lambda@Edge viewer-request function                                                                                                                       |
+| Solution concern scan (`interfaces/INTENT.md`)          | Solution    | Material/informational/not-applicable classification across 11 concern categories (boundaries, data/state, security, reliability, performance, operations, cost, compliance, evolution, etc.) |
+| Developer specification session                         | Solution    | Migration default: existing instances default to `basic` mode if `AUTH_MODE` unset                                                                                                            |
+| Developer specification session                         | Solution    | NFR-7 attribution mechanism: CloudWatch log correlation via `x-edge-request-id`, no new infrastructure                                                                                        |
+| Design quality gate (`patterns/design-quality-gate.md`) | Solution    | PASS after remediation — closed the D9/D10 gap; no Mermaid CLI available, ran syntax-oriented inspection instead                                                                              |
+
+Plus everything read directly from the repo during drafting and review (not tabulated in Report.md, but load-bearing for every decision): `apps/lambda-auth/build.ts`, `project.json`, `.env.example`, `.secrets.example`, `handler.spec.ts`, `scripts/local/sm-push.sh`/`sm-pull.sh`, `apps/infra/lib/edge-stack.ts`, `apps/infra/lib/docs-stack.ts`, and the three existing HLD/NFR docs listed below.
+
+### Documentation updated (Publish phase)
+
+| Doc                                                                         | Kind of change   | What changed                                                                                                                                                          |
+| --------------------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/Target Architecture (HLD)/v1/Containers/Auth.md`                      | Full rewrite     | Three deploy-time modes, `AUTH_MODE` build selector, OIDC flow + diagrams, extended Secrets Manager payload, `jose` dependency, D1–D10 constraints, updated Key Paths |
+| `docs/Target Architecture (HLD)/v1/Containers/Infrastructure.md`            | Minor delta      | Mode-neutral Lambda@Edge diagram label; note that shipped code now varies by `AUTH_MODE` while CDK-managed resources are unchanged                                    |
+| `docs/Target Architecture (HLD)/v1/Non-Functional Concerns/Requirements.md` | Targeted updates | NFR-1 generalized beyond basic-auth-only; new NFR-8 (OIDC security requirements); NFR-6 and NFR-7 wording corrected for per-mode behavior                             |
+
+Each update was identified by `@architect` (read-only doc-impact pass, 15 section-level changes total — 2 more than `solution/Architecture.md`'s own summary table had named), applied by `@docs-writer`, and verified by a second `@architect` review pass before being treated as done.
+
+### Design-session artifacts produced (now archived)
+
+`design/00 Frame.md`, `design/01 Research.md`, `design/02 Evaluate.md`, `design/Report.md`, `design/stat.json`, `solution/Architecture.md`, `solution/Design.md`, `solution/Stack.md`, `solution/Efforts.md`, and this `SESSION.md` — all under `docs/Stories/archive/[DESIGN-20261017-UX3J] Configurable Site Authentication (No Auth, Basic Auth, OIDC SSO)/`.

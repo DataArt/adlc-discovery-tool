@@ -7,7 +7,7 @@
   "ticket_created_at": null,
   "ticket_created_source": null,
   "started_at": "2026-10-17T11:31:47.678Z",
-  "completed_at": null,
+  "completed_at": "2026-10-17T12:51:23.411Z",
   "coverage": "from_tracking_start",
   "stages": [
     {
@@ -64,26 +64,37 @@
     },
     {
       "id": "review-gate",
-      "status": "active",
+      "status": "completed",
       "attempts": [
         {
           "id": "6cc296de-128c-42a4-8c12-936f7d340202",
           "started_at": "2026-10-17T12:33:01.505Z",
-          "ended_at": null,
+          "ended_at": "2026-10-17T12:37:23.184Z",
           "trigger": "initial",
-          "outcome": null
+          "outcome": "completed"
         }
       ]
     },
     {
       "id": "address-feedback",
-      "status": "pending",
-      "attempts": []
+      "status": "skipped",
+      "attempts": [],
+      "skip_reason": "no_concerns",
+      "evidence_ref": "Confirmed MR approval, PR #6",
+      "skipped_at": "2026-10-17T12:37:23.044Z"
     },
     {
       "id": "publish",
-      "status": "pending",
-      "attempts": []
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "d7a07682-1f5c-4bba-974d-582767908d61",
+          "started_at": "2026-10-17T12:37:23.324Z",
+          "ended_at": "2026-10-17T12:51:23.256Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
     }
   ],
   "steps": [],
@@ -140,27 +151,78 @@
       "kind": "work",
       "activity": "review",
       "started_at": "2026-10-17T12:33:01.505Z",
-      "ended_at": null,
-      "last_observed_at": "2026-10-17T12:33:01.505Z"
+      "ended_at": "2026-10-17T12:36:43.236Z",
+      "last_observed_at": "2026-10-17T12:36:43.236Z"
+    },
+    {
+      "id": "a3a7c933-3420-4ce5-8eba-84c4d9cdac6c",
+      "stage_id": "review-gate",
+      "stage_attempt_id": "6cc296de-128c-42a4-8c12-936f7d340202",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting design approval from Dmitry Vyrostkov on PR #6",
+      "started_at": "2026-10-17T12:36:43.236Z",
+      "ended_at": "2026-10-17T12:37:22.747Z",
+      "last_observed_at": "2026-10-17T12:37:22.747Z"
+    },
+    {
+      "id": "7ea93ef1-4450-45c0-ab4c-8910a6a93ff5",
+      "stage_id": "review-gate",
+      "stage_attempt_id": "6cc296de-128c-42a4-8c12-936f7d340202",
+      "step": null,
+      "kind": "work",
+      "activity": "review",
+      "started_at": "2026-10-17T12:37:22.747Z",
+      "ended_at": "2026-10-17T12:37:23.184Z",
+      "last_observed_at": "2026-10-17T12:37:23.184Z"
+    },
+    {
+      "id": "1c9c27ba-7fcb-445f-becb-0438ea69230b",
+      "stage_id": "publish",
+      "stage_attempt_id": "d7a07682-1f5c-4bba-974d-582767908d61",
+      "step": null,
+      "kind": "work",
+      "activity": "documentation",
+      "started_at": "2026-10-17T12:37:23.324Z",
+      "ended_at": "2026-10-17T12:51:23.256Z",
+      "last_observed_at": "2026-10-17T12:51:23.256Z"
     }
   ],
-  "checks": [],
+  "checks": [
+    {
+      "id": "gate-round-01",
+      "stage_id": "review-gate",
+      "stage_attempt_id": "6cc296de-128c-42a4-8c12-936f7d340202",
+      "step": null,
+      "design_revision": 0,
+      "name": "Design approval",
+      "kind": "acceptance",
+      "started_at": "2026-10-17T12:37:22.896Z",
+      "ended_at": "2026-10-17T12:37:22.896Z",
+      "result": "passed",
+      "evidence_ref": "PR #6 approved by Dmitry Vyrostkov, no concerns raised",
+      "source": "developer confirmation",
+      "exit_code": null,
+      "signal": null
+    }
+  ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-10-17T12:33:01.647Z",
+    "as_of": "2026-10-17T12:51:23.559Z",
     "lead_time_seconds": null,
-    "cycle_time_seconds": null,
-    "observed_work_seconds": 3673.201,
-    "observed_wait_seconds": 0,
+    "cycle_time_seconds": 4775.733,
+    "observed_work_seconds": 4735.3009999999995,
+    "observed_wait_seconds": 39.511,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "wait_seconds_to_date": 0,
-    "unclassified_seconds": 0.9220000000000255,
+    "wait_seconds_to_date": 39.511,
+    "unclassified_seconds": 1.0750000000002373,
     "rework_seconds": 0,
     "blocked_seconds": 0,
-    "approval_wait_seconds": 0,
+    "approval_wait_seconds": 39.511,
     "failed_checks": 0,
-    "first_pass_verification_rate": null,
+    "first_pass_verification_rate": 1,
     "human_reported_seconds": null,
     "tokens": null,
     "token_coverage": "unavailable"

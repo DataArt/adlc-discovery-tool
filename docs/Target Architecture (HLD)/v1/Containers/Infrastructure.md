@@ -10,7 +10,7 @@ flowchart LR
 
     subgraph EDGE_BOX ["  CloudFront Edge  "]
         CF["☁️ CloudFront"]:::cf
-        LAE["🔐 Lambda@Edge\nbasic auth"]:::lae
+        LAE["🔐 Lambda@Edge\nconfigurable auth"]:::lae
     end
 
     S3["🪣 S3 Bucket\nstatic site · OAC"]:::s3
@@ -73,9 +73,10 @@ _Auth decision path (401 challenge vs pass-through) is shown in `Containers/Auth
 - S3 bucket as static site origin (Origin Access Control)
 - IAM roles and resource policies
 - All resources defined as CDK constructs — no manual provisioning
-- Secrets Manager secret provisioned as an empty placeholder (`{}`); value is populated post-deploy by `lambda-auth:sm-push` — never set by CDK
+- Secrets Manager secret provisioned as an empty placeholder (`{}`); value is populated post-deploy by `lambda-auth:sm-push` — never set by CDK; the populated payload's shape varies by `AUTH_MODE`, but the CDK-provisioned secret container itself is unchanged
 - Dedicated, private logs bucket captures both CloudFront standard access logs (every viewer request — IP, path, status, edge location) and the site bucket's own S3 server-access logs, with a 180-day expiration lifecycle rule; previously neither existed
 - GitHub OIDC provider (`CiStack`) enabling GitHub Actions to authenticate via short-lived credentials; two roles, each trusted for exactly one triggering event — a pull_request-only read role (SSM only) and a push-to-main-only deploy role (S3, CloudFront, Lambda, SSM) — so a PR can never assume deploy-grade credentials before human review
+- The Lambda code shipped into `EdgeStack`'s placeholder via `lambda-auth:deploy` varies by the build-time `AUTH_MODE` selector in `apps/lambda-auth`; `EdgeStack`'s and `DocsStack`'s CDK-managed resources (placeholder Lambda, IAM role, secret container) are unchanged by this selector
 
 ## Technology
 

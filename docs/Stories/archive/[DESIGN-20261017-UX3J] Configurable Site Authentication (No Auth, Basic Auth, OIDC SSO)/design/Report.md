@@ -22,10 +22,10 @@ _Resolved once in Frame, via `patterns/context-resolution.md`. Every later phase
 ## State
 
 ```yaml
-current_stage: review-gate
-completed_stages: [frame, research, evaluate, solution]
+current_stage: publish
+completed_stages: [frame, research, evaluate, solution, review-gate, address-feedback]
 selected_artifacts: [architecture, design, stack, efforts]
-next_action: 'Open draft MR for Review Gate'
+next_action: 'Begin Publish'
 context_fingerprint: ''
 ```
 
@@ -47,11 +47,11 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 ## Status
 
-| Field  | Value                                                                                                                 |
-| ------ | --------------------------------------------------------------------------------------------------------------------- |
-| Ticket | DESIGN-20261017-UX3J                                                                                                  |
-| Status | 🔄 In Progress                                                                                                        |
-| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate ✅ · 📦 Solution ✅ · 🔎 Review 🔄 · 💬 Address Feedback ⏳ · 📤 Publish ⏳ |
+| Field  | Value                                                                                                                           |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Ticket | DESIGN-20261017-UX3J                                                                                                            |
+| Status | ✅ Complete — 1h 19m observed work (design/stat.json)                                                                           |
+| Phase  | 📋 Frame ✅ · 🔍 Research ✅ · 🏗 Evaluate ✅ · 📦 Solution ✅ · 🔎 Review ✅ · 💬 Address Feedback ⏭️ (skipped) · 📤 Publish ✅ |
 
 ---
 
@@ -61,7 +61,7 @@ Update this block whenever a phase starts, completes, or is invalidated. The
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 1h 1m 13s · Wait to date: 0s (closed 0s + current 0s) · Unclassified: 1s
+Observed work: 1h 18m 55s · Wait to date: 40s (closed 40s + current 0s) · Unclassified: 1s
 
 | Stage                      | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks |
 | -------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- |
@@ -69,9 +69,9 @@ Observed work: 1h 1m 13s · Wait to date: 0s (closed 0s + current 0s) · Unclass
 | research (completed)       | 2026-10-17T11:37:28.063Z | 2026-10-17T11:53:09.198Z | 15m 41s     | 15m 41s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | evaluate (completed)       | 2026-10-17T11:53:09.360Z | 2026-10-17T12:01:09.189Z | 8m 0s       | 8m 0s   | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 | solution (completed)       | 2026-10-17T12:01:09.347Z | 2026-10-17T12:33:01.357Z | 31m 52s     | 31m 52s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| review-gate (active)       | 2026-10-17T12:33:01.505Z | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
-| address-feedback (pending) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
-| publish (pending)          | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| review-gate (completed)    | 2026-10-17T12:33:01.505Z | 2026-10-17T12:37:23.184Z | 4m 22s      | 3m 42s  | 40s  | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
+| address-feedback (skipped) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             |
+| publish (completed)        | 2026-10-17T12:37:23.324Z | 2026-10-17T12:51:23.256Z | 14m 0s      | 14m 0s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             |
 
 <!-- design-metrics:end -->
 
@@ -143,26 +143,28 @@ Full elaboration: `solution/Architecture.md`, `solution/Design.md`
 
 ## Gate
 
-- Approver: —
-- Draft MR: —
-- Approved: —
+- Approver: Dmitry Vyrostkov
+- Draft MR: https://github.com/DataArt/adlc-discovery-tool/pull/6
+- Approved: 2026-10-17
 
 ---
 
 ## Efforts
 
-| Date       | Phase    | Notes                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-17 | Frame    | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                                                                                                                                                             |
-| 2026-10-17 | Research | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input)                                                                                                                                            |
-| 2026-10-17 | Evaluate | Recommended Option C's deployment shape running Option A's token flow (direct Entra ID OIDC, no Cognito) — developer's explicit steer; WAF: 2 Green, 3 Amber, 0 Red; 4 P1 items (security review, refresh-token flow, NFR-7 attribution, authMode deploy guard); 6 OQs deferred to Solution                                                                                                                 |
-| 2026-10-17 | Solution | Selected artifacts written (Architecture, Design, Stack, Efforts — 3 tickets after consolidation); @architect structural review found 6 gaps, resolved in 1 reiteration (OK on 2nd pass); 2 Mermaid syntax errors fixed interactively; design quality gate found and closed 1 gap (D9/D10 added for passphrase policy + none-mode warning); closing WAF: 4/6 Green, 1 Amber (pending security review), 0 P1 |
+| Date       | Phase       | Notes                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-17 | Frame       | Context: v1/Containers (Auth.md); 4 known requirements, 5 proposed requirements accepted; developer added Entra ID app-registration constraint (per-instance, requested from Admins Helpdesk — external/manual)                                                                                                                                                                                             |
+| 2026-10-17 | Research    | @architect returned 5 options (A: direct Entra OIDC, B: Cognito-federated, C: per-mode CDK-synth bundles, D: external perimeter bolt-on, E: CloudFront Function cookie gate); developer confirmed set complete; 10 OQs triaged (4 Viability, 6 Evaluation-input)                                                                                                                                            |
+| 2026-10-17 | Evaluate    | Recommended Option C's deployment shape running Option A's token flow (direct Entra ID OIDC, no Cognito) — developer's explicit steer; WAF: 2 Green, 3 Amber, 0 Red; 4 P1 items (security review, refresh-token flow, NFR-7 attribution, authMode deploy guard); 6 OQs deferred to Solution                                                                                                                 |
+| 2026-10-17 | Solution    | Selected artifacts written (Architecture, Design, Stack, Efforts — 3 tickets after consolidation); @architect structural review found 6 gaps, resolved in 1 reiteration (OK on 2nd pass); 2 Mermaid syntax errors fixed interactively; design quality gate found and closed 1 gap (D9/D10 added for passphrase policy + none-mode warning); closing WAF: 4/6 Green, 1 Amber (pending security review), 0 P1 |
+| 2026-10-17 | Review Gate | Draft MR #6 opened, approver Dmitry Vyrostkov; approved with no concerns — Address Feedback skipped                                                                                                                                                                                                                                                                                                         |
+| 2026-10-17 | Publish     | MR approved by Dmitry Vyrostkov; docs updated: `Auth.md` (full rewrite), `Infrastructure.md` (minor delta), `Requirements.md` (NFR-1 generalized, NFR-8 added, NFR-6/NFR-7 updated); @architect review found 2 minor altitude/completeness items, resolved in 1 reiteration (OK on 2nd pass)                                                                                                                |
 
 ---
 
 ## Implementation Tickets
 
-_Filled in during Publish after implementation tickets are recorded._
+_Implementation tickets were not recorded — developer declined at Publish wrap-up (2026-10-17). The WBS in `solution/Efforts.md` (3 tickets) remains the reference for future implementation work._
 
 | Ticket | Summary | Layer | Depends on |
 | ------ | ------- | ----- | ---------- |

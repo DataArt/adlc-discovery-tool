@@ -17,18 +17,18 @@ type: reference
 
 ## Progress
 
-| #   | Step                                               | Status     | Notes                             | Test | Docs |
-| --- | -------------------------------------------------- | ---------- | --------------------------------- | ---- | ---- |
-| 1   | `lib/redirect.ts` — open-redirect guard            | ✅ Done    | Straightforward, went as planned  |      |      |
-| 2   | `lib/pkce.ts` — PKCE/state generation              | ✅ Done    | Went as planned                   |      |      |
-| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify  | ✅ Done    | Added `clearPkceCookie` helper    |      |      |
-| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`) | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y |      |      |
-| 5   | `handler-none.ts` — pass-through                   | ✅ Done    | Went as planned                   |      |      |
-| 6   | `handler-basic.ts` — relocate today's handler      | ✅ Done    | Verbatim, confirmed via diff      |      |      |
-| 7   | `build.ts` — `AUTH_MODE` selector                  | ⏳ Pending |                                   |      |      |
-| 8   | `handler-oidc.ts` — full OIDC flow                 | ⏳ Pending |                                   |      |      |
-| 9   | `.env.example`/`.secrets.example` — schema docs    | ⏳ Pending |                                   |      |      |
-| 10  | This repo — default to `oidc` with canonical app   | ⏳ Pending |                                   |      |      |
+| #   | Step                                               | Status     | Notes                              | Test | Docs |
+| --- | -------------------------------------------------- | ---------- | ---------------------------------- | ---- | ---- |
+| 1   | `lib/redirect.ts` — open-redirect guard            | ✅ Done    | Straightforward, went as planned   |      |      |
+| 2   | `lib/pkce.ts` — PKCE/state generation              | ✅ Done    | Went as planned                    |      |      |
+| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify  | ✅ Done    | Added `clearPkceCookie` helper     |      |      |
+| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`) | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y  |      |      |
+| 5   | `handler-none.ts` — pass-through                   | ✅ Done    | Went as planned                    |      |      |
+| 6   | `handler-basic.ts` — relocate today's handler      | ✅ Done    | Verbatim, confirmed via diff       |      |      |
+| 7   | `build.ts` — `AUTH_MODE` selector                  | ✅ Done    | Live build + bundle check verified |      |      |
+| 8   | `handler-oidc.ts` — full OIDC flow                 | ⏳ Pending |                                    |      |      |
+| 9   | `.env.example`/`.secrets.example` — schema docs    | ⏳ Pending |                                    |      |      |
+| 10  | This repo — default to `oidc` with canonical app   | ⏳ Pending |                                    |      |      |
 
 ## Stage Metrics
 
@@ -36,14 +36,14 @@ type: reference
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem stages without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 32m 0s · Wait: 0s · Unclassified: 11m 22s
+Observed work: 34m 38s · Wait: 0s · Unclassified: 12m 7s
 
 | Stage     | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | --------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
 | context   | 2026-11-03T22:58:04.953Z | 2026-11-03T22:58:07.997Z | 3s          | 3s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | ceremony  | 2026-11-03T22:58:59.189Z | 2026-11-03T22:58:59.238Z | 0s          | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | plan      | 2026-11-03T22:58:59.299Z | 2026-11-03T23:16:52.601Z | 17m 53s     | 17m 53s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 14m 4s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
+| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 16m 41s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | test      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 | document  | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 
@@ -56,7 +56,7 @@ Quality (recorded inventory): findings 4 · open 3 · PR findings 0 · critical 
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the step's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the step. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem steps without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 32m 0s · Wait: 0s · Unclassified: 11m 22s
+Observed work: 34m 38s · Wait: 0s · Unclassified: 12m 7s
 
 | Step             | Started (UTC)            | Completed (UTC)          | Elapsed     | Work   | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | ---------------- | ------------------------ | ------------------------ | ----------- | ------ | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
@@ -66,7 +66,7 @@ Observed work: 32m 0s · Wait: 0s · Unclassified: 11m 22s
 | step-04: Step 4  | 2026-11-03T23:30:22.301Z | 2026-11-03T23:32:37.719Z | 2m 15s      | 2m 15s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-05: Step 5  | 2026-11-03T23:34:50.752Z | 2026-11-03T23:37:00.289Z | 2m 10s      | 2m 10s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-06: Step 6  | 2026-11-03T23:38:37.369Z | 2026-11-03T23:41:13.724Z | 2m 36s      | 2m 36s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| step-07: Step 7  | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
+| step-07: Step 7  | 2026-11-03T23:41:58.191Z | 2026-11-03T23:44:36.078Z | 2m 38s      | 2m 38s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-08: Step 8  | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 | step-09: Step 9  | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 | step-10: Step 10 | unavailable              | unavailable              | unavailable | 0s     | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
@@ -121,6 +121,15 @@ Went as planned. Relocated `handler.ts`/`handler.spec.ts` to `handler-basic.ts`/
 `handler-basic.spec.ts` (filesystem move, unstaged — developer stages/commits).
 Content confirmed byte-identical via `diff` except the spec's import path.
 7/7 tests pass (`yarn nx run lambda-auth:test -- handler-basic.spec`).
+
+### Step 7 — `build.ts`
+
+Refactored `build.ts` to export `resolveAuthMode()` for testability (module still
+runs as a plain script, unchanged CLI behavior). 9/9 `build.spec` tests pass; full
+project suite 51/51 pass; typecheck clean. Live-verified: `AUTH_MODE=none` build
+prints the warning and produces a bundle with zero `jose`/`SecretsManagerClient`
+occurrences (AC-7); `AUTH_MODE=bogus` throws before esbuild runs, no `dist/index.js`
+written (AC-4). Cleaned up local test-build artifacts afterward (gitignored, not committed).
 
 ## Tech Debt
 

@@ -194,8 +194,16 @@
       "order": 7,
       "plan_ref": "1-plan.md#step-7",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "02a52efe-3c57-4280-a653-3d50ddd62ac3",
+          "started_at": "2026-11-03T23:41:58.191Z",
+          "ended_at": "2026-11-03T23:44:36.078Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -357,6 +365,20 @@
       "started_at": "2026-11-03T23:38:37.369Z",
       "ended_at": "2026-11-03T23:41:13.724Z",
       "last_observed_at": "2026-11-03T23:41:13.724Z"
+    },
+    {
+      "id": "ccdc53c3-2df9-4d12-bb06-6d63bcfe333b",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-07",
+        "attempt_id": "02a52efe-3c57-4280-a653-3d50ddd62ac3"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:41:58.191Z",
+      "ended_at": "2026-11-03T23:44:36.078Z",
+      "last_observed_at": "2026-11-03T23:44:36.078Z"
     }
   ],
   "checks": [
@@ -467,18 +489,36 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "6d0e2e32-5f57-4d0c-af87-6c3ff4bfe351",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-07",
+        "attempt_id": "02a52efe-3c57-4280-a653-3d50ddd62ac3"
+      },
+      "name": "build.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:44:36.035Z",
+      "ended_at": "2026-11-03T23:44:36.035Z",
+      "result": "passed",
+      "evidence_ref": "9/9 build.spec + 51/51 full suite pass; typecheck clean; live AUTH_MODE=none/bogus builds confirmed; developer confirmed 'confirmed, mark step 7 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:41:27.287Z",
+    "as_of": "2026-11-03T23:44:50.174Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 1919.945,
+    "observed_work_seconds": 2077.832,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 682.434,
+    "unclassified_seconds": 727.4340000000002,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -490,7 +530,7 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T23:41:27.285Z",
+    "as_of": "2026-11-03T23:44:50.172Z",
     "source": "2-report.md",
     "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {
@@ -562,7 +602,7 @@
       "scopes": 0
     },
     "test_runs": {
-      "recorded": 6,
+      "recorded": 7,
       "failed": 0,
       "errors": 0,
       "interrupted": 0

@@ -158,8 +158,16 @@
       "order": 5,
       "plan_ref": "1-plan.md#step-5",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "8dd07c12-be7a-4a35-b3a5-57c264167038",
+          "started_at": "2026-11-03T23:34:50.752Z",
+          "ended_at": "2026-11-03T23:37:00.289Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -313,6 +321,20 @@
       "started_at": "2026-11-03T23:30:22.301Z",
       "ended_at": "2026-11-03T23:32:37.719Z",
       "last_observed_at": "2026-11-03T23:32:37.719Z"
+    },
+    {
+      "id": "b9e78f45-4c69-4295-9d45-da3354b068d6",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-05",
+        "attempt_id": "8dd07c12-be7a-4a35-b3a5-57c264167038"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:34:50.752Z",
+      "ended_at": "2026-11-03T23:37:00.289Z",
+      "last_observed_at": "2026-11-03T23:37:00.289Z"
     }
   ],
   "checks": [
@@ -387,18 +409,36 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "9beb3cd4-d6a7-4ca6-b093-0848a9cddab4",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-05",
+        "attempt_id": "8dd07c12-be7a-4a35-b3a5-57c264167038"
+      },
+      "name": "handler-none.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:37:00.240Z",
+      "ended_at": "2026-11-03T23:37:00.240Z",
+      "result": "passed",
+      "evidence_ref": "3/3 tests pass via yarn nx run lambda-auth:test -- handler-none.spec; developer confirmed 'confirmed, mark step 5 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:32:52.713Z",
+    "as_of": "2026-11-03T23:37:12.373Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 1634.0529999999999,
+    "observed_work_seconds": 1763.59,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 453.75199999999995,
+    "unclassified_seconds": 583.8750000000002,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -410,7 +450,7 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T23:32:52.711Z",
+    "as_of": "2026-11-03T23:37:12.371Z",
     "source": "2-report.md",
     "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {
@@ -482,7 +522,7 @@
       "scopes": 0
     },
     "test_runs": {
-      "recorded": 4,
+      "recorded": 5,
       "failed": 0,
       "errors": 0,
       "interrupted": 0

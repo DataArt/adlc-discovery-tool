@@ -70,6 +70,7 @@ _Auth decision path (401 challenge vs pass-through) is shown in `Containers/Auth
 ## Responsibilities
 
 - CloudFront distribution configured with `defaultRootObject: index.html`; an `errorResponses` entry remaps S3 403 → HTTP 404 (private S3 buckets return 403 for missing objects, not 404)
+- `ResponseHeadersPolicy` attached to the default behavior adds HSTS, `X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`, and a CSP scoped to `'self'` plus `https://giscus.app` to every response — see [NFR-9](../Non-Functional%20Concerns/Requirements.md)
 - S3 bucket as static site origin (Origin Access Control)
 - IAM roles and resource policies
 - All resources defined as CDK constructs — no manual provisioning

@@ -80,12 +80,51 @@ export class DocsStack extends cdk.Stack {
     });
   }
 
+  // Giscus (NFR-6 comments) loads https://giscus.app/client.js and renders its
+  // comment widget in an iframe from the same origin — both need an explicit
+  // CSP allowance. VitePress itself injects small inline bootstrap scripts
+  // (dark-mode/OS detection) and a few inline style attributes, so script-src
+  // and style-src need 'unsafe-inline' until those are moved to nonces/hashes.
+  private createResponseHeadersPolicy(): cloudfront.ResponseHeadersPolicy {
+    return new cloudfront.ResponseHeadersPolicy(this, 'SecurityHeadersPolicy', {
+      securityHeadersBehavior: {
+        strictTransportSecurity: {
+          accessControlMaxAge: cdk.Duration.days(365),
+          includeSubdomains: true,
+          preload: true,
+          override: true,
+        },
+        contentTypeOptions: { override: true },
+        frameOptions: { frameOption: cloudfront.HeadersFrameOption.DENY, override: true },
+        referrerPolicy: {
+          referrerPolicy: cloudfront.HeadersReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
+          override: true,
+        },
+        contentSecurityPolicy: {
+          contentSecurityPolicy: [
+            "default-src 'self'",
+            "script-src 'self' 'unsafe-inline' https://giscus.app",
+            "style-src 'self' 'unsafe-inline'",
+            'frame-src https://giscus.app',
+            "connect-src 'self' https://giscus.app",
+            "img-src 'self' data: https://giscus.app",
+            "font-src 'self'",
+            "object-src 'none'",
+            "base-uri 'self'",
+          ].join('; '),
+          override: true,
+        },
+      },
+    });
+  }
+
   private createDistribution(
     siteBucket: s3.Bucket,
     logsBucket: s3.Bucket,
     edgeStack: EdgeStack,
     cfPriceClass: string
   ): cloudfront.Distribution {
+    const responseHeadersPolicy = this.createResponseHeadersPolicy();
     return new cloudfront.Distribution(this, 'Distribution', {
       defaultRootObject: 'index.html',
       enableLogging: true,
@@ -104,6 +143,7 @@ export class DocsStack extends cdk.Stack {
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        responseHeadersPolicy,
         edgeLambdas: [
           {
             functionVersion: edgeStack.authFnVersion,

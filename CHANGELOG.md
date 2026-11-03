@@ -1,3 +1,13 @@
+## [1.8.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.7.0...v1.8.0) (2026-11-03)
+
+### Features
+
+- **infra:** attach CloudFront ResponseHeadersPolicy with security headers ([4703e83](https://github.com/DataArt/adlc-discovery-tool/commit/4703e8344f206977dd24f777d92c1baa3f48b7b2))
+
+### Bug Fixes
+
+- **infra:** harden CSP for giscus styling and add frame-ancestors ([2886fb4](https://github.com/DataArt/adlc-discovery-tool/commit/2886fb4229acb6ce6ea27c8a8afc31342c9f0369))
+
 ## [1.7.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.6.7...v1.7.0) (2026-10-16)
 
 ### Features

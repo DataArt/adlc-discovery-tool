@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "jose": "^6.0.0"
   },
   "devDependencies": {
     "@aws-sdk/client-secrets-manager": "^3.0.0",

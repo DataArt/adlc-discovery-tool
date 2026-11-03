@@ -140,8 +140,16 @@
       "order": 4,
       "plan_ref": "1-plan.md#step-4",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08",
+          "started_at": "2026-11-03T23:30:22.301Z",
+          "ended_at": "2026-11-03T23:32:37.719Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -291,6 +299,20 @@
       "started_at": "2026-11-03T23:27:27.129Z",
       "ended_at": "2026-11-03T23:29:34.867Z",
       "last_observed_at": "2026-11-03T23:29:34.867Z"
+    },
+    {
+      "id": "523b3a83-67cc-4fbb-b902-d58bb3b747ca",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:30:22.301Z",
+      "ended_at": "2026-11-03T23:32:37.719Z",
+      "last_observed_at": "2026-11-03T23:32:37.719Z"
     }
   ],
   "checks": [
@@ -347,18 +369,36 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "5a34aa7b-ca4e-427b-b1b5-27fcb53ae7c4",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08"
+      },
+      "name": "jwks.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:32:37.670Z",
+      "ended_at": "2026-11-03T23:32:37.670Z",
+      "result": "passed",
+      "evidence_ref": "5/5 tests pass via yarn nx run lambda-auth:test -- jwks.spec; typecheck clean; developer confirmed 'confirmed, mark step 4 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:29:48.581Z",
+    "as_of": "2026-11-03T23:32:52.713Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 1498.635,
+    "observed_work_seconds": 1634.0529999999999,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 405.038,
+    "unclassified_seconds": 453.75199999999995,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -370,7 +410,7 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T23:29:48.579Z",
+    "as_of": "2026-11-03T23:32:52.711Z",
     "source": "2-report.md",
     "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {
@@ -442,7 +482,7 @@
       "scopes": 0
     },
     "test_runs": {
-      "recorded": 3,
+      "recorded": 4,
       "failed": 0,
       "errors": 0,
       "interrupted": 0

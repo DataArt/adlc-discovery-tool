@@ -74,6 +74,7 @@ __metadata:
     "@types/node": "npm:^20.0.0"
     bcryptjs: "npm:^2.4.3"
     esbuild: "npm:^0.25.0"
+    jose: "npm:^6.0.0"
     tsx: "npm:^4.0.0"
     typescript: "npm:^5.0.0"
   languageName: unknown
@@ -7092,6 +7093,13 @@ __metadata:
   version: 1.0.2
   resolution: "java-properties@npm:1.0.2"
   checksum: 10c0/be0f58c83b5a852f313de2ea57f7b8b7d46dc062b2ffe487d58838e7034d4660f4d22f2a96aae4daa622af6d734726c0d08b01396e59666ededbcfdc25a694d6
+  languageName: node
+  linkType: hard
+
+"jose@npm:^6.0.0":
+  version: 6.2.15
+  resolution: "jose@npm:6.2.15"
+  checksum: 10c0/0e72e53ead0e01adc4598438f889e753622043806a7ba0c802f7cd7da17466e5a6167a63b4b4e67490944c9f88eb0dd5c81c05aca2c38a72718443632a7b37b5
   languageName: node
   linkType: hard
 

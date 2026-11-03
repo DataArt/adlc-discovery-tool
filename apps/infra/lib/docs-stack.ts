@@ -81,10 +81,14 @@ export class DocsStack extends cdk.Stack {
   }
 
   // Giscus (NFR-6 comments) loads https://giscus.app/client.js and renders its
-  // comment widget in an iframe from the same origin — both need an explicit
-  // CSP allowance. VitePress itself injects small inline bootstrap scripts
-  // (dark-mode/OS detection) and a few inline style attributes, so script-src
-  // and style-src need 'unsafe-inline' until those are moved to nonces/hashes.
+  // comment widget in an iframe from the same origin — script-src, style-src
+  // and frame-src all need an explicit CSP allowance (style-src too: giscus's
+  // client.js sets styles on the host page, not just inside the iframe).
+  // VitePress itself injects small inline bootstrap scripts (dark-mode/OS
+  // detection) and a few inline style attributes, so script-src and style-src
+  // also need 'unsafe-inline' until those are moved to nonces/hashes.
+  // frame-ancestors 'none' restates X-Frame-Options: DENY as CSP, which
+  // browsers prioritize over the legacy header when both are present.
   private createResponseHeadersPolicy(): cloudfront.ResponseHeadersPolicy {
     return new cloudfront.ResponseHeadersPolicy(this, 'SecurityHeadersPolicy', {
       securityHeadersBehavior: {
@@ -104,13 +108,14 @@ export class DocsStack extends cdk.Stack {
           contentSecurityPolicy: [
             "default-src 'self'",
             "script-src 'self' 'unsafe-inline' https://giscus.app",
-            "style-src 'self' 'unsafe-inline'",
+            "style-src 'self' 'unsafe-inline' https://giscus.app",
             'frame-src https://giscus.app',
             "connect-src 'self' https://giscus.app",
             "img-src 'self' data: https://giscus.app",
             "font-src 'self'",
             "object-src 'none'",
             "base-uri 'self'",
+            "frame-ancestors 'none'",
           ].join('; '),
           override: true,
         },

@@ -212,8 +212,16 @@
       "order": 8,
       "plan_ref": "1-plan.md#step-8",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe",
+          "started_at": "2026-11-03T23:46:18.738Z",
+          "ended_at": "2026-11-03T23:56:50.260Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -232,6 +240,16 @@
       "order": 10,
       "plan_ref": "1-plan.md#step-10",
       "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-11",
+      "title": "Deploy + validate oidc on real dev env (addendum)",
+      "order": 11,
+      "plan_ref": "1-plan.md#addendum-step-11",
+      "depends_on": ["step-08", "step-09", "step-10"],
       "status": "pending",
       "attempts": [],
       "flags": []
@@ -379,6 +397,20 @@
       "started_at": "2026-11-03T23:41:58.191Z",
       "ended_at": "2026-11-03T23:44:36.078Z",
       "last_observed_at": "2026-11-03T23:44:36.078Z"
+    },
+    {
+      "id": "92fb9f63-7810-4540-9f22-e6e388f5e6f7",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-08",
+        "attempt_id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:46:18.738Z",
+      "ended_at": "2026-11-03T23:56:50.260Z",
+      "last_observed_at": "2026-11-03T23:56:50.260Z"
     }
   ],
   "checks": [
@@ -507,18 +539,36 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "a370020f-09ea-4c8b-b455-2b394a0cda81",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-08",
+        "attempt_id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe"
+      },
+      "name": "handler-oidc.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:56:50.211Z",
+      "ended_at": "2026-11-03T23:56:50.211Z",
+      "result": "passed",
+      "evidence_ref": "13/13 handler-oidc.spec + 64/64 full suite pass; typecheck clean; live oidc build confirms jose bundled; developer confirmed the pass-through-vs-redirect divergence as acceptable and said 'mark step 8 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:44:50.174Z",
+    "as_of": "2026-11-03T23:57:10.218Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 2077.832,
+    "observed_work_seconds": 2709.354,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 727.4340000000002,
+    "unclassified_seconds": 835.9560000000001,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -530,7 +580,7 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T23:44:50.172Z",
+    "as_of": "2026-11-03T23:57:10.216Z",
     "source": "2-report.md",
     "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {
@@ -602,7 +652,7 @@
       "scopes": 0
     },
     "test_runs": {
-      "recorded": 7,
+      "recorded": 8,
       "failed": 0,
       "errors": 0,
       "interrupted": 0

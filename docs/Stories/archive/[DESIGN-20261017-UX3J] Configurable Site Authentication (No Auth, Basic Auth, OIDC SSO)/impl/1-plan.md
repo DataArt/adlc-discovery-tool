@@ -337,3 +337,52 @@ provided by the user>`, and a freshly generated `OIDC_SESSION_SIGNING_KEY` (via
   the implementation in Step 8/10, no edits expected unless a real gap surfaces during Test stage
 - Efforts.md Ticket #3 (security review, load test, runbook) — explicitly a pre-production gate,
   tracked in `2-report.md`'s Tech Debt table at the end of Implement, not resolved by this plan
+
+## Addendum — Step 11 (authorized scope addition, added mid-Implement 2026-11-04)
+
+Requested by the developer during Step 7: deploy this repo's `oidc`-mode build to the real
+canonical dev environment and validate the live OIDC flow end-to-end, beyond what unit tests can
+cover. This step depends on Steps 8–10 completing first (the OIDC handler, secrets schema docs,
+and this repo's `.env.dev`/`.secrets.dev` configuration). All sub-actions that mutate AWS state are
+guarded commands — presented as instructions for the developer to run, never executed by the agent.
+
+### Step 11 — Deploy and validate `oidc` mode on the real dev environment (manual, guarded)
+
+**Changes:** none (operational verification only, no code).
+
+**Developer-run instructions:**
+
+1. Push secrets to Secrets Manager (guarded):
+   `yarn nx run lambda-auth:sm-push --configuration dev`
+   (interactive confirm prompt; pushes `.secrets.dev`'s `DOCS_BASIC_AUTH_HASH` placeholder plus the
+   new `OIDC_CLIENT_ID`/`OIDC_CLIENT_SECRET`/`OIDC_TENANT_ID`/`OIDC_SESSION_SIGNING_KEY` fields)
+2. Build and deploy the Lambda@Edge bundle (guarded — ships to the already-provisioned placeholder
+   function and triggers CloudFront propagation, per Architecture.md D1):
+   `yarn nx run lambda-auth:deploy --configuration dev`
+3. Wait for Lambda@Edge version propagation across CloudFront edge locations (can take several
+   minutes per D1's documented rollout-consistency note) before testing.
+
+**Verification:**
+
+> Open `https://d2dn3olm9x55r4.cloudfront.net/` in a private/incognito browser window.
+> Expected: redirected to Entra ID `/authorize` (no session cookie yet) — Flow 1.
+>
+> Sign in with a DataArt account.
+> Expected: redirected back to the original path; page loads; DevTools → Application → Cookies
+> shows `__Host-docs_session` with `HttpOnly`/`Secure`/`SameSite=Lax` set, and no leftover
+> `__Host-docs_pkce` cookie (cleared on finalize).
+>
+> Reload the page.
+> Expected: no redirect — Flow 2, steady-state pass-through.
+>
+> Run: `yarn nx run lambda-auth:logs --configuration dev` (tails CloudWatch) while reloading.
+> Expected: a log line containing the authenticated UPN/sub and a request ID, confirming D7/NFR-7
+> attribution — cross-check that request ID against the CloudFront/S3 access log for the same
+> request (manual join, per D7's documented approach).
+>
+> Optional: manually expire/clear just the `rt`/`at` fields are not independently testable from the
+> browser, so silent refresh (Flow 3) is accepted as covered by `handler-oidc.spec.ts`'s unit test
+> rather than re-verified live here — flag in `2-report.md` if a live gap is found.
+
+This is a HARD STOP verification item like every other step — the developer runs it and reports
+back; the agent does not deploy or sign in on their behalf.

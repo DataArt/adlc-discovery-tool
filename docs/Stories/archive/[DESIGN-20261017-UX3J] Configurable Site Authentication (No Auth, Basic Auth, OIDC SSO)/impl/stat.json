@@ -1,0 +1,331 @@
+{
+  "schema_version": 2,
+  "lifecycle": "dev",
+  "ticket": "DESIGN-20261017-UX3J",
+  "author": "Anton Merkulov",
+  "tracking_started_at": "2026-11-03T22:58:04.908Z",
+  "ticket_created_at": null,
+  "ticket_created_source": null,
+  "started_at": "2026-11-03T22:58:04.953Z",
+  "completed_at": null,
+  "coverage": "from_tracking_start",
+  "stages": [
+    {
+      "id": "context",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "04ac946a-ad81-4efe-afba-32638ed5a9f4",
+          "started_at": "2026-11-03T22:58:04.953Z",
+          "ended_at": "2026-11-03T22:58:07.997Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "ceremony",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "06a26319-1f95-440f-8e26-ff449ad41555",
+          "started_at": "2026-11-03T22:58:59.189Z",
+          "ended_at": "2026-11-03T22:58:59.238Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "plan",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "af2c34d8-f909-4c11-b781-5052799a33d8",
+          "started_at": "2026-11-03T22:58:59.299Z",
+          "ended_at": "2026-11-03T23:16:52.601Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "implement",
+      "status": "active",
+      "attempts": [
+        {
+          "id": "946ae659-9508-4260-91f7-1bdc00610184",
+          "started_at": "2026-11-03T23:16:52.649Z",
+          "ended_at": null,
+          "trigger": "initial",
+          "outcome": null
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "test",
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "document",
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    }
+  ],
+  "steps": [
+    {
+      "id": "step-01",
+      "title": "Step 1",
+      "order": 1,
+      "plan_ref": "1-plan.md#step-1",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-02",
+      "title": "Step 2",
+      "order": 2,
+      "plan_ref": "1-plan.md#step-2",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-03",
+      "title": "Step 3",
+      "order": 3,
+      "plan_ref": "1-plan.md#step-3",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-04",
+      "title": "Step 4",
+      "order": 4,
+      "plan_ref": "1-plan.md#step-4",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-05",
+      "title": "Step 5",
+      "order": 5,
+      "plan_ref": "1-plan.md#step-5",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-06",
+      "title": "Step 6",
+      "order": 6,
+      "plan_ref": "1-plan.md#step-6",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-07",
+      "title": "Step 7",
+      "order": 7,
+      "plan_ref": "1-plan.md#step-7",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-08",
+      "title": "Step 8",
+      "order": 8,
+      "plan_ref": "1-plan.md#step-8",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-09",
+      "title": "Step 9",
+      "order": 9,
+      "plan_ref": "1-plan.md#step-9",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "step-10",
+      "title": "Step 10",
+      "order": 10,
+      "plan_ref": "1-plan.md#step-10",
+      "depends_on": [],
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    }
+  ],
+  "intervals": [
+    {
+      "id": "c3218e15-d6e0-4088-99c1-a2d2bc2baf3f",
+      "stage_id": "context",
+      "stage_attempt_id": "04ac946a-ad81-4efe-afba-32638ed5a9f4",
+      "step": null,
+      "kind": "work",
+      "activity": "investigation",
+      "started_at": "2026-11-03T22:58:04.953Z",
+      "ended_at": "2026-11-03T22:58:07.997Z",
+      "last_observed_at": "2026-11-03T22:58:07.997Z"
+    },
+    {
+      "id": "44ee319c-8f53-4de5-98e0-5ea27c88fc4f",
+      "stage_id": "ceremony",
+      "stage_attempt_id": "06a26319-1f95-440f-8e26-ff449ad41555",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-11-03T22:58:59.189Z",
+      "ended_at": "2026-11-03T22:58:59.238Z",
+      "last_observed_at": "2026-11-03T22:58:59.238Z"
+    },
+    {
+      "id": "f5763a7a-cb17-4136-b705-4373b175b982",
+      "stage_id": "plan",
+      "stage_attempt_id": "af2c34d8-f909-4c11-b781-5052799a33d8",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-11-03T22:58:59.299Z",
+      "ended_at": "2026-11-03T23:16:52.601Z",
+      "last_observed_at": "2026-11-03T23:16:52.601Z"
+    },
+    {
+      "id": "6546188f-a517-47ea-87f9-764633de4636",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": null,
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:16:52.649Z",
+      "ended_at": null,
+      "last_observed_at": "2026-11-03T23:16:52.649Z"
+    }
+  ],
+  "checks": [],
+  "usage_samples": [],
+  "metrics": {
+    "as_of": "2026-11-03T23:16:53.215Z",
+    "lead_time_seconds": null,
+    "cycle_time_seconds": null,
+    "observed_work_seconds": 1076.395,
+    "observed_wait_seconds": 0,
+    "open_work_seconds": 0,
+    "open_wait_seconds": 0,
+    "unclassified_seconds": 51.912000000000035,
+    "rework_seconds": 0,
+    "blocked_seconds": 0,
+    "approval_wait_seconds": 0,
+    "failed_checks": 0,
+    "first_pass_verification_rate": null,
+    "human_reported_seconds": null,
+    "tokens": null,
+    "token_coverage": "unavailable"
+  },
+  "quality": {
+    "version": 1,
+    "as_of": "2026-11-03T22:58:08.061Z",
+    "source": "2-report.md",
+    "source_sha256": "d60d34bcebf6b96dc4451ccbfc6149e33523b3320d1255da032d7d3769ad7630",
+    "findings": {
+      "total": 0,
+      "by_kind": {
+        "deviation": 0,
+        "bug": 0,
+        "design": 0,
+        "improve": 0,
+        "security": 0,
+        "performance": 0,
+        "docs": 0
+      },
+      "by_severity": {
+        "critical": 0,
+        "high": 0,
+        "medium": 0,
+        "low": 0,
+        "info": 0
+      },
+      "by_classification": {
+        "introduced": 0,
+        "pre-existing": 0,
+        "ruled-out": 0,
+        "advisory": 0
+      },
+      "by_resolution": {
+        "open": 0,
+        "fixed": 0,
+        "accepted": 0,
+        "tech-debt": 0,
+        "doc-updated": 0
+      },
+      "deviations_by_type": {
+        "contradiction": 0,
+        "extension": 0,
+        "omission": 0
+      },
+      "pr_review": {
+        "total": 0,
+        "by_kind": {
+          "deviation": 0,
+          "bug": 0,
+          "design": 0,
+          "improve": 0,
+          "security": 0,
+          "performance": 0,
+          "docs": 0
+        },
+        "by_severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "info": 0
+        }
+      }
+    },
+    "tech_debt": {
+      "total": 0,
+      "ticketed": 0,
+      "unticketed": 0
+    },
+    "tests": {
+      "written": null,
+      "passed": null,
+      "failed": null,
+      "skipped": null,
+      "scopes": 0
+    },
+    "test_runs": {
+      "recorded": 0,
+      "failed": 0,
+      "errors": 0,
+      "interrupted": 0
+    },
+    "closure_issues": []
+  }
+}

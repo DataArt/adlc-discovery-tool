@@ -70,7 +70,7 @@ Strategic Intent sets the target upfront, raw, before Investigate's stage loop e
 
 The process applies at every scale: to the engagement as a whole, to each workshop day, and to each individual session. The arc is the same; only the grain changes.
 
-→ [02 Terminology](./02%20Terminology.md) for what "phase," "stage," and "artifact" mean and where each artifact actually lives. → [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md) for how this arc maps onto gates and weeks. → [04 Evidence Chain](./04%20Evidence%20Chain.md) for how each stage's claims trace back to source.
+→ [02 Terminology](./02%20Terminology.md) for what "phase," "stage," and "artifact" mean and where each artifact actually lives. → [03 How the Engagement Runs](./03%20How%20the%20Engagement%20Runs.md) for how this arc maps onto gates and weeks. → [04 Evidence Chain](./04%20Evidence%20Chain.md) for how each stage's claims trace back to source, and [05 Data Protection & PII](./05%20Data%20Protection%20%26%20PII.md) for what that source material contains.
 
 ## 🔍 Investigate
 

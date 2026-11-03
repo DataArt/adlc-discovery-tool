@@ -86,8 +86,16 @@
       "order": 1,
       "plan_ref": "1-plan.md#step-1",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea",
+          "started_at": "2026-11-03T23:18:36.095Z",
+          "ended_at": "2026-11-03T23:20:39.480Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -223,62 +231,95 @@
       "kind": "work",
       "activity": "implementation",
       "started_at": "2026-11-03T23:16:52.649Z",
-      "ended_at": null,
-      "last_observed_at": "2026-11-03T23:16:52.649Z"
+      "ended_at": "2026-11-03T23:18:36.095Z",
+      "last_observed_at": "2026-11-03T23:18:36.095Z"
+    },
+    {
+      "id": "89956ff8-d748-45c7-adef-93617cecbbc7",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:18:36.095Z",
+      "ended_at": "2026-11-03T23:20:39.480Z",
+      "last_observed_at": "2026-11-03T23:20:39.480Z"
     }
   ],
-  "checks": [],
+  "checks": [
+    {
+      "id": "5c7bc650-5ac5-413a-b30d-fe47bf0c99c5",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea"
+      },
+      "name": "redirect.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:20:39.426Z",
+      "ended_at": "2026-11-03T23:20:39.426Z",
+      "result": "passed",
+      "evidence_ref": "8/8 tests pass via yarn nx run lambda-auth:test -- redirect.spec; developer confirmed 'correct'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    }
+  ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:16:53.215Z",
+    "as_of": "2026-11-03T23:22:04.342Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 1076.395,
+    "observed_work_seconds": 1303.2259999999999,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 51.912000000000035,
+    "unclassified_seconds": 136.20800000000008,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
     "failed_checks": 0,
-    "first_pass_verification_rate": null,
+    "first_pass_verification_rate": 1,
     "human_reported_seconds": null,
     "tokens": null,
     "token_coverage": "unavailable"
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T22:58:08.061Z",
+    "as_of": "2026-11-03T23:22:04.340Z",
     "source": "2-report.md",
-    "source_sha256": "d60d34bcebf6b96dc4451ccbfc6149e33523b3320d1255da032d7d3769ad7630",
+    "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {
-      "total": 0,
+      "total": 4,
       "by_kind": {
-        "deviation": 0,
+        "deviation": 1,
         "bug": 0,
-        "design": 0,
+        "design": 2,
         "improve": 0,
         "security": 0,
         "performance": 0,
-        "docs": 0
+        "docs": 1
       },
       "by_severity": {
         "critical": 0,
-        "high": 0,
+        "high": 1,
         "medium": 0,
-        "low": 0,
-        "info": 0
+        "low": 2,
+        "info": 1
       },
       "by_classification": {
-        "introduced": 0,
-        "pre-existing": 0,
+        "introduced": 1,
+        "pre-existing": 1,
         "ruled-out": 0,
-        "advisory": 0
+        "advisory": 2
       },
       "by_resolution": {
-        "open": 0,
-        "fixed": 0,
+        "open": 3,
+        "fixed": 1,
         "accepted": 0,
         "tech-debt": 0,
         "doc-updated": 0
@@ -286,7 +327,7 @@
       "deviations_by_type": {
         "contradiction": 0,
         "extension": 0,
-        "omission": 0
+        "omission": 1
       },
       "pr_review": {
         "total": 0,
@@ -321,11 +362,11 @@
       "scopes": 0
     },
     "test_runs": {
-      "recorded": 0,
+      "recorded": 1,
       "failed": 0,
       "errors": 0,
       "interrupted": 0
     },
-    "closure_issues": []
+    "closure_issues": ["RF-2: open", "RF-3: open", "RF-4: open"]
   }
 }

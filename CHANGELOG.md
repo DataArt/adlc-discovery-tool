@@ -1,3 +1,24 @@
+## [1.10.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.9.0...v1.10.0) (2026-11-04)
+
+### Features
+
+- **infra:** add IaC security scanning via cdk-nag, add Trivy to CI, pin MCP server versions ([b87a4fa](https://github.com/DataArt/adlc-discovery-tool/commit/b87a4fa40c59baea5e9c2c4cf71aaaddc21d16c7))
+- **infra:** wire up cdk-nag checks, Trivy scan, and pinned MCP versions ([759db47](https://github.com/DataArt/adlc-discovery-tool/commit/759db47a5e430925a71004918153ea6d5ff7c2a9))
+
+### Bug Fixes
+
+- **auth:** make lambda-auth build cache depend on AUTH_MODE/SM vars ([c145711](https://github.com/DataArt/adlc-discovery-tool/commit/c1457116e651e5bb76d21f689b1a4bc0a651aa55))
+- **ci:** correct trivy-action tag to v0.33.1 ([950065d](https://github.com/DataArt/adlc-discovery-tool/commit/950065d65be0335d619fa754e9f92055d62e780a))
+- **ci:** install Trivy directly from GitHub releases instead of trivy-action ([4da56c2](https://github.com/DataArt/adlc-discovery-tool/commit/4da56c2f13956da51a85e6be7c084cc209d46518))
+- **ci:** use trivy-action with skip-setup-trivy instead of raw trivy fs ([c3b91ff](https://github.com/DataArt/adlc-discovery-tool/commit/c3b91ff10b794ae2ac4ecabef1800be23dc37ffe))
+- **deps:** bump brace-expansion to 5.0.12, fixing 4 HIGH DoS CVEs ([ab686fd](https://github.com/DataArt/adlc-discovery-tool/commit/ab686fd260fec82ab07e3388ec0507bd97f5b430))
+- **infra:** add S3 lifecycle rules for site and logs bucket retention ([893c0c9](https://github.com/DataArt/adlc-discovery-tool/commit/893c0c9cc71cd3df1bf176114f88f0b484605049))
+- **infra:** scope CI CloudFront policy to one distribution, drop aws-mcp from agent sessions ([acfc2c6](https://github.com/DataArt/adlc-discovery-tool/commit/acfc2c63e9906b81dcedb69d59a3e4bf2c93ab3e))
+
+### Reverts
+
+- **ci:** go back to direct GitHub-release Trivy install ([0e8f8fd](https://github.com/DataArt/adlc-discovery-tool/commit/0e8f8fdd66db0383fada517d84292ff8dc787e99))
+
 ## [1.9.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.8.0...v1.9.0) (2026-11-04)
 
 ### Features

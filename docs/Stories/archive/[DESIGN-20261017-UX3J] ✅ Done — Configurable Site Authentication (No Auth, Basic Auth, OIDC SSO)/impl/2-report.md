@@ -26,21 +26,72 @@ tracked follow-up debt rather than blocking archival on an unbounded external le
 time. Resume Step 11 directly from `1-plan.md`'s Addendum once Admins Helpdesk
 confirms the redirect-URI registration.
 
+**Post-archival incident (2026-11-04):** Step 11's live validation surfaced two
+real-world issues Implement-stage unit tests couldn't catch, both now fixed and
+confirmed against a live login against the canonical Entra tenant — see
+`## Post-Archival Incident` below. TD-1 is resolved (redirect URI was registered).
+
+## Post-Archival Incident (2026-11-04)
+
+Once Admins Helpdesk registered the redirect URI (resolving TD-1), live sign-in
+surfaced two issues neither the original Plan nor its unit tests (which mock token
+responses) could have caught, because both depend on the real shape of tokens Entra
+actually issues — not the shape Design.md assumed:
+
+1. **Oversized session cookie.** Real DataArt-tenant access + refresh tokens run
+   ~6.3–6.4KB combined, far exceeding the ~4093-byte limit browsers enforce on a
+   single cookie's `name=value` pair (the original single-cookie design assumed a
+   smaller, more typical token size). Fixed by progressive refinement: single
+   oversized cookie → two-cookie split → three-cookie split (`SESSION_COOKIE_NAME`
+   access-only / `REFRESH_COOKIE_NAME` refresh-only / `IDENTITY_COOKIE_NAME` claims)
+   → raw (non-JSON-wrapped) token encoding + truncated 128-bit HMAC, clawing back
+   the last 6–18 bytes needed to fit. See `apps/lambda-auth/src/lib/cookie.ts`'s
+   module doc comment for the full before/after reasoning. Commits `b319a62`,
+   `99782dc`, `866d9ba`, `cec7615`.
+2. **Infinite login redirect loop ("302 ping-pong").** After the cookie-size fix,
+   steady-state requests silently failed Entra signature re-verification on every
+   request and bounced back to `/authorize`. Root cause: this app's access token
+   (default Microsoft Graph scope, no exposed custom API) is not a reliably
+   verifiable JWS — Microsoft documents that Graph-bound access tokens may be
+   opaque, which real testing confirmed (`JWSSignatureVerificationFailed` on every
+   attempt, not a decode error). Fixed by moving signature verification to the ID
+   token (always a genuine signed JWT), done once at token issuance rather than
+   per-request; steady-state now trusts the session cookie's own HMAC instead.
+   Commit `001fc4c`.
+3. **Second user, same CookieBudgetExceededError class, bigger overage.** After
+   migrating to `openid-client` (TD-4), a _different_ DataArt user's login still hit
+   `CookieBudgetExceededError` — 4328-4339 bytes against the 4093 budget, a larger
+   overage than the first user ever produced. Per-user Entra access token size
+   varies unpredictably (opaque Graph token format, possibly CAE-related) and isn't
+   boundable by shaving encoding bytes. Root cause: the access token was stored in
+   the session cookie but never actually read anywhere in `handler-oidc.ts` — pure
+   dead weight that also happened to be the single largest, most variable field.
+   Fixed by removing it from the session entirely (two cookies — refresh + identity
+   — instead of three); `exp` is tracked independently of the token value, so D4's
+   silent refresh is unaffected. Documented as a deviation from Design.md's
+   `{at, rt, sub, upn, exp}` cookie contract — see `lib/cookie.ts`'s module doc
+   comment. Commit `fd40e78`. See TD-5.
+
+All three fixes are additive to the original design's intent (D2's token flow, D3's
+fail-closed posture) — none reverses an Architecture.md decision. TD-4 (below)
+tracks the `openid-client` migration (resolved); TD-5 tracks the access-token
+removal (resolved).
+
 ## Progress
 
-| #   | Step                                                | Status     | Notes                                                           | Test | Docs |
-| --- | --------------------------------------------------- | ---------- | --------------------------------------------------------------- | ---- | ---- |
-| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done    | Straightforward, went as planned                                | ✅   | —    |
-| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done    | Went as planned                                                 | ✅   | —    |
-| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done    | Added `clearPkceCookie` helper                                  | ✅   | —    |
-| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y                               | ✅   | —    |
-| 5   | `handler-none.ts` — pass-through                    | ✅ Done    | Went as planned                                                 | ✅   | —    |
-| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done    | Verbatim, confirmed via diff                                    | ✅   | —    |
-| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done    | Live build + bundle check verified                              | ✅   | —    |
-| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done    | Diverged from plan text on silent-refresh mechanics — see notes | ✅   | —    |
-| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done    | Additive-only, no secrets; sm-push/pull unchanged               | —    | ✅   |
-| 10  | This repo — default to `oidc` with canonical app    | ✅ Done    | Real build verified; stray stale artifact identified, not ours  | ✅   | —    |
-| 11  | Deploy + validate `oidc` on real dev env (addendum) | ⚠️ Blocked | Blocked on Entra redirect-URI registration — see TD-1           | ❌   | —    |
+| #   | Step                                                | Status  | Notes                                                                                                                                | Test | Docs |
+| --- | --------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---- | ---- |
+| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done | Straightforward, went as planned                                                                                                     | ✅   | —    |
+| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done | Went as planned                                                                                                                      | ✅   | —    |
+| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done | Added `clearPkceCookie` helper                                                                                                       | ✅   | —    |
+| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done | `jose@^6.0.0`, clockTolerance=10y                                                                                                    | ✅   | —    |
+| 5   | `handler-none.ts` — pass-through                    | ✅ Done | Went as planned                                                                                                                      | ✅   | —    |
+| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done | Verbatim, confirmed via diff                                                                                                         | ✅   | —    |
+| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done | Live build + bundle check verified                                                                                                   | ✅   | —    |
+| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done | Diverged from plan text on silent-refresh mechanics — see notes                                                                      | ✅   | —    |
+| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done | Additive-only, no secrets; sm-push/pull unchanged                                                                                    | —    | ✅   |
+| 10  | This repo — default to `oidc` with canonical app    | ✅ Done | Real build verified; stray stale artifact identified, not ours                                                                       | ✅   | —    |
+| 11  | Deploy + validate `oidc` on real dev env (addendum) | ✅ Done | Unblocked once Entra redirect-URI registered; live login confirmed after fixing two further issues — see `## Post-Archival Incident` | ✅   | —    |
 
 ## Stage Metrics
 
@@ -221,11 +272,13 @@ this external dependency.
 
 ## Tech Debt
 
-| #    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                        | Type       | Tracker | Finding | Owner                                     | Next action                                                                                                                                                                                                                                                                                                                      |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------- | ------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TD-1 | Step 11 (deploy + validate on real dev env) is blocked: live sign-in against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returns `AADSTS500113: No reply address is registered for the application`. Code confirmed correct (`handler-oidc.ts`'s `CALLBACK_PATH` sends exactly that `redirect_uri`) — this is the external Entra app-registration dependency Architecture.md D8 called out (Admins Helpdesk-owned, outside code scope). | blocker    | —       | —       | Admins Helpdesk                           | Developer emailing Admins Helpdesk to confirm `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` is registered under **Redirect URIs**, on the **Web** platform (not SPA). Resume Step 11 once confirmed.                                                                                                                    |
-| TD-2 | `lib/jwks.ts`'s `verifySignature` validates signature + issuer, but not `aud` (audience). The access token's actual audience depends on the Entra app registration's configured API/scopes, which isn't knowable without testing against the live tenant — hardcoding a guessed value risks silently breaking every real login.                                                                                                                    | security   | —       | RF-8    | Developer / independent security reviewer | Confirm the real `aud` claim on a live-issued access token (once Step 11 unblocks) and add explicit `audience` validation to `verifySignature`. This is exactly the scope of the independent security review Architecture.md D2 already requires before production `oidc` rollout (Efforts.md Ticket #3) — not a new obligation. |
-| TD-3 | D7/NFR-7 attribution logs `event.Records[0].cf.config.requestId`, intended to correlate with CloudFront's `x-edge-request-id` header in access logs — the two values' equivalence hasn't been confirmed against a live deployed distribution.                                                                                                                                                                                                      | dependency | —       | RF-2    | Developer                                 | During Step 11's live validation (once unblocked), compare a logged `requestId` against the corresponding CloudFront/S3 access-log entry's `x-edge-request-id` for the same request. If they differ, source the header value in `handler-oidc.ts` instead.                                                                       |
+| #    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Type        | Tracker | Finding | Owner                                     | Next action                                                                                                                                                                                                                                                                                              |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------- | ------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TD-1 | ~~Step 11 (deploy + validate on real dev env) is blocked: live sign-in against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returns `AADSTS500113: No reply address is registered for the application`.~~ **Resolved 2026-11-04** — Admins Helpdesk registered the redirect URI (Web platform). Live sign-in confirmed working end-to-end, after fixing two further issues the registration unblocked (see `## Post-Archival Incident` above).                                                                                                                                                                                                                                          | blocker     | —       | —       | Admins Helpdesk                           | Closed.                                                                                                                                                                                                                                                                                                  |
+| TD-2 | ~~`lib/jwks.ts`'s `verifySignature` validates signature + issuer of the **ID token**, but not `aud`.~~ **Resolved 2026-11-04** — superseded by TD-4's `openid-client` migration (commit `6e783be`), which validates `aud` on the ID token by default.                                                                                                                                                                                                                                                                                                                                                                                                                                             | security    | —       | RF-8    | Developer / independent security reviewer | Closed.                                                                                                                                                                                                                                                                                                  |
+| TD-3 | D7/NFR-7 attribution logs `event.Records[0].cf.config.requestId`, intended to correlate with CloudFront's `x-edge-request-id` header in access logs — the two values' equivalence hasn't been confirmed against a live deployed distribution.                                                                                                                                                                                                                                                                                                                                                                                                                                                     | dependency  | —       | RF-2    | Developer                                 | During Step 11's live validation (once unblocked), compare a logged `requestId` against the corresponding CloudFront/S3 access-log entry's `x-edge-request-id` for the same request. If they differ, source the header value in `handler-oidc.ts` instead.                                               |
+| TD-4 | ~~`handler-oidc.ts`/`lib/{pkce,jwks}.ts` hand-roll the authorization-code+PKCE flow, state/nonce validation, token exchange/refresh, and JWKS-based verification with raw `fetch` calls.~~ **Resolved 2026-11-04** — migrated to `openid-client` (commit `6e783be`). `lib/pkce.ts` and `lib/jwks.ts` removed; PKCE generation, state validation, token exchange/refresh, and ID-token signature/issuer/audience verification are now all owned by the library. 64/64 tests pass; bundle verified smaller (15.8KB zipped) with no `jose`/raw-fetch token code remaining.                                                                                                                           | enhancement | —       | —       | Developer                                 | Closed.                                                                                                                                                                                                                                                                                                  |
+| TD-5 | A second real login (different DataArt user) hit a new `CookieBudgetExceededError` the three-cookie split still didn't cover (4328-4339 bytes vs. the 4093 budget — a bigger overage than the first user's token). Root cause: the access token, which was stored but never read anywhere in the handler, was also the single largest and most per-user-variable field. **Resolved 2026-11-04** — removed the access token from the session cookie entirely (commit `fd40e78`); session is now two cookies (refresh token + identity) instead of three. Documented as a deviation from Design.md's original `{at, rt, sub, upn, exp}` cookie contract — see `lib/cookie.ts`'s module doc comment. | bug         | —       | —       | Developer                                 | Closed. Separately: confirm with the client whether work-email-address identity claims (`sub`/`upn`, still stored in the identity cookie) need handling beyond signed/`HttpOnly`/`Secure` cookie storage — a policy question for the independent security review (Efforts.md Ticket #3), not a code gap. |
 
 ## Test Results
 

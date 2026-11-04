@@ -88,7 +88,20 @@ export default withMermaid(
     title: '[[CLIENT_NAME]] ADLC Discovery',
     description:
       'AI-First SDLC Discovery — evidence-led, from diagnosed problem to proven solution. [[CLIENT_NAME]] × DataArt.',
-    head: [['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }]],
+    head: [
+      ['link', { rel: 'icon', type: 'image/png', href: '/favicon.png' }],
+      // Applies the persisted sidebar/aside collapse state before hydration
+      // (same pattern VitePress itself uses for dark mode) so returning
+      // visitors don't see the panel flash open then collapse on load.
+      [
+        'script',
+        { id: 'check-sidebar-collapse' },
+        `(()=>{try{const d=document.documentElement;
+          if(localStorage.getItem('vp-sidebar-collapsed')==='true')d.classList.add('sidebar-collapsed');
+          if(localStorage.getItem('vp-aside-collapsed')==='true')d.classList.add('aside-collapsed');
+        }catch(e){}})();`,
+      ],
+    ],
 
     srcDir: '../../docs',
 

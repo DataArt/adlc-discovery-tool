@@ -2,6 +2,8 @@
 import DefaultTheme from 'vitepress/theme';
 import GiscusComments from './GiscusComments.vue';
 import Breadcrumbs from './Breadcrumbs.vue';
+import SidebarToggles from './SidebarToggles.vue';
+import SidebarFocusToggle from './SidebarFocusToggle.vue';
 
 const { Layout } = DefaultTheme;
 
@@ -16,6 +18,12 @@ const giscusEnabled = import.meta.env.VITE_GISCUS_ENABLED === 'true';
 
 <template>
   <Layout>
+    <template #layout-top>
+      <SidebarToggles />
+    </template>
+    <template #nav-bar-content-after>
+      <SidebarFocusToggle />
+    </template>
     <template #doc-before>
       <Breadcrumbs />
     </template>

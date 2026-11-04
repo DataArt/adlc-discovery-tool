@@ -27,8 +27,13 @@
 //     --aws-region us-east-1 --location-short ue1 \
 //     --github-org AcmeOrg --github-org-id 12345 \
 //     --github-repo adlc-discovery-acme --github-repo-id 67890 \
-//     [--giscus-repo-id R_xxx] [--giscus-category-id DIC_xxx] \
+//     [--giscus-enabled] [--giscus-repo-id R_xxx] [--giscus-category-id DIC_xxx] \
 //     [--dry-run]
+//
+// --giscus-enabled should only be passed when --github-repo is, or will become, a PUBLIC
+// repository — giscus's API serves that repo's Discussions to any unauthenticated caller
+// regardless of repo visibility, so pointing it at a private repo exposes its content
+// publicly (confirmed by penetration testing; see docs/Engineering Guide/09 Harness Security.md).
 
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
@@ -117,6 +122,7 @@ function buildEnvScaffolds(v: Answers): EnvScaffold[] {
         AWS_REGION: v.awsRegion,
         VITE_GITHUB_ORG: v.githubOrg,
         VITE_GITHUB_REPO: v.githubRepo,
+        ...(v.giscusEnabled ? { VITE_GISCUS_ENABLED: 'true' } : {}),
         ...(v.giscusRepoId ? { VITE_GISCUS_REPO_ID: v.giscusRepoId } : {}),
         ...(v.giscusCategoryId ? { VITE_GISCUS_CATEGORY_ID: v.giscusCategoryId } : {}),
       },
@@ -138,6 +144,7 @@ interface Answers {
   githubOrgId: string;
   githubRepo: string;
   githubRepoId: string;
+  giscusEnabled: boolean;
   giscusRepoId?: string;
   giscusCategoryId?: string;
   dryRun: boolean;
@@ -154,6 +161,7 @@ function parseAndValidateArgs(): Answers {
       'github-org-id': { type: 'string' },
       'github-repo': { type: 'string' },
       'github-repo-id': { type: 'string' },
+      'giscus-enabled': { type: 'boolean', default: false },
       'giscus-repo-id': { type: 'string' },
       'giscus-category-id': { type: 'string' },
       'dry-run': { type: 'boolean', default: false },
@@ -209,6 +217,7 @@ function parseAndValidateArgs(): Answers {
     githubOrgId: values['github-org-id']!,
     githubRepo: values['github-repo']!,
     githubRepoId: values['github-repo-id']!,
+    giscusEnabled: values['giscus-enabled']!,
     giscusRepoId: values['giscus-repo-id'],
     giscusCategoryId: values['giscus-category-id'],
     dryRun: values['dry-run']!,

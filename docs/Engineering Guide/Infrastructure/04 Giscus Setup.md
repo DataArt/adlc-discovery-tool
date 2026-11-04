@@ -6,7 +6,24 @@ _Manual runbook for wiring up the comments widget — only needed if this was sk
 
 ## When you need this
 
-`/bootstrap-client` walks through this as part of Stage 2 (step 2.4) and can be skipped there if Discussions/giscus aren't ready yet. If comments show "giscus is not installed on this repository" (or the widget doesn't render at all), either this setup was skipped, or `VITE_GITHUB_ORG` / `VITE_GITHUB_REPO` / `VITE_GISCUS_REPO_ID` / `VITE_GISCUS_CATEGORY_ID` in `apps/docs-web/.env.<env>` are missing or wrong — check those first.
+`/bootstrap-client` walks through this as part of Stage 2 (step 2.4) and can be skipped there if Discussions/giscus aren't ready yet. If comments show "giscus is not installed on this repository" (or the widget doesn't render at all), check in this order: `VITE_GISCUS_ENABLED=true` in `apps/docs-web/.env.<env>` first (the widget is off by default — see the warning below), then `VITE_GITHUB_ORG` / `VITE_GITHUB_REPO` / `VITE_GISCUS_REPO_ID` / `VITE_GISCUS_CATEGORY_ID`.
+
+---
+
+## ⚠️ Only for a public repository
+
+giscus is designed to work only with a **public** GitHub repository. Pointed at a private one,
+giscus.app's API still serves that repo's Discussions content to any unauthenticated caller on
+the internet — bypassing both GitHub's own repo permissions and this site's `AUTH_MODE` gate
+entirely. This was confirmed by penetration testing (see `09 Harness Security.md`), not a
+theoretical concern.
+
+If `{org}/{repo}` is private and staying private, do not enable giscus here — leave
+`VITE_GISCUS_ENABLED` unset and skip the rest of this runbook. giscus's own recommended pattern
+for this situation is a separate, dedicated public repo holding nothing but Discussions, but this
+starter kit's `VITE_GITHUB_REPO` is shared with the site's "View on GitHub" nav link (`config.ts`),
+so wiring that up cleanly needs its own decision/implementation — it is not a drop-in env var
+change today.
 
 ---
 

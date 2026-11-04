@@ -23,6 +23,20 @@ function decodedPathname(): string {
   }
 }
 
+// After the giscus GitHub OAuth redirect completes, the page URL carries a
+// `?giscus=<session token>` parameter (upstream giscus behavior — see
+// docs/Engineering Guide/09 Harness Security.md). Strip it immediately so the
+// token doesn't linger in browser history or get copy-pasted/shared; it's
+// already been read and consumed by the giscus widget by the time this runs.
+// This cannot prevent it being logged on the original request (server/CDN
+// access logs still see the full URL that was actually requested).
+function stripGiscusTokenFromUrl() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has('giscus')) return;
+  url.searchParams.delete('giscus');
+  window.history.replaceState(window.history.state, '', url.toString());
+}
+
 function injectGiscus() {
   if (!mount.value) return;
 
@@ -48,7 +62,10 @@ function injectGiscus() {
   mount.value.appendChild(script);
 }
 
-onMounted(injectGiscus);
+onMounted(() => {
+  stripGiscusTokenFromUrl();
+  injectGiscus();
+});
 
 // VitePress is an SPA — client-side navigation (sidebar/nav links) updates
 // `route.path` without remounting this component. Giscus has no

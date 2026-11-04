@@ -130,6 +130,36 @@ same as any other dev-lifecycle ticket, and stays there (not archived) until rem
 `docs/Stories/[ADLC-005] Open — Pin GitHub Actions to Commit SHAs/intent.md` for the first
 instance — the one open item from this review (SHA-pinning Actions) that wasn't fixed in-session.
 
+### Giscus exposes private-repo content regardless of AUTH_MODE (2026-11)
+
+A DataArt Security Lab penetration test (`DataArt_ADLCDiscoveryTool_PenetrationTesting_Report_v1.0_10232026.pdf`,
+2026-10-22 to 2026-10-23) found one HIGH-severity issue (CVSS 8.3): the giscus comments widget was
+configured against this project's own GitHub repo, which was private at the time. The design intent
+(`docs/Stories/archive/[ADLC-000].../impl/1-plan.md`) had assumed "access to comments is scoped by
+GitHub repo permissions" — reasonable-looking, but wrong. giscus.app's API serves a repo's
+Discussions through its own GitHub App's installation token, server-side, never the viewer's GitHub
+credentials — so it can read a private repo's Discussions regardless of who's asking, with zero
+authentication. The PoC enumerated and read every discussion anonymously via raw HTTP requests to
+`giscus.app/api/discussions`. Critically, this bypasses the site's own `AUTH_MODE` gate entirely
+(even `oidc`/enterprise SSO) — `giscus.app` is a separate third-party service CloudFront/Lambda@Edge
+never sees. Two related medium findings compounded it: no `giscus.json` origin allowlist (any
+external site could embed the widget and post as any signed-in GitHub user), and the giscus OAuth
+redirect placing a session token in the URL (upstream giscus behavior, not something this repo's
+code controls).
+
+**Fix:** giscus is now off by default. `VITE_GISCUS_ENABLED` (`apps/docs-web/.env.<env>`) must be
+explicitly set to `true`, and only when `GITHUB_REPO` is — or will become — a public repository
+(`apps/docs-web/.vitepress/theme/Layout.vue` gates the widget on this flag; `Infrastructure/04 Giscus
+Setup.md` documents it). `/bootstrap-client` now asks about repo visibility before offering to wire
+up giscus for a new client engagement, and warns against it for a private repo
+(`.claude/skills/bootstrap-client/SKILL.md` Step 2.4, `plan.md`). This repo itself
+(`DataArt/adlc-discovery-tool`) is slated to go public, so giscus stays enabled here
+(`apps/docs-web/.env.dev`). See NFR-6 for the current requirement.
+
+Not yet done: a `giscus.json` origin allowlist for whichever repo ends up hosting Discussions (fixes
+the cross-origin embedding finding independently of the public/private question) — tracked as a
+follow-up, not blocking, since the widget is off by default now.
+
 ---
 
 ## Related

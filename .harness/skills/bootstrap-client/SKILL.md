@@ -136,6 +136,13 @@ If the repo doesn't exist yet:
 
 ### 2.4 — Giscus (comments widget)
 
+First ask whether `{org}/{repo}` is, or will become, a **public** repository. This matters: giscus is designed to work only with a public repo. Pointed at a private one, giscus.app's API still serves that repo's Discussions content to any unauthenticated caller on the internet — bypassing both GitHub's repo permissions and the site's own `AUTH_MODE` gate entirely. This was confirmed by penetration testing (see `docs/Engineering Guide/09 Harness Security.md`), not a theoretical concern.
+
+- **Repo is/will be public** → safe, proceed below, and set `VITE_GISCUS_ENABLED=true` in Step 2.6.
+- **Repo is private, staying private** → warn clearly, recommend skipping giscus (`VITE_GISCUS_ENABLED` stays unset/`false`) unless the developer explicitly accepts the exposure, or wants to create a separate, dedicated public repo containing nothing but Discussions to point giscus at instead (giscus's own documented pattern for this situation — note VITE_GITHUB_REPO is shared with the site's GitHub nav link today, so this needs its own follow-up, not a drop-in).
+
+If proceeding:
+
 > "Before I can wire up comments:
 >
 > 1. Enable **Discussions** on `{org}/{repo}` (repo Settings → General → Features)
@@ -146,7 +153,7 @@ If the repo doesn't exist yet:
 
 **Stop and wait.**
 
-If confirmed, apply `pattern-run-and-validate.md` for the ID fetch — the repo is private, so giscus.app's own config tool can't see it, that's expected:
+If confirmed, apply `pattern-run-and-validate.md` for the ID fetch — for a private repo, giscus.app's own config tool can't see it (expected, unrelated to the exposure issue above):
 
 ```bash
 gh api graphql -f query='
@@ -163,7 +170,7 @@ gh api graphql -f query='
 
 Print this, **stop and wait** for the developer to run it and paste back the JSON. `repository.id` → `GISCUS_REPO_ID`. Match the category name from above against `discussionCategories.nodes` → that node's `id` → `GISCUS_CATEGORY_ID`.
 
-If skipped, leave both values empty — the script handles missing Giscus values gracefully.
+If skipped, leave both values (and `VITE_GISCUS_ENABLED`) empty — the script handles missing Giscus values gracefully, and the widget stays off by default.
 
 ### 2.5 — Confirm before writing anything
 
@@ -203,9 +210,11 @@ yarn bootstrap:client --client-name "{value}" --org-prefix {value} \
   --aws-region {value} --location-short {value} \
   --github-org {value} --github-org-id {value} \
   --github-repo {value} --github-repo-id {value} \
-  [--giscus-repo-id {value}] [--giscus-category-id {value}] \
+  [--giscus-enabled] [--giscus-repo-id {value}] [--giscus-category-id {value}] \
   --dry-run
 ```
+
+Only include `--giscus-enabled` if Step 2.4 confirmed `{org}/{repo}` is, or will become, public.
 
 **Stop and wait** for the developer to run it and paste back the output. Read the pasted file/replacement counts as-is — don't re-derive or summarize them yourself. Ask:
 

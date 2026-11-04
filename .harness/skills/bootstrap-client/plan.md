@@ -101,6 +101,16 @@ Collects client identity (name, org prefix, AWS region/location code, GitHub org
 
 ### Repo Discussions (part of Stage 2)
 
+**Only enable giscus if `{org}/{repo}` is, or will become, a public repository.** giscus's API
+serves a repo's Discussions content to any unauthenticated caller regardless of the repo's
+visibility — pointed at a private repo, it bypasses both GitHub's own repo permissions and this
+site's `AUTH_MODE` gate entirely. Confirmed by penetration testing, not theoretical — see
+`docs/Engineering Guide/09 Harness Security.md`. If the repo is private and staying private, skip
+giscus (leave `VITE_GISCUS_ENABLED` unset). giscus's own recommended pattern for this situation is
+a separate, dedicated public repo holding nothing but Discussions, but this starter kit's
+`VITE_GITHUB_REPO` is shared with the site's "View on GitHub" nav link (`config.ts`), so wiring
+that up cleanly needs its own decision/implementation — it is not a drop-in env var change today.
+
 ```bash
 gh api repos/{org}/{repo} -X PATCH -f has_discussions=true   # turns on the Discussions tab
 ```

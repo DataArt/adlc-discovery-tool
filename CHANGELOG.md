@@ -1,3 +1,21 @@
+## [1.9.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.8.0...v1.9.0) (2026-11-04)
+
+### Features
+
+- **auth:** add AUTH_MODE deploy-time selector to build.ts ([05439f1](https://github.com/DataArt/adlc-discovery-tool/commit/05439f1042f654c9eb0a17407a9b4a378c91e743))
+- **auth:** add handler-none pass-through mode ([2e99b39](https://github.com/DataArt/adlc-discovery-tool/commit/2e99b39a698435b5dd05f8e2659cadccf7f2e4b9))
+- **auth:** add handler-oidc full OIDC authentication flow ([d209fc4](https://github.com/DataArt/adlc-discovery-tool/commit/d209fc4600dcd6614658a0d46efe2341bd623982))
+- **auth:** add jose-based JWKS fetch/cache and signature verification ([cc2a585](https://github.com/DataArt/adlc-discovery-tool/commit/cc2a5857e18046d5e58d8659993e196bb1ae51b8))
+- **auth:** add PKCE verifier/challenge and state generation ([09730d2](https://github.com/DataArt/adlc-discovery-tool/commit/09730d22e1e18dc32a48b3c098697f34a97978e0))
+- **auth:** add same-origin redirect-target guard ([060c25b](https://github.com/DataArt/adlc-discovery-tool/commit/060c25bfe67dd118a99b3250062ad4107e1ae9d4))
+- **auth:** add session and PKCE cookie sign/verify helpers ([4b253a9](https://github.com/DataArt/adlc-discovery-tool/commit/4b253a9e237b988dc5b0ed9b48ede596d89c576c))
+- **auth:** implement configurable site authentication (none/basic/oidc) ([50eca29](https://github.com/DataArt/adlc-discovery-tool/commit/50eca29368a2c011d287323649412a50704b9abe))
+
+### Bug Fixes
+
+- **auth:** close PR review findings — CRLF injection, PKCE byte budget, JWT issuer check, cookie leak to origin ([b3659a0](https://github.com/DataArt/adlc-discovery-tool/commit/b3659a0a7b17be29d0ce275664b0e50979582276))
+- **infra:** use ref claim instead of event_name for CI OIDC trust policy ([e74d0d9](https://github.com/DataArt/adlc-discovery-tool/commit/e74d0d9b7f7ebc31ab3e544094f8f93b23649f53))
+
 ## [1.8.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.7.0...v1.8.0) (2026-11-03)
 
 ### Features

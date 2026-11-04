@@ -32,7 +32,12 @@
     "build": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "dev",
-      "inputs": ["default"],
+      "inputs": [
+        "default",
+        { "env": "AUTH_MODE" },
+        { "env": "SM_SECRET_NAME" },
+        { "env": "AWS_REGION" }
+      ],
       "outputs": ["{projectRoot}/dist"],
       "options": {
         "command": "bash scripts/ci/lambda-auth-build.sh"

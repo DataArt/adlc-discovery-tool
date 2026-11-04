@@ -32,22 +32,11 @@ jobs:
       - name: Audit
         run: yarn npm audit --all --severity moderate
 
-      - name: Install Trivy
-        # aquasecurity/trivy-action's own installer (setup-trivy) downloads the binary from
-        # get.trivy.dev, which has had DNS/outage issues independent of this repo. Installing
-        # directly from GitHub release assets (already reachable here via actions/checkout)
-        # avoids that dependency; checksum is verified against the release's published list.
-        env:
-          TRIVY_VERSION: '0.76.1'
-        run: |
-          set -euo pipefail
-          TARBALL="trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
-          curl -sSL -o "$TARBALL" "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/${TARBALL}"
-          curl -sSL -o checksums.txt "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_checksums.txt"
-          grep " ${TARBALL}\$" checksums.txt | sha256sum -c -
-          tar -xzf "$TARBALL" trivy
-          sudo install trivy /usr/local/bin/trivy
-          rm -f "$TARBALL" checksums.txt trivy
+      - name: Manual Trivy Setup
+        uses: aquasecurity/setup-trivy@v0.3.1
+        with:
+          cache: true
+          version: v0.76.1
 
       - name: Trivy filesystem scan
         uses: aquasecurity/trivy-action@v0.36.0

@@ -115,6 +115,21 @@ The CI CloudFront policy (`CiStack.buildCloudFrontPolicy`) was also narrowed fro
 `distribution/*` to the single distribution's ARN in the same pass, for the same shared-account
 reason (`apps/infra/lib/ci-stack.ts`).
 
+### Vulnerability tracking convention (2026-11)
+
+The same review flagged that dependency/IaC/MCP vulnerabilities were remediated ad hoc (bare
+commits like `fix(deps): bump nx ...`) with no ticket, no assigned owner, and no visible status
+until closed — findings could silently stay open indefinitely with nobody accountable.
+
+This repo has no external tracker (see `CLAUDE.md` — internal prefix `ADLC`, story folders under
+`docs/Stories/`), so the fix reuses that existing mechanism rather than adding a new tool: a
+vulnerability finding that is fixed in the same session it's found (e.g. a dependency bump, a
+version pin) needs no ticket — the commit message is the record. A finding that is _not_ fixed
+immediately gets filed as an `ADLC-XXX` story under `docs/Stories/` with an owner and status, the
+same as any other dev-lifecycle ticket, and stays there (not archived) until remediated. See
+`docs/Stories/[ADLC-005] Open — Pin GitHub Actions to Commit SHAs/intent.md` for the first
+instance — the one open item from this review (SHA-pinning Actions) that wasn't fixed in-session.
+
 ---
 
 ## Related

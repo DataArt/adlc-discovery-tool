@@ -32,6 +32,15 @@ jobs:
       - name: Audit
         run: yarn npm audit --all --severity moderate
 
+      - name: Trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+          ignore-unfixed: true
+
       - name: Lint (affected)
         run: yarn nx affected --target=lint --base=origin/${{ github.base_ref }} --head=HEAD
 

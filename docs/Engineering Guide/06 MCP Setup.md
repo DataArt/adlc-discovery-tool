@@ -1,6 +1,9 @@
 # MCP Setup
 
-_Connect Claude or Codex to GitHub and Atlassian via Model Context Protocol._
+_Connect Claude or Codex to Atlassian via Model Context Protocol._
+
+No GitHub MCP connector is configured either — GitHub operations go through the `gh` CLI
+directly, not a credentialed MCP server.
 
 No AWS MCP connector is configured here: agent sessions never hold a live AWS SSO session.
 Deploys happen only via CI after merge (OIDC-assumed roles, see `apps/infra/lib/ci-stack.ts`)
@@ -43,14 +46,6 @@ Then fill in credentials for each tool below.
 | `JIRA_USERNAME`            | Your Atlassian account email                                                                                        |
 | `JIRA_API_TOKEN`           | Same token as Confluence                                                                                            |
 | `JIRA_PROJECTS_FILTER`     | Comma-separated project keys to expose, e.g. `SP`                                                                   |
-
----
-
-## GitHub
-
-| Variable                       | Description                                                                                                            |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
-| `GITHUB_PERSONAL_ACCESS_TOKEN` | Generate at [github.com/settings/tokens](https://github.com/settings/tokens) — scopes: `repo`, `read:org`, `read:user` |
 
 ---
 

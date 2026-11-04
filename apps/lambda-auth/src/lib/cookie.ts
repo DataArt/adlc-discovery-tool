@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
 /** Exact cookie names per Design.md's §Changed interfaces/contracts. The `__Host-`
- * prefix enforces `Secure`, `Path=/`, no `Domain` at the browser level (D5). */
+ * prefix enforces `Secure`, `Path=/`, no `Domain` at the browser level (D3). */
 export const SESSION_COOKIE_NAME = '__Host-docs_session';
 export const PKCE_COOKIE_NAME = '__Host-docs_pkce';
 
@@ -60,8 +60,9 @@ function verify(token: string, signingKey: Buffer): string | null {
 /** Signs the session payload and returns the full `Set-Cookie` header value. */
 export function signSessionCookie(payload: SessionPayload, signingKey: Buffer): string {
   const token = sign(JSON.stringify(payload), signingKey);
-  assertByteBudget(token);
-  return `${SESSION_COOKIE_NAME}=${token}; ${COOKIE_ATTRIBUTES}`;
+  const setCookie = `${SESSION_COOKIE_NAME}=${token}; ${COOKIE_ATTRIBUTES}`;
+  assertByteBudget(setCookie);
+  return setCookie;
 }
 
 /** Verifies and parses a session cookie's raw value (the `Cookie` header's value
@@ -84,7 +85,9 @@ export function verifySessionCookie(
  * including the 10-minute TTL that bounds the Entra redirect round-trip. */
 export function signPkceCookie(payload: PkcePayload, signingKey: Buffer): string {
   const token = sign(JSON.stringify(payload), signingKey);
-  return `${PKCE_COOKIE_NAME}=${token}; ${COOKIE_ATTRIBUTES}; Max-Age=${PKCE_COOKIE_MAX_AGE_SECONDS}`;
+  const setCookie = `${PKCE_COOKIE_NAME}=${token}; ${COOKIE_ATTRIBUTES}; Max-Age=${PKCE_COOKIE_MAX_AGE_SECONDS}`;
+  assertByteBudget(setCookie);
+  return setCookie;
 }
 
 /** Verifies and parses a PKCE cookie's raw value. Returns `null` on any

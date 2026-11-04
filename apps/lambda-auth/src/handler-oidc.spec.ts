@@ -133,6 +133,9 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(result).toBe(event.Records[0].cf.request);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('jane@dataart.com'));
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('req-abc-123'));
+    // The session cookie (raw access/refresh tokens) must not be forwarded to
+    // the S3 origin.
+    expect((result as { headers: Record<string, unknown> }).headers['cookie']).toBeUndefined();
   });
 
   it('silently refreshes an expired access token and redirects to the same URI with an updated Set-Cookie (no visible re-login)', async () => {

@@ -7,6 +7,7 @@ describe('verifySignature', () => {
   let otherJwks: ReturnType<typeof createLocalJWKSet>;
   let validToken: string;
   let wrongKeyToken: string;
+  let wrongIssuerToken: string;
 
   beforeAll(async () => {
     const { publicKey, privateKey } = await generateKeyPair('RS256');
@@ -28,6 +29,14 @@ describe('verifySignature', () => {
       .setProtectedHeader({ alg: 'RS256', kid: 'key-1' })
       .setIssuedAt()
       .setExpirationTime('1h')
+      .setIssuer('https://login.microsoftonline.com/tenant-abc/v2.0')
+      .sign(privateKey);
+
+    wrongIssuerToken = await new SignJWT({ sub: 'user-1' })
+      .setProtectedHeader({ alg: 'RS256', kid: 'key-1' })
+      .setIssuedAt()
+      .setExpirationTime('1h')
+      .setIssuer('https://login.microsoftonline.com/some-other-tenant/v2.0')
       .sign(privateKey);
 
     wrongKeyToken = await new SignJWT({ sub: 'user-1' })
@@ -56,5 +65,21 @@ describe('verifySignature', () => {
 
   it('accepts a different valid token against its matching JWKS', async () => {
     await expect(verifySignature(wrongKeyToken, otherJwks)).resolves.toBe(true);
+  });
+
+  it('accepts a validly-signed token with the expected issuer', async () => {
+    await expect(
+      verifySignature(validToken, goodJwks, 'https://login.microsoftonline.com/tenant-abc/v2.0')
+    ).resolves.toBe(true);
+  });
+
+  it('rejects a validly-signed token from the wrong issuer (different tenant)', async () => {
+    await expect(
+      verifySignature(
+        wrongIssuerToken,
+        goodJwks,
+        'https://login.microsoftonline.com/tenant-abc/v2.0'
+      )
+    ).resolves.toBe(false);
   });
 });

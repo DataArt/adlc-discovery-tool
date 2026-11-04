@@ -10,5 +10,10 @@ export function sanitizeRedirectTarget(candidate?: string): string {
   // (`//host`), backslash variants (`/\evil.com`, used by some browsers as a
   // slash equivalent), and absolute URLs (which never start with `/`).
   if (!/^\/(?!\/|\\)/.test(candidate)) return '/';
+  // Reject embedded control characters (CR, LF, NUL, and other C0 controls) —
+  // this value flows directly into a `Location` response header, so an
+  // unfiltered CR/LF would allow header/response-splitting.
+  // eslint-disable-next-line no-control-regex
+  if (/[\x00-\x1f\x7f]/.test(candidate)) return '/';
   return candidate;
 }

@@ -227,11 +227,11 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       return redirectToLogin(host, '/', '', secrets);
     }
 
-    const [expectedStatePart, encodedPath] = receivedState.split('.');
+    const [receivedStatePart, encodedPath] = receivedState.split('.');
     const pkceCookieValue = parseCookies(request.headers)[PKCE_COOKIE_NAME];
     const pkce = pkceCookieValue ? verifyPkceCookie(pkceCookieValue, secrets.signingKey) : null;
 
-    if (!pkce || !validateState(pkce.s, expectedStatePart)) {
+    if (!pkce || !validateState(pkce.s, receivedStatePart)) {
       // CSRF/state-replay failure: fail closed, restart Flow 1 (a fresh PKCE
       // cookie below replaces the stale one).
       return redirectToLogin(host, '/', '', secrets);
@@ -305,16 +305,24 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   }
 
   const jwks = getJwks(jwksUrl(secrets.tenantId));
-  const signatureValid = await verifySignature(session.at, jwks);
+  const signatureValid = await verifySignature(
+    session.at,
+    jwks,
+    `https://login.microsoftonline.com/${secrets.tenantId}/v2.0`
+  );
   if (!signatureValid) {
-    // Fail closed — tampered, wrong kid, or JWKS rotation mismatch. Never
-    // passed through, never silently retried (D3).
+    // Fail closed — tampered, wrong kid, wrong issuer, or JWKS rotation
+    // mismatch. Never passed through, never silently retried (D3).
     return redirectToLogin(host, request.uri, request.querystring, secrets);
   }
 
   const nowSeconds = Math.floor(Date.now() / 1000);
   if (session.exp > nowSeconds) {
     logAttribution(session.upn, session.sub, requestId);
+    // Don't forward the session cookie (raw access/refresh tokens) to the S3
+    // origin — nothing downstream needs it, and leaving it in place risks it
+    // landing in origin-side access logs.
+    delete request.headers['cookie'];
     return request;
   }
 

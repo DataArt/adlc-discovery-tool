@@ -103,6 +103,11 @@ describe('PKCE cookie', () => {
     expect(setCookie).toContain('Max-Age=600');
   });
 
+  it('also enforces the byte budget on an oversized PKCE payload', () => {
+    const hugePayload = { v: 'x'.repeat(10_000), s: 'state-value' };
+    expect(() => signPkceCookie(hugePayload, KEY)).toThrow(CookieBudgetExceededError);
+  });
+
   it('rejects a mismatched key', () => {
     const setCookie = signPkceCookie(PKCE_PAYLOAD, KEY);
     const value = extractValue(setCookie);

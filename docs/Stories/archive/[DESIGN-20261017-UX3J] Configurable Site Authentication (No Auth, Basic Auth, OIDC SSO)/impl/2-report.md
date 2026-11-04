@@ -6,30 +6,36 @@ type: reference
 
 # DESIGN-20261017-UX3J: Configurable Site Authentication — Report
 
-| Field  | Value                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------- |
-| Ticket | DESIGN-20261017-UX3J                                                                        |
-| Branch | `feat/design-20261017-ux3j-configurable-auth`                                               |
-| PR     | —                                                                                           |
-| Author | Anton Merkulov                                                                              |
-| Status | 🔄 In Progress                                                                              |
-| Phase  | 🎯 Context ✅ · 🚀 Ceremony ✅ · 📋 Plan ✅ · 🔨 Implement 🔄 · 🧪 Test ⏳ · 📝 Document ⏳ |
+| Field  | Value                                                                                        |
+| ------ | -------------------------------------------------------------------------------------------- |
+| Ticket | DESIGN-20261017-UX3J                                                                         |
+| Branch | `feat/design-20261017-ux3j-configurable-auth`                                                |
+| PR     | —                                                                                            |
+| Author | Anton Merkulov                                                                               |
+| Status | 🔄 In Progress                                                                               |
+| Phase  | 🎯 Context ✅ · 🚀 Ceremony ✅ · 📋 Plan ✅ · 🔨 Implement ✅* · 🧪 Test 🔄 · 📝 Document ⏳ |
+
+\* All 10 steps of the original approved plan are done and verified. Step 11 (an
+authorized mid-Implement addendum — live deploy/validate) remains open, blocked on
+the external Entra app-registration dependency (TD-1). Developer explicitly directed
+proceeding to Test with this known, tracked exception (2026-11-04) rather than
+blocking the rest of the lifecycle on an unbounded external lead time.
 
 ## Progress
 
 | #   | Step                                                | Status     | Notes                                                           | Test | Docs |
 | --- | --------------------------------------------------- | ---------- | --------------------------------------------------------------- | ---- | ---- |
-| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done    | Straightforward, went as planned                                |      |      |
-| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done    | Went as planned                                                 |      |      |
-| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done    | Added `clearPkceCookie` helper                                  |      |      |
-| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y                               |      |      |
-| 5   | `handler-none.ts` — pass-through                    | ✅ Done    | Went as planned                                                 |      |      |
-| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done    | Verbatim, confirmed via diff                                    |      |      |
-| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done    | Live build + bundle check verified                              |      |      |
-| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done    | Diverged from plan text on silent-refresh mechanics — see notes |      |      |
-| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done    | Additive-only, no secrets; sm-push/pull unchanged               |      |      |
-| 10  | This repo — default to `oidc` with canonical app    | ✅ Done    | Real build verified; stray stale artifact identified, not ours  |      |      |
-| 11  | Deploy + validate `oidc` on real dev env (addendum) | ⏳ Pending | Scope added mid-Implement 2026-11-04, see `1-plan.md` Addendum  |      |      |
+| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done    | Straightforward, went as planned                                | ✅   | —    |
+| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done    | Went as planned                                                 | ✅   | —    |
+| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done    | Added `clearPkceCookie` helper                                  | ✅   | —    |
+| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y                               | ✅   | —    |
+| 5   | `handler-none.ts` — pass-through                    | ✅ Done    | Went as planned                                                 | ✅   | —    |
+| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done    | Verbatim, confirmed via diff                                    | ✅   | —    |
+| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done    | Live build + bundle check verified                              | ✅   | —    |
+| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done    | Diverged from plan text on silent-refresh mechanics — see notes | ✅   | —    |
+| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done    | Additive-only, no secrets; sm-push/pull unchanged               | —    | ✅   |
+| 10  | This repo — default to `oidc` with canonical app    | ✅ Done    | Real build verified; stray stale artifact identified, not ours  | ✅   | —    |
+| 11  | Deploy + validate `oidc` on real dev env (addendum) | ⚠️ Blocked | Blocked on Entra redirect-URI registration — see TD-1           | ❌   | —    |
 
 ## Stage Metrics
 
@@ -37,18 +43,18 @@ type: reference
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem stages without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 53m 45s · Wait: 0s · Unclassified: 16m 8s
+Observed work: 1h 15m 40s · Wait: 0s · Unclassified: 16m 52s
 
 | Stage     | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | --------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
 | context   | 2026-11-03T22:58:04.953Z | 2026-11-03T22:58:07.997Z | 3s          | 3s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | ceremony  | 2026-11-03T22:58:59.189Z | 2026-11-03T22:58:59.238Z | 0s          | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | plan      | 2026-11-03T22:58:59.299Z | 2026-11-03T23:16:52.601Z | 17m 53s     | 17m 53s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 35m 49s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
+| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 57m 44s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | test      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 | document  | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 
-Quality (recorded inventory): findings 4 · open 3 · PR findings 0 · critical 0 · debt 0 · tests written unavailable · latest failed cases unavailable · failed test runs 0. Counts describe recorded coverage, not a quality score; kind/severity/resolution breakdowns are in [stat.json](stat.json).
+Quality (recorded inventory): findings 12 · open 3 · PR findings 5 · critical 0 · debt unavailable · tests written 62 · latest failed cases 0 · failed test runs 0. Counts describe recorded coverage, not a quality score; kind/severity/resolution breakdowns are in [stat.json](stat.json).
 <!-- dev-metrics-stage:end -->
 
 ## Step Metrics
@@ -57,7 +63,7 @@ Quality (recorded inventory): findings 4 · open 3 · PR findings 0 · critical 
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the step's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the step. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem steps without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 53m 45s · Wait: 0s · Unclassified: 16m 8s
+Observed work: 1h 15m 40s · Wait: 0s · Unclassified: 16m 52s
 
 | Step                                                       | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | ---------------------------------------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
@@ -71,18 +77,26 @@ Observed work: 53m 45s · Wait: 0s · Unclassified: 16m 8s
 | step-08: Step 8                                            | 2026-11-03T23:46:18.738Z | 2026-11-03T23:56:50.260Z | 10m 32s     | 10m 32s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-09: Step 9                                            | 2026-11-03T23:58:39.481Z | 2026-11-04T00:01:07.885Z | 2m 28s      | 2m 28s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-10: Step 10                                           | 2026-11-04T00:01:32.757Z | 2026-11-04T00:07:40.097Z | 6m 7s       | 6m 7s   | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| step-11: Deploy + validate oidc on real dev env (addendum) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
+| step-11: Deploy + validate oidc on real dev env (addendum) | 2026-11-04T00:08:42.468Z | unavailable              | unavailable | 21m 55s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 
 <!-- dev-metrics-step:end -->
 
 ## Review Findings
 
-| ID   | Stage | Origin          | Kind      | Deviation type | Severity | Classification | Finding                                                                                                                                | Evidence                          | Resolution | TD  | Decision                                                                                                |
-| ---- | ----- | --------------- | --------- | -------------- | -------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------- | --- | ------------------------------------------------------------------------------------------------------- |
-| RF-1 | plan  | hld-audit       | deviation | omission       | high     | introduced     | Plan omitted Design.md's exact cookie names (`__Host-docs_session`/`__Host-docs_pkce`), `Path=/`/no-`Domain`, PKCE 10-min TTL          | `1-plan.md` Step 3/8 (pre-rework) | fixed      | —   | Reworked Step 3/8 + added AC-10; re-audit verdict **go**                                                |
-| RF-2 | plan  | hld-audit       | design    | —              | low      | advisory       | `cf.config.requestId` vs `x-edge-request-id` header equivalence for D7/NFR-7 not confirmed                                             | `1-plan.md` Step 8                | open       | —   | Added implementation note to confirm equivalence during Implement; fallback to header if different      |
-| RF-3 | plan  | hld-audit       | design    | —              | low      | advisory       | `jose` `clockTolerance` could misroute an expired-but-validly-signed token into fail-closed instead of silent refresh                  | Re-audit report                   | open       | —   | Not a plan change; add a dedicated test case in Step 8's `handler-oidc.spec.ts` during Implement        |
-| RF-4 | plan  | doc-consistency | docs      | —              | info     | pre-existing   | `solution/Design.md`'s module diagram shows `HB --> COOKIE`, contradicting its own prose that `handler-basic.ts` uses no `lib/` module | Both audit reports                | open       | —   | Not a plan defect (plan correctly follows the prose); flag to Design.md owner separately — out of scope |
+| ID    | Stage | Origin          | Kind      | Deviation type | Severity | Classification | Finding                                                                                                                                                                           | Evidence                          | Resolution | TD   | Decision                                                                                                                                                                                                             |
+| ----- | ----- | --------------- | --------- | -------------- | -------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- | ---------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RF-1  | plan  | hld-audit       | deviation | omission       | high     | introduced     | Plan omitted Design.md's exact cookie names (`__Host-docs_session`/`__Host-docs_pkce`), `Path=/`/no-`Domain`, PKCE 10-min TTL                                                     | `1-plan.md` Step 3/8 (pre-rework) | fixed      | —    | Reworked Step 3/8 + added AC-10; re-audit verdict **go**                                                                                                                                                             |
+| RF-2  | plan  | hld-audit       | design    | —              | low      | advisory       | `cf.config.requestId` vs `x-edge-request-id` header equivalence for D7/NFR-7 not confirmed                                                                                        | `1-plan.md` Step 8                | open       | —    | Added implementation note to confirm equivalence during Implement; fallback to header if different                                                                                                                   |
+| RF-3  | plan  | hld-audit       | design    | —              | low      | advisory       | `jose` `clockTolerance` could misroute an expired-but-validly-signed token into fail-closed instead of silent refresh                                                             | Re-audit report                   | open       | —    | Not a plan change; add a dedicated test case in Step 8's `handler-oidc.spec.ts` during Implement                                                                                                                     |
+| RF-4  | plan  | doc-consistency | docs      | —              | info     | pre-existing   | `solution/Design.md`'s module diagram shows `HB --> COOKIE`, contradicting its own prose that `handler-basic.ts` uses no `lib/` module                                            | Both audit reports                | open       | —    | Not a plan defect (plan correctly follows the prose); flag to Design.md owner separately — out of scope                                                                                                              |
+| RF-5  | test  | pr-review       | security  | —              | high     | introduced     | `sanitizeRedirectTarget` didn't reject embedded CR/LF/NUL, allowing header/response-splitting via the attacker-controlled `state` suffix                                          | `@auth` review                    | fixed      | —    | Added control-character rejection in `lib/redirect.ts`; new CRLF/NUL test cases added and passing                                                                                                                    |
+| RF-6  | test  | pr-review       | bug       | —              | medium   | introduced     | `signPkceCookie` never called `assertByteBudget`, unlike `signSessionCookie` — unenforced Design.md D3 contract                                                                   | `@auth` review                    | fixed      | —    | Added budget check + test to `signPkceCookie`                                                                                                                                                                        |
+| RF-7  | test  | pr-review       | improve   | —              | low      | introduced     | Byte-budget check measured only the signed token, not the full `Set-Cookie` header (~55 extra bytes from attributes)                                                              | `@auth` review                    | fixed      | —    | Both sign functions now assert on the full `Set-Cookie` string                                                                                                                                                       |
+| RF-8  | test  | hld-audit       | security  | —              | high     | introduced     | `jwtVerify` validated signature only — no `aud`/`iss` check, so any token signed by the tenant's keys for _any_ app in that tenant would pass                                     | `@auth` + `@architect` reviews    | tech-debt  | TD-2 | Added `issuer` validation (deterministic, tenant-scoped). `audience` validation deferred — depends on live Entra app config not verifiable here; see TD-2                                                            |
+| RF-9  | test  | hld-audit       | docs      | —              | info     | introduced     | `lib/cookie.ts`'s `__Host-` prefix comment cited D5 instead of D3                                                                                                                 | `@architect` review               | fixed      | —    | Comment corrected                                                                                                                                                                                                    |
+| RF-10 | test  | pr-review       | security  | —              | medium   | introduced     | Steady-state pass-through forwarded the `Cookie` header (raw access/refresh tokens) to the S3 origin unmodified                                                                   | `@auth` review                    | fixed      | —    | `handler-oidc.ts` now strips the `Cookie` header before forwarding; test added                                                                                                                                       |
+| RF-11 | test  | pr-review       | improve   | —              | info     | introduced     | Local variable `expectedStatePart` actually held the _received_ (attacker-visible) value, backwards from `validateState(expected, received)`'s own parameter names                | `@auth` review                    | fixed      | —    | Renamed to `receivedStatePart`                                                                                                                                                                                       |
+| RF-12 | test  | hld-audit       | design    | —              | low      | pre-existing   | Architecture.md's "Open items for Solution follow-through" lists an unresolved JWKS/secret cache TTL policy; code ships cold-start-only caching with no explicit closing decision | `@architect` review               | accepted   | —    | Design.md's own lib/jwks.ts section already specifies "fetch once per cold start, no TTL" as the deliberate decision — this closes the Architecture.md open item; noted here for traceability, no code change needed |
 
 ## Implementation Notes
 
@@ -177,15 +191,56 @@ current build target (`build.ts` always outputs `dist/index.js`, zipped to
 23 matches for `handler-oidc`/`login.microsoftonline`/`jose`. Developer opted to
 leave the stale file as-is (harmless, gitignored, unused).
 
-## Tech Debt
+### Step 11 — Deploy + validate `oidc` on real dev env (addendum)
 
-| #   | Description | Type | Tracker | Finding | Owner | Next action |
-| --- | ----------- | ---- | ------- | ------- | ----- | ----------- |
+Developer ran `sm-push`/`deploy` against the real dev environment. Live sign-in
+against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returned
+`AADSTS500113: No reply address is registered for the application`. Verified the
+IAM access policy first (`apps/infra/lib/edge-stack.ts`'s `AuthFnRole` already
+grants `secretsmanager:GetSecretValue` scoped to the exact secret ARN — unchanged,
+confirmed correct, not the cause) and the code's `redirect_uri` construction
+(`handler-oidc.ts`'s `CALLBACK_PATH` correctly produces
+`https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` from the request's `Host`
+header) — both confirmed correct. The error is specifically Entra rejecting a
+`redirect_uri` that doesn't match a registered one on the app registration itself —
+the external, manual D8 dependency (Admins Helpdesk-owned app registration).
+Developer is emailing Admins Helpdesk to confirm the URI is registered under the
+**Web** platform (not SPA — a common cause of this exact error for a confidential-
+client flow). Logged as TD-1; Step 11 marked ⚠️ Blocked, not failed — all code-level
+steps (1–10, the original approved plan) are complete and verified independent of
+this external dependency.
+
+| #    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                        | Type     | Tracker | Finding | Owner                                     | Next action                                                                                                                                                                                                                                                                                                                      |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | ------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TD-1 | Step 11 (deploy + validate on real dev env) is blocked: live sign-in against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returns `AADSTS500113: No reply address is registered for the application`. Code confirmed correct (`handler-oidc.ts`'s `CALLBACK_PATH` sends exactly that `redirect_uri`) — this is the external Entra app-registration dependency Architecture.md D8 called out (Admins Helpdesk-owned, outside code scope). | blocker  | —       | —       | Admins Helpdesk                           | Developer emailing Admins Helpdesk to confirm `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` is registered under **Redirect URIs**, on the **Web** platform (not SPA). Resume Step 11 once confirmed.                                                                                                                    |
+| TD-2 | `lib/jwks.ts`'s `verifySignature` validates signature + issuer, but not `aud` (audience). The access token's actual audience depends on the Entra app registration's configured API/scopes, which isn't knowable without testing against the live tenant — hardcoding a guessed value risks silently breaking every real login.                                                                                                                    | security | —       | RF-8    | Developer / independent security reviewer | Confirm the real `aud` claim on a live-issued access token (once Step 11 unblocks) and add explicit `audience` validation to `verifySignature`. This is exactly the scope of the independent security review Architecture.md D2 already requires before production `oidc` rollout (Efforts.md Ticket #3) — not a new obligation. |
 
 ## Test Results
 
-| Project | Build | Tests | Typecheck | Lint | Written | Passed | Failed | Skipped | Evidence |
-| ------- | ----- | ----- | --------- | ---- | ------- | ------ | ------ | ------- | -------- |
+| Project     | Build | Tests | Typecheck | Lint | Written | Passed | Failed | Skipped | Evidence                                                                                                                                            |
+| ----------- | ----- | ----- | --------- | ---- | ------- | ------ | ------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| lambda-auth | ✅    | ✅    | ✅        | ✅   | 62      | 69     | 0      | 0       | `yarn nx run lambda-auth:{build,test,typecheck,lint}` (all green); live `oidc`/`none`/`bogus` `AUTH_MODE` builds verified manually (Steps 7, 8, 10) |
+
+## Acceptance Criteria Validation
+
+_Per `1-plan.md`'s Acceptance Criteria (immutable; results recorded here, not by editing the plan)._
+
+| AC    | Result  | Evidence                                                                                                     |
+| ----- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| AC-1  | ✅ Pass | `build.spec.ts` unit-covers unset→`basic`; live default-mode build before Step 10 confirmed no warning       |
+| AC-2  | ✅ Pass | Live `AUTH_MODE=none` build (Step 7): warning printed, `handler-none.ts` selected                            |
+| AC-3  | ✅ Pass | Live `AUTH_MODE=oidc` build (Steps 8, 10): no warning, `jose` confirmed bundled                              |
+| AC-4  | ✅ Pass | Live `AUTH_MODE=bogus` build (Step 7): exit 1 before esbuild, no `dist/index.js`                             |
+| AC-5  | ✅ Pass | 69/69 tests pass, covering every row of Design.md's error-handling table + all lib modules + build selection |
+| AC-6  | ✅ Pass | `yarn nx run lambda-auth:typecheck` clean throughout                                                         |
+| AC-7  | ✅ Pass | `none`-mode bundle grep: 0 matches for `jose`/`SecretsManagerClient` (Step 7)                                |
+| AC-8  | ✅ Pass | `.env.dev`/`.secrets.dev` populated with canonical app credentials + generated signing key (Step 10)         |
+| AC-9  | ✅ Pass | `git grep` for both secret values across the repo: no matches (Step 10)                                      |
+| AC-10 | ✅ Pass | `handler-oidc.spec.ts`'s cookie-attribute test asserts exact names + `Max-Age=600`                           |
+
+All 10 acceptance criteria pass. Step 11 (live end-to-end sign-in against the real
+Entra tenant) remains open per TD-1 — not one of the original plan's ACs, but the
+addendum's own intended verification; unaffected by the AC-level pass above.
 
 ## Efforts Spent
 

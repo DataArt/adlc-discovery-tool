@@ -54,7 +54,7 @@
     },
     {
       "id": "implement",
-      "status": "active",
+      "status": "waiting",
       "attempts": [
         {
           "id": "946ae659-9508-4260-91f7-1bdc00610184",
@@ -266,8 +266,16 @@
       "order": 11,
       "plan_ref": "1-plan.md#addendum-step-11",
       "depends_on": ["step-08", "step-09", "step-10"],
-      "status": "pending",
-      "attempts": [],
+      "status": "waiting",
+      "attempts": [
+        {
+          "id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad",
+          "started_at": "2026-11-04T00:08:42.468Z",
+          "ended_at": null,
+          "trigger": "initial",
+          "outcome": null
+        }
+      ],
       "flags": []
     }
   ],
@@ -455,6 +463,35 @@
       "started_at": "2026-11-04T00:01:32.757Z",
       "ended_at": "2026-11-04T00:07:40.097Z",
       "last_observed_at": "2026-11-04T00:07:40.097Z"
+    },
+    {
+      "id": "83960f0a-8296-4a09-9c4c-4b643f6a575c",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-04T00:08:42.468Z",
+      "ended_at": "2026-11-04T00:30:37.342Z",
+      "last_observed_at": "2026-11-04T00:30:37.342Z"
+    },
+    {
+      "id": "0a9e1282-2dda-4bc9-b824-5b3750d32c0e",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "kind": "wait",
+      "reason": "external_dependency",
+      "detail": null,
+      "started_at": "2026-11-04T00:30:37.342Z",
+      "ended_at": null,
+      "last_observed_at": "2026-11-04T00:30:37.342Z"
     }
   ],
   "checks": [
@@ -641,14 +678,14 @@
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-04T00:07:57.880Z",
+    "as_of": "2026-11-04T00:41:58.911Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 3225.098,
+    "observed_work_seconds": 4539.972,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
-    "open_wait_seconds": 0,
-    "unclassified_seconds": 967.8739999999998,
+    "open_wait_seconds": 681.569,
+    "unclassified_seconds": 1012.462,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -660,38 +697,38 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-04T00:07:57.878Z",
+    "as_of": "2026-11-04T00:41:58.908Z",
     "source": "2-report.md",
-    "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
+    "source_sha256": "eb72d66222148deb278e884a1e8cf897fb0d3b9daaad077559b794686c45d38c",
     "findings": {
-      "total": 4,
+      "total": 12,
       "by_kind": {
         "deviation": 1,
-        "bug": 0,
-        "design": 2,
-        "improve": 0,
-        "security": 0,
+        "bug": 1,
+        "design": 3,
+        "improve": 2,
+        "security": 3,
         "performance": 0,
-        "docs": 1
+        "docs": 2
       },
       "by_severity": {
         "critical": 0,
-        "high": 1,
-        "medium": 0,
-        "low": 2,
-        "info": 1
+        "high": 3,
+        "medium": 2,
+        "low": 4,
+        "info": 3
       },
       "by_classification": {
-        "introduced": 1,
-        "pre-existing": 1,
+        "introduced": 8,
+        "pre-existing": 2,
         "ruled-out": 0,
         "advisory": 2
       },
       "by_resolution": {
         "open": 3,
-        "fixed": 1,
-        "accepted": 0,
-        "tech-debt": 0,
+        "fixed": 7,
+        "accepted": 1,
+        "tech-debt": 1,
         "doc-updated": 0
       },
       "deviations_by_type": {
@@ -700,36 +737,32 @@
         "omission": 1
       },
       "pr_review": {
-        "total": 0,
+        "total": 5,
         "by_kind": {
           "deviation": 0,
-          "bug": 0,
+          "bug": 1,
           "design": 0,
-          "improve": 0,
-          "security": 0,
+          "improve": 2,
+          "security": 2,
           "performance": 0,
           "docs": 0
         },
         "by_severity": {
           "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "info": 0
+          "high": 1,
+          "medium": 2,
+          "low": 1,
+          "info": 1
         }
       }
     },
-    "tech_debt": {
-      "total": 0,
-      "ticketed": 0,
-      "unticketed": 0
-    },
+    "tech_debt": null,
     "tests": {
-      "written": null,
-      "passed": null,
-      "failed": null,
-      "skipped": null,
-      "scopes": 0
+      "written": 62,
+      "passed": 69,
+      "failed": 0,
+      "skipped": 0,
+      "scopes": 1
     },
     "test_runs": {
       "recorded": 8,
@@ -737,6 +770,11 @@
       "errors": 0,
       "interrupted": 0
     },
-    "closure_issues": ["RF-2: open", "RF-3: open", "RF-4: open"]
+    "closure_issues": [
+      "RF-2: open",
+      "RF-3: open",
+      "RF-4: open",
+      "RF-8: debt needs linked TD row, owner and next action"
+    ]
   }
 }

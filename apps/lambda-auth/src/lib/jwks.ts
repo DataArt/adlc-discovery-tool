@@ -18,16 +18,29 @@ export function getJwks(issuerUrl: string): RemoteJwks {
   return jwks;
 }
 
-/** Verifies `token`'s signature against `jwks`. Returns `false` on any failure
- * (tampered, wrong `kid`, unreachable JWKS endpoint) — never throws. Expiry is
- * intentionally tolerated loosely here; the caller branches on expiry itself
- * (silent refresh vs. fail-closed), so this only answers "was this signed by
- * a key Entra controls," not "is it still valid right now." */
+/** Verifies `token`'s signature (and, when `issuer` is given, its `iss` claim)
+ * against `jwks`. Returns `false` on any failure (tampered, wrong `kid`, wrong
+ * issuer, unreachable JWKS endpoint) — never throws. Expiry is intentionally
+ * tolerated loosely here; the caller branches on expiry itself (silent refresh
+ * vs. fail-closed), so this only answers "was this signed by a key Entra
+ * controls for this tenant," not "is it still valid right now."
+ *
+ * Note: this does not validate the `aud` claim. The access token's audience
+ * depends on the Entra app registration's configured API/scopes, which isn't
+ * knowable at implementation time without testing against the live tenant —
+ * confirming and adding `audience` validation is deferred to the independent
+ * security review Architecture.md D2 already requires before production
+ * rollout (Efforts.md Ticket #3), rather than guessing a value that could
+ * silently break every real login. */
 const TEN_YEARS_SECONDS = 60 * 60 * 24 * 365 * 10;
 
-export async function verifySignature(token: string, jwks: JWTVerifyGetKey): Promise<boolean> {
+export async function verifySignature(
+  token: string,
+  jwks: JWTVerifyGetKey,
+  issuer?: string
+): Promise<boolean> {
   try {
-    await jwtVerify(token, jwks, { clockTolerance: TEN_YEARS_SECONDS });
+    await jwtVerify(token, jwks, { clockTolerance: TEN_YEARS_SECONDS, issuer });
     return true;
   } catch {
     return false;

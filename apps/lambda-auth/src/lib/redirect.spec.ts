@@ -26,6 +26,14 @@ describe('sanitizeRedirectTarget', () => {
     expect(sanitizeRedirectTarget('evil.com')).toBe('/');
   });
 
+  it('rejects an embedded CRLF (header-injection attempt)', () => {
+    expect(sanitizeRedirectTarget('/page\r\nSet-Cookie: evil=1')).toBe('/');
+  });
+
+  it('rejects an embedded NUL byte', () => {
+    expect(sanitizeRedirectTarget('/page\x00ignored')).toBe('/');
+  });
+
   it('rejects an empty string', () => {
     expect(sanitizeRedirectTarget('')).toBe('/');
   });

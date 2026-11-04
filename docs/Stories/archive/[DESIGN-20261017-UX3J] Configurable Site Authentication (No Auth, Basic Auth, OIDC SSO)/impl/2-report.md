@@ -27,8 +27,8 @@ type: reference
 | 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done    | Verbatim, confirmed via diff                                    |      |      |
 | 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done    | Live build + bundle check verified                              |      |      |
 | 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done    | Diverged from plan text on silent-refresh mechanics — see notes |      |      |
-| 9   | `.env.example`/`.secrets.example` — schema docs     | ⏳ Pending |                                                                 |      |      |
-| 10  | This repo — default to `oidc` with canonical app    | ⏳ Pending |                                                                 |      |      |
+| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done    | Additive-only, no secrets; sm-push/pull unchanged               |      |      |
+| 10  | This repo — default to `oidc` with canonical app    | ✅ Done    | Real build verified; stray stale artifact identified, not ours  |      |      |
 | 11  | Deploy + validate `oidc` on real dev env (addendum) | ⏳ Pending | Scope added mid-Implement 2026-11-04, see `1-plan.md` Addendum  |      |      |
 
 ## Stage Metrics
@@ -37,14 +37,14 @@ type: reference
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the stage's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the stage. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem stages without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 45m 9s · Wait: 0s · Unclassified: 13m 56s
+Observed work: 53m 45s · Wait: 0s · Unclassified: 16m 8s
 
 | Stage     | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | --------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
 | context   | 2026-11-03T22:58:04.953Z | 2026-11-03T22:58:07.997Z | 3s          | 3s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | ceremony  | 2026-11-03T22:58:59.189Z | 2026-11-03T22:58:59.238Z | 0s          | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | plan      | 2026-11-03T22:58:59.299Z | 2026-11-03T23:16:52.601Z | 17m 53s     | 17m 53s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 27m 13s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
+| implement | 2026-11-03T23:16:52.649Z | unavailable              | unavailable | 35m 49s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | test      | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 | document  | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 
@@ -57,7 +57,7 @@ Quality (recorded inventory): findings 4 · open 3 · PR findings 0 · critical 
 
 Source: [stat.json](stat.json). **Elapsed** = wall-clock time from the step's first start to its completion (includes any wait). **Work** = summed observed work intervals (active effort) within that span. **Wait** = summed observed wait intervals (blocked on developer input, approval, or an external dependency) within that span. Work + Wait can read less than Elapsed when time went unclassified, or more after a retry reopened the step. Durations are shown as `Xh Ym Zs`, rounded to the nearest second; open intervals are excluded from Elapsed/Work/Wait. **Flags** surfaces non-initial attempt triggers (🔁 retried/rework, 🔀 scope change, 🔓 reopened) and any failed check (⚠️), derived from recorded data — never a new judgment call — so a reader can scan for problem steps without parsing every row. Token subtotals have unavailable coverage; ticket usage is not allocated to individual units.
 
-Observed work: 45m 9s · Wait: 0s · Unclassified: 13m 56s
+Observed work: 53m 45s · Wait: 0s · Unclassified: 16m 8s
 
 | Step                                                       | Started (UTC)            | Completed (UTC)          | Elapsed     | Work    | Wait | Input tokens | Output tokens | Coverage            | Attempts | Failed checks | Flags |
 | ---------------------------------------------------------- | ------------------------ | ------------------------ | ----------- | ------- | ---- | ------------ | ------------- | ------------------- | -------- | ------------- | ----- |
@@ -69,8 +69,8 @@ Observed work: 45m 9s · Wait: 0s · Unclassified: 13m 56s
 | step-06: Step 6                                            | 2026-11-03T23:38:37.369Z | 2026-11-03T23:41:13.724Z | 2m 36s      | 2m 36s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-07: Step 7                                            | 2026-11-03T23:41:58.191Z | 2026-11-03T23:44:36.078Z | 2m 38s      | 2m 38s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-08: Step 8                                            | 2026-11-03T23:46:18.738Z | 2026-11-03T23:56:50.260Z | 10m 32s     | 10m 32s | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
-| step-09: Step 9                                            | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
-| step-10: Step 10                                           | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
+| step-09: Step 9                                            | 2026-11-03T23:58:39.481Z | 2026-11-04T00:01:07.885Z | 2m 28s      | 2m 28s  | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
+| step-10: Step 10                                           | 2026-11-04T00:01:32.757Z | 2026-11-04T00:07:40.097Z | 6m 7s       | 6m 7s   | 0s   | unavailable  | unavailable   | from_tracking_start | 1        | 0             | —     |
 | step-11: Deploy + validate oidc on real dev env (addendum) | unavailable              | unavailable              | unavailable | 0s      | 0s   | unavailable  | unavailable   | from_tracking_start | 0        | 0             | —     |
 
 <!-- dev-metrics-step:end -->
@@ -153,6 +153,29 @@ session cookie, which immediately re-requests the page and then hits the
 steady-state pass-through branch — transparent to the user, satisfying D4's "no
 visible re-login" intent via one extra round trip rather than a literal
 same-response pass-through. No D1–D10 decision or `apps/infra` resource is affected.
+
+### Step 9 — secrets/env schema docs
+
+Went as planned. `.env.example` documents `AUTH_MODE`; `.secrets.example` documents
+`OIDC_CLIENT_ID`/`OIDC_CLIENT_SECRET`/`OIDC_TENANT_ID`/`OIDC_SESSION_SIGNING_KEY` with
+generation hints. `sm-push.sh`/`sm-pull.sh` re-read and confirmed schema-agnostic —
+no script changes needed, as Design.md anticipated.
+
+### Step 10 — default this repo to `oidc`
+
+Set `apps/lambda-auth/.env.dev`'s `AUTH_MODE=oidc` and populated `.secrets.dev` with
+the canonical app's `OIDC_CLIENT_ID`/`OIDC_TENANT_ID`/`OIDC_CLIENT_SECRET` plus a
+freshly generated `OIDC_SESSION_SIGNING_KEY` (`openssl rand -base64 32`) — both files
+confirmed gitignored (`.env.*`/`.secrets.*` patterns), never committed, no secret
+value found anywhere in `git grep`. Collinson's credentials are not used in this repo.
+
+The developer ran `yarn nx run lambda-auth:build:dev` directly and flagged that
+`dist/lambda-handler.js` showed basic-auth content — investigated: that file is a
+stale artifact dated Jul 15, predating this entire ticket, and is not written by any
+current build target (`build.ts` always outputs `dist/index.js`, zipped to
+`lambda-auth.zip`). The actual build output (`dist/index.js`) was confirmed correct —
+23 matches for `handler-oidc`/`login.microsoftonline`/`jose`. Developer opted to
+leave the stale file as-is (harmless, gitignored, unused).
 
 ## Tech Debt
 

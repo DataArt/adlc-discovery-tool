@@ -230,8 +230,16 @@
       "order": 9,
       "plan_ref": "1-plan.md#step-9",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "29ef0183-7521-4607-a6a8-56e2540fdf01",
+          "started_at": "2026-11-03T23:58:39.481Z",
+          "ended_at": "2026-11-04T00:01:07.885Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -240,8 +248,16 @@
       "order": 10,
       "plan_ref": "1-plan.md#step-10",
       "depends_on": [],
-      "status": "pending",
-      "attempts": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4",
+          "started_at": "2026-11-04T00:01:32.757Z",
+          "ended_at": "2026-11-04T00:07:40.097Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
       "flags": []
     },
     {
@@ -411,6 +427,34 @@
       "started_at": "2026-11-03T23:46:18.738Z",
       "ended_at": "2026-11-03T23:56:50.260Z",
       "last_observed_at": "2026-11-03T23:56:50.260Z"
+    },
+    {
+      "id": "bb16134e-9062-42d3-9666-77a271bb3160",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-09",
+        "attempt_id": "29ef0183-7521-4607-a6a8-56e2540fdf01"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:58:39.481Z",
+      "ended_at": "2026-11-04T00:01:07.885Z",
+      "last_observed_at": "2026-11-04T00:01:07.885Z"
+    },
+    {
+      "id": "0a8b2e83-0450-4a08-a309-7b02202b5fbf",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-10",
+        "attempt_id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-04T00:01:32.757Z",
+      "ended_at": "2026-11-04T00:07:40.097Z",
+      "last_observed_at": "2026-11-04T00:07:40.097Z"
     }
   ],
   "checks": [
@@ -557,18 +601,54 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "a5264e40-568f-41b8-a23a-9e94f8a8ac38",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-09",
+        "attempt_id": "29ef0183-7521-4607-a6a8-56e2540fdf01"
+      },
+      "name": "schema-docs-diff",
+      "kind": "acceptance",
+      "started_at": "2026-11-04T00:01:07.842Z",
+      "ended_at": "2026-11-04T00:01:07.842Z",
+      "result": "passed",
+      "evidence_ref": "git diff confirmed additive-only, no secrets; sm-push/sm-pull confirmed schema-agnostic; developer confirmed 'nice!'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "42633033-3647-443e-9c0d-39fd48d8d125",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-10",
+        "attempt_id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4"
+      },
+      "name": "oidc-dev-build",
+      "kind": "build",
+      "started_at": "2026-11-04T00:07:40.052Z",
+      "ended_at": "2026-11-04T00:07:40.052Z",
+      "result": "passed",
+      "evidence_ref": "yarn nx run lambda-auth:build:dev succeeded; dist/index.js (actual build output) confirmed oidc-mode via 23 matches for handler-oidc/login.microsoftonline/jose; stray dist/lambda-handler.js identified as a stale pre-session artifact, not produced by any current build target; developer confirmed 'ok, then done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-03T23:57:10.218Z",
+    "as_of": "2026-11-04T00:07:57.880Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
-    "observed_work_seconds": 2709.354,
+    "observed_work_seconds": 3225.098,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
     "open_wait_seconds": 0,
-    "unclassified_seconds": 835.9560000000001,
+    "unclassified_seconds": 967.8739999999998,
     "rework_seconds": 0,
     "blocked_seconds": 0,
     "approval_wait_seconds": 0,
@@ -580,7 +660,7 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-03T23:57:10.216Z",
+    "as_of": "2026-11-04T00:07:57.878Z",
     "source": "2-report.md",
     "source_sha256": "17aa42ac6438c2bfa9535fdbddbf7a654b1b63590197544ac8b2d166d808250f",
     "findings": {

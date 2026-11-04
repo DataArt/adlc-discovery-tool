@@ -59,10 +59,16 @@ export class DocsStack extends cdk.Stack {
       enforceSSL: true,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       objectOwnership: s3.ObjectOwnership.OBJECT_WRITER,
-      lifecycleRules: [{ expiration: cdk.Duration.days(180) }],
+      lifecycleRules: [{ expiration: cdk.Duration.days(90) }],
     });
   }
 
+  // Versioning exists for rollback of a bad deploy, not long-term backup — without a
+  // lifecycle rule, every noncurrent version (including content deliberately removed
+  // from the site) is retained forever. 90 days covers any realistic rollback window
+  // within this engagement's fixed duration. A 3-year expiration on current objects is
+  // a backstop in case the manual engagement-end cleanup is missed (see NFR-10) — well
+  // beyond this engagement's fixed duration, so it should never fire in the ordinary case.
   private createSiteBucket(bucketName: string, logsBucket: s3.Bucket): s3.Bucket {
     return new s3.Bucket(this, 'SiteBucket', {
       bucketName,
@@ -72,6 +78,16 @@ export class DocsStack extends cdk.Stack {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       serverAccessLogsBucket: logsBucket,
       serverAccessLogsPrefix: 's3-access-logs/',
+      lifecycleRules: [
+        // ExpiredObjectDeleteMarker can't be combined with expiration in one rule (CDK
+        // rejects it), so the current-object backstop and noncurrent-version cleanup
+        // are split across two rules.
+        { expiration: cdk.Duration.days(3 * 365) },
+        {
+          noncurrentVersionExpiration: cdk.Duration.days(90),
+          expiredObjectDeleteMarker: true,
+        },
+      ],
     });
   }
 

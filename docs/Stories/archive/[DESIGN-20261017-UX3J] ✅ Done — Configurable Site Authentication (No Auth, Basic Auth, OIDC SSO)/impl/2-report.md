@@ -26,6 +26,44 @@ tracked follow-up debt rather than blocking archival on an unbounded external le
 time. Resume Step 11 directly from `1-plan.md`'s Addendum once Admins Helpdesk
 confirms the redirect-URI registration.
 
+**Post-archival incident (2026-11-04):** Step 11's live validation surfaced two
+real-world issues Implement-stage unit tests couldn't catch, both now fixed and
+confirmed against a live login against the canonical Entra tenant — see
+`## Post-Archival Incident` below. TD-1 is resolved (redirect URI was registered).
+
+## Post-Archival Incident (2026-11-04)
+
+Once Admins Helpdesk registered the redirect URI (resolving TD-1), live sign-in
+surfaced two issues neither the original Plan nor its unit tests (which mock token
+responses) could have caught, because both depend on the real shape of tokens Entra
+actually issues — not the shape Design.md assumed:
+
+1. **Oversized session cookie.** Real DataArt-tenant access + refresh tokens run
+   ~6.3–6.4KB combined, far exceeding the ~4093-byte limit browsers enforce on a
+   single cookie's `name=value` pair (the original single-cookie design assumed a
+   smaller, more typical token size). Fixed by progressive refinement: single
+   oversized cookie → two-cookie split → three-cookie split (`SESSION_COOKIE_NAME`
+   access-only / `REFRESH_COOKIE_NAME` refresh-only / `IDENTITY_COOKIE_NAME` claims)
+   → raw (non-JSON-wrapped) token encoding + truncated 128-bit HMAC, clawing back
+   the last 6–18 bytes needed to fit. See `apps/lambda-auth/src/lib/cookie.ts`'s
+   module doc comment for the full before/after reasoning. Commits `b319a62`,
+   `99782dc`, `866d9ba`, `cec7615`.
+2. **Infinite login redirect loop ("302 ping-pong").** After the cookie-size fix,
+   steady-state requests silently failed Entra signature re-verification on every
+   request and bounced back to `/authorize`. Root cause: this app's access token
+   (default Microsoft Graph scope, no exposed custom API) is not a reliably
+   verifiable JWS — Microsoft documents that Graph-bound access tokens may be
+   opaque, which real testing confirmed (`JWSSignatureVerificationFailed` on every
+   attempt, not a decode error). Fixed by moving signature verification to the ID
+   token (always a genuine signed JWT), done once at token issuance rather than
+   per-request; steady-state now trusts the session cookie's own HMAC instead.
+   Commit `001fc4c`.
+
+Both fixes are additive to the original design's intent (D2's token flow, D3's
+fail-closed posture) — neither reverses an Architecture.md decision. TD-4 (below)
+tracks replacing the hand-rolled OIDC client code with `openid-client`, which would
+have modeled both of these correctly by default.
+
 ## Progress
 
 | #   | Step                                                | Status     | Notes                                                           | Test | Docs |
@@ -221,11 +259,12 @@ this external dependency.
 
 ## Tech Debt
 
-| #    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                        | Type       | Tracker | Finding | Owner                                     | Next action                                                                                                                                                                                                                                                                                                                      |
-| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------- | ------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TD-1 | Step 11 (deploy + validate on real dev env) is blocked: live sign-in against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returns `AADSTS500113: No reply address is registered for the application`. Code confirmed correct (`handler-oidc.ts`'s `CALLBACK_PATH` sends exactly that `redirect_uri`) — this is the external Entra app-registration dependency Architecture.md D8 called out (Admins Helpdesk-owned, outside code scope). | blocker    | —       | —       | Admins Helpdesk                           | Developer emailing Admins Helpdesk to confirm `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` is registered under **Redirect URIs**, on the **Web** platform (not SPA). Resume Step 11 once confirmed.                                                                                                                    |
-| TD-2 | `lib/jwks.ts`'s `verifySignature` validates signature + issuer, but not `aud` (audience). The access token's actual audience depends on the Entra app registration's configured API/scopes, which isn't knowable without testing against the live tenant — hardcoding a guessed value risks silently breaking every real login.                                                                                                                    | security   | —       | RF-8    | Developer / independent security reviewer | Confirm the real `aud` claim on a live-issued access token (once Step 11 unblocks) and add explicit `audience` validation to `verifySignature`. This is exactly the scope of the independent security review Architecture.md D2 already requires before production `oidc` rollout (Efforts.md Ticket #3) — not a new obligation. |
-| TD-3 | D7/NFR-7 attribution logs `event.Records[0].cf.config.requestId`, intended to correlate with CloudFront's `x-edge-request-id` header in access logs — the two values' equivalence hasn't been confirmed against a live deployed distribution.                                                                                                                                                                                                      | dependency | —       | RF-2    | Developer                                 | During Step 11's live validation (once unblocked), compare a logged `requestId` against the corresponding CloudFront/S3 access-log entry's `x-edge-request-id` for the same request. If they differ, source the header value in `handler-oidc.ts` instead.                                                                       |
+| #    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                              | Type        | Tracker | Finding | Owner                                     | Next action                                                                                                                                                                                                                                                                                                          |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------- | ------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TD-1 | ~~Step 11 (deploy + validate on real dev env) is blocked: live sign-in against `https://d2dn3olm9x55r4.cloudfront.net/_auth/callback` returns `AADSTS500113: No reply address is registered for the application`.~~ **Resolved 2026-11-04** — Admins Helpdesk registered the redirect URI (Web platform). Live sign-in confirmed working end-to-end, after fixing two further issues the registration unblocked (see `## Post-Archival Incident` above). | blocker     | —       | —       | Admins Helpdesk                           | Closed.                                                                                                                                                                                                                                                                                                              |
+| TD-2 | `lib/jwks.ts`'s `verifySignature` validates signature + issuer of the **ID token** (not `aud`), done once at issuance rather than per-request (see Post-Archival Incident #2) — the access token itself is no longer signature-verified at all, since real testing confirmed it's not a reliably verifiable JWS for this app's scope. Audience validation on the ID token remains unaddressed.                                                           | security    | —       | RF-8    | Developer / independent security reviewer | Confirm the real `aud` claim on a live-issued ID token and add explicit `audience` validation to `verifySignature`'s ID-token call. This is exactly the scope of the independent security review Architecture.md D2 already requires before production `oidc` rollout (Efforts.md Ticket #3) — not a new obligation. |
+| TD-3 | D7/NFR-7 attribution logs `event.Records[0].cf.config.requestId`, intended to correlate with CloudFront's `x-edge-request-id` header in access logs — the two values' equivalence hasn't been confirmed against a live deployed distribution.                                                                                                                                                                                                            | dependency  | —       | RF-2    | Developer                                 | During Step 11's live validation (once unblocked), compare a logged `requestId` against the corresponding CloudFront/S3 access-log entry's `x-edge-request-id` for the same request. If they differ, source the header value in `handler-oidc.ts` instead.                                                           |
+| TD-4 | `handler-oidc.ts`/`lib/{pkce,jwks}.ts` hand-roll the authorization-code+PKCE flow, state/nonce validation, token exchange/refresh, and JWKS-based verification with raw `fetch` calls. Real-world testing (Post-Archival Incident) surfaced two issues — oversized tokens, an access token that isn't a verifiable JWS — that a standard OIDC client library models correctly by default.                                                                | enhancement | —       | —       | Developer                                 | Migrate to `openid-client` (same maintainer as `jose`, actively maintained): adopt its authorization-code+PKCE flow helpers, token endpoint client, and ID-token verification in place of the hand-rolled equivalents. Scoped as its own `/dev` cycle, not a patch to this ticket.                                   |
 
 ## Test Results
 

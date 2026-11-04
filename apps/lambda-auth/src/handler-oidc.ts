@@ -19,7 +19,6 @@ import {
   IDENTITY_COOKIE_NAME,
   PKCE_COOKIE_NAME,
   REFRESH_COOKIE_NAME,
-  SESSION_COOKIE_NAME,
   type SessionPayload,
   clearPkceCookie,
   signPkceCookie,
@@ -229,14 +228,13 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     const identity = claimsToIdentity(tokens.claims());
     const exp = Math.floor(Date.now() / 1000) + (tokens.expiresIn() ?? 3600);
     const sessionPayload: SessionPayload = {
-      at: tokens.access_token,
       rt: tokens.refresh_token,
       sub: identity.sub,
       upn: identity.upn,
       exp,
     };
 
-    let sessionSetCookies: [string, string, string];
+    let sessionSetCookies: [string, string];
     try {
       sessionSetCookies = signSessionCookie(sessionPayload, secrets.signingKey);
     } catch (err) {
@@ -268,7 +266,6 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   // ID token was already verified once, at issuance, above.
   const requestCookies = parseCookies(request.headers);
   const session = verifySessionCookie(
-    requestCookies[SESSION_COOKIE_NAME],
     requestCookies[REFRESH_COOKIE_NAME],
     requestCookies[IDENTITY_COOKIE_NAME],
     secrets.signingKey
@@ -303,14 +300,13 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   const identity = claimsToIdentity(refreshed.claims(), session.sub, session.upn);
   const newExp = Math.floor(Date.now() / 1000) + (refreshed.expiresIn() ?? 3600);
   const newSessionPayload: SessionPayload = {
-    at: refreshed.access_token,
     rt: refreshed.refresh_token ?? session.rt,
     sub: identity.sub,
     upn: identity.upn,
     exp: newExp,
   };
 
-  let updatedSetCookies: [string, string, string];
+  let updatedSetCookies: [string, string];
   try {
     updatedSetCookies = signSessionCookie(newSessionPayload, secrets.signingKey);
   } catch (err) {

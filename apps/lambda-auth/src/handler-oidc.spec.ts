@@ -175,7 +175,7 @@ describe('handler-oidc: missing/malformed session cookie', () => {
   it('redirects to /authorize when the session cookie is malformed', async () => {
     const { handler } = await import('./handler-oidc');
     const result = await handler(
-      cfEvent({ uri: '/page', cookie: '__Host-docs_session=not-a-valid-token' })
+      cfEvent({ uri: '/page', cookie: '__Host-docs_refresh=not-a-valid-token' })
     );
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toContain('/authorize');
@@ -183,13 +183,17 @@ describe('handler-oidc: missing/malformed session cookie', () => {
 });
 
 describe('handler-oidc: steady state and silent refresh', () => {
-  it('passes through unchanged for a valid, unexpired session', async () => {
+  it('passes through unchanged for a valid, unexpired session, without ever contacting Entra', async () => {
+    // The session cookie no longer stores the access token at all (it was
+    // never read anywhere in this handler, and was the single largest,
+    // most per-user-variable contributor to oversized-cookie failures — see
+    // lib/cookie.ts's module doc comment). Steady-state trusts the cookie's
+    // own HMAC and the `exp` it carries; it never re-contacts Entra.
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
     const setCookies = signSessionCookie(
       {
-        at: 'access-token',
         rt: 'refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -206,10 +210,9 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(result).toBe(event.Records[0].cf.request);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('jane@dataart.com'));
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('req-abc-123'));
-    // The session cookie (raw access/refresh tokens) must not be forwarded to
-    // the S3 origin.
+    // The session cookie (raw refresh token) must not be forwarded to the S3
+    // origin.
     expect((result as { headers: Record<string, unknown> }).headers['cookie']).toBeUndefined();
-    // Steady-state trusts the cookie's own HMAC — no Entra round-trip needed.
     expect(authorizationCodeGrantMock).not.toHaveBeenCalled();
     expect(refreshTokenGrantMock).not.toHaveBeenCalled();
   });
@@ -220,7 +223,6 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const pastExp = Math.floor(Date.now() / 1000) - 10;
     const sessionSetCookies = signSessionCookie(
       {
-        at: 'old-access-token',
         rt: 'valid-refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -243,7 +245,6 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(getLocation(result)).toBe('/page?x=1');
     expect(refreshTokenGrantMock).toHaveBeenCalledWith('fake-config', 'valid-refresh-token');
     const setCookies = getSetCookies(result);
-    expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
   });
@@ -254,7 +255,6 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const pastExp = Math.floor(Date.now() / 1000) - 10;
     const setCookies = signSessionCookie(
       {
-        at: 'old-access-token',
         rt: 'expired-refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -272,19 +272,12 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(getLocation(result)).toContain('/authorize');
   });
 
-  it('passes through on a valid, non-expired session without ever contacting Entra (opaque Graph access token)', async () => {
-    // Entra's access token for this app is not guaranteed to be a verifiable
-    // JWS (Microsoft Graph tokens may be opaque) — steady-state trusts the
-    // session cookie's own HMAC instead of re-verifying anything against
-    // Entra on every request. Signature verification only ever happens once,
-    // at token issuance, internally inside authorizationCodeGrant/
-    // refreshTokenGrant against the ID token.
+  it('fails closed when the session cookie pair is tampered, even when not expired', async () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
     const setCookies = signSessionCookie(
       {
-        at: 'opaque-access-token',
         rt: 'refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -292,35 +285,11 @@ describe('handler-oidc: steady state and silent refresh', () => {
       },
       SIGNING_KEY
     );
+    const [refreshCookie, identityCookie] = setCookies;
+    const tamperedRefreshCookie = refreshCookie.replace(/^([^=]+)=[^;]+/, '$1=tampered.value');
     const event = cfEvent({
       uri: '/page',
-      cookie: cookieHeader(setCookies),
-    });
-    const result = await handler(event);
-    expect(result).toMatchObject({ uri: '/page' });
-    expect(authorizationCodeGrantMock).not.toHaveBeenCalled();
-    expect(refreshTokenGrantMock).not.toHaveBeenCalled();
-  });
-
-  it('fails closed when the session cookie trio is tampered, even when not expired', async () => {
-    const { handler } = await import('./handler-oidc');
-    const { signSessionCookie } = await import('./lib/cookie');
-    const futureExp = Math.floor(Date.now() / 1000) + 3600;
-    const setCookies = signSessionCookie(
-      {
-        at: 'tampered-access-token',
-        rt: 'refresh-token',
-        sub: 'user-1',
-        upn: 'jane@dataart.com',
-        exp: futureExp,
-      },
-      SIGNING_KEY
-    );
-    const [accessCookie, refreshCookie, identityCookie] = setCookies;
-    const tamperedAccessCookie = accessCookie.replace(/^([^=]+)=[^;]+/, '$1=tampered.value');
-    const event = cfEvent({
-      uri: '/page',
-      cookie: cookieHeader([tamperedAccessCookie, refreshCookie, identityCookie]),
+      cookie: cookieHeader([tamperedRefreshCookie, identityCookie]),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
@@ -425,7 +394,6 @@ describe('handler-oidc: callback route', () => {
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toBe('/docs/intro');
     const setCookies = getSetCookies(result);
-    expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
     expect(

@@ -1,3 +1,18 @@
+## [1.11.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.10.1...v1.11.0) (2026-11-04)
+
+### Features
+
+- **web:** add collapsible left/right sidebars to docs theme ([ac2c996](https://github.com/DataArt/adlc-discovery-tool/commit/ac2c9960866d518ccc580830f083eea6387b48c0))
+
+### Bug Fixes
+
+- **auth:** raise session cookie byte budget to 8192 ([b319a62](https://github.com/DataArt/adlc-discovery-tool/commit/b319a62d297cd3fd5f2506aee955a2c392d4f116))
+- **auth:** split session cookie into two cookies, fixing login loop ([99782dc](https://github.com/DataArt/adlc-discovery-tool/commit/99782dc2cef72623bd18fb17bad015c9caf8f546))
+- **auth:** split session into three cookies — access/refresh/identity ([866d9ba](https://github.com/DataArt/adlc-discovery-tool/commit/866d9bad390b341c2d6e460d37039e3f98fab04d))
+- **auth:** stop storing the access token in the session cookie ([fd40e78](https://github.com/DataArt/adlc-discovery-tool/commit/fd40e78c638575b62042d68a8bf7cf27b54edd9a))
+- **auth:** trim cookie overhead further — raw token encoding + truncated HMAC ([cec7615](https://github.com/DataArt/adlc-discovery-tool/commit/cec7615605ca663d3f0e1c5a41d369008fe04169))
+- **auth:** verify ID token at issuance instead of access token per-request ([001fc4c](https://github.com/DataArt/adlc-discovery-tool/commit/001fc4cdd65b9cb54de7518bc25e1957ee7f3396))
+
 ## [1.10.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.10.0...v1.10.1) (2026-11-04)
 
 ### Bug Fixes

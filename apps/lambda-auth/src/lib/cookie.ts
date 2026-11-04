@@ -28,7 +28,9 @@ export const REFRESH_COOKIE_NAME = '__Host-docs_refresh';
 export const IDENTITY_COOKIE_NAME = '__Host-docs_identity';
 export const PKCE_COOKIE_NAME = '__Host-docs_pkce';
 
-const COOKIE_ATTRIBUTES = 'HttpOnly; Secure; SameSite=Lax; Path=/';
+// No spaces after `;` — every byte counts toward COOKIE_MAX_BYTES, and the
+// spaces are purely cosmetic (not required by the Set-Cookie grammar).
+const COOKIE_ATTRIBUTES = 'HttpOnly;Secure;SameSite=Lax;Path=/';
 const PKCE_COOKIE_MAX_AGE_SECONDS = 600; // 10 minutes — bounds the Entra redirect round-trip
 
 // Real, browser-enforced ceiling on a single cookie's `name=value` pair
@@ -64,9 +66,17 @@ export function assertByteBudget(cookieValue: string, maxBytes = 4096): void {
   if (byteLength > maxBytes) throw new CookieBudgetExceededError(byteLength, maxBytes);
 }
 
+// Truncated to 128 bits (16 of the full 32-byte HMAC-SHA256 digest) to claw
+// back bytes toward the browser's per-cookie limit — see COOKIE_MAX_BYTES's
+// comment. A 128-bit MAC remains cryptographically strong for session-cookie
+// integrity (this authenticates the cookie's contents; it is not a
+// standalone encryption or general-purpose signature use case).
+const SIGNATURE_BYTES = 16;
+
 function sign(value: string, signingKey: Buffer): string {
   const payload = Buffer.from(value, 'utf-8').toString('base64url');
-  const signature = createHmac('sha256', signingKey).update(payload).digest('base64url');
+  const digest = createHmac('sha256', signingKey).update(payload).digest();
+  const signature = digest.subarray(0, SIGNATURE_BYTES).toString('base64url');
   return `${payload}.${signature}`;
 }
 
@@ -74,7 +84,8 @@ function verify(token: string, signingKey: Buffer): string | null {
   const parts = token.split('.');
   if (parts.length !== 2) return null;
   const [payload, signature] = parts;
-  const expectedSignature = createHmac('sha256', signingKey).update(payload).digest('base64url');
+  const digest = createHmac('sha256', signingKey).update(payload).digest();
+  const expectedSignature = digest.subarray(0, SIGNATURE_BYTES).toString('base64url');
   const signatureBuf = Buffer.from(signature);
   const expectedBuf = Buffer.from(expectedSignature);
   if (signatureBuf.length !== expectedBuf.length) return null;
@@ -104,6 +115,23 @@ function verifyOne<T>(cookieValue: string | undefined, signingKey: Buffer): T | 
   }
 }
 
+// at/rt are opaque single-value tokens — signing them raw (no `{"at":"..."}`
+// JSON wrapper) saves the object-syntax overhead entirely. That margin
+// matters here: live testing showed the JSON-wrapped version exceeding the
+// 4093-byte budget by as little as 6-18 bytes on some logins (token size
+// varies slightly per issuance), so every byte of avoidable overhead counts.
+function signRaw(name: string, rawValue: string, signingKey: Buffer): string {
+  const token = sign(rawValue, signingKey);
+  const setCookie = `${name}=${token}; ${COOKIE_ATTRIBUTES}`;
+  assertByteBudget(setCookie, COOKIE_MAX_BYTES);
+  return setCookie;
+}
+
+function verifyRaw(cookieValue: string | undefined, signingKey: Buffer): string | null {
+  if (!cookieValue) return null;
+  return verify(cookieValue, signingKey);
+}
+
 type IdentityPart = Pick<SessionPayload, 'sub' | 'upn' | 'exp'>;
 
 /** Signs the session payload and returns three `Set-Cookie` header values —
@@ -114,8 +142,8 @@ export function signSessionCookie(
   payload: SessionPayload,
   signingKey: Buffer
 ): [string, string, string] {
-  const accessCookie = signOne(SESSION_COOKIE_NAME, { at: payload.at }, signingKey);
-  const refreshCookie = signOne(REFRESH_COOKIE_NAME, { rt: payload.rt }, signingKey);
+  const accessCookie = signRaw(SESSION_COOKIE_NAME, payload.at, signingKey);
+  const refreshCookie = signRaw(REFRESH_COOKIE_NAME, payload.rt, signingKey);
   const identityPayload: IdentityPart = { sub: payload.sub, upn: payload.upn, exp: payload.exp };
   const identityCookie = signOne(IDENTITY_COOKIE_NAME, identityPayload, signingKey);
   return [accessCookie, refreshCookie, identityCookie];
@@ -132,13 +160,13 @@ export function verifySessionCookie(
   identityCookieValue: string | undefined,
   signingKey: Buffer
 ): SessionPayload | null {
-  const access = verifyOne<{ at: string }>(accessCookieValue, signingKey);
-  if (access === null) return null;
-  const refresh = verifyOne<{ rt: string }>(refreshCookieValue, signingKey);
-  if (refresh === null) return null;
+  const at = verifyRaw(accessCookieValue, signingKey);
+  if (at === null) return null;
+  const rt = verifyRaw(refreshCookieValue, signingKey);
+  if (rt === null) return null;
   const identity = verifyOne<IdentityPart>(identityCookieValue, signingKey);
   if (identity === null) return null;
-  return { ...access, ...refresh, ...identity };
+  return { at, rt, ...identity };
 }
 
 /** Signs the PKCE payload and returns the full `Set-Cookie` header value,

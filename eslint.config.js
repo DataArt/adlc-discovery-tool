@@ -5,8 +5,10 @@ import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(js.configs.recommended, ...tseslint.configs.recommended, prettier, {
   ignores: [
-    'node_modules/**',
-    'dist/**',
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/cdk.out/**',
+    'raw-artifacts/**',
     '**/.vitepress/dist/**',
     '**/.vitepress/cache/**',
     '.nx/**',

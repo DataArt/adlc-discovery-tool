@@ -18,8 +18,12 @@ const VALID_SECRET_PAYLOAD = JSON.stringify({
 
 const sendMock = vi.fn();
 vi.mock('@aws-sdk/client-secrets-manager', () => ({
-  SecretsManagerClient: vi.fn().mockImplementation(() => ({ send: sendMock })),
-  GetSecretValueCommand: vi.fn((input: unknown) => input),
+  SecretsManagerClient: vi.fn().mockImplementation(function () {
+    return { send: sendMock };
+  }),
+  GetSecretValueCommand: vi.fn(function (input: unknown) {
+    return input;
+  }),
 }));
 
 const verifySignatureMock = vi.fn();

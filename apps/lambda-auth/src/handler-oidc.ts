@@ -6,6 +6,7 @@ import type {
 } from 'aws-lambda';
 import { decodeJwt } from 'jose';
 import {
+  IDENTITY_COOKIE_NAME,
   PKCE_COOKIE_NAME,
   REFRESH_COOKIE_NAME,
   SESSION_COOKIE_NAME,
@@ -262,7 +263,7 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       exp,
     };
 
-    let sessionSetCookies: [string, string];
+    let sessionSetCookies: [string, string, string];
     try {
       sessionSetCookies = signSessionCookie(sessionPayload, secrets.signingKey);
     } catch (err) {
@@ -294,13 +295,14 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     };
   }
 
-  // Steady-state: validate the session cookies (split across two — see
-  // lib/cookie.ts — since the combined access+refresh token pair exceeds
-  // what a single cookie can hold).
+  // Steady-state: validate the session cookies (split across three — see
+  // lib/cookie.ts — since the access and refresh tokens are each too large
+  // to share a cookie with each other or with the identity claims).
   const requestCookies = parseCookies(request.headers);
   const session = verifySessionCookie(
     requestCookies[SESSION_COOKIE_NAME],
     requestCookies[REFRESH_COOKIE_NAME],
+    requestCookies[IDENTITY_COOKIE_NAME],
     secrets.signingKey
   );
   if (!session) {
@@ -349,7 +351,7 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     exp: newExp,
   };
 
-  let updatedSetCookies: [string, string];
+  let updatedSetCookies: [string, string, string];
   try {
     updatedSetCookies = signSessionCookie(newSessionPayload, secrets.signingKey);
   } catch (err) {

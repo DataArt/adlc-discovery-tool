@@ -186,6 +186,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const setCookies = getSetCookies(result);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
   });
 
   it('re-enters Flow 1 when the refresh token is expired/invalid', async () => {
@@ -344,6 +345,7 @@ describe('handler-oidc: callback route', () => {
     const setCookies = getSetCookies(result);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
     expect(
       setCookies.some((c) => c.startsWith('__Host-docs_pkce=') && c.includes('Max-Age=0'))
     ).toBe(true);

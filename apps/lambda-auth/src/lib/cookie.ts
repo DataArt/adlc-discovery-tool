@@ -3,18 +3,29 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 /** Exact cookie names per Design.md's §Changed interfaces/contracts. The `__Host-`
  * prefix enforces `Secure`, `Path=/`, no `Domain` at the browser level (D3).
  *
- * The session is split across two cookies — `SESSION_COOKIE_NAME` (access
- * token + identity claims) and `REFRESH_COOKIE_NAME` (refresh token) — because
- * real tokens observed in production (DataArt tenant, 2026-11-04) run
- * ~6.3-6.4KB combined, which exceeds the ~4093-byte limit browsers actually
- * enforce on a single cookie's `name=value` pair. Raising this module's own
- * budget constant alone does not work around that: it only stops *this code*
- * from rejecting an oversized cookie — the browser silently drops it anyway,
- * which manifested as an infinite login redirect loop (the server-side
- * exchange kept succeeding, but the dropped cookie meant the browser was
- * never actually authenticated on the next request). */
+ * The session is split across three cookies — `SESSION_COOKIE_NAME` (access
+ * token alone), `REFRESH_COOKIE_NAME` (refresh token alone), and
+ * `IDENTITY_COOKIE_NAME` (the small `sub`/`upn`/`exp` claims) — because real
+ * tokens observed in production (DataArt tenant, 2026-11-04) run ~6.3-6.4KB
+ * combined, which exceeds the ~4093-byte limit browsers actually enforce on
+ * a single cookie's `name=value` pair.
+ *
+ * This started as a two-cookie split (access token + identity claims in one,
+ * refresh token in the other), but live testing showed the access+identity
+ * cookie still exceeded budget by ~150 bytes — the two large tokens are
+ * close enough in size that bundling the identity claims with either one
+ * tips it over. Giving each large token its own dedicated cookie, with the
+ * identity claims in a third, removes that overhead entirely.
+ *
+ * Also: raising this module's own budget constant alone does not work
+ * around the real browser limit — it only stops *this code* from rejecting
+ * an oversized cookie. The browser silently drops it anyway, which first
+ * manifested as an infinite login redirect loop (the server-side exchange
+ * kept succeeding, but the dropped cookie meant the browser was never
+ * actually authenticated on the next request). */
 export const SESSION_COOKIE_NAME = '__Host-docs_session';
 export const REFRESH_COOKIE_NAME = '__Host-docs_refresh';
+export const IDENTITY_COOKIE_NAME = '__Host-docs_identity';
 export const PKCE_COOKIE_NAME = '__Host-docs_pkce';
 
 const COOKIE_ATTRIBUTES = 'HttpOnly; Secure; SameSite=Lax; Path=/';
@@ -22,8 +33,8 @@ const PKCE_COOKIE_MAX_AGE_SECONDS = 600; // 10 minutes — bounds the Entra redi
 
 // Real, browser-enforced ceiling on a single cookie's `name=value` pair
 // (RFC 6265-derived; Chrome/Firefox/Safari all converge around this figure).
-// Unlike the module's previous 8192 constant, this is not a value we can
-// safely raise — exceeding it makes the browser drop the cookie silently.
+// This is not a value we can safely raise — exceeding it makes the browser
+// drop the cookie silently.
 const COOKIE_MAX_BYTES = 4093;
 
 export class CookieBudgetExceededError extends Error {
@@ -75,50 +86,59 @@ function verify(token: string, signingKey: Buffer): string | null {
   }
 }
 
-type AccessPart = Omit<SessionPayload, 'rt'>;
-type RefreshPart = Pick<SessionPayload, 'rt'>;
-
-/** Signs the session payload and returns both `Set-Cookie` header values —
- * `[accessCookie, refreshCookie]` — that together represent the session.
- * Both must be set; both must be present and valid to reconstruct the
- * session via `verifySessionCookie`. */
-export function signSessionCookie(payload: SessionPayload, signingKey: Buffer): [string, string] {
-  const { rt, ...accessPart } = payload;
-  const accessPayload: AccessPart = accessPart;
-  const refreshPayload: RefreshPart = { rt };
-
-  const accessToken = sign(JSON.stringify(accessPayload), signingKey);
-  const accessCookie = `${SESSION_COOKIE_NAME}=${accessToken}; ${COOKIE_ATTRIBUTES}`;
-  assertByteBudget(accessCookie, COOKIE_MAX_BYTES);
-
-  const refreshToken = sign(JSON.stringify(refreshPayload), signingKey);
-  const refreshCookie = `${REFRESH_COOKIE_NAME}=${refreshToken}; ${COOKIE_ATTRIBUTES}`;
-  assertByteBudget(refreshCookie, COOKIE_MAX_BYTES);
-
-  return [accessCookie, refreshCookie];
+function signOne(name: string, value: unknown, signingKey: Buffer): string {
+  const token = sign(JSON.stringify(value), signingKey);
+  const setCookie = `${name}=${token}; ${COOKIE_ATTRIBUTES}`;
+  assertByteBudget(setCookie, COOKIE_MAX_BYTES);
+  return setCookie;
 }
 
-/** Verifies and parses the session's two raw cookie values (the `Cookie`
- * header's values for `SESSION_COOKIE_NAME` and `REFRESH_COOKIE_NAME`, not
- * the full `Set-Cookie` strings). Returns `null` if either is missing,
- * malformed, tampered, or signed with a different key — never throws. */
-export function verifySessionCookie(
-  accessCookieValue: string | undefined,
-  refreshCookieValue: string | undefined,
-  signingKey: Buffer
-): SessionPayload | null {
-  if (!accessCookieValue || !refreshCookieValue) return null;
-  const accessJson = verify(accessCookieValue, signingKey);
-  if (accessJson === null) return null;
-  const refreshJson = verify(refreshCookieValue, signingKey);
-  if (refreshJson === null) return null;
+function verifyOne<T>(cookieValue: string | undefined, signingKey: Buffer): T | null {
+  if (!cookieValue) return null;
+  const json = verify(cookieValue, signingKey);
+  if (json === null) return null;
   try {
-    const access = JSON.parse(accessJson) as AccessPart;
-    const refresh = JSON.parse(refreshJson) as RefreshPart;
-    return { ...access, ...refresh };
+    return JSON.parse(json) as T;
   } catch {
     return null;
   }
+}
+
+type IdentityPart = Pick<SessionPayload, 'sub' | 'upn' | 'exp'>;
+
+/** Signs the session payload and returns three `Set-Cookie` header values —
+ * `[accessCookie, refreshCookie, identityCookie]` — that together represent
+ * the session. All three must be set; all three must be present and valid
+ * to reconstruct the session via `verifySessionCookie`. */
+export function signSessionCookie(
+  payload: SessionPayload,
+  signingKey: Buffer
+): [string, string, string] {
+  const accessCookie = signOne(SESSION_COOKIE_NAME, { at: payload.at }, signingKey);
+  const refreshCookie = signOne(REFRESH_COOKIE_NAME, { rt: payload.rt }, signingKey);
+  const identityPayload: IdentityPart = { sub: payload.sub, upn: payload.upn, exp: payload.exp };
+  const identityCookie = signOne(IDENTITY_COOKIE_NAME, identityPayload, signingKey);
+  return [accessCookie, refreshCookie, identityCookie];
+}
+
+/** Verifies and parses the session's three raw cookie values (the `Cookie`
+ * header's values for `SESSION_COOKIE_NAME`, `REFRESH_COOKIE_NAME`, and
+ * `IDENTITY_COOKIE_NAME` — not the full `Set-Cookie` strings). Returns
+ * `null` if any is missing, malformed, tampered, or signed with a different
+ * key — never throws. */
+export function verifySessionCookie(
+  accessCookieValue: string | undefined,
+  refreshCookieValue: string | undefined,
+  identityCookieValue: string | undefined,
+  signingKey: Buffer
+): SessionPayload | null {
+  const access = verifyOne<{ at: string }>(accessCookieValue, signingKey);
+  if (access === null) return null;
+  const refresh = verifyOne<{ rt: string }>(refreshCookieValue, signingKey);
+  if (refresh === null) return null;
+  const identity = verifyOne<IdentityPart>(identityCookieValue, signingKey);
+  if (identity === null) return null;
+  return { ...access, ...refresh, ...identity };
 }
 
 /** Signs the PKCE payload and returns the full `Set-Cookie` header value,
@@ -148,13 +168,14 @@ export function clearPkceCookie(): string {
   return `${PKCE_COOKIE_NAME}=; ${COOKIE_ATTRIBUTES}; Max-Age=0`;
 }
 
-/** Returns `Set-Cookie` header values that immediately expire both session
- * cookies — used when a valid-looking session turns out to be unusable
- * (e.g. only one of the pair survived) to avoid leaving a half-session
- * cookie around. */
-export function clearSessionCookies(): [string, string] {
+/** Returns `Set-Cookie` header values that immediately expire all three
+ * session cookies — used when a valid-looking session turns out to be
+ * unusable (e.g. only some of the trio survived) to avoid leaving a
+ * half-session behind. */
+export function clearSessionCookies(): [string, string, string] {
   return [
     `${SESSION_COOKIE_NAME}=; ${COOKIE_ATTRIBUTES}; Max-Age=0`,
     `${REFRESH_COOKIE_NAME}=; ${COOKIE_ATTRIBUTES}; Max-Age=0`,
+    `${IDENTITY_COOKIE_NAME}=; ${COOKIE_ATTRIBUTES}; Max-Age=0`,
   ];
 }

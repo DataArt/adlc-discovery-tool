@@ -2,6 +2,7 @@ import { randomBytes } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import {
   CookieBudgetExceededError,
+  IDENTITY_COOKIE_NAME,
   PKCE_COOKIE_NAME,
   REFRESH_COOKIE_NAME,
   SESSION_COOKIE_NAME,
@@ -33,23 +34,36 @@ describe('cookie name constants', () => {
   it('match the Design.md-specified exact values', () => {
     expect(SESSION_COOKIE_NAME).toBe('__Host-docs_session');
     expect(REFRESH_COOKIE_NAME).toBe('__Host-docs_refresh');
+    expect(IDENTITY_COOKIE_NAME).toBe('__Host-docs_identity');
     expect(PKCE_COOKIE_NAME).toBe('__Host-docs_pkce');
   });
 });
 
-describe('session cookie (split across two cookies)', () => {
+describe('session cookie (split across three cookies)', () => {
   it('round-trips sign -> verify', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
-    const accessValue = extractValue(accessSetCookie);
-    const refreshValue = extractValue(refreshSetCookie);
-    expect(verifySessionCookie(accessValue, refreshValue, KEY)).toEqual(SESSION_PAYLOAD);
+    const [accessSetCookie, refreshSetCookie, identitySetCookie] = signSessionCookie(
+      SESSION_PAYLOAD,
+      KEY
+    );
+    expect(
+      verifySessionCookie(
+        extractValue(accessSetCookie),
+        extractValue(refreshSetCookie),
+        extractValue(identitySetCookie),
+        KEY
+      )
+    ).toEqual(SESSION_PAYLOAD);
   });
 
-  it('sets the required cookie attributes and correct names on both cookies', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
+  it('sets the required cookie attributes and correct names on all three cookies', () => {
+    const [accessSetCookie, refreshSetCookie, identitySetCookie] = signSessionCookie(
+      SESSION_PAYLOAD,
+      KEY
+    );
     expect(accessSetCookie).toContain(`${SESSION_COOKIE_NAME}=`);
     expect(refreshSetCookie).toContain(`${REFRESH_COOKIE_NAME}=`);
-    for (const setCookie of [accessSetCookie, refreshSetCookie]) {
+    expect(identitySetCookie).toContain(`${IDENTITY_COOKIE_NAME}=`);
+    for (const setCookie of [accessSetCookie, refreshSetCookie, identitySetCookie]) {
       expect(setCookie).toContain('HttpOnly');
       expect(setCookie).toContain('Secure');
       expect(setCookie).toContain('SameSite=Lax');
@@ -58,35 +72,63 @@ describe('session cookie (split across two cookies)', () => {
   });
 
   it('rejects a tampered access-cookie signature', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
+    const [accessSetCookie, refreshSetCookie, identitySetCookie] = signSessionCookie(
+      SESSION_PAYLOAD,
+      KEY
+    );
     const [payload] = extractValue(accessSetCookie).split('.');
     const tampered = `${payload}.deadbeef`;
-    expect(verifySessionCookie(tampered, extractValue(refreshSetCookie), KEY)).toBeNull();
+    expect(
+      verifySessionCookie(
+        tampered,
+        extractValue(refreshSetCookie),
+        extractValue(identitySetCookie),
+        KEY
+      )
+    ).toBeNull();
   });
 
-  it('rejects a cookie pair signed with a different key', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
+  it('rejects a cookie trio signed with a different key', () => {
+    const [accessSetCookie, refreshSetCookie, identitySetCookie] = signSessionCookie(
+      SESSION_PAYLOAD,
+      KEY
+    );
     expect(
-      verifySessionCookie(extractValue(accessSetCookie), extractValue(refreshSetCookie), OTHER_KEY)
+      verifySessionCookie(
+        extractValue(accessSetCookie),
+        extractValue(refreshSetCookie),
+        extractValue(identitySetCookie),
+        OTHER_KEY
+      )
     ).toBeNull();
   });
 
   it('rejects malformed input without throwing', () => {
-    expect(verifySessionCookie('not-a-valid-token', 'also-not-valid', KEY)).toBeNull();
-    expect(verifySessionCookie('', '', KEY)).toBeNull();
-    expect(verifySessionCookie('a.b.c', 'd.e.f', KEY)).toBeNull();
+    expect(
+      verifySessionCookie('not-a-valid-token', 'also-not-valid', 'also-not-valid', KEY)
+    ).toBeNull();
+    expect(verifySessionCookie('', '', '', KEY)).toBeNull();
+    expect(verifySessionCookie('a.b.c', 'd.e.f', 'g.h.i', KEY)).toBeNull();
   });
 
-  it('rejects when either half of the pair is missing', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
-    expect(verifySessionCookie(extractValue(accessSetCookie), undefined, KEY)).toBeNull();
-    expect(verifySessionCookie(undefined, extractValue(refreshSetCookie), KEY)).toBeNull();
+  it('rejects when any one of the trio is missing', () => {
+    const [accessSetCookie, refreshSetCookie, identitySetCookie] = signSessionCookie(
+      SESSION_PAYLOAD,
+      KEY
+    );
+    const a = extractValue(accessSetCookie);
+    const r = extractValue(refreshSetCookie);
+    const i = extractValue(identitySetCookie);
+    expect(verifySessionCookie(undefined, r, i, KEY)).toBeNull();
+    expect(verifySessionCookie(a, undefined, i, KEY)).toBeNull();
+    expect(verifySessionCookie(a, r, undefined, KEY)).toBeNull();
   });
 
   it('serializes a representative payload with each cookie under the 4093-byte budget', () => {
-    const [accessSetCookie, refreshSetCookie] = signSessionCookie(SESSION_PAYLOAD, KEY);
-    expect(() => assertByteBudget(accessSetCookie, 4093)).not.toThrow();
-    expect(() => assertByteBudget(refreshSetCookie, 4093)).not.toThrow();
+    const setCookies = signSessionCookie(SESSION_PAYLOAD, KEY);
+    for (const setCookie of setCookies) {
+      expect(() => assertByteBudget(setCookie, 4093)).not.toThrow();
+    }
   });
 });
 
@@ -106,23 +148,25 @@ describe('assertByteBudget', () => {
     expect(() => signSessionCookie(hugePayload, KEY)).toThrow(CookieBudgetExceededError);
   });
 
-  it('accepts a realistic large token pair split across two cookies, each within budget (sized to reflect production-observed combined token sizes)', () => {
+  it('accepts a realistic large token pair, each in its own cookie, within budget (sized to reflect production-observed combined token sizes)', () => {
     const largeTokenPayload = {
       ...SESSION_PAYLOAD,
-      at: 'a'.repeat(2200),
-      rt: 'r'.repeat(2200),
+      at: 'a'.repeat(2900),
+      rt: 'r'.repeat(2900),
     };
     expect(() => signSessionCookie(largeTokenPayload, KEY)).not.toThrow();
   });
 });
 
 describe('clearSessionCookies', () => {
-  it('expires both session cookies immediately', () => {
-    const [accessClear, refreshClear] = clearSessionCookies();
+  it('expires all three session cookies immediately', () => {
+    const [accessClear, refreshClear, identityClear] = clearSessionCookies();
     expect(accessClear).toContain(`${SESSION_COOKIE_NAME}=`);
     expect(accessClear).toContain('Max-Age=0');
     expect(refreshClear).toContain(`${REFRESH_COOKIE_NAME}=`);
     expect(refreshClear).toContain('Max-Age=0');
+    expect(identityClear).toContain(`${IDENTITY_COOKIE_NAME}=`);
+    expect(identityClear).toContain('Max-Age=0');
   });
 });
 

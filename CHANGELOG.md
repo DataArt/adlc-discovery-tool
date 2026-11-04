@@ -1,3 +1,9 @@
+## [1.10.1](https://github.com/DataArt/adlc-discovery-tool/compare/v1.10.0...v1.10.1) (2026-11-04)
+
+### Bug Fixes
+
+- **web:** make giscus opt-in and public-repo-only, bump dompurify ([7130238](https://github.com/DataArt/adlc-discovery-tool/commit/71302386d7bad87b89c59f219095ddc2fad94c7a))
+
 ## [1.10.0](https://github.com/DataArt/adlc-discovery-tool/compare/v1.9.0...v1.10.0) (2026-11-04)
 
 ### Features

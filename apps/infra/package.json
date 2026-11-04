@@ -7,6 +7,7 @@
     "constructs": "^10.0.0"
   },
   "devDependencies": {
-    "aws-cdk": "2.1131.0"
+    "aws-cdk": "2.1131.0",
+    "cdk-nag": "2.38.2"
   }
 }

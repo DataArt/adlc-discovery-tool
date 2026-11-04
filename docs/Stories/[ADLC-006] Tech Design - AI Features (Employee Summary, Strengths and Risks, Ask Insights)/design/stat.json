@@ -1,0 +1,405 @@
+{
+  "schema_version": 2,
+  "lifecycle": "design",
+  "design_revision": 1,
+  "ticket": "ADLC-006",
+  "tracking_started_at": "2026-10-12T07:41:15.684Z",
+  "ticket_created_at": null,
+  "ticket_created_source": null,
+  "started_at": "2026-10-12T07:41:15.728Z",
+  "completed_at": null,
+  "coverage": "from_tracking_start",
+  "stages": [
+    {
+      "id": "context-gathering",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "87b0edd9-e8c1-4a78-938b-64e89a970356",
+          "started_at": "2026-10-12T07:41:15.728Z",
+          "ended_at": "2026-10-12T07:50:56.540Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "ceremony",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "9bba4fe9-84ad-4e98-b0eb-7115664bd187",
+          "started_at": "2026-10-12T07:50:56.583Z",
+          "ended_at": "2026-10-12T07:55:47.693Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "frame",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "da658df7-62b4-4ff6-859a-02388860c9eb",
+          "started_at": "2026-10-12T07:56:18.449Z",
+          "ended_at": "2026-10-12T08:06:38.673Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "7e2e9669-e080-4bed-acf5-aced9a1bd684",
+          "started_at": "2026-10-12T08:06:49.078Z",
+          "ended_at": "2026-10-12T09:44:33.395Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "evaluate",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "a21950a8-f028-449c-970c-a15ace81dda9",
+          "started_at": "2026-10-12T09:44:52.591Z",
+          "ended_at": "2026-10-12T21:19:51.935Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "d86e6d2f-e83b-40cf-a9e1-374dff82df4b",
+          "started_at": "2026-10-12T21:21:06.183Z",
+          "ended_at": "2026-10-12T23:20:54.183Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "review-gate",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "977ad296-f63e-4d24-923d-b19bccc307dd",
+          "started_at": "2026-10-12T23:24:30.594Z",
+          "ended_at": "2026-10-13T08:00:22.741Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "id": "address-feedback",
+      "status": "active",
+      "attempts": [
+        {
+          "id": "c759a092-f054-4b75-bcde-468dd267e886",
+          "started_at": "2026-10-13T08:00:22.821Z",
+          "ended_at": null,
+          "trigger": "review_feedback",
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "id": "publish",
+      "status": "pending",
+      "attempts": []
+    },
+    {
+      "id": "completion",
+      "status": "pending",
+      "attempts": []
+    }
+  ],
+  "steps": [],
+  "intervals": [
+    {
+      "id": "3538f75c-6cbe-4203-aab7-900289b0be8f",
+      "stage_id": "context-gathering",
+      "stage_attempt_id": "87b0edd9-e8c1-4a78-938b-64e89a970356",
+      "step": null,
+      "kind": "work",
+      "activity": "investigation",
+      "started_at": "2026-10-12T07:41:15.728Z",
+      "ended_at": "2026-10-12T07:41:20.162Z",
+      "last_observed_at": "2026-10-12T07:41:20.162Z"
+    },
+    {
+      "id": "48666cb2-f566-4884-a2c8-b5d4ad38aeb1",
+      "stage_id": "context-gathering",
+      "stage_attempt_id": "87b0edd9-e8c1-4a78-938b-64e89a970356",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting context-gathering sign-off",
+      "started_at": "2026-10-12T07:41:20.162Z",
+      "ended_at": "2026-10-12T07:50:56.540Z",
+      "last_observed_at": "2026-10-12T07:50:56.540Z"
+    },
+    {
+      "id": "541aacb4-b150-41f3-86da-b8d00f09ac66",
+      "stage_id": "ceremony",
+      "stage_attempt_id": "9bba4fe9-84ad-4e98-b0eb-7115664bd187",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-10-12T07:50:56.583Z",
+      "ended_at": "2026-10-12T07:55:47.693Z",
+      "last_observed_at": "2026-10-12T07:55:47.693Z"
+    },
+    {
+      "id": "13f74acf-aed1-4aa1-873f-935234a94348",
+      "stage_id": "frame",
+      "stage_attempt_id": "da658df7-62b4-4ff6-859a-02388860c9eb",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-10-12T07:56:18.449Z",
+      "ended_at": "2026-10-12T08:06:38.673Z",
+      "last_observed_at": "2026-10-12T08:06:38.673Z"
+    },
+    {
+      "id": "83f1d86e-2cc7-41b3-a92c-d35a9a3e4712",
+      "stage_id": "research",
+      "stage_attempt_id": "7e2e9669-e080-4bed-acf5-aced9a1bd684",
+      "step": null,
+      "kind": "work",
+      "activity": "investigation",
+      "started_at": "2026-10-12T08:06:49.078Z",
+      "ended_at": "2026-10-12T09:44:33.395Z",
+      "last_observed_at": "2026-10-12T09:44:33.395Z"
+    },
+    {
+      "id": "bcdc043f-bb73-4efc-a1aa-55040eacef1c",
+      "stage_id": "evaluate",
+      "stage_attempt_id": "a21950a8-f028-449c-970c-a15ace81dda9",
+      "step": null,
+      "kind": "work",
+      "activity": "review",
+      "started_at": "2026-10-12T09:44:52.591Z",
+      "ended_at": "2026-10-12T21:19:51.935Z",
+      "last_observed_at": "2026-10-12T21:19:51.935Z"
+    },
+    {
+      "id": "1441a77e-b54b-410d-b618-c0684409703a",
+      "stage_id": "solution",
+      "stage_attempt_id": "d86e6d2f-e83b-40cf-a9e1-374dff82df4b",
+      "step": null,
+      "kind": "work",
+      "activity": "documentation",
+      "started_at": "2026-10-12T21:21:06.183Z",
+      "ended_at": "2026-10-12T21:42:10.588Z",
+      "last_observed_at": "2026-10-12T21:42:10.588Z"
+    },
+    {
+      "id": "76917d96-81b8-4bbb-9d06-7b031b0c468c",
+      "stage_id": "solution",
+      "stage_attempt_id": "d86e6d2f-e83b-40cf-a9e1-374dff82df4b",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting solution sign-off",
+      "started_at": "2026-10-12T21:42:10.588Z",
+      "ended_at": "2026-10-12T23:20:54.183Z",
+      "last_observed_at": "2026-10-12T23:20:54.183Z"
+    },
+    {
+      "id": "46c9c88f-8aa8-44fe-9d67-27bf56f05317",
+      "stage_id": "review-gate",
+      "stage_attempt_id": "977ad296-f63e-4d24-923d-b19bccc307dd",
+      "step": null,
+      "kind": "work",
+      "activity": "review",
+      "started_at": "2026-10-12T23:24:30.594Z",
+      "ended_at": "2026-10-12T23:25:45.487Z",
+      "last_observed_at": "2026-10-12T23:25:45.487Z"
+    },
+    {
+      "id": "73c94844-3034-4e0d-aa84-7401b00adc16",
+      "stage_id": "review-gate",
+      "stage_attempt_id": "977ad296-f63e-4d24-923d-b19bccc307dd",
+      "step": null,
+      "kind": "wait",
+      "reason": "approval",
+      "detail": "Awaiting MR 626 approval or comments, no approver specified",
+      "started_at": "2026-10-12T23:25:45.487Z",
+      "ended_at": "2026-10-13T08:00:22.741Z",
+      "last_observed_at": "2026-10-13T08:00:22.741Z"
+    },
+    {
+      "id": "fa3498d7-62aa-467d-af41-3d23ccaea803",
+      "stage_id": "address-feedback",
+      "stage_attempt_id": "c759a092-f054-4b75-bcde-468dd267e886",
+      "step": null,
+      "kind": "work",
+      "activity": "review",
+      "started_at": "2026-10-13T08:00:22.821Z",
+      "ended_at": null,
+      "last_observed_at": "2026-10-13T08:00:22.821Z"
+    }
+  ],
+  "checks": [
+    {
+      "id": "context-gathering-signoff-01",
+      "stage_id": "context-gathering",
+      "stage_attempt_id": "87b0edd9-e8c1-4a78-938b-64e89a970356",
+      "step": null,
+      "design_revision": 0,
+      "name": "Context Gathering sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T07:42:24.388Z",
+      "ended_at": "2026-10-12T07:42:24.388Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied 'yes, continue' to Step 5 sign-off",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "ceremony-signoff-01",
+      "stage_id": "ceremony",
+      "stage_attempt_id": "9bba4fe9-84ad-4e98-b0eb-7115664bd187",
+      "step": null,
+      "design_revision": 0,
+      "name": "Ceremony sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T07:53:13.258Z",
+      "ended_at": "2026-10-12T07:53:13.258Z",
+      "result": "passed",
+      "evidence_ref": "Branch docs/adlc-006-ai-features-tech-design confirmed via git branch --show-current",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "frame-decisions-signoff-01",
+      "stage_id": "frame",
+      "stage_attempt_id": "da658df7-62b4-4ff6-859a-02388860c9eb",
+      "step": null,
+      "design_revision": 0,
+      "name": "Frame decisions sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T08:01:25.146Z",
+      "ended_at": "2026-10-12T08:01:25.146Z",
+      "result": "passed",
+      "evidence_ref": "Developer confirmed 3-decision breakdown: Employee Summary, Strengths and Risks, Ask Insights",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "frame-signoff-01",
+      "stage_id": "frame",
+      "stage_attempt_id": "da658df7-62b4-4ff6-859a-02388860c9eb",
+      "step": null,
+      "design_revision": 0,
+      "name": "Frame sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T08:03:56.644Z",
+      "ended_at": "2026-10-12T08:03:56.644Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied 'good to go' to Step 3 sign-off",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "research-signoff-01",
+      "stage_id": "research",
+      "stage_attempt_id": "7e2e9669-e080-4bed-acf5-aced9a1bd684",
+      "step": null,
+      "design_revision": 0,
+      "name": "Research sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T09:40:45.808Z",
+      "ended_at": "2026-10-12T09:40:45.808Z",
+      "result": "passed",
+      "evidence_ref": "Developer replied 'good to go, continue to evaluate' after reviewing all 6 decisions plus the cross-cutting Azure AI Foundry option",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "fdcf2bff-5d87-42e4-b605-6a96eff48a0c",
+      "stage_id": "evaluate",
+      "stage_attempt_id": "a21950a8-f028-449c-970c-a15ace81dda9",
+      "step": null,
+      "design_revision": 0,
+      "name": "Evaluate sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T21:19:48.136Z",
+      "ended_at": "2026-10-12T21:19:48.136Z",
+      "result": "passed",
+      "evidence_ref": "Developer reviewed combined 6-decision Evaluate summary and replied: ok, lets move next",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "c7221284-b463-4219-9929-adb3c138f548",
+      "stage_id": "solution",
+      "stage_attempt_id": "d86e6d2f-e83b-40cf-a9e1-374dff82df4b",
+      "step": null,
+      "design_revision": 0,
+      "name": "Solution sign-off",
+      "kind": "acceptance",
+      "started_at": "2026-10-12T23:20:48.818Z",
+      "ended_at": "2026-10-12T23:20:48.818Z",
+      "result": "passed",
+      "evidence_ref": "Developer approved all solution artifacts; Efforts.md Estimate column left pending by explicit developer decision ('will set numbers later, skip for now'), then instructed to proceed to Review Gate without waiting on it",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "0238fcc5-f8cb-41b3-8e10-0058f17456aa",
+      "stage_id": "address-feedback",
+      "stage_attempt_id": "c759a092-f054-4b75-bcde-468dd267e886",
+      "step": null,
+      "design_revision": 1,
+      "name": "Design approval",
+      "kind": "acceptance",
+      "started_at": "2026-10-13T08:00:31.955Z",
+      "ended_at": "2026-10-13T08:00:31.955Z",
+      "result": "failed",
+      "evidence_ref": "Developer raised concerns on MR 626: (1) 'Generator' component naming has no concrete technical shape (class/function/API?); (2) Synthetic AI Container App's HTTP server framework and BFF-to-Synthetic-AI auth model were never specified",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    }
+  ],
+  "usage_samples": [],
+  "metrics": {
+    "as_of": "2026-10-13T08:00:31.958Z",
+    "lead_time_seconds": null,
+    "cycle_time_seconds": null,
+    "observed_work_seconds": 49818.72699999999,
+    "observed_wait_seconds": 37377.227,
+    "open_work_seconds": 0,
+    "open_wait_seconds": 0,
+    "wait_seconds_to_date": 37377.227,
+    "unclassified_seconds": 360.32000000001426,
+    "rework_seconds": 0,
+    "blocked_seconds": 0,
+    "approval_wait_seconds": 37377.227,
+    "failed_checks": 1,
+    "first_pass_verification_rate": 0.8571428571428571,
+    "human_reported_seconds": null,
+    "tokens": null,
+    "token_coverage": "unavailable"
+  }
+}

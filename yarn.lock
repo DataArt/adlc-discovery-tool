@@ -60,6 +60,7 @@ __metadata:
   dependencies:
     aws-cdk: "npm:2.1131.0"
     aws-cdk-lib: "npm:2.261.0"
+    cdk-nag: "npm:2.38.2"
     constructs: "npm:^10.0.0"
   languageName: unknown
   linkType: soft
@@ -4126,21 +4127,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:5.0.9, brace-expansion@npm:^5.0.8":
-  version: 5.0.9
-  resolution: "brace-expansion@npm:5.0.9"
+"brace-expansion@npm:^5.0.12":
+  version: 5.0.12
+  resolution: "brace-expansion@npm:5.0.12"
   dependencies:
     balanced-match: "npm:^4.0.2"
-  checksum: 10c0/3dea38884a1c3c8b1c9c44a7402a0c76fca460f70cffb3127242b0b4cbf4472019e022ade021eec44838ff19f1dac2625dfd11dd459d7e1e055b0698a8d52fec
-  languageName: node
-  linkType: hard
-
-"brace-expansion@npm:^5.0.5":
-  version: 5.0.7
-  resolution: "brace-expansion@npm:5.0.7"
-  dependencies:
-    balanced-match: "npm:^4.0.2"
-  checksum: 10c0/4769109c3c082de178e449a371bcad50d51ab468f644bce2dd9188efe0cf0a080ed102105d7fc8577382cedc45bad7e6443a91bf3d8102264ee8cf927dbaf205
+  checksum: 10c0/a40ac64d3bdb5bb222456514d3633c1f627f03b844f509c69e70f98b78be0ce85e21b44bbfecdd0ddd4cc0855ca4242b41ea96ddccf88c7c3c7a84405474bb3a
   languageName: node
   linkType: hard
 
@@ -4218,6 +4210,16 @@ __metadata:
   version: 2.0.1
   resolution: "ccount@npm:2.0.1"
   checksum: 10c0/3939b1664390174484322bc3f45b798462e6c07ee6384cb3d645e0aa2f318502d174845198c1561930e1d431087f74cf1fe291ae9a4722821a9f4ba67e574350
+  languageName: node
+  linkType: hard
+
+"cdk-nag@npm:2.38.2":
+  version: 2.38.2
+  resolution: "cdk-nag@npm:2.38.2"
+  peerDependencies:
+    aws-cdk-lib: ^2.176.0
+    constructs: ^10.5.1
+  checksum: 10c0/9dbac8ab7040a5499e8b86d4199b725cdf32fbac028b0168f8c48ca82525a181db1568e94a3666bdcffabedb3c842dd7719d0f9afcf3072bebfddbfbf0f4bf75
   languageName: node
   linkType: hard
 

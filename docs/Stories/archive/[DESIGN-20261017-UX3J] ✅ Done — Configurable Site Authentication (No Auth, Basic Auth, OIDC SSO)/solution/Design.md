@@ -19,7 +19,6 @@ flowchart TD
         REDIRECT["redirect.ts\nsame-origin relative-path guard"]:::lib
     end
 
-    HB --> COOKIE
     HO --> COOKIE
     HO --> JWKS
     HO --> PKCE

@@ -1,0 +1,797 @@
+{
+  "schema_version": 2,
+  "lifecycle": "dev",
+  "ticket": "DESIGN-20261017-UX3J",
+  "author": "Anton Merkulov",
+  "tracking_started_at": "2026-11-03T22:58:04.908Z",
+  "ticket_created_at": null,
+  "ticket_created_source": null,
+  "started_at": "2026-11-03T22:58:04.953Z",
+  "completed_at": null,
+  "coverage": "from_tracking_start",
+  "stages": [
+    {
+      "id": "context",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "04ac946a-ad81-4efe-afba-32638ed5a9f4",
+          "started_at": "2026-11-03T22:58:04.953Z",
+          "ended_at": "2026-11-03T22:58:07.997Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "ceremony",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "06a26319-1f95-440f-8e26-ff449ad41555",
+          "started_at": "2026-11-03T22:58:59.189Z",
+          "ended_at": "2026-11-03T22:58:59.238Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "plan",
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "af2c34d8-f909-4c11-b781-5052799a33d8",
+          "started_at": "2026-11-03T22:58:59.299Z",
+          "ended_at": "2026-11-03T23:16:52.601Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "implement",
+      "status": "waiting",
+      "attempts": [
+        {
+          "id": "946ae659-9508-4260-91f7-1bdc00610184",
+          "started_at": "2026-11-03T23:16:52.649Z",
+          "ended_at": null,
+          "trigger": "initial",
+          "outcome": null
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "test",
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    },
+    {
+      "id": "document",
+      "status": "pending",
+      "attempts": [],
+      "flags": []
+    }
+  ],
+  "steps": [
+    {
+      "id": "step-01",
+      "title": "Step 1",
+      "order": 1,
+      "plan_ref": "1-plan.md#step-1",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea",
+          "started_at": "2026-11-03T23:18:36.095Z",
+          "ended_at": "2026-11-03T23:20:39.480Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-02",
+      "title": "Step 2",
+      "order": 2,
+      "plan_ref": "1-plan.md#step-2",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "19790e7b-57bd-44f9-83a8-a89f3dfc6b41",
+          "started_at": "2026-11-03T23:23:29.916Z",
+          "ended_at": "2026-11-03T23:24:37.587Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-03",
+      "title": "Step 3",
+      "order": 3,
+      "plan_ref": "1-plan.md#step-3",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "2e54084b-a5a8-46e4-88ed-4f460371bf3d",
+          "started_at": "2026-11-03T23:27:27.129Z",
+          "ended_at": "2026-11-03T23:29:34.867Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-04",
+      "title": "Step 4",
+      "order": 4,
+      "plan_ref": "1-plan.md#step-4",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08",
+          "started_at": "2026-11-03T23:30:22.301Z",
+          "ended_at": "2026-11-03T23:32:37.719Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-05",
+      "title": "Step 5",
+      "order": 5,
+      "plan_ref": "1-plan.md#step-5",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "8dd07c12-be7a-4a35-b3a5-57c264167038",
+          "started_at": "2026-11-03T23:34:50.752Z",
+          "ended_at": "2026-11-03T23:37:00.289Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-06",
+      "title": "Step 6",
+      "order": 6,
+      "plan_ref": "1-plan.md#step-6",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "25ae7b07-d225-43a5-b60e-1b66a6e9b64e",
+          "started_at": "2026-11-03T23:38:37.369Z",
+          "ended_at": "2026-11-03T23:41:13.724Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-07",
+      "title": "Step 7",
+      "order": 7,
+      "plan_ref": "1-plan.md#step-7",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "02a52efe-3c57-4280-a653-3d50ddd62ac3",
+          "started_at": "2026-11-03T23:41:58.191Z",
+          "ended_at": "2026-11-03T23:44:36.078Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-08",
+      "title": "Step 8",
+      "order": 8,
+      "plan_ref": "1-plan.md#step-8",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe",
+          "started_at": "2026-11-03T23:46:18.738Z",
+          "ended_at": "2026-11-03T23:56:50.260Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-09",
+      "title": "Step 9",
+      "order": 9,
+      "plan_ref": "1-plan.md#step-9",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "29ef0183-7521-4607-a6a8-56e2540fdf01",
+          "started_at": "2026-11-03T23:58:39.481Z",
+          "ended_at": "2026-11-04T00:01:07.885Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-10",
+      "title": "Step 10",
+      "order": 10,
+      "plan_ref": "1-plan.md#step-10",
+      "depends_on": [],
+      "status": "completed",
+      "attempts": [
+        {
+          "id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4",
+          "started_at": "2026-11-04T00:01:32.757Z",
+          "ended_at": "2026-11-04T00:07:40.097Z",
+          "trigger": "initial",
+          "outcome": "completed"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "id": "step-11",
+      "title": "Deploy + validate oidc on real dev env (addendum)",
+      "order": 11,
+      "plan_ref": "1-plan.md#addendum-step-11",
+      "depends_on": ["step-08", "step-09", "step-10"],
+      "status": "waiting",
+      "attempts": [
+        {
+          "id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad",
+          "started_at": "2026-11-04T00:08:42.468Z",
+          "ended_at": null,
+          "trigger": "initial",
+          "outcome": null
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "intervals": [
+    {
+      "id": "c3218e15-d6e0-4088-99c1-a2d2bc2baf3f",
+      "stage_id": "context",
+      "stage_attempt_id": "04ac946a-ad81-4efe-afba-32638ed5a9f4",
+      "step": null,
+      "kind": "work",
+      "activity": "investigation",
+      "started_at": "2026-11-03T22:58:04.953Z",
+      "ended_at": "2026-11-03T22:58:07.997Z",
+      "last_observed_at": "2026-11-03T22:58:07.997Z"
+    },
+    {
+      "id": "44ee319c-8f53-4de5-98e0-5ea27c88fc4f",
+      "stage_id": "ceremony",
+      "stage_attempt_id": "06a26319-1f95-440f-8e26-ff449ad41555",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-11-03T22:58:59.189Z",
+      "ended_at": "2026-11-03T22:58:59.238Z",
+      "last_observed_at": "2026-11-03T22:58:59.238Z"
+    },
+    {
+      "id": "f5763a7a-cb17-4136-b705-4373b175b982",
+      "stage_id": "plan",
+      "stage_attempt_id": "af2c34d8-f909-4c11-b781-5052799a33d8",
+      "step": null,
+      "kind": "work",
+      "activity": "planning",
+      "started_at": "2026-11-03T22:58:59.299Z",
+      "ended_at": "2026-11-03T23:16:52.601Z",
+      "last_observed_at": "2026-11-03T23:16:52.601Z"
+    },
+    {
+      "id": "6546188f-a517-47ea-87f9-764633de4636",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": null,
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:16:52.649Z",
+      "ended_at": "2026-11-03T23:18:36.095Z",
+      "last_observed_at": "2026-11-03T23:18:36.095Z"
+    },
+    {
+      "id": "89956ff8-d748-45c7-adef-93617cecbbc7",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:18:36.095Z",
+      "ended_at": "2026-11-03T23:20:39.480Z",
+      "last_observed_at": "2026-11-03T23:20:39.480Z"
+    },
+    {
+      "id": "b7d055a3-7bc2-4aef-b84a-b5ce776eed48",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "19790e7b-57bd-44f9-83a8-a89f3dfc6b41"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:23:29.916Z",
+      "ended_at": "2026-11-03T23:24:37.587Z",
+      "last_observed_at": "2026-11-03T23:24:37.587Z"
+    },
+    {
+      "id": "065ce17d-bcd9-442d-a680-c5c05a07be85",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "2e54084b-a5a8-46e4-88ed-4f460371bf3d"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:27:27.129Z",
+      "ended_at": "2026-11-03T23:29:34.867Z",
+      "last_observed_at": "2026-11-03T23:29:34.867Z"
+    },
+    {
+      "id": "523b3a83-67cc-4fbb-b902-d58bb3b747ca",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:30:22.301Z",
+      "ended_at": "2026-11-03T23:32:37.719Z",
+      "last_observed_at": "2026-11-03T23:32:37.719Z"
+    },
+    {
+      "id": "b9e78f45-4c69-4295-9d45-da3354b068d6",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-05",
+        "attempt_id": "8dd07c12-be7a-4a35-b3a5-57c264167038"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:34:50.752Z",
+      "ended_at": "2026-11-03T23:37:00.289Z",
+      "last_observed_at": "2026-11-03T23:37:00.289Z"
+    },
+    {
+      "id": "0a0bffe9-eda8-456f-890f-a94c18e561bf",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-06",
+        "attempt_id": "25ae7b07-d225-43a5-b60e-1b66a6e9b64e"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:38:37.369Z",
+      "ended_at": "2026-11-03T23:41:13.724Z",
+      "last_observed_at": "2026-11-03T23:41:13.724Z"
+    },
+    {
+      "id": "ccdc53c3-2df9-4d12-bb06-6d63bcfe333b",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-07",
+        "attempt_id": "02a52efe-3c57-4280-a653-3d50ddd62ac3"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:41:58.191Z",
+      "ended_at": "2026-11-03T23:44:36.078Z",
+      "last_observed_at": "2026-11-03T23:44:36.078Z"
+    },
+    {
+      "id": "92fb9f63-7810-4540-9f22-e6e388f5e6f7",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-08",
+        "attempt_id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:46:18.738Z",
+      "ended_at": "2026-11-03T23:56:50.260Z",
+      "last_observed_at": "2026-11-03T23:56:50.260Z"
+    },
+    {
+      "id": "bb16134e-9062-42d3-9666-77a271bb3160",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-09",
+        "attempt_id": "29ef0183-7521-4607-a6a8-56e2540fdf01"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-03T23:58:39.481Z",
+      "ended_at": "2026-11-04T00:01:07.885Z",
+      "last_observed_at": "2026-11-04T00:01:07.885Z"
+    },
+    {
+      "id": "0a8b2e83-0450-4a08-a309-7b02202b5fbf",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-10",
+        "attempt_id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-04T00:01:32.757Z",
+      "ended_at": "2026-11-04T00:07:40.097Z",
+      "last_observed_at": "2026-11-04T00:07:40.097Z"
+    },
+    {
+      "id": "83960f0a-8296-4a09-9c4c-4b643f6a575c",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "kind": "work",
+      "activity": "implementation",
+      "started_at": "2026-11-04T00:08:42.468Z",
+      "ended_at": "2026-11-04T00:30:37.342Z",
+      "last_observed_at": "2026-11-04T00:30:37.342Z"
+    },
+    {
+      "id": "0a9e1282-2dda-4bc9-b824-5b3750d32c0e",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "kind": "wait",
+      "reason": "external_dependency",
+      "detail": null,
+      "started_at": "2026-11-04T00:30:37.342Z",
+      "ended_at": null,
+      "last_observed_at": "2026-11-04T00:30:37.342Z"
+    }
+  ],
+  "checks": [
+    {
+      "id": "5c7bc650-5ac5-413a-b30d-fe47bf0c99c5",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-01",
+        "attempt_id": "cb1a5cb6-f9c5-4e23-b996-95f6f2263cea"
+      },
+      "name": "redirect.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:20:39.426Z",
+      "ended_at": "2026-11-03T23:20:39.426Z",
+      "result": "passed",
+      "evidence_ref": "8/8 tests pass via yarn nx run lambda-auth:test -- redirect.spec; developer confirmed 'correct'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "a370656c-ee9b-4965-b169-ef8af3d34400",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-02",
+        "attempt_id": "19790e7b-57bd-44f9-83a8-a89f3dfc6b41"
+      },
+      "name": "pkce.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:24:37.533Z",
+      "ended_at": "2026-11-03T23:24:37.533Z",
+      "result": "passed",
+      "evidence_ref": "6/6 tests pass via yarn nx run lambda-auth:test -- pkce.spec; developer confirmed 'works well'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "9a9a04f5-283c-4f67-9661-5c11b7b3d197",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-03",
+        "attempt_id": "2e54084b-a5a8-46e4-88ed-4f460371bf3d"
+      },
+      "name": "cookie.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:29:34.801Z",
+      "ended_at": "2026-11-03T23:29:34.801Z",
+      "result": "passed",
+      "evidence_ref": "13/13 tests pass via yarn nx run lambda-auth:test -- cookie.spec; developer confirmed 'all good'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "5a34aa7b-ca4e-427b-b1b5-27fcb53ae7c4",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-04",
+        "attempt_id": "68d2a6c4-4181-4b2f-933b-a63ff7ae1c08"
+      },
+      "name": "jwks.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:32:37.670Z",
+      "ended_at": "2026-11-03T23:32:37.670Z",
+      "result": "passed",
+      "evidence_ref": "5/5 tests pass via yarn nx run lambda-auth:test -- jwks.spec; typecheck clean; developer confirmed 'confirmed, mark step 4 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "9beb3cd4-d6a7-4ca6-b093-0848a9cddab4",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-05",
+        "attempt_id": "8dd07c12-be7a-4a35-b3a5-57c264167038"
+      },
+      "name": "handler-none.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:37:00.240Z",
+      "ended_at": "2026-11-03T23:37:00.240Z",
+      "result": "passed",
+      "evidence_ref": "3/3 tests pass via yarn nx run lambda-auth:test -- handler-none.spec; developer confirmed 'confirmed, mark step 5 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "c56e4cc5-e326-45e2-987c-384a3af265fb",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-06",
+        "attempt_id": "25ae7b07-d225-43a5-b60e-1b66a6e9b64e"
+      },
+      "name": "handler-basic.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:41:13.671Z",
+      "ended_at": "2026-11-03T23:41:13.671Z",
+      "result": "passed",
+      "evidence_ref": "7/7 tests pass via yarn nx run lambda-auth:test -- handler-basic.spec; content verbatim-diff confirmed; developer confirmed 'confirmed, mark step 6 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "6d0e2e32-5f57-4d0c-af87-6c3ff4bfe351",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-07",
+        "attempt_id": "02a52efe-3c57-4280-a653-3d50ddd62ac3"
+      },
+      "name": "build.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:44:36.035Z",
+      "ended_at": "2026-11-03T23:44:36.035Z",
+      "result": "passed",
+      "evidence_ref": "9/9 build.spec + 51/51 full suite pass; typecheck clean; live AUTH_MODE=none/bogus builds confirmed; developer confirmed 'confirmed, mark step 7 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "a370020f-09ea-4c8b-b455-2b394a0cda81",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-08",
+        "attempt_id": "2e2280cd-e69e-490c-bd79-141a5b05d6fe"
+      },
+      "name": "handler-oidc.spec",
+      "kind": "test",
+      "started_at": "2026-11-03T23:56:50.211Z",
+      "ended_at": "2026-11-03T23:56:50.211Z",
+      "result": "passed",
+      "evidence_ref": "13/13 handler-oidc.spec + 64/64 full suite pass; typecheck clean; live oidc build confirms jose bundled; developer confirmed the pass-through-vs-redirect divergence as acceptable and said 'mark step 8 done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "a5264e40-568f-41b8-a23a-9e94f8a8ac38",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-09",
+        "attempt_id": "29ef0183-7521-4607-a6a8-56e2540fdf01"
+      },
+      "name": "schema-docs-diff",
+      "kind": "acceptance",
+      "started_at": "2026-11-04T00:01:07.842Z",
+      "ended_at": "2026-11-04T00:01:07.842Z",
+      "result": "passed",
+      "evidence_ref": "git diff confirmed additive-only, no secrets; sm-push/sm-pull confirmed schema-agnostic; developer confirmed 'nice!'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "42633033-3647-443e-9c0d-39fd48d8d125",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-10",
+        "attempt_id": "5464a2bf-5aa7-4b64-a40a-708ed2ba21c4"
+      },
+      "name": "oidc-dev-build",
+      "kind": "build",
+      "started_at": "2026-11-04T00:07:40.052Z",
+      "ended_at": "2026-11-04T00:07:40.052Z",
+      "result": "passed",
+      "evidence_ref": "yarn nx run lambda-auth:build:dev succeeded; dist/index.js (actual build output) confirmed oidc-mode via 23 matches for handler-oidc/login.microsoftonline/jose; stray dist/lambda-handler.js identified as a stale pre-session artifact, not produced by any current build target; developer confirmed 'ok, then done'",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    },
+    {
+      "id": "83444334-cf01-488d-8230-c835ff9a0133",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "name": "jwks.spec",
+      "kind": "test",
+      "started_at": "2026-11-04T00:52:52.469Z",
+      "ended_at": "2026-11-04T00:52:52.469Z",
+      "result": "passed",
+      "evidence_ref": "70/70 full suite pass after Document-stage fixes (RF-3 test added); typecheck+lint clean",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
+    }
+  ],
+  "usage_samples": [],
+  "metrics": {
+    "as_of": "2026-11-04T00:54:17.594Z",
+    "lead_time_seconds": null,
+    "cycle_time_seconds": null,
+    "observed_work_seconds": 4539.972,
+    "observed_wait_seconds": 0,
+    "open_work_seconds": 0,
+    "open_wait_seconds": 1420.252,
+    "unclassified_seconds": 1012.462,
+    "rework_seconds": 0,
+    "blocked_seconds": 0,
+    "approval_wait_seconds": 0,
+    "failed_checks": 0,
+    "first_pass_verification_rate": 1,
+    "human_reported_seconds": null,
+    "tokens": null,
+    "token_coverage": "unavailable"
+  },
+  "quality": {
+    "version": 1,
+    "as_of": "2026-11-04T00:54:17.591Z",
+    "source": "2-report.md",
+    "source_sha256": "0df6daa43f5f3b9fde9e2cd26bce82ae3785528745aa452c31fdde15cc2d9970",
+    "findings": {
+      "total": 16,
+      "by_kind": {
+        "deviation": 1,
+        "bug": 1,
+        "design": 3,
+        "improve": 2,
+        "security": 3,
+        "performance": 0,
+        "docs": 6
+      },
+      "by_severity": {
+        "critical": 0,
+        "high": 3,
+        "medium": 4,
+        "low": 5,
+        "info": 4
+      },
+      "by_classification": {
+        "introduced": 11,
+        "pre-existing": 3,
+        "ruled-out": 0,
+        "advisory": 2
+      },
+      "by_resolution": {
+        "open": 0,
+        "fixed": 13,
+        "accepted": 1,
+        "tech-debt": 2,
+        "doc-updated": 0
+      },
+      "deviations_by_type": {
+        "contradiction": 0,
+        "extension": 0,
+        "omission": 1
+      },
+      "pr_review": {
+        "total": 5,
+        "by_kind": {
+          "deviation": 0,
+          "bug": 1,
+          "design": 0,
+          "improve": 2,
+          "security": 2,
+          "performance": 0,
+          "docs": 0
+        },
+        "by_severity": {
+          "critical": 0,
+          "high": 1,
+          "medium": 2,
+          "low": 1,
+          "info": 1
+        }
+      }
+    },
+    "tech_debt": {
+      "total": 3,
+      "ticketed": 0,
+      "unticketed": 3
+    },
+    "tests": {
+      "written": 63,
+      "passed": 70,
+      "failed": 0,
+      "skipped": 0,
+      "scopes": 1
+    },
+    "test_runs": {
+      "recorded": 9,
+      "failed": 0,
+      "errors": 0,
+      "interrupted": 0
+    },
+    "closure_issues": []
+  }
+}

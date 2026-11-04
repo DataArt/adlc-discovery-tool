@@ -164,9 +164,6 @@ export class CiStack extends cdk.Stack {
       assumedBy: new iam.WebIdentityPrincipal(oidcProvider.openIdConnectProviderArn, {
         StringEquals: {
           'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
-          // `event_name`, not `sub`, carries the pull_request distinction here (see
-          // repoSub's comment).
-          'token.actions.githubusercontent.com:event_name': 'pull_request',
         },
         StringLike: {
           'token.actions.githubusercontent.com:sub': this.repoSub(
@@ -175,6 +172,16 @@ export class CiStack extends cdk.Stack {
             githubRepo,
             githubRepoId
           ),
+          // GitHub sets `ref` to `refs/pull/<number>/merge` for pull_request-triggered
+          // runs. Using `ref` here — not `event_name` — because it's the claim already
+          // proven to evaluate correctly for DeployRole's `refs/heads/main` condition;
+          // `event_name` combined with a job-level `environment:` declaration was
+          // observed in production to make AssumeRoleWithWebIdentity fail with
+          // "Not authorized" on every attempt (confirmed via CloudTrail: the presented
+          // `sub` matched the trust policy exactly, so `event_name` was the only
+          // remaining unverified condition) — see aws-actions/configure-aws-credentials#454
+          // for the same class of environment/claims interaction.
+          'token.actions.githubusercontent.com:ref': 'refs/pull/*',
         },
       }),
       inlinePolicies: {

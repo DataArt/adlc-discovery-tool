@@ -8,8 +8,12 @@ const STORED_HASH = createHash('sha256').update(PASSWORD).digest('hex');
 const sendMock = vi.fn();
 
 vi.mock('@aws-sdk/client-secrets-manager', () => ({
-  SecretsManagerClient: vi.fn().mockImplementation(() => ({ send: sendMock })),
-  GetSecretValueCommand: vi.fn((input: unknown) => input),
+  SecretsManagerClient: vi.fn().mockImplementation(function () {
+    return { send: sendMock };
+  }),
+  GetSecretValueCommand: vi.fn(function (input: unknown) {
+    return input;
+  }),
 }));
 
 function basicAuthHeader(username: string, password: string): string {
@@ -39,19 +43,19 @@ beforeEach(() => {
 
 describe('lambda-auth handler', () => {
   it('rejects requests with no Authorization header', async () => {
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const result = await handler(cfEvent());
     expect(result).toMatchObject({ status: '401' });
   });
 
   it('rejects non-Basic auth schemes', async () => {
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const result = await handler(cfEvent('Bearer sometoken'));
     expect(result).toMatchObject({ status: '401' });
   });
 
   it('rejects malformed Basic credentials with no colon', async () => {
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const header = `Basic ${Buffer.from('nocolonhere').toString('base64')}`;
     const result = await handler(cfEvent(header));
     expect(result).toMatchObject({ status: '401' });
@@ -61,7 +65,7 @@ describe('lambda-auth handler', () => {
     sendMock.mockResolvedValue({
       SecretString: JSON.stringify({ DOCS_BASIC_AUTH_HASH: STORED_HASH }),
     });
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const result = await handler(cfEvent(basicAuthHeader('user', 'wrong-password')));
     expect(result).toMatchObject({ status: '401' });
   });
@@ -70,7 +74,7 @@ describe('lambda-auth handler', () => {
     sendMock.mockResolvedValue({
       SecretString: JSON.stringify({ DOCS_BASIC_AUTH_HASH: STORED_HASH }),
     });
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const event = cfEvent(basicAuthHeader('user', PASSWORD));
     const result = await handler(event);
     expect(result).toBe(event.Records[0].cf.request);
@@ -78,7 +82,7 @@ describe('lambda-auth handler', () => {
 
   it('rejects when the Secrets Manager lookup fails', async () => {
     sendMock.mockRejectedValue(new Error('boom'));
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const result = await handler(cfEvent(basicAuthHeader('user', PASSWORD)));
     expect(result).toMatchObject({ status: '401' });
   });
@@ -87,7 +91,7 @@ describe('lambda-auth handler', () => {
     sendMock.mockResolvedValue({
       SecretString: JSON.stringify({ DOCS_BASIC_AUTH_HASH: 'not-a-hex-hash' }),
     });
-    const { handler } = await import('./handler');
+    const { handler } = await import('./handler-basic');
     const result = await handler(cfEvent(basicAuthHeader('user', PASSWORD)));
     expect(result).toMatchObject({ status: '401' });
   });

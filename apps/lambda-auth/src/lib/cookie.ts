@@ -57,6 +57,7 @@ export interface SessionPayload {
 export interface PkcePayload {
   v: string; // code verifier
   s: string; // state
+  p: string; // original request path to redirect back to after login
 }
 
 /** Throws if `cookieValue` exceeds `maxBytes` (default 4096, the common browser

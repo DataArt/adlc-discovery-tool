@@ -75,7 +75,7 @@ __metadata:
     "@types/node": "npm:^20.0.0"
     bcryptjs: "npm:^2.4.3"
     esbuild: "npm:^0.25.0"
-    jose: "npm:^6.0.0"
+    openid-client: "npm:^6.8.0"
     tsx: "npm:^4.0.0"
     typescript: "npm:^5.0.0"
   languageName: unknown
@@ -7054,7 +7054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jose@npm:^6.0.0":
+"jose@npm:^6.2.15":
   version: 6.2.15
   resolution: "jose@npm:6.2.15"
   checksum: 10c0/0e72e53ead0e01adc4598438f889e753622043806a7ba0c802f7cd7da17466e5a6167a63b4b4e67490944c9f88eb0dd5c81c05aca2c38a72718443632a7b37b5
@@ -8472,6 +8472,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"oauth4webapi@npm:^3.8.8":
+  version: 3.8.8
+  resolution: "oauth4webapi@npm:3.8.8"
+  checksum: 10c0/1f7d35ba8d7d5aa9ce9ec5959a4611ed2b5dd7830172b1546749b91dda8c53f7934e669c6f81e912c64e3ae4fc681d4d6ce149b42cc9d17db97162bf8765e028
+  languageName: node
+  linkType: hard
+
 "object-assign@npm:^4.0.1":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
@@ -8542,6 +8549,16 @@ __metadata:
     is-inside-container: "npm:^1.0.0"
     is-wsl: "npm:^3.1.0"
   checksum: 10c0/c86d0b94503d5f735f674158d5c5d339c25ec2927562f00ee74590727292ed23e1b8d9336cb41ffa7e1fa4d3641d29b199b4ea37c78cb557d72b511743e90ebb
+  languageName: node
+  linkType: hard
+
+"openid-client@npm:^6.8.0":
+  version: 6.8.9
+  resolution: "openid-client@npm:6.8.9"
+  dependencies:
+    jose: "npm:^6.2.15"
+    oauth4webapi: "npm:^3.8.8"
+  checksum: 10c0/6ec85b68a9a153acfa23b1fe2a2130ab829c1e2be43e6a270d93bb9e550a0d21eac8d3ae47ba75cac9adbbae1e4cb7a714bfc3a836649cfd4ba8392ce860be4e
   languageName: node
   linkType: hard
 

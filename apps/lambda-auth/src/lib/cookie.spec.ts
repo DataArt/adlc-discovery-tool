@@ -171,7 +171,7 @@ describe('clearSessionCookies', () => {
 });
 
 describe('PKCE cookie', () => {
-  const PKCE_PAYLOAD = { v: 'verifier-value', s: 'state-value' };
+  const PKCE_PAYLOAD = { v: 'verifier-value', s: 'state-value', p: '/docs/intro' };
 
   it('round-trips sign -> verify', () => {
     const setCookie = signPkceCookie(PKCE_PAYLOAD, KEY);
@@ -185,7 +185,7 @@ describe('PKCE cookie', () => {
   });
 
   it('also enforces the byte budget on an oversized PKCE payload', () => {
-    const hugePayload = { v: 'x'.repeat(10_000), s: 'state-value' };
+    const hugePayload = { v: 'x'.repeat(10_000), s: 'state-value', p: '/docs/intro' };
     expect(() => signPkceCookie(hugePayload, KEY)).toThrow(CookieBudgetExceededError);
   });
 

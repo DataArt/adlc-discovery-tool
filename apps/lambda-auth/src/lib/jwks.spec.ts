@@ -8,6 +8,7 @@ describe('verifySignature', () => {
   let validToken: string;
   let wrongKeyToken: string;
   let wrongIssuerToken: string;
+  let expiredButValidToken: string;
 
   beforeAll(async () => {
     const { publicKey, privateKey } = await generateKeyPair('RS256');
@@ -44,6 +45,13 @@ describe('verifySignature', () => {
       .setIssuedAt()
       .setExpirationTime('1h')
       .sign(otherPrivateKey);
+
+    // Signed 2 hours ago, expired 1 hour ago — but still validly signed.
+    expiredButValidToken = await new SignJWT({ sub: 'user-1' })
+      .setProtectedHeader({ alg: 'RS256', kid: 'key-1' })
+      .setIssuedAt(Math.floor(Date.now() / 1000) - 7200)
+      .setExpirationTime(Math.floor(Date.now() / 1000) - 3600)
+      .sign(privateKey);
   });
 
   it('accepts a validly-signed token against its own JWKS', async () => {
@@ -81,5 +89,13 @@ describe('verifySignature', () => {
         'https://login.microsoftonline.com/tenant-abc/v2.0'
       )
     ).resolves.toBe(false);
+  });
+
+  it('accepts an expired-but-validly-signed token (expiry is intentionally not enforced here)', async () => {
+    // Confirms the real jose clockTolerance setting doesn't conflate "expired"
+    // with "invalid signature" — handler-oidc.ts's own exp check (not this
+    // function) is what routes an expired token to the silent-refresh path
+    // instead of the fail-closed path.
+    await expect(verifySignature(expiredButValidToken, goodJwks)).resolves.toBe(true);
   });
 });

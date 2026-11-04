@@ -674,17 +674,35 @@
       "source": "developer",
       "exit_code": null,
       "signal": null
+    },
+    {
+      "id": "83444334-cf01-488d-8230-c835ff9a0133",
+      "stage_id": "implement",
+      "stage_attempt_id": "946ae659-9508-4260-91f7-1bdc00610184",
+      "step": {
+        "id": "step-11",
+        "attempt_id": "47d96aa8-6a80-4b2b-a529-b46d708d3cad"
+      },
+      "name": "jwks.spec",
+      "kind": "test",
+      "started_at": "2026-11-04T00:52:52.469Z",
+      "ended_at": "2026-11-04T00:52:52.469Z",
+      "result": "passed",
+      "evidence_ref": "70/70 full suite pass after Document-stage fixes (RF-3 test added); typecheck+lint clean",
+      "source": "developer",
+      "exit_code": null,
+      "signal": null
     }
   ],
   "usage_samples": [],
   "metrics": {
-    "as_of": "2026-11-04T00:41:58.911Z",
+    "as_of": "2026-11-04T00:54:17.594Z",
     "lead_time_seconds": null,
     "cycle_time_seconds": null,
     "observed_work_seconds": 4539.972,
     "observed_wait_seconds": 0,
     "open_work_seconds": 0,
-    "open_wait_seconds": 681.569,
+    "open_wait_seconds": 1420.252,
     "unclassified_seconds": 1012.462,
     "rework_seconds": 0,
     "blocked_seconds": 0,
@@ -697,11 +715,11 @@
   },
   "quality": {
     "version": 1,
-    "as_of": "2026-11-04T00:41:58.908Z",
+    "as_of": "2026-11-04T00:54:17.591Z",
     "source": "2-report.md",
-    "source_sha256": "eb72d66222148deb278e884a1e8cf897fb0d3b9daaad077559b794686c45d38c",
+    "source_sha256": "0df6daa43f5f3b9fde9e2cd26bce82ae3785528745aa452c31fdde15cc2d9970",
     "findings": {
-      "total": 12,
+      "total": 16,
       "by_kind": {
         "deviation": 1,
         "bug": 1,
@@ -709,26 +727,26 @@
         "improve": 2,
         "security": 3,
         "performance": 0,
-        "docs": 2
+        "docs": 6
       },
       "by_severity": {
         "critical": 0,
         "high": 3,
-        "medium": 2,
-        "low": 4,
-        "info": 3
+        "medium": 4,
+        "low": 5,
+        "info": 4
       },
       "by_classification": {
-        "introduced": 8,
-        "pre-existing": 2,
+        "introduced": 11,
+        "pre-existing": 3,
         "ruled-out": 0,
         "advisory": 2
       },
       "by_resolution": {
-        "open": 3,
-        "fixed": 7,
+        "open": 0,
+        "fixed": 13,
         "accepted": 1,
-        "tech-debt": 1,
+        "tech-debt": 2,
         "doc-updated": 0
       },
       "deviations_by_type": {
@@ -756,25 +774,24 @@
         }
       }
     },
-    "tech_debt": null,
+    "tech_debt": {
+      "total": 3,
+      "ticketed": 0,
+      "unticketed": 3
+    },
     "tests": {
-      "written": 62,
-      "passed": 69,
+      "written": 63,
+      "passed": 70,
       "failed": 0,
       "skipped": 0,
       "scopes": 1
     },
     "test_runs": {
-      "recorded": 8,
+      "recorded": 9,
       "failed": 0,
       "errors": 0,
       "interrupted": 0
     },
-    "closure_issues": [
-      "RF-2: open",
-      "RF-3: open",
-      "RF-4: open",
-      "RF-8: debt needs linked TD row, owner and next action"
-    ]
+    "closure_issues": []
   }
 }

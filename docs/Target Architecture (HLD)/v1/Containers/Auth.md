@@ -66,9 +66,12 @@ sequenceDiagram
     CF->>LAE: viewer-request trigger
     LAE->>ID: POST /token (refresh token grant)
     ID-->>LAE: new access token (+ refresh token)
-    LAE->>S3: pass-through + Set-Cookie: updated session cookie
+    LAE-->>B: 302 to same URI + Set-Cookie: updated session cookie
+    B->>CF: GET /page (session cookie, access token now valid)
+    CF->>LAE: viewer-request trigger
+    LAE->>S3: pass-through
     S3-->>CF: static asset
-    CF-->>B: 200 OK (no redirect, transparent to user)
+    CF-->>B: 200 OK (instant redirect, no visible re-login)
 
     Note over B,S3: Flow 4 — both tokens expired/invalid, forces fresh login
     B->>CF: GET /page (session cookie, refresh token also expired/invalid)

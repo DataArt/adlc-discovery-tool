@@ -7,6 +7,7 @@ import type {
 import { decodeJwt } from 'jose';
 import {
   PKCE_COOKIE_NAME,
+  REFRESH_COOKIE_NAME,
   SESSION_COOKIE_NAME,
   type SessionPayload,
   clearPkceCookie,
@@ -261,9 +262,9 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       exp,
     };
 
-    let sessionSetCookie: string;
+    let sessionSetCookies: [string, string];
     try {
-      sessionSetCookie = signSessionCookie(sessionPayload, secrets.signingKey);
+      sessionSetCookies = signSessionCookie(sessionPayload, secrets.signingKey);
     } catch (err) {
       console.error('Session cookie exceeded byte budget:', err);
       return errorResponse();
@@ -286,20 +287,22 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       headers: {
         location: [{ key: 'Location', value: redirectPath }],
         'set-cookie': [
-          { key: 'Set-Cookie', value: sessionSetCookie },
+          ...sessionSetCookies.map((value) => ({ key: 'Set-Cookie', value })),
           { key: 'Set-Cookie', value: clearPkceCookie() },
         ],
       },
     };
   }
 
-  // Steady-state: validate the session cookie.
-  const sessionCookieValue = parseCookies(request.headers)[SESSION_COOKIE_NAME];
-  if (!sessionCookieValue) {
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
-  }
-
-  const session = verifySessionCookie(sessionCookieValue, secrets.signingKey);
+  // Steady-state: validate the session cookies (split across two — see
+  // lib/cookie.ts — since the combined access+refresh token pair exceeds
+  // what a single cookie can hold).
+  const requestCookies = parseCookies(request.headers);
+  const session = verifySessionCookie(
+    requestCookies[SESSION_COOKIE_NAME],
+    requestCookies[REFRESH_COOKIE_NAME],
+    secrets.signingKey
+  );
   if (!session) {
     return redirectToLogin(host, request.uri, request.querystring, secrets);
   }
@@ -346,9 +349,9 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     exp: newExp,
   };
 
-  let updatedSetCookie: string;
+  let updatedSetCookies: [string, string];
   try {
-    updatedSetCookie = signSessionCookie(newSessionPayload, secrets.signingKey);
+    updatedSetCookies = signSessionCookie(newSessionPayload, secrets.signingKey);
   } catch (err) {
     console.error('Refreshed session cookie exceeded byte budget:', err);
     return errorResponse();
@@ -371,7 +374,7 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     statusDescription: 'Found',
     headers: {
       location: [{ key: 'Location', value: target }],
-      'set-cookie': [{ key: 'Set-Cookie', value: updatedSetCookie }],
+      'set-cookie': updatedSetCookies.map((value) => ({ key: 'Set-Cookie', value })),
     },
   };
 };

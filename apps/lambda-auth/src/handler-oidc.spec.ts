@@ -80,6 +80,12 @@ function extractCookieValue(setCookie: string): string {
   return setCookie.slice(eq + 1, semi < 0 ? undefined : semi);
 }
 
+/** Builds a request `Cookie:` header value from one or more `Set-Cookie`
+ * strings (e.g. the tuple `signSessionCookie` returns). */
+function cookieHeader(setCookies: string[]): string {
+  return setCookies.map((sc) => sc.split(';')[0]).join('; ');
+}
+
 beforeEach(() => {
   vi.resetModules();
   sendMock.mockReset();
@@ -118,7 +124,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
         at: 'access-token',
         rt: 'refresh-token',
@@ -131,7 +137,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(setCookies),
     });
     const result = await handler(event);
     expect(result).toBe(event.Records[0].cf.request);
@@ -146,7 +152,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const pastExp = Math.floor(Date.now() / 1000) - 10;
-    const setCookie = signSessionCookie(
+    const sessionSetCookies = signSessionCookie(
       {
         at: 'old-access-token',
         rt: 'valid-refresh-token',
@@ -167,7 +173,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const event = cfEvent({
       uri: '/page',
       querystring: 'x=1',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(sessionSetCookies),
     });
     const result = await handler(event);
     // D4: no visible re-login. Note: this redirects to the same URI rather than
@@ -179,13 +185,14 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(getLocation(result)).toBe('/page?x=1');
     const setCookies = getSetCookies(result);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
   });
 
   it('re-enters Flow 1 when the refresh token is expired/invalid', async () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const pastExp = Math.floor(Date.now() / 1000) - 10;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
         at: 'old-access-token',
         rt: 'expired-refresh-token',
@@ -202,7 +209,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     });
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(setCookies),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
@@ -214,7 +221,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const { signSessionCookie } = await import('./lib/cookie');
     verifySignatureMock.mockResolvedValue(false);
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
         at: 'tampered-access-token',
         rt: 'refresh-token',
@@ -226,7 +233,7 @@ describe('handler-oidc: steady state and silent refresh', () => {
     );
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(setCookies),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
@@ -336,6 +343,7 @@ describe('handler-oidc: callback route', () => {
     expect(getLocation(result)).toBe('/docs/intro');
     const setCookies = getSetCookies(result);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
     expect(
       setCookies.some((c) => c.startsWith('__Host-docs_pkce=') && c.includes('Max-Age=0'))
     ).toBe(true);

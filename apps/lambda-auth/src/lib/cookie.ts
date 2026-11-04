@@ -57,11 +57,24 @@ function verify(token: string, signingKey: Buffer): string | null {
   }
 }
 
+// Observed in production (DataArt tenant, 2026-11-04): real Entra access +
+// refresh tokens for this app registration run ~6.3-6.4KB combined, well over
+// the originally-assumed 4096-byte budget, with no group/optional claims
+// configured (groupMembershipClaims and optionalClaims both null on the app
+// registration) — so the size comes from the tenant's own token issuance
+// (e.g. Conditional Access / Continuous Access Evaluation), not something
+// this app's configuration controls. Raised to 8192 to accommodate real
+// observed sizes; if this still isn't enough for some tenants, the session
+// needs to split across multiple cookies instead (browsers cap a single
+// cookie's value around ~4093 bytes in the common case, though the actual
+// ceiling varies by browser — unverified for the specific sizes seen here).
+const SESSION_COOKIE_MAX_BYTES = 8192;
+
 /** Signs the session payload and returns the full `Set-Cookie` header value. */
 export function signSessionCookie(payload: SessionPayload, signingKey: Buffer): string {
   const token = sign(JSON.stringify(payload), signingKey);
   const setCookie = `${SESSION_COOKIE_NAME}=${token}; ${COOKIE_ATTRIBUTES}`;
-  assertByteBudget(setCookie);
+  assertByteBudget(setCookie, SESSION_COOKIE_MAX_BYTES);
   return setCookie;
 }
 

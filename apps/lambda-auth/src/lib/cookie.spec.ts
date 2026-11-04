@@ -87,6 +87,15 @@ describe('assertByteBudget', () => {
     const hugePayload = { ...SESSION_PAYLOAD, at: 'x'.repeat(10_000) };
     expect(() => signSessionCookie(hugePayload, KEY)).toThrow(CookieBudgetExceededError);
   });
+
+  it("accepts a large token pair under the session cookie's 8192-byte budget (sized to reflect production-observed token sizes, accounting for base64url expansion)", () => {
+    const largeTokenPayload = {
+      ...SESSION_PAYLOAD,
+      at: 'a'.repeat(2200),
+      rt: 'r'.repeat(2200),
+    };
+    expect(() => signSessionCookie(largeTokenPayload, KEY)).not.toThrow();
+  });
 });
 
 describe('PKCE cookie', () => {

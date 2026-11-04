@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { naming } from './conventions';
@@ -13,6 +14,7 @@ interface CiStackProps extends cdk.StackProps {
   githubRepo: string;
   githubRepoId: string;
   createOidcProvider: boolean;
+  distribution: cloudfront.Distribution;
 }
 
 export class CiStack extends cdk.Stack {
@@ -28,6 +30,7 @@ export class CiStack extends cdk.Stack {
       githubRepo,
       githubRepoId,
       createOidcProvider,
+      distribution,
     } = props;
     const names = naming({ orgPrefix, environment, workload, locationShort });
 
@@ -41,7 +44,8 @@ export class CiStack extends cdk.Stack {
       githubOrg,
       githubOrgId,
       githubRepo,
-      githubRepoId
+      githubRepoId,
+      distribution
     );
     const ciReadRole = this.createCiReadRole(
       oidcProvider,
@@ -115,7 +119,8 @@ export class CiStack extends cdk.Stack {
     githubOrg: string,
     githubOrgId: string,
     githubRepo: string,
-    githubRepoId: string
+    githubRepoId: string,
+    distribution: cloudfront.Distribution
   ): iam.Role {
     return new iam.Role(this, 'DeployRole', {
       roleName: names.ciDeployRole,
@@ -138,7 +143,7 @@ export class CiStack extends cdk.Stack {
       }),
       inlinePolicies: {
         S3Deploy: this.buildS3Policy(names.siteBucket),
-        CloudFrontDeploy: this.buildCloudFrontPolicy(),
+        CloudFrontDeploy: this.buildCloudFrontPolicy(distribution),
         LambdaDeploy: this.buildLambdaPolicy(names.authFn),
         SsmRead: this.buildSsmPolicy(environment, workload, orgPrefix),
       },
@@ -207,7 +212,10 @@ export class CiStack extends cdk.Stack {
     });
   }
 
-  private buildCloudFrontPolicy(): iam.PolicyDocument {
+  // Scoped to this one distribution's ARN, not distribution/* — with several clients
+  // sharing an AWS account, a wildcard here would let this repo's CI role modify
+  // (or strip auth from) another client's distribution.
+  private buildCloudFrontPolicy(distribution: cloudfront.Distribution): iam.PolicyDocument {
     return new iam.PolicyDocument({
       statements: [
         new iam.PolicyStatement({
@@ -219,7 +227,9 @@ export class CiStack extends cdk.Stack {
             'cloudfront:UpdateDistribution',
             'cloudfront:GetDistribution',
           ],
-          resources: [`arn:aws:cloudfront::${this.account}:distribution/*`],
+          resources: [
+            `arn:aws:cloudfront::${this.account}:distribution/${distribution.distributionId}`,
+          ],
         }),
       ],
     });

@@ -23,6 +23,8 @@ interface DocsStackProps extends cdk.StackProps {
 }
 
 export class DocsStack extends cdk.Stack {
+  public readonly distribution: cloudfront.Distribution;
+
   constructor(scope: Construct, id: string, props: DocsStackProps) {
     super(scope, id, props);
     const { environment, workload, locationShort, orgPrefix, cfPriceClass, edgeStack } = props;
@@ -32,6 +34,7 @@ export class DocsStack extends cdk.Stack {
     const siteBucket = this.createSiteBucket(names.siteBucket, logsBucket);
     const secret = this.createAuthSecret(names.authSecret);
     const distribution = this.createDistribution(siteBucket, logsBucket, edgeStack, cfPriceClass);
+    this.distribution = distribution;
 
     new cdk.CfnOutput(this, 'CloudFrontDomain', { value: distribution.distributionDomainName });
     new cdk.CfnOutput(this, 'CloudFrontDistributionId', { value: distribution.distributionId });

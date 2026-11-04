@@ -31,7 +31,7 @@ Object.entries(defaultTags({ orgPrefix, environment, workload })).forEach(([k, v
   cdk.Tags.of(app).add(k, v)
 );
 
-new DocsStack(app, `DocsStack-${stackSuffix}`, {
+const docsStack = new DocsStack(app, `DocsStack-${stackSuffix}`, {
   ...shared,
   cfPriceClass,
   edgeStack,
@@ -56,6 +56,7 @@ new CiStack(app, `CiStack-${stackSuffix}`, {
   githubOrgId,
   githubRepo,
   githubRepoId,
+  distribution: docsStack.distribution,
   // The GitHub OIDC provider is an AWS-account-wide singleton. Only the first
   // client/org deployed into a shared account should create it — every subsequent
   // one must import the existing provider instead. Defaults to creating it, since

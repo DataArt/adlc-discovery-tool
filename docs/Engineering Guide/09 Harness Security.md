@@ -25,7 +25,7 @@ flowchart TD
 
     A["Leg (a): Untrusted content\nClient workshop/gate transcript,\nwritten answers (03-capture.md, 01-gate.md)"]:::untrusted
     B["Leg (b): Sensitive access\nMain session — full Bash,\ngit push, repo write"]:::session
-    C["Leg (c): Outbound action\naws-mcp · GitHub · Atlassian\n(live, credentialed MCP connectors)"]:::outbound
+    C["Leg (c): Outbound action\nGitHub · Atlassian\n(live, credentialed MCP connectors)"]:::outbound
     G["Checkpoint: untrusted-source-material.md\n+ CLAUDE.md Critical list"]:::guard
     O["Outbound effect\n(issue opened, AWS call made,\ncode pushed)"]:::outbound
 
@@ -39,7 +39,7 @@ flowchart TD
 | --------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | (a) Untrusted content | `.claude/skills/discovery/references/03-capture.md`, `01-gate.md` | Both instruct processing "supplied transcript or written answers" verbatim into `Notes.md`/`Outcomes.md`; client-supplied content can originate from any workshop attendee, not just vetted staff |
 | (b) Sensitive access  | Main session (not a subagent)                                     | Ingestion runs with full Bash and `git push`; `git push` is gated only by a per-action approval prompt, not content review                                                                        |
-| (c) Outbound action   | `.mcp.json` / `.harness/mcp.json`                                 | Three live, credentialed connectors configured: `aws-mcp`, GitHub (`@modelcontextprotocol/server-github`), Atlassian (`mcp-atlassian`)                                                            |
+| (c) Outbound action   | `.mcp.json` / `.harness/mcp.json`                                 | Two live, credentialed connectors configured: GitHub (`@modelcontextprotocol/server-github`), Atlassian (`mcp-atlassian`). `aws-mcp` was removed from agent sessions (2026-11) — see below.       |
 
 The only tool-restricted member of the discovery family, `@discovery` (`.claude/agents/discovery.md`, tools: `Read, Glob, Grep`), is a post-hoc, read-only citation checker invoked as a satellite review before an artifact is published — it never touches the ingestion step itself, so it does not break the trifecta at the point where it actually forms.
 
@@ -88,6 +88,32 @@ The pattern is wired into the two actual ingestion points (`03-capture.md`, `01-
 This is an instruction-layer, documentation-level mitigation — not a hard technical control. It does not make the harness immune to a sufficiently clever injection; a model could still be fooled. What it does do is close the specific gap the security review named (zero mitigation language existed anywhere for this flow) and give the model, and any human reviewer, an explicit, discoverable rule at the exact point where all three trifecta legs meet.
 
 A structural fix — running the ingestion step itself as a restricted subagent with no Bash, no `git push`, and no MCP access, so a hijacked step literally cannot reach those tools regardless of what it is told — was considered and intentionally deferred, not implemented in this pass. It remains a documented future option, not an outstanding unaddressed risk.
+
+### Partial structural fix: `aws-mcp` removed from agent sessions (2026-11)
+
+A supervisor security review (Dmitry Vyrostkov, 2026-10-15) flagged that the harness ran with
+more privilege than a single engagement needs: a live AWS SSO session (`aws-mcp`, `AWS_PROFILE`)
+alongside a `repo`-scoped GitHub PAT and Atlassian write tokens, in the same session that ingests
+untrusted client transcripts — i.e. leg (c) above included a credential with real write/deploy
+reach into AWS, not just GitHub/Atlassian.
+
+`aws-mcp` is now removed from `.mcp.json` / `.harness/mcp.json` entirely. Deploys happen only via
+CI after merge, through the OIDC-assumed `CiStack` roles (`apps/infra/lib/ci-stack.ts`) — an agent
+session never holds AWS credentials of any kind. This closes the AWS portion of leg (c) outright
+(no amount of prompt injection can reach AWS from a session that has no AWS credential), rather
+than relying on the instruction-layer guard alone for that connector.
+
+Still open from the same review, as operational/config choices rather than code fixes:
+
+- A fine-grained, single-repo GitHub token in place of the current `repo`-scoped PAT.
+- Read-only Atlassian API tokens for this flow.
+- An egress allowlist (sandboxed shell or devcontainer firewall) limiting outbound network access.
+- One AWS account per client, so a compromised or overbroad CI role in one engagement's account
+  cannot reach another client's resources.
+
+The CI CloudFront policy (`CiStack.buildCloudFrontPolicy`) was also narrowed from
+`distribution/*` to the single distribution's ARN in the same pass, for the same shared-account
+reason (`apps/infra/lib/ci-stack.ts`).
 
 ---
 

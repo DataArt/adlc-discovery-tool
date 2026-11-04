@@ -1,12 +1,17 @@
 # MCP Setup
 
-_Connect Claude or Codex to AWS, GitHub, and Atlassian via Model Context Protocol._
+_Connect Claude or Codex to GitHub and Atlassian via Model Context Protocol._
+
+No AWS MCP connector is configured here: agent sessions never hold a live AWS SSO session.
+Deploys happen only via CI after merge (OIDC-assumed roles, see `apps/infra/lib/ci-stack.ts`)
+— see `09 Harness Security.md` for why. If you need to inspect live AWS state yourself, use
+the `aws` CLI directly in your own shell, outside the agent session.
 
 ---
 
 ## Prerequisites
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) — the AWS MCP proxy runs via `uvx`:
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) — the Atlassian MCP server runs via `uvx`:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -23,23 +28,6 @@ cp .env.example .env
 ```
 
 Then fill in credentials for each tool below.
-
----
-
-## AWS
-
-| Variable      | Description                                                                            |
-| ------------- | -------------------------------------------------------------------------------------- |
-| `AWS_PROFILE` | Named profile in `~/.aws/credentials` or `~/.aws/config` (SSO). Default: `unqlo-demo`. |
-| `AWS_REGION`  | AWS region for MCP calls. Default: `eu-west-1`.                                        |
-
-Verify your profile is working:
-
-```bash
-aws sts get-caller-identity --profile "$AWS_PROFILE"
-```
-
-A valid JSON response with your `Account` and `Arn` confirms the AWS MCP server will authenticate correctly.
 
 ---
 
@@ -95,7 +83,7 @@ claude mcp list
 # or use the Codex MCP listing command in your installed Codex version
 ```
 
-All three servers should show as connected: `aws-mcp`, `github`, and `mcp-atlassian` (if Atlassian vars are set).
+Both servers should show as connected: `github` and `mcp-atlassian` (if Atlassian vars are set).
 
 ---
 

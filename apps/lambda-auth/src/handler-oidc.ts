@@ -4,10 +4,21 @@ import type {
   CloudFrontRequestEvent,
   CloudFrontRequestResult,
 } from 'aws-lambda';
-import { decodeJwt } from 'jose';
 import {
+  AuthorizationResponseError,
+  authorizationCodeGrant,
+  buildAuthorizationUrl,
+  calculatePKCECodeChallenge,
+  type Configuration,
+  discovery,
+  randomPKCECodeVerifier,
+  randomState,
+  refreshTokenGrant,
+} from 'openid-client';
+import {
+  IDENTITY_COOKIE_NAME,
   PKCE_COOKIE_NAME,
-  SESSION_COOKIE_NAME,
+  REFRESH_COOKIE_NAME,
   type SessionPayload,
   clearPkceCookie,
   signPkceCookie,
@@ -15,8 +26,6 @@ import {
   verifyPkceCookie,
   verifySessionCookie,
 } from './lib/cookie';
-import { getJwks, verifySignature } from './lib/jwks';
-import { generatePkce, validateState } from './lib/pkce';
 import { sanitizeRedirectTarget } from './lib/redirect';
 
 const CALLBACK_PATH = '/_auth/callback';
@@ -33,13 +42,6 @@ interface OidcSecrets {
   signingKey: Buffer;
 }
 
-interface TokenResponse {
-  access_token: string;
-  refresh_token?: string;
-  id_token?: string;
-  expires_in?: number;
-}
-
 interface Claims {
   sub?: string;
   upn?: string;
@@ -49,6 +51,11 @@ interface Claims {
 
 // Cached per cold start, mirroring handler-basic.ts's cachedHash pattern.
 let cachedSecrets: OidcSecrets | null = null;
+// Cached per cold start — discovery() performs a network call to Entra's
+// well-known metadata endpoint; its Configuration also owns the JWKS cache
+// that authorizationCodeGrant/refreshTokenGrant use internally to verify the
+// ID token's signature, so there's no separate JWKS module to manage here.
+let cachedConfig: Configuration | null = null;
 
 async function getSecrets(): Promise<OidcSecrets> {
   if (cachedSecrets) return cachedSecrets;
@@ -71,16 +78,17 @@ async function getSecrets(): Promise<OidcSecrets> {
   return cachedSecrets;
 }
 
-function authorizeUrl(tenantId: string): string {
-  return `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize`;
-}
-
-function tokenUrl(tenantId: string): string {
-  return `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
-}
-
-function jwksUrl(tenantId: string): string {
-  return `https://login.microsoftonline.com/${tenantId}/discovery/v2.0/keys`;
+async function getConfig(secrets: OidcSecrets): Promise<Configuration> {
+  if (cachedConfig) return cachedConfig;
+  // Passing clientSecret as the `metadata` shorthand defaults the client's
+  // authentication method to ClientSecretPost — the same `client_secret` in
+  // the POST body this handler used before migrating to openid-client.
+  cachedConfig = await discovery(
+    new URL(`https://login.microsoftonline.com/${secrets.tenantId}/v2.0`),
+    secrets.clientId,
+    secrets.clientSecret
+  );
+  return cachedConfig;
 }
 
 function parseCookies(headers: CloudFrontHeaders): Record<string, string> {
@@ -96,88 +104,40 @@ function parseCookies(headers: CloudFrontHeaders): Record<string, string> {
   return out;
 }
 
-function decodeClaims(token: string): Claims {
-  try {
-    return decodeJwt(token) as Claims;
-  } catch {
-    return {};
-  }
-}
-
-function claimsToIdentity(claims: Claims, fallbackSub = '', fallbackUpn = '') {
+function claimsToIdentity(claims: Claims | undefined, fallbackSub = '', fallbackUpn = '') {
   return {
-    sub: claims.sub ?? fallbackSub,
-    upn: claims.upn ?? claims.preferred_username ?? claims.email ?? fallbackUpn,
+    sub: claims?.sub ?? fallbackSub,
+    upn: claims?.upn ?? claims?.preferred_username ?? claims?.email ?? fallbackUpn,
   };
 }
 
-async function exchangeCodeForTokens(
-  code: string,
-  verifier: string,
-  redirectUri: string,
-  secrets: OidcSecrets
-): Promise<TokenResponse> {
-  const body = new URLSearchParams({
-    grant_type: 'authorization_code',
-    client_id: secrets.clientId,
-    client_secret: secrets.clientSecret,
-    code,
-    redirect_uri: redirectUri,
-    code_verifier: verifier,
-    scope: SCOPE,
-  });
-  const response = await fetch(tokenUrl(secrets.tenantId), {
-    method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
-  });
-  if (!response.ok) throw new Error(`Token exchange failed with status ${response.status}`);
-  const json = (await response.json()) as TokenResponse;
-  if (!json.access_token || !json.refresh_token) throw new Error('Malformed token response');
-  return json;
-}
-
-async function refreshTokens(refreshToken: string, secrets: OidcSecrets): Promise<TokenResponse> {
-  const body = new URLSearchParams({
-    grant_type: 'refresh_token',
-    client_id: secrets.clientId,
-    client_secret: secrets.clientSecret,
-    refresh_token: refreshToken,
-    scope: SCOPE,
-  });
-  const response = await fetch(tokenUrl(secrets.tenantId), {
-    method: 'POST',
-    headers: { 'content-type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
-  });
-  if (!response.ok) throw new Error(`Refresh failed with status ${response.status}`);
-  const json = (await response.json()) as TokenResponse;
-  if (!json.access_token) throw new Error('Malformed refresh response');
-  return json;
-}
-
-function redirectToLogin(
+async function redirectToLogin(
   host: string,
   originalUri: string,
   originalQuerystring: string,
-  secrets: OidcSecrets
-): CloudFrontRequestResult {
-  const { verifier, challenge, state } = generatePkce();
+  secrets: OidcSecrets,
+  config: Configuration
+): Promise<CloudFrontRequestResult> {
+  const verifier = randomPKCECodeVerifier();
+  const challenge = await calculatePKCECodeChallenge(verifier);
+  const state = randomState();
   const originalPath = originalQuerystring ? `${originalUri}?${originalQuerystring}` : originalUri;
-  const packedState = `${state}.${Buffer.from(originalPath, 'utf-8').toString('base64url')}`;
   const redirectUri = `https://${host}${CALLBACK_PATH}`;
 
-  const url = new URL(authorizeUrl(secrets.tenantId));
-  url.searchParams.set('client_id', secrets.clientId);
-  url.searchParams.set('response_type', 'code');
-  url.searchParams.set('redirect_uri', redirectUri);
-  url.searchParams.set('response_mode', 'query');
-  url.searchParams.set('scope', SCOPE);
-  url.searchParams.set('state', packedState);
-  url.searchParams.set('code_challenge', challenge);
-  url.searchParams.set('code_challenge_method', 'S256');
+  const url = buildAuthorizationUrl(config, {
+    redirect_uri: redirectUri,
+    response_type: 'code',
+    response_mode: 'query',
+    scope: SCOPE,
+    state,
+    code_challenge: challenge,
+    code_challenge_method: 'S256',
+  });
 
-  const pkceSetCookie = signPkceCookie({ v: verifier, s: state }, secrets.signingKey);
+  const pkceSetCookie = signPkceCookie(
+    { v: verifier, s: state, p: originalPath },
+    secrets.signingKey
+  );
 
   return {
     status: '302',
@@ -210,10 +170,12 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   const requestId = event.Records[0].cf.config.requestId;
 
   let secrets: OidcSecrets;
+  let config: Configuration;
   try {
     secrets = await getSecrets();
+    config = await getConfig(secrets);
   } catch (err) {
-    console.error('OIDC secrets fetch failed:', err);
+    console.error('OIDC secrets/discovery fetch failed:', err);
     return errorResponse();
   }
 
@@ -221,64 +183,66 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   if (request.uri === CALLBACK_PATH) {
     const params = new URLSearchParams(request.querystring);
     const code = params.get('code');
-    const receivedState = params.get('state');
+    const state = params.get('state');
 
-    if (!code || !receivedState) {
-      return redirectToLogin(host, '/', '', secrets);
+    if (!code || !state) {
+      return redirectToLogin(host, '/', '', secrets, config);
     }
 
-    const [receivedStatePart, encodedPath] = receivedState.split('.');
     const pkceCookieValue = parseCookies(request.headers)[PKCE_COOKIE_NAME];
     const pkce = pkceCookieValue ? verifyPkceCookie(pkceCookieValue, secrets.signingKey) : null;
 
-    if (!pkce || !validateState(pkce.s, receivedStatePart)) {
-      // CSRF/state-replay failure: fail closed, restart Flow 1 (a fresh PKCE
-      // cookie below replaces the stale one).
-      return redirectToLogin(host, '/', '', secrets);
+    if (!pkce) {
+      // Missing/malformed/tampered PKCE cookie: fail closed, restart Flow 1
+      // (a fresh PKCE cookie below replaces the stale one).
+      return redirectToLogin(host, '/', '', secrets, config);
     }
 
-    let tokens: TokenResponse;
+    const currentUrl = new URL(`https://${host}${CALLBACK_PATH}?${request.querystring}`);
+
+    let tokens: Awaited<ReturnType<typeof authorizationCodeGrant>>;
     try {
-      tokens = await exchangeCodeForTokens(
-        code,
-        pkce.v,
-        `https://${host}${CALLBACK_PATH}`,
-        secrets
-      );
+      tokens = await authorizationCodeGrant(config, currentUrl, {
+        pkceCodeVerifier: pkce.v,
+        expectedState: pkce.s,
+      });
     } catch (err) {
+      if (err instanceof AuthorizationResponseError) {
+        // State mismatch/replay/response validation failure — a CSRF-shaped
+        // error, not a token-exchange failure. Fail closed, restart Flow 1,
+        // same as the missing-PKCE-cookie case above.
+        return redirectToLogin(host, '/', '', secrets, config);
+      }
       console.error('Initial token exchange failed:', err);
       return errorResponse();
     }
 
-    const claims = decodeClaims(tokens.id_token ?? tokens.access_token);
-    const identity = claimsToIdentity(claims);
-    const exp = Math.floor(Date.now() / 1000) + (tokens.expires_in ?? 3600);
+    if (!tokens.refresh_token) {
+      console.error('Token response missing refresh_token');
+      return errorResponse();
+    }
+
+    // tokens.claims() returns the ID token's claims only after
+    // authorizationCodeGrant has already verified its signature, issuer, and
+    // audience internally — no separate verification step needed here.
+    const identity = claimsToIdentity(tokens.claims());
+    const exp = Math.floor(Date.now() / 1000) + (tokens.expiresIn() ?? 3600);
     const sessionPayload: SessionPayload = {
-      at: tokens.access_token,
-      rt: tokens.refresh_token!,
+      rt: tokens.refresh_token,
       sub: identity.sub,
       upn: identity.upn,
       exp,
     };
 
-    let sessionSetCookie: string;
+    let sessionSetCookies: [string, string];
     try {
-      sessionSetCookie = signSessionCookie(sessionPayload, secrets.signingKey);
+      sessionSetCookies = signSessionCookie(sessionPayload, secrets.signingKey);
     } catch (err) {
       console.error('Session cookie exceeded byte budget:', err);
       return errorResponse();
     }
 
-    let redirectPath = '/';
-    if (encodedPath) {
-      try {
-        redirectPath = sanitizeRedirectTarget(
-          Buffer.from(encodedPath, 'base64url').toString('utf-8')
-        );
-      } catch {
-        redirectPath = '/';
-      }
-    }
+    const redirectPath = sanitizeRedirectTarget(pkce.p);
 
     return {
       status: '302',
@@ -286,34 +250,28 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       headers: {
         location: [{ key: 'Location', value: redirectPath }],
         'set-cookie': [
-          { key: 'Set-Cookie', value: sessionSetCookie },
+          ...sessionSetCookies.map((value) => ({ key: 'Set-Cookie', value })),
           { key: 'Set-Cookie', value: clearPkceCookie() },
         ],
       },
     };
   }
 
-  // Steady-state: validate the session cookie.
-  const sessionCookieValue = parseCookies(request.headers)[SESSION_COOKIE_NAME];
-  if (!sessionCookieValue) {
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
-  }
-
-  const session = verifySessionCookie(sessionCookieValue, secrets.signingKey);
-  if (!session) {
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
-  }
-
-  const jwks = getJwks(jwksUrl(secrets.tenantId));
-  const signatureValid = await verifySignature(
-    session.at,
-    jwks,
-    `https://login.microsoftonline.com/${secrets.tenantId}/v2.0`
+  // Steady-state: validate the session cookies (split across three — see
+  // lib/cookie.ts — since the access and refresh tokens are each too large
+  // to share a cookie with each other or with the identity claims). This
+  // trusts the cookie's own HMAC rather than re-verifying anything against
+  // Entra — the access token isn't a reliably verifiable JWS for this app's
+  // scope (see Design.md deviation note / Post-Archival Incident), and the
+  // ID token was already verified once, at issuance, above.
+  const requestCookies = parseCookies(request.headers);
+  const session = verifySessionCookie(
+    requestCookies[REFRESH_COOKIE_NAME],
+    requestCookies[IDENTITY_COOKIE_NAME],
+    secrets.signingKey
   );
-  if (!signatureValid) {
-    // Fail closed — tampered, wrong kid, wrong issuer, or JWKS rotation
-    // mismatch. Never passed through, never silently retried (D3).
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
+  if (!session) {
+    return redirectToLogin(host, request.uri, request.querystring, secrets, config);
   }
 
   const nowSeconds = Math.floor(Date.now() / 1000);
@@ -327,28 +285,30 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
   }
 
   // Access token expired — attempt silent refresh (D4).
-  let refreshed: TokenResponse;
+  let refreshed: Awaited<ReturnType<typeof refreshTokenGrant>>;
   try {
-    refreshed = await refreshTokens(session.rt, secrets);
+    refreshed = await refreshTokenGrant(config, session.rt);
   } catch (err) {
     console.error('Silent refresh failed, re-entering login flow:', err);
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
+    return redirectToLogin(host, request.uri, request.querystring, secrets, config);
   }
 
-  const claims = decodeClaims(refreshed.id_token ?? refreshed.access_token);
-  const identity = claimsToIdentity(claims, session.sub, session.upn);
-  const newExp = Math.floor(Date.now() / 1000) + (refreshed.expires_in ?? 3600);
+  // Entra doesn't always re-issue an id_token on a refresh grant; when it
+  // does, refreshTokenGrant already verified it the same way as the initial
+  // exchange. When it doesn't, tokens.claims() returns undefined and we keep
+  // the identity already established at initial login.
+  const identity = claimsToIdentity(refreshed.claims(), session.sub, session.upn);
+  const newExp = Math.floor(Date.now() / 1000) + (refreshed.expiresIn() ?? 3600);
   const newSessionPayload: SessionPayload = {
-    at: refreshed.access_token,
     rt: refreshed.refresh_token ?? session.rt,
     sub: identity.sub,
     upn: identity.upn,
     exp: newExp,
   };
 
-  let updatedSetCookie: string;
+  let updatedSetCookies: [string, string];
   try {
-    updatedSetCookie = signSessionCookie(newSessionPayload, secrets.signingKey);
+    updatedSetCookies = signSessionCookie(newSessionPayload, secrets.signingKey);
   } catch (err) {
     console.error('Refreshed session cookie exceeded byte budget:', err);
     return errorResponse();
@@ -371,7 +331,7 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     statusDescription: 'Found',
     headers: {
       location: [{ key: 'Location', value: target }],
-      'set-cookie': [{ key: 'Set-Cookie', value: updatedSetCookie }],
+      'set-cookie': updatedSetCookies.map((value) => ({ key: 'Set-Cookie', value })),
     },
   };
 };

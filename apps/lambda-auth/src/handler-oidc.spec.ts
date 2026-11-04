@@ -26,15 +26,54 @@ vi.mock('@aws-sdk/client-secrets-manager', () => ({
   }),
 }));
 
-const verifySignatureMock = vi.fn();
-const getJwksMock = vi.fn();
-vi.mock('./lib/jwks', () => ({
-  getJwks: (...args: unknown[]) => getJwksMock(...args),
-  verifySignature: (...args: unknown[]) => verifySignatureMock(...args),
+class MockAuthorizationResponseError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'AuthorizationResponseError';
+  }
+}
+
+const discoveryMock = vi.fn();
+const buildAuthorizationUrlMock = vi.fn();
+const authorizationCodeGrantMock = vi.fn();
+const refreshTokenGrantMock = vi.fn();
+const calculatePKCECodeChallengeMock = vi.fn();
+const randomPKCECodeVerifierMock = vi.fn();
+const randomStateMock = vi.fn();
+
+vi.mock('openid-client', () => ({
+  AuthorizationResponseError: MockAuthorizationResponseError,
+  discovery: (...args: unknown[]) => discoveryMock(...args),
+  buildAuthorizationUrl: (...args: unknown[]) => buildAuthorizationUrlMock(...args),
+  authorizationCodeGrant: (...args: unknown[]) => authorizationCodeGrantMock(...args),
+  refreshTokenGrant: (...args: unknown[]) => refreshTokenGrantMock(...args),
+  calculatePKCECodeChallenge: (...args: unknown[]) => calculatePKCECodeChallengeMock(...args),
+  randomPKCECodeVerifier: (...args: unknown[]) => randomPKCECodeVerifierMock(...args),
+  randomState: (...args: unknown[]) => randomStateMock(...args),
 }));
 
-const fetchMock = vi.fn();
-vi.stubGlobal('fetch', fetchMock);
+/** Builds a fake `openid-client` token-endpoint response, matching the shape
+ * `authorizationCodeGrant`/`refreshTokenGrant` resolve to — raw fields plus
+ * the `claims()`/`expiresIn()` helper methods the real library attaches. */
+function tokenResponse(opts: {
+  access_token?: string;
+  refresh_token?: string;
+  claims?: Record<string, unknown> | undefined;
+  expiresIn?: number;
+}) {
+  const {
+    access_token = 'at',
+    refresh_token = 'rt',
+    claims = { sub: 'user-1', upn: 'jane@dataart.com' },
+    expiresIn = 3600,
+  } = opts;
+  return {
+    access_token,
+    refresh_token,
+    claims: () => claims,
+    expiresIn: () => expiresIn,
+  };
+}
 
 function cfEvent(opts: {
   uri?: string;
@@ -80,15 +119,45 @@ function extractCookieValue(setCookie: string): string {
   return setCookie.slice(eq + 1, semi < 0 ? undefined : semi);
 }
 
+/** Builds a request `Cookie:` header value from one or more `Set-Cookie`
+ * strings (e.g. the tuple `signSessionCookie` returns). */
+function cookieHeader(setCookies: string[]): string {
+  return setCookies.map((sc) => sc.split(';')[0]).join('; ');
+}
+
 beforeEach(() => {
   vi.resetModules();
   sendMock.mockReset();
   sendMock.mockResolvedValue({ SecretString: VALID_SECRET_PAYLOAD });
-  verifySignatureMock.mockReset();
-  verifySignatureMock.mockResolvedValue(true);
-  getJwksMock.mockReset();
-  getJwksMock.mockReturnValue('fake-jwks');
-  fetchMock.mockReset();
+
+  discoveryMock.mockReset();
+  discoveryMock.mockResolvedValue('fake-config');
+
+  buildAuthorizationUrlMock.mockReset();
+  buildAuthorizationUrlMock.mockImplementation(
+    (_config: unknown, params: Record<string, string>) => {
+      const url = new URL(`https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/authorize`);
+      for (const [key, value] of Object.entries(params)) url.searchParams.set(key, value);
+      return url;
+    }
+  );
+
+  authorizationCodeGrantMock.mockReset();
+  authorizationCodeGrantMock.mockResolvedValue(tokenResponse({}));
+
+  refreshTokenGrantMock.mockReset();
+  refreshTokenGrantMock.mockResolvedValue(
+    tokenResponse({ access_token: 'new-access-token', refresh_token: 'new-refresh-token' })
+  );
+
+  calculatePKCECodeChallengeMock.mockReset();
+  calculatePKCECodeChallengeMock.mockResolvedValue('fake-challenge');
+
+  randomPKCECodeVerifierMock.mockReset();
+  randomPKCECodeVerifierMock.mockReturnValue('fake-verifier');
+
+  randomStateMock.mockReset();
+  randomStateMock.mockReturnValue('fake-state');
 });
 
 describe('handler-oidc: missing/malformed session cookie', () => {
@@ -106,7 +175,7 @@ describe('handler-oidc: missing/malformed session cookie', () => {
   it('redirects to /authorize when the session cookie is malformed', async () => {
     const { handler } = await import('./handler-oidc');
     const result = await handler(
-      cfEvent({ uri: '/page', cookie: '__Host-docs_session=not-a-valid-token' })
+      cfEvent({ uri: '/page', cookie: '__Host-docs_refresh=not-a-valid-token' })
     );
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toContain('/authorize');
@@ -114,13 +183,17 @@ describe('handler-oidc: missing/malformed session cookie', () => {
 });
 
 describe('handler-oidc: steady state and silent refresh', () => {
-  it('passes through unchanged for a valid, unexpired session', async () => {
+  it('passes through unchanged for a valid, unexpired session, without ever contacting Entra', async () => {
+    // The session cookie no longer stores the access token at all (it was
+    // never read anywhere in this handler, and was the single largest,
+    // most per-user-variable contributor to oversized-cookie failures — see
+    // lib/cookie.ts's module doc comment). Steady-state trusts the cookie's
+    // own HMAC and the `exp` it carries; it never re-contacts Entra.
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
-        at: 'access-token',
         rt: 'refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -131,24 +204,25 @@ describe('handler-oidc: steady state and silent refresh', () => {
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(setCookies),
     });
     const result = await handler(event);
     expect(result).toBe(event.Records[0].cf.request);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('jane@dataart.com'));
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('req-abc-123'));
-    // The session cookie (raw access/refresh tokens) must not be forwarded to
-    // the S3 origin.
+    // The session cookie (raw refresh token) must not be forwarded to the S3
+    // origin.
     expect((result as { headers: Record<string, unknown> }).headers['cookie']).toBeUndefined();
+    expect(authorizationCodeGrantMock).not.toHaveBeenCalled();
+    expect(refreshTokenGrantMock).not.toHaveBeenCalled();
   });
 
   it('silently refreshes an expired access token and redirects to the same URI with an updated Set-Cookie (no visible re-login)', async () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const pastExp = Math.floor(Date.now() / 1000) - 10;
-    const setCookie = signSessionCookie(
+    const sessionSetCookies = signSessionCookie(
       {
-        at: 'old-access-token',
         rt: 'valid-refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -156,18 +230,10 @@ describe('handler-oidc: steady state and silent refresh', () => {
       },
       SIGNING_KEY
     );
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        access_token: 'new-access-token',
-        refresh_token: 'new-refresh-token',
-        expires_in: 3600,
-      }),
-    });
     const event = cfEvent({
       uri: '/page',
       querystring: 'x=1',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(sessionSetCookies),
     });
     const result = await handler(event);
     // D4: no visible re-login. Note: this redirects to the same URI rather than
@@ -177,17 +243,18 @@ describe('handler-oidc: steady state and silent refresh', () => {
     // transparent, satisfying D4's intent without a second user-visible login.
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toBe('/page?x=1');
+    expect(refreshTokenGrantMock).toHaveBeenCalledWith('fake-config', 'valid-refresh-token');
     const setCookies = getSetCookies(result);
-    expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
   });
 
   it('re-enters Flow 1 when the refresh token is expired/invalid', async () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     const pastExp = Math.floor(Date.now() / 1000) - 10;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
-        at: 'old-access-token',
         rt: 'expired-refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -195,28 +262,22 @@ describe('handler-oidc: steady state and silent refresh', () => {
       },
       SIGNING_KEY
     );
-    fetchMock.mockResolvedValueOnce({
-      ok: false,
-      status: 400,
-      json: async () => ({ error: 'invalid_grant' }),
-    });
+    refreshTokenGrantMock.mockRejectedValueOnce(new Error('invalid_grant'));
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader(setCookies),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toContain('/authorize');
   });
 
-  it('fails closed on an invalid JWT signature, even when not expired', async () => {
+  it('fails closed when the session cookie pair is tampered, even when not expired', async () => {
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
-    verifySignatureMock.mockResolvedValue(false);
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
-    const setCookie = signSessionCookie(
+    const setCookies = signSessionCookie(
       {
-        at: 'tampered-access-token',
         rt: 'refresh-token',
         sub: 'user-1',
         upn: 'jane@dataart.com',
@@ -224,31 +285,47 @@ describe('handler-oidc: steady state and silent refresh', () => {
       },
       SIGNING_KEY
     );
+    const [refreshCookie, identityCookie] = setCookies;
+    const tamperedRefreshCookie = refreshCookie.replace(/^([^=]+)=[^;]+/, '$1=tampered.value');
     const event = cfEvent({
       uri: '/page',
-      cookie: `__Host-docs_session=${extractCookieValue(setCookie)}`,
+      cookie: cookieHeader([tamperedRefreshCookie, identityCookie]),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toContain('/authorize');
-    expect(fetchMock).not.toHaveBeenCalled();
+    expect(refreshTokenGrantMock).not.toHaveBeenCalled();
   });
 });
 
 describe('handler-oidc: callback route', () => {
-  async function pkceCookieFor(state: string, verifier = 'test-verifier') {
+  async function pkceCookieFor(state: string, verifier = 'test-verifier', redirectPath = '/page') {
     const { signPkceCookie } = await import('./lib/cookie');
-    const setCookie = signPkceCookie({ v: verifier, s: state }, SIGNING_KEY);
+    const setCookie = signPkceCookie({ v: verifier, s: state, p: redirectPath }, SIGNING_KEY);
     return extractCookieValue(setCookie);
   }
 
-  it('fails closed on a state mismatch, discarding the PKCE cookie and restarting Flow 1', async () => {
+  it('redirects to /authorize restarting Flow 1 when the PKCE cookie is missing', async () => {
     const { handler } = await import('./handler-oidc');
-    const pkceCookie = await pkceCookieFor('expected-state');
-    const packedState = `wrong-state.${Buffer.from('/page', 'utf-8').toString('base64url')}`;
     const event = cfEvent({
       uri: '/_auth/callback',
-      querystring: `code=abc123&state=${packedState}`,
+      querystring: `code=abc123&state=some-state`,
+    });
+    const result = await handler(event);
+    expect(result).toMatchObject({ status: '302' });
+    expect(getLocation(result)).toContain('/authorize');
+    expect(authorizationCodeGrantMock).not.toHaveBeenCalled();
+  });
+
+  it('fails closed restarting Flow 1 when authorizationCodeGrant rejects with AuthorizationResponseError (state/response validation failure)', async () => {
+    const { handler } = await import('./handler-oidc');
+    const pkceCookie = await pkceCookieFor('expected-state');
+    authorizationCodeGrantMock.mockRejectedValueOnce(
+      new MockAuthorizationResponseError('state mismatch')
+    );
+    const event = cfEvent({
+      uri: '/_auth/callback',
+      querystring: `code=abc123&state=expected-state`,
       cookie: `__Host-docs_pkce=${pkceCookie}`,
     });
     const result = await handler(event);
@@ -257,41 +334,29 @@ describe('handler-oidc: callback route', () => {
     // A fresh PKCE cookie replaces the stale one.
     const setCookies = getSetCookies(result);
     expect(setCookies.some((c) => c.startsWith('__Host-docs_pkce='))).toBe(true);
-    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('returns an error response on initial token-exchange failure, no pass-through, no retry', async () => {
     const { handler } = await import('./handler-oidc');
     const state = 'matching-state';
     const pkceCookie = await pkceCookieFor(state);
-    const packedState = `${state}.${Buffer.from('/page', 'utf-8').toString('base64url')}`;
-    fetchMock.mockResolvedValueOnce({ ok: false, status: 500, json: async () => ({}) });
+    authorizationCodeGrantMock.mockRejectedValueOnce(new Error('network error'));
     const event = cfEvent({
       uri: '/_auth/callback',
-      querystring: `code=abc123&state=${packedState}`,
+      querystring: `code=abc123&state=${state}`,
       cookie: `__Host-docs_pkce=${pkceCookie}`,
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '502' });
   });
 
-  it('falls back to / for a crafted absolute redirect target', async () => {
+  it('falls back to / for a crafted absolute redirect target stored in the PKCE cookie', async () => {
     const { handler } = await import('./handler-oidc');
     const state = 'matching-state-2';
-    const pkceCookie = await pkceCookieFor(state);
-    const packedState = `${state}.${Buffer.from('https://evil.com/phish', 'utf-8').toString('base64url')}`;
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({
-        access_token: 'at',
-        refresh_token: 'rt',
-        id_token: undefined,
-        expires_in: 3600,
-      }),
-    });
+    const pkceCookie = await pkceCookieFor(state, 'test-verifier', 'https://evil.com/phish');
     const event = cfEvent({
       uri: '/_auth/callback',
-      querystring: `code=abc123&state=${packedState}`,
+      querystring: `code=abc123&state=${state}`,
       cookie: `__Host-docs_pkce=${pkceCookie}`,
     });
     const result = await handler(event);
@@ -299,18 +364,13 @@ describe('handler-oidc: callback route', () => {
     expect(getLocation(result)).toBe('/');
   });
 
-  it('falls back to / for a crafted protocol-relative redirect target', async () => {
+  it('falls back to / for a crafted protocol-relative redirect target stored in the PKCE cookie', async () => {
     const { handler } = await import('./handler-oidc');
     const state = 'matching-state-3';
-    const pkceCookie = await pkceCookieFor(state);
-    const packedState = `${state}.${Buffer.from('//evil.com', 'utf-8').toString('base64url')}`;
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ access_token: 'at', refresh_token: 'rt', expires_in: 3600 }),
-    });
+    const pkceCookie = await pkceCookieFor(state, 'test-verifier', '//evil.com');
     const event = cfEvent({
       uri: '/_auth/callback',
-      querystring: `code=abc123&state=${packedState}`,
+      querystring: `code=abc123&state=${state}`,
       cookie: `__Host-docs_pkce=${pkceCookie}`,
     });
     const result = await handler(event);
@@ -320,25 +380,44 @@ describe('handler-oidc: callback route', () => {
   it('completes Flow 1 on a successful exchange: sets session cookie, clears PKCE cookie, redirects to the original path', async () => {
     const { handler } = await import('./handler-oidc');
     const state = 'matching-state-4';
-    const pkceCookie = await pkceCookieFor(state);
-    const packedState = `${state}.${Buffer.from('/docs/intro', 'utf-8').toString('base64url')}`;
-    fetchMock.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ access_token: 'at', refresh_token: 'rt', expires_in: 3600 }),
-    });
+    const pkceCookie = await pkceCookieFor(state, 'test-verifier', '/docs/intro');
     const event = cfEvent({
       uri: '/_auth/callback',
-      querystring: `code=abc123&state=${packedState}`,
+      querystring: `code=abc123&state=${state}`,
       cookie: `__Host-docs_pkce=${pkceCookie}`,
     });
     const result = await handler(event);
+    expect(authorizationCodeGrantMock).toHaveBeenCalledWith('fake-config', expect.any(URL), {
+      pkceCodeVerifier: 'test-verifier',
+      expectedState: state,
+    });
     expect(result).toMatchObject({ status: '302' });
     expect(getLocation(result)).toBe('/docs/intro');
     const setCookies = getSetCookies(result);
-    expect(setCookies.some((c) => c.startsWith('__Host-docs_session='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_refresh='))).toBe(true);
+    expect(setCookies.some((c) => c.startsWith('__Host-docs_identity='))).toBe(true);
     expect(
       setCookies.some((c) => c.startsWith('__Host-docs_pkce=') && c.includes('Max-Age=0'))
     ).toBe(true);
+  });
+
+  it('returns an error response when the token response is missing a refresh_token', async () => {
+    const { handler } = await import('./handler-oidc');
+    const state = 'matching-state-5';
+    const pkceCookie = await pkceCookieFor(state);
+    authorizationCodeGrantMock.mockResolvedValueOnce({
+      access_token: 'at',
+      refresh_token: undefined,
+      claims: () => ({ sub: 'user-1', upn: 'jane@dataart.com' }),
+      expiresIn: () => 3600,
+    });
+    const event = cfEvent({
+      uri: '/_auth/callback',
+      querystring: `code=abc123&state=${state}`,
+      cookie: `__Host-docs_pkce=${pkceCookie}`,
+    });
+    const result = await handler(event);
+    expect(result).toMatchObject({ status: '502' });
   });
 });
 
@@ -347,6 +426,14 @@ describe('handler-oidc: cold-start secret validation', () => {
     sendMock.mockResolvedValue({
       SecretString: JSON.stringify({ OIDC_CLIENT_ID: CLIENT_ID, OIDC_TENANT_ID: TENANT_ID }),
     });
+    const { handler } = await import('./handler-oidc');
+    const result = await handler(cfEvent({ uri: '/page' }));
+    expect(result).toMatchObject({ status: '502' });
+    expect(discoveryMock).not.toHaveBeenCalled();
+  });
+
+  it('fails closed when discovery() rejects', async () => {
+    discoveryMock.mockRejectedValueOnce(new Error('metadata fetch failed'));
     const { handler } = await import('./handler-oidc');
     const result = await handler(cfEvent({ uri: '/page' }));
     expect(result).toMatchObject({ status: '502' });

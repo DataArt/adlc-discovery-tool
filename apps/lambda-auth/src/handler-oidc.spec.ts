@@ -217,10 +217,38 @@ describe('handler-oidc: steady state and silent refresh', () => {
     expect(getLocation(result)).toContain('/authorize');
   });
 
-  it('fails closed on an invalid JWT signature, even when not expired', async () => {
+  it('passes through on a valid, non-expired session even when the access token is not a verifiable JWT (opaque Graph token)', async () => {
+    // Entra's access token for this app is not guaranteed to be a verifiable
+    // JWS (Microsoft Graph tokens may be opaque) — steady-state trusts the
+    // session cookie's own HMAC instead of re-verifying anything against
+    // Entra on every request, so verifySignature (used only for the ID token
+    // at issuance) returning false here must not affect pass-through.
     const { handler } = await import('./handler-oidc');
     const { signSessionCookie } = await import('./lib/cookie');
     verifySignatureMock.mockResolvedValue(false);
+    const futureExp = Math.floor(Date.now() / 1000) + 3600;
+    const setCookies = signSessionCookie(
+      {
+        at: 'opaque-access-token',
+        rt: 'refresh-token',
+        sub: 'user-1',
+        upn: 'jane@dataart.com',
+        exp: futureExp,
+      },
+      SIGNING_KEY
+    );
+    const event = cfEvent({
+      uri: '/page',
+      cookie: cookieHeader(setCookies),
+    });
+    const result = await handler(event);
+    expect(result).toMatchObject({ uri: '/page' });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('fails closed when the session cookie trio is tampered, even when not expired', async () => {
+    const { handler } = await import('./handler-oidc');
+    const { signSessionCookie } = await import('./lib/cookie');
     const futureExp = Math.floor(Date.now() / 1000) + 3600;
     const setCookies = signSessionCookie(
       {
@@ -232,9 +260,11 @@ describe('handler-oidc: steady state and silent refresh', () => {
       },
       SIGNING_KEY
     );
+    const [accessCookie, refreshCookie, identityCookie] = setCookies;
+    const tamperedAccessCookie = accessCookie.replace(/^([^=]+)=[^;]+/, '$1=tampered.value');
     const event = cfEvent({
       uri: '/page',
-      cookie: cookieHeader(setCookies),
+      cookie: cookieHeader([tamperedAccessCookie, refreshCookie, identityCookie]),
     });
     const result = await handler(event);
     expect(result).toMatchObject({ status: '302' });
@@ -293,7 +323,7 @@ describe('handler-oidc: callback route', () => {
       json: async () => ({
         access_token: 'at',
         refresh_token: 'rt',
-        id_token: undefined,
+        id_token: 'fake-id-token',
         expires_in: 3600,
       }),
     });
@@ -314,7 +344,12 @@ describe('handler-oidc: callback route', () => {
     const packedState = `${state}.${Buffer.from('//evil.com', 'utf-8').toString('base64url')}`;
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ access_token: 'at', refresh_token: 'rt', expires_in: 3600 }),
+      json: async () => ({
+        access_token: 'at',
+        refresh_token: 'rt',
+        id_token: 'fake-id-token',
+        expires_in: 3600,
+      }),
     });
     const event = cfEvent({
       uri: '/_auth/callback',
@@ -332,7 +367,12 @@ describe('handler-oidc: callback route', () => {
     const packedState = `${state}.${Buffer.from('/docs/intro', 'utf-8').toString('base64url')}`;
     fetchMock.mockResolvedValueOnce({
       ok: true,
-      json: async () => ({ access_token: 'at', refresh_token: 'rt', expires_in: 3600 }),
+      json: async () => ({
+        access_token: 'at',
+        refresh_token: 'rt',
+        id_token: 'fake-id-token',
+        expires_in: 3600,
+      }),
     });
     const event = cfEvent({
       uri: '/_auth/callback',

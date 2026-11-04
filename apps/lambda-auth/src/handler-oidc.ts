@@ -106,6 +106,26 @@ function decodeClaims(token: string): Claims {
   }
 }
 
+// Entra's access token for this app (default Graph scope, no exposed custom
+// API) is not a verifiable JWS — Microsoft documents that API-bound access
+// tokens may be opaque and must not be parsed/verified by the client. The ID
+// token is always a genuine signed JWT, so that's the one signature check
+// that actually proves "this response came from Entra" — done once, here, at
+// the moment tokens are received. Every subsequent request trusts the
+// session cookie's own HMAC instead of re-verifying anything against Entra;
+// that HMAC already guarantees the cookie's contents are exactly what we
+// signed at issuance, so a live per-request Entra signature check added no
+// real security value and, for an opaque access token, cannot even succeed.
+async function verifyIdToken(idToken: string | undefined, secrets: OidcSecrets): Promise<boolean> {
+  if (!idToken) return false;
+  const jwks = getJwks(jwksUrl(secrets.tenantId));
+  return verifySignature(
+    idToken,
+    jwks,
+    `https://login.microsoftonline.com/${secrets.tenantId}/v2.0`
+  );
+}
+
 function claimsToIdentity(claims: Claims, fallbackSub = '', fallbackUpn = '') {
   return {
     sub: claims.sub ?? fallbackSub,
@@ -252,6 +272,11 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
       return errorResponse();
     }
 
+    if (!(await verifyIdToken(tokens.id_token, secrets))) {
+      console.error('ID token signature verification failed on initial exchange');
+      return errorResponse();
+    }
+
     const claims = decodeClaims(tokens.id_token ?? tokens.access_token);
     const identity = claimsToIdentity(claims);
     const exp = Math.floor(Date.now() / 1000) + (tokens.expires_in ?? 3600);
@@ -309,18 +334,6 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     return redirectToLogin(host, request.uri, request.querystring, secrets);
   }
 
-  const jwks = getJwks(jwksUrl(secrets.tenantId));
-  const signatureValid = await verifySignature(
-    session.at,
-    jwks,
-    `https://login.microsoftonline.com/${secrets.tenantId}/v2.0`
-  );
-  if (!signatureValid) {
-    // Fail closed — tampered, wrong kid, wrong issuer, or JWKS rotation
-    // mismatch. Never passed through, never silently retried (D3).
-    return redirectToLogin(host, request.uri, request.querystring, secrets);
-  }
-
   const nowSeconds = Math.floor(Date.now() / 1000);
   if (session.exp > nowSeconds) {
     logAttribution(session.upn, session.sub, requestId);
@@ -337,6 +350,15 @@ export const handler = async (event: CloudFrontRequestEvent): Promise<CloudFront
     refreshed = await refreshTokens(session.rt, secrets);
   } catch (err) {
     console.error('Silent refresh failed, re-entering login flow:', err);
+    return redirectToLogin(host, request.uri, request.querystring, secrets);
+  }
+
+  // Entra doesn't always re-issue an id_token on a refresh grant (depends on
+  // whether 'openid' was re-requested and tenant config); when it does,
+  // verify it the same way as the initial exchange. When it doesn't, we keep
+  // the identity already established (and verified) at initial login.
+  if (refreshed.id_token && !(await verifyIdToken(refreshed.id_token, secrets))) {
+    console.error('ID token signature verification failed on silent refresh');
     return redirectToLogin(host, request.uri, request.querystring, secrets);
   }
 

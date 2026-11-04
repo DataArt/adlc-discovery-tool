@@ -42,7 +42,14 @@ export async function verifySignature(
   try {
     await jwtVerify(token, jwks, { clockTolerance: TEN_YEARS_SECONDS, issuer });
     return true;
-  } catch {
+  } catch (err) {
+    // Only called against the ID token at issuance (callback/refresh) — see
+    // handler-oidc.ts's verifyIdToken — so a failure here is a genuine,
+    // infrequent, worth-logging event (Entra's response didn't verify), not
+    // per-request noise. Error name/message only, never the token itself.
+    const name = err instanceof Error ? err.name : typeof err;
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`verifySignature failed: ${name}: ${message}`);
     return false;
   }
 }

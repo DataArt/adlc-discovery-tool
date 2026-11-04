@@ -66,19 +66,19 @@ have modeled both of these correctly by default.
 
 ## Progress
 
-| #   | Step                                                | Status     | Notes                                                           | Test | Docs |
-| --- | --------------------------------------------------- | ---------- | --------------------------------------------------------------- | ---- | ---- |
-| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done    | Straightforward, went as planned                                | ✅   | —    |
-| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done    | Went as planned                                                 | ✅   | —    |
-| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done    | Added `clearPkceCookie` helper                                  | ✅   | —    |
-| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done    | `jose@^6.0.0`, clockTolerance=10y                               | ✅   | —    |
-| 5   | `handler-none.ts` — pass-through                    | ✅ Done    | Went as planned                                                 | ✅   | —    |
-| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done    | Verbatim, confirmed via diff                                    | ✅   | —    |
-| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done    | Live build + bundle check verified                              | ✅   | —    |
-| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done    | Diverged from plan text on silent-refresh mechanics — see notes | ✅   | —    |
-| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done    | Additive-only, no secrets; sm-push/pull unchanged               | —    | ✅   |
-| 10  | This repo — default to `oidc` with canonical app    | ✅ Done    | Real build verified; stray stale artifact identified, not ours  | ✅   | —    |
-| 11  | Deploy + validate `oidc` on real dev env (addendum) | ⚠️ Blocked | Blocked on Entra redirect-URI registration — see TD-1           | ❌   | —    |
+| #   | Step                                                | Status  | Notes                                                                                                                                | Test | Docs |
+| --- | --------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---- | ---- |
+| 1   | `lib/redirect.ts` — open-redirect guard             | ✅ Done | Straightforward, went as planned                                                                                                     | ✅   | —    |
+| 2   | `lib/pkce.ts` — PKCE/state generation               | ✅ Done | Went as planned                                                                                                                      | ✅   | —    |
+| 3   | `lib/cookie.ts` — session/PKCE cookie sign/verify   | ✅ Done | Added `clearPkceCookie` helper                                                                                                       | ✅   | —    |
+| 4   | `lib/jwks.ts` — JWKS fetch/cache + verify (`jose`)  | ✅ Done | `jose@^6.0.0`, clockTolerance=10y                                                                                                    | ✅   | —    |
+| 5   | `handler-none.ts` — pass-through                    | ✅ Done | Went as planned                                                                                                                      | ✅   | —    |
+| 6   | `handler-basic.ts` — relocate today's handler       | ✅ Done | Verbatim, confirmed via diff                                                                                                         | ✅   | —    |
+| 7   | `build.ts` — `AUTH_MODE` selector                   | ✅ Done | Live build + bundle check verified                                                                                                   | ✅   | —    |
+| 8   | `handler-oidc.ts` — full OIDC flow                  | ✅ Done | Diverged from plan text on silent-refresh mechanics — see notes                                                                      | ✅   | —    |
+| 9   | `.env.example`/`.secrets.example` — schema docs     | ✅ Done | Additive-only, no secrets; sm-push/pull unchanged                                                                                    | —    | ✅   |
+| 10  | This repo — default to `oidc` with canonical app    | ✅ Done | Real build verified; stray stale artifact identified, not ours                                                                       | ✅   | —    |
+| 11  | Deploy + validate `oidc` on real dev env (addendum) | ✅ Done | Unblocked once Entra redirect-URI registered; live login confirmed after fixing two further issues — see `## Post-Archival Incident` | ✅   | —    |
 
 ## Stage Metrics
 

@@ -22,7 +22,7 @@ A shared workspace for ADLC discovery, inspired by the broader Connect Framework
 | 4a      | [Getting started case](<05 Getting Started Case.md>)                           |
 | 4b      | [Day-to-day collaboration case](<06 Day-to-Day Collaboration Case.md>)         |
 | 5       | [Launching a new client engagement](<07 Launching a New Client Engagement.md>) |
-| 6       | [Collinson case](<08 Collinson Case.md>)                                       |
+| 6       | [Handoff case](<08 Handoff Case.md>)                                           |
 | 7       | [Questions and answers](<09 Questions and Answers.md>)                         |
 
 ## The flow
@@ -85,4 +85,3 @@ flowchart LR
 
 - [Process Overview](<../AI SDLC/01 Engagement/03 Process/01 Overview.md>) — engagement model and original diagram
 - [Quick Walkthrough](<../AI SDLC/01 Engagement/07 Contribution/06 Quick Walkthrough.md>) — copyable prompts for exploring the workspace
-- [Collinson workspace](https://d39lj4dq6ly541.cloudfront.net/) — the client engagement referenced in the case

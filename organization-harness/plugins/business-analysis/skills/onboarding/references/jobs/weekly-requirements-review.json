@@ -1,0 +1,26 @@
+{
+  "id": "weekly-requirements-review",
+  "name": "Weekly requirements review",
+  "skill": "requirements-analysis",
+  "trigger": {
+    "type": "schedule",
+    "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=10;BYMINUTE=0",
+    "timezone": "Europe/Madrid"
+  },
+  "execution": {
+    "environment": "cloud-preferred",
+    "session": "standalone",
+    "permissions": "read-only"
+  },
+  "context": {
+    "required": ["project-scope", "reporting-window", "output-destination"]
+  },
+  "dependencies": {
+    "connectors": ["jira", "confluence"]
+  },
+  "output": {
+    "type": "report",
+    "notify": "on-findings"
+  },
+  "prompt": "Review unresolved questions, contradictions and missing acceptance criteria; report evidence only. Cite sources, distinguish facts from assumptions, re-check access on every run and report missing context. Never write to external systems."
+}

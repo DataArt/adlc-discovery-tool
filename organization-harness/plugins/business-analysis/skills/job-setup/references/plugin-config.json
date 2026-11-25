@@ -1,0 +1,28 @@
+{
+  "sharedSkills": [
+    "onboarding",
+    "connector-setup",
+    "environment-check",
+    "agent-setup",
+    "job-setup"
+  ],
+  "sharedAgents": ["researcher", "reviewer", "documentation-specialist"],
+  "connectors": {
+    "required": ["jira", "confluence"],
+    "optional": ["teams", "sharepoint"]
+  },
+  "workflows": {
+    "meeting-notes": {
+      "liveConnectors": [],
+      "manualInputsAllowed": true
+    },
+    "requirements-analysis": {
+      "liveConnectors": ["jira", "confluence"],
+      "manualInputsAllowed": true
+    },
+    "story-generation": {
+      "liveConnectors": ["jira"],
+      "manualInputsAllowed": true
+    }
+  }
+}

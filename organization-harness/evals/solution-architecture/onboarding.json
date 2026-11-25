@@ -1,0 +1,24 @@
+{
+  "skill": "onboarding",
+  "status": "draft",
+  "cases": [
+    {
+      "id": "normal",
+      "prompt": "Run onboarding with representative approved project context.",
+      "expected": [
+        "Reports per-workflow readiness",
+        "Offers agent and job setup as optional",
+        "Does not register anything without approval"
+      ]
+    },
+    {
+      "id": "blocked",
+      "prompt": "Run onboarding with missing connector access and no approval for configuration changes.",
+      "expected": [
+        "Reports limitations",
+        "Does not invent access or successful registration",
+        "Does not perform writes"
+      ]
+    }
+  ]
+}

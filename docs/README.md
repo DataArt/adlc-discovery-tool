@@ -36,4 +36,4 @@ A DataArt-led engagement diagnosing SDLC bottlenecks and mapping a path to AI-fi
 
 ## Demo Presentation
 
-→ [ADLC Discovery presentation materials](Demo/index.md) — section pages with repository diagrams, speaker notes, contributor feedback prompts, and the Collinson example.
+→ [ADLC Discovery presentation materials](Demo/index.md) — section pages with repository diagrams, speaker notes, contributor feedback prompts, and the handoff example.

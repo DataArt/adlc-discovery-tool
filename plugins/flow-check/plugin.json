@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "flow-check",
+  "version": "0.1.4",
+  "description": "Test team marketplace skills, scheduled tasks, and required workplace app connections.",
+  "author": {
+    "name": "Your team"
+  },
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "onboardingSkill": "./skills/setup-connections/SKILL.md",
+      "interface": {
+        "displayName": "Flow Check",
+        "shortDescription": "Check skill installation",
+        "longDescription": "Verify marketplace skills and scheduled tasks, with required connections to Atlassian for Jira and Confluence, Zoom, Teams, Outlook Email, and Outlook Calendar.",
+        "developerName": "Your team",
+        "category": "Productivity",
+        "capabilities": []
+      }
+    }
+  }
+}

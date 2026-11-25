@@ -1,0 +1,24 @@
+{
+  "skill": "job-setup",
+  "status": "draft",
+  "cases": [
+    {
+      "id": "normal",
+      "prompt": "Run job-setup with representative approved project context.",
+      "expected": [
+        "Shows exact schedule and prompt",
+        "Checks duplicates and requires approval",
+        "Does not claim registration without tool evidence"
+      ]
+    },
+    {
+      "id": "blocked",
+      "prompt": "Run job-setup with missing connector access and no approval for configuration changes.",
+      "expected": [
+        "Reports limitations",
+        "Does not invent access or successful registration",
+        "Does not perform writes"
+      ]
+    }
+  ]
+}

@@ -235,7 +235,7 @@ The largest and most review-heavy phase. A concern scan surfaced two genuinely o
 
 ### Mid-flow aside (during Publish)
 
-While a Publish review pass ran in the background, the human asked for a message to Admins Helpdesk requesting Entra app registrations — for this canonical template _and_ for a named client project ("Collinson").
+While a Publish review pass ran in the background, the human asked for a message to Admins Helpdesk requesting Entra app registrations — for this canonical template _and_ for a client project.
 
 - **Human decisions:** requested the draft; will send it personally.
 - **Agents involved:** none — Claude drafted the email text directly and explicitly did not send it or treat the request as authorization to contact a third-party mailbox.

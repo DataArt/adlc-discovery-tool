@@ -1,0 +1,26 @@
+# Connect one app at a time
+
+For full onboarding, follow manifest order unless the user chooses another. Resume with the first outstanding service in scope. A Jira-only request needs only the Jira check. Use the manifest's required flags to distinguish required from optional checks. Atlassian has one install and sign-in step with two independent service checks.
+
+| App and listing fallback                                                                  | Why connect it                                                   | Smallest useful read in the intended workspace                                                     |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [Atlassian](https://chatgpt.com/plugins/plugin_asdk_app_6a83901dde988191b3f3cefdcc19acfa) | Jira supplies backlog context and Confluence holds requirements. | Read the selected Jira project's metadata and the selected Confluence space's metadata separately. |
+| [Zoom](https://chatgpt.com/plugins/plugin_asdk_app_69373a13116c819189d046aea1278836)      | Locate source meetings for meeting notes.                        | Read metadata for one user-selected meeting in the work account.                                   |
+| [Teams](https://chatgpt.com/plugins/teams)                                                | Locate stakeholder discussions.                                  | Read metadata for one selected team or channel.                                                    |
+| [Outlook Email](https://chatgpt.com/plugins/outlook-email)                                | Locate requirements or decisions shared by email.                | Check work mailbox metadata, or access one user-selected message.                                  |
+| [Outlook Calendar](https://chatgpt.com/plugins/outlook-calendar)                          | Identify meeting context for discovery work.                     | Read the intended calendar's metadata, or access one selected event.                               |
+
+**Find the next step.** Resolve declared dependencies with Plugin Management when available. A team marketplace plugin can return `plugin_not_found` from the public dependency lookup. In that case call `search_plugins` for the current provider (for example, “Atlassian”). Match the returned listing to the app in the manifest and use its canonical plugin ID, installed status and suggestion history. Tool visibility and an empty site list do not establish installation status.
+
+**Give one action at a time.** For an eligible missing plugin, call `suggest_plugins` with the returned ID for this connector alone, then give the short Install/Connect instruction and clickable listing. Respect pending and recent suggestions. For an installed app, use the host's native connection action when available, or its authenticated read for verification. If the host displays a card, point to it and wait for Done or Skip. When the host provides no card, use the listing as a fallback. Keep sign-in and consent in the provider UI.
+
+**Installed Atlassian with no accessible sites.** When the host exposes a native Connect or Reconnect action and connection is unresolved, invoke it before requesting a Jira project or Confluence space. Otherwise use the account-level read `getAccessibleAtlassianResources` once if it has not already run. If it returns an authentication challenge, let the host present sign-in. An empty site list alone leaves the connection state unresolved. If there is no native action or challenge, give the listing as the single recovery action. Reserve installation suggestions for eligible missing apps.
+
+> **Workplace app 1 of 5 · Atlassian**
+> No Atlassian sites were returned. [Open Atlassian](https://chatgpt.com/plugins/plugin_asdk_app_6a83901dde988191b3f3cefdcc19acfa) to check your work account and choose **Connect** if offered. Reply **Done** to retry or **Skip** to continue.
+
+After Done, refresh the available sites. If the user confirms the correct account and the list is still empty, use one known project or space link for a scoped check, or let the user skip. If a target was already supplied, use it directly when authorized.
+
+**Verify and advance.** Wait for the connection event or reply. On Done, refresh the tools and make the smallest supported read from the table. If only content reads are available, use one sample chosen by the user. Keep external resources unchanged and report only access and scope. Account access alone leaves a requested project or resource unverified. A successful metadata read verifies only the capability exercised.
+
+Give the result in one line, then present the next unresolved connector in the same reply. On failure, identify the observed issue (sign-in required, permission denied, target unavailable, or no verification tool), give one recovery action and allow retry or skip. Preserve successful checks, including a single successful Atlassian service. Leave skipped services outstanding and continue. When resuming in a new chat, reconstruct progress from current evidence and recheck as needed.

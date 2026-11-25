@@ -1,0 +1,34 @@
+{
+  "id": "daily-meeting-notes",
+  "name": "Daily meeting notes for review",
+  "skill": "meeting-notes",
+  "trigger": {
+    "type": "schedule",
+    "rrule": "FREQ=DAILY;BYHOUR=18;BYMINUTE=0",
+    "timezone": "Europe/Madrid"
+  },
+  "execution": {
+    "environment": "cloud-preferred",
+    "session": "standalone",
+    "permissions": "read-only"
+  },
+  "context": {
+    "required": [
+      "calendar",
+      "messenger-scopes",
+      "meeting-filter",
+      "reporting-window",
+      "reviewer",
+      "private-review-destination",
+      "confluence-site-space-parent"
+    ]
+  },
+  "dependencies": {
+    "connectors": ["outlook-calendar", "teams", "atlassian"]
+  },
+  "output": {
+    "type": "report",
+    "notify": "on-findings"
+  },
+  "prompt": "Use the meeting-notes skill and its result contract and its discovery and publication procedure. Search the configured Outlook Calendar and Teams chats or channels for completed meetings in the reporting window. Include any additional configured messenger. Match each occurrence across sources. Use attributable discussion, transcripts or notes to draft decisions, actions and open questions. Record unavailable sources and meetings lacking evidence. Deliver each complete draft with its occurrence key, revision, sources and proposed Confluence destination to the designated reviewer in the private result view. End the scheduled run there. Publication is a separate interactive action requiring the reviewer's explicit approval of the exact draft and destination."
+}

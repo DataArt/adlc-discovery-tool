@@ -39,4 +39,4 @@ flowchart LR
 
 ---
 
-[Presentation](index.md) · [Previous](<06 Day-to-Day Collaboration Case.md>) · [Next](<08 Collinson Case.md>)
+[Presentation](index.md) · [Previous](<06 Day-to-Day Collaboration Case.md>) · [Next](<08 Handoff Case.md>)

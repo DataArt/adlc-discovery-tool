@@ -1,0 +1,20 @@
+{
+  "name": "team-skills",
+  "interface": {
+    "displayName": "Team Skills"
+  },
+  "plugins": [
+    {
+      "name": "business-analysis",
+      "source": {
+        "source": "local",
+        "path": "./plugins/business-analysis"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

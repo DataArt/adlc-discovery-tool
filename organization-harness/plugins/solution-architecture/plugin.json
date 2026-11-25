@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "solution-architecture",
+  "version": "0.2.0",
+  "description": "Architecture design, review, technology selection and estimation.",
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/onboarding/SKILL.md",
+      "interface": {
+        "displayName": "Solution Architecture"
+      }
+    }
+  }
+}

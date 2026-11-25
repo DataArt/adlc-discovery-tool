@@ -1,0 +1,24 @@
+{
+  "skill": "flow-check",
+  "status": "draft",
+  "cases": [
+    {
+      "id": "normal",
+      "prompt": "Run flow-check with representative approved project context.",
+      "expected": [
+        "Cites scoped issues and pull requests",
+        "Distinguishes inactivity from blocking",
+        "Does not modify external resources"
+      ]
+    },
+    {
+      "id": "blocked",
+      "prompt": "Run flow-check with missing connector access and no approval for configuration changes.",
+      "expected": [
+        "Reports limitations",
+        "Does not invent access or successful registration",
+        "Does not perform writes"
+      ]
+    }
+  ]
+}

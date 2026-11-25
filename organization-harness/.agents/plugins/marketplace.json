@@ -1,0 +1,56 @@
+{
+  "name": "organization-harness",
+  "interface": {
+    "displayName": "Organization Harness"
+  },
+  "plugins": [
+    {
+      "name": "business-analysis",
+      "source": {
+        "source": "local",
+        "path": "./plugins/business-analysis"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "solution-architecture",
+      "source": {
+        "source": "local",
+        "path": "./plugins/solution-architecture"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "engineering",
+      "source": {
+        "source": "local",
+        "path": "./plugins/engineering"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "project-management",
+      "source": {
+        "source": "local",
+        "path": "./plugins/project-management"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

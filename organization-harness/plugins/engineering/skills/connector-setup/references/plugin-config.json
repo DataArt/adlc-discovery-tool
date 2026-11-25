@@ -1,0 +1,28 @@
+{
+  "sharedSkills": [
+    "onboarding",
+    "connector-setup",
+    "environment-check",
+    "agent-setup",
+    "job-setup"
+  ],
+  "sharedAgents": ["researcher", "reviewer", "documentation-specialist"],
+  "connectors": {
+    "required": ["github", "jira"],
+    "optional": ["gitlab", "bitbucket", "confluence", "figma"]
+  },
+  "workflows": {
+    "implementation-harness": {
+      "liveConnectors": ["github", "jira"],
+      "manualInputsAllowed": true
+    },
+    "code-review": {
+      "liveConnectors": ["github"],
+      "manualInputsAllowed": true
+    },
+    "migration": {
+      "liveConnectors": ["github"],
+      "manualInputsAllowed": true
+    }
+  }
+}

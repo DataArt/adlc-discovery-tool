@@ -241,7 +241,7 @@ Set `apps/lambda-auth/.env.dev`'s `AUTH_MODE=oidc` and populated `.secrets.dev` 
 the canonical app's `OIDC_CLIENT_ID`/`OIDC_TENANT_ID`/`OIDC_CLIENT_SECRET` plus a
 freshly generated `OIDC_SESSION_SIGNING_KEY` (`openssl rand -base64 32`) — both files
 confirmed gitignored (`.env.*`/`.secrets.*` patterns), never committed, no secret
-value found anywhere in `git grep`. Collinson's credentials are not used in this repo.
+value found anywhere in `git grep`. client's credentials are not used in this repo.
 
 The developer ran `yarn nx run lambda-auth:build:dev` directly and flagged that
 `dist/lambda-handler.js` showed basic-auth content — investigated: that file is a

@@ -16,10 +16,10 @@ in `apps/lambda-auth`, so each deployed docs-site instance can run no auth, toda
 Basic Auth (unchanged), or direct Entra ID OIDC SSO with per-user identity, silent refresh, and
 attribution logging — with exactly one mode's code shipped per build (no dead auth-protocol code).
 
-Entra ID app registrations now exist for both the canonical (template) instance and a Collinson
+Entra ID app registrations now exist for both the canonical (template) instance and a client
 instance. This repo is the canonical instance. This plan implements the full design here, then
 configures this repo's dev deploy config to default to `oidc` mode wired to the canonical app
-registration. The Collinson instance's credentials are out of scope (separate repo).
+registration. The client instance's credentials are out of scope (separate repo).
 
 The target architecture doc (`docs/Target Architecture (HLD)/v1/Containers/Auth.md`) and NFR-1/6/7/8
 already reflect this design (published at the design's Publish stage) — no further doc changes are
@@ -43,7 +43,7 @@ expected unless implementation surfaces a gap.
 **Out of scope:**
 
 - `apps/infra` — CDK-managed resources are unchanged per Architecture.md (confirmed, no action)
-- Collinson instance configuration (separate repo)
+- client instance configuration (separate repo)
 - Efforts.md Ticket #3 (independent security review, load/latency test, runbook) — pre-production
   gate, tracked but not blocking this implementation
 - Actually running `sm-push`/deploying — guarded/developer-run
@@ -311,7 +311,7 @@ correlation claim holds as documented. If they differ, source the header value i
   `OIDC_TENANT_ID=e26666fd-a875-4064-b4ca-775ea917529a`, `OIDC_CLIENT_SECRET=<the canonical secret
 provided by the user>`, and a freshly generated `OIDC_SESSION_SIGNING_KEY` (via
   `openssl rand -base64 32`, run locally, value never echoed into chat/commit)
-- No code change ships the Collinson app's credentials anywhere in this repo
+- No code change ships the client app's credentials anywhere in this repo
 
 **Verification:**
 

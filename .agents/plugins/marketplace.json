@@ -1,0 +1,20 @@
+{
+  "name": "team-skills-test",
+  "interface": {
+    "displayName": "Team Skills Test"
+  },
+  "plugins": [
+    {
+      "name": "flow-check",
+      "source": {
+        "source": "local",
+        "path": "./plugins/flow-check"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

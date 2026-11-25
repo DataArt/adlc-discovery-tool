@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "flow-check",
+  "version": "0.1.0",
+  "description": "A small skill-only plugin for testing team marketplace installation and updates.",
+  "author": {
+    "name": "Your team"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Flow Check",
+        "shortDescription": "Check skill installation",
+        "longDescription": "Verify that a skill from your team's GitHub marketplace is available in chat.",
+        "developerName": "Your team",
+        "category": "Productivity",
+        "capabilities": []
+      }
+    }
+  }
+}

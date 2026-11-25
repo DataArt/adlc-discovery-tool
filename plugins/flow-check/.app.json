@@ -1,0 +1,24 @@
+{
+  "apps": {
+    "atlassian": {
+      "id": "asdk_app_6a83901dde988191b3f3cefdcc19acfa",
+      "required": true
+    },
+    "zoom": {
+      "id": "asdk_app_69373a13116c819189d046aea1278836",
+      "required": true
+    },
+    "teams": {
+      "id": "connector_246af0940da3457da0e751171dc1ce60",
+      "required": true
+    },
+    "outlook-email": {
+      "id": "connector_4aaab2856305417b993eca9a216aaf6e",
+      "required": true
+    },
+    "outlook-calendar": {
+      "id": "connector_e6a7394682e24467ac68c60696f275a4",
+      "required": true
+    }
+  }
+}

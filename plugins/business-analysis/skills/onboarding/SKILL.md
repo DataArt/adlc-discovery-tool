@@ -11,7 +11,7 @@ Use the request to choose between the full walkthrough and a single step. On fir
 
 Identify the host and any project the user has named. Resolve an outstanding app connection before asking for a project or space. Request one target at a time when a scoped check needs it. Walk through these stages in order, presenting one action at a time:
 
-1. [Connect workplace apps](references/connections.md). Read the [app manifest](../../.app.json), verify available services, and guide the user through each outstanding connection in chat.
+1. [Connect workplace apps](references/connections.md). Read the [app manifest](../../.app.json). Resolve the current connector in Plugin Management first. If lookup of the team plugin fails, search for the connector itself. For an eligible missing app, call the native plugin suggestion tool with its returned ID before replying. Then follow the connection procedure for sign-in and verification.
 2. [Set up specialist agents](references/agents.md). Show the roles available for this project and offer installation or Skip. Check existing definitions before applying approved changes.
 3. [Set up recurring jobs](references/jobs.md). Offer daily meeting notes, hourly Zoom meeting notes and the weekly requirements review for configuration or Skip. Check for an existing schedule and obtain approval for the exact task before creating or changing it.
 4. [Check the environment](references/environment-check.md). Assess workflow readiness using the resulting configuration and current scoped evidence. Report unsupported capabilities, skipped steps and usable manual inputs in the [readiness report](assets/readiness-report.md).

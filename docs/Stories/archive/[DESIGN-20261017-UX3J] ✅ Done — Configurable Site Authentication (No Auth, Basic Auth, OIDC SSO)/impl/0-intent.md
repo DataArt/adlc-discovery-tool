@@ -16,8 +16,8 @@ silent refresh, and attribution logging — without shipping dead auth-protocol 
 for modes an instance doesn't use.
 
 Separately, Entra ID app registrations now exist for two instances: the canonical
-(template) `[DataArt] [Prod] ADLC_Discovery_Tool` and the Collinson instance
-`[DataArt] [Prod] ADLC_Discovery_Tool_Collinson`. This repo is the canonical
+(template) `[DataArt] [Prod] ADLC_Discovery_Tool` and the client instance
+`[DataArt] [Prod] ADLC_Discovery_Tool_<client>`. This repo is the canonical
 instance.
 
 ## Proposed outcome
@@ -34,7 +34,7 @@ instance.
    canonical Entra app registration (`3a5f31e9-f173-4f57-9caa-17cff938af2f`, tenant
    `e26666fd-a875-4064-b4ca-775ea917529a`), with real secrets placed only in the
    gitignored `.secrets.dev` and never committed.
-4. The Collinson instance's app-registration details are recorded for later use in
+4. The client instance's app-registration details are recorded for later use in
    that separate repo — out of scope for this implementation.
 
 ## Affected users and systems

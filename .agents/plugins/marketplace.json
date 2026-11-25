@@ -1,14 +1,14 @@
 {
-  "name": "team-skills-test",
+  "name": "team-skills",
   "interface": {
-    "displayName": "Team Skills Test"
+    "displayName": "Team Skills"
   },
   "plugins": [
     {
-      "name": "flow-check",
+      "name": "business-analysis",
       "source": {
         "source": "local",
-        "path": "./plugins/flow-check"
+        "path": "./plugins/business-analysis"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -1,0 +1,32 @@
+{
+  "sharedSkills": [
+    "onboarding",
+    "connector-setup",
+    "environment-check",
+    "agent-setup",
+    "job-setup"
+  ],
+  "sharedAgents": ["researcher", "reviewer", "documentation-specialist"],
+  "connectors": {
+    "required": ["jira", "confluence"],
+    "optional": ["github", "figma"]
+  },
+  "workflows": {
+    "solution-design": {
+      "liveConnectors": ["jira", "confluence"],
+      "manualInputsAllowed": true
+    },
+    "architecture-review": {
+      "liveConnectors": ["confluence"],
+      "manualInputsAllowed": true
+    },
+    "effort-estimation": {
+      "liveConnectors": ["jira"],
+      "manualInputsAllowed": true
+    },
+    "technology-selection": {
+      "liveConnectors": [],
+      "manualInputsAllowed": true
+    }
+  }
+}

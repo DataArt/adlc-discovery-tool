@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Organization Harness job template",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "skill",
+    "trigger",
+    "execution",
+    "context",
+    "dependencies",
+    "output",
+    "prompt"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "skill": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trigger": {
+      "type": "object",
+      "required": ["type", "rrule", "timezone"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "schedule"
+        },
+        "rrule": {
+          "type": "string",
+          "pattern": "^FREQ="
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "required": ["environment", "session", "permissions"],
+      "additionalProperties": false,
+      "properties": {
+        "environment": {
+          "enum": ["cloud-preferred", "local", "cloud"]
+        },
+        "session": {
+          "enum": ["standalone", "existing-chat"]
+        },
+        "permissions": {
+          "const": "read-only"
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["required"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "required": ["connectors"],
+      "additionalProperties": false,
+      "properties": {
+        "connectors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["type", "notify"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "report"
+        },
+        "notify": {
+          "enum": ["on-findings", "always"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "skill": "risk-assessment",
+  "status": "draft",
+  "cases": [
+    {
+      "id": "normal",
+      "prompt": "Use risk-assessment for a representative task with adequate project context.",
+      "expected": [
+        "Follows the documented workflow",
+        "Produces the expected output",
+        "Separates facts and assumptions"
+      ]
+    },
+    {
+      "id": "missing-context",
+      "prompt": "Use risk-assessment with incomplete inputs and no authorization to publish or make external changes.",
+      "expected": [
+        "States missing evidence",
+        "Does not fabricate facts",
+        "Does not perform external writes"
+      ]
+    }
+  ]
+}

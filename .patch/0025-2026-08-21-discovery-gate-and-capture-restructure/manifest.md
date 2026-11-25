@@ -10,7 +10,7 @@ To support this, `docs/AI SDLC/02 Capture/` is reorganized: two new numbered sub
 
 Gate 1's colloquial name was aligned to "Steering Meeting" everywhere (folder name, skill text, and the two top-level process docs that previously called it "Findings Approval") — "Gate Review" remains the underlying workflow-doc name, same tier as "Initiation" for Gate 0.
 
-**Not included:** the real Collinson-specific Gate 1 agenda (`02 Capture/03 Gates/Gate 1 (Steering Meeting) - 25 August 2026/Agenda.md`) and `decks/.gitignore` — both repo-specific to this engagement, not starter-kit material, consistent with patch 0024's precedent. The Collinson agenda has since been deleted from this repo entirely (not just excluded from the bundle) — its content was superseded by the generic `Gate 1 (Steering Meeting) - Date TBD` placeholder, which the bundle does carry.
+**Not included:** the real client-specific Gate 1 agenda (`02 Capture/03 Gates/Gate 1 (Steering Meeting) - 25 August 2026/Agenda.md`) and `decks/.gitignore` — both repo-specific to this engagement, not starter-kit material, consistent with patch 0024's precedent. The client agenda has since been deleted from this repo entirely (not just excluded from the bundle) — its content was superseded by the generic `Gate 1 (Steering Meeting) - Date TBD` placeholder, which the bundle does carry.
 
 ## Renamed (24)
 
@@ -101,5 +101,5 @@ None — every removed path is accounted for above as a Rename.
 
 ## Not included (repo-specific — apply manually if relevant, or skip)
 
-- `docs/AI SDLC/02 Capture/Gate 1 (Steering Meeting) - 25 August 2026/Agenda.md` — carried real Collinson stakeholder names/figures, not starter-kit material. Since deleted from this repo entirely (not merely excluded from the bundle) — a target repo has nothing to move or reconcile here.
+- `docs/AI SDLC/02 Capture/Gate 1 (Steering Meeting) - 25 August 2026/Agenda.md` — carried real client stakeholder names/figures, not starter-kit material. Since deleted from this repo entirely (not merely excluded from the bundle) — a target repo has nothing to move or reconcile here.
 - `decks/.gitignore` — unrelated stray file from an earlier session, already excluded from patch 0024 for the same reason.

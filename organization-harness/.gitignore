@@ -1,0 +1,11 @@
+# Local context and generated artifacts
+.env
+.env.*
+!.env.example
+inputs/
+outputs/
+customer-context/
+.local/
+dist/
+__pycache__/
+.DS_Store

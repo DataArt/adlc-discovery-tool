@@ -1,0 +1,26 @@
+{
+  "id": "daily-flow-check",
+  "name": "Daily Delivery Flow Check",
+  "skill": "flow-check",
+  "trigger": {
+    "type": "schedule",
+    "rrule": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=9;BYMINUTE=0",
+    "timezone": "Europe/Madrid"
+  },
+  "execution": {
+    "environment": "cloud-preferred",
+    "session": "standalone",
+    "permissions": "read-only"
+  },
+  "context": {
+    "required": ["project-scope", "reporting-window", "output-destination", "repository-scope"]
+  },
+  "dependencies": {
+    "connectors": ["jira", "github"]
+  },
+  "output": {
+    "type": "report",
+    "notify": "on-findings"
+  },
+  "prompt": "Identify delivery blockers, stale pull requests and unresolved dependencies. Cite sources, distinguish facts from assumptions, re-check access on every run and report missing context. Never write to external systems."
+}

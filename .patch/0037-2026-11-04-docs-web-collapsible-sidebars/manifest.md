@@ -7,9 +7,9 @@
 
 Adds collapsible left/right sidebars to the VitePress docs site theme, with
 the prose content area adapting to fill the freed width — not just hiding
-the panel. Originated in the Collinson sibling repo (prepared there as its
+the panel. Originated in the client sibling repo (prepared there as its
 own bundle 0027) and pulled back into this canonical repo, since the
-feature is generically useful and not Collinson-specific.
+feature is generically useful and not client-specific.
 
 Three nav controls:
 
@@ -50,7 +50,7 @@ both read as input lag, so every transition touching these states is
 explicitly set to `transition: none` in the collapsed-state CSS rules.
 
 **Note on `config.ts`/`Layout.vue`/`custom.css` in the target repo**: this
-canonical repo had diverged from the Collinson source's base in ways
+canonical repo had diverged from the client source's base in ways
 unrelated to this feature (markdown container registration, giscus opt-in
 gating, a Demo nav section, security hardening on `config.ts`'s `markdown.html`
 flag) — `config.ts` and `Layout.vue` were hand-merged here, not overwritten,

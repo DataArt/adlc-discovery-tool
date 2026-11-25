@@ -1,0 +1,26 @@
+{
+  "id": "weekly-requirements-review",
+  "name": "Weekly requirements review",
+  "skill": "requirements-analysis",
+  "trigger": {
+    "type": "schedule",
+    "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=10;BYMINUTE=0",
+    "timezone": "Europe/Madrid"
+  },
+  "execution": {
+    "environment": "cloud-preferred",
+    "session": "standalone",
+    "permissions": "read-only"
+  },
+  "context": {
+    "required": ["jira-project", "confluence-space", "reporting-window", "output-destination"]
+  },
+  "dependencies": {
+    "connectors": ["atlassian"]
+  },
+  "output": {
+    "type": "report",
+    "notify": "on-findings"
+  },
+  "prompt": "For the agreed reporting window, review requirements in the selected Jira project and Confluence space. Recheck read access to each source on every run. Cite the issues or pages supporting unresolved questions, contradictions and missing acceptance criteria. Identify assumptions and any gaps in coverage. If a source is inaccessible, report the incomplete review. Return the report in the configured result destination and leave source systems unchanged."
+}

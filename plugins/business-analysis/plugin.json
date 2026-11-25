@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "business-analysis",
+  "version": "0.1.0",
+  "description": "Discovery, requirements and backlog preparation.",
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "onboardingSkill": "./skills/onboarding/SKILL.md",
+      "interface": {
+        "displayName": "Business Analysis",
+        "logo": "./assets/business-analysis.svg",
+        "composerIcon": "./assets/business-analysis.svg"
+      }
+    }
+  }
+}

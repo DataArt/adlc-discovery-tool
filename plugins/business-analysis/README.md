@@ -6,6 +6,7 @@ Start [onboarding](skills/onboarding/SKILL.md) for the guided flow through conne
 
 ## Plugin guides
 
+- [How the Business Analysis plugin works](docs/How%20the%20Business%20Analysis%20Plugin%20Works.md) — understand the architecture, workflow handoffs, specialist roles, and human approvals.
 - [Set up the Business Analysis plugin](docs/Set%20Up%20the%20Business%20Analysis%20Plugin.md) — install the plugin, connect sources, and configure jobs.
 - [Maintain the Business Analysis plugin](docs/Maintain%20the%20Business%20Analysis%20Plugin.md) — troubleshoot installations, update source files, and verify changes.
 

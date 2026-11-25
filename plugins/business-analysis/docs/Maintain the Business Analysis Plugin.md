@@ -1,5 +1,17 @@
 # Maintain the Business Analysis plugin
 
+## Decide where the change belongs
+
+Start with who should see the change. If one team wants a different reviewer, schedule or destination, rerun the relevant part of onboarding in that workspace. If every future installation should behave differently, edit the packaged definition. The [architecture guide](How%20the%20Business%20Analysis%20Plugin%20Works.md) explains the responsibilities of each part.
+
+| Request                                                      | First place to look                                                                                                                          |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| “Run our review on Tuesday.”                                 | Ask onboarding to update this project's registered job. Check its saved cadence and timezone.                                                |
+| “Every new weekly review should default to Tuesday.”         | Change the weekly job template and the default shown in the setup guide. Existing schedules need a separate update.                          |
+| “Notes keep presenting suggestions as decisions.”            | Review the meeting-notes result contract and drafting instructions. Test with a transcript that contains both a suggestion and an agreement. |
+| “Our specialist misses ambiguous deadlines.”                 | Inspect the relevant agent definition, try it on a known ambiguity, then compare the updated role with the installed project copy.           |
+| “The job sees the invitation but cannot summarize the call.” | Run the environment check for the scheduled identity. Verify that it can read actual meeting evidence for the same occurrence.               |
+
 ## Maintain an existing installation
 
 | When something changes                                | What to do                                                                                                                                                                                            |
@@ -23,3 +35,13 @@ Edit the files in `plugins/business-analysis/` directly. The package is self-con
 | Plugin name, icon or setup entry point | Edit the [plugin manifest](../plugin.json). For a source move or plugin identifier change, also update the entry in the repository’s `.agents/plugins/marketplace.json`.                                                                                    |
 
 After editing, parse the affected JSON, TOML or skill frontmatter and resolve local links from the file that contains them. Confirm that each changed job names a packaged skill and declared connectors. Load the updated package in the intended host and exercise the changed path. For example, give meeting notes a transcript containing a tentative deadline and check that the draft preserves the uncertainty. For a scheduler change, inspect the saved task and its first result under the scheduled identity. [Meeting-notes result criteria](../skills/meeting-notes/references/result-contract.md)
+
+## Test a change before sharing it
+
+For a small evaluation, write down a sample input and the result you expect, then compare it with the result you observe. Use invented project details. For a change to how decisions are recorded, try this in a private chat with the updated plugin:
+
+> Use Meeting notes on this excerpt. Maya said, “I'll send the estimate. Friday could work for launch if QA signs off.” Lee confirmed, “We decided the pilot will cover one team.”
+
+Check the draft for three things. Maya owns sending the estimate and has no stated due date. Friday remains conditional on QA. The pilot scope is recorded as one team, linked to Lee's statement. If the draft turns Friday into a commitment, revise the drafting instruction or result contract and repeat the same example. Compare the output with the [meeting-notes criteria](../skills/meeting-notes/references/result-contract.md).
+
+For a job change, also preview its exact prompt, schedule, identity and destination. A dry run shows what that invocation can produce. Inspect the saved task and its first scheduled result to verify the recurring path. For a connector change, test one known resource in the intended project. Record what you checked and any capability you still need to verify when sharing the update.

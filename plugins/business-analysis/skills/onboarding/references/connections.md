@@ -12,12 +12,14 @@ For full onboarding, follow manifest order unless the user chooses another. Resu
 
 **Resolve the current app.** Check the tools and connection state the host exposes. If read tools are usable, go straight to verification. Where Plugin Management is available, use its dependency lookup for the Business Analysis plugin. If necessary, search for the connector listing and match its dependency app ID against the packaged ID. Use the returned canonical plugin ID for the installation suggestion.
 
-**Present one action in chat.** For a missing app, invoke the host's native installation suggestion (such as Plugin Management's suggest_plugins) for this app alone when eligible. For an installed app needing authorization, invoke its native connection action when available. Include the clickable listing for the current app as a fallback. Describe a dialog as open only if the host confirms it. If the host lacks a dialog, direct the user to the listing. Sign-in and consent happen in the provider UI. Never ask for passwords, tokens or codes in chat.
+**Present one action in chat.** For a missing app, invoke the host's native installation suggestion (such as Plugin Management's suggest_plugins) for this app alone when eligible. For an installed app needing authorization, invoke its native connection action when available. When the host presents its connection card, point to its **Connect** button and wait for the connection event or Done. Use the listing when the host exposes no native action or challenge. Describe a dialog as open only if the host confirms it. If the host lacks a dialog, direct the user to the listing. Sign-in and consent happen in the provider UI. Never ask for passwords, tokens or codes in chat.
 
-Example for full onboarding when Atlassian needs sign-in (adapt the step count to the selected apps):
+**Installed Atlassian with no accessible sites.** When the host exposes a native Connect or Reconnect action and connection is unresolved, invoke it before requesting a Jira project or Confluence space. Otherwise use the account-level read `getAccessibleAtlassianResources` once if it has not already run. If it returns an authentication challenge, let the host present sign-in. An empty site list alone leaves the connection state unresolved. If there is no native action or challenge, give the listing as the single recovery action. Reserve installation suggestions for eligible missing apps.
 
-> **Step 1 of 5 · Atlassian**  
-> Connect Atlassian to read your Jira backlog and Confluence requirements. Choose **Connect** in [Atlassian](https://chatgpt.com/plugins/plugin_asdk_app_6a83901dde988191b3f3cefdcc19acfa). Reply **Done** when signed in, or **Skip** to move on.
+> **Workplace app 1 of 5 · Atlassian**
+> No Atlassian sites were returned. [Open Atlassian](https://chatgpt.com/plugins/plugin_asdk_app_6a83901dde988191b3f3cefdcc19acfa) to check your work account and choose **Connect** if offered. Reply **Done** to retry or **Skip** to continue.
+
+After Done, refresh the available sites. If the user confirms the correct account and the list is still empty, use one known project or space link for a scoped check, or let the user skip. If a target was already supplied, use it directly when authorized.
 
 **Verify and advance.** Wait for the connection event or reply. On Done, refresh the tools and make the smallest supported read from the table. If only content reads are available, use one sample chosen by the user. Keep external resources unchanged and report only access and scope. Account access alone leaves a requested project or resource unverified. A successful metadata read verifies only the capability exercised.
 

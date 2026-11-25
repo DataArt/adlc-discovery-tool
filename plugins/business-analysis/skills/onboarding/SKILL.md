@@ -9,7 +9,7 @@ Use the request to choose between the full walkthrough and a single step. On fir
 
 ## Full walkthrough
 
-Identify the host and any project the user has named. Ask for a target only when a check needs it. Walk through these stages in order, presenting one action at a time:
+Identify the host and any project the user has named. Resolve an outstanding app connection before asking for a project or space. Request one target at a time when a scoped check needs it. Walk through these stages in order, presenting one action at a time:
 
 1. [Connect workplace apps](references/connections.md). Read the [app manifest](../../.app.json), verify available services, and guide the user through each outstanding connection in chat.
 2. [Set up specialist agents](references/agents.md). Show the roles available for this project and offer installation or Skip. Check existing definitions before applying approved changes.

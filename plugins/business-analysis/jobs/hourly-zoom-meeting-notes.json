@@ -30,5 +30,5 @@
     "type": "report",
     "notify": "on-findings"
   },
-  "prompt": "Use the meeting-notes skill and its Zoom meeting procedure. Check selected Outlook occurrences hourly from 15 minutes after the meeting ends. Match the event to the Zoom occurrence and verify the transcript against accessible recording audio. Reconcile existing drafts before creating one set of topic-grouped notes per occurrence. Return the complete draft and separate clarification questions to the designated BA or PM in private chat. End the read-only run there. After explicit approval in an interactive session, verify Confluence publication before saving an unsent Outlook reply draft for the original invitees."
+  "prompt": "Use the meeting-notes skill and its Zoom meeting procedure. Check selected Outlook occurrences hourly at the first check at least 15 minutes after the scheduled end. Match the event to the Zoom occurrence and verify the transcript against accessible recording audio. Reconcile existing drafts before creating one set of topic-grouped notes per occurrence. Return the complete draft and separate clarification questions to the designated BA or PM in private chat. End the read-only run there. After explicit approval in an interactive session, verify Confluence publication before saving an unsent Outlook reply draft for the original invitees."
 }

@@ -1,6 +1,6 @@
 ---
 name: meeting-notes
-description: 'Turn meeting transcripts or notes into accurate decisions, actions and open questions. Use for meeting summaries, scheduled meeting discovery, and review or approved Confluence publication of meeting-note drafts.'
+description: 'Turn meeting transcripts or notes into accurate decisions, actions and open questions. Use for Meeting Notes setup, meeting summaries, scheduled meeting discovery, and review or approved Confluence publication of meeting-note drafts.'
 ---
 
 # Meeting Notes
@@ -12,6 +12,8 @@ Read [operating principles](references/operating-principles.md) before executing
 For requests to verify a transcript against Zoom audio and for the hourly calendar job, follow the [Zoom meeting procedure](references/zoom-meeting-notes.md), including its draft format and approved Outlook handoff. For other meetings, use the workflow below.
 
 For a scheduled discovery run or a request to review, revise or publish a job draft, follow the [discovery and publication procedure](references/meeting-job.md). For supplied notes, start with the workflow below.
+
+For `Start setup` in a Meeting Notes context, follow the [Zoom setup procedure](references/zoom-meeting-notes.md#set-up-the-project-and-sources).
 
 ## Required context
 

@@ -4,11 +4,7 @@ Use this procedure for hourly Outlook calendar checks and manual requests for no
 
 ## Set up the project and sources
 
-On `Start setup` (case-insensitive), offer manual drafting, the full workflow, or both. Ask for one group of missing settings at a time and confirm shared defaults. Collect settings for the selected modes. For the full workflow, confirm the BA or PM reviewer, private review chat, Outlook calendar and draft mailbox, timezone and event filters, Zoom account, and Confluence site, space and parent. Confirm the destination for cross-project calls.
-
-Store approved project terminology, business purpose and scope in the approved corporate environment. Keep reusable instructions and templates in GitHub. Keep credentials, real recordings and transcripts, and account-specific settings outside the repository.
-
-Dry-run the selected workflow on one completed meeting. Check whether the scheduled identity can retrieve and inspect the matching Zoom audio and transcript. Check whether the interactive host can publish to the agreed Confluence destination and save a formatted reply draft on the original Outlook invitation. Respect the approval gate for live writes. Summarize verified capabilities and blockers. Activate the schedule only after verification and at the user's request.
+On `Start setup` (case-insensitive), follow the [guided setup](zoom-setup.md) in the current chat. Start with the setup scope and ask only for missing or unclear settings.
 
 ## Collect and verify evidence
 
@@ -25,13 +21,11 @@ Use these header fields in order **Meeting title**, **Participants invited** (or
 
 Group **Topics Discussed** by topic, identifying the project where useful. Capture stated business needs, expected system behavior, scope, constraints and dependencies. Distinguish proposals, confirmed decisions and open questions. Follow with **Decisions made** and their conditions, **Open questions**, and **Follow-ups/Action points** with agreed next steps, owners and deadlines. Include agreed inputs or dependencies needed to answer open questions. Preserve relative deadlines as stated. Apply the [edge case rules](#edge-cases) for unconfirmed assignments and conflicting evidence. Use “Not specified” for missing fields and “None recorded” for empty sections. Keep all projects discussed in the same set of notes.
 
-Below the proposed page body, show **Uncertainties to clarify** in a separate private reviewer block. Explain each ambiguity and ask a specific question about unclear decisions, owners, deadlines, conflicting prior notes or evidence gaps. Apply confirmed answers to the draft and present the revised version. If uncertainty remains, ask whether the reviewer wants to finalize with those points unresolved. Keep unconfirmed outcomes out of decisions.
+Use the [review message examples](review-messages.md) for draft delivery, clarifications and status updates. Below the proposed page body, show **Uncertainties to clarify** in a separate private reviewer block. Explain each ambiguity and ask a specific question about unclear decisions, owners, deadlines, conflicting prior notes or evidence gaps. Apply confirmed answers to the draft and present the revised version. If uncertainty remains, ask whether the reviewer wants to finalize with those points unresolved. Keep unconfirmed outcomes out of decisions.
 
 ## Publish, then prepare the reply
 
-Show the BA or PM the exact revision, page title (`YYYY-MM-DD - Meeting title`), destination and proposed follow-up. Use the calendar title or, without an event, the confirmed date and title. Resolve ambiguous approval by confirming the revision or wording before publication. On explicit approval in chat, publish only the approved notes and verify the page. Keep reviewer questions and private discussion out of both outputs.
-
-After verified publication, save a reply draft on the original Outlook invitation, addressed to its original invitees. Preserve the reply subject. Insert a brief greeting, thanks and the approved notes above the existing thread. Use HTML where supported to preserve headings, bold text, spacing, lists, tables and links. Verify the saved format when possible. For plain text, use readable headings, bullets and labeled table rows, and report the fallback in chat. The BA or PM sends the email.
+Show the BA or PM the exact revision, [Confluence page title and body](confluence-page.md), destination and proposed follow-up. Resolve ambiguous approval by confirming the revision or wording before publication. On explicit approval in chat, follow the [publication procedure](meeting-job.md) to publish and verify the page. After verified publication, use the [Outlook reply procedure](outlook-reply.md) if the original invitation is available.
 
 Return the Confluence link and the Outlook draft status or link. Report confirmed differences between invitees and attendees in chat. For a manual call without an invitation, finish with the page link. If reply draft creation fails, is unsupported or its save is uncertain, report the specific issue alongside the published page link and check for an existing draft before retrying. Resume at the unfinished handoff when the page is already verified.
 
